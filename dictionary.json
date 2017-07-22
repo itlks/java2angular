@@ -1,0 +1,20 @@
+{
+    "p:outputPanel":"span",
+    "h:outputText":"h3",
+    "p:commandLink styleClass=\"btn btn-default\"":"button",
+    "h:outputLabel":"h2",
+    "p:inputText": "input type=\"text\"",
+    "h:selectOneMenu":"",
+    "p:ajax": "",
+    "p:commandButton": "input type=\"submit\"",
+    "p:dataTable": "table",
+    "<p:column":"<td><tr>$1</td></tr>",
+    "<f:selectItems":"",
+    "<h:selectOneRadio": "<input type=\"radio\"",
+    "<selectItem":"",
+    "<h:panelGroup": "div",
+    "<p:radioButton": "<input type=\"radio\"",
+    "<p:graphicImage": "<img src=",
+    "<p:calendar": "<input type=\"date\"" 
+    
+    }

@@ -1,0 +1,24 @@
+body{
+
+    background: url(../assets/woodbg.jpg);
+    background-size: cover;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#icone{
+
+    padding-top: 5%;
+
+}
+
+#espaco {
+    padding-bottom: 3%;
+}
+
+#conteudo {
+    width: 100%;
+
+}
