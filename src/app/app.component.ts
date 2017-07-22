@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
     let arrayTags: string[] = [''];
 
     // array de tags que serão procuradas ao pecorrer o metodo.
-    arrayTagFrom = ["p:outputPanel", "h:outputLabel", "p:inputText", "p:commandButton", "p:commandLink"];
+    arrayTagFrom = ["p:outputPanel", "h:outputLabel", "p:inputText", "p:commandButton", "p:commandLink", "p:selectBooleanCheckbox", "p:selectOneRadio", "p:calendar"];
 
     
  while(strHtml.search(/\s\s+ /gm) > 0){ // enquanto existir espaçamentos entre as tags substitua por " "
@@ -120,6 +120,15 @@ export class AppComponent implements OnInit {
               break;
             case 5:
               next = this.convLink(strTag);
+              break;
+            case 6:
+              next = this.convCheckBox(strTag);
+              break;
+            case 7:
+              next = this.convRadio(strTag);
+              break;
+            case 8:
+              next = this.convCalendar(strTag);
               break;
             default:
               next = strTag.trim();
@@ -362,5 +371,20 @@ export class AppComponent implements OnInit {
     html = html.replace("rendered", "*ngIf");
     return html;
   }
+ 
+  convCheckBox(html: string): string {
+    html = html.replace("p:outputPanel", "div");
+  
+    return html;
+  }
+  
+  convRadio(html: string): string {
+    
+    return html;
+  }
 
+  convCalendar(html: string): string {
+  
+    return html;
+  }
 }
