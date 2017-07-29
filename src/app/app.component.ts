@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
 import JSZip from 'jszip/dist/jszip';
-
-
+import S from 'string';
 
 declare var jQuery: any;
 @Component({
@@ -88,7 +87,7 @@ export class AppComponent implements OnInit {
           templateUrl: '${this.componente.toLowerCase()}.html',
           styleUrls: ['${this.componente.toLowerCase()}.less']
       })
-      export class ${this.componente} implements OnInit {
+      export class ${S('-'+this.componente.replace('.','-')).camelize().s} implements OnInit {
 
           constructor(public router: Router) {
           }
