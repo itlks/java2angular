@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     myReader.readAsText(file); //ler o arquivo inserido ao mesmo tempo que o onloadend e carregado.
   }
 
-  downloadContent(){ // 
+  downloadContent(returnString: boolean = false){ // 
 
     var uriContent = encodeURIComponent(this.content);  // this.content variavel global que recebe o resultado do motor principal.
     
@@ -73,11 +73,15 @@ export class AppComponent implements OnInit {
     var link = document.createElement('a');
     link.download = filename + '.html'; // nome do arquivo gerado
     link.href = 'data:,' + uriContent;
-    link.click(); // ação do botão
+    
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
 
   }
 
-  private downloadComponent(){ // 
+  private downloadComponent(returnString: boolean = false){ // 
 
     var uriContent = 
     `
@@ -108,13 +112,18 @@ export class AppComponent implements OnInit {
     var link = document.createElement('a');
     link.download = filename + '.ts'; // nome do arquivo gerado 
     link.href = 'data:,' + uriContent;
-    link.click(); // ação do botão
+  
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
 
   }
 
-  private downloadLess(){ // 
+  private downloadLess(returnString: boolean = false){ // 
 
     var uriContent = "";
+
 
     let filename: string = this.componente.toLowerCase();
     //filename = filename.slice(0, filename.length-5); 
@@ -122,16 +131,49 @@ export class AppComponent implements OnInit {
     var link = document.createElement('a');
     link.download = filename + '.less'; // nome do arquivo gerado 
     link.href = 'data:,' + uriContent;
-    link.click(); // ação do botão
+    
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
 
   }
 
-  private downloadSpec(){ // 
+  private downloadSpec(returnString:boolean = false){ // 
 
+    var uriContent = "";
+
+    
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.spec'; // nome do arquivo gerado 
+    link.href = 'data:,' + uriContent;
+
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
+
+  }
+
+  
+  private downloadZip(){ // 
+
+    let _component = this.componente.replace('.component', '');
 
     var zip = new JSZip();
-    zip.file("Hello.txt", "Hello World\n");
-    var img = zip.folder("images");
+    
+    let img = zip.folder(_component);
+    
+    
+
+    zip.file(`${_component}\\${this.downloadLess(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadSpec(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadComponent(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadContent(true).name}`, this.downloadSpec(true).content);
     
     zip.generateAsync({type:"blob"})
     .then(function(content) {
@@ -139,20 +181,8 @@ export class AppComponent implements OnInit {
         //saveAs(content, "example.zip");
 
         let _blob = new Blob([content], { type: 'blob' });
-        FileSaver.saveAs(_blob, 'teste.zip');
+        FileSaver.saveAs(_blob, `${_component}.zip`);
     });
-
-
-    // var uriContent = "";
-
-    // let filename: string = this.componente.toLowerCase();
-    // //filename = filename.slice(0, filename.length-5); 
-
-    // var link = document.createElement('a');
-    // link.download = filename + '.spec'; // nome do arquivo gerado 
-    // link.href = 'data:,' + uriContent;
-    // link.click(); // ação do botão
-
   }
 
   displayFile(){
