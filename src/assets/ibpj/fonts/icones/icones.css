@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../../fonts/icomoon.eot?iooa5w');
+  src:  url('../../fonts/icomoon.eot?iooa5w#iefix') format('embedded-opentype'),
+    url('../../fonts/icomoon.ttf?iooa5w') format('truetype'),
+    url('../../fonts/icomoon.woff?iooa5w') format('woff'),
+    url('../../fonts/icomoon.svg?iooa5w#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i.ic {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+span.ic {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-alerta:before {
+  content: "\e900";
+}
+.icon-alerta-v2:before {
+  content: "\e901";
+}
+.icon-arrowDown:before {
+  content: "\e902";
+}
+.icon-busca:before {
+  content: "\e903";
+}
+.icon-cartoes:before {
+  content: "\e904";
+}
+.icon-contaCorrente-v2:before {
+  content: "\e905";
+}
+.icon-credito:before {
+  content: "\e906";
+}
+.icon-inicio:before {
+  content: "\e907";
+}
+.icon-investimentos-v2:before {
+  content: "\e908";
+}
+.icon-outrosProdutos:before {
+  content: "\e910";
+}
+.icon-pagamento:before {
+  content: "\e911";
+}
+.icon-tempo:before {
+  content: "\e912";
+}
+.icon-tutoriaisInformacao:before {
+  content: "\e913";
+}
+.icon-utilizadades:before {
+  content: "\e914";
+}
+

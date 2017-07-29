@@ -1,0 +1,195 @@
+body {
+  margin-bottom: 0; }
+
+.topo-login {
+  background: #54656D; }
+  .topo-login .logo {
+    background: none;
+    margin-left: 16px; }
+  .topo-login .titulo-login {
+    text-align: right;
+    margin-right: 16px;
+    font-size: 24px;
+    color: #fff; }
+    .topo-login .titulo-login label {
+      text-align: right;
+      padding: 0px;
+      margin-right: 104px;
+      font-size: 24px;
+      color: #fff; }
+    .topo-login .titulo-login a {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 999;
+      margin-right: 0;
+      text-decoration: none;
+      background: #685743;
+      color: #fff;
+      font-size: 12px;
+      border: 1px solid;
+      border-radius: 15px;
+      padding: 5px 13px;
+      margin: 22px; }
+
+.bloco-login {
+  padding: 16px;
+  background: #fff;
+  margin-top: 75px; }
+  .bloco-login .btn-login {
+    width: 100% !important;
+    padding: 10px 0;
+    font-weight: bold; }
+    .bloco-login .btn-login:focus {
+      background: #394a53 !important; }
+  .bloco-login .rodape-bloco-login {
+    padding-top: 21px;
+    position: relative; }
+    .bloco-login .rodape-bloco-login img {
+      position: absolute;
+      bottom: 10px;
+      right: 0; }
+  .bloco-login .form-group {
+    margin: 0px 0 15px; }
+
+.bloco-login-2 {
+  padding: 16px;
+  background: #fff; }
+  .bloco-login-2 .btn-login {
+    width: 100% !important;
+    padding: 10px 0;
+    font-weight: bold; }
+  .bloco-login-2 .rodape-bloco-login {
+    padding-top: 21px;
+    position: relative; }
+    .bloco-login-2 .rodape-bloco-login img {
+      position: absolute;
+      bottom: 10px;
+      right: 0; }
+  .bloco-login-2 .form-group {
+    margin-left: 0 !important;
+    margin-right: 0 !important; }
+    .bloco-login-2 .form-group label {
+      float: left;
+      top: 7px; }
+
+.titulo-painel-login-2 h4 {
+  font-size: 14px !important; }
+
+label {
+  font-weight: normal; }
+
+.rodape {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 16px;
+  background: #54656D;
+  width: 100%;
+  color: #fff;
+  min-width: 1024px; }
+
+.rodape-2 {
+  padding: 16px;
+  background: #54656D;
+  width: 100%;
+  color: #fff; }
+
+.usuario-senha {
+  background: #E9EAEA;
+  padding: 21px 0;
+  margin-top: 40px;
+  margin-bottom: 70px;
+  width: 100%;
+  position: absolute !important;
+  bottom: 0px; }
+  .usuario-senha i {
+    float: left;
+    color: #B9B9B9;
+    padding: 0px 8px 18px 0px;
+    font-size: 33px; }
+
+.menu-login-2 {
+  margin: 30px 0; }
+  .menu-login-2 a {
+    font-size: 14px;
+    margin: 0px 8px; }
+    .menu-login-2 a:hover {
+      text-decoration: none;
+      border-bottom: 1px solid #EE1D23; }
+
+.teclado img {
+  display: inline-block; }
+
+.btn-secundario {
+  background: #8A8A8A;
+  margin: auto 5px; }
+
+.btn-voltar {
+  background: none;
+  color: #42555e !important; }
+  .btn-voltar:hover, .btn-voltar:focus {
+    background: none !important;
+    color: #42555e;
+    box-shadow: none; }
+
+table.keyboard td {
+  background: #efefef;
+  border: 1px solid white;
+  background-image: linear-gradient(to bottom, #f7f7f7, #efefef);
+  text-align: center;
+  cursor: pointer; }
+  table.keyboard td i {
+    font-size: 13px !important; }
+    table.keyboard td i.fa-level-down {
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      font-size: 21px !important; }
+  table.keyboard td .simble {
+    position: relative;
+    top: -5px;
+    left: -10px;
+    font-weight: bold; }
+    table.keyboard td .simble.gray {
+      color: #c9cdd0;
+      font-weight: normal; }
+  table.keyboard td .element {
+    font-weight: bold;
+    position: relative;
+    top: 7px;
+    right: -5px; }
+table.keyboard .numbers td {
+  position: relative; }
+  table.keyboard .numbers td span.simble {
+    display: table-row-group;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: #c9cdd0;
+    font-weight: normal; }
+  table.keyboard .numbers td span.number {
+    top: 8px;
+    position: relative;
+    right: -10px; }
+
+.tecladoLogin {
+  width: 630px;
+  margin: 0 auto; }
+
+.subMenuLogin {
+  width: 800px;
+  margin: 0 auto; }
+
+.teclado .topo-login {
+  background: #685743; }
+.teclado .rodape {
+  background: #685743; }
+
+@media screen and (max-height: 768px) {
+  .usuario-senha {
+    position: initial !important; } }
+
+/*# sourceMappingURL=login.css.map */

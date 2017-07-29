@@ -1,0 +1,32 @@
+.modal {
+
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+
+	.modal-content {
+
+		width: 600px;
+    	margin: 30px auto;
+
+		.modal-header {
+
+			font-size: 18px;
+			padding: 10px;
+
+			.modal-close{
+			    background: url(../images/close.png);
+		        background-size: contain;
+			    width: 25px;
+			    height: 23px;
+			    display: block;
+			    float: right;
+			}
+		}
+		.modal-body {
+			
+		}
+		.modal-footer {
+			text-align: left;
+		}
+	}
+}

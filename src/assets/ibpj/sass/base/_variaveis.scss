@@ -1,0 +1,52 @@
+
+/* Fonts */
+@font-face {
+  font-family: 'RobotoLight_0';
+  src: url("../fonts/roboto/RobotoLight_0.eot");
+  src: url("../fonts/roboto/RobotoLight_0.eot") format("embedded-opentype"), url("../fonts/roboto/RobotoLight_0.woff2") format("woff2"), url("../fonts/roboto/RobotoLight_0.woff") format("woff"), url("../fonts/roboto/RobotoLight_0.ttf") format("truetype"), url("../fonts/roboto/RobotoLight_0.svg#RobotoLight_0") format("svg"); }
+@font-face {
+  font-family: 'RobotoRegular_0';
+  src: url("../fonts/roboto/RobotoRegular_0.eot");
+  src: url("../fonts/roboto/RobotoRegular_0.eot") format("embedded-opentype"), url("../fonts/roboto/RobotoRegular_0.woff2") format("woff2"), url("../fonts/roboto/RobotoRegular_0.woff") format("woff"), url("../fonts/roboto/RobotoRegular_0.ttf") format("truetype"), url("../fonts/roboto/RobotoRegular_0.svg#RobotoRegular_0") format("svg"); }
+
+
+/* Colors */
+
+$white-color: #fff;
+$black-color: #000;
+$link-color: #1BB3BC;
+$grey-color: #EEEEEE;
+$light-grey-color: #f6f6f6;
+$link-grey: #41444E;
+$brown-color: #685743;
+$red-color: #EE1D23;
+$background-color: #f0f0f0;
+$green-color: #43A72B;
+
+$font-default-color: #41555E;
+
+
+$cor-branco:#ffffff;
+$cor-cinza:#EEEEEE;
+$cor-preta:#000000;
+$cor-link:#1BB3BC;
+$cor-link-cinza:#41555E;
+$cor-fundo-branco:#f0f0f0;
+
+$cor-check: #00D15F;
+$cor-check-circle:#59B200;
+
+$cor-circle-exclam-point:#FFD24D;
+
+$background-label-after-checked:#00D15F;
+
+$cor-cinza-datepicker-month:#C9C9C9;
+$background-datepicker:#41555E;
+$background-datepicker-hover:#324147;
+
+$background-datepicker-btn-default:#42555E;
+
+
+/* Shadows*/
+
+$box-shadow: 2px 3px 10px -5px;

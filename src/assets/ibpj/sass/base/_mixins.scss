@@ -1,0 +1,27 @@
+@mixin transition {
+    -webkit-transition: width 0.4s ease-in-out;
+    -moz-transition: width 0.4s ease-in-out;
+    -ms-transition: width 0.4s ease-in-out;
+    -o-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;  
+}
+
+/* Spaces */
+
+@mixin spaces {
+	.space-b {
+		margin-bottom: 15px;
+	}
+
+	.space-r {
+		margin-right: 15px;
+	}
+
+	.space-l {
+		margin-left: 15px;
+	}
+
+	.space-t {
+		margin-top: 15px;
+	}
+}

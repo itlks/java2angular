@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
+
 declare var jQuery: any;
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   public fileString;
   private content;
-
+  values: number[] = [102, 115, 130, 137];
   constructor() {
     this.fileString;
   }
@@ -67,7 +69,7 @@ export class AppComponent implements OnInit {
   }
 
   displayFile(){
-    window.open("https://angular.io/docs", "_blank");
+    window.open("../assets/ibpj/index.html", "_blank");
 }
 
   convMain(strHtml: string): void { //motor principal, concentra todas as chamadas para invocar os demais ações.
@@ -384,7 +386,7 @@ export class AppComponent implements OnInit {
   }
 
   convCalendar(html: string): string {
-  
+    html = html.replace("p:calendar","");
     return html;
   }
 }

@@ -1,0 +1,32 @@
+/*imports*/
+@import 'base/_variaveis.scss';
+@import 'base/_reset.scss';
+@import 'base/_mixins.scss';
+
+@import 'layout/_content.scss';
+@import 'layout/_header.scss';
+@import 'layout/_footer.scss';
+@import 'layout/_side-menu.scss';
+@import 'layout/_sub-header.scss';
+@import 'layout/_stages.scss';
+@import 'layout/_sitemap.scss';
+@import 'layout/_sub-menu.scss';
+
+@import 'module/_panel-title.scss';
+@import 'module/_box-shadow.scss';
+
+@import 'module/components/_buttons.scss';
+@import 'module/components/_input-radio.scss';
+@import 'module/components/_input-text.scss';
+@import 'module/components/_textarea.scss';
+@import 'module/components/_select.scss';
+@import 'module/components/_input-checkbox.scss';
+@import	'module/components/_table.scss';
+@import 'module/components/_modal.scss';
+
+
+
+
+@include spaces;
+
+
