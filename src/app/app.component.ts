@@ -375,8 +375,24 @@ export class AppComponent implements OnInit {
   }
  
   convCheckBox(html: string): string {
-    html = html.replace("p:outputPanel", "div");
-  
+
+    console.log(html);
+    //converter tag abertura e substitui por tag nova
+    html = html.replace("<p:selectBooleanCheckbox", "<input type='checkbox'");
+    
+    //procurar atributo value(não é necessario)
+    //procurar atributo binding
+    html = html.replace("binding","ngmodel");
+    //procurar tag fechamento possibilidade 1
+    html = html.replace("</p:selectBooleanCheckbox>", ">");
+    //procurar tag fechamento possibilidade 2
+    html = html.replace("/>", ">");
+    //se funçõ forem sendo chamadas pelo checkbox
+    //html = html.replace("#{", "");
+    //html = html.replace("}", "");
+    
+    console.log(html);
+
     return html;
   }
   
