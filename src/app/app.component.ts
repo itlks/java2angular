@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
 
   downloadContent(returnString: boolean = false){ // 
 
-    var uriContent = encodeURIComponent(this.content);  // this.content variavel global que recebe o resultado do motor principal.
+    var uriContent = this.content;  // this.content variavel global que recebe o resultado do motor principal.
     
     let file: any = document.getElementById("origem");
     //let filename :string = file.files[0].name;
