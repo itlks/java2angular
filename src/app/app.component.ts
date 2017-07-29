@@ -12,7 +12,11 @@ export class AppComponent implements OnInit {
   title = 'app';
   public fileString;
   private content;
+  private componente: string= "caleb.component";
+  private tag: string = "caleb-tag";
+   
   values: number[] = [102, 115, 130, 137];
+
   constructor() {
     this.fileString;
   }
@@ -58,11 +62,47 @@ export class AppComponent implements OnInit {
     var uriContent = encodeURIComponent(this.content);  // this.content variavel global que recebe o resultado do motor principal.
     
     let file: any = document.getElementById("origem");
-    let filename :string = file.files[0].name;
-    filename = filename.slice(0, filename.length-5); 
+    //let filename :string = file.files[0].name;
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
 
     var link = document.createElement('a');
-    link.download = filename.concat('html'); // nome do arquivo gerado
+    link.download = filename + '.html'; // nome do arquivo gerado
+    link.href = 'data:,' + uriContent;
+    link.click(); // ação do botão
+
+  }
+
+  downloadComponent(){ // 
+
+    var uriContent = 
+    `
+    import {Component, OnInit} from '@angular/core';
+    import {Router} from '@angular/router';
+
+      @Component({
+          selector: '${this.tag}',
+          templateUrl: '${this.componente.toLowerCase()}.html',
+          styleUrls: ['${this.componente.toLowerCase()}.less']
+      })
+      export class ${this.componente} implements OnInit {
+
+          constructor(public router: Router) {
+          }
+
+
+          ngOnInit() {
+              
+          }
+
+      }
+    `;
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.ts'; // nome do arquivo gerado 
     link.href = 'data:,' + uriContent;
     link.click(); // ação do botão
 
