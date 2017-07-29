@@ -170,10 +170,10 @@ export class AppComponent implements OnInit {
     
     
 
-    zip.file(`${_component}\\${this.downloadLess(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadLess(true).name}`, this.downloadLess(true).content);
     zip.file(`${_component}\\${this.downloadSpec(true).name}`, this.downloadSpec(true).content);
-    zip.file(`${_component}\\${this.downloadComponent(true).name}`, this.downloadSpec(true).content);
-    zip.file(`${_component}\\${this.downloadContent(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadComponent(true).name}`, this.downloadComponent(true).content);
+    zip.file(`${_component}\\${this.downloadContent(true).name}`, this.downloadContent(true).content);
     
     zip.generateAsync({type:"blob"})
     .then(function(content) {
