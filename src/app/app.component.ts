@@ -379,8 +379,59 @@ export class AppComponent implements OnInit {
   }
   
   convRadio(html: string): string {
+    var valorTagValue = "";
+    var valorTagId = "";
+    var valorTagInput = "";
+    var valorTagValue = "";
+    var valorTypeRadio = "radio";
+    var valorTagLabel = "label ";
+    var valorTypeOp = "data-ng-repeat";
+    var contador = "opcao";
+    var regexSelectOneRadio = /p:selectOneRadio\s*/;
+    var regexSelectOneRadioFim = /\<\/p:selectOneRadio\>/;
+    var regxIdAspas = /id\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica id="conteudo"
+    var regxLayoutApas = /layout\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica layout="conteudo"
+    var regxValueApas = /value\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica value="conteudo"
+    var regxValue = /value\s*=*\s*/; //identifica value=
     
-    return html;
+
+    var regxIdApas = /id\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica value="conteudo"
+    
+    var regxEspecial = /[^a-zA-Z_.]\s*/g;
+    
+    if(html != null){
+        if(html.match(regexSelectOneRadioFim) !== null){
+          html = html.replace(regexSelectOneRadioFim, "</label>");
+        }
+
+      if (html.match(regxValueApas) != null) { //verifica se tem value
+        valorTagValue = this.pegaConteudo(html, regxValueApas, regxValue);
+        var valorTagValueSemCaracEspec = valorTagValue.replace(regxEspecial, "");
+        valorTagValueSemCaracEspec = contador + " in " + valorTagValueSemCaracEspec;
+
+        if(html.match(regxIdApas) != null){ //verifica se tem layout="conteudo"
+          html = html.replace(regxIdApas, "");
+        }
+
+        if(html.match(regxLayoutApas) != null){ //verifica se tem layout="conteudo"
+          html = html.replace(regxLayoutApas, "");
+        }
+
+        if ( html.match(regexSelectOneRadio) !== null ){ 
+          html = html.replace(regexSelectOneRadio, valorTagLabel);
+        }
+        
+        if( html.match(regxValueApas) !== null){
+          html = html.replace(regxValueApas, valorTypeOp + '="' + valorTagValueSemCaracEspec +'"');
+        }
+      }
+
+      return html;
+
+    }else {
+      html = "Error";
+      return html;
+    }
   }
 
   convCalendar(html: string): string {
