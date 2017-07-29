@@ -475,7 +475,7 @@ export class AppComponent implements OnInit {
     if (html.search(regxRendered) || html.search(regxBinding) || html.search(regxConverter) ||
       html.search(regxImmediate) || html.search(regxValidator) || regxStyleClass !== null) {
 
-      html = html.replace(regxRendered, "*ngIf="); // troca todos os rendered por ngIf=
+      //html = html.replace(regxRendered, "*ngIf="); // troca todos os rendered por ngIf=
       html = html.replace(regxBinding, ""); 
       html = html.replace(regxConverter, "");
       html = html.replace(regxImmediate, "");
