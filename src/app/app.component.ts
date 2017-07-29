@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
 import JSZip from 'jszip/dist/jszip';
+import * as FileSaver from 'file-saver';
 
 
 
@@ -127,15 +128,30 @@ export class AppComponent implements OnInit {
 
   private downloadSpec(){ // 
 
-    var uriContent = "";
 
-    let filename: string = this.componente.toLowerCase();
-    //filename = filename.slice(0, filename.length-5); 
+    var zip = new JSZip();
+    zip.file("Hello.txt", "Hello World\n");
+    var img = zip.folder("images");
+    
+    zip.generateAsync({type:"blob"})
+    .then(function(content) {
+        // see FileSaver.js
+        //saveAs(content, "example.zip");
 
-    var link = document.createElement('a');
-    link.download = filename + '.spec'; // nome do arquivo gerado 
-    link.href = 'data:,' + uriContent;
-    link.click(); // ação do botão
+        let _blob = new Blob([content], { type: 'blob' });
+        FileSaver.saveAs(_blob, 'teste.zip');
+    });
+
+
+    // var uriContent = "";
+
+    // let filename: string = this.componente.toLowerCase();
+    // //filename = filename.slice(0, filename.length-5); 
+
+    // var link = document.createElement('a');
+    // link.download = filename + '.spec'; // nome do arquivo gerado 
+    // link.href = 'data:,' + uriContent;
+    // link.click(); // ação do botão
 
   }
 

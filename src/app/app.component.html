@@ -11,14 +11,20 @@
             <div class="row">
                 
                 <div class="col-xs-3">
-                    <label>Nome do Componente</label>
-                    <input type="text" [(ngModel)]="componente">
+                    <div class="input-group ">
+                        <label>Nome do Componente</label>
+                        <input type="text" [(ngModel)]="componente" placeholder="template.component">
+                    </div>
                 </div>
-                <div class="col-xs-3">
-                    <label>Nome da tag</label>
-                    <input type="text" [(ngModel)]="tag">
+                <div class="col-xs-6">
+                    <div class="input-group ">
+                        <label>Nome da tag</label>
+                        <input type="text" [(ngModel)]="tag" placeholder="sigla-seletor">
+                    </div>
                 </div>
                 
+            </div>
+                <div id="espaco">
             </div>
             <div class="row">
                 <div class="col-xs-3">
