@@ -265,10 +265,12 @@ export class AppComponent implements OnInit {
       });
     });
     strHtmlConvertido.trim();
-    strHtmlConvertido.replace(/#msg\[/g,'');
-    strHtmlConvertido.replace(/\{/g,'');
-    strHtmlConvertido.replace(/\}/g,'');
-    strHtmlConvertido.replace(/\]/g,'');
+    strHtmlConvertido = strHtmlConvertido.replace(/#msg/g,'');
+    
+    strHtmlConvertido = strHtmlConvertido.replace(/\[/g,'');
+    strHtmlConvertido = strHtmlConvertido.replace(/\{/g,'');
+    strHtmlConvertido = strHtmlConvertido.replace(/\}/g,'');
+    strHtmlConvertido = strHtmlConvertido.replace(/\]/g,'');
 
     this.content = strHtmlConvertido;
     
