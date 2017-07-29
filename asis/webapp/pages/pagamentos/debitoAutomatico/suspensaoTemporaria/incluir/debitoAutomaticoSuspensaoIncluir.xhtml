@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.debito.automatico.incluir.selecao.suspensao.tituloOpcoes']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- painel tipo conta -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="tipoConta"
+									value="#{msg['pages.pagamentos.debito.automatico.incluir.selecao.suspensao.tipoConta']}" />
+								<h:selectOneMenu id="tipoConta"
+									value="#{debitoAutomaticoSuspensaoIncluirBBean.tipoConta}">
+
+									<p:ajax event="change" process="@this"
+										update="formGeral:panelTipoConta,panelBotao"
+										listener="#{debitoAutomaticoSuspensaoIncluirBBean.consultarEmpresasConveniadas}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.selecione']}"
+										itemValue="-1" noSelectionOption="true" />
+
+									<f:selectItems
+										value="#{debitoAutomaticoSuspensaoIncluirBBean.listaTiposContas}"
+										var="tc" itemLabel="#{tc.descricao}"
+										itemValue="#{tc.descricao}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- renderiza quando selecionado tipo da conta  -->
+		<p:outputPanel id="panelTipoConta">
+			<p:outputPanel
+				rendered="#{debitoAutomaticoSuspensaoIncluirBBean.exibeEmpresaConveniada}">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-lg-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<h4>#{msg['pages.pagamentos.debito.automatico.incluir.selecao.suspensao.tituloDados']}</h4>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-lg-12">
+						<p:outputPanel styleClass="box-shadow">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-4">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="selEmpresaConveniada"
+											value="#{msg['pages.pagamentos.debito.automatico.incluir.selecao.suspensao.empresaConveniada']}" />
+										<h:selectOneMenu id="selEmpresaConveniada"
+											value="#{debitoAutomaticoSuspensaoIncluirBBean.empresaConveniada}">
+
+											<p:ajax event="change" process="@this"
+												update="formGeral:panelIdentificacaoConsumidor,panelBotao"
+												listener="#{debitoAutomaticoSuspensaoIncluirBBean.onChangeEmpresaConveniada}" />
+
+											<f:selectItem
+												itemLabel="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.selecione']}"
+												itemValue="-1" noSelectionOption="true" />
+
+											<f:selectItems
+												value="#{debitoAutomaticoSuspensaoIncluirBBean.listaEmpresasConveniadas}"
+												var="ec" itemLabel="#{ec.descEmpresaConveniada}"
+												itemValue="#{ec.descEmpresaConveniada}" />
+										</h:selectOneMenu>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<!-- rederiza quando selecionado empresa conveniada -->
+								<p:outputPanel id="panelIdentificacaoConsumidor">
+									<p:outputPanel styleClass="col-md-4"
+										rendered="#{debitoAutomaticoSuspensaoIncluirBBean.exibeIdentificacaoConsumidor}">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel for="numReferencia"
+												value="#{debitoAutomaticoSuspensaoIncluirBBean.labelConvenio}" /><h:outputText value=":"/>
+											<p:inputText id="numReferencia" styleClass="form-control"
+												maxlength="#{debitoAutomaticoSuspensaoIncluirBBean.tamanhoNumeroReferencia}"
+												onkeypress="replaceSpecialChars(this);"
+												onkeyup="replaceSpecialChars(this);"
+												value="#{debitoAutomaticoSuspensaoIncluirBBean.numeroReferencia}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+								
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- rederiza quando selecionado empresa conveniada -->
+		<p:outputPanel id="panelBotao">
+			<p:outputPanel
+				rendered="#{debitoAutomaticoSuspensaoIncluirBBean.exibeBotao}">
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-md-12 text-right">
+						<p:commandLink
+							action="#{debitoAutomaticoSuspensaoIncluirBBean.voltarEmConsulta}"
+							styleClass="btn btn-default btn-cinza" role="button">#{msg['page.btn.voltar']}</p:commandLink>
+						<p:commandLink
+							action="#{debitoAutomaticoSuspensaoIncluirBBean.continuarEmBusca}"
+							styleClass="btn btn-default" role="button">#{msg['page.btn.continuar']}</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row" rendered="#{excluirPerfilAcessoBBean.podeExcluir == false }">
+			<p:outputPanel styleClass="col-xs-12 space-t">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<h:outputLabel
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.userNoPerfil']}" />
+						<h:outputText class="space"
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.userNoPerfil1']}" />
+						<h:outputText
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.userNoPerfil2']}" />
+						<p:spacer width="4" /> <h:outputLabel class="space"
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.administrativo']}" />
+						<h:outputLabel class="texto-vermelho space"
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.tag']}" /> 
+						<h:outputLabel
+							class="space"
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.usersec']}" />
+						<h:outputLabel class="texto-vermelho space"
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.tag']}" /> 
+						<h:outputLabel
+							value="#{msg['page.perfilAcesso.excluirConfirmacao.alt']}" /> 
+						<h:outputText
+							value="." />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.perfilAcesso.excluirConfirmacao.confirmeDadosExclusaoPerfil']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:dataTable id="checkboxDT" var="usr"
+						value="#{excluirPerfilAcessoBBean.lPerfilSelecionado}"
+						tableStyleClass="table table-striped">
+
+						<p:column
+							headerText="#{msg['page.perfilAcesso.excluirConfirmacao.nomePerfil']}">
+							<h:outputText value="#{usr.nomePerfilAcesso}" id="perfilNome" />
+						</p:column>
+						<p:column
+							headerText="#{msg['page.perfilAcesso.excluirConfirmacao.descricao']}">
+							<h:outputText value="#{usr.descricaoPerfilAcesso}"
+								id="perfilDescricao" />
+						</p:column>
+						<p:column styleClass="text-left"
+							headerText="#{msg['page.perfilAcesso.excluirConfirmacao.quantidadeUsuarioPerfil']}">
+							<h:outputText value="#{usr.contador}" id="perfilQtd" />
+						</p:column>
+					</p:dataTable>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{!excluirPerfilAcessoBBean.temUserNoPerfil and perfilAcessoAlteracaoBBean.session.tipoAcessoContrato ne '1'}">
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<!-- Inicio dos botões -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-secundario" role="button"
+					value="#{msg['page.perfilAcesso.excluirConfirmacao.voltar']}"
+					action="#{excluirPerfilAcessoBBean.voltarConfirmacao}" />
+
+				<p:commandButton id="btnConfirmar" styleClass="btn btn-default"
+					action="#{excluirPerfilAcessoBBean.continuarConfirmacao}"
+					role="button" onclick="encryptSecureDL();"
+					value="#{msg['page.perfilAcesso.excluirConfirmacao.continuar']}"
+					rendered="#{excluirPerfilAcessoBBean.podeExcluir}" />
+				<p:defaultCommand target="btnConfirmar" />
+
+				<p:defaultCommand target="btnConfirmar" />
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- Fim dos botões -->
+
+	</ui:define>
+</ui:composition>

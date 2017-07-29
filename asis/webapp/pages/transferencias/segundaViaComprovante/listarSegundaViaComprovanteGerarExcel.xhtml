@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:outputPanel style="display:none" >
+		<p:outputPanel styleClass="row" >
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:dataTable emptyMessage="Nenhum registro encontrado."
+						value="#{transferenciaSegundaViaComprovanteBBean.exportarExcel}"
+						id="tabelaExcelNone"
+						var="iExportarExcel" >
+								<p:column>
+                                	<h:outputText value="#{iExportarExcel[0]}" />
+                            	</p:column>
+
+                               <p:column rendered="#{transferenciaSegundaViaComprovanteBBean.listaTed eq false}">
+                                     <h:outputText value="#{iExportarExcel[1]}" />
+                               </p:column>
+
+                               <p:column>
+                                     <h:outputText value="#{iExportarExcel[2]}"/>
+                               </p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

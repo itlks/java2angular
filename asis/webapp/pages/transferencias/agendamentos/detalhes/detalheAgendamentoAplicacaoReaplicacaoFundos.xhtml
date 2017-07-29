@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:outputLabel styleClass="space-b" value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+  
+	<p:outputPanel styleClass="row">
+			 
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaFundosAplicacaoDebito" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.contaDebito']}" />
+			<h:outputText id="contaFundosAplicacaoDebito"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaCorrenteDebito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaFundosAplicacaoCredito" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.contaFundoCredito']}" />
+			<h:outputText id="contaFundosAplicacaoCredito"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaFundo}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="vinculo" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.vinculo']}" />
+			<h:outputText id="vinculo"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.vinculo}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.situacaoContrato}">
+			<h:outputLabel for="situacaoContrato" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.situacaoContrato']}" />
+			<h:outputText id="situacaoContrato"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.situacaoContrato}" />
+		</p:outputPanel>
+			 
+	</p:outputPanel>
+			
+</ui:composition>

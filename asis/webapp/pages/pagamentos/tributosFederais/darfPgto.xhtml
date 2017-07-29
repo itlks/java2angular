@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<!-- Configurações Assinatura Eletrônica  -->
+		<script type="text/javascript" language="javascript">
+			jQuery(window).load(function() {
+				initDL();
+				gerarChave();
+			});
+		</script>
+
+		<h:inputHidden id="chaveServer" partialSubmit="true"
+			value="#{loginBBean.session.serverPublicKey}" />
+
+		<h:inputHidden id="hashSenhaEletronica" partialSubmit="true"
+			value="#{loginBBean.session.hashSenhaEletronica}" />
+
+		<h:inputHidden id="chaveClient" partialSubmit="true"
+			value="#{loginBBean.session.browserPublicKey}" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{loginBBean.session.nomeUsuarioLogado}" />
+
+		<p:remoteCommand name="gerarChave"
+			action="#{dispositivoSecureBBean.gerarChave}" process=":formGeral"
+			update=":formGeral" />
+		<!-- FIM - Configurações Assinatura Eletrônica  -->
+
+
+
+		<!-- INICIO html/pimefaces -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.federais.darfPgto.confiraDados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- alerta -->
+
+		<!-- alerta fim -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-6">
+							<p:outputPanel
+								styleClass="col-lg-12 text-center flex-align-vh lg-height form-group margin-bottom-120 margin-top-40">
+								<p:outputPanel styleClass="col-lg-3">
+									<h:graphicImage value="/images/u132.png"
+										style="width: 84px;height: 96px;" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-9">
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.misterioFazenda']}</p>
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.secretariaReceitaFederal']}</p>
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.documentoArrecadacao']}</p>
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.darf']}</p>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputText for="nomeTelefone" style="padding-top: 5px;">#{msg['page.pagamentos.tributos.federais.darfCadastro.nomeEmpresaTelefone']}</h:outputText>
+								<p:outputPanel styleClass="quebra" />
+								<p:outputLabel id="nomeTelefone"
+									value="#{tributosFederaisBBean.darf.nome}">
+								</p:outputLabel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<!-- 				FIM PAINEL ESQUERDO				 -->
+
+						<!-- 				PAINEL DIREITO 					 -->
+						<p:outputPanel styleClass="col-lg-6 border-left">
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="periodoApuracao">#{msg['page.pagamentos.tributos.federais.darfCadastro.periodoApuracao']}
+								</h:outputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="periodoApuracao"
+										value="#{tributosFederaisBBean.darf.dataPeriodo}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="cpfCnpj">#{msg['page.pagamentos.tributos.federais.darfCadastro.cpfCnpj']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6 form-group text-right">
+									<p:outputLabel id="cpfCnpj"
+										value="#{tributosFederaisBBean.darf.cpfCnpj}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="codigoReceita">#{msg['page.pagamentos.tributos.federais.darfCadastro.codigoReceita']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="codigoReceita"
+										value="#{tributosFederaisBBean.darf.codigoReceita}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="receitaBruta">#{msg['page.pagamentos.tributos.federais.darfCadastro.numeroReferencia']}
+								</h:outputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="receitaBruta"
+										value="#{tributosFederaisBBean.darf.numeroReferencia}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="dataVencimento">#{msg['page.pagamentos.tributos.federais.darfCadastro.dataVencimento']}
+								</h:outputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="dataVencimento"
+										value="#{tributosFederaisBBean.darf.dataVencimento}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="valorPrincipal">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorPrincipal']}
+								</h:outputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorPrincipal"
+										value="#{tributosFederaisBBean.darf.valorPrincipal}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="valorMulta">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorMulta']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorMulta"
+										value="#{tributosFederaisBBean.darf.valorMulta}">
+									</p:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group sem-margin">
+									<h:outputText for="valorJuros">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorJuros']}
+								<br />
+								#{msg['page.pagamentos.tributos.federais.darfCadastro.encargos']}
+								</h:outputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorJuros">#{tributosFederaisBBean.darf.valorJurosEncargos}</p:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel
+								styleClass="row flex-align-v row-gray-background padding-5 no-padding-bottom"
+								id="painelValorTotal">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="valorTotal">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorTotal']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorTotal">#{tributosFederaisBBean.darf.valorTotal}</p:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+						<!--			FIM PAINEL DIREITO   			 -->
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<br />
+
+		<!-- ASSINATURA ELETRÔNICA - INÍCIO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributosFederais.darfSimples.confirmacao.assinatura.eletronica']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-md-3">
+							<p:outputLabel for="nrContaCorrente">#{msg['page.pagamentos.tributosFederais.darfSimples.confirmacao.conta.corrente']}</p:outputLabel>
+							<br />
+							<h:outputText id="nrContaCorrente"></h:outputText>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-3">
+							<p:outputLabel for="assinaturaEletronica">#{msg['page.pagamentos.tributosFederais.darfSimples.confirmacao.assinatura.eletronica']}</p:outputLabel>
+							<br />
+							<p:password id="assinaturaEletronica" placeholder=""
+								styleClass="form-control largura-menor"
+								value="#{dispositivoSecureBBean.senhaEletronica}" />
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- ASSINATURA ELETRÔNICA - FIM -->
+
+		<!-- BOTÕES DE FLUXO - INÍCIO -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{tributosFederaisBBean.voltarDarfPgto}" id="btnVoltar"
+					value="#{msg['page.pagamentos.tributosFederais.darfSimples.confirmacao.voltar']}" />
+
+				<p:commandLink styleClass="btn btn-default" role="button"
+					action="#{tributosFederaisBBean.continuarDarfPgto}"
+					id="btnContinuar"
+					value="#{msg['page.pagamentos.tributosFederais.darfSimples.confirmacao.continuar']}">
+					<p:ajax event="click" onstart="encryptSecureDL();" process="@all"
+						listener="#{dispositivoSecureBBean.autenticarTodosDispositivos()}" />
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- BOTÕES DE FLUXO - FIM -->
+
+		<!-- FIM html/pimefaces -->
+	</ui:define>
+</ui:composition>

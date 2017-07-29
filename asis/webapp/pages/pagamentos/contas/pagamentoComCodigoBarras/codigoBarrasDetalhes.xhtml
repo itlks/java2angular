@@ -1,0 +1,507 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{not pagamentosContasCodigoBarrasBBean.flgNossonumero}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nossoNumero']}" />
+		<h:outputText value="#{pagamentosContasCodigoBarrasBBean.nossoNumero}" />
+	</p:outputPanel>
+
+	<p:outputPanel
+		rendered="#{not empty pagamentosContasCodigoBarrasBBean.instituicaoFinanceiraFavorecida or (not empty pagamentosContasCodigoBarrasBBean.codigoISPB and pagamentosContasCodigoBarrasBBean.codigoISPB ne '000')}">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.instituicaoFinanceiraFavorecida']}" />
+			<h:outputText
+				value="#{pagamentosContasCodigoBarrasBBean.codigoISPB} - #{pagamentosContasCodigoBarrasBBean.instituicaoFinanceiraFavorecida}" />
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<!-- Inicio Beneficiario Original -->
+	<p:outputPanel
+		rendered="#{pagamentosContasCodigoBarrasBBean.exibeBeneficOriginal or pagamentosContasCodigoBarrasBBean.flagVR}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="space-b">
+				<p:separator styleClass="space-t space-b" />
+				<h5 class="bold">#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dadosDeBeneficiárioOriginal']}</h5>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	<!-- Inicio Painel Documento Cliente -->
+		<p:outputPanel
+			rendered="#{pagamentosContasCodigoBarrasBBean.renderFieldsVr}"
+			styleClass="space-b">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel id="panelTiposDocumentosCliente"
+						styleClass="col-xs-4 radio label150"
+						style="margin-top: -8px; width: 350px;">
+						<h:selectOneRadio id="tiposDocumentoCliente" tabindex="-1"
+							value="#{pagamentosContasCodigoBarrasBBean.tipoDocumentoCliente}">
+							<f:selectItems
+								value="#{pagamentosContasCodigoBarrasBBean.tiposDocumento}"
+								var="i" itemLabel="#{i.label}" itemValue="#{i.value}" />
+							<p:ajax event="change" process="@this"
+								update="@this,panelNomeCliente,panelDocumentoCliente"
+								listener="#{pagamentosContasCodigoBarrasBBean.onChangeTipoDocumentoCliente}" />
+						</h:selectOneRadio>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel id="panelDocumentoCliente" styleClass="col-xs-2">
+						<p:inputText styleClass="form-control"
+							value="#{pagamentosContasCodigoBarrasBBean.documentoCliente}"
+							onkeypress="maskCpfCnpj(this,event)"
+							onchange="maskCpfCnpj(this,event)" maxlength="18">
+							<p:ajax event="change" process="@this"
+								update="@this,panelTiposDocumentosCliente,panelNomeCliente"
+								listener="#{pagamentosContasCodigoBarrasBBean.onChangeDocumentoCliente}" />
+						</p:inputText>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel id="panelNomeCliente" styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel>
+						<p:outputPanel
+							rendered="#{pagamentosContasCodigoBarrasBBean.strTipoDocumentoCliente eq 'F'}">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel styleClass="space"
+									value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nome']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:outputPanel
+							rendered="#{pagamentosContasCodigoBarrasBBean.strTipoDocumentoCliente eq 'J'}">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel styleClass="space"
+									value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.razaoSocial']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:inputText styleClass="form-control" disabled="false"
+								value="#{pagamentosContasCodigoBarrasBBean.fixedRSBarraDTO.OESCNOMECONSUMIDOR}"
+								autocomplete="off" onkeyup="replaceSpecialChars(this)" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	<!-- Fim Painel Documento Cliente -->
+
+		<p:outputPanel rendered="#{not pagamentosContasCodigoBarrasBBean.renderFieldsVr}">
+			<p:outputPanel
+				rendered="#{not empty pagamentosContasCodigoBarrasBBean.cnpjBeneficiarioOriginal}">
+				<p:outputPanel
+					rendered="#{pagamentosContasCodigoBarrasBBean.IsBeneficiarioOriginalPF()}">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cpf']}" />
+						<h:outputText
+							value="#{pagamentosContasCodigoBarrasBBean.cnpjBeneficiarioOriginal}" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel
+					rendered="#{pagamentosContasCodigoBarrasBBean.IsBeneficiarioOriginalPJ()}">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cnpj']}" />
+						<h:outputText
+							value="#{pagamentosContasCodigoBarrasBBean.cnpjBeneficiarioOriginal}" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsBeneficiarioOriginalPF()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nome']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.razaoSocialBeneficiarioOriginal}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsBeneficiarioOriginalPJ()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.razaoSocial']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.razaoSocialBeneficiarioOriginal}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{not empty pagamentosContasCodigoBarrasBBean.nomeFantasiaBeneficiarioOriginal}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nomeFantasia']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.nomeFantasiaBeneficiarioOriginal}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Beneficiario Original -->
+
+	<!-- Inicio Sacador Avalista -->
+	<p:outputPanel
+		rendered="#{pagamentosContasCodigoBarrasBBean.exibeSacadorAvalista}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="space-t space-b">
+				<h5 class="bold">#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dadosDoSacadorAvalista']}</h5>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{not empty pagamentosContasCodigoBarrasBBean.cnpjSacadorAvalista}">
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsSacadorAvalistaPF()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cpf']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.cnpjSacadorAvalista}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsSacadorAvalistaPJ()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cnpj']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.cnpjSacadorAvalista}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{pagamentosContasCodigoBarrasBBean.IsSacadorAvalistaPF()}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel styleClass="space"
+					value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nome']}" />
+				<h:outputText
+					value="#{pagamentosContasCodigoBarrasBBean.razaoSocialSacadorAvalista}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{pagamentosContasCodigoBarrasBBean.IsSacadorAvalistaPJ()}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel styleClass="space"
+					value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.razaoSocial']}" />
+				<h:outputText
+					value="#{pagamentosContasCodigoBarrasBBean.razaoSocialSacadorAvalista}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{not empty pagamentosContasCodigoBarrasBBean.nomeFantasiaSacadorAvalista}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel styleClass="space"
+					value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nomeFantasia']}" />
+				<h:outputText
+					value="#{pagamentosContasCodigoBarrasBBean.nomeFantasiaSacadorAvalista}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Sacador Avalista -->
+
+	<!-- Inicio Pagador Original -->
+	<p:outputPanel
+		rendered="#{pagamentosContasCodigoBarrasBBean.exibePagadorOriginal or pagamentosContasCodigoBarrasBBean.flagVR}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="space-b">
+				<p:separator styleClass="space-t space-b" />
+				<h5 class="bold">#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dadosDoPagadorOriginal']}</h5>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="">
+			<!-- Inicio Painel Documento Pagador Original -->
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					rendered="#{pagamentosContasCodigoBarrasBBean.renderFieldsVr}"
+					styleClass="space-b">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel id="panelTipoDocPagadorOriginal"
+							styleClass="col-xs-12 radio label150"
+							style="margin-top: -8px; width: 350px;">
+							<h:selectOneRadio id="tiposDocPagadorOriginal" tabindex="-1"
+								value="#{pagamentosContasCodigoBarrasBBean.tipoDocPagadorOriginalEnum}">
+								<f:selectItems
+									value="#{pagamentosContasCodigoBarrasBBean.tiposDocumento}"
+									var="i" itemLabel="#{i.label}" itemValue="#{i.value}" />
+								<p:ajax event="change" process="@this"
+									update="@this,panelNomePagadorOriginal,panelDocPagadorOriginal"
+									listener="#{pagamentosContasCodigoBarrasBBean.onChangeTipoDocPagadorOriginal}" />
+							</h:selectOneRadio>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel id="panelDocPagadorOriginal" styleClass="col-xs-2">
+							<p:inputText styleClass="form-control"
+								value="#{pagamentosContasCodigoBarrasBBean.cnpjPagadorOriginal}"
+								onkeypress="maskCpfCnpj(this,event)"
+								onchange="maskCpfCnpj(this,event)" maxlength="18">
+								<p:ajax event="change" process="@this"
+									update="@this,panelTipoDocPagadorOriginal,panelNomePagadorOriginal"
+									listener="#{pagamentosContasCodigoBarrasBBean.onChangeDocPagadorOriginal}" />
+							</p:inputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel id="panelNomePagadorOriginal" styleClass="row">
+						<p:outputPanel>
+							<p:outputPanel
+								rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorOriginalPF()}">
+								<p:outputPanel styleClass="col-xs-4">
+									<h:outputLabel styleClass="space"
+										value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nome']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel>
+							<p:outputPanel
+								rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorOriginalPJ()}">
+								<p:outputPanel styleClass="col-xs-4">
+									<h:outputLabel styleClass="space"
+										value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.razaoSocial']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:inputText styleClass="form-control" disabled="false"
+								value="#{pagamentosContasCodigoBarrasBBean.razaoSocialPagadorOriginal}"
+								autocomplete="off" onkeyup="replaceSpecialChars(this)" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<!-- Fim Painel Documento Pagador Original -->
+		</p:outputPanel>
+
+		<p:outputPanel rendered="#{not pagamentosContasCodigoBarrasBBean.renderFieldsVr}"> 
+			<p:outputPanel
+				rendered="#{not empty pagamentosContasCodigoBarrasBBean.cnpjPagadorOriginal}">
+				<p:outputPanel
+					rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorOriginalPF()}">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cpf']}" />
+						<h:outputText
+							value="#{pagamentosContasCodigoBarrasBBean.cnpjPagadorOriginal}" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel
+					rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorOriginalPJ()}">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cnpj']}" />
+						<h:outputText
+							value="#{pagamentosContasCodigoBarrasBBean.cnpjPagadorOriginal}" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorOriginalPF()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nome']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.razaoSocialPagadorOriginal}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorOriginalPJ()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.razaoSocial']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.razaoSocialPagadorOriginal}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Pagador Original -->
+
+	<!-- Inicio Pagador Efetivo -->
+	<p:outputPanel
+		rendered="#{pagamentosContasCodigoBarrasBBean.exibePagadorEfetivo}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="space-t space-b">
+				<h5 class="bold">#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dadosDoPagadorEfetivo']}</h5>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{not empty pagamentosContasCodigoBarrasBBean.cnpjPagadorEfetivo}">
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorEfetivoPF()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cpf']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.cnpjPagadorEfetivo}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorEfetivoPJ()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel styleClass="space"
+						value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.cnpj']}" />
+					<h:outputText
+						value="#{pagamentosContasCodigoBarrasBBean.cnpjPagadorEfetivo}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorEfetivoPF()}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel styleClass="space"
+					value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nome']}" />
+				<h:outputText
+					value="#{pagamentosContasCodigoBarrasBBean.razaoSocialPagadorEfetivo}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{pagamentosContasCodigoBarrasBBean.IsPagadorEfetivoPJ()}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel styleClass="space"
+					value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.razaoSocial']}" />
+				<h:outputText
+					value="#{pagamentosContasCodigoBarrasBBean.razaoSocialPagadorEfetivo}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Pagador Efetivo -->
+
+	<p:outputPanel styleClass="col-xs-12">
+		<p:outputPanel styleClass="space-b">
+			<p:separator styleClass="space-t space-b" />
+			<h5 class="bold">#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dadosDoPagamento']}</h5>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<!-- Inicio Data Vencimento -->
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{not pagamentosContasCodigoBarrasBBean.editaDataVencimento}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dataDeVencimento']}" />
+		<h:outputText for=""
+			value="#{pagamentosContasCodigoBarrasBBean.dataVencimento}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{pagamentosContasCodigoBarrasBBean.editaDataVencimento}">
+		<p:outputPanel styleClass="row">
+			<h:outputLabel styleClass="col-xs-12"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dataDeVencimento']}" />
+			<p:outputPanel styleClass="icon-data-input col-xs-2 space-b">
+				<i class="fa fa-calendar"></i>
+				<p:calendar showOtherMonths="true" pattern="dd/MM/yyyy"
+					value="#{pagamentosContasCodigoBarrasBBean.dataVencimento}"
+					maxlength="10" converter="dateTelaConverter"
+					onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+					onkeypress="mascaraData(this, event)" readonlyInput="false"
+					disabledWeekends="#{transferenciaBBean.desabilitaFinaisDeSemana}"
+					styleClass="margin-5-top">
+
+					<p:ajax event="change" onstart="openLoad();"
+						oncomplete="closeLoad();"
+						listener="#{pagamentosContasCodigoBarrasBBean.dateSelectedDataVencimento}"
+						update="@this, panelBotoes" />
+
+					<p:ajax event="dateSelect" onstart="openLoad();"
+						oncomplete="closeLoad();"
+						listener="#{pagamentosContasCodigoBarrasBBean.dateSelectedDataVencimento}"
+						update="@this, panelBotoes" />
+
+				</p:calendar>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Data Vencimento -->
+
+	<!-- Inicio Pagar Agora ou Agendar Pagamento -->
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{pagamentosContasCodigoBarrasBBean.exibeDataAgendamento}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dataAgendamento']}" />
+		<h:outputText
+			value="#{pagamentosContasCodigoBarrasBBean.dataPagamento}" />
+	</p:outputPanel>
+	<!-- Fim Pagar Agora ou Agendar Pagamento -->
+
+	<!-- Inicio Detalhes de Valor de Pagamento -->
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{pagamentosContasCodigoBarrasBBean.flgValornominal}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorNominal']}" />
+		<h:outputText
+			value="#{pagamentosContasCodigoBarrasBBean.valorNominal}">
+			<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+		</h:outputText>
+	</p:outputPanel>
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{not pagamentosContasCodigoBarrasBBean.flgOmiteBrancos_valorPago}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorPago']}" />
+		<h:outputText value="#{pagamentosContasCodigoBarrasBBean.valorPago}">
+			<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+		</h:outputText>
+	</p:outputPanel>
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{not pagamentosContasCodigoBarrasBBean.flgOmiteBrancos_encargos}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.encargos']}" />
+		<h:outputText value="#{pagamentosContasCodigoBarrasBBean.encargos}">
+			<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+		</h:outputText>
+	</p:outputPanel>
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{not pagamentosContasCodigoBarrasBBean.flgOmiteBrancos_desconto}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.desconto']}" />
+		<h:outputText value="#{pagamentosContasCodigoBarrasBBean.descontos}">
+			<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+		</h:outputText>
+	</p:outputPanel>
+	<!-- Fim Detalhes de Valor de Pagamento -->
+
+	<!-- Inicio Valor de Pagamento -->
+	<p:outputPanel styleClass="col-xs-12"
+		rendered="#{not pagamentosContasCodigoBarrasBBean.flgValorAberto}">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorTotalACobrar']}" />
+		<h:outputText value="#{pagamentosContasCodigoBarrasBBean.valorTotal}">
+			<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+		</h:outputText>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row space-t col-xs-12">
+		<p:outputPanel styleClass="col-xs-3"
+			rendered="#{pagamentosContasCodigoBarrasBBean.flgValorAberto}">
+			<h:outputLabel styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorTotalACobrar']}" />
+			<p:inputText
+				value="#{pagamentosContasCodigoBarrasBBean.valorTotalInput}"
+				maxlength="17"
+				onblur="maskMoneyOnBlur(this)" converter="valorDecimalConverter"
+				styleClass="form-control margin-5-top" />
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Valor de pagamento -->
+
+</ui:composition>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{usuarioSecundarioIncluirBBean.msgErroJavaStript}" />
+
+		<h:inputHidden id="senhaNovaHash" partialSubmit="true"
+			value="#{usuarioSecundarioIncluirBBean.dto.senhaNovaHash}" />
+
+		<h:inputHidden id="senhaNovaConfirmaHash" partialSubmit="true"
+			value="#{usuarioSecundarioIncluirBBean.dto.senhaNovaConfirmaHash}" />
+
+		<h:inputHidden id="assinaturaHash" partialSubmit="true"
+			value="#{usuarioSecundarioIncluirBBean.dto.assinaturaHash}" />
+
+		<h:inputHidden id="assinaturaConfirmacaoHash" partialSubmit="true"
+			value="#{usuarioSecundarioIncluirBBean.dto.confirmacaoAssinatura}" />
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information flex-align-v box-shadow">
+					<i class="fa fa-exclamation-circle space-rr"></i>
+					<span> <h:outputText styleClass="row"
+							value="#{msg['page.administrativo.usuarioSecundario.incluir.alerta1']}" />
+						<h:outputText styleClass="row"
+							value="#{msg['page.administrativo.usuarioSecundario.incluir.alerta2']}" />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.administrativo.usuarioSecundarioIncluir.wizard1']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="nomeCompleto"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.nomeCompleto']}" />
+									<p:inputText id="nomeCompleto" styleClass="form-control"
+										maxlength="64"
+										value="#{usuarioSecundarioIncluirBBean.dto.nomeUsuario}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="cpfCnpj"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.cpf']}" />
+									<p:inputMask id="cpfCnpj" maxlength="14"
+										styleClass="form-control"
+										value="#{usuarioSecundarioIncluirBBean.dto.nrCpf}"
+										mask="999.999.999-99" onkeypress="onlyNumbers(event)" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="area"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.area']}" />
+									<p:inputText id="area" styleClass="form-control" maxlength="50"
+										value="#{usuarioSecundarioIncluirBBean.dto.nomeArea}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="fone"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.telefoneFixo']}" />
+									<p:inputMask id="fone" styleClass="form-control"
+										onkeypress="onlyNumbers(event)"
+										value="#{usuarioSecundarioIncluirBBean.dto.nrTelefone}"
+										mask="(99) 9999 - 9999" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="fone" styleClass="space-tt"
+										value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.formato.telefone']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row"
+								rendered="#{usuarioSecundarioIncluirBBean.exibeCelular}">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="celular"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.telefoneCelular']}" />
+
+									<p:inputMask id="celular" styleClass="form-control"
+										onkeypress="onlyNumbers(event)"
+										value="#{usuarioSecundarioIncluirBBean.dto.nrCelular}"
+										mask="(99) 99999 - 9999" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="celular" styleClass="space-tt"
+										value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.formato.celular']}" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="nomeAcesso"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.nomeAcesso']}" />
+									<p:inputText id="nomeAcesso" style="width:100%" maxlength="14"
+										styleClass="form-control"
+										value="#{usuarioSecundarioIncluirBBean.dto.nomeLogon}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="senhaAcesso"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.senhaAcesso']}" />
+									<p:password id="senhaAcesso" maxlength="8"
+										styleClass="form-control"
+										value="#{usuarioSecundarioIncluirBBean.dto.novaSenha}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="senhaAcesso" styleClass="space-tt"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.formato2']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="senhaAcessoConfirmacao"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.confirmaSenha']}" />
+									<p:password id="senhaAcessoConfirmacao" maxlength="8"
+										styleClass="form-control"
+										value="#{usuarioSecundarioIncluirBBean.dto.senhaConfirmacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row"
+								rendered="#{usuarioSecundarioIncluirBBean.exibeAssin}">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="novaAssinatura"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.assinaturaEletronica']}" />
+									<p:password maxlength="8" styleClass="form-control"
+										id="novaAssinatura"
+										value="#{usuarioSecundarioIncluirBBean.dto.novaAssinatura}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="novaAssinatura" styleClass="space-tt"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.formato2']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row"
+								rendered="#{usuarioSecundarioIncluirBBean.exibeAssin}">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+									<h:outputLabel for="confirmacaoAssinatura"
+										value="#{msg['page.administrativo.usuarioSecundario.incluir.confirmaAssinatura']}" />
+									<p:password maxlength="8" id="confirmacaoAssinatura"
+										styleClass="form-control"
+										value="#{usuarioSecundarioIncluirBBean.dto.confirmacaoAssinatura}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row"
+								rendered="#{usuarioSecundarioIncluirBBean.exibeAssin}">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="checkbox">
+										<p:selectBooleanCheckbox styleClass="space"
+											value="#{usuarioSecundarioIncluirBBean.dto.inAcesMobl}"
+											id="basic" />
+										<h:outputText styleClass="text" for="basic"
+											value="#{msg['page.administrativo.usuarioSecundario.incluir.assinaturaMobile']}" />
+									</p:outputPanel>
+									<a
+										href="http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=9193"
+										target="_blank" style="text-decoration: underline"> <br />
+										<h:outputText
+											value="#{msg['page.administrativo.usuarioSecundario.incluir.termos']}" />
+									</a>
+
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					id="voltarParaMenu"
+					action="#{usuarioSecundarioIncluirBBean.voltarParaMenu}"
+					role="button"
+					value="#{msg['page.administrativo.usuarioSecundario.incluir.btn.voltar']}" />
+
+				<p:blockUI block="btnCopiarPerfil" trigger="btnCopiarPerfil" />
+				<p:commandButton styleClass="btn btn-default margin-right-5"
+					onclick="encryptNomeAcessoAssinaturaPasswordDL();"
+					onstart="openLoad()" oncomplete="closeLoad()"
+					action="#{usuarioSecundarioIncluirBBean.copiarPerfil}"
+					role="button" id="btnCopiarPerfil"
+					value="#{msg['page.administrativo.usuarioSecundario.incluir.btn.copiar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					role="button" onstart="openLoad()" oncomplete="closeLoad()"
+					action="#{usuarioSecundarioIncluirBBean.confirmarIncluirPreenchimento}"
+					onclick="encryptNomeAcessoAssinaturaPasswordDL();"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

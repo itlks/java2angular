@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.federais.darfPgto.confiraDados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-md-6">
+							<p:outputPanel styleClass="titulo-destaque">
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-md-2">
+
+										<p:graphicImage id="republicaFBrasil"
+											styleClass="republicaFb-darfSimples" value="/images/u132.gif" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-md-10">
+
+										<h5>
+											<p>
+												<h:outputText value="#{darfBBean.tituloDocumento1}" />
+												<br />
+												<h:outputText value="#{darfBBean.tituloDocumento2}" />
+												<br />
+												<h:outputText styleClass="bold"
+													value="#{darfBBean.tituloDocumento3}" />
+												<br />
+											</p>
+										</h5>
+
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p>
+								<strong><h:outputText for="nomeEmpresaTelefone"
+										value="#{msg['page.pagamentos.tributos.federais.darfPgto.nomeEmpresaTelefone']}" /></strong>
+							</p>
+							<p>
+								<h:outputText id="nomeEmpresaTelefone"
+									value="#{darfBBean.darfDTO.nomeEmpresaTelefone}" />
+							</p>
+							<br />
+							<br />
+
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-6 border-left-col">
+
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.periodoApuracao']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.periodoApuracao}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b gray-row">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.cpfCnpj']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<h:outputText value="#{darfBBean.darfDTO.cpfCnpj}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.codigoReceita']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.codigoReceita}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b gray-row">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.numeroReferencia']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.numeroReferencia}" />
+
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.dataVencimento']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.dataVencimento}" />
+
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b gray-row">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.valorPrincipal']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.valorPrincipal}" />
+
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.valorMulta']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.valorMulta}" />
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b gray-row">
+								<p:outputPanel styleClass="col-md-6">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.valorJurosEncargos']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p>
+										<h:outputText value="#{darfBBean.darfDTO.valorJurosEncargos}" />
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b grey-row">
+								<p:outputPanel styleClass="col-md-6 grey-col">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.federais.darfPgto.valorTotal']}" /></strong>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right grey-col">
+									<p>
+										<strong><h:outputText
+												value="#{darfBBean.darfDTO.valorTotal}" /></strong>
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<ui:include src="/commons/inicializaDL.xhtml" />
+					<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-md-12 text-right">
+						<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+						<p:commandButton id="btnVoltar"
+							styleClass="btn btn-default btn-cinza" role="button"
+							action="#{darfBBean.voltarDaTelaDeConfirmacao}"
+							value="#{msg['page.pagamentos.tributos.federais.darfPgto.voltar']}" />
+
+						<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+						<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+							onstart="encryptSecureDL();" role="button"
+							action="#{darfBBean.confirmarTelaConfirmacao}"
+							value="#{msg['page.pagamentos.tributos.federais.darfPgto.continuar']}" />
+						<p:defaultCommand target="btnContinuar" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+
+
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

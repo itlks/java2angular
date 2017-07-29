@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.gerenciar.consultar.aparelhos.oquevoceprecisa']}</h4>
+				</p:outputPanel>	
+			</p:outputPanel>
+		</p:outputPanel>		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel	styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle gerenciarAparelho"></i>
+					<span>
+					<p>#{msg['pages.gerenciar.consultar.aparelhos.dispositivo']}</p>
+					<p>#{msg['pages.gerenciar.consultar.aparelhos.habilitar']}</p>
+					<p>#{msg['pages.gerenciar.consultar.aparelhos.bloquearDesbloquear']}</p>
+					<p>#{msg['pages.gerenciar.consultar.aparelhos.descontinuar']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.gerenciar.consultar.aparelhos.aparelho']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:dataTable id="gerenciar">
+							<p:column headerText="#{msg['pages.gerenciar.consultar.aparelhos.nomeaparelho']}">
+								<h:outputText value="teste2" />
+							</p:column>
+							<p:column headerText="#{msg['pages.gerenciar.consultar.aparelhos.status']}">
+								<h:outputText value="teste3" />
+							</p:column>
+							<p:column headerText="#{msg['pages.gerenciar.consultar.aparelhos.datacadastro']}">
+								<h:outputText value="teste4" />
+							</p:column>
+							<p:column headerText="#{msg['pages.gerenciar.consultar.aparelhos.datahabilitacao']}">
+								<h:outputText value="teste5" />
+							</p:column>
+							<p:column headerText="">
+								<p:commandLink styleClass="pull-center" title="#{msg['pages.gerenciar.consultar.aparelhos.bloquear']}" value="#{msg['pages.gerenciar.consultar.aparelhos.bloquear']}" />
+							</p:column>
+							<p:column headerText="">
+								<p:commandLink styleClass="pull-center" title="#{msg['pages.gerenciar.consultar.aparelhos.cancelar']}" value="#{msg['pages.gerenciar.consultar.aparelhos.cancelar']}" />
+							</p:column>
+							
+						</p:dataTable>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:outputPanel id="panelBotao" styleClass="col-md-12 text-right">
+					<p:commandLink id="voltar" styleClass="btn btn-default btn-cinza" role="button" action="#{gerenciarAparelhosBBean.voltar}">#{msg['page.btn.voltar']}</p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		
+			</ui:define>
+</ui:composition>

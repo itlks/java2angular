@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<h:inputHidden id="hashAcesso" partialSubmit="true" value="#{usuarioMasterFinalizarCadastroBBean.session.hashAcesso}" />
+		<h:inputHidden id="hashAcessoNovo" partialSubmit="true" value="#{usuarioMasterFinalizarCadastroBBean.session.hashAcessoNovo}" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{usuarioMasterFinalizarCadastroBBean.dto.msgErroJavaStript}" />
+			
+			
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos block-aviso alert-information box-shadow min-lines">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							<h:outputText>#{msg['page.administrativo.usuario.master.masterCadastrar2.msgHeader1']}</h:outputText>
+							<h:outputText>#{msg['page.administrativo.usuario.master.masterCadastrar2.msgHeader2']}</h:outputText>
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="placeholders">
+
+			<p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.usuarioMaster.cadastro.subTitulo']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-14">
+					<p:outputPanel styleClass="box-shadow">	
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-3">
+	
+							<p:outputPanel styleClass="">
+								<p:outputLabel styleClass="space" for="nomeCompleto" 
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.nome']}" />
+								<h:outputText id="nomeCompleto"
+									value=" #{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.nomeTitularConta}" />
+							</p:outputPanel>
+						</p:outputPanel>
+							
+						<p:outputPanel styleClass="col-xs-3">
+								<p:outputPanel >
+									<p:outputLabel styleClass="space">#{msg['page.administrativo.usuarioMaster.cadastro.cpf']}</p:outputLabel>
+									<h:outputText id="cpf"
+											value=" #{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.cpfUsuario}"
+											converter="converterCpfCnpj" />
+								</p:outputPanel>				
+						</p:outputPanel>
+						
+				  	</p:outputPanel>
+				  	
+				  	<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-3">
+							<p:outputPanel >
+								<h:outputLabel styleClass="space" for="ddd"
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.ddd']}" />
+								<h:outputText id="ddd"
+									value=" #{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.codigoDDD}" rendered="#{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.codigoDDD ne '0'}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-3">
+							<p:outputPanel >
+								<p:outputLabel styleClass="space" for="telefone"
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.telefone']}" />
+								<h:outputText id="telefone"
+									value=" #{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.numeroTelefone}" rendered="#{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.numeroTelefone ne '0'}"  />
+							</p:outputPanel>				
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel >
+								<p:outputLabel styleClass="space" for="ramal"
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.ramal']}" />
+								<h:outputText id="ramal"
+									value=" #{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.ramal}" rendered="#{usuarioMasterFinalizarCadastroBBean.usuarioSelecionado.ramal ne '0'}"/>
+							</p:outputPanel>				
+						</p:outputPanel>
+				  	</p:outputPanel>
+				  	
+				  	<p:outputPanel styleClass="row space-t">
+				  		<p:outputPanel styleClass="col-xs-4">
+				  			<p:outputPanel >
+				  				<p:outputLabel for="nomeAcesso"
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.nomeAcesso']}" />
+								
+								<p:inputText id="nomeAcesso" styleClass="form-control"
+											 value="#{usuarioMasterFinalizarCadastroBBean.dto.nomeAcesso}"
+											 maxlength="14" />
+				  			</p:outputPanel>
+				  		</p:outputPanel>
+				  		
+				  		
+			  			<p:outputPanel styleClass="col-xs-4 input-help">
+				  				<p:outputLabel value="#{msg['page.administrativo.usuarioMaster.cadastro.msg1']}" />
+				  		</p:outputPanel>
+				  	</p:outputPanel>
+				  	
+					<p:outputPanel styleClass="row space-t">
+				  		<p:outputPanel styleClass="col-xs-4">
+				  			<p:outputPanel >
+				  			
+				  				<p:outputLabel for="senhaAcessoNova"
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.senha']}"/>
+								<p:password id="senhaAcessoNova" maxlength="8" styleClass="form-control"
+									 placeholder="" />
+				  			
+				  			</p:outputPanel>
+				  		</p:outputPanel>
+				  		
+
+			  			<p:outputPanel styleClass="col-xs-4 input-help">
+			  				<p:outputLabel value="#{msg['page.administrativo.usuarioMaster.cadastro.msg2']}" />
+			  			</p:outputPanel>
+
+				  	</p:outputPanel>
+				  	
+				  	
+				  	<p:outputPanel styleClass="row space-t">
+				  		<p:outputPanel styleClass="col-xs-4">
+				  			<p:outputPanel >
+				  				<p:outputLabel for="senhaAcessoConfirmacao"
+									value="#{msg['page.administrativo.usuarioMaster.cadastro.senhaConfirmacao']}" />
+									
+									<p:password id="senhaAcessoConfirmacao" maxlength="8" 
+												styleClass="form-control"	placeholder="" />
+				  				</p:outputPanel>
+				  		</p:outputPanel>
+				  	</p:outputPanel>
+					
+				</p:outputPanel>	
+			</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 text-right">
+						<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+							id="voltar"
+							value="#{msg['page.administrativo.usuarioMaster.cadastro.voltar']}"
+							style="margin-right:10px;"
+							action="#{usuarioMasterFinalizarCadastroBBean.voltarUsuarioMasterFinalizarCadastroPreenchimento}" />
+							
+						<p:blockUI block="btnContinuar" trigger="btnContinuar" />		
+						<p:commandLink styleClass="btn btn-default" role="button" id="btnContinuar"
+							value="#{msg['page.btn.continuar']}"
+							onclick="encryptUsuarioMasterFinalizaContratoDL();"
+							action="#{usuarioMasterFinalizarCadastroBBean.continuarUsuarioMasterFinalizarCadastroPreenchimento}">
+						</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>				
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

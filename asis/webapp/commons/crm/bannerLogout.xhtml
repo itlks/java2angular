@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+
+		.bkimgLogout {
+			margin: auto;
+		    width: 50%;
+			background-image: url("#{campanhasCRMBBean.bannerLogout.strImagemUrl}");
+		}
+	</style>
+<h:form>
+	<p:outputPanel id="idPanelbannerLogout">
+		<p:outputPanel rendered="#{campanhasCRMBBean.bannerLogout.habilitarBanner}" layout="block"  style="margin-top:8px; margin-bottom: 8px;" align="center">
+			<h:panelGroup class="bkimgLogout" id="divArte" layout="block" style="OVERFLOW: hidden; HEIGHT: 90px; WIDTH: 550px" rendered="#{campanhasCRMBBean.bannerLogout.isMidia3 != true}">
+				<h:panelGroup layout="block" style="OVERFLOW: hidden; HEIGHT: 90px; WIDTH: 550px; text-align: initial;">
+					
+					<!-- Bloco 1: Tipo de midia 4 -->
+					<p:outputPanel layout="block" styleClass="col-xs-12">	
+						<span class="textCarousell" style="top: #{campanhasCRMBBean.bannerLogout.strTopDiv1}px; left: #{campanhasCRMBBean.bannerLogout.strLeftDiv1}px;">
+							<h:outputText escape="false" value="#{campanhasCRMBBean.bannerLogout.strTextoDiv1}"/>
+						</span>
+						
+						<span class="textCarousell"  style="top: #{campanhasCRMBBean.bannerLogout.strTopDiv2}px; left: #{campanhasCRMBBean.bannerLogout.strLeftDiv2}px;">
+							<h:outputText escape="false" value="#{campanhasCRMBBean.bannerLogout.strTextoDiv2}"/>
+						</span>
+						
+						<span class="textCarousell"  style="top: #{campanhasCRMBBean.bannerLogout.strTopDiv3}px; left: #{campanhasCRMBBean.bannerLogout.strLeftDiv3}px;" >
+							<h:outputText escape="false" value="#{campanhasCRMBBean.bannerLogout.strTextoDiv3}"/>
+						</span>
+						
+						<span class="textCarousell" style="top: #{campanhasCRMBBean.bannerLogout.strTopLinkUrl}px; left: #{campanhasCRMBBean.bannerLogout.strLeftLinkUrl}px;">
+							<h:commandLink action="#{campanhasCRMBBean.redirectBanner(campanhasCRMBBean.bannerLogout)}" target="#{campanhasCRMBBean.bannerLogout.blank}">
+								<h:outputText escape="false" value="#{campanhasCRMBBean.bannerLogout.strTextoLinkUrl}"/>
+							</h:commandLink>
+						</span>
+					</p:outputPanel>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			<h:panelGroup id="divArte2" layout="block" style="OVERFLOW: hidden; HEIGHT: 95px; WIDTH: 540px" rendered="#{campanhasCRMBBean.bannerLogout.isMidia3}">
+				<h:commandLink action="#{campanhasCRMBBean.redirectBanner(campanhasCRMBBean.bannerLogout)}" target="#{campanhasCRMBBean.bannerLogout.blank}">
+					<p:graphicImage value="#{campanhasCRMBBean.bannerLogout.strImagemUrl}"/>
+				</h:commandLink>
+			</h:panelGroup>
+			
+			<p:outputPanel style="OVERFLOW: hidden; WIDTH: 540px; height:19px; background-color: white; text-align: center; display: inline-block;"
+						   rendered="#{campanhasCRMBBean.bannerLogout.isCRM}">
+				<span>
+					<h:outputText value="Para ver uma nova campanha no próximo acesso. "/>
+					<p:commandLink action="#{campanhasCRMBBean.rejeitarBanner(campanhasCRMBBean.bannerLogout)}" 
+								   partialSubmit="true" 
+								   async="true" 
+								   immediate="true"
+								   style="margin-left:8">
+						<h:outputText value="Clique aqui."/>
+						<f:param name="rejeiteBoId" value="#{campanhasCRMBBean.bannerLogout.boId}" />
+						<f:param name="rejeiteRaAttribSeg" value="#{campanhasCRMBBean.bannerLogout.raAttribSeg}" />
+					</p:commandLink>
+				</span>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</h:form>
+</ui:composition>

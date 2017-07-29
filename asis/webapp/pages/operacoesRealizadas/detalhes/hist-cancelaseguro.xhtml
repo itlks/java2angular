@@ -1,0 +1,50 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoCancelaSeguro_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosCancelaSeguro_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosCancelaSeguroLbl_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idProdutoCancelaSeguro_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.produto']}"
+							styleClass="space" id="idProdutoLblCancelaSeguro_#{posicaoLista}" />
+			<h:outputText value="${compHisParts[5]}" id="idProdutoTxtCancelaSeguro_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroCertificadoCancelaSeguro_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroCertificado']}"
+							styleClass="space" id="idNumeroCertificadoLblCancelaSeguro_#{posicaoLista}" />
+			<h:outputText value="${compHisParts[4]}" id="idNumeroCertificadoTxtCancelaSeguro_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroProcessadoSusepCancelaSeguro_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroProcessoSusep']}"
+							styleClass="space" id="idNumeroProcessadoLblCancelaSeguro_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[3]}" id="idNumeroProcessadoTxtCancelaSeguro_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idRegistroSusepCancelaSeguro_#{posicaoLista}">
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.registroSusep']}"
+							id="idRegistroSusepTxtCancelaSeguro_#{posicaoLista}"/>
+		</p:outputPanel>		
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idSeparatorCancelaSeguro_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepCancelaSeguro_#{posicaoLista}">
+			<p:separator id="separatorCancelaSeguro_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+
+</ui:fragment>

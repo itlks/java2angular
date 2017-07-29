@@ -1,0 +1,61 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />	
+
+	<p:outputPanel styleClass="row space-b" id="idExtPgoForManutencao_#{posicaoLista}">	
+		<p:outputPanel styleClass="col-xs-12" id="idDadosPgoForManutencao_#{posicaoLista}">
+			<h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" 
+			id="idDadosPgoForManutencaoLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idHistConvPgoForManutencao_#{posicaoLista}">
+		  	<h:outputLabel value="#{msg['page.autorizacoes.historico.consulta.pesquisa.convenio.label']}" styleClass="space" 
+		  	id="idHistConvLblPgoForManutencao_#{posicaoLista}"/> 
+		  	<h:outputText value="${compHisParts[1].concat('-').concat(compHisParts[2]).concat('-').concat(compHisParts[3])}" 
+		  	id="idHistConvTxtPgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idOpReaDetPgoForManutencao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.documento']}" styleClass="space" 
+			id="idOpReaDetLblPgoForManutencao_#{posicaoLista}"/>
+		 	<h:outputText value="${compHisParts[6]}" converter="converterCpfCnpj" id="idOpReaDetTxtPgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>
+			
+		<p:outputPanel styleClass="col-xs-12" id="idMsgGetNetPgoForManutencao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.nome']}" styleClass="space" 
+			id="idMsgGetNetLblPgoForManutencao_#{posicaoLista}"/>
+		 	<h:outputText value="${compHisParts[7]}" id="idMsgGetNetTxtPgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>	
+
+			<p:outputPanel styleClass="col-xs-12" id="idContrManPgoForManutencao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.telefone']}" styleClass="space" 
+			id="idContrManLblPgoForManutencao_#{posicaoLista}"/>
+		  	<h:outputText value="${compHisParts[8].concat('-').concat(compHisParts[9])}" id="idContrManTxtPgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>	
+		
+		<p:outputPanel styleClass="col-xs-12" id="idUserMasterPgoForManutencao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['pages.usuarioMaster.masterCadastrar2.ramal']}" styleClass="space" id="idUserMasterLblPgoForManutencao_#{posicaoLista}"/>
+		  	<h:outputText value="${compHisParts[10]}" id="idUserMasterTxtPgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>	
+		
+		<p:outputPanel styleClass="col-xs-12" id="idOpeRealizadasPgoForManutencao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.fax']}" styleClass="space" 
+			id="idOpeRealizadasLblPgoForManutencao_#{posicaoLista}"/>
+		  	<h:outputText value="${compHisParts[11].concat('-').concat(compHisParts[12])}" id="idOpeRealizadasTxtPgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>		
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPgoForManutencao_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPgoForManutencao_#{posicaoLista}">
+			<p:separator id="idSepaLinePgoForManutencao_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

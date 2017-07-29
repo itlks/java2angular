@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel col-xs-12" rendered="#{creditoPessoalBBean.parcelaSelec.gerouPendencia}">
+					<h4>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.transacao.finalizada']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel col-xs-12" rendered="#{!creditoPessoalBBean.parcelaSelec.gerouPendencia}">
+					<h4>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.finalizada']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.valorEmprestimo']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.vlEmpr}</span>
+							<br />
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.quantidadeParcelas']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.numParcelas}</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.tipoTaxa']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.tpTaxa}</span>
+							<br />
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.taxaJurosMensal']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.txJuroMes}</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.taxaJurosAnual']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.txJuroAno}</span>
+							<br />
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.tarifaAberturaCredito']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.vlTariCntr}</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.valorIOF']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.vlIOF}</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.cetMensal']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.cetMes}</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.cetAnual']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.cetAno}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.valorTotalFinanciado']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.vlTotaFinan}</span>
+							<br />
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.valorTotalEmprestimo']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.vlTotaEncarg}</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.valorParcelas']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.valorParcela}</span>
+							<br />
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.vencimentoPrimeiraParcela']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.dtPrimVcto}</span>
+							<br />
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.ultimoVencimento']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.dtUltiVcto}</span>
+							<br />
+							<h:outputText
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.encargosInadimplencia']}"
+								styleClass="space bold" />
+								#{creditoPessoalBBean.parcelaSelec.txInad}
+							
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.dadosSimulacao.multa']}"
+								styleClass="space" />
+							<span>#{creditoPessoalBBean.parcelaSelec.txMora}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 space-b">
+							<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.declaro.1']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 space-b">
+							<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.declaracao.cliente.1']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 space-b">
+							<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.informacao.cet']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+							<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.declaracao.cliente.2']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b" rendered="#{creditoPessoalBBean.parcelaSelec.gerouPendencia}">
+						<p:outputPanel styleClass="col-xs-12 text-center">
+							<h5>
+								<strong>#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.demonstrativo.conferencia']}</strong>
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b" rendered="#{!creditoPessoalBBean.parcelaSelec.gerouPendencia}">
+						<p:outputPanel styleClass="col-xs-4">
+							<p>
+								<strong><h:outputText
+										value="#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.autenticacao.bancaria']}" /></strong>
+							</p>
+							<p>
+								<h:outputText value="#{creditoPessoalBBean.parcelaSelec.referOper}" />
+							</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4 ">
+							<p>
+								<strong><h:outputText
+										value="#{msg['pages.emprestimosRecebiveis.giroEletronico.comprovante.contratacao.data.hora']}" /></strong>
+							</p>
+							<p>
+								<h:outputText value="#{creditoPessoalBBean.parcelaSelec.dataHoraTransacao}" />
+							</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="quebra"></p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

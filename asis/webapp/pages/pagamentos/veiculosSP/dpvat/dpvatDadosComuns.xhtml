@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-4">
+			<h5>
+				<h:outputText value="#{msg['page.pagamentos.veiculossp.dpvat.pagamento.renav']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatSpBBean.renavamDTO.numero}" converter="converterNumeroRenavam" />
+			</h5>									
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:separator />
+	
+	<p:outputPanel styleClass="row space-b">	
+		<p:outputPanel styleClass="col-xs-4">
+			<h5 class="space-b">
+				<h:outputText value="#{msg['page.pagamentos.veiculossp.dpvat.pagamento.propr']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatSpBBean.renavamDTO.nome}" />
+			</h5>		
+			<h5>
+				<h:outputText value="#{msg['page.pagamentos.veiculossp.dpvat.pagamento.cpfcnpj']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatSpBBean.dpvatDTO.cpfCnpj}" converter="converterCpfCnpj" />
+			</h5>								
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-4">
+			<h5 class="space-b">
+				<h:outputText value="#{msg['page.pagamentos.veiculossp.dpvat.pagamento.codigMunic']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatSpBBean.dpvatDTO.codMun}" />
+			</h5>			
+			<h5>
+				<h:outputText value="#{msg['page.pagamentos.veiculossp.dpvat.pagamento.placaVeicu']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatSpBBean.renavamDTO.placaVeiculo}" />
+			</h5>		
+		</p:outputPanel>
+	</p:outputPanel>
+
+</ui:composition>

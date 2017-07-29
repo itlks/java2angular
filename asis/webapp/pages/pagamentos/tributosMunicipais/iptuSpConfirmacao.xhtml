@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>Confira os dados do pagamento para finalizar sua operação</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="box-shadow">    
+
+                    <p:outputPanel styleClass="row space-b">
+
+                        <p:outputPanel styleClass="col-md-12">
+                            <p:outputPanel styleClass="titulo-destaque">
+                            
+                              <p:outputPanel styleClass="row">
+                                  <p:outputPanel styleClass="col-md-1 col-md-offset-1">                            
+                                
+                                        <p:graphicImage  width="78px" height="101px" value="/images/u67.png" />                                                              
+                                    </p:outputPanel>
+                                    
+                                  <p:outputPanel styleClass="col-md-8">                                  
+                                    <br/><br/>
+                                    <h5>PREFEITURA DO MUNICÍPIO DE SÃO PAULO <br/>
+
+                                        Documentação de Arrecadação de IPTU - Imposto Predial e Territorial Urbano <br/>
+
+                                    </h5>
+
+                                  </p:outputPanel>
+                              </p:outputPanel>
+                            </p:outputPanel> 
+
+                            <p:separator />
+                        </p:outputPanel>
+
+                    </p:outputPanel>
+
+                    <p:outputPanel styleClass="row space-b">
+
+                        <p:outputPanel styleClass="col-md-12 ">
+
+                            <p><strong>Nome do Contribuinte: </strong>EMPRESA ABC</p>
+                            <p><strong>Nº do Contribuinte/Cadastro do Imóvel: </strong>00184530018</p>
+                            <p><strong>Ano do exercício: </strong>2015</p>
+                            <p><strong>Número da notificação:</strong></p>  
+                                                                                                                  
+                        </p:outputPanel>                                              
+                    </p:outputPanel>  
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-md-12 ">   
+                        
+                            <p:separator />
+                        
+                        </p:outputPanel>
+                    </p:outputPanel>                                             
+                    
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-md-12 ">    
+                        
+                            <p>Existem dívidas em exercício(s) mais antigos - Procure a P.M.S.P.</p>
+                            <p>Existem dívidas em exercício(s) no Depto. Fiscal - Procure a P.M.S.P.</p>
+                            <p>Existem dívidas em exercício(s) mais antigos e no Depto. Fiscal - Procure a P.M.S.P.</p>                          
+                        </p:outputPanel>                                              
+                    </p:outputPanel>               
+                                                    
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>Assinatura Eletrônica</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-lg-12">                        
+            <p:outputPanel styleClass="box-shadow">
+              <p:outputPanel styleClass="row">
+                <p:outputPanel styleClass="col-md-3">
+                    <p><strong>Conta Corrente:</strong></p>
+                    <p><strong>0391 13 004611-9</strong></p>
+                </p:outputPanel>   
+                <p:outputPanel styleClass="col-md-5">
+                    <p:outputPanel styleClass="form-group">
+                       <h:outputLabel for="">Assinatura Eletrônica</h:outputLabel>
+                       <p:password styleClass="form-control text-center"></p:password>
+                    </p:outputPanel>
+                </p:outputPanel>  
+                </p:outputPanel>         
+            </p:outputPanel>
+          </p:outputPanel>
+        </p:outputPanel>             
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			   <p:commandLink styleClass="btn btn-default btn-cinza"  role="button">Voltar</p:commandLink>
+			   <p:commandLink styleClass="btn btn-default" role="button">Continuar</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>        
+	</ui:define>
+</ui:composition>         

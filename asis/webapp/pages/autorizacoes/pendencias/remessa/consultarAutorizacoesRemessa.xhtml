@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/bootstrap-table.js" />
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+	<p:outputPanel styleClass="row space-b">
+
+		<p:outputPanel styleClass="row">
+			<h:outputLabel styleClass="col-xs-12"
+				value="#{msg['pages.autorizacoes.pendencias.remessa.selecaoConvenios']}"
+				for="convenios" />
+		</p:outputPanel>
+		
+		
+		
+		
+
+		<p:outputPanel styleClass="row">
+			<p:scrollPanel styleClass="col-xs-6 text-left noHover"
+				style="height:auto; max-height:200px " mode="native">
+				<p:selectManyCheckbox id="convenios" layout="grid" columns="1"
+					styleClass="no-border ui-many-chkbox"
+					value="#{autorizacoesPendenciaRemessaBBean.conveniosSelecionados}"
+					label="#{msg['pages.autorizacoes.pendencias.remessa.comboConvenio.label']}"
+					required="selected">
+
+					<f:selectItems
+						value="#{autorizacoesPendenciaRemessaBBean.conveniosProduto.convenios}"
+						var="convenio"
+						itemLabel="#{convenio.todos == null ? convenio.banco.numero.concat(convenio.banco.agencia).concat(convenio.banco.conta).concat(' - ').concat(convenio.nomeConvenio) : convenio.todos}"
+						itemValue="#{convenio.banco.numero.concat(convenio.banco.agencia).concat(convenio.banco.conta)}" />
+
+				</p:selectManyCheckbox>
+			</p:scrollPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<f:verbatim>
+				<input 
+						type="button" 
+						class="btn btn-default btn-period"
+						onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"
+						onclick="filtrarConvenios();"
+						value="#{msg['page.btn.exibir']}" />
+				
+				</f:verbatim>
+			</p:outputPanel>
+		</p:outputPanel>	
+
+	</p:outputPanel>
+	
+	<div class="col-xs-12 text-center" id="msgemVazio"></div>
+
+	<p:outputPanel id="panelPendenciasPorRemessa" styleClass="row remessa">
+        <p:outputPanel styleClass="col-xs-12">
+           <div id="resultadosAutorizacoesRemessa" ></div>
+        </p:outputPanel>
+			
+		
+	</p:outputPanel>
+
+</ui:composition>

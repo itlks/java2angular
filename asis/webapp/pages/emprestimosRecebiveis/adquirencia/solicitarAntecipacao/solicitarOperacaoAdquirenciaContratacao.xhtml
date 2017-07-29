@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="//commons/inicializaDL.xhtml"></ui:include>
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+	
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.contratacaoOperacoes']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row col-xs-9">
+								<h:outputText
+									value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.recDispRecSelecPoperacao']}" />
+
+								<p:outputPanel styleClass="row space-t col-xs-12">
+									<h:outputLabel styleClass="space"
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.estabelecimento']}" />
+									<h:outputText id="estabelecimento_hash_1"
+										value="#{solicitarOperacaoAdquirenciaBBean.dto.estabelecimento}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputLabel for="" styleClass="space"
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorTotalDisponivel']}" />
+									<h:outputText for=""
+										value="#{solicitarOperacaoAdquirenciaBBean.dto.vlrTotDisponivel}"
+										converter="valorMonetarioConverter" />
+
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputLabel for="" styleClass="space"
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorSelecionado']}" />
+									<h:outputText for=""
+										value="#{solicitarOperacaoAdquirenciaBBean.dto.vlrSelecionado}"
+										converter="valorMonetarioConverter" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row col-xs-3">
+								<p:graphicImage value="/images/selo-getnet-2.png" width="200px" />
+							</p:outputPanel>
+							<p:outputPanel
+								rendered="#{solicitarOperacaoAdquirenciaBBean.dto.listaPLConsultaFluxoCartoesVisa.size() > 0}">
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputLabel for="" styleClass="space"
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.bandeira']}" />
+									<h:outputText for=""
+										value="#{solicitarOperacaoAdquirenciaBBean.bandeiraOperacaoAdquirenciaVisa.descricao}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="row space-t">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel
+											styleClass="table-responsive table table-striped">
+											<p:dataTable id="tblFluxosVisa" var="listaFluxo"
+												rowSelectMode="checkbox" rowKey="#{listaFluxo}"
+												value="#{solicitarOperacaoAdquirenciaBBean.dto.listaPLConsultaFluxoCartoesVisa}"
+												selection="#{solicitarOperacaoAdquirenciaBBean.dto.listaPLConsultaFluxoCartoesVisaSelecionados}"
+												emptyMessage="Lista Vazia">
+
+												<p:ajax event="rowSelectCheckbox"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="rowUnselectCheckbox"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="rowSelect"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="rowUnselect"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="toggleSelect"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+
+												<p:column selectionMode="multiple" />
+												<p:column
+													headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dataCredito']}"
+													styleClass="col-xs-4">
+													<h:outputText value="#{listaFluxo.dtTitulo}" />
+												</p:column>
+												<p:column styleClass="text-right col-xs-8"
+													headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dispParaAntecipacao']}">
+													<h:outputText value="#{listaFluxo.vlTitulo}"
+														converter="valorMonetarioConverter" />
+												</p:column>
+
+											</p:dataTable>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel
+								rendered="#{solicitarOperacaoAdquirenciaBBean.dto.listaPLConsultaFluxoCartoesMaster.size()> 0}">
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputLabel for="" styleClass="space"
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.bandeira']}" />
+									<h:outputText for=""
+										value="#{solicitarOperacaoAdquirenciaBBean.bandeiraOperacaoAdquirenciaMaster.descricao}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="row space-t">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel
+											styleClass="table-responsive table table-striped">
+
+											<p:dataTable id="tblFluxosMaster" var="listaFluxo"
+												value="#{solicitarOperacaoAdquirenciaBBean.dto.listaPLConsultaFluxoCartoesMaster}"
+												selection="#{solicitarOperacaoAdquirenciaBBean.dto.listaPLConsultaFluxoCartoesMasterSelecionados}"
+												rowKey="#{listaFluxo}" rowSelectMode="checkbox"
+												emptyMessage="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.listaVazia']}">
+
+												<p:ajax event="rowSelectCheckbox"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="rowUnselectCheckbox"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="rowSelect"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="rowUnselect"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+												<p:ajax event="toggleSelect"
+													listener="#{solicitarOperacaoAdquirenciaBBean.somarValorSelecionado}"
+													update="@form" />
+
+												<p:column selectionMode="multiple" />
+												<p:column
+													headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dataCredito']}"
+													styleClass="col-xs-8">
+													<h:outputText value="#{listaFluxo.dtTitulo}" />
+												</p:column>
+												<p:column styleClass="text-right col-xs-4"
+													headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dispParaAntecipacao']}">
+													<h:outputText value="#{listaFluxo.vlTitulo}"
+														converter="valorMonetarioConverter" />
+												</p:column>
+
+											</p:dataTable>
+										</p:outputPanel>
+									</p:outputPanel>
+
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b space-t">
+						<p:outputPanel styleClass="col-xs-12 text-right">
+
+							<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+							<p:commandButton id="btnVoltar"
+								styleClass="btn btn-default btn-cinza" role="button"
+								action="#{solicitarOperacaoAdquirenciaBBean.voltarDaTelaContratacao}"
+								value="#{msg['page.btn.voltar']}" />
+
+							<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+							<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+								role="button"
+								action="#{solicitarOperacaoAdquirenciaBBean.continuarDaTelaContratacao}"
+								onclick="enviarHash()"
+								value="#{msg['page.btn.continuar']}" />
+							<p:defaultCommand target="btnContinuar" />
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('tr').click(function(event) {
+					if (event.target.type !== 'radio') {
+						$(':radio', this).trigger('click');
+					}
+				});
+			});
+		</script>
+	</ui:define>
+</ui:composition>

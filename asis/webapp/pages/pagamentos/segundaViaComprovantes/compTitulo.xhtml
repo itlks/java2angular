@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+	
+
+
+		<span id="divHtml"> 
+		
+			<!-- Geração PDF-->
+			<c:forEach
+				items="#{segundaViaComprovanteTitulosBBean.listaSegViaCompTitulosSelecionados}"
+				var="dto" varStatus="item">
+				<span class="multiplosPdfsCss">		
+		
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<h:outputText value="#{msg['page.segunda.via.comprovantes.contas.comprovante']}" 
+									  styleClass="bold" />
+										<hr/>
+					<p:outputPanel rendered="${not empty segundaViaComprovanteConsultarBBean.cartaoDto}">
+						
+						<p:outputPanel styleClass="row space-b" >
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<h:outputText value="#{msg['page.segunda.via.comprovantes.titulos.nomecartao']} " styleClass="bold"/>
+									<h:outputText value="#{segundaViaComprovanteConsultarBBean.cartaoDto.nomeTitular}" />
+								</p>							
+							</p:outputPanel>	
+							
+							<p:outputPanel styleClass="col-xs-8">
+								<p>
+									<h:outputText value="#{msg['page.segunda.via.comprovantes.titulos.cartao']} " styleClass="bold"/>									  
+									<h:outputText value="#{segundaViaComprovanteConsultarBBean.cartaoDto.tipo}"/> 
+									<h:outputText value=" - " style="margin-right: 3px; margin-left: 3px !important;"/> 
+									<h:outputText value="#{segundaViaComprovanteConsultarBBean.cartaoDto.numeroFormatado}"/>
+								</p>
+							</p:outputPanel>											
+						</p:outputPanel>	
+						<br />				
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.header.codigobarras']}" styleClass="bold" />
+							<span><h:outputText value="#{dto.codigoBarras}" 
+									converter="codigoBarrasConverter" /> 
+							</span>
+							<br />
+							<br />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel rendered="#{not empty dto.nomeCedente}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.beneficiario']}" styleClass="bold" rendered="#{dto.tipoTitulo==1}"/>
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.favorecido']}" styleClass="bold" rendered="#{dto.tipoTitulo!=1}"/>
+								<span><h:outputText value="#{dto.nomeCedente}" /></span>
+								<br />
+							</p:outputPanel>							
+							<p:outputPanel rendered="#{dto.codigoCedente!='00000000000'}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.codigoBeneficiario']}" styleClass="bold"  />
+								<span><h:outputText  value="#{dto.codigoCedente}" /></span>
+								<br />
+							</p:outputPanel>							
+							<p:outputPanel rendered="#{dto.nossoNumero!='00000000000'}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.nossoNumero']}" styleClass="bold" />
+								<span><h:outputText  value="#{dto.nossoNumero}" /></span>
+								<br />
+							</p:outputPanel>							
+							<p:outputPanel rendered="#{not empty dto.nomeSacado}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.pagador']}" styleClass="bold" rendered="#{dto.tipoTitulo==1}"/>
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.clientepagador']}" styleClass="bold" rendered="#{dto.tipoTitulo!=1}"/>
+								<span><h:outputText  value="#{dto.nomeSacado}" /></span>
+								<br />
+							</p:outputPanel>							
+							<p:outputPanel rendered="#{dto.valorDocumento!='00000000000000'}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.valorDocumento']}" styleClass="bold" />
+								<span><h:outputText 	value="#{dto.valorDocumento}"> 
+										<f:convertNumber type="currency" currencySymbol="R$ " />
+									  </h:outputText>
+								</span>
+							</p:outputPanel>							
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-8">
+							<p:outputPanel rendered="#{dto.valorDesconto!='00000000000000'}">							
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.desconto']}" styleClass="bold"  />
+								<span><h:outputText  value="#{dto.valorDesconto}">
+										<f:convertNumber type="currency" currencySymbol="R$ " />
+									  </h:outputText>
+								</span>
+								<br />
+							</p:outputPanel>								
+							<p:outputPanel rendered="#{dto.valorMoraMulta!='00000000000000'}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.multa']}" styleClass="bold"  />
+								<span><h:outputText  value="#{dto.valorMoraMulta}">
+										<f:convertNumber type="currency" currencySymbol="R$ " />
+									  </h:outputText>
+								</span>
+								<br />
+							</p:outputPanel>									
+							<p:outputPanel rendered="#{not empty dto.dataVencimento}">
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.dataVencimento']}" styleClass="bold" />
+								<span><h:outputText  value="#{dto.dataVencimento}" /></span>
+								<br />
+							</p:outputPanel>							
+							<p:outputPanel rendered="#{not empty dto.dataContabil}">									
+								<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.datapagamento']}" styleClass="bold" />
+								<span><h:outputText  value="#{dto.dataContabil}" /></span>
+								<br />
+							</p:outputPanel>							
+							
+							<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulos.valorcobrado']}" styleClass="bold" />
+							<span><h:outputText value="#{dto.valorPago}"> 
+									<f:convertNumber type="currency" currencySymbol="R$ " />
+									</h:outputText>
+							</span>
+						</p:outputPanel>		
+						
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">						
+							<h:outputText value="#{msg['page.segunda.via.comprovantes.titulos.header.mensagem']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+
+						<p:outputPanel styleClass="col-xs-4">
+							<p><strong>#{msg['page.segunda.via.comprovantes.titulos.data']}</strong></p>
+							<p><h:outputText value="#{dto.dataTransacao} - #{dto.horaTransacao}" />
+							</p>
+							<br />
+							<p><strong>#{msg['page.segunda.via.comprovantes.titulos.autenticacao']}</strong></p>
+							<p><h:outputText value="#{dto.nsuPagamento}" />
+							</p>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-8">
+                          <p><strong>#{msg['page.segunda.via.comprovantes.titulos.canal']}</strong></p>
+                          <p><h:outputText value="#{dto.canalPagamentoUpperCase}"/></p>
+                       </p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="form-group col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />						
+						</p:outputPanel>
+					</p:outputPanel>
+					
+				</p:outputPanel>
+
+			
+				
+			</p:outputPanel>
+			
+		</p:outputPanel>
+		</span>
+				<br/>
+			</c:forEach>
+			
+		</span>
+			
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 "  style="margin-top:-17px;">
+			
+	            <ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml">
+					<ui:param name="divHtml" value="true" />
+					<ui:param name="imprimir" value="true" />
+					
+				</ui:include>
+				
+			</p:outputPanel>
+
+		</p:outputPanel>
+	           	
+			
+		<p:outputPanel styleClass="row space-b">
+		 	<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">               
+               <p:commandLink styleClass="btn btn-default btn-cinza" 
+               				  action="#{segundaViaComprovanteTitulosBBean.voltarSegViaTitulos}" 
+               				  role="button">#{msg['page.btn.voltar']}
+               </p:commandLink>
+            </p:outputPanel>                          
+        </p:outputPanel>     
+			
+	</ui:define>
+</ui:composition>
+

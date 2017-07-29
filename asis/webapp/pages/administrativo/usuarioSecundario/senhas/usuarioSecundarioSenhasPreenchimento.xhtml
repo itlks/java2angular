@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{usuarioSecundarioSenhaBBean.usuario.nomeLogon}" />
+
+		<h:inputHidden id="hashAcessoNovo" partialSubmit="true"
+			value="#{usuarioSecundarioSenhaBBean.usuario.senhaHash}" />
+
+		<h:inputHidden id="hashSenhaEletronicaNova" partialSubmit="true"
+			value="#{usuarioSecundarioSenhaBBean.usuario.assinaturaHash}" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{usuarioSecundarioSenhaBBean.usuario.msgErroJavaStript}" />
+
+		<h:inputHidden id="tipoConta" partialSubmit="true"
+			value="#{usuarioSecundarioSenhaBBean.session.tipoAcessoContrato}" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.usuarioSecundario.alterarSenha.alertSpan']}</p>
+						<p>#{msg['pages.usuarioSecundario.alterarSenha.alertSpan2']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.usuarioSecundario.alterarSenha.subtitulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-4 space-b">
+							<p:outputPanel>
+								<h:outputLabel for="nomeUsuario"
+									value="#{msg['pages.administrativo.usuarioSecundario.nome']}"
+									styleClass="space" />
+								<h:outputText id="nomeUsuario"
+									value="#{usuarioSecundarioSenhaBBean.usuario.nomeUsuario}" />
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h:outputLabel for="nomeArea"
+									value="#{msg['pages.administrativo.usuarioSecundario.area']}"
+									styleClass="space" />
+								<h:outputText id="nomeArea"
+									value="#{usuarioSecundarioSenhaBBean.usuario.nomeArea}" />
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h:outputLabel for="nomeLogon"
+									value="#{msg['pages.administrativo.usuarioSecundario.nomeAcesso']}"
+									styleClass="space" />
+								<h:outputText id="nomeLogon"
+									value="#{usuarioSecundarioSenhaBBean.usuario.nomeLogon}" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel>
+								<h:outputLabel for="cpf"
+									value="#{msg['pages.administrativo.usuarioSecundario.cpf']}"
+									styleClass="space" />
+								<h:outputText id="cpf"
+									value="#{usuarioSecundarioSenhaBBean.usuario.nrCpf}">
+									<f:converter converterId="converterCpfCnpj" />
+								</h:outputText>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel
+						rendered="#{usuarioSecundarioSenhaBBean.session.tipoAcessoContrato eq '2'}">
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5>
+									<strong>#{msg['pages.usuarioSecundario.alterarSenha.selecioneSenha']}</strong>
+								</h5>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel
+						rendered="#{usuarioSecundarioSenhaBBean.session.tipoAcessoContrato eq '2'}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2">
+
+								<p:outputPanel styleClass="form-group">
+									<h:selectOneMenu id="tipoSenha"
+										value="#{usuarioSecundarioSenhaBBean.tipoSenha}">
+
+										<p:ajax update="formGeral" process="@this" event="change" />
+
+										<f:selectItems id="opcaoSenha"
+											value="#{usuarioSecundarioSenhaBBean.tiposSenhas.entrySet()}"
+											var="entry" itemValue="#{entry.key}"
+											itemLabel="#{entry.value}" />
+
+									</h:selectOneMenu>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="senhasPanel" styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="form-group">
+
+								<!-- Inicio grid senha -->
+
+								<p:outputPanel styleClass="row"
+									rendered="#{usuarioSecundarioSenhaBBean.tipoSenha == 5}">
+									<p:outputPanel styleClass="col-xs-12">
+
+										<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-2">
+
+												<p:outputLabel id="senhaAcesso"
+													value="#{msg['pages.usuarioSecundario.alterarSenha.senhaAcesso']} " />
+
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-2">
+												<p:outputLabel id="senhaAcessoConfirmar"
+													value="#{msg['pages.usuarioSecundario.alterarSenha.senhaAcessoConfirmar']}" />
+
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="row">
+
+											<p:outputPanel styleClass="col-xs-2">
+
+												<p:password id="senhaAcessoNova" maxlength="8"
+													styleClass="form-control"
+													value="#{usuarioSecundarioSenhaBBean.usuario.novaSenha}" />
+
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-2">
+
+												<p:password id="senhaAcessoConfirmacao" maxlength="8"
+													styleClass="form-control"
+													value="#{usuarioSecundarioSenhaBBean.usuario.senhaConfirmacao}" />
+
+											</p:outputPanel>
+											<h:outputText
+												style="padding-top: 8px; display: inline-block;"
+												value="#{msg['pages.usuarioSecundario.alterarSenha.formato']}" />
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<!-- Fim grid senha -->
+
+								<!-- Inicio grid assinatura -->
+								<p:outputPanel
+									rendered="#{usuarioSecundarioSenhaBBean.session.tipoAcessoContrato eq '2'}">
+									<p:outputPanel styleClass="row"
+										rendered="#{usuarioSecundarioSenhaBBean.tipoSenha == 6}">
+										<p:outputPanel styleClass="col-xs-12">
+
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-2">
+
+													<p:outputLabel id="assinaturaEletronica"
+														value="#{msg['pages.usuarioSecundario.alterarSenha.assEletronica']} " />
+
+												</p:outputPanel>
+												<p:outputPanel styleClass="col-xs-4">
+													<p:outputLabel id="assinaturaEletronicaConfirmacao"
+														value="#{msg['pages.usuarioSecundario.alterarSenha.assEletronicaConfirmar']}" />
+
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="row">
+
+												<p:outputPanel styleClass="col-xs-2">
+													<p:password id="novaAssinatura" styleClass="form-control"
+														maxlength="8"
+														value="#{usuarioSecundarioSenhaBBean.usuario.novaAssinatura}" />
+
+												</p:outputPanel>
+												<p:outputPanel styleClass="col-xs-2">
+
+													<p:password id="confirmacaoAssinatura" maxlength="8"
+														styleClass="form-control"
+														value="#{usuarioSecundarioSenhaBBean.usuario.confirmacaoAssinatura}" />
+
+												</p:outputPanel>
+												<h:outputText
+													style="padding-top: 8px; display: inline-block;"
+													value="#{msg['pages.usuarioSecundario.alterarSenha.formato1']}" />
+											</p:outputPanel>
+
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:blockUI block="painelBotao" trigger="btnContinuar" />
+
+		<p:outputPanel styleClass="row space-b" id="painelBotao">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{usuarioSecundarioSenhaBBean.voltarTelaPreenchimento}"
+					value="#{msg['page.btn.voltar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					onclick="gerarEncryptHashAssinaturaOuSenhaNova();" role="button"
+					action="#{usuarioSecundarioSenhaBBean.continuarEmPreenchimento}"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

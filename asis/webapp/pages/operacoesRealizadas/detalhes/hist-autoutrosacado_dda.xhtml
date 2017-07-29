@@ -1,0 +1,56 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set id="v#{id}" var="compHisParts6" value="${fn:split(compHisParts[6], '$')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoAutoOutroSacado_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosAutoOutroSacado_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosAutoOutroSacadoLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCpfCnpjAutorizacaoAutoOutroSacado_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfCnpjAutorizacao']}"
+							id="idCpfCnpjAutorizacaoLblAutoOutroSacado_#{posicaoLista}"/>
+			<h:outputText 	value="${compHisParts[4]}" converter="converterCpfCnpj" 
+							id="idCpfCnpjAutorizacaoTxtAutoOutroSacado_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idDataAutorizacaoOutroPagadorAutoOutroSacado_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataAutorizacaoOutroPagador']}"
+							rendered="${compHisParts[7] eq '1'}" id="idDataAutorizacaoOutroPagadorLblAutoOutroSacado_#{posicaoLista}"/>
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataExclusaoAutorizacao']}" rendered="${compHisParts[7] ne '1'}"
+							id="idDataExclusaoAutorizadaoLblAutoOutroSacado_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[5]}" converter="dateConverterFormat" id="idDataExclusaoAutorizadaoTxtAutoOutroSacado_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCpfCnpjPagadorAutoOutroSacado_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfCnpjPagador']}"
+							id="idCpfCnpjPagadorLblAutoOutroSacado_#{posicaoLista}"/>
+			<h:outputText 	value="${compHisParts6[0]}" converter="converterCpfCnpj"
+							id="idCpfCnpjPagadorTxtAutoOutroSacado_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idOrdemTituloAutoOutroSacado_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.ordemTitulo']}"
+							id="idOrdemTituloLblAutoOutroSacado_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts6[1]}" id="idOrdemTituloTxtAutoOutroSacado_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+		
+	<p:outputPanel styleClass="row space-b" id="idSeparatorAutoOutroSacado_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepAutoOutroSacado_#{posicaoLista}">
+			<p:separator id="separatorSepAutoOutroSacado_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+
+</ui:fragment>

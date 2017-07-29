@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:jsp="http://java.sun.com/JSP/Page"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:c="http://java.sun.com/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+	    <f:event type="preRenderView" listener="#{consultarAntecipacaoBBean.acessoDiretoConsulta}" />
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow ">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-10 min-lines">
+							<i class="fa fa-exclamation-circle"></i>
+							<span>
+								<p>#{msg['page.adquirencia.consulta.banner']}</p>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2 text-right">
+							<p:graphicImage value="/images/adquirencia.png" alt="Imagem"
+								styleClass="pull-right padding-right-15" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12 ">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['page.adquirencia.consulta.resultado']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="table-responsive table table-striped space-t fakeFooter">
+						
+						<p:dataTable 	id="dtAdquirencia"
+										value="#{consultarAntecipacaoBBean.listaOperacoes}"
+										var="operacao"
+										selection="#{consultarAntecipacaoBBean.dtoSelecionado}"
+										selectionMode="single" rowKey="#{operacao.TSOEMBNROPER}"
+										emptyMessage="Não há operações disponíveis para consulta.">
+	
+							<p:ajax event="rowSelect" listener="#{consultarAntecipacaoBBean.onRowSelect}" />
+	
+	
+							<p:column 	headerText="#{msg['page.adquirencia.consulta.dataDaOperacao']}"
+										width="51%"
+										styleClass="text-left">
+								<h:outputText value="#{operacao.TSOEMBDTOPER}" />
+							</p:column>
+	
+							<p:column 	headerText="#{msg['page.adquirencia.consulta.numeroOperacao']}"
+										width="35%">
+								<h:outputText value="#{operacao.TSOEMBNROPER}" />
+							</p:column>
+	
+							<p:column 	headerText="#{msg['page.adquirencia.consulta.valor']}"
+										width="40%" styleClass="text-right">
+								<h:outputText value="#{operacao.TSOEMBVLOPER}" />
+							</p:column>
+	
+						</p:dataTable>
+						
+						<p:outputPanel styleClass="col-xs-12 fakeDiv">
+							<p:outputPanel style="width:80%; padding-left: 8px; text-align:left" styleClass="first">
+								<span>#{msg['page.adquirencia.consulta.valorTotal']}</span>
+							</p:outputPanel>
+							<p:outputPanel styleClass="second">
+								<h:outputText value="#{consultarAntecipacaoBBean.dto.valorTotalOperacao}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+						
+				</p:outputPanel>
+				
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+				
+			</p:outputPanel>
+			
+		</p:outputPanel>
+	</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-t no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink 	id="btnVoltar" 
+								styleClass="btn btn-default btn-cinza" 
+								role="button" 
+								immediate="true"
+								action="#{consultarAntecipacaoBBean.voltarTelaPreenchimento}">
+								#{msg['page.adquirencia.consulta.voltar']}
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

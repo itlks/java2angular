@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="statusLoading" widgetVar="statusLoading" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" styleClass="loading no-visible">
+	    <p:graphicImage value="/images/aguarde.gif" />
+	</p:dialog>
+
+	<script>
+        var scripts = document.getElementsByClassName('btn-default');
+        var i = scripts.length;
+        while (i--) {
+            if(scripts[i].textContent == 'Voltar' || scripts[i].textContent == 'Continuar' || scripts[i].textContent == 'Cancelar' ||
+               scripts[i].textContent == 'Copiar Perfil' || scripts[i].textContent == 'Alterar Perfis' || scripts[i].textContent == 'Dados Cadastrais'){
+                   scripts[i].addEventListener('click', blockButton(scripts[i].id), false);
+                   scripts[i].addEventListener('success', unblockButton(scripts[i].id), false);
+                   scripts[i].addEventListener('click', openLoad, false);
+                   scripts[i].addEventListener('success', closeLoad, false);
+            }
+        }
+
+	</script>
+	
+</ui:composition>

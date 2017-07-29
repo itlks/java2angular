@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+		<p:outputPanel styleClass="titulo-bloco col-xs-12" style="height: 30px">
+			<h4>#{msg['page.outrosServicos.consorcio.dadosDoGrupo.titulo']}</h4>
+		</p:outputPanel>
+		<br />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+								
+								<p:outputPanel styleClass="form-horizontal">
+									<div class="form-group no-margin-bottom">
+										<label class="col-xs-2 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.cliente']}</label>
+										<div class="col-sm-10">
+											<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.nomeCliente}" />
+										</div>
+									</div>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-horizontal">
+									<div class="form-group no-margin-bottom">
+										<label class="col-xs-2 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.grupo']}</label>
+										<div class="col-sm-10">
+											<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.grupo}" />
+										</div>
+									</div>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-horizontal">
+									<div class="form-group no-margin-bottom">
+										<label class="col-xs-2 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.bem']}</label>
+										<div class="col-sm-10">
+											<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.bem}" />
+										</div>
+									</div>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-4">
+								
+								<p:outputPanel styleClass="form-horizontal">
+									<div class="form-group no-margin-bottom">
+										<label class="col-xs-2 pull-left">#{msg['page.outrosServicos.consorcio.dadosGrupo.modal.cnpj']}</label>
+										<div class="col-sm-10">
+											<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.cnpj}" converter="converterCpfCnpj" />
+										</div>
+									</div>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-horizontal js-panel-dados-grupo">
+									<div class="form-group no-margin-bottom">
+										<label class="col-xs-2 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.cota']}</label>
+										<div class="col-sm-10">
+											<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.cota}" />
+											<strong style="color: #EE1D23; padding: 5px;">&gt;</strong>
+											<p:commandLink actionListener="#{consorcioDadosGrupoBBean.preencheModalCota()}" immediate="true" oncomplete="PF('dialogDetalheCota').show();" rendered="#{consorcioListaCotasAtivasBBean.mostrarLink}">
+												#{msg['page.outrosServicos.consorcio.dadosDoGrupo.outraCota']}
+											</p:commandLink>
+										</div>
+									</div>
+								</p:outputPanel>
+								
+							</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:separator />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<div class="form-group no-margin-bottom">
+								<label>#{msg['page.outrosServicos.consorcio.dadosDoGrupo.dadosDetalhados']}</label>
+							</div>
+						</p:outputPanel>							
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-t js-panel-dados-grupo">
+
+						<p:outputPanel styleClass="col-lg-4">
+
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.prazo']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.prazo}" />
+									</div>
+								</div>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.primeiraAssembleia']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.dataPrimeiraAssembleia}" />
+									</div>
+								</div>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.lanceEmbutido']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.flagLanceEmbutido}" converter="snConverter" />
+									</div>
+								</div>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-sm-4">
+
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.numeroParticipantes']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.numeroParticipantes}" />
+									</div>
+								</div>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.encerramentoPrevisto']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.dataEncerramentoPrevisto}" />
+									</div>
+								</div>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.situacaoGrupo']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.situGrupo}" />
+									</div>
+								</div>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-sm-4">
+							<p:outputPanel styleClass="form-horizontal">
+								<div class="form-group no-margin-bottom">
+									<label class="col-xs-4 pull-left">#{msg['page.outrosServicos.consorcio.dadosDoGrupo.modalidade']}</label>
+									<div class="col-sm-2">
+										<h:outputLabel value="#{consorcioDadosGrupoBBean.dto.nomeProduto}" />
+									</div>
+								</div>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row rodape-painel space-t">
+						<p:outputPanel styleClass="col-lg-12">
+							
+							<h:outputLabel value="*#{msg['page.outrosServicos.consorcio.dadosDoGrupo.valorEmbutido']}" />
+							<br />
+							
+							<p:outputPanel styleClass="col-lg-6">
+								<h:outputLabel value="#{msg['page.outrosServicos.consorcio.dadosDoGrupo.observacao']}" />
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="col-lg-6">
+								<h:outputLabel styleClass="pull-right">
+									<strong style="color: #EE1D23; padding: 5px;">&gt;</strong>
+									<p:commandLink>
+										#{msg['page.outrosServicos.consorcio.dadosDoGrupo.consultarGlossario']}
+									</p:commandLink>
+								</h:outputLabel>
+							</p:outputPanel>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+					
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b space-t">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					value="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.voltar']}"
+					styleClass="btn btn-default btn-cinza" immediate="true"
+					action="#{consorcioDadosGrupoBBean.voltar}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	
+		<ui:include src="/pages/outrosServicos/consorcio/modal/modaListaCotas.xhtml" />
+	
+	</ui:define>
+</ui:composition>

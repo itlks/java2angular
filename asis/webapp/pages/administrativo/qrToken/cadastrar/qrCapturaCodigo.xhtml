@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<ui:define name="content">
+
+		<script type="text/javascript" language="javascript">
+		function encryptQrAdesao() {
+		    var serverPublicKey = document.getElementById("formGeral:chaveServer");
+		    var clientPublicKey = document.getElementById("formGeral:chaveClient");
+		
+		    var qrCode = document.getElementById("formGeral:qrCode");
+		    var qrCodeHash = document.getElementById("formGeral:qrCodeHash");
+            
+		    qrCodeHash.value = DLECC.encryptToApp(qrCode.value, serverPublicKey.value);
+            qrCode.value = qrCodeHash.value;
+		}
+		</script>
+
+		<ui:include
+			src="/pages/administrativo/qrToken/cadastrar/qrAvisoCadastrar.xhtml">
+		</ui:include>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.administrativo.qrToken.cadastrar.CaptuDeCodig']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row value-inline">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row space-b bold">
+						<p:outputPanel styleClass="col-md-12">
+							<p>PASSO 2 - #{msg['pages.administrativo.qrToken.cadastrar.FotogAImageDoCodig']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row value-inline">
+						<p:outputPanel styleClass="col-xs-2">
+							<p:outputLabel styleClass="bold"
+								value="#{msg['pages.administrativo.qrToken.cadastrar.CPF']}" />		<br/>					
+							<p:outputLabel styleClass="bold"
+								value="#{msg['pages.administrativo.qrToken.cadastrar.NomeDoApare']}" /> <br/>
+							</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7">
+							<span><h:outputText value="#{qrTokenCadastroBBean.session.cpfUsuario}"
+								converter="converterCpfCnpj" /></span>							
+							<span><h:outputText value="#{qrTokenCadastroBBean.dto.nomeAparelho}" /><br/></span>							
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row qrCodeFull">
+						<p:outputPanel styleClass="col-xs-7 text-right">
+							<p:outputPanel>
+								<img src="#{qrTokenCadastroBBean.dto.codeGerado}"  style="width: 300px; height: 300px;"/>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5 input">
+
+								<p:outputLabel styleClass="bold"  value="#{msg['pages.administrativo.qrToken.cadastrar.SenhaDoQRToken']}" />
+								<br/><br/>
+								<p:password id="qrCode" value="#{qrTokenCadastroBBean.dto.inputCode}" styleClass="form-control" maxlength="8" placeholder="" />
+								<h:inputHidden id="qrCodeHash" partialSubmit="true" />
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+			
+		<p:outputPanel>
+                <ui:include src="/commons/inicializaDL.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{qrTokenCadastroBBean.voltarCapturaCodigo}" role="button">#{msg['page.btn.voltar']}
+				</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" onmousedown="encryptQrAdesao();"
+					action="#{qrTokenCadastroBBean.continuarCapturaCodigo}"
+					value="#{msg['page.btn.continuar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,180 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.conta.corrente.saldo.bloqueado.consulta']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="" value=""></h:outputLabel>
+							<h:outputText
+								value="#{msg['pages.conta.corrente.saldo.bloqueado.posicao.em']}  " />
+							<h:outputText
+								value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.dataHora}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+							#{msg['page.contaCorrente.saldo.bloqueado.dataAs']}
+									<h:outputText
+										value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.dataHora}">
+										<f:convertDateTime pattern="HH" />
+									</h:outputText>
+									<h:outputText
+										value="#{msg['page.contaCorrente.saldo.bloqueado.h']}" />
+									<h:outputText
+										value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.dataHora}">
+										<f:convertDateTime pattern="mm" />
+									</h:outputText>
+
+							<p:outputPanel styleClass="table-responsive table table-striped foot-correction">
+
+								<p:panelGrid style="margin-top:20px">
+									<f:facet name="header">
+										<p:row>
+											<p:column>
+												<h:outputText
+													value="#{msg['pages.conta.corrente.saldo.bloqueado.periodo']}" />
+											</p:column>
+											<p:column styleClass="text-right">
+												<h:outputText
+													value="#{msg['pages.conta.corrente.saldo.bloqueado.valor.bloqueado']}" />
+											</p:column>
+										</p:row>
+
+									</f:facet>
+
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.um.dia']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado1Dia}" />
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.dois.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado2Dias}"/>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.tres.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado3Dias}"/>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.quatro.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado4Dias}"/>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.cinco.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado5Dias}"/>
+										</p:column>
+									</p:row>
+
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.seis.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado6Dias}"/>
+										</p:column>
+									</p:row>
+
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.sete.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueado7Dias}"/>
+										</p:column>
+									</p:row>
+
+									<p:row>
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.conta.corrente.saldo.bloqueado.desbloqueio.mais.de.sete.dias']}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText
+												value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueadoMaisDe7Dias}"/>
+										</p:column>
+									</p:row>
+
+									<f:facet name="footer">
+										<p:row>
+											<p:column styleClass="text-left">
+												<h:outputText
+													value="#{msg['pages.conta.corrente.saldo.bloqueado.valor.total.bloqueado']}" />
+											</p:column>
+											<p:column styleClass="text-right">
+												<h:outputText
+													value="#{contaCorrenteConsultarSaldoBloqueadoBBean.saldoBloqueado.saldoBloqueadoTotal}"/>
+											</p:column>
+										</p:row>
+
+									</f:facet>
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+							<p:separator />
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml"/>
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{contaCorrenteConsultarSaldoBloqueadoBBean.voltarMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+	</ui:define>
+
+</ui:composition>

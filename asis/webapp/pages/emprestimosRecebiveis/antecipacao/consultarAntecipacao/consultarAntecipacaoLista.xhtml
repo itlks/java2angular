@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+    <ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>O QUE VOCÊ PRECISA SABER PARA CONSULTAR ANTECIPACOES</p></span>
+					<br />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<b>Escolha um tipo de consulta para ver suas operações e clique em exibir</b>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<h5>Consulta de antecipações</h5>
+					<br />
+			         <p:outputPanel styleClass="table-responsive table table-striped">
+						<h4>Operações:</h4>
+						<br />
+						<p:dataTable id="dtAntecipacoes" var="r"
+							value="#{consultaAntecipacoesRecebiveisBBean.listaOperacoes}"
+							selectionMode="single"
+							rowKey="#{r}">
+                            <p:ajax event="rowSelect" process="@this" update="" listener="#{consultaAntecipacoesRecebiveisBBean.selecionarOperacao}" />
+                            
+                            <p:column>
+								<f:facet name="header">
+									<h:outputText value="Data da operação" />
+								</f:facet>
+                          	    <h:outputText value="#{r.dtOperacao}" />
+                           </p:column>
+                           
+                           <p:column >
+								<f:facet name="header">
+									<h:outputText value="Número da operação" />
+								</f:facet>
+                          	    <h:outputText value="#{r.numOperacao}" />
+                           </p:column>
+                           
+                           <p:column styleClass="text-right">
+								<f:facet name="header">
+									<h:outputText value="Valor - R$" />
+								</f:facet>
+                          	    <h:outputText id="idValor" value="#{r.vlOperacao}">
+							    	<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+							    </h:outputText>
+                           </p:column>
+                           
+                           <p:column styleClass="text-right" exportable="false">
+								<f:facet name="header"></f:facet>																				
+							</p:column>
+
+						</p:dataTable>
+					</p:outputPanel>
+					
+					
+		
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel id="panelBotoesPdf">
+			<p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml">
+					<ui:param name="excel" value="dtAntecipacoes" />
+					<ui:param name="nomeExcel" value="Extrato Santander" />
+				</ui:include>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		
+	</ui:define>
+
+</ui:composition>

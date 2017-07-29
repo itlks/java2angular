@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+	
+	<p:dialog id="popupRecebe" closable="true" header="#{msg['pages.emprestimos.recebiveis.popup.lancamento']} #{posicaoRecebimentoManageBBean.dataFormatada}
+	#{msg['pages.emprestimos.recebiveis.popup.detalhe']} #{posicaoRecebimentoManageBBean.tipoBandeira}" 
+	visible="#{posicaoRecebimentoManageBBean.popupVisivel}"	styleClass="modal-box box-shadow" modal="true"  widgetVar="painelPopupRecebiveisDiaPorBandeiraVar" >
+			
+			<p:ajax event="close" listener="#{PosicaoRecebimentoManageBBean.closePopUp}"/>
+			
+			<div class="popover-content" >
+		
+				<h:outputLabel value="#{posicaoRecebimentoManageBBean.tipoCartao}" /> 
+				<p:dataTable id="recebimwento" var="recebimentoDia" emptyMessage="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.empty']}"
+				value="#{posicaoRecebimentoManageBBean.consultaRecebimentoDiaPorBandeira.listaConsultaRecebimentosDiaPorBandeira}">
+		
+									<p:column headerText="#{msg['pages.emprestimos.recebiveis.popup.credenciadora']}">
+										<p:outputPanel rendered="#{recebimentoDia.TSOESZNOMCREDDESC == 'CREDITO CONTA CORRENTE' or recebimentoDia.TSOESZNOMCREDDESC == 'TOTAL'}" >
+	                                        <h:outputLabel value="#{recebimentoDia.TSOESZNOMCREDDESC}" />
+	                                    </p:outputPanel>
+	                                    <p:outputPanel rendered="#{recebimentoDia.TSOESZNOMCREDDESC != 'CREDITO CONTA CORRENTE' and recebimentoDia.TSOESZNOMCREDDESC != 'TOTAL'}" >
+	                                        <h:outputText value="#{recebimentoDia.TSOESZNOMCREDDESC}" />
+	                                    </p:outputPanel>
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.emprestimos.recebiveis.popup.valor']}" styleClass="text-right" >
+									<p:outputPanel rendered="#{recebimentoDia.TSOESZNOMCREDDESC == 'CREDITO CONTA CORRENTE' or recebimentoDia.TSOESZNOMCREDDESC == 'TOTAL'}" >
+										<h:outputLabel value="#{recebimentoDia.valorFormatado}">
+											<f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+										</h:outputLabel>
+										</p:outputPanel>
+										
+	                                    <p:outputPanel rendered="#{recebimentoDia.TSOESZNOMCREDDESC != 'CREDITO CONTA CORRENTE' and recebimentoDia.TSOESZNOMCREDDESC != 'TOTAL'}" >
+	                                        <h:outputText value="#{recebimentoDia.valorFormatado}"  >
+	                                        <f:convertNumber type="currency" currencySymbol="" ></f:convertNumber>
+	                                        </h:outputText>
+	                                    </p:outputPanel>
+									</p:column>
+									
+				</p:dataTable>
+			
+			</div>
+			
+	     </p:dialog>
+    
+</ui:composition>

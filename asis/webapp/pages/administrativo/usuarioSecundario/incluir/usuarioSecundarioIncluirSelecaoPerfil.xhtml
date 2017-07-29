@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="placeholders">
+			<p:outputPanel styleClass="row space-b">
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel
+							styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+							<i class="fa fa-exclamation-circle"></i>
+							<p>
+								#{msg['pages.administrativo.usuarioSecundario.usuarioCopiarPerfil.p1']}<br />
+								#{msg['pages.administrativo.usuarioSecundario.usuarioCopiarPerfil.p2']}
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="box-shadow">
+
+							<p:dataTable id="dtUsuarios"
+								selection="#{usuarioSecundarioIncluirBBean.dto.userSelecionado}"
+								rowKey="#{per.nomeUsuario}"
+								value="#{usuarioSecundarioIncluirBBean.dto.usuarioSecundarioList}"
+								var="per"
+								tableStyleClass="tacle-custom tacle-custom-zebrada tacle-custom-header-left tacle-custom-border-transparente 
+					tacle-custom-continua tacle-custom-sombra"
+								styleClass="data-table-header-custom" selectionMode="single">
+
+								<p:ajax event="rowSelect"
+									listener="#{usuarioSecundarioIncluirBBean.onRowSelect}" />
+								<p:column
+									headerText="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.lista.nomeCompleto']}"
+									style="text-align: left;">
+						#{per.nomeUsuario} 
+					</p:column>
+
+								<p:column
+									headerText="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.lista.nomeAcesso']}"
+									style="text-align: left;">
+						[#{per.nomeLogon}] 
+					</p:column>
+
+								<p:column
+									headerText="#{msg['pages.administrativo.usuarioSecundario.usuarioCopiarPerfil.coluna.mobile']}">
+									<h:outputLabel for="" rendered="#{per.inAcesMobl == 'S'}"
+										value="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.habilitado']}" />
+									<h:outputLabel for="" rendered="#{per.inAcesMobl != 'S'}" value="-" />
+								</p:column>
+
+								<p:column style="display: none">
+									<p:commandLink value="#{per.idUsuario}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12 text-right">
+
+								<p:commandButton id="continueButton"
+									styleClass="btn btn-default"
+									action="#{usuarioSecundarioIncluirBBean.voltarUsuarioSecundarioIncluirPreenchimento}"
+									role="button"
+									value="#{msg['page.administrativo.perfilAutorizacao.alterarConfirmacao.voltar']}" />
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{transferenciaBBean.acessoDiretoComprovante}" />
+		<f:event type="postValidate"
+			listener="#{transferenciaBBean.fechaAcessoDireto}" />
+			
+				<!--  INÍCIO DO COMPROVANTE -->
+				
+				<p:outputPanel styleClass="row" rendered="#{transferenciaBBean.gerouPendencia eq 'S'}">
+		            <p:outputPanel styleClass="col-xs-12">
+		                <p:outputPanel styleClass="titulo-painel">
+		                    <h4>#{msg['page.transferencias.transferir.demonstrativo.pendente']}</h4>
+		                </p:outputPanel>
+		            </p:outputPanel>
+		        </p:outputPanel>
+
+				<p:outputPanel styleClass="row" rendered="#{transferenciaBBean.gerouPendencia eq 'N'}">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'AGENDAMENTO'}">
+								<h4>#{msg['page.transferencias.transferir.demonstrativo.agendamento.finalizado']}</h4>
+							</p:outputPanel>
+							<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'TRANSFERIR_AGORA'}">
+								<h4>#{msg['page.transferencias.transferir.demonstrativo.transferencia.finalizada']}</h4>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+			
+				<p:outputPanel>
+					<ui:include src="/pages/transferencias/transferencias/informacoes.xhtml" />
+				</p:outputPanel>
+				<!--  FIM DO COMPROVANTE -->
+
+				<!--  INÍCIO DO DEMONSTRATIVO -->
+				<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'AGENDAMENTO'}">
+					<p>#{msg['page.transferencias.transferir.demonstrativo.creditodiaagendamento']}</p>
+				</p:outputPanel>
+				<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'TRANSFERIR_AGORA' and transferenciaBBean.gerouPendencia eq 'N'}">
+					<p:outputPanel rendered="#{transferenciaBBean.tipoTransferencia eq 'DOC'}">
+						<p>#{msg['page.transferencias.transferir.demonstrativo.creditoproxdia']}</p>
+					</p:outputPanel>
+					<p:outputPanel rendered="#{transferenciaBBean.tipoTransferencia ne 'DOC'}">
+						<p>#{msg['page.transferencias.transferir.demonstrativo.creditomesmodia']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel rendered="#{empty transferenciaBBean.tipoTransferencia}">
+					<p>#{msg['page.transferencias.transferir.demonstrativo.transfmesmobanco']}</p>
+				</p:outputPanel>
+				<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'AGENDAMENTO'}">
+					<p>#{msg['page.transferencias.transferir.demonstrativo.sujeitoconfirmacaosaldo']}</p>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row">
+		            <p:outputPanel styleClass="col-lg-12">
+		                <p:separator styleClass="custom-separator" />
+		            </p:outputPanel>
+		        </p:outputPanel>
+
+				<p:outputPanel styleClass="row" rendered="#{transferenciaBBean.gerouPendencia eq 'S'}">
+      				<p:outputPanel styleClass="col-xs-12">
+				      <h4 align="center">#{msg['page.transferencias.transferir.demonstrativo.validoparaconferencia']}</h4>
+		            </p:outputPanel>  
+                 </p:outputPanel>
+                 
+				<p:outputPanel rendered="#{transferenciaBBean.gerouPendencia eq 'N'}">
+			        <p:outputPanel styleClass="row">
+			            <p:outputPanel styleClass="col-xs-12">
+			
+			                <p:outputPanel styleClass="row">
+			                    <p:outputPanel styleClass="col-xs-4">
+			                        <p><strong>#{msg['page.commons.comprovante.autenticacao']}</strong></p>
+			                        <p>
+			                            <h:outputText value="#{transferenciaBBean.autenticacaoBancaria}" />
+			                        </p>
+			                    </p:outputPanel>
+			
+			                    <p:outputPanel styleClass="col-xs-4">
+			                        <p><strong>#{msg['page.commons.comprovante.data.hora']}</strong></p>
+			                        <p>
+			                            <h:outputText value="#{transferenciaBBean.dataHoraTransacao}">
+			                                <f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+			                            </h:outputText>
+			                        </p>
+			                    </p:outputPanel>
+			                </p:outputPanel>
+			
+			            </p:outputPanel>
+			        </p:outputPanel>
+				</p:outputPanel>
+				<!-- FIM DO DEMONSTRATIVO -->
+				
+				<p:outputPanel styleClass="row">
+		            <p:outputPanel styleClass="col-lg-12">
+		                <p:separator styleClass="custom-separator" />
+		            </p:outputPanel>
+		        </p:outputPanel>
+
+				<p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+			<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

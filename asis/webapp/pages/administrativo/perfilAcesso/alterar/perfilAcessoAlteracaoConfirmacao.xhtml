@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:santander="http://santander.com/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.perfilAcesso.alterarConfirmacao.subtitle']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.nomePerfil']}" />
+							<h:outputText
+								value="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.nomePerfil}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.descricao']}" />
+							<h:outputText
+								value="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.descricao}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include
+						src="/pages/administrativo/perfilAcesso/perfilAcessoTreeViewVisualizacao.xhtml">
+						<ui:param name="DTOlistaPerfilAcesso"
+							value="#{perfilAcessoAlteracaoBBean.listaPerfilAcesso}" />
+					</ui:include>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<ui:include src="/commons/inicializaDL.xhtml" />
+
+		<p:outputPanel
+			rendered="#{perfilAcessoAlteracaoBBean.session.tipoAcessoContrato ne '1'}">
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza"
+					action="#{perfilAcessoAlteracaoBBean.voltarPreenchimento2}"
+					role="button"
+					value="#{msg['page.administrativo.perfilAcesso.incluir.botaoVoltar']}" />
+
+				<p:commandButton id="btnConfirmar"
+					value="#{msg['page.administrativo.perfilAcesso.incluir.botaoContinuar']}"
+					role="button"
+					action="#{perfilAcessoAlteracaoBBean.continuarComprovante}"
+					styleClass="btn btn-default">
+					<p:ajax
+						disabled="#{perfilAcessoAlteracaoBBean.session.tipoAcessoContrato eq '1'}"
+						event="click" onstart="encryptSecureDL();" process="@all" />
+
+				</p:commandButton>
+
+				<p:defaultCommand target="btnConfirmar" />
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

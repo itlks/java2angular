@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+	
+	<!-- TERMO DE ADESÃO PREENCHER INICIO -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel	styleClass="aviso-interno-blocos alert-information min-lines">
+					<i class="fa fa-exclamation-circle"></i>
+					<p><span>#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.texto1']}</span></p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					    <p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-12">
+								<p:dataTable id="dataMaster" var="t"
+									value="#{termoAdesaoRecebiveisBBean.opcoesBandeira}"
+									selection="#{termoAdesaoRecebiveisBBean.opcoesBandeiraSelecionados}"
+									rowKey="#{t}" emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+                                        
+                                    <p:column id="selectAllMasters" 
+                                              selectionMode="multiple" 
+                                              onclick="#{termoAdesaoRecebiveisBBean.onChangeSelecionado}" 
+                                              listener="#{termoAdesaoRecebiveisBBean.onChangeSelecionado}">
+                                        <h:outputText value="Todas" />
+                                    </p:column>
+									<p:column headerText="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.bandeirasContratar']}">
+										<h:outputText value="#{t.label}" />
+									</p:column>
+								</p:dataTable>
+                                <br />
+                                <p:dataTable id="dataMasterC" var="t" emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									value="#{termoAdesaoRecebiveisBBean.opcoesBandeiraContratados}"
+									tableStyleClass="table table-striped">
+									<p:column headerText="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.bandeirasContratadas']}">
+										<h:outputText value="#{t.label}" />
+									</p:column>
+								</p:dataTable>
+								<br />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+            
+            <p:outputPanel id="panelBotoes" styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12 text-right">
+
+				   <p:commandLink id="btnContinuar" styleClass="btn btn-default"
+	   					action="#{termoAdesaoRecebiveisBBean.continuarEmContrato}" 
+	   					role="button">#{msg['page.btn.continuar']}
+					</p:commandLink>
+
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+				<!-- TERMO DE ADESÃO PREENCHER FIM -->
+			
+		
+	</ui:define>
+</ui:composition>

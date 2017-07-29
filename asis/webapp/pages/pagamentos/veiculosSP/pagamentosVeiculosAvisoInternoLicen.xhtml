@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="panelLicenciamento"
+		styleClass="aviso-interno-blocos alert-information box-shadow">
+		<i class="fa fa-exclamation-circle" />
+		<span> <p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="row">
+					<h:outputLabel for=""
+						value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.trasacao.exclusiva']}" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="row">
+					<h:outputText
+						value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.ao.efetuar']}" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="row">
+					<h:outputText
+						value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.nao.efetue']}" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="row">
+					<h:outputText
+						value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.para.informacoes']} " />
+					<h:commandLink action="#{pagamentosVeiculosSelecaoBBean.redirectFazenda}" target="_blank"
+						value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.secretaria.fazenda']}" />
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row space-t space-b">
+					<p:commandLink
+					actionListener="#{pagamentosVeiculosSelecaoBBean.initLimites}"
+					value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.confiraLimitesPagamento']}" />
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row">
+					<h:outputText
+						value="#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.AquiVocePodeInclu']}" />
+				</p:outputPanel>	
+				<p:outputPanel styleClass="row">
+					<h:outputText
+						value="#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.OBSAposOCadas']}" />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-t">
+					<p:commandLink id="cmdLnkIncluir"
+					action="#{pagamentosVeiculosSelecaoBBean.initRenavam}"
+						value="#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.IncluNovoRENAV']}" />
+				</p:outputPanel>
+				
+			</p:outputPanel></span>
+	</p:outputPanel>
+</ui:composition>

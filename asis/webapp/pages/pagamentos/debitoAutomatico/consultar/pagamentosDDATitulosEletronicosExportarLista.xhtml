@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalha.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Argumento da busca</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Pagador  eletrônico:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="NOSDEI JK ZEC BNE" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5">
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="CPF/CNPJ:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="02.386.450/0001-90" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Situação do Título:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="Todos em aberto" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5">
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Vencimento de:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Origem:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="Todos" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5">
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Beneficiário:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>Títulos Eletrônicos DDA</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="">
+								<span> Os valores apresentados correspondem ao valor
+									original do título. Para visualizar o título, clique sobre o <b>Nosso
+										N°</b>. Para visualizar informações complementares de cada título,
+									clique sobre a imagem
+								</span>
+								<p:outputLabel styleClass="no-padding no-margin-bottom">
+									<i
+										class="fa fa-info-circle icone-informacao no-padding checkbox"></i>
+								</p:outputLabel>
+								<span>Selecione, no máximo, 20 itens da lista.</span>
+							</h:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel
+						styleClass="table-responsive table table-striped no-margin-bottom">
+						<p:dataTable id="tabela1">
+							<p:column headerText="Vencimento" styleClass="text-left col-xs-2">
+								<h:outputText value="teste" />
+							</p:column>
+							<p:column headerText="Beneficiário"
+								styleClass="text-left col-xs-2">
+								<h:outputText value="teste2" />
+							</p:column>
+							<p:column headerText="Nosso Nº" styleClass="text-left col-xs-2">
+								<h:outputText value="teste3" />
+							</p:column>
+							<p:column headerText="Pagador" styleClass="text-left col-xs-2">
+								<h:outputText value="teste4" />
+							</p:column>
+							<p:column headerText="Valor (R$)"
+								styleClass="text-right col-xs-2">
+								<h:outputText value="teste5" styleClass="text-center" />
+							</p:column>
+							<p:column headerText="Pagador Autorizado"
+								styleClass="text-left col-xs-2">
+								<h:outputText value="teste6" />
+							</p:column>
+							<p:column styleClass="text-center col-xs-1">
+								<f:facet name="header">
+									<p:outputLabel styleClass="no-margin-bottom">
+										<i class="fa fa-info-circle icone-informacao no-padding"></i>
+									</p:outputLabel>
+								</f:facet>
+								<h:outputText value="teste7" styleClass="text-center" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<p:outputPanel styleClass="rodape-comprovante">
+					<p:commandLink actionListener="#">
+						<i class="ic icon-excel"></i> Exportar Excel 
+					</p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-PDF"></i> Salvar em PDF 
+					</p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-email"></i> Enviar por e-mail 
+					</p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-imprimir"></i> Imprimir 
+					</p:commandLink>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+						<p:commandLink styleClass="btn btn-default btn-cinza pull-left"
+							actionListener="#" role="button">
+					         Cancelar 
+					    </p:commandLink>
+						<p:commandLink styleClass="btn btn-default btn-cinza"
+							actionListener="#" role="button">
+					         Voltar 
+					    </p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateConsultaNovo.xhtml">
+	
+	<ui:define name="content">				
+		<!-- 
+			SEÇÃO DE TEXTO INFORMATIVO 
+		 -->
+		<p:outputPanel styleClass="row no-visible">
+          <p:outputPanel styleClass="col-xs-12">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">                               
+                <i class="fa fa-exclamation-circle"></i>
+                <span><p>#{msg['page.operacoes.realizadas.consulta.mensagem.resultado.consultar']}</p></span>
+            </p:outputPanel> 
+          </p:outputPanel>                        
+        </p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.operacoes.realizadas.consulta.label.pesquisa']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow" id="painelGeral">
+					
+					<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="form-group col-xs-3" id="vai" >
+							<h:outputText value="#{msg['page.operacoes.realizadas.consulta.label.periodoespecifico']}" style="font-size:14px;" styleClass="bold" />
+							
+							<h:selectOneMenu id="periodo" value="#{operacoesRealizadasBBean.periodoSelecionado}">
+								<f:selectItems value="#{operacoesRealizadasBBean.selectPeriodos}" var="selectPeriodo" itemLabel="#{selectPeriodo.descricao}">
+								</f:selectItems>
+								<p:ajax listener="#{operacoesRealizadasBBean.onChangePeriodoSelecionado}" update="de ate" event="change"/>
+							</h:selectOneMenu>						
+							</p:outputPanel>							
+					</p:outputPanel>
+					<p:separator />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-3" >
+							<h:outputText value="#{msg['pages.consulta.agendamento.label.outroperiodo']}" style="font-size:14px;" styleClass="bold"/>
+						</p:outputPanel>
+					</p:outputPanel>					
+					
+					<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="form-group col-xs-3" >
+								<p:outputLabel value="#{msg['pages.consulta.agendamento.label.DataInicial']}"/>
+								<p:outputPanel styleClass="icon-data-input" id="panelDataInicial">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="de"
+										pattern="dd/MM/yyyy" 
+										converter="dateConverterFormat" 
+										maxlength="10" 
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										value="#{operacoesRealizadasBBean.dto.datainicio}"
+										placeholder="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.De']}">
+											<p:ajax listener="#{operacoesRealizadasBBean.onChangeOutroPeriodoSelecionadoDataInicio}" update="periodo panelDataInicial vai" event="dateSelect"/>
+											 <p:ajax listener="#{operacoesRealizadasBBean.onChangeOutroPeriodoSelecionadoDataInicio}" update="@form:vai panelDataInicial" event="change"/>
+											 
+											 <p:ajax event="dateSelect" listener="#{operacoesRealizadasBBean.onChangeOutroPeriodoSelecionadoDataInicio}"  update=" panelDataInicial" />
+											<p:ajax event="blur" listener="#{operacoesRealizadasBBean.onChangeOutroPeriodoSelecionadoDataInicio}"  update="panelDataInicial" process="@this"/>
+										</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group col-xs-3" >
+								<p:outputLabel value="#{msg['pages.consulta.agendamento.label.DataFinal']}" />
+								<p:outputPanel styleClass="icon-data-input" id="panelDataFinal">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="ate"
+										pattern="dd/MM/yyyy" 
+										converter="dateConverterFormat" 
+										maxlength="10" 
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										value="#{operacoesRealizadasBBean.dto.datafim}"
+										placeholder="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.Ate']}"
+										onchange="limparDataFinal()">
+										
+										<p:ajax event="dateSelect" listener="#{operacoesRealizadasBBean.onChangeOutroPeriodoSelecionadoDataFim}"  update="panelDataFinal vai" />
+										<p:ajax event="blur" listener="#{operacoesRealizadasBBean.onChangeOutroPeriodoSelecionadoDataFim}"  update="panelDataFinal" process="@this"/>
+										</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:separator />
+					
+					
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-3" >
+							<h:outputText value="#{msg['pages.consulta.agendamento.label.tipodeoperacao']}" style="font-size:14px;" styleClass="bold"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="checkbox">
+								<p:selectBooleanCheckbox id="checkBoxSelecionaTodos" value="#{operacoesRealizadasBBean.renderizaPanelOperacoes}">
+									<p:ajax event="change" listener="#{operacoesRealizadasBBean.limparSelecionados()}" update="@(.js-painel-produto)"/>						
+								</p:selectBooleanCheckbox>																
+								<h:outputLabel value="Todos"/>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 js-painel-produto"  >	
+							<p:outputPanel styleClass="row">	
+								<p:outputPanel styleClass="col-xs-3" rendered="#{!operacoesRealizadasBBean.renderizaPanelOperacoes}">
+									<c:forEach items="#{operacoesRealizadasBBean.listaOperacoes}" var="item" begin="0" end="19" styleClass="js-checkbox-operacoes" >
+										<p:outputPanel styleClass="checkbox">	
+											<p:selectBooleanCheckbox value="#{item.selecionado}"  >
+												<p:ajax event="change" update="@(.js-checkbox-operacoes)" /> 
+											</p:selectBooleanCheckbox>
+											<h:outputLabel value="#{item.descricao}" />	
+										</p:outputPanel>								
+									</c:forEach>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-3" rendered="#{!operacoesRealizadasBBean.renderizaPanelOperacoes}" >
+									<c:forEach items="#{operacoesRealizadasBBean.listaOperacoes}" var="item" begin="20" styleClass="js-checkbox-operacoes" >						
+										<p:outputPanel styleClass="checkbox" >
+											<p:selectBooleanCheckbox value="#{item.selecionado}"  >
+												<p:ajax event="change" update="@(.js-checkbox-operacoes)" /> 
+											</p:selectBooleanCheckbox>
+											<h:outputLabel value="#{item.descricao}" />
+										</p:outputPanel>
+		 							</c:forEach> 								
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						</p:outputPanel>
+						
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-t">
+				
+					<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+						<p:commandLink styleClass="btn btn-default btn-cinza no-print no-visible" role="button"
+							action="#{operacoesRealizadasBBean.voltarMenu()}"
+							value="#{msg['page.btn.voltar']}"
+							immediate="true" />
+							
+						<p:blockUI block="continuarButton" trigger="continuarButton" />
+						<p:commandLink styleClass="btn btn-default no-print no-visible" role="button"
+							id="continuarButton"
+							action="#{operacoesRealizadasBBean.confirmarTelaPreenchimento}"
+							value="#{msg['page.btn.continuar']}" 
+							immediate="true" />
+					</p:outputPanel>
+				</p:outputPanel>
+				
+			</p:outputPanel>
+			
+		</p:outputPanel>
+		
+		
+	</ui:define>
+</ui:composition>

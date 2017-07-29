@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:santander="http://santander.com/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<style>
+input[type="checkbox"] {
+	position: absolute;
+}
+
+input[type="checkbox"]:checked+label:after {
+	content: "";
+	display: inline-block;
+	width: 7px;
+	height: 12px;
+	border: solid #00D15F;
+	border-width: 0 3px 3px 0;
+	-ms-transform: rotate(40deg);
+	-webkit-transform: rotate(40deg);
+	-moz-transform: rotate(40deg);
+	-o-transform: rotate(40deg);
+	transform: rotate(40deg);
+	position: absolute;
+	left: 5px;
+	top: 2px;
+}
+
+table {
+	border-collapse: separate !important;
+	border-spacing: 0;
+}
+
+table>tbody>tr:hover>td {
+	background-color: white;
+}
+
+table>tbody>tr>td[name=level1] {
+	border-style: hidden;
+	padding-top: 20px;
+}
+
+table tr[name=level2] td {
+	border-bottom: 1px solid #DDDDDD !important;
+}
+</style>
+
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/treeTableView.js" />
+
+		<h:inputHidden value="#{perfilAcessoAlteracaoBBean.admChk}"
+			id="chkAdm" />
+
+		<p:remoteCommand
+			action="#{perfilAcessoAlteracaoBBean.exibirMensagemContador}"
+			autoRun="true" />
+
+		<p:remoteCommand
+			action="#{perfilAcessoAlteracaoBBean.exibirMsgMarcarTodos}"
+			name="exibirMsgMarcarTodos" />
+
+		<p:remoteCommand
+			action="#{perfilAcessoAlteracaoBBean.exibirMsgMarcarAdministrativo}"
+			name="exibirAlertaAdministrativo" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><h:outputLabel
+							value="#{msg['pages.administrativo.perfilAcesso.alterarPreenchimentoPassoDois.text1']}" /><br />
+						<h:outputText
+							value="#{msg['pages.administrativo.perfilAcesso.alterarPreenchimentoPassoDois.text0']}" /><br />
+						<h:outputLabel
+							value="#{msg['page.administrativo.perfilAcesso.incluir.alerta4']}" />
+						<h:outputText
+							value=" #{msg['page.administrativo.perfilAcesso.incluir.alerta5']}" /><br />
+						<h:outputText
+							value="#{msg['page.administrativo.perfilAcesso.incluir.esse.procedimento']}" />
+						<p:spacer width="5" />
+						<h:outputLabel class="space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.alerta5a']}" />
+						<h:outputLabel class="texto-vermelho space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.tag']}" />
+						<h:outputLabel class="space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.alerta6']}" />
+						<h:outputLabel class="texto-vermelho space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.tag']}" />
+						<h:outputLabel
+							value="#{msg['page.administrativo.perfilAcesso.incluir.alerta7']}" />
+						<h:outputText
+							value="." />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.perfilAcesso.alterar.preenchimento.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow ">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.nomePerfil']}" />
+							<h:outputText
+								value="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.getNomePerfil()}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-6 form-group">
+							<h:outputLabel
+								value="#{msg['page.administrativo.perfilAcesso.incluir.descricao']}" />
+							<p:inputText id="txtDescricao" maxlength="50"
+								value="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.descricao}"
+								styleClass="form-control" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel
+								value="#{msg['page.administrativo.perfilAcesso.incluir.selecioneItemsPerfil']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 treeview-panel">
+							<!-- Santander TreeTableView -->
+							<santander:treeTableView
+								value="#{perfilAcessoAlteracaoBBean.roots}"
+								binding="#{perfilAcessoAlteracaoBBean.treeTableView}"
+								showToolbar="true" eventCheck="validaQtdeSelecao(this.id);" />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza"
+					action="#{perfilAcessoAlteracaoBBean.voltarPreenchimento1}"
+					role="button"
+					value="#{msg['page.administrativo.perfilAcesso.incluir.botaoVoltar']}" />
+
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					role="button" onclick="obterSelectedNodes();"
+					action="#{perfilAcessoAlteracaoBBean.prosseguirConfirmacao}"
+					value="#{msg['page.administrativo.perfilAcesso.incluir.botaoContinuar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:dialog widgetVar="msgMarcarTodos" id="msgMarcarTodos"
+			position="center" modal="true" dynamic="true" resizable="false">
+			<p:outputPanel styleClass="text-left content-modal-text">
+				<p:graphicImage url="/images/btnExclamation.png?faces-redirect=true" />
+				<p:outputLabel
+					value="#{msg['pages.administrativo.perfilAcesso.alterar.msg.marcarTodos']}"
+					escape="false" />
+				<p:outputPanel>
+					<p:commandButton value="#{msg['page.btn.ok']}"
+						style="margin-top: 35px"
+						actionListener="#{perfilAcessoAlteracaoBBean.fecharMsgMarcarTodos}"
+						styleClass="btn btn-default pull-right" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:dialog>
+
+		<p:dialog widgetVar="msgCategoriaAdminstrativo"
+			id="msgCategoriaAdminstrativo" position="center" modal="true"
+			dynamic="true" resizable="false">
+			<p:outputPanel styleClass="text-left content-modal-text">
+				<p:graphicImage url="/images/btnExclamation.png?faces-redirect=true" />
+				<p:outputLabel value="#{msg['msg.alert.perfil.chk.administrativo']}"
+					escape="false" />
+				<p:outputPanel>
+					<p:commandButton value="#{msg['page.btn.ok']}"
+						style="margin-top: 35px"
+						actionListener="#{perfilAcessoAlteracaoBBean.fecharMsgCategoriaAdminstrativo}"
+						styleClass="btn btn-default pull-right" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

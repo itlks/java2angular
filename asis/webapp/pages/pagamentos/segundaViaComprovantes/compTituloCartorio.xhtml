@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+		<span id="divHtml">
+			<p:outputPanel styleClass="row" id="painelGeral">
+				<p:outputPanel styleClass="col-xs-12">
+					<c:forEach 	items="#{segundaViaComprovanteTituloCartorioBBean.listaTitulosCartorioSelecionados}"
+								var="tituloCartorio" 
+								varStatus="tituloCartorioIndex">
+								
+						<div class="multiplosPdfsCss">
+							<p:outputPanel styleClass="box-shadow">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										
+										<h:outputText 	id="txte_#{tituloCartorio.chaveUnica}"
+														value="#{msg['page.segunda.via.comprovantes.contas.comprovante']}" 
+														styleClass="bold" />
+										<hr/>
+										
+										<p:outputPanel styleClass="row space-b">
+											<p:outputPanel styleClass="col-xs-6">
+												<h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.chave']}" styleClass="bold" />
+												<span><h:outputText for="" value="#{tituloCartorio.chaveUnica}" /></span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.cpf.cnpj']} " styleClass="bold"/>
+												<span>#{tituloCartorio.numDocSacadoFormatado}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.id.cartorio']} " styleClass="bold"/>
+												<span>#{tituloCartorio.idCartorio}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.uf']} " styleClass="bold"/>
+												<span>#{tituloCartorio.codUf}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.protocolo']} " styleClass="bold"/>
+												<span>#{tituloCartorio.protocolo}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.valor.titulo']} " styleClass="bold"/>
+												<span>
+													<h:outputText value="#{tituloCartorio.valorTitulo}">
+														<f:convertNumber type="currency" currencySymbol="" />
+													</h:outputText>
+												</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.valor.custas']} " styleClass="bold"/>
+												<span>
+													<h:outputText value="#{tituloCartorio.valorCustoEmolumento}">
+														<f:convertNumber type="currency" currencySymbol="" />
+													</h:outputText>
+												</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.valor.total']} " styleClass="bold"/>
+												<span>
+													<h:outputText value="#{tituloCartorio.valorTotal}">
+														<f:convertNumber type="currency" currencySymbol="" />
+													</h:outputText>
+												</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.razao']} " styleClass="bold"/>
+												<span>#{tituloCartorio.nomeRazaoSocialSacadoAva}</span>
+											</p:outputPanel>
+											
+											<p:outputPanel styleClass="col-xs-6">
+												<p:outputLabel value=" " styleClass="bold"/>
+												<span> &nbsp; </span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.pagador']} " styleClass="bold"/>
+												<span>#{tituloCartorio.nomeRazaoSocial}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.municipio']} " styleClass="bold"/>
+												<span>#{tituloCartorio.codMunicipio}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.numero.titulo']} " styleClass="bold"/>
+												<span>#{tituloCartorio.numTitulo}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.data.protocolo']} " styleClass="bold"/>
+												<span>#{tituloCartorio.dataProtocolo}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.especie.titulo']} " styleClass="bold"/>
+												<span>#{tituloCartorio.codEspecieTitulo} - #{tituloCartorio.descEspecieTitulo}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.data.vencimento.titulo']} " styleClass="bold"/>
+												<span>#{tituloCartorio.dataVencimentoTitulo}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.data.limite.pagamento']} " styleClass="bold"/>
+												<span>#{tituloCartorio.dataLimitePagamento}</span>
+												<br />
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.beneficiario']} " styleClass="bold"/>
+												<span>#{tituloCartorio.nomeCedente}</span>
+												<br />
+											</p:outputPanel>
+										</p:outputPanel>
+										
+										<br />
+
+										<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-12 form-group">
+												<p>#{msg['page.segunda.via.comprovantes.titulo.mensagem1']}</p>
+											</p:outputPanel>
+										</p:outputPanel>
+										
+										<p:separator styleClass="custom-separator" />
+										
+										<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-4">
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.autenticacao']}" styleClass="bold"/>
+												<p>#{tituloCartorio.codNsuPagamento}</p>
+											</p:outputPanel>
+											
+											<p:outputPanel styleClass="col-xs-3">
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.data.hora.transacao']}" styleClass="bold"/>
+												<p>#{tituloCartorio.dataPagamento} - #{tituloCartorio.horarioPagamento}</p>
+											</p:outputPanel>
+											
+											<p:outputPanel styleClass="col-xs-3">
+												<p:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.canal']}" styleClass="bold"/>
+												<p>#{tituloCartorio.descricaoDoCanal}</p>
+											</p:outputPanel>
+										</p:outputPanel>
+										
+										<p:separator styleClass="custom-separator" />
+
+										<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-12">
+												<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+											</p:outputPanel>
+										</p:outputPanel>
+					
+									</p:outputPanel>
+									
+									<br/>
+								</p:outputPanel>
+							</p:outputPanel>
+						</div>							
+					</c:forEach>
+					<p:outputPanel styleClass="row" style="margin-top: -16px">
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml">
+								<ui:param name="divHtml" value="true" />
+								<ui:param name="imprimir" value="true" />
+							</ui:include>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</span>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="goSegundaViaComprovanteTituloCartorio" role="button">#{msg['page.btn.voltar']}
+		       </p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<!-- Gerar nova referencia de operação inicio -->
+		<p:outputPanel styleClass="no-print no-visible">
+			<ui:include
+				src="/pages/pagamentos/telefonePrePago/recargaProgramada/consulta/popup.xhtml" />
+		</p:outputPanel>
+		<!--  Gerar nova referencia de operação  fim -->
+
+		<p:outputPanel styleClass="row content">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="no-print no-visible aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							#{msg['pages.pagamentos.recargaProgramada.consultar.paraConsultarProgramacao']}
+							<i class="fa fa-plus-square iconeTexto space" aria-hidden="true" />.
+							#{msg['pages.pagamentos.recargaProgramada.consultar.paraConsultarProgramacao1']}
+						</p>
+						<p>
+							#{msg['pages.pagamentos.recargaProgramada.consultar.ImpressaoPDFImprimir']}
+							<i class="fa fa-plus-square iconeTexto space" aria-hidden="true" />.
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.recargaProgramada.consultar.recargaAgen']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<!-- DESENVOLVIMENTO NOVO -->
+					<p:outputPanel styleClass="row space-b no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{recargaProgramadaConsultarBBean.expandedRow}">
+							<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+							<p:commandLink update=":formGeral" process="@this"
+								action="#{recargaProgramadaConsultarBBean.setExpandedRow(false)}"
+								value="#{msg['pages.usuarioSecundario.alterarPreenchimento2.retrair.todas.areas']}">
+							</p:commandLink>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{!recargaProgramadaConsultarBBean.expandedRow}">
+							<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+							<p:commandLink update=":formGeral" process="@this"
+								action="#{recargaProgramadaConsultarBBean.setExpandedRow(true)}">
+								<h:outputText
+									value="#{msg['pages.usuarioSecundario.alterarPreenchimento2.expandir.todas.areas']}" />
+							</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel id="formExp" styleClass="table">
+
+								<p:dataTable id="dtRecarga" var="recarga"
+									value="#{recargaProgramadaConsultarBBean.consultarRecarga.listaRecargas}"
+									ajax="false"
+									emptyMessage="#{msg['pages.pagamentos.recargaProgramada.consultar.naoexistlista']}"
+									expandedRow="#{recargaProgramadaConsultarBBean.expandedRow}">
+
+									<p:column styleClass="no-print no-visible" style="width:16px"
+										ajax="false">
+										<p:rowToggler />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.recargaProgramada.consultar.operadora']}">
+										<h:outputText value="#{recarga.nomeOperadora}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.recargaProgramada.consultar.dddTelefone']}">
+										<h:outputText value="#{recarga.numeroTelefoneFormatado}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.recargaProgramada.consultar.periodicidade']}">
+										<h:outputText value="#{recarga.periodicidade}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.recargaProgramada.consultar.situacao']}">
+										<h:outputText value="#{recarga.descSituacao}" />
+									</p:column>
+
+									<p:column styleClass="text-right space-r"
+										headerText="#{msg['pages.pagamentos.recargaProgramada.consultar.valor']}">
+										<h:outputText value="#{recarga.valor}">
+											<f:convertNumber type="currency" locale="pt_br"
+												currencySymbol="R$" />
+										</h:outputText>
+									</p:column>
+
+									<p:rowExpansion ajax="false">
+										<p:outputPanel styleClass="row ajusteColunaExpansivel space-b">
+
+											<p:outputPanel styleClass="col-xs-3 PRConsultarColuna1">
+												<p:outputPanel styleClass="space-b space-t">
+													<strong><span class="space"><h:outputText
+																value="#{msg['pages.pagamentos.recargaProgramada.consultar.dataInicial']}" /></span></strong>
+													<h:outputText value="#{recarga.dataInicial}" />
+												</p:outputPanel>
+												<p:outputPanel>
+													<strong><span class="space"><h:outputText
+																value="#{msg['pages.pagamentos.recargaProgramada.consultar.canal']}" /></span></strong>
+													<h:outputText value="#{recarga.canal}" />
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-3 PRConsultarColuna2">
+												<p:outputPanel styleClass="space-b space-t">
+													<strong><span class="space"><h:outputText
+																value="#{msg['pages.pagamentos.recargaProgramada.consultar.dataInclusaoProgramacao']}" /></span></strong>
+													<h:outputText value="#{recarga.dataInclusaoProgramacao}" />
+												</p:outputPanel>
+												<p:outputPanel>
+													<strong><span class="space"><h:outputText
+																value="#{msg['pages.pagamentos.recargaProgramada.consultar.datadoCancelamento']}" /></span></strong>
+													<h:outputText value="#{recarga.dataCancelamento}" />
+													<h:outputText value="#{recarga.motivoCancelamento}"
+														rendered="#{empty recarga.dataCancelamento}" />
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-3 PRConsultarColuna3">
+												<p:outputPanel styleClass="space-b space-t ">
+													<strong><span class="space"><h:outputText
+																value="#{msg['pages.pagamentos.recargaProgramada.consultar.prazo']}" /></span></strong>
+													<h:outputText rendered="#{empty recarga.dataformatada}"
+														value="#{recarga.prazo}">
+													</h:outputText>
+													<h:outputText rendered="#{not empty recarga.dataformatada}"
+														value="#{recarga.dataformatada}"></h:outputText>
+												</p:outputPanel>
+												<p:outputPanel>
+													<strong><span class="space"><h:outputText
+																value="#{msg['pages.pagamentos.recargaProgramada.consultar.motivodocancelamento']}" /></span></strong>
+													<h:outputText value="#{recarga.motivoCancelamento}" />
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel
+												styleClass="col-xs-3 PRConsultarColuna4 space-t no-print no-visible">
+												<p:outputPanel style="margin-top: 10px">
+													<p:outputPanel styleClass="text-right"
+														rendered="#{recarga.mostrarBotoes}">
+														<h:graphicImage styleClass="custom-icons"
+															value="/images/u1239.png" />
+														<p:commandLink role="button" ajax="false"
+															action="#{recargaProgramadaConsultarBBean.alterarRecargaSelecionada(recarga)}"
+															value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.column.alterar']}">
+														</p:commandLink>
+
+														<h:graphicImage styleClass="custom-icons"
+															value="/images/u1241.png" />
+														<p:commandLink role="button" ajax="false"
+															action="#{recargaProgramadaConsultarBBean.carregarPopup(recarga)}"
+															id="painelSecundarioListar"
+															value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.column.excluir']}">
+															<f:param
+																name="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataInclusaoProgramacao}"
+																value="#{recarga}"></f:param>
+														</p:commandLink>
+													</p:outputPanel>
+												</p:outputPanel>
+											</p:outputPanel>
+
+										</p:outputPanel>
+									</p:rowExpansion>
+
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:outputPanel id="panelBotao">
+					<p:commandLink id="voltar" styleClass="btn btn-default btn-cinza"
+						role="button" action="#{recargaProgramadaConsultarBBean.voltar}">#{msg['page.btn.voltar']}</p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:dialog 	widgetVar="popupLimites" 
+				id="popupLimites" 
+				position="center"
+				width="600" modal="true" dynamic="true" resizable="false"
+				styleClass="modal-box modalGray no-print no-visible">
+						
+		<p:outputPanel
+			styleClass="text-left content-modal-text space-b no-padding">
+			<p:outputPanel styleClass="row no-padding space-b">
+				<p:outputPanel styleClass="col-xs-2 space-t">
+					<p:graphicImage styleClass="space-t" value="/images/btnSalvar.png" />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-10">
+					<h:outputText escape="false" styleClass="bold"
+						value=" #{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.msgLimiteMaxDebito']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</p:dialog>
+</ui:composition>

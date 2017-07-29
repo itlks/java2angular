@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+<!-- 	template="/templates/templateConsultaNovo.xhtml" -->
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row"
+			rendered="#{debitoAutomaticoSelecaoBBean.acaoEnum.acao == 'BL'}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+
+					<span>
+						<p>#{msg['pages.pagamentos.debito.automatico.lancamento.bloquear.alert1']}</p>
+
+						<p>#{msg['pages.pagamentos.debito.automatico.lancamento.bloquear.alert2']}</p>
+
+						<p>#{msg['pages.pagamentos.debito.automatico.lancamento.bloquear.alert3']}</p>
+					</span>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText for="" styleClass="h4"
+						value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.criterioBusca']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel for="tipoConta" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.tipoConta']}" />
+							<h:outputText id="tipoConta"
+								value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.tipoConta.descricao}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.tipoConta.id ne 0}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel for="empresaConveniada" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.empresaConveniada']}" />
+							<h:outputText id="empresaConveniada"
+								value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.empresaConveniada.nomeEmpresaConveniada}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel for="dataInicial" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dataInicial']}" />
+							<h:outputText id="dataInicial" converter="dateConverterFormat"
+								value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.dataInicial}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel for="dataFinal" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dataFinal']}" />
+							<h:outputText id="dataFinal" converter="dateConverterFormat"
+								value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.dataFinal}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{debitoAutomaticoSelecaoBBean.exibeSituacao}">
+							<p:outputLabel for="situacao" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.situacao']}" />
+							<h:outputText id="situacao"
+								value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.situacao.descricao}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1"
+									value="#{debitoAutomaticoSelecaoBBean.listaConsulta}"
+									var="item"
+									rendered="#{debitoAutomaticoSelecaoBBean.apenasConsulta}">
+
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dataDebito']}" style="width: 10%">
+										<h:outputText value="#{item.fecprdb}"
+											converter="dateConverterFormat" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.empresaConveniadaHeader']}" style="width: 12%">
+										<h:outputText value="#{item.nmconv}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.identificador']}" style="width: 15%">
+										<h:outputText value="#{item.forcons}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.formaPagamento']}" style="width: 35%">
+										<h:outputText 
+											value="#{debitoAutomaticoSelecaoBBean.getFormaPagamento(item.formpag, item.nrcrtao)}" />
+									</p:column>
+									<p:column
+										rendered="#{debitoAutomaticoCadastroBBean.empresaConveniada()}"
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.empresaConveniadaHeader']}">
+										<h:outputText value="#{item.nmconv}" />
+									</p:column>
+									<p:column styleClass="text-right"
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.valor']}">
+										<h:outputText value="#{item.importe}" styleClass="text-right"
+											converter="valorMonetarioConverter" />
+									</p:column>
+									<p:column
+										rendered="#{debitoAutomaticoSelecaoBBean.exibeSituacao}"
+										headerText="#{debitoAutomaticoSelecaoBBean.labelHeaderTabelaConsulta}">
+										<h:outputText
+											value="#{debitoAutomaticoSelecaoBBean.getSituacao(item.indesta, item.tipbloq)}" />
+									</p:column>
+								</p:dataTable>
+
+								<p:dataTable id="tabela2"
+									value="#{debitoAutomaticoSelecaoBBean.listaConsulta}"
+									var="item"
+									selection="#{debitoAutomaticoSelecaoBBean.itemConsulta}"
+									selectionMode="single" rowKey="#{item}"
+									rendered="#{!debitoAutomaticoSelecaoBBean.apenasConsulta}">
+
+									<p:ajax event="rowSelect"
+										listener="#{debitoAutomaticoSelecaoBBean.selecionarItemConsulta}" />
+
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dataDebito']}">
+										<h:outputText value="#{item.fecprdb}"
+											converter="dateConverterFormat" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.empresaConveniadaHeader']}">
+										<h:outputText value="#{item.nmconv}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.identificador']}">
+										<h:outputText value="#{item.forcons}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.formaPagamento']}">
+										<h:outputText
+											value="#{debitoAutomaticoSelecaoBBean.getFormaPagamento(item.formpag, item.nrcrtao)}" />
+									</p:column>
+									<p:column styleClass="text-right"
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.valor']}">
+										<h:outputText value="#{item.importe}" styleClass="text-right"
+											converter="valorMonetarioConverter" />
+									</p:column>
+									<p:column
+										rendered="#{debitoAutomaticoSelecaoBBean.exibeSituacao}"
+										headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.situacao.grid']}">
+										<h:outputText
+											value="#{debitoAutomaticoSelecaoBBean.getSituacao(item.indesta, item.tipbloq)}" />
+									</p:column>
+
+								</p:dataTable>
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{debitoAutomaticoSelecaoBBean.apenasConsulta}">
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="voltar"
+					styleClass="btn btn-default btn-cinza no-print no-visible"
+					action="#{debitoAutomaticoSelecaoBBean.voltarEmConsulta}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

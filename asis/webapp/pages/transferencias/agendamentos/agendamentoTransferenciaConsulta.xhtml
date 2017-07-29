@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<h:outputText styleClass="row"
+						value="#{msg['pages.consulta.agendamento.label.buscarealizada']}" />
+					<h:outputText styleClass="row"
+						value="#{msg['pages.consulta.agendamento.label.possivelconsultar']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['pages.consulta.agendamento.label.opcoesPesquisa']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="box-shadow col-xs-12">
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="form-group col-xs-3">
+
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for=""
+							value="#{msg['pages.consulta.agendamento.label.periodoespecifico']}" />
+						<h:selectOneMenu id="noventaDias" name="noventaDias"
+							value="#{agendamentoBBean.itemSelecionadoUltimosNoventaDias}">
+
+							<f:selectItem itemLabel="#{msg['pages.selectItem.selecione']}"
+								itemValue="-1" noSelectionOption="true" />
+
+							<f:selectItems
+								value="#{agendamentoBBean.listaDosUltimosNoventaDias}" var="ec"
+								itemLabel="#{ec.descricao}" itemValue="#{ec.dia}" />
+
+							<p:ajax event="change"
+								listener="#{agendamentoBBean.onChangeUltimosNoventaDias()}"
+								process="@this" update="dataInicial dataFinal" />
+
+						</h:selectOneMenu>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<p:outputPanel styleClass="form-group col-xs-3">
+
+					<h:outputLabel for=""
+						value="#{msg['pages.consulta.agendamento.label.situacao']}" />
+					<h:selectOneMenu id="tipoAgendamento" name="tipoAgendamento"
+						value="#{agendamentoBBean.itemSelecionadoSituacao}">
+
+						<f:selectItem itemLabel="#{msg['pages.selectItem.selecione']}"
+							itemValue="-1" noSelectionOption="true" />
+
+						<f:selectItems value="#{agendamentoBBean.listaTipoDeAgendamento}"
+							var="lista" itemLabel="#{lista.descricao}"
+							itemValue="#{lista.id}">
+
+						</f:selectItems>
+					</h:selectOneMenu>
+
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:separator />
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputLabel
+						value="#{msg['pages.consulta.agendamento.label.outroperiodo']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="form-group col-xs-3">
+					<p:outputLabel
+						value="#{msg['pages.consulta.agendamento.label.DataInicial']}" />
+					<p:outputPanel styleClass="icon-data-input">
+						<i class="fa fa-calendar"></i>
+						<p:calendar id="dataInicial" showOtherMonths="true" maxlength="10"
+							pattern="dd/MM/yyyy" value="#{agendamentoBBean.dataInicial}"
+							converter="dateTelaConverter"
+							onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+							onkeypress="mascaraData(this, event)">
+							<p:ajax event="dateSelect" process="@this"
+								update="@this, noventaDias"
+								listener="#{agendamentoBBean.onChangeCalendar()}" />
+							<p:ajax event="change" process="@this"
+								update="@this, noventaDias"
+								listener="#{agendamentoBBean.onChangeCalendar()}" />
+						</p:calendar>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="form-group col-xs-3">
+					<p:outputLabel
+						value="#{msg['pages.consulta.agendamento.label.DataFinal']}" />
+					<p:outputPanel styleClass="icon-data-input">
+						<i class="fa fa-calendar"></i>
+						<p:calendar id="dataFinal" showOtherMonths="true" maxlength="10"
+							pattern="dd/MM/yyyy" value="#{agendamentoBBean.dataFinal}"
+							converter="dateTelaConverter"
+							onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+							onkeypress="mascaraData(this, event)">
+							<p:ajax event="dateSelect" process="@this"
+								update="@this, noventaDias"
+								listener="#{agendamentoBBean.onChangeCalendar()}" />
+							<p:ajax event="change" process="@this"
+								update="@this, noventaDias"
+								listener="#{agendamentoBBean.onChangeCalendar()}" />
+						</p:calendar>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+			<p:separator />
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputLabel
+						value="#{msg['pages.consulta.agendamento.label.tipodeoperacao']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="table-responsive radio">
+				<h:selectOneRadio id="tipoOperacao"
+					value="#{agendamentoBBean.tipoGrupoOperacao}"
+					layout="pageDirection" required="true">
+					<f:selectItems value="#{agendamentoBBean.listaOperacoes}" var="op"
+						itemValue="#{op.id}" itemLabel="#{op.descricao}" />
+				</h:selectOneRadio>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel id="panelBotao" styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{agendamentoBBean.voltarEmMenu}"
+					value="#{msg['page.btn.voltar']}" />
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					role="button" action="#{agendamentoBBean.consultarAgendamentos}"
+					value="#{msg['page.btn.continuar']}" />
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+			</p:outputPanel>
+			<p:defaultCommand target="btnContinuar" />
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

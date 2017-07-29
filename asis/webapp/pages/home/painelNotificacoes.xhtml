@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:overlayPanel id="painelNotificacoesHome" widgetVar="painelNotificacoesHomeVar" for="iconeNotificacoes" styleClass="Notificacao notif" > 
+		
+
+		<p:outputPanel styleClass="row tituloNotificacao">
+			<p:outputPanel styleClass="col-xs-12">
+				<i class="ic icon-alerta"></i>
+				<span>#{msg['pages.home.aviso.notificacao']}</span>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row conteudoNotificacao notif">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:outputPanel rendered="#{homeBBean.strAvisosDDA eq 'S'}"
+					styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 sessao">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4 link-Notificacao">
+								<p:outputLabel>#{msg['pages.home.dda']}</p:outputLabel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="valor col-xs-8">
+								<p:outputLabel rendered="#{homeBBean.strNivelUsuario eq 'S'}">#{msg['pages.home.dda.aviso']}</p:outputLabel>
+								<p:commandLink rendered="#{homeBBean.strNivelUsuario ne 'S'}" action="#{homeBBean.redirectDDA}">#{msg['pages.home.dda.aviso']}</p:commandLink>
+								
+							</p:outputPanel>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel rendered="#{homeBBean.strAvisosCorresp eq 'S'}" styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 sessao">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4 link-Notificacao">
+								<p:outputLabel  >#{msg['pages.home.correspondencia']}</p:outputLabel>
+						
+							</p:outputPanel>
+							<p:outputPanel styleClass="valor col-xs-8">
+								<p:outputLabel rendered="#{homeBBean.strNivelUsuario eq 'S'}"  >#{msg['pages.home.correspondencia.aviso']}</p:outputLabel>
+								<p:commandLink rendered="#{homeBBean.strNivelUsuario ne 'S'}" action="#{homeBBean.redirectCorrespondencia}"  >#{msg['pages.home.correspondencia.aviso']}</p:commandLink>
+								
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>				
+
+				</p:outputPanel>
+
+				<p:outputPanel rendered="#{homeBBean.lngRetCodeQRToken eq '24'}" styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 sessao">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4 link-Notificacao">
+								<p:outputLabel action="#{homeBBean.redirectQrTokenAutorizar}" >#{msg['pages.home.qrCode']}</p:outputLabel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="valor col-xs-8">
+							
+									<p:commandLink rendered="#{homeBBean.lngRetCodeQRToken eq '24'}" action="#{homeBBean.redirectQrTokenAutorizar}" >#{msg['pages.home.qrCode.aviso1']} Clique aqui para autorizar.</p:commandLink>
+							
+																
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>				
+				</p:outputPanel>
+
+				<p:outputPanel rendered="#{homeBBean.lngRetCodeQRToken eq '25'}" styleClass="row">
+				
+					<p:outputPanel styleClass="col-xs-12 sessao">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4 link-Notificacao">
+								<p:outputLabel>#{msg['pages.home.qrCode']}</p:outputLabel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="valor col-xs-8">
+						
+									<p:commandLink  action="#{homeBBean.redirectQrTokenHabilitar}">#{msg['pages.home.qrCode.aviso2']} Clique aqui para habilitar.</p:commandLink>
+								
+						
+							
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>	
+				</p:outputPanel>
+
+				<p:outputPanel
+					rendered="#{homeBBean.strAvisosDDA eq 'N' and homeBBean.strAvisosCorresp eq 'N' and homeBBean.lngRetCodeQRToken eq '0'}" styleClass="text-center space-t">
+					<p:outputPanel>
+						<p:outputLabel>#{msg['pages.home.aviso.naoexiste.notificacao']}</p:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</p:overlayPanel>
+</ui:composition>

@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="enviarPorEmailDialog" widgetVar="enviarPorEmailDialog" position="center" modal="true" dynamic="true" resizable="false" styleClass="modal-email">
+
+		<p:outputPanel styleClass="containerModal">
+			<h4>Enviar um arquivo por e-mail</h4>
+
+			<p:outputPanel styleClass="contentModal">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-lg-12 space-b">
+						<p:outputPanel id="panelEmail" styleClass="link-open">
+
+							<p:commandLink id="link1" onclick="openLink('link1');">
+								Para quem os arquivos podem ser enviados
+							</p:commandLink>
+							<p>Os arquivos podem ser enviados para qualquer pessoa que
+								possua um e-mail válido.</p>
+							<br />
+
+							<p:commandLink id="link2" onclick="openLink('link2');">
+								Quantidade de destinatários que podem receber o arquivo
+							</p:commandLink>
+							<p>Não há quantidade máxima de destinatários para o envio de
+								um arquivo. Você pode enviá-lo para diferentes e-mails. Para
+								isso, separe os endereços por vírgula.</p>
+							<br />
+
+							<p:commandLink id="link3" onclick="openLink('link3');">
+								Formato dos arquivos enviados por e-mail
+							</p:commandLink>
+							<p>Os arquivos são enviados por e-mail em formato PDF,
+								anexados à mensagem.</p>
+							<br />
+							<p:commandLink id="link4" onclick="openLink('link4');">
+								Conheça os problemas que podem impedir que o destinatário receba o e-mail
+							</p:commandLink>
+							<p>
+								Algumas circunstâncias podem impedir que o destinatário receba
+								os arquivos por e-mail: <br /> - O e-mail informado não está
+								correto ou não existe <br /> - A caixa de e-mails do
+								destinatário está lotada e não permite a entrada de novas
+								mensagens <br /> - O destinatário possui serviço de bloqueio de
+								mensagens de remetentes desconhecidos (anti-spam)
+							</p>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-lg-12 space-t">
+
+						<h5>Dados do destinatário</h5>
+						<p class="font-12">Informe o e-mail do destinatário no campo
+							abaixo. Caso queira enviar o arquivo para mais de um destinatário,
+							use a vírgula para separar os endereços.</p>
+						<p class="font-12">Ex.: nome1@email.com, nome2@email.com</p>
+
+						<p:inputTextarea autoResize="false" id="email" value="#{PDFBBean.email}" styleClass="form-control" rows="5" />
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<br />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="text-right">
+				<p:commandLink onclick="PF('enviarPorEmailDialog').hide();" styleClass="btn btn-default btn-cinza" actionListener="#" role="button">
+		             Voltar
+		        </p:commandLink>
+
+				<p:commandLink id="enviarEmail" onstart="dialog_block();" oncomplete="dialog_unblock();" action="#{PDFBBean.enviarEmail()}" rendered="#{multiplosPdfs ne 'true'}" ajax="true" update="formGeral:email" process="formGeral:email" styleClass="btn btn-default" role="button">
+		         	Continuar
+		        </p:commandLink>
+		        
+				<p:commandLink id="enviarEmailMultiplosPdfs" onstart="dialog_block();" oncomplete="dialog_unblock();" action="#{PDFBBean.enviarEmailMultiplosPdfs()}" rendered="#{multiplosPdfs eq 'true'}" ajax="true" update="formGeral:email" process="formGeral:email" styleClass="btn btn-default" role="button">
+		         	Continuar
+		        </p:commandLink>
+		        
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</p:dialog>
+
+	<script type="text/javascript" language="javascript">
+		function openLink(id) {
+			if ($('#formGeral\\:' + id).next().is(":visible")) {
+				$(".link-open p").slideUp();
+				return "false";
+			} else {
+				$(".link-open p").slideUp();
+				$('#formGeral\\:' + id).next().slideToggle();
+			}
+		}
+	</script>
+
+
+</ui:composition>
+
+
+

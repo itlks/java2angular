@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+
+	<ui:define name="content">
+		 <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                
+                <p:outputPanel styleClass="titulo-painel" rendered="#{pagamentosTributosMunicipaisIptuSPBBean.pagamentoGerouPendencia}">
+                    <h4>#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.label.informativo.pendencia']}</h4>
+                </p:outputPanel>
+                
+            </p:outputPanel>
+        </p:outputPanel>  
+
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow no-margin-bottom">
+                
+                
+                
+ 
+					<p:outputPanel rendered="#{!pagamentosTributosMunicipaisIptuSPBBean.pagamentoGerouPendencia}">
+						<c:forEach items="#{pagamentosTributosMunicipaisIptuSPBBean.comprovante}" var="dado" varStatus="iteratorDados">
+
+							<p:outputPanel styleClass="row" rendered="#{dado.tplinha=='C'}">							
+								<p:outputPanel styleClass="col-xs-12 text-center">
+									<h:outputText value="#{dado.value} " styleClass="bold" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-12">
+									<c:forEach begin="1" end="#{dado.pllinha}">
+										<br />
+									</c:forEach>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row" rendered="#{dado.tplinha=='L'}">							
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText value="#{dado.label} " styleClass="bold col-xs-2 no-padding" />
+									<h:outputText value="#{dado.value}" styleClass="col-xs-10 no-padding"/>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-12">
+									<c:forEach begin="1" end="#{dado.pllinha}">
+										<br />
+									</c:forEach>
+								</p:outputPanel>								
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row" rendered="#{dado.tplinha=='I'}">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText value="#{dado.value}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-12">
+									<c:forEach begin="1" end="#{dado.pllinha}">
+										<br />
+									</c:forEach>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</c:forEach>
+					</p:outputPanel>
+
+
+ 					<p:outputPanel styleClass="row" rendered="#{pagamentosTributosMunicipaisIptuSPBBean.pagamentoGerouPendencia}">
+ 						<p:outputPanel styleClass="col-xs-12 no-padding text-center">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.cabecalho.prefeitura']}" styleClass="bold" />
+						</p:outputPanel>						
+						<p:outputPanel styleClass="col-xs-12 text-center space-b">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.subcabecalho.prefeitura']}"/>
+						</p:outputPanel>
+						
+						
+						<p:outputPanel styleClass="col-xs-12 " rendered="#{!pagamentosTributosMunicipaisIptuSPBBean.pagamento.OENOMECONTRIBUINTE eq ''}">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.nome.contribuinte']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.nomeDoContribuinte}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.numero.contribuinte']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.numeroContribuinte}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.ano.exercicio']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.ano}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.numero.notificacao']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.numeroNotificacao}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.numero.parcela']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.numeroParcelaComprovante}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.vencimento.parcela']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.vencimento}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.data.pagamento']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.dataPagamento}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.valor.parcela']}" styleClass="no-padding bold"/>
+							<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.valor}" />
+						</p:outputPanel>
+					
+						<p:outputPanel styleClass="col-xs-12 text-center space-t ">
+							<p:outputPanel styleClass="rodape-painel border-right border-left border-top border-bottom">
+								<p:outputPanel styleClass="space-b space-t">
+									<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.label.informativo.apenas.conferencia']}" styleClass="bold"  />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+ 					
+ 					<p:outputPanel styleClass="row space-b space-t">
+                        <p:outputPanel styleClass="col-md-12 ">   
+                        
+                            <p:separator />
+                        
+                        </p:outputPanel>
+                    </p:outputPanel>  
+
+                    
+                    <p:outputPanel styleClass="row space-t">
+                        <p:outputPanel styleClass="col-md-12 space-t">                           
+                    		<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />                        
+                        </p:outputPanel>
+                    </p:outputPanel>
+                	              
+                </p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+            </p:outputPanel>
+        </p:outputPanel>               
+	</ui:define>
+</ui:composition>         

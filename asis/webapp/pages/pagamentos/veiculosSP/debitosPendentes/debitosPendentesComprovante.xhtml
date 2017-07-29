@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{debitosPendentesBBean.textoComprovante}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel for="renavam" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.renavamComPontos']}" />
+									<p:outputLabel id="renavam"
+										style="font-weight:normal"
+										value="#{debitosPendentesBBean.nomeRenavamFormatado}" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8">
+								<p>
+									<p:outputLabel for="codigoMunicipio" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.codigoMunicipioComPontos']}" />
+									<p:outputLabel id="codigoMunicipio"
+										style="font-weight:normal"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.muniest}" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel for="proprietario" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.proprietarioComPontos']}" />
+									<p:outputLabel id="proprietario"
+										 style="font-weight:normal"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.nomePro}" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel for="cpfCnpj" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.cpfCnpjComPontos']}" />
+									<p:outputLabel id="cpfCnpj"
+										style="font-weight:normal"
+										value="#{debitosPendentesBBean.cpfCnpjFormatado}" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel for="placaVeiculo" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.placaVeiculoComPontos']}" />
+									<p:outputLabel id="placaVeiculo"
+										style="font-weight:normal"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.palca}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.dpvat']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel for="quantidadeDPVAT" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.pendentes']}" />
+									<p:outputLabel id="quantidadeDPVAT"
+										value="#{debitosPendentesBBean.quantidadePendenteDPVAT}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel for="totalDpvat" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valorTotal']}" />
+									<p:outputLabel id="totalDpvat"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.totDPVA}"
+										 style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valDPV1 > 0}">
+								<p>
+									<p:outputLabel for="excercicio" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicio"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.anoExer}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valDPV1 > 0}">
+								<p>
+									<p:outputLabel for="valorDPVAT" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorDPVAT"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valDPV1}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valDPV2 > 0}">
+								<p>
+									<p:outputLabel for="excercicio2" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicio2"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.anoExer2}"
+										style="font-weight:normal" >
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valDPV2 > 0}">
+								<p>
+									<p:outputLabel for="valorDPVAT2" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorDPVAT2"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valDPV2}"
+										 style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.ipva']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel for="quantidadeIPVA" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.pendentes']}" />
+									<p:outputLabel id="quantidadeIPVA"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.ocoIPVA}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel for="totalIPVA" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valorTotal']}" />
+									<p:outputLabel id="totalIPVA"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.totIPVA}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV1 > 0}">
+								<p>
+									<p:outputLabel for="excercicioIPVA" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicioIPVA"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.dadIPV1}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV1 > 0}">
+								<p>
+									<p:outputLabel for="valorIPVA"  styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorIPVA"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV1}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV2 > 0}">
+								<p>
+									<p:outputLabel for="excercicioIPVA2" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicioIPVA2"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.dadIPV2}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV2 > 0}">
+								<p>
+									<p:outputLabel for="valorIPVA2" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorIPVA2"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV2}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV3 > 0}">
+								<p>
+									<p:outputLabel for="excercicioIPVA3" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicioIPVA3"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.dadIPV3}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV3 > 0}">
+								<p>
+									<p:outputLabel for="valorIPVA3" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorIPVA3"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV3}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV4 > 0}">
+								<p>
+									<p:outputLabel for="excercicioIPVA4" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicioIPVA4"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.dadIPV4}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV4 > 0}">
+								<p>
+									<p:outputLabel for="valorIPVA4" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorIPVA4"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV4}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV5 > 0}">
+								<p>
+									<p:outputLabel for="excercicioIPVA5" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicioIPVA5"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.dadIPV5}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV5 > 0}">
+								<p>
+									<p:outputLabel for="valorIPVA5" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorIPVA5"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV5}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV6 > 0}">
+								<p>
+									<p:outputLabel for="excercicioIPVA6" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.exercicio']}" />
+									<p:outputLabel id="excercicioIPVA6"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.dadIPV6}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3"
+								rendered="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV6 > 0}">
+								<p>
+									<p:outputLabel for="valorIPVA6" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+									<p:outputLabel id="valorIPVA6"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.valIPV6}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.multas']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel for="quantidadeMulta" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.pendentes']}" />
+									<p:outputLabel id="quantidadeMulta"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.ocoMult}"
+										style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p>
+									<p:outputLabel for="totalMulta" styleClass="space"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valorTotal']}" />
+									<p:outputLabel id="totalMulta"
+										value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.totMult}"
+										style="font-weight:normal" >
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</p:outputLabel>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:repeat var="multa" value="#{debitosPendentesBBean.listGuia}">
+								<p:outputPanel styleClass="col-xs-4">
+									<p>
+										<p:outputLabel for="guia" styleClass="space"
+											value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.guia']}" />
+										<p:outputLabel id="guia" value="#{multa.guia}"
+											style="font-weight:normal" />
+									</p>
+									<p>
+										<p:outputLabel for="dataInfracaoGuia"  styleClass="space"
+											value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.dataInfracao']}" />
+										<p:outputLabel id="dataInfracaoGuia"
+											value="#{multa.dataInfracao}"
+											style="font-weight:normal" />
+									</p>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4">
+									<p>
+										<p:outputLabel for="autoInfracaoGuia" styleClass="space"
+											value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.autoInfracao']}" />
+
+										<p:outputLabel id="autoInfracaoGuia"
+											value="#{multa.autoInfracao}"
+											style="font-weight:normal" />
+									</p>
+									<p>
+										<p:outputLabel for="dataVencimentoGuia" styleClass="space" 
+											value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.dataVencimento']}" />
+
+										<p:outputLabel id="dataVencimentoGuia"
+											value="#{multa.dataVencimento}"
+											style="font-weight:normal" />
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<p>
+										<p:outputLabel for="orgaoAutuador" styleClass="space" 
+											value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.orgaoAutuador']}" />
+										<p:outputLabel id="orgaoAutuador"
+											value="#{multa.orgaoAutuador}"
+											style="font-weight:normal" />
+									</p>
+									<p>
+										<p:outputLabel for="valorGuia" styleClass="space"
+											value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valor']}" />
+										<p:outputLabel id="valorGuia" value="#{multa.valor}"
+											onkeyup="mskMoney(this)"
+											style="font-weight:normal" >
+											<f:convertNumber type="currency" currencySymbol="R$" />
+										</p:outputLabel>
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputLabel value="" />
+								</p:outputPanel>
+							</ui:repeat>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+
+							<!--VALOR TOTAL INICIO -->
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-offset-9 col-xs-3">
+
+									<h:outputLabel for="" styleClass="space" 
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.valorTotal']}" />
+									
+									<p:outputLabel id="valorGuia" value="#{debitosPendentesBBean.debitosPendentesVeiculosRenavamDTO.totDebi}"
+											onkeyup="mskMoney(this)"
+											style="font-weight:normal" >
+											<f:convertNumber type="currency" currencySymbol="R$" />
+										</p:outputLabel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+							<!-- VALOR TOTAL FINAL -->
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{!debitosPendentesBBean.gerouPendencia}">
+							<p:separator />
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel styleClass="distancia-esquerda"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.autenticacao.bancaria']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel styleClass="distancia-esquerda"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.data.pagamento']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel styleClass="distancia-esquerda"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.data.contabil']}" />
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel value="#{debitosPendentesBBean.referOper}"
+										styleClass="distancia-esquerda" style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel
+										value="#{debitosPendentesBBean.dataHoraPagamento}"
+										styleClass="distancia-esquerda" style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p>
+									<p:outputLabel value="#{debitosPendentesBBean.dataContabil}"
+										styleClass="distancia-esquerda" style="font-weight:normal" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-12">
+								<br></br>
+								<p> 
+									<p:outputLabel styleClass="distancia-esquerda"
+										value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.autenticacao.digital']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-12">
+								<p>
+								<h:outputText value="#{debitosPendentesBBean.debitosPendentes.autentDigital}" converter="autenticacaoDigitalConverter" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+							<p:outputPanel styleClass="margin-bottom-25 space"
+								style="text-align: center;"
+								rendered="#{debitosPendentesBBean.gerouPendencia}">
+								<p:outputLabel 
+									style="font-weight:normal;"
+									value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.demonstrativoValido']}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-12"
+								rendered="#{!debitosPendentesBBean.gerouPendencia}">
+								<p>#{msg['pages.pagamentos.veiculosSP.debitosPendentes.pagamentoEfetuadoMeioInternet']}</p>
+								<p>#{msg['pages.pagamentos.veiculosSP.debitosPendentes.esteComprovanteDeveraSerApresentadoNovo']}</p>
+								<p>#{msg['pages.pagamentos.veiculosSP.debitosPendentes.emCasoDuvidaProcurar']}</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-8">
+							<p class="bold">#{msg['page.commons.comprovante.central.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="bold">#{msg['page.commons.comprovante.sac.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="bold">#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+						</p:outputPanel>						
+					</p:outputPanel>	
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel>
+			<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

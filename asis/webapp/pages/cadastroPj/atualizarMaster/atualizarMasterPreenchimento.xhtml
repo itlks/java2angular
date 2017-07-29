@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovoSemMenuSair.xhtml">
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/invalidTeclado.xhtml" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.msgErro}" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{atualizarMasterBBean.session.nomeUsuarioLogado}" />
+
+		<h:inputHidden id="cpfHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.cpfHash}" />
+
+		<h:inputHidden id="cnpjHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.cnpjHash}" />
+
+		<h:inputHidden id="perguntaHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.perguntaHash}" />
+
+		<h:inputHidden id="respostaHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.respostaHash}" />
+
+		<h:inputHidden id="senhaNovaHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.senhaNovaHash}" />
+
+		<h:inputHidden id="senhaNovaConfirmaHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.senhaNovaConfirmaHash}" />
+
+		<h:inputHidden id="assinaturaHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.assinaturaHash}" />
+
+		<h:inputHidden id="assinaturaConfirmaHash" partialSubmit="true"
+			value="#{atualizarMasterBBean.dto.assinaturaConfirmaHash}" />
+
+		<h:inputHidden id="showCnpj" partialSubmit="true"
+			value="#{atualizarMasterBBean.showCnpj}" />
+			
+			
+		<h:inputHidden id="tipoContrato" partialSubmit="true"
+			value="#{atualizarMasterBBean.session.tipoAcessoContrato}" />
+			
+		<p:outputPanel id="container-fluid" styleClass="container-fluid">
+		
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel>
+						<h1>#{msg['pages.cadastroPj.recadastramento.titulo.1']}</h1>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.recadastro.master.sub.titulo.dados']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow">
+					
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p><strong>#{msg['pages.cadastroPj.atualizar.label.nomeTitular']}</strong>
+									#{atualizarMasterBBean.dto.cliente}</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-2">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.atualizar.label.agencia']}</strong>
+									#{atualizarMasterBBean.dto.agencia}</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p class="text-right">
+								    <strong>#{msg['pages.cadastroPj.atualizar.label.conta']}</strong>
+									#{atualizarMasterBBean.dto.contaCorrente}</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h5 class="space-b">#{msg['pages.cadastroPj.atualizar.preencha.campos']}</h5>
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.atualizar.identificacao']}</strong>
+								</h5>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row"
+							rendered="#{atualizarMasterBBean.showCnpj}">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.label.cnpj']}" />
+									<p:inputMask id="userCnpj" styleClass="form-control"
+											value="#{atualizarMasterBBean.dto.cnpj}"
+											size="25" mask="99.999.999/9999-99"/>
+	
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+				
+
+						<p:outputPanel styleClass="row"
+							rendered="#{!atualizarMasterBBean.showCnpj}">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.label.cpfTitular']}" />
+									<p:inputMask id="userCpfTitular" size="25" 
+											value="#{atualizarMasterBBean.dto.cnpj}" 
+											mask="999.999.999-99" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.label.cpf']}" />
+									<p:inputMask id="userCpf" styleClass="form-control"  size="25"
+										mask="999.999.999-99" value="#{atualizarMasterBBean.dto.cpf}">
+									</p:inputMask>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.atualizar.senha.acesso']}</strong>
+								</h5>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.senha.nova']}" />
+
+									<p:password id="userNewPassword" styleClass="form-control"
+										maxlength="8" value="#{atualizarMasterBBean.dto.senhaNova}">
+									</p:password>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 input-help">
+								<p:outputLabel
+									value="#{msg['pages.cadastroPj.atualizar.senha.length']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.senha.confirmacao']}" />
+									<p:password id="userPasswordConfirmation"
+										styleClass="form-control" maxlength="8"
+										value="#{atualizarMasterBBean.dto.senhaConfirmacao}"></p:password>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+						
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-8">
+
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.atualizar.dados.master']}</strong>
+								</h5>
+
+								<p>
+									#{msg['pages.cadastroPj.atualizar.digite.uma.pergunta']}
+								</p>
+								<br/>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-8">
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.pergunta']}" />
+									<p:inputText id="userQuestion" styleClass="form-control" 
+										maxlength="60" value="#{atualizarMasterBBean.dto.pergunta}"></p:inputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.resposta']}" />
+									<p:inputText id="userAnswer" styleClass="form-control" 
+										maxlength="60" value="#{atualizarMasterBBean.dto.resposta}"></p:inputText>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel rendered="#{atualizarMasterBBean.session.tipoAcessoContrato != 1}">
+						
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.atualizar.assinatura.eletronica.titulo']}</strong>
+								</h5>
+								<p>
+									#{msg['pages.cadastroPj.atualizar.para.a.realizacao']}
+								</p>
+								<p>
+									#{msg['pages.cadastroPj.atualizar.assinatura.eletronicaCadastre']}
+								</p>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row"  >
+							<p:outputPanel styleClass="col-xs-4">
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.assinatura.eletronica']}" />
+									<p:password id="userAssinatura" styleClass="form-control"
+										maxlength="8" value="#{atualizarMasterBBean.dto.assinatura}"></p:password>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel 
+										value="#{msg['pages.cadastroPj.atualizar.assinatura.eletronicaConfirmar']}" />
+									<p:password id="userAssinaturaConfirmacao"
+										styleClass="form-control" maxlength="8"
+										value="#{atualizarMasterBBean.dto.assinaturaConfirmacao}"></p:password>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						</p:outputPanel>
+						
+					</p:outputPanel>
+					
+					<p:blockUI block="continuarButton" trigger="continuarButton" />
+					<p:outputPanel styleClass="row space-b">
+						
+						<p:outputPanel styleClass="col-xs-12 text-right" >
+							<p:commandLink id="continuarButton" styleClass="btn btn-default"
+								action="#{atualizarMasterBBean.continuar()}"
+								onclick="validarFormAtualizarMaster();" role="button">#{msg['page.btn.continuar']}
+		                         </p:commandLink>
+						</p:outputPanel>
+					
+						
+					
+					</p:outputPanel>
+			
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			
+
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

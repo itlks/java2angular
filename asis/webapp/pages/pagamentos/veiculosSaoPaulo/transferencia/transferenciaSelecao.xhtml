@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<h:outputText
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.pagamentos.efetuados']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<h:outputText
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.pagamentos.efetuados1']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<h:outputText
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.pode.incluir1']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<h:outputText
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.obs1']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<h:outputText
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.mais.informacoes1']}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-t space-b">
+								<p:commandLink
+									actionListener="#{transferenciaVeiculosBBean.initLimites}"
+									value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.confiraLimitesPagamento']}" />
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row">
+								<h:outputText
+									value="#{msg['pages.pagamentos.veiculosSP.licenciamento.selecao.aqui']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<h:outputText styleClass="bold"
+									value="#{msg['pages.pagamentos.veiculosSP.licenciamento.selecao.obs']}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-t">
+								<p:commandLink
+									action="#{pagamentosVeiculosSelecaoBBean.linkRenavam}"
+									value="#{msg['pages.pagamentos.veiculosSP.debitosPendentes.incluirNovoRenavam']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.selecione.renavam']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+
+					<p:outputPanel styleClass="space-b">
+						<h:outputText styleClass="h5"
+							value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.selecionerenavam']}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:blockUI block="dtRenavam" trigger="dtRenavam" />
+						<p:dataTable id="dtRenavam" var="t"
+							value="#{transferenciaVeiculosBBean.listaRenavam}"
+							emptyMessage="NAO EXISTEM REGISTROS PARA A PESQUISA SOLICITADA - PGE0050"
+							selectionMode="single" rowKey="#{t}">
+							<p:ajax event="rowSelect" process="@this" update=""
+								listener="#{transferenciaVeiculosBBean.selecionarRenavam}" />
+							<p:column styleClass="col-xs-3"
+								headerText="#{msg['pages.pagamentos.veiculosSP.identificacao']}">
+								<h:outputText id="identificacao" value="#{t.identificacao}" />
+							</p:column>
+							<p:column styleClass="col-xs-3"
+								headerText="#{msg['pages.pagamentos.veiculosSP.renavam']}">
+								<h:outputText id="nome" value="#{t.nomeRenavamFormatado}" />
+							</p:column>
+							<p:column styleClass="col-xs-3"
+								headerText="#{msg['pages.pagamentos.veiculosSP.placaVeiculo']}">
+								<h:outputText id="placaVeiculo" value="#{t.placaVeiculo}" />
+							</p:column>
+							<p:column styleClass="col-xs-3"
+								headerText="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.situacao']}">
+								<h:outputText id="situacao" value="#{t.situacao.descricao}"   style="margin-right:10px"/>
+								<p:outputLabel id="tooltipRenavam"
+												rendered="#{t.situacao.id eq 'N'}">
+												<i class="fa fa-info-circle" aria-hidden="true" />
+											</p:outputLabel>
+				
+											<p:tooltip for="tooltipRenavam"
+												value="#{msg['pages.renavam.preenchimentoRenavam.column.tooltip']}" />	
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel id="panelBotao" styleClass="col-xs-12 text-right">
+				<p:commandButton id="voltar" styleClass="btn btn-default btn-cinza"
+					role="button" action="#{transferenciaVeiculosBBean.voltarEmMenu}"
+					value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<ui:include src="/pages/limites/limites.xhtml" />
+
+	</ui:define>
+</ui:composition>

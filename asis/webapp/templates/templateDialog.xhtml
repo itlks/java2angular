@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+		<section class="edicao-coluna"> 
+			<p:outputPanel styleClass="container col-xs-offset-1 col-md-offset-1">
+				<p:dialog id="dialogTelaInterna" widgetVar="dialogTelaInterna" modal="true" closable="true" resizable="true" styleClass="modalPage" style="overflow-y: scroll;">
+					<p:outputPanel id="idFormGeralDialog" style="cursor: hand; cursor: pointer;" styleClass="modalContainer">
+
+			<script type="text/javascript" language="javascript">
+				function closeDialog() {
+					jQuery(window).load(function() {
+						closeDialog();
+					});
+				}
+
+				function scrollToFirstMessage() {
+					$('#formGeral\\:dialogTelaInterna').animate({
+						scrollTop : 0
+					});
+				}
+			</script>
+
+			<p:remoteCommand name="closeDialog" action="#{mensagemBBean.closeDialog}" />
+						
+						<p:commandLink styleClass="closeModal pull-right">
+							<p:graphicImage value="/images/close-modal.png" onclick="closeDialog();" />
+						</p:commandLink>
+						
+						<!-- Título da página -->
+							<p:outputPanel styleClass="row space-b titulo">
+								<p:outputPanel styleClass= "#{wizardDialogBBean.numeroPassos gt 4 ? 'col-lg-4 site-map' : 'col-lg-5 site-map'}" >
+									<h1>#{wizardDialogBBean.nomeFuncionalidade}</h1>
+								</p:outputPanel>
+								<p:outputPanel styleClass="#{wizardDialogBBean.numeroPassos gt 4 ? 'col-lg-8 no-print no-visible' : 'col-lg-7 no-print no-visible'}" rendered="#{not(wizardDialogBBean.numeroPagina eq '99') and not(wizardDialogBBean.numeroPagina eq '999')}">
+									<p:outputPanel styleClass="text-right">
+										<ul class="etapas third-step">
+											<c:if test="#{wizardDialogBBean.numeroPassos gt 1}">
+												<li class='#{wizardDialogBBean.cssClass1}'><span><i class="fa fa-circle"></i> <i class="fa fa-check-circle"></i>#{wizardDialogBBean.label1}</span></li>
+											</c:if>
+											
+											<c:if test="#{wizardDialogBBean.numeroPassos gt 1}">
+												<li class='#{wizardDialogBBean.cssClass2}'><span><i class="fa fa-circle"></i> <i class="fa fa-check-circle"></i> #{wizardDialogBBean.label2} </span></li>
+											</c:if>
+											
+											<c:if test="#{wizardDialogBBean.numeroPassos gt 2}">
+												<li class='#{wizardDialogBBean.cssClass3}'><span><i class="fa fa-circle"></i> <i class="fa fa-check-circle"></i> #{wizardDialogBBean.label3} </span></li>
+											</c:if>
+											
+											<c:if test="#{wizardDialogBBean.numeroPassos gt 3}">
+												<li class='#{wizardDialogBBean.cssClass4}'><span><i class="fa fa-circle"></i> <i class="fa fa-check-circle"></i> #{wizardDialogBBean.label4} </span></li>
+											</c:if>
+											
+											<c:if test="#{wizardDialogBBean.numeroPassos gt 4}">
+												<li class='#{wizardDialogBBean.cssClass5}'><span><i class="fa fa-circle"></i> <i class="fa fa-check-circle"></i> #{wizardDialogBBean.label5} </span></li>
+											</c:if>
+										</ul>
+										<p:outputPanel styleClass="quebra"></p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<ui:include src="/commons/invalidInternas.xhtml" />
+							
+							<div id="divHtml">
+								<ui:insert name="contentDialog" />
+							</div>
+							
+					</p:outputPanel>
+				</p:dialog>
+			</p:outputPanel> 
+		</section>
+</html>

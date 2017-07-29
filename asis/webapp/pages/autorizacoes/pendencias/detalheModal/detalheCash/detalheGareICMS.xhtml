@@ -1,0 +1,322 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:param name="item"
+		value="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash}" />
+			<p:outputPanel styleClass="col-xs-12">
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="Convênio: " />
+						<h:outputText value=" #{item.convenio}" />
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="Conta de Débito: " />
+						<h:outputText value=" #{item.contaDebito}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="No. compromisso banco: " />
+						<h:outputText value=" #{item.YLW63NUMCOMPRO}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="No. compromisso cliente: " />
+						<h:outputText value=" #{item.YLW63SEUNUMERO}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="Data de Pagamento: " />
+						<h:outputText value=" #{item.YLW63FECVALORCRED}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12 space-b">
+						<h:outputLabel value="Situação: " />
+						<h:outputText value=" #{item.YLW63INDESTACOMP}" />
+					</p:outputPanel>
+					
+			<p:outputPanel styleClass="col-xs-12">
+				<p:separator />
+			</p:outputPanel>
+			
+				<p:outputPanel styleClass="row space-l">
+					<p:outputPanel styleClass="col-xs-12 no-padding space-t">
+					<h5 class="bold">Dados do Pagamento</h5>
+				</p:outputPanel>
+			
+			<p:outputPanel styleClass="row space-r">
+				<p:outputPanel styleClass="col-xs-6">
+				
+					<p:outputPanel styleClass="row space-b space-t">
+						<p:outputPanel styleClass="col-xs-12 text-center space-b space-t">
+							<p><h:outputLabel value="Guia de Arrecadação Estadual " /></p>
+							<p><h:outputLabel value="GARE ICMS" /></p>
+						</p:outputPanel>
+					</p:outputPanel>
+								
+
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.contribuinte']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{item.YLW63NOMEFAVORECIDO}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.endereco']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{item.enderecoGARE}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-5 space-t">
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.municipio']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputText value="#{item.municipioGARE}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-3 space-t">
+									<p:outputPanel styleClass="row col-xs-12 ">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.uf']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputText value="SP" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4 space-t">
+									<p:outputPanel styleClass="row col-xs-12 ">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.telefone']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputText value="#{item.telefoneGARE}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.cnae']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{item.cNAEGARE}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.observacao']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{item.YLW63OBS1TRIB}" />
+								</p:outputPanel>
+							</p:outputPanel>	
+							
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-6 border-left-col">
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.dataVencimento']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{item.YLW63FECVENC}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.codigoReceita']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText
+										value="#{item.YLW63CODRECPAG}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="04 - Inscrição Estadual ou Cód. Município:" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{item.YLW63INSCESTTRIB}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.cpfCnpj']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{item.YLW63CODFORNCONS}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.inscricaoDividaAtivaOuNumeroEtiqueta']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText
+										value="#{item.YLW63DIVIDAATIVA}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.referencia']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{item.YLW63COMPTTRIB}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.aiimOuNumeroParcelamentoOuNumeroNotificacao']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText
+										value="#{item.YLW63DIVIDAATIVA}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.valorReceita']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText value="#{item.YLW63IMPORTE}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.jurosMora']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText value="#{item.YLW63IMPJUROS}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.multaMoraInfracao']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText value="#{item.YLW63IMPMULTA}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.acrescimo']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText 
+									value="#{item.YLW63IMPACRESCTRIB}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.honorarios']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText
+										value="#{item.YLW63IMPHONTRIB}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.valorTotal']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputLabel value="#{item.valorTotal}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							</p:outputPanel>
+
+							
+							</p:outputPanel>
+							</p:outputPanel>
+							</p:outputPanel>
+							
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+
+					<p:outputPanel styleClass="row space-b space-t">
+						<p:outputPanel styleClass="col-xs-12 text-center space-b space-t">
+							<p>
+								<h:outputLabel value="ATENÇÃO" />
+							</p>
+							<p>
+								<h:outputLabel value="Transação exclusiva para pagamento da Guia de Arrecadação Estadual de Demais Receitas." />
+							</p>
+							<p>
+								<h:outputLabel value="Preencha cuidadosamente, pois os dados informados são de sua responsabilidade." />
+							</p>
+							<p>
+								<h:outputLabel styleClass="space" value="Para mais informações, acesse o site da" />
+								<a class="space" href="http://www.fazenda.sp.gov.br/guias/" target="_blank" >Secretaria da Fazenda do Estado de São Paulo.</a>
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+</ui:composition>

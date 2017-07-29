@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+	<f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg" />
+
+	<h:head>
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/style.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/pdf-style.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css" />
+		<title>#{ msg['page.home.label.titulo'] }</title>
+	</h:head>
+
+	<h:body>
+
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="col-xs-3 img-content">
+					<img
+						src="#{facesContext.externalContext.requestContextPath}/images/santander-u29.png" />
+				</div>
+				<div class="titulo text-right col-xs-9">
+					<p>
+						<span><h:outputText id="tituloSistema"
+								value="#{ msg['page.home.label.titulo.sistema'] }" /></span>
+					</p>
+				</div>
+			</div>
+
+			<hr class="ui-separator ui-state-default ui-corner-all separator" />
+
+			<div class="row">
+				<div class="col-xs-6 text-left name">#{loginBBean.session.nomeTitularConta}</div>
+				<div class="col-xs-6 text-right info-account">
+					<div>
+						<strong><h:outputText id="agencia"
+								value="#{ msg['page.home.label.agencia'] }" />: </strong>#{loginBBean.session.agencia}
+					</div>
+					<div>
+						<strong><h:outputText id="conta"
+								value="#{ msg['page.home.label.conta'] }" />: </strong>#{loginBBean.session.conta}
+					</div>
+				</div>
+			</div>
+
+			<hr class="ui-separator ui-state-default ui-corner-all separator" />
+
+			<p:outputPanel
+				styleClass="row #{wizardBBean.numeroPassos gt 4 ? 'col-lg-4 site-map' : 'col-lg-5 site-map'}">
+				<span> #{atributosDaSessao.primeiroBreadcrumb} <strong>&gt;</strong>
+					#{atributosDaSessao.segundoBreadcrumb}
+				</span>
+				<h1>#{atributosDaSessao.terceiroBreadcrumb}</h1>
+			</p:outputPanel>
+				<br />
+				<br />
+				<br />
+				<br />
+			<p:outputPanel styleClass="row space-b">
+				<h:outputText value="#{msg['pages.conta.corrente.consulta.copiaDeCheques.visualizacao.frente']}" style="padding-left:25px"/>
+				<br />
+				<br />
+				<p:outputPanel styleClass="col-lg-12">
+					<p:column rowpan="3">
+						<p:graphicImage
+							value="#{contaCorrenteConsultaChequesBBean.getImagemChequeFrente()}"
+							width="595px" height="205px" />
+					</p:column>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row space-b">
+				<h:outputText value="#{msg['pages.conta.corrente.consulta.copiaDeCheques.visualizacao.verso']}" style="padding-left:25px"/>
+				<br />
+				<br />
+				<p:outputPanel styleClass="col-lg-12">
+					<p:column rowpan="3">
+						<p:graphicImage
+							value="#{contaCorrenteConsultaChequesBBean.getImagemChequeVerso()}"
+							width="595px" height="205px" />
+					</p:column>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+
+			<div class="row space-b">
+				<div class="col-xs-12 text-right print-btn-bottom">
+					<h:commandButton value="Imprimir" onclick="window.print();"
+						styleClass="no-print btn btn-default pull-right" />
+				</div>
+			</div>
+		</div>
+
+	</h:body>
+</f:view>
+</html>

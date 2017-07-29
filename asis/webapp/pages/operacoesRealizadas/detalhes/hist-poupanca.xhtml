@@ -1,0 +1,41 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoPoupanca_#{posicaoLista}">	
+		<p:outputPanel styleClass="col-xs-12" id="idDadosPoupanca_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosPoupancaLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroPoupancaPoupanca_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroPoupanca']}" styleClass="space" id="idNumeroPoupancaLblPoupanca_#{posicaoLista}" />			  
+			     <h:outputText value="${compHisParts[0]}" id="idNumeroPoupancaTxt1Poupanca_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idTipoPoupanca_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['pages.agendamento.detalhe.tipo']}" styleClass="space" id="idTipoLblPoupanca_#{posicaoLista}" />			  
+			     <h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.livreVerificarNecessidade']}" rendered="${compHisParts[2] eq '1'}" id="idTipoTxt1Poupanca_#{posicaoLista}" />
+			     <h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.integradaVerificarNecessidade']}" rendered="${compHisParts[2] ne '1'}" id="idTipoTxt2Poupanca_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+	
+		<p:outputPanel styleClass="col-xs-12" id="idValorPoupanca_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" id="idValorLblPoupanca_#{posicaoLista}" />			
+				<h:outputLabel value="#{detalheParam.valor}" id="idValorLbl1Poupanca_#{posicaoLista}" />			
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idRowSpacePoupanca_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idColXSPoupanca_#{posicaoLista}">
+			<p:separator id="idSeparatorPoupanca_#{posicaoLista}" />
+		</p:outputPanel>
+	</p:outputPanel>	
+</ui:fragment>

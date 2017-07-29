@@ -1,0 +1,167 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false"
+		styleClass="loading">
+		<p:graphicImage value="/images/aguarde.gif" />
+	</p:dialog>
+
+	<p:dataTable id="tabelaModalidadeRemessa"
+		widgetVar="tabelaModalidadeRemessa"
+		value="#{sintetica.modalidadesRemessa}" var="modalidadeRemessa"
+		emptyMessage="#{msg['pages.autorizacoes.pendencias.remessa.emptyMessage']}"
+		styleClass="tableHeaderInvisible fakeFooter noPadding no-margin-bottom">
+
+		<p:ajax event="rowToggle" onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:column styleClass="col-xs-6 padding">
+			<h:outputText styleClass="space-ll" />
+			<p:rowToggler />
+
+			<p:selectBooleanCheckbox id="checkBoxModalidadeRemessa"
+				value="#{modalidadeRemessa.selecionado}"
+				rendered="#{modalidadeRemessa.flgAutorizarModalidade}"
+				styleClass="js-checkbox-modalidade-remessa space-l">
+				<p:ajax event="change"
+					listener="#{autorizacoesPendenciaBBean.onChangeCheckboxPrimeiroNivel(item, sintetica, modalidadeRemessa)}"
+					update="@(.js-checkbox-produto, .js-checkbox-sintetica, .js-checkbox-modalidade-remessa, .js-checkbox-modalidade, .js-checkbox-analitica, .js-painel-selecionadas)"
+					onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+
+			</p:selectBooleanCheckbox>
+			<h:outputText styleClass="fa fa-check space-l"
+				rendered="#{!modalidadeRemessa.flgAutorizarModalidade}" />
+			<h:outputText styleClass="space-l"
+				value="#{modalidadeRemessa.dataPagamento}" />
+		</p:column>
+
+		<p:column styleClass="col-xs-3 padding">
+			<h:outputText value="#{modalidadeRemessa.quantidade}" />
+		</p:column>
+
+		<p:column styleClass="col-xs-3 padding text-right">
+			<h:outputText value="#{modalidadeRemessa.valor}"
+				converter="valorMonetarioConverter" />
+		</p:column>
+
+
+		<p:rowExpansion>
+			<p:dataTable id="tabelaModadlidadeSegundoNivel"
+				value="#{modalidadeRemessa.listaModalidadeSegundoNivel}"
+				var="modalidade"
+				emptyMessage="#{msg['pages.autorizacoes.pendencias.remessa.emptyMessage']}"
+				styleClass="tableHeaderInvisible fakeFooter noPadding no-margin-bottom">
+
+				<p:ajax event="rowToggle" onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+
+				<p:column styleClass="col-xs-6 padding">
+
+					<h:outputText styleClass="space-llll" />
+					<p:rowToggler />
+					<p:selectBooleanCheckbox id="checkBoxModalidade"
+						value="#{modalidade.selecionado}"
+						rendered="#{modalidade.flgAutorizarModalidade}"
+						styleClass="js-checkbox-modalidade space-l">
+						<p:ajax event="change"
+							listener="#{autorizacoesPendenciaBBean.onChangeCheckboxSegundoNivel(item, sintetica, modalidadeRemessa, modalidade)}"
+							update="@(.js-checkbox-produto, .js-checkbox-sintetica, .js-checkbox-modalidade-remessa, .js-checkbox-modalidade, .js-checkbox-analitica, .js-painel-selecionadas)"
+							onstart="PF('statusDialog').show()"
+							onsuccess="PF('statusDialog').hide()" />
+					</p:selectBooleanCheckbox>
+					<h:outputText styleClass="fa fa-check space-l"
+						rendered="#{!modalidade.flgAutorizarModalidade}" />
+					<h:outputText styleClass="space-l"
+						value="#{modalidade.agrupamento}" />
+				</p:column>
+
+				<p:column styleClass="col-xs-3 padding">
+					<h:outputText value="#{modalidade.quantidade}" />
+				</p:column>
+
+
+				<p:column styleClass="col-xs-3 padding text-right">
+					<h:outputText value="#{modalidade.valor}"
+						converter="valorMonetarioConverter" />
+				</p:column>
+
+				<p:rowExpansion>
+
+					<p:dataTable id="tabelaAnalitica"
+						value="#{modalidade.listaModalidade}" var="analitica"
+						rowKey="#{analitica}"
+						emptyMessage="#{msg['pages.autorizacoes.pendencias.remessa.emptyMessage']}"
+						styleClass="headerShow fakeFooter no-margin-bottom space-llllll">
+
+						<p:column styleClass="col-xs-3 padding"
+							headerText="#{msg['pages.autorizacoes.pendencias.remessa.favorecido']}">
+
+							<p:selectBooleanCheckbox id="checkBoxAnalitica"
+								value="#{analitica.itemSelecionado}"
+								rendered="#{analitica.flagPermiteAutorizar eq 'S'}"
+								styleClass="js-checkbox-analitica">
+								<p:ajax event="change"
+									listener="#{autorizacoesPendenciaBBean.onChangeCheckboxModalidade(item, sintetica, modalidadeRemessa, modalidade, analitica)}"
+									update="@(.js-checkbox-produto, .js-checkbox-sintetica, .js-checkbox-modalidade-remessa, .js-checkbox-modalidade, .js-checkbox-analitica, .js-painel-selecionadas)"
+									onstart="PF('statusDialog').show()"
+									onsuccess="PF('statusDialog').hide()" />
+							</p:selectBooleanCheckbox>
+
+							<h:outputText styleClass="fa fa-check space-l"
+								rendered="#{analitica.flagPermiteAutorizar eq 'N'}" />
+
+							<h:outputText styleClass="space-l"
+								value="#{analitica.nomeFavorecidoPendencia}" />
+						</p:column>
+
+						<p:column styleClass="col-xs-2 padding"
+							headerText="#{msg['pages.autorizacoes.pendencias.remessa.convenio']}">
+							<c:set var="convenio" value="#{analitica.contaConvenioAutoriza}" />
+							<c:set var="conveniopt1" value="${fn:substring(convenio,4,8)}" />
+							<c:set var="conveniopt2" value="${fn:substring(convenio,10,20)}" />
+							<h:outputText
+								value="#{conveniopt1.concat('-').concat(conveniopt2)}" />
+						</p:column>
+
+						<p:column styleClass="col-xs-2 padding"
+							headerText="#{msg['pages.autorizacoes.pendencias.remessa.contaDebito']}">
+							<c:set var="contaDebito" value="#{analitica.contaDebito}" />
+							<c:set var="contaDebitopt1"
+								value="${fn:substring(contaDebito,4,8)}" />
+							<c:set var="contaDebitopt2"
+								value="${fn:substring(contaDebito,11,20)}" />
+							<h:outputText
+								value="#{contaDebitopt1.concat('-').concat(contaDebitopt2)}" />
+						</p:column>
+
+						<p:column styleClass="col-xs-2 padding"
+							headerText="#{msg['pages.autorizacoes.pendencias.remessa.compromisso']}">
+							<h:outputText value="#{analitica.codigoTransacaoDetalhe}" />
+						</p:column>
+
+						<p:column styleClass="col-xs-1 padding"
+							headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.assinaturaPendente']}">
+							<h:outputText value="#{analitica.qtAssPendente}" />
+						</p:column>
+
+						<p:column styleClass="col-xs-2 padding text-right"
+							headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.valor']}">
+							<h:outputText value="#{analitica.valorUsuarioPendencia}"
+								converter="valorDecimalConverter" />
+							<ui:include
+								src="/pages/autorizacoes/pendencias/detalheModal/detalhePesquisa.xhtml" />
+						</p:column>
+					</p:dataTable>
+				</p:rowExpansion>
+			</p:dataTable>
+		</p:rowExpansion>
+	</p:dataTable>
+</ui:fragment>

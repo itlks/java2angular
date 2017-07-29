@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.telefoneprepago.recarga.dadosalteracao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="apelido" styleClass="space"
+								value="#{msg['page.pagamentos.telefoneprepago.recarga.identificacao']}" />
+							<h:outputText id="apelido"
+								value="#{recargaApelidoBBean.telefoneDTO.apelido}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 col-xs-6 col-xs-4 col-xs-3">
+							<h:outputLabel for="ddd" styleClass="space"
+								value="#{msg['pages.pagamentos.telefoneprepago.recarga.ddd2pontos']}" />
+							<h:inputText id="ddd" styleClass="form-control numberOnly"
+								maxlength="2" value="#{recargaApelidoBBean.telefoneDTO.ddd}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 col-xs-6 col-xs-4 col-xs-3">
+							<h:outputLabel for="celular" styleClass="space"
+								value="#{msg['page.pagamentos.telefoneprepago.recarga.telefone2pontos']}" />
+							<h:inputText id="celular" styleClass="form-control numberOnly"
+								maxlength="9" value="#{recargaApelidoBBean.telefoneDTO.celular}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="voltar" styleClass="btn btn-default btn-cinza"
+					role="button" action="#{recargaApelidoBBean.voltarEmConsulta}"
+					value="#{msg['page.btn.voltar']}" />
+				<p:commandButton styleClass="btn btn-default" role="button"
+					id="continuar" onstart="openLoad()" oncomplete="closeLoad()"
+					action="#{recargaApelidoBBean.continuarEmAlterarComprovante}"
+					value="#{msg['page.btn.confirmar']}" />
+				<p:defaultCommand target="continuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

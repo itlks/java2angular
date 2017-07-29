@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<f:view contentType="text/html" encoding="UTF-8">
+	<f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg" />
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="robots" content="noindex,nofollow"/>
+		
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/icones/icones.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/styleNovo.css" />
+		<link type="text/css" rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css" />
+		<link rel="shortcut icon"
+			href="#{facesContext.externalContext.requestContextPath}/images/icones/favicon.ico" />
+
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/acc-rec.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/utils.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/jquery.mask.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/default.js" />
+
+		<!-- Inicio JavaScript DL -->
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/ie10-viewport-bug-workaround.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/aes.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/Clumpy.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/DLECC.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/ec.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn2.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/pad-nopadding-min.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/pbkdf2.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/prng4.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/rng.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/sec.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/sha256.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/dl/codeDL.js" />
+		<script language="JavaScript" type="text/javascript"
+		    src="#{facesContext.externalContext.requestContextPath}/js/dl/cryptDecrypt.js" />
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/blockUI.js" />
+		<script language="JavaScript">
+			$(function() {
+				if (window.performance.navigation.type == 2) {
+					window.location = "#{facesContext.externalContext.requestContextPath}/commons/logout.xhtml";
+				}
+			});
+
+			function startSair() {
+				document.getElementById("formGeral:btnSair").click();
+			};
+		</script>
+
+		<title>#{ msg['page.home.label.titulo'] }</title>
+	</h:head>
+
+	<h:body>
+		<p:outputPanel id="topo" styleClass="topo">
+			<p:outputPanel styleClass="container-fluid">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel id="logo" styleClass="col-xs-4 logo">
+						<p:graphicImage value="/images/logo-login.png" alt="logo" />
+					</p:outputPanel>
+					<form jsfc="h:form" id="formSair">
+						<p:outputPanel styleClass="col-xs-8 text-right"
+							id="painelNotificacoes">
+							<p:outputPanel styleClass="btnSair semMenu">
+								<p:commandLink partialSubmit="true" title="Sair"
+									action="#{mensagemBBean.sairInternetBanking}">#{ msg['page.home.label.sair']}</p:commandLink>
+							</p:outputPanel>
+						</p:outputPanel>
+					</form>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<section class="edicao-coluna"> <p:outputPanel
+			id="container-fluid" style="min-width: 937px !important;">
+			<p:outputPanel id="row" styleClass="col-xs-12">
+				<p:outputPanel styleClass="space-t">
+					<form jsfc="h:form" id="formGeral">
+						<p:panel visible="false">
+							<h:outputLink id="btnSair" styleClass="no-visible no-print"
+								value="https://www.santander.com.br/br/pessoa-juridica">
+								<p:ajax event="click" listener="#{mensagemBBean.sair}"></p:ajax>
+							</h:outputLink>
+						</p:panel>
+						<p:outputPanel id="idFormGeral" styleClass="col-xs-12 miolo">
+							<ui:insert name="content" />
+						</p:outputPanel>
+						<ui:include src="/commons/rodape.xhtml" />
+						<ui:include src="/commons/invalidInternasAlternativas.xhtml" />
+						<ui:include src="/commons/loadingAction.xhtml" />
+						<ui:include src="/commons/tagueamento.xhtml" />
+					</form>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel> </section>
+		<p:dialog widgetVar="widDlgConfirmation" position="center"
+			modal="true" dynamic="true" resizable="false">
+			<ui:include src="../pages/mensagem/confirmaGenerico.xhtml" />
+		</p:dialog>
+		<p:dialog widgetVar="widDlgConfirmationLogout" position="center"
+			modal="true" dynamic="true" resizable="false">
+			<ui:include src="../pages/mensagem/confirmaLogout.xhtml" />
+		</p:dialog>
+		<p:dialog widgetVar="widDlgMessagem" position="center" modal="true"
+			dynamic="true" resizable="false">
+			<ui:include src="/pages/mensagem/mensagemGenerica.xhtml" />
+		</p:dialog>
+	</h:body>
+</f:view>
+</html>

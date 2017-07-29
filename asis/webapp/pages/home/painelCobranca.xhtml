@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+				
+				<p:inputText type="hidden" styleClass="textCoachMark" value="Painel de gestão da sua Carteira de Cobrança."></p:inputText>
+				<p:inputText type="hidden" styleClass="posicaoPainel" value="width: 400px; left: 15px; top:-70px; display: block; position: absolute; z-index: 1;"></p:inputText>
+	
+				<p:outputPanel styleClass="box-shadow maquinaGetNet radiusB" rendered="#{homeBBean.widgetFavorito eq 'painelCobranca'}" id="painelCobranca">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6 legenda-cobranca">
+						
+							<p class="boletoVencidos">
+								<span class="tituloBoleto">#{msg['page.home.painelCobranca.Boleto.Vencido']}</span><br/>
+								<span>#{msg['page.home.painelCobranca.Quantidade']} <h:outputText value="#{homeBBean.painelCobrancaDTO.qteTitulosVencidos}" /></span><br/>
+								<span>R$ 								<h:outputText  class=""
+														converter="valorMonetarioConverter"
+														value="#{homeBBean.painelCobrancaDTO.valorTtulosVencidos}" /></span>
+							
+							</p>
+							
+							<p class="boletoVencer">
+								<span class="tituloBoleto">#{msg['page.home.painelCobranca.Boleto.A.Vencer']}</span><br/>
+								<span>#{msg['page.home.painelCobranca.Quantidade']}#{homeBBean.painelCobrancaDTO.qteTitulosAVencer}</span><br/>
+								<span>R$ 								<h:outputText  
+														converter="valorMonetarioConverter"
+														value="#{homeBBean.painelCobrancaDTO.valorTitulosAVencer}" /></span>
+							
+							</p>
+							
+														
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6 text-center">
+<!-- 							<p:outputPanel styleClass="img-qtd"> -->
+<!-- 								<p>Títulos</p> -->
+<!-- 								<h:outputText value="3003" styleClass="txt-img-qtd"></h:outputText> -->
+<!-- 							</p:outputPanel> -->
+							<p:graphicImage value="#{homeBBean.montaGraficoCobranca()}" height="130px" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6 ">
+							<p><p:commandLink action="#{homeBBean.redirectCobrancaBoleto}" >Emitir Boleto</p:commandLink> </p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6 text-center">
+							<p:commandLink  action="#{homeBBean.redirectCobranca}" 
+									value="#{msg['page.home.painelCobranca.VerPosicaoConsolidada']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+</ui:composition>

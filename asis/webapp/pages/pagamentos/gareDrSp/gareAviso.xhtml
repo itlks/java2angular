@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-md-12">
+			<p:outputPanel
+				styleClass="aviso-interno-blocos alert-information box-shadow">
+				<i class="fa fa-exclamation-circle"></i>
+				<span>
+					<p>
+						<strong><h:outputText value="#{msg['page.gare.aviso.pagamento1']}"/></strong>
+					</p>
+					<p>
+						<h:outputText value="#{msg['pages.apelidos.gpsAviso.transacao.pagamentosFull']}"/>
+					</p>
+					<p>
+						<h:outputText value="#{msg['page.gare.aviso.cuidado']}"/>
+					</p>
+					<p>
+						<h:outputText value="#{msg['pages.apelidos.gpsAviso.para.mais.informacoes']}"/>
+                       <p:commandLink style="margin-left: 5px;" oncomplete="window.open('http://www.fazenda.sp.gov.br/guias/', '_blank')">#{msg['page.gare.aviso.site.fazenda.nome']}</p:commandLink>
+					</p>
+					<p>
+						<p:commandLink actionListener="#{gareDRSPBBean.initLimites}" styleClass="space-r"
+							value="#{msg['pages.apelidos.gpsAviso.confira.limites']}">
+						</p:commandLink>
+					</p>
+				</span>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<ui:include src="/pages/limites/limites.xhtml"/>
+
+
+</ui:composition>

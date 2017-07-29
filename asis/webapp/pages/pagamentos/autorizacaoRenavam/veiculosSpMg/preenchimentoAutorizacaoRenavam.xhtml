@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	<f:event type="preRenderView" listener="#{formularioRenavamBbean.acessoDireto()}" />
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>#{msg['pages.preenchimento.autorizacao.renavam.texto1']}
+						#{msg['pages.preenchimento.autorizacao.renavam.texto2']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.preenchimento.autorizacao.renavam.selecionar']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel
+						styleClass="table-responsive table table-striped no-margin-bottom">
+						<p:dataTable id="tabelaPagamentosAutorizados"
+							value="#{formularioRenavamBbean.autoriazacaoRenavanDTO.dados}"
+							var="pagamentosAutorizados"
+							selection="#{formularioRenavamBbean.dadosSelecionados}"
+							rowKey="#{pagamentosAutorizados.identif}" emptyMessage="#{msg['pages.preenchimento.autorizacao.renavam.lista.vazia']}">
+							
+							<p:column selectionMode="multiple" />
+							
+							<p:column headerText="#{msg['pages.preenchimento.autorizacao.renavam.renavan']}">
+								<h:outputText value="#{pagamentosAutorizados.identif}" converter="converterNumeroRenavam"/>
+							</p:column>
+
+							<p:column headerText="#{msg['pages.preenchimento.autorizacao.renavam.estado']}">
+								<h:outputText value="#{pagamentosAutorizados.sbtppag}" />
+							</p:column>
+
+							<p:column headerText="#{msg['pages.preenchimento.autorizacao.renavam.apelido']}">
+								<h:outputText value="#{pagamentosAutorizados.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+						<p:commandLink styleClass="btn btn-default btn-cinza"
+							actionListener="#{formularioRenavamBbean.voltar}" role="button">
+        					 #{msg['pages.preenchimento.autorizacao.renavam.voltar']}
+     					 </p:commandLink>
+						<p:commandLink styleClass="btn btn-default" actionListener="#{formularioRenavamBbean.irParaTelaComprovante}"
+							role="button" rendered = "#{formularioRenavamBbean.autoriazacaoRenavanDTO.dados!=null}">
+      					   #{msg['pages.preenchimento.autorizacao.renavam.confirmar']} 
+      					</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

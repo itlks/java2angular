@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+           	<p:outputPanel styleClass="col-lg-12">
+               	<p:outputPanel styleClass="titulo-painel">
+                   	<h4>
+						<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.numeroContrato']} " />
+						<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strNumCOntrato}" />
+					</h4>
+               	</p:outputPanel>
+           	</p:outputPanel>
+       	</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-md-12">
+                <p:outputPanel styleClass="box-shadow no-margin-bottom">   
+                	<p:outputPanel styleClass="col-xs-6">
+	                	<p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.produto']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strDEscProduto}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.valorEmprestimo']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strValorEmprestimo}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.taxaMes']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strTaxaMes}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.inicioContrato']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strDataInicial}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.indexador']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strDesIndex}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b" rendered="#{emprestimoRecebiveisBBean.renderCetMensal}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.custoEfetivoTotalMensal']}" styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strCETAM}" /> 	 
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b" rendered="#{emprestimoRecebiveisBBean.renderSobrepreco}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.sobrepreco']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strSobrePreco}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b" rendered="#{emprestimoRecebiveisBBean.renderPremio}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.premioSeguro']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strPremioSeg}" />
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                </p:outputPanel>
+	                
+	                <p:outputPanel styleClass="col-xs-6">
+                 		<p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.agenciaContaDebito']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.agencia} #{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.conta}" />  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.numeroParcelas']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strNumParcelas}" />
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.tipoTaxa']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strTipoTaxa}" />	  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.terminoContrato']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strDataFinal}" />	  
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b" rendered="#{emprestimoRecebiveisBBean.renderCDI}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.cdi']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strPorcentagem}" />	
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b" rendered="#{emprestimoRecebiveisBBean.renderCetAnual}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                       		<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.custoEfetivoTotalAnual']} " styleClass="bold"/>
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strCETAA}" /> 	 	 
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+	                    
+	                    <p:outputPanel styleClass="row space-b" rendered="#{emprestimoRecebiveisBBean.renderDevoluSeg}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.premioSeguroAntecipada']}  " styleClass="bold" />
+								<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strDevoluSeg}" />
+	                        </p:outputPanel>
+	                    </p:outputPanel>
+                 	</p:outputPanel>                 	
+                 	
+	                 <p:outputPanel styleClass="col-xs-12" rendered="#{emprestimoRecebiveisBBean.msgCustoEfetivoTotalCalculadoPJ}">
+	                 	<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.MensagemCET']}"/>
+	                 </p:outputPanel>
+                 	
+	                <p:outputPanel styleClass="col-xs-12" rendered="#{emprestimoRecebiveisBBean.saldoDevedor}">
+						<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.SaldoDevedor']}" styleClass="bold" />
+						<h:outputText value=" #{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.dataAtual}" />
+						<h:outputText value=" (R$): " styleClass="bold" />
+						<h:outputText value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.strSaldo}" styleClass="bold"/>
+						<h:outputText value="**" styleClass="bold"/>                 		
+	               	</p:outputPanel>
+	               	
+	               	<p:outputPanel styleClass="row space-b">
+	               	
+	               	</p:outputPanel>
+                    
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-md-12">
+                          	<p:outputPanel styleClass="table-responsive table table-striped">
+                          		<p:dataTable 
+									id="dtGrid" 
+									var="linha"
+									value="#{emprestimoRecebiveisBBean.detalharContratoSaidaDTO.listaDetalharContratoRS}"
+									emptyMessage="#{msg['pages.renavam.empty.table']}">
+
+									<p:column width="25%">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.tabela.numeroParcelas']}" />
+										</f:facet>
+										<h:outputText value="#{linha.TSOENRPARCELA}" />
+									</p:column>
+
+									<p:column width="25%">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.vencimento']}" />
+										</f:facet>
+										<h:outputText value="#{linha.TSOEFECLIQ}" />
+									</p:column>
+
+									<p:column styleClass=" text-right" width="25%">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.valorOriginal']}" />
+										</f:facet>
+										
+											<h:outputText value="#{linha.TSOEVLORIGA}" />
+									</p:column>
+									
+									<p:column width="5%">
+									</p:column>
+
+									<p:column width="20%">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.status']}" />
+										</f:facet>
+										<h:outputText value="#{linha.TSOEDESCSITUPARC}" />
+									</p:column>
+									
+								</p:dataTable>
+								
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.MensagemPFEmprestimo']}" />								
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.SegundaMensagemPFEmprestimo']}" />								
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-12" rendered="#{emprestimoRecebiveisBBean.terceiraMensagemPJEmprestimo}">
+									<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.terceiraMensagemPJEmprestimo']}" />								
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-12" rendered="#{emprestimoRecebiveisBBean.terceiraMensagemPJEmprestimo}">
+									<h:outputText value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.detalhes.terceiraMensagemPJEmprestimo2']}" />								
+								</p:outputPanel>
+                          	</p:outputPanel>                                                                                    
+                        </p:outputPanel>               
+                    </p:outputPanel>
+                </p:outputPanel>
+                	<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+            </p:outputPanel>
+        </p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b no-print no-visible">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink  id="cmdLnkVoltar" 
+								value="#{msg['page.btn.voltar']}"
+								styleClass="btn btn-default btn-cinza" role="button"
+								action="#{emprestimoRecebiveisBBean.voltarLista}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

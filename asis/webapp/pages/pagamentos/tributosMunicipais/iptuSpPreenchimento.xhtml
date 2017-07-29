@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+		  <p:outputPanel styleClass="col-lg-12">
+			<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">                               
+				<i class="fa fa-exclamation-circle"></i>
+				<span><p><strong>Transação exclusiva para pagamento on-line do IPTU da Prefeitura do Município de São Paulo.</strong></p>
+				<p>Serviços disponíveis somente em dias Úteis, das 7h às 21h. No vencimento, o pagamento deverá ser efetuado até as 21h.</p>
+				<p>Os campos assinalados com * são de preenchimento obrigatório. Preencha cuidadosamente, pois os dados informados são de sua responsabilidade.</p>
+				<p>Para mais informações, acesse o site da <p:commandLink>Secretaria da Fazenda do Estado de Sao Paulo.</p:commandLink></p><br/>
+				<p><p:commandLink>Confira os limites para esse pagamento.</p:commandLink></p></span>
+			</p:outputPanel>  
+		  </p:outputPanel>                        
+		</p:outputPanel>        
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Informe os dados para pagamento</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>  
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">    
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel for="" value="Nº do Contribuinte/Cadastro do Imóvel:*" />
+							   <p:inputText styleClass="form-control" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel for="" value="Ano do exercício:*" />
+							   <p:inputText styleClass="form-control" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel for="" value="Número da notificação:" />
+							   <p:inputText styleClass="form-control" />
+							</p:outputPanel>                        
+																
+						</p:outputPanel>               
+					</p:outputPanel>   
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12" />                    
+						  <p:separator />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+						  
+							<p:outputPanel styleClass="checkbox">
+							   <p:selectBooleanCheckbox value="" name="cb2_1" id="cb2_1"> </p:selectBooleanCheckbox>
+							   <h:outputLabel for="cb2_1" styleClass="checkbox-inline">
+								Desejo cadastrar esse contribuinte para futuros pagamentos
+							   </h:outputLabel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>                                                        
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>      
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			   <p:commandLink styleClass="btn btn-default btn-cinza"  role="button">Voltar</p:commandLink>
+			   <p:commandLink styleClass="btn btn-default" role="button">Continuar</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel> 
+	       
+	</ui:define>
+</ui:composition>         

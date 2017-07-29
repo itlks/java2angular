@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:outputPanel styleClass="titulo-painel">
+
+					<h4>#{msg['page.contaCorrente.docOnline.comprovante.dadosTransacao']}</h4>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p>
+						<h:outputLabel styleClass="space" value="#{msg['page.contaCorrente.docOnline.comprovante.transacao']}" />
+						<h:outputLabel value="#{msg['page.contaCorrente.docOnline.comprovante.descTransacao']}"/>
+					</p>
+					<p>
+						<h:outputLabel styleClass="space" value="#{msg['page.contaCorrente.docOnline.comprovante.dataAdesao']}" />
+						<h:outputLabel value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.getConsultaMovDocOnLineDTO().getDataAdesao()}"/>
+					</p>
+					<p:separator />
+					<br />
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-6">
+							<p>
+								<h:outputLabel value="#{msg['page.contaCorrente.docOnline.comprovante.autenticacao']}"
+									styleClass="no-margin-bottom" />
+								<br />
+								<h:outputLabel value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.getConsultaMovDocOnLineDTO().getChaveAutenticacao()}"/>
+							</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<p>
+								<h:outputLabel value="#{msg['page.contaCorrente.docOnline.comprovante.dataHoraTrasacao']}"
+									styleClass="no-margin-bottom" />
+								<br />
+								<h:outputLabel value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.getConsultaMovDocOnLineDTO().getDataHoraTransacao()}"/>
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

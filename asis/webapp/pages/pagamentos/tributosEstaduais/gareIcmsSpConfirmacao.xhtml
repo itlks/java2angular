@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel h4 no-margin box-shadow">
+					<h:outputText
+						value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.confira.dados']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+						
+							<p:outputPanel styleClass="titulo-destaque">
+								<p:outputPanel styleClass="row">
+									<h:outputText styleClass="h5"
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.documentoArrecadacao']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<h:outputText styleClass="bold h5"
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.gareIcms']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.contribuinte']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{gareIcmsSpBBean.dto.contribuiente}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.endereco']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{gareIcmsSpBBean.dto.endereco}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-5 space-t">
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.municipio']}" />
+									</p:outputPanel>
+									
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputText value="#{gareIcmsSpBBean.dto.municipio}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-3 space-t">
+									<p:outputPanel styleClass="row col-xs-12 ">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.uf']}" />
+									</p:outputPanel>
+									
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputText value="#{gareIcmsSpBBean.dto.uf}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-4 space-t">
+									<p:outputPanel styleClass="row col-xs-12 ">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.telefone']}" />
+									</p:outputPanel>
+									
+									<p:outputPanel styleClass="row col-xs-12">
+										<h:outputText value="#{gareIcmsSpBBean.dto.telefone}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.cnae']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{gareIcmsSpBBean.dto.cnae}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="">
+								<p:outputPanel styleClass="row col-xs-12 space-t">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.observacao']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row col-xs-12">
+									<h:outputText value="#{gareIcmsSpBBean.dto.observacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-6 border-left-col">
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.uf.favorecida']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.ufFavorecida}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.dataVencimento']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.dataVencimento}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.codigoReceita']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText
+										value="#{gareIcmsSpBBean.dto.codigoReceitaFormatado}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.inscricaoEstadual']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.inscricaoEstadual}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.cpfCnpj']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.cnpjCpf}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.inscricaoDividaAtivaOuNumeroEtiqueta']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText
+										value="#{gareIcmsSpBBean.dto.inscricaoDividaAtivaNumeroEtiqueta}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.referencia']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.referencia}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.aiimOuNumeroParcelamentoOuNumeroNotificacao']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText
+										value="#{gareIcmsSpBBean.dto.aiimDeicmemeParcelamento}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.valorReceita']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.valorReceita}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.jurosMora']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.jurosMora}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-8">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.multaMoraInfracao']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-4 text-right">
+									<h:outputText value="#{gareIcmsSpBBean.dto.multaMoraInfracao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.acrescimo']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText
+										value="#{gareIcmsSpBBean.dto.acrescimentoFinanceiro}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.honorarios']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText
+										value="#{gareIcmsSpBBean.dto.honorariosAdvocaticios}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b total-label"
+								style="padding: 10px 0px;">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.valorTotal']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputLabel value="#{gareIcmsSpBBean.dto.valorTotal}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button" id="btnVoltar"
+					value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.voltar']}"
+					action="#{gareIcmsSpBBean.voltarTelaConfirmacao}" />
+
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandButton id="btnConfirmar" onstart="encryptSecureDL();"
+					styleClass="btn btn-default" role="button"
+					value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.continuar']}"
+					action="#{gareIcmsSpBBean.confirmarTelaConfirmacao}" />
+				<p:defaultCommand target="btnConfirmar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

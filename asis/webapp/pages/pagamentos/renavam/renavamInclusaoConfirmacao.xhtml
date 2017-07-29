@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.renavam.incluirConfirmacaoInclusaoSenha.conferindoDados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="dtGrid" var="renavam"
+									value="#{renavamListaBBean.lDtoSelecionado}"
+									tableStyleClass="table-td-equals">
+
+									<p:column
+										headerText="#{msg['pages.renavam.incluirConfirmacaoInclusaoSenha.renavam']}">
+										<h:outputText value="#{renavam.numero}"
+											converter="converterNumeroRenavam" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['pages.renavam.incluirConfirmacaoInclusaoSenha.apelido']}">
+										<h:outputText value="#{renavam.apelido}" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['pages.renavam.incluirConfirmacaoInclusaoSenha.estado']}">
+										<h:outputText value="#{renavam.estado}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml"></ui:include>
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					role="button"
+					value="#{msg['pages.renavam.incluirConfirmacaoInclusaoSenha.voltar']}"
+					action="#{renavamListaBBean.voltarParaPreenchimento}" />
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					onclick="encryptSecureDL();"
+					value="#{msg['pages.renavam.incluirConfirmacaoInclusaoSenha.continuar']}"
+					action="#{renavamListaBBean.continuarInclusao}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:santander="http://santander.com/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.usuarioSecundario.usuarioInclusaoComprovante.inclusao.finalizada']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+				
+				<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.nomePerfil']}" />
+							<h:outputText
+								value="#{perfilAcessoInclusaoBBean.perfilAcessoDTO.nomePerfil}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.descricao']}" />
+							<h:outputText
+								value="#{perfilAcessoInclusaoBBean.perfilAcessoDTO.descricao}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row no-print no-visible"
+						rendered="#{perfilAcessoInclusaoBBean.exibirLinkAutorizacao}">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+							<p:outputPanel
+								styleClass="lista-float right text-right no-print no-visible"
+								style="padding:10px;">
+
+								<p class="title">
+									<h5>
+										<h:outputLabel
+											value="#{msg['page.administrativo.perfilAcesso.incluir.desejaIncluirPerfil']}" />
+									</h5>
+								</p>
+
+								<p>
+									<h:outputLabel class="texto-vermelho space" value="&gt;" />
+									<p:commandLink
+										action="#{perfilAcessoInclusaoBBean.irParaPerfilAutorizacao}"
+										value="#{msg['page.administrativo.perfilAcesso.incluir.incluirPerfil']}" />
+								</p>
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include
+						src="/pages/administrativo/perfilAcesso/perfilAcessoTreeViewVisualizacao.xhtml">
+						<ui:param name="DTOlistaPerfilAcesso"
+							value="#{perfilAcessoInclusaoBBean.listaPerfilAcesso}" />
+					</ui:include>
+
+					<p:separator />
+
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

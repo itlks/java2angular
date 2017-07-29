@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <h:outputText
+							value="#{msg['page.conta.corrente.consulta.copiaDeCheques.aviso.linha01']}" /><br />
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.copiaDeCheques.aviso.linha2']}" />
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.copiaDeCheques.aviso.linha3']}" />
+						<br /> <p:outputPanel
+							rendered="#{not empty contaCorrenteConsultaChequesBBean.dadosTelaConsulta.tarifa}">
+							<br />
+							<h:outputFormat
+								value="#{msg['page.conta.corrente.consulta.copiaDeCheques.aviso.linha4']}">
+								<f:param
+									value=" #{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.tarifa}" />
+							</h:outputFormat>
+						</p:outputPanel>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.copiaDeCheques.informe.os.dados.para.pesquisa']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel id="pesquisa" styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel id="filtro" styleClass="col-md-12 radioGrid">
+
+							<p:selectOneRadio id="tipoConsulta" name="tipoConsulta"
+								value="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.tipoConsulta}"
+								layout="custom"
+								valueChangeListener="#{contaCorrenteConsultaChequesBBean.toggleTipoPesquisa}">
+								<f:selectItem itemValue="0" />
+								<f:selectItem itemValue="1" />
+								<p:ajax update="pesquisa listaCheques" />
+							</p:selectOneRadio>
+
+							<p:radioButton id="radio1" for="tipoConsulta" itemIndex="0" />
+							<p:outputLabel
+								value="#{msg['page.conta.corrente.consulta.copiaDeCheques.cheque.numero']}:" />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-3">
+
+							<p:outputPanel styleClass="form-group">
+								<p:inputText id="numeroCheque" name="numeroCheque"
+									styleClass="form-control numberOnly" maxlength="6"
+									value="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.numeroCheque}">
+									<p:ajax update="pesquisa listaCheques" event="click"
+										process="@all"
+										listener="#{contaCorrenteConsultaChequesBBean.ativarTipoConsultaNumero()}" />
+								</p:inputText>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-3">
+							<p:outputPanel styleClass="form-group">
+								<p:commandLink styleClass="btn btn-default" role="button"
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.ok']}"
+									action="#{contaCorrenteConsultaChequesBBean.consultarChequeNumero()}"
+									update="listaCheques"
+									rendered="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.tipoConsulta eq 0}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-3 radioGrid">
+
+							<p:radioButton id="radio2" for="tipoConsulta" itemIndex="1" />
+							<p:outputLabel
+								value="#{msg['page.conta.corrente.consulta.copiaDeCheques.todos.os.cheques']}:" />
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-3"
+							rendered="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.periodoConsulta == 'OUTROS'}">
+							<h:outputText
+								value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.data.inicial']}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-3"
+							rendered="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.periodoConsulta == 'OUTROS'}">
+							<h:outputText
+								value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.data.final']}" />
+						</p:outputPanel>
+
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-3">
+							<p:outputPanel styleClass="form-group">
+								<h:selectOneMenu id="periodoConsulta" name="periodoConsulta"
+									value="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.periodoConsulta}">
+									<f:selectItem
+										itemLabel="#{msg['page.conta.corrente.consulta.copiaDeCheques.form.option.selecione']}"
+										itemValue="#{null}" noSelectionOption="true" />
+									<f:selectItems
+										value="#{contaCorrenteConsultaChequesBBean.periodosDeConsulta()}"
+										var="periodo" itemsValue="#{periodo}"
+										itemLabel="#{periodo.label}" />
+									<p:ajax update="pesquisa listaCheques" event="change"
+										process="@all"
+										listener="#{contaCorrenteConsultaChequesBBean.ativarTipoConsultaPeriodo()}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel
+							rendered="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.periodoConsulta == 'OUTROS'}">
+							<p:outputPanel styleClass="col-md-3">
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar" />
+									<p:calendar id="filtroDtInicial"
+										value="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.dataInicial}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false">
+										<p:ajax event="change" />
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-3">
+
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar" />
+									<p:calendar id="filtroDtFinal"
+										value="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.dataFinal}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false">
+										<p:ajax event="change" />
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-3">
+								<p:commandLink styleClass="btn btn-default" role="button"
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.ok']}"
+									action="#{contaCorrenteConsultaChequesBBean.listarChequesEmitidos()}"
+									update="listaCheques"
+									rendered="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.periodoConsulta == 'OUTROS'}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel id="listaCheques" styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow"
+					rendered="#{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.mostraTabela}">
+					<p:outputPanel styleClass="row">
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.mensagem.selecione']}" />
+					</p:outputPanel>
+
+					<p:dataTable tableStyleClass="tacle-custom tacle-custom-zebrada"
+						rowKey="#{cheque.numcheq}"
+						value="#{contaCorrenteConsultaChequesBBean.listaChequesEmitidos}"
+						var="cheque"
+						selection="#{contaCorrenteConsultaChequesBBean.chequeEmitido}"
+						selectionMode="single"
+						emptyMessage="#{contaCorrenteConsultaChequesBBean.mensagem}">
+						<p:ajax event="rowSelect"
+							listener="#{contaCorrenteConsultaChequesBBean.chamaTelaConfirmacao}" />
+						<p:column
+							headerText="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.numero']}"
+							styleClass="text-left">
+							<h:outputText value="#{cheque.getNumcheqFormatado()}" />
+						</p:column>
+
+						<p:column
+							headerText="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.datacomp']}"
+							styleClass="text-left">
+							<h:outputText value="#{cheque.fhcpago}"
+								converter="dateConverterFormat" />
+
+						</p:column>
+
+						<p:column
+							headerText="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.valor']}"
+							styleClass="text-right">
+							<h:outputText value="#{cheque.importe}">
+								<f:convertNumber groupingUsed="true" minFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{contaCorrenteConsultaChequesBBean.voltarMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+
+
+
+

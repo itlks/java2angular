@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+
+	<p:outputPanel styleClass="contentModal">
+		<p:dialog id="empresas" widgetVar="empresas" draggable="false"
+			showHeader="true" width="60%" height="80%" modal="true"
+			styleClass="modalGray modal-box modalTituloCustom"
+			header="Empresas Conveniadas">
+
+			<p:separator />
+
+			<p:scrollPanel mode="native" style="height:600px;" id="relacaoEmpresasScroll">
+
+				<h:body>
+
+					<p:dataTable var="relacaoEmpresasEnum" id="tbTeste"
+						value="#{relacaoEmpresasBBean.relacaoEmpresasEnum}"
+						styleClass="table tableHeaderInvisible table-accordion noHover">
+
+						<p:ajax event="rowToggle"
+							listener="#{relacaoEmpresasBBean.buscaEmpresa}" />
+
+
+						<p:column style="width:16px">
+							<p:rowToggler />
+						</p:column>
+
+						<p:column>
+							<h:outputText value="#{relacaoEmpresasEnum.nome}" />
+						</p:column>
+
+						<p:rowExpansion>
+							<ui:include
+								src="/pages/pagamentos/contas/pagamentoComCodigoBarras/relacaoEmpresas/detalheEmpresas.xhtml" />
+						</p:rowExpansion>
+
+
+					</p:dataTable>
+				</h:body>
+
+			</p:scrollPanel>
+
+		</p:dialog>
+	</p:outputPanel>
+</ui:composition>

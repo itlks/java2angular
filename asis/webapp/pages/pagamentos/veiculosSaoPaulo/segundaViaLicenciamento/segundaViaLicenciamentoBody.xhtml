@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculossp.licenciamento.comprovante.RENAV']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.numero}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.CodigDoMunic']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.codMunicipio}" />
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Propr']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.proprietario}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.CPFC']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.numCpfCnpj}" converter="converterCpfCnpj"/>
+		</p:outputPanel>
+	</p:outputPanel>	
+	
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.PlacaDoVeicu']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.placa}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.taxa.licenciamento']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.taxaLicenciamento}"> 
+				<f:convertNumber type="currency" currencySymbol="R$" />
+			</h:outputText>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" >
+		<p:outputPanel styleClass="col-xs-6" rendered="#{segundaViaLicenciamentoBBean.opcaoRemessa1 eq '1' or segundaViaLicenciamentoBBean.opcaoRemessa eq '1'}">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.taxa.postagem']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.taxaPost}">
+				<f:convertNumber type="currency" currencySymbol="R$" />
+			</h:outputText>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.VALORTOTAL']}" styleClass="bold space" />
+			<h:outputText value="#{segundaViaLicenciamentoBBean.dto.valorTotal}">
+				<f:convertNumber type="currency" currencySymbol="R$" />
+			</h:outputText>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.gareItCmdSp.apelidos.alterar.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h5>
+										<strong>#{msg['page.pagamentos.gareItCmdSp.apelidos.label.identificacao']}
+											#{apelidoBBean.configuracaoApelido.apelidoEscolhido.identificacao}</strong>
+									</h5>
+									<p:separator styleClass="custom-separator" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="codigoReceita">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.codigo.receita']}</p:outputLabel>
+									<p:inputText
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.codigoReceita}"
+										onkeypress="return onlyNumbers(event)" id="codigoReceita"
+										maxlength="4" styleClass="form-control" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="nrDeclaracao">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.nr.declaracao']}</p:outputLabel>
+									<p:inputText id="nrDeclaracao" styleClass="form-control"
+										maxlength="15"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.numeroDeclaracao}"
+										onkeypress="return onlyNumbers(event)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="cnpjCpf">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.cnpj.cpf']}</p:outputLabel>
+									<p:inputText id="cnpjCpf" styleClass="form-control"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnpjCpf}"
+										onkeyup="maskCpfCnpj(this, event)" maxlength="18" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="inscricao">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.inscricao']}</p:outputLabel>
+									<p:inputText id="inscricao" styleClass="form-control"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.inscricaoDivida}"
+										maxlength="13" onkeypress="return onlyNumbers(event)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="nrAiim">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.nr.aiim']}</p:outputLabel>
+									<p:inputText id="nrAiim" styleClass="form-control"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.nrAiim}"
+										maxlength="13" onkeypress="return onlyNumbers(event)" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="contribuinte">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.contribuinte']}</p:outputLabel>
+									<p:inputText id="contribuinte" styleClass="form-control"
+										onblur="replaceSpecialChars(this);"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.contribuinte}"
+										maxlength="50" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-8 form-group">
+									<p:outputLabel for="endereco">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.endereco']}</p:outputLabel>
+									<p:inputText id="endereco" styleClass="form-control"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.endereco}"
+										maxlength="38" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-4 form-group">
+									<p:outputLabel for="telefone">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.telefone']}</p:outputLabel>
+									<p:inputText id="telefone" styleClass="form-control"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.telefone}"
+										maxlength="9" onkeypress="return onlyNumbers(event)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-6 form-group">
+									<p:outputLabel for="cep"
+										value="#{msg['page.pagamentos.gareItCmdSp.apelidos.label.cep']}" />
+									<p:inputMask id="cep" mask="99999-999"
+										styleClass="form-control"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cep}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12 form-group">
+									<p:outputLabel for="observacao">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.observacoes']}</p:outputLabel>
+									<p:inputTextarea id="observacao" rows="6" maxlength="30"
+										styleClass="form-control"
+										onblur="replaceSpecialChars(this);stringToUpperCase(this)"
+										value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.observacoes}">
+										<p:ajax event="blur"
+											listener="#{gareItCmdSpBBean.onBlurObservacao()}" />
+									</p:inputTextarea>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					id="btnVoltar" role="button" value="#{msg['page.btn.voltar']}"
+					action="#{apelidoBBean.goApelido()}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton styleClass="btn btn-default"
+					value="#{msg['page.pagamentos.gareItCmdSp.btn.continuar']}"
+					id="btnContinuar"
+					action="#{gareItCmdSpBBean.continuarApelidosAlterarConfirmacao}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

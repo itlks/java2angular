@@ -1,0 +1,159 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<script type="text/javascript" language="javascript">
+		jQuery(document).ready(function() {
+			generateHtmlToPdf();
+			$(".imprimirClass").click(function(){
+/* 				openPopup(); */
+			});
+		});
+
+		function generateHtmlToPrint(){
+			var html;
+			if( $('.divHtmlClass').length ){
+				html = $('#divHtml').html();
+			}else{
+				html = $('.edicao-coluna').html();
+			}
+			html = strip(html, 'script');
+			html = strip(html, 'input');
+			html = stripByClassName(html, "no-print");
+			html = stripByClassName(html, "no-visible");
+			html = b64EncodeUnicode(html);
+			
+			$( ".htmlToPrintHiddenClass input" ).each(function( index ) {
+				$(this).attr("value", html);
+			});
+		}
+		
+		function generateHtmlToPdf(){
+			var html;
+			if( $('.divHtmlClass').length ){
+				html = $('#divHtml').html();
+			}else{
+				html = $('.edicao-coluna').html();
+			}
+			html = strip(html, 'script');
+			html = strip(html, 'input');
+			html = stripImg(html);
+			html = stripByClassName(html, "no-print");
+			html = stripByClassName(html, "no-visible");
+			html = b64EncodeUnicode(html);
+			$( ".htmlToPdfHiddenClass input" ).each(function( index ) {
+				$(this).attr("value", html);
+			});
+		}
+		
+		function b64EncodeUnicode(str) {
+			
+		    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+		        return String.fromCharCode('0x' + p1);
+		    }));
+		}
+		
+		function b64DecodeUnicode(str) {
+		    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+		        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+		    }).join(''));
+		}		
+		
+		function strip(html, tagName) {
+		    var div = document.createElement('div');
+		    div.innerHTML = html;
+		    var scripts = div.getElementsByTagName(tagName);
+		    var i = scripts.length;
+		    while (i--) {
+		      scripts[i].parentNode.removeChild(scripts[i]);
+		    }
+		    return div.innerHTML;
+		}
+
+		function stripByClassName(html, className) {
+		    var div = document.createElement('div');
+		    div.innerHTML = html;
+		    var scripts = div.getElementsByClassName(className);
+		    var i = scripts.length;
+		    while (i--) {
+		      scripts[i].parentNode.removeChild(scripts[i]);
+		    }
+		    return div.innerHTML;
+		}
+		
+ 		function stripImg(html){
+ 			var src = "";
+ 			var string = "";
+		    var div = document.createElement('div');
+		    div.innerHTML = html;
+		    var scripts = div.getElementsByTagName('img');
+		    var i = scripts.length;
+		    while (i--) {
+		    	if(string.indexOf(".gif") != -1){
+		    		scripts[i].parentNode.removeChild(scripts[i]);
+		    	}else{
+		    		src = scripts[i].getAttribute('src').replace('#{request.contextPath}/', './');
+		    		scripts[i].setAttribute('src', src);
+		    	}
+		    }
+		    
+		    return div.innerHTML;
+		}
+
+		function openPopup() {
+			var context = "#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}";
+			var page = context + "/commons/pdf/pdfImprimir.xhtml";
+			var width = 1025;
+			var height = 700;
+			var left = ($(window).width() / 2) - (width / 2), top = ($(window).height() / 2) - (height / 2), popup = 
+				myWindow = window.open(page, "Imprimir", "modal=true, location=no, scrollbars=yes, resizable=yes, width=" + width + ", height=" + height + ", top=" + top + ", left=" + left);
+		}
+	</script>
+
+	<p:outputPanel styleClass="rodape-comprovante no-print no-visible">
+		<h:panelGroup>
+							
+			<h:panelGroup styleClass="divHtmlClass" rendered="#{divHtml}"/>
+			
+			<div class="htmlToPrintHiddenClass">
+				<h:inputHidden id="htmlToPrintHidden" value="#{PDFBBean.htmlToPrint}" />
+			</div>
+			
+			<div class="htmlToPdfHiddenClass">
+				<h:inputHidden id="htmlToPdfHidden" value="#{PDFBBean.htmlToPdf}" />
+			</div>
+
+			<p:commandLink id="exportarExcel" ajax="false" rendered="#{not empty excel}">
+				<p:dataExporter target="#{excel}" type="xls" fileName="#{nomeExcel}" postProcessor="#{consultaAntecipacoesRecebiveisBBean.postProcessXLS}"></p:dataExporter>
+				<i class="ic icon-excel"></i> #{msg['pdf.label.excel']}
+			</p:commandLink>
+			
+			<p:commandLink id="salvarPDF" onclick="generateHtmlToPdf();" action="#{PDFBBean.salvarPDF()}" ajax="false" rendered="#{salvarPDF ne 'false'}">
+				<f:setPropertyActionListener target="#{PDFBBean.pdfOrientation}" value="#{pdfOrientation eq 'Landscape' ? 'Landscape' : 'Portrait'}" />
+				<f:setPropertyActionListener target="#{PDFBBean.pdfCollor}" value="#{pdfCollor eq 'true' ? 'true' : 'false'}" />
+				<f:setPropertyActionListener target="#{PDFBBean.pdfCustom}" value="#{pdfCustom eq 'true' ? 'true' : 'false'}" />				
+				<i class="ic icon-PDF"></i> #{msg['pdf.label.salvar']} 
+			</p:commandLink>
+			
+			<p:commandLink id="enviarEmailPopup" onclick="generateHtmlToPdf();" oncomplete="PF('enviarPorEmailDialog').show();" action="#{PDFBBean.clearFields}" update="@form" rendered="#{enviarEmail ne 'false'}">
+				<f:setPropertyActionListener target="#{PDFBBean.pdfOrientation}" value="#{pdfOrientation eq 'Landscape' ? 'Landscape' : 'Portrait'}" />
+				<f:setPropertyActionListener target="#{PDFBBean.pdfCollor}" value="#{pdfCollor eq 'true' ? 'true' : 'false'}" />
+				<f:setPropertyActionListener target="#{PDFBBean.pdfCustom}" value="#{pdfCustom eq 'true' ? 'true' : 'false'}" />				
+				<i class="ic icon-email"></i> #{msg['pdf.label.email']} 
+			</p:commandLink>
+			
+			<p:commandLink id="imprimir" onclick="generateHtmlToPrint();" oncomplete="openPopup();" styleClass="imprimirClass" rendered="#{imprimir ne 'false'}">
+				<f:setPropertyActionListener target="#{PDFBBean.pdfCustom}" value="#{pdfCustom eq 'true' ? 'true' : 'false'}" />
+				<i class="ic icon-imprimir"></i> #{msg['pdf.label.imprimir']}
+			</p:commandLink>
+		</h:panelGroup>
+
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="no-print no-visible">
+		<ui:include src="/commons/pdf/pdfEnviarPorEmailDialog.xhtml"/>
+	</p:outputPanel>
+</ui:composition>

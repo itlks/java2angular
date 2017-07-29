@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+	
+
+		<p:outputPanel styleClass="row" id="panelCabecalho">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{transferenciaSegundaViaComprovanteBBean.cabecalhoConsulta}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.transferenciaDeValores']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible" id="panelPrincipal">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-sm-3">
+							<h:outputLabel
+								value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.tipoDeTransferencia']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-3">
+								<h:selectOneMenu
+									value="#{transferenciaSegundaViaComprovanteBBean.dto.tipoTransferencia}"
+									id="selectTipoTransacao">
+									<f:selectItem itemValue=""
+										itemLabel="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{transferenciaSegundaViaComprovanteBBean.tiposTransacaoMesmoBanco}"
+										var="transacao" itemLabel="#{transacao.descricao}"
+										itemValue="#{transacao}" />
+									<p:ajax event="change"
+										listener="#{transferenciaSegundaViaComprovanteBBean.verificaTipoTransferencia}"
+										update="panelPrincipal panelCabecalho" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+					<p:outputPanel id="panelMesmoBanco"
+						rendered="#{transferenciaSegundaViaComprovanteBBean.selecionado eq 1}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.disponibilizadeConsulta']}" />
+								<h:outputText
+									value=" #{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.ultimosDozeMeses']}"></h:outputText>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:separator />
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.selecioneMes']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.selecioneAno']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:selectOneMenu
+									value="#{transferenciaSegundaViaComprovanteBBean.dto.mes}">
+									<f:selectItems
+										value="#{transferenciaSegundaViaComprovanteBBean.meses}"
+										var="meses" itemLabel="#{meses.descricao}"
+										itemValue="#{meses}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-sm-3">
+								<h:selectOneMenu
+									value="#{transferenciaSegundaViaComprovanteBBean.dto.ano}">
+									<f:selectItems
+										value="#{transferenciaSegundaViaComprovanteBBean.preencherAno}"
+										var="ano" itemLabel="#{ano}" itemValue="#{ano}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="panelOutrosBancosDoc"
+						rendered="#{transferenciaSegundaViaComprovanteBBean.selecionado eq 2}">
+						<p:outputPanel>
+							<h:outputLabel
+								value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.disponibilizadeConsulta']}" />
+							<h:outputText
+								value=" #{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.dezoitoMeses']}" />
+						</p:outputPanel>
+
+						<p:separator />
+
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.escolhaPeriodoPagamento']}" />
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.periodoEspecifico']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:selectOneMenu
+									value="#{transferenciaSegundaViaComprovanteBBean.dto.periodoEspecificoDoc}">
+									<f:selectItems
+										value="#{transferenciaSegundaViaComprovanteBBean.periodosEspecificosDoc}"
+										var="doc" itemLabel="#{doc.descricao}" itemValue="#{doc}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:separator />
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.outroPeriodo']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.dataInicial']}" />
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar
+										value="#{transferenciaSegundaViaComprovanteBBean.dataInicial}"
+										maxlength="10" pattern="dd/MM/yyyy"
+										converter="dateTelaConverter"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+										onkeypress="mascaraData(this, event)">
+										<p:ajax event="change" process="@this" update="@this" />
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.dataFinal']}" />
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar
+										value="#{transferenciaSegundaViaComprovanteBBean.dataFinal}"
+										maxlength="10" pattern="dd/MM/yyyy"
+										converter="dateTelaConverter"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+										onkeypress="mascaraData(this, event)">
+										<p:ajax event="change" process="@this" update="@this" />
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="panelOutrosBancosTed"
+						rendered="#{transferenciaSegundaViaComprovanteBBean.selecionado eq 3}">
+						<p:outputPanel>
+							<h:outputLabel
+								value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.disponibilizadeConsulta']}" />
+							<h:outputText
+								value=" #{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.ultimosTresDias']}" />
+						</p:outputPanel>
+
+						<p:separator />
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:outputLabel
+									value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.periodoEspecifico']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-sm-3">
+								<h:selectOneMenu
+									value="#{transferenciaSegundaViaComprovanteBBean.dto.periodoEspecificoTed}">
+									<f:selectItems
+										value="#{transferenciaSegundaViaComprovanteBBean.periodosEspecificosTed}"
+										var="ted" itemLabel="#{ted.descricao}" itemValue="#{ted}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<br />
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel
+						styleClass="col-xs-12 text-right no-print no-visible">
+						<p:blockUI block="continuarButton" trigger="continuarButton" />
+						<p:commandLink styleClass="btn btn-default no-print no-visible"
+							role="button" id="continuarButton"
+							action="#{transferenciaSegundaViaComprovanteBBean.segundaViaListagem}"
+							value="#{msg['page.btn.continuar']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

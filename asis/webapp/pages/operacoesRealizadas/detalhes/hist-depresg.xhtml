@@ -1,0 +1,45 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"/>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.autorizacoes.historico.consulta.pesquisa.produto.label']}" styleClass="space" />
+					<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cdbpre']}" rendered="${compHisParts[0] eq '0003'}"/>
+					<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cdbdi']}" rendered="${compHisParts[0] eq '0006'}"/>
+					<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cdbcristaldi']}" rendered="${compHisParts[0] eq '0011'}"/>
+					<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cdbrecompensa']}" rendered="${compHisParts[0] eq '0019'}"/>
+					<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dra']}" rendered="${compHisParts[0] ne '0003' and compHisParts[0] ne '0006' and compHisParts[0] ne '0011' and compHisParts[0] ne '0019' }"/>
+			</p:outputPanel>			
+	</p:outputPanel>
+			
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>
+<!-- Produto	 -->
+<!-- 	Se ArrCampos(0) = "0003", então “CDB-PRÉ” -->
+<!-- 	Se ArrCampos(0) = "0006", então “CDB-DI” -->
+<!-- 	Se ArrCampos(0) = "0011", então “CDB Cristal DI” -->
+<!-- 	Se ArrCampos(0) = "0019", então “CDB Recompensa” -->
+<!-- 	Senão “DRA” -->
+
+<!-- Se rsResposta("SERV") = “0012” -->
+<!-- 	Prazo	ArrCampos(1) + Se ArrCampos(1) = 1 então “Dia”, senão “Dias” -->
+<!-- Se rsResposta("SERV") = “0073” -->
+<!-- 	Cancelamento de	Se ArrCampos(1) = “Aplicação” -->
+<!-- Senão "Resgate" -->

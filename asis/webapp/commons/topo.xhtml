@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel id="topo" styleClass="topo">
+		<p:outputPanel id="logo" styleClass="logo">
+			<p:commandLink action="#{menuBBean.redirectHome}">
+				<p:graphicImage value="/images/santander-topo.png" alt="logo" />
+			</p:commandLink>
+		</p:outputPanel>
+
+		<p:outputPanel id="sub-header" styleClass="sub-header">
+			<ul class="dados-usuario">
+				<li class="drop-usuario">
+				
+				<strong>
+					<h:outputText id="ola" value="#{msg['page.home.label.ola']}" />, #{loginBBean.session.nomeUsuarioMaster}
+				</strong>
+				
+					<p>
+						<h:outputText id="agencia" value="#{ msg['page.home.label.agencia'] }" />: #{loginBBean.session.agencia}
+						
+						<p:spacer height="10" />
+						
+						<h:outputText id="conta" value="#{ msg['page.home.label.conta'] }" />: 
+							<h:outputText id="valConta" value="#{loginBBean.session.conta}" />
+						
+						<a class="trocar-conta pull-right"	href="#">
+							<h:outputText id="trocaConta" value="#{ msg['page.home.label.trocaConta'] }" />
+						</a>	
+					</p>
+					<p>
+						<h:outputText id="ultimoAcesso"
+							value="#{ msg['page.home.label.ultimoAcesso'] }" /> #{loginBBean.session.dataUltimoAcesso}
+					</p></li>
+				<li>
+					<p:commandLink styleClass="sair" title="Sair" action="#{mensagemBBean.sairInternetBanking}">
+						#{ msg['page.home.label.sair'] }
+					</p:commandLink>
+				</li>
+			</ul>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row">
+		<div class="sub-menu-header">
+			<ui:include src="/commons/painelSecundario/painelSecundario.xhtml"/>
+		</div>
+	</p:outputPanel>
+</ui:composition>

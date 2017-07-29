@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.consultaLancamentosFuturos']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="PanelConsulta">
+			<p:outputPanel styleClass="col-xs-12 box-shadow no-margin-bottom">
+
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="row no-print no-visible">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputText
+									value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.escolhaODadoParaConsulta']}" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+
+
+						<p:outputPanel styleClass="row no-print no-visible">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="space-t col-xs-4 ">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel
+												value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.bandeiraDoisPontos']}" />
+											<h:selectOneMenu name="tipoOrigemApreensao"
+												value="#{adquirenciaLancamentosFuturosBBean.bandeiraSelecionada}">
+												<f:selectItem itemValue="002" itemLabel="Mastercard" />
+												<f:selectItem itemValue="001" itemLabel="Visa" />
+												<f:selectItem itemValue="999" itemLabel="Todas" />
+											</h:selectOneMenu>
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="space-t col-xs-2 pull-right">
+										<p:outputPanel styleClass="space-t pull-right ">
+											<p:commandButton id="btnExibir" styleClass="btn btn-default"
+												tabindex="3" role="button"
+												value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.exibir']}">
+												<p:ajax update="PanelConsulta"
+													listener="#{adquirenciaLancamentosFuturosBBean.buscarLancamentosFuturos}"
+													process="@all" />
+											</p:commandButton>
+											<p:blockUI block="btnExibir" trigger="btnExibir" />
+											<p:defaultCommand target="btnExibir" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-4 pull-right text-right">
+										<p:graphicImage value="/images/selo-getnet-2.png"
+											width="200px" />
+									</p:outputPanel>
+
+
+
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<!-- inicio -->
+
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel
+						rendered="#{adquirenciaLancamentosFuturosBBean.exibeDetalhes}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel styleClass="space"
+									value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.valorTotalDisponivel']}" />
+								<h:outputText
+									value="R$ #{adquirenciaLancamentosFuturosBBean.valorMonetario(adquirenciaLancamentosFuturosBBean.intTotalValor)}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row"
+							rendered="#{adquirenciaLancamentosFuturosBBean.exibeMastercard}">
+							<p:outputPanel styleClass="col-xs-12 space-t">
+								<h:outputLabel styleClass="space"
+									value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.bandeiraDoisPontos']}" />
+								<h:outputText value="Mastercard" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel
+							styleClass="space-t fakeFooter table-responsive table table-striped"
+							rendered="#{adquirenciaLancamentosFuturosBBean.exibeMastercard}">
+							<p:dataTable id="lancamentosMaster" var="lancamentoMaster"
+								value="#{adquirenciaLancamentosFuturosBBean.listaMaster}">
+								<p:column styleClass="text-left">
+
+									<f:facet name="header">
+										<h:outputText
+											value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.dataDoCredito']}" />
+									</f:facet>
+
+									<h:outputText
+										value="#{adquirenciaLancamentosFuturosBBean.formatarDataDDMMYYYY(lancamentoMaster.OEDATALANCAMENTOS)}" />
+								</p:column>
+								<p:column styleClass="text-right">
+
+									<f:facet name="header">
+										<h:outputText
+											value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.disponivelParaAntecipacao']}" />
+									</f:facet>
+
+									<h:outputText
+										value="#{adquirenciaLancamentosFuturosBBean.valorMonetario(lancamentoMaster.OEVALORLANCAMENTOSORIG)}" />
+								</p:column>
+							</p:dataTable>
+
+							<p:outputPanel styleClass="col-xs-12 fakeDiv">
+								<p:outputPanel styleClass="first text-left"
+									style="padding-left:10px; text-align:left;">
+									<span>#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.total']}
+									</span>
+								</p:outputPanel>
+								<p:outputPanel styleClass="second pull-right">
+									<span>#{adquirenciaLancamentosFuturosBBean.valorMonetario(adquirenciaLancamentosFuturosBBean.totalMaster)}
+									</span>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row"
+							rendered="#{adquirenciaLancamentosFuturosBBean.exibeVisa}">
+							<p:outputPanel styleClass="col-xs-12 space-t">
+								<h:outputLabel styleClass="space"
+									value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.bandeiraDoisPontos']}" />
+								<h:outputText value="Visa" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel
+							styleClass="space-t fakeFooter table-responsive table table-striped"
+							rendered="#{adquirenciaLancamentosFuturosBBean.exibeVisa}">
+							<p:dataTable id="lancamentosVisa" var="lancamentoVisa"
+								value="#{adquirenciaLancamentosFuturosBBean.listaVisa}">
+								<p:column styleClass="text-left">
+									<f:facet name="header">
+										<h:outputText
+											value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.dataDoCredito']}" />
+									</f:facet>
+									<h:outputText
+										value="#{adquirenciaLancamentosFuturosBBean.formatarDataDDMMYYYY(lancamentoVisa.OEDATALANCAMENTOS)}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<f:facet name="header">
+										<h:outputText
+											value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.disponivelParaAntecipacao']}" />
+									</f:facet>
+									<h:outputText
+										value="#{adquirenciaLancamentosFuturosBBean.valorMonetario(lancamentoVisa.OEVALORLANCAMENTOSORIG)}" />
+								</p:column>
+							</p:dataTable>
+
+							<p:outputPanel styleClass="col-xs-12 fakeDiv">
+								<p:outputPanel styleClass="second"
+									style="padding-left:10px; text-align:left;">
+									<span>#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.total']}
+									</span>
+								</p:outputPanel>
+								<p:outputPanel styleClass="second pull-right">
+									<span>#{adquirenciaLancamentosFuturosBBean.valorMonetario(adquirenciaLancamentosFuturosBBean.totalVisa)}
+									</span>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row no-visible no-print" rendered="false">
+					<p:outputPanel
+						styleClass="space-t foot-correction table-responsive table table-striped">
+						<p:dataTable id="lancamentosExcel" var="lancamento"
+							value="#{adquirenciaLancamentosFuturosBBean.listaExcel}">
+							<p:column>
+								<h:outputText value="#{lancamento.descricao}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{lancamento.dado}" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+
+				<p:outputPanel styleClass="col-xs-12"
+					rendered="#{adquirenciaLancamentosFuturosBBean.exibeDetalhes}">
+					<ui:include src="/commons/pdf/pdfButtons.xhtml">
+						<ui:param name="excel" value="lancamentosExcel" />
+					</ui:include>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+
+
+			<!-- fim -->
+
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row  space-t no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="goMenu"
+					value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

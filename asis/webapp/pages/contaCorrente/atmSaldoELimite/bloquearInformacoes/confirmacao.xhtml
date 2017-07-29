@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	
+	<f:event type="preRenderView" listener="#{bloqDesbloqAtmBBean.blockacessoDiretoComfirmacao()}" />
+	
+<p:outputPanel styleClass="row space-b">
+      <p:outputPanel styleClass="col-lg-12">
+        <p:outputPanel
+          styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+          <i class="fa fa-exclamation-circle"></i>
+          <span><strong>#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.confiraTransacao']}</strong></span>
+        </p:outputPanel>
+      </p:outputPanel>
+    </p:outputPanel>
+
+
+    <p:outputPanel styleClass="row">
+
+      <p:outputPanel styleClass="col-lg-12">
+
+        <p:outputPanel styleClass="titulo-painel">
+
+          <h4>#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.dadosTransacao']}</h4>
+
+        </p:outputPanel>
+
+      </p:outputPanel>
+    </p:outputPanel>
+
+
+    <p:outputPanel styleClass="row">
+
+      <p:outputPanel styleClass="col-lg-12">
+        <p:outputPanel styleClass="box-shadow">
+
+          <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-md-12">
+
+              <p>
+                <h:outputLabel for="" value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.opcaoAtual']} " /> #{bloqDesbloqAtmBBean.descOpcaoBloqCarregada}
+              </p>
+              <p>
+                <h:outputLabel for="" value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.trocarPara']}" /> #{bloqDesbloqAtmBBean.descOpcaoBloqueio}
+              </p>
+
+            </p:outputPanel>
+          </p:outputPanel>
+
+
+        </p:outputPanel>
+      </p:outputPanel>
+    </p:outputPanel>
+
+    <p:outputPanel>
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/dispositivoSegurancaNovo.xhtml"/>
+	</p:outputPanel>
+
+	<p:blockUI block="panelBotoes" trigger="btnConfirmar" />
+   <p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink
+					action="#{bloqDesbloqAtmBBean.voltarEmSelecao}"
+					styleClass="btn btn-default btn-cinza" role="button">
+			      	#{msg['page.btn.voltar']}
+				</p:commandLink>
+
+				
+				<p:commandLink id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{bloqDesbloqAtmBBean.continuarEmComprovante}"
+					role="button" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+    
+    </ui:define>
+</ui:composition>

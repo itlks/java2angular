@@ -1,0 +1,70 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}" />
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<c:set id="setCodAcaoApelidos_#{id}" var="codAcao" value="${fn:trim(compHisParts[0])}" />
+	<c:set id="setTipoApelidoApelidos_#{id}" var="codTipoApelido" value="${fn:trim(compHisParts[1])}" />
+	<c:set id="setIdentificacaoApelidos_#{id}" var="identificacao" value="${compHisParts[2]}" />
+	
+	<c:choose>
+ 	 <c:when test="${codAcao eq 'I'}"><c:set var="acao" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.inclusaoApelido']}" /></c:when>
+ 	 <c:when test="${codAcao eq 'A'}"><c:set var="acao" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.alteracaoApelido']}" /></c:when>
+ 	 <c:when test="${codAcao eq 'E'}"><c:set var="acao" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.exclusaoApelido']}" /></c:when>
+	</c:choose>
+	
+	<c:choose>
+ 	 <c:when test="${codTipoApelido eq '01' or codTipoApelido == 1}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.boletoBancario']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '02' or codTipoApelido == 2}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.darf']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '03' or codTipoApelido == 3}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.gps']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '04' or codTipoApelido == 4}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.gareIcms']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '05' or codTipoApelido == 5}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.gareDr']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '06' or codTipoApelido == 6}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.gareItcmd']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '07' or codTipoApelido == 7}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.veiculo']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '08' or codTipoApelido == 8}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.iptu']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '09' or codTipoApelido == 9}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tributosMunicipais']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '10' or codTipoApelido == 10}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cartao']}" /></c:when>
+ 	 <c:when test="${codTipoApelido eq '11' or codTipoApelido == 11}"><c:set var="tipoApelido" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.darfSimples']}" /></c:when>
+	</c:choose>
+	
+	 <p:outputPanel styleClass="row" id="idExternoColunaApelidos_#{posicaoLista}">
+ 
+	<p:outputPanel styleClass="col-xs-12" id="idExternoApelidos_#{posicaoLista}">
+	  <h:outputLabel 	styleClass="space bold" id="idDadosApelidos_#{posicaoLista}"
+	  					value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"/>
+	</p:outputPanel> 
+
+	<p:outputPanel styleClass="col-xs-12" id="idAcaoApelidos_#{posicaoLista}">
+	  <h:outputLabel 	styleClass="space bold" id="idAcaoLblApelidos_#{posicaoLista}"
+	  					value="#{msg['page.operacoes.realizadas.detalhe.dados.label.acao']}"/>
+	  <h:outputText value="#{acao}" id="idAcaoTxtApelidos_#{posicaoLista}"/>
+	</p:outputPanel>
+ 
+	<p:outputPanel styleClass="col-xs-12" id="idTipoApelidoApelidos_#{posicaoLista}">
+	  <h:outputLabel 	styleClass="space bold" id="idTipoApelidoLblApelidos_#{posicaoLista}"
+	  					value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoApelido']}"/>
+	  <h:outputText value="#{tipoApelido}" id="idTipoApelidoTxtApelidos_#{posicaoLista}"/>
+	</p:outputPanel>
+ 
+	<p:outputPanel styleClass="col-xs-12" id="idIdentificacaoApelidos_#{posicaoLista}">
+	  <h:outputLabel 	styleClass="space bold" id="idIdentificacaoLblApelidos_#{posicaoLista}"
+	  					value="#{msg['page.operacoes.realizadas.detalhe.dados.label.identificacao']}"/>
+	  <h:outputText value="#{identificacao}" id="idIdentificacaoTxtApelidos_#{posicaoLista}"/>
+	</p:outputPanel>
+	
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row space-b" id="idSeparatorApelidos_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepApelidos_#{posicaoLista}">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+	
+</ui:fragment>

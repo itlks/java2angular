@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<!-- INICIO html/pimefaces -->
+
+		<!-- alerta -->
+		<ui:include src="//commons/inicializaDL.xhtml"></ui:include>
+		<!-- alerta fim -->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.gareItCmdSp.apelidos.alterar.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- alerta -->
+
+		<!-- alerta fim -->
+		<p:outputPanel id="PanelPreenchimento" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<h:inputHidden value="#{gareDRSPBBean.clientHash}" id="clientHash" />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							
+								<h:outputLabel >#{msg['page.pagamentos.gare-dr.apelidoAlterar.identificacao']} </h:outputLabel>
+								<h:outputText
+									value="  #{gareDRSPBBean.apelidoSelecionadoDTO.apelido}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						
+						<p:outputPanel styleClass="col-xs-12">
+						
+						<p:separator />
+						
+						</p:outputPanel>
+					</p:outputPanel>
+						
+					<p:outputPanel styleClass="row">
+
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.codigoRecieta']}</h:outputLabel>
+								<p:inputText id="codigoReceita_hash_1" styleClass="form-control"
+									maxlength="5" disabled="{gareDRSPBBean.usarApelido}"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.codReceita}"
+									onkeypress="return SomenteNumeros(event)" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.inscEstadual']}</h:outputLabel>
+								<p:inputText id="inscricaoEstadual_hash_2"
+									styleClass="form-control" maxlength="13"
+									disabled="{gareDRSPBBean.usarApelido}"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.inscEstadual}"
+									onkeypress="return SomenteNumeros(event)"  />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.cnpjCpf']}</h:outputLabel>
+								<p:inputText id="cnpj" styleClass="form-control"
+									label="cpfCnpj" maxlength="18"
+									disabled="{gareDRSPBBean.usarApelido}"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.numeroCPF}"
+									onkeypress="return SomenteNumeros(event)"									
+									onblur="CheckCGCCPF(this)"  />
+									
+									
+									
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.inscDivida']}</h:outputLabel>
+								<p:inputText id="inscricaoDivida_hash_4"
+									styleClass="form-control" maxlength="13"
+									disabled="{gareDRSPBBean.usarApelido}"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.inscDivida}"
+									onkeypress="return SomenteNumeros(event)"  />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.nrAii']}</h:outputLabel>
+								<p:inputText id="numeroAIIM_hash_5" styleClass="form-control"
+									maxlength="13"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.aiim}"
+									disabled="{gareDRSPBBean.usarApelido}"
+									onkeypress="return SomenteNumeros(event)" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.contribuinte']}</h:outputLabel>
+								<p:inputText id="contribuinte" styleClass="form-control"
+									maxlength="50"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.nomeContribuinte}"
+									disabled="{gareDRSPBBean.usarApelido}"
+									onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.endereco']}</h:outputLabel>
+								<p:inputText id="endereco" styleClass="form-control"
+									maxlength="50"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.endereco}"
+									disabled="{gareDRSPBBean.usarApelido}"
+									onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-3">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.telefone']}</h:outputLabel>
+								<p:inputMask id="telefone" styleClass="form-control"
+									maxlength="10"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.telefone}"
+									disabled="{gareDRSPBBean.usarApelido}"
+									
+									mask="99999-9999"/>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.tituloReceita']}</h:outputLabel>
+								<p:inputText id="tributoReceita_hash_7"
+									styleClass="form-control"
+									disabled="{gareDRSPBBean.usarApelido}"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.tributo}"
+									onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.pagamentos.gare-dr.apelidoAlterar.CNAE']}</h:outputLabel>
+								<p:inputText id="cnae_hash_6" styleClass="form-control"
+									maxlength="10"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.cnae}"
+									disabled="{gareDRSPBBean.usarApelido}"
+									onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-3">
+							<p:outputPanel styleClass="form-group">
+								<p>&nbsp;</p>
+								<h:outputLabel>#{msg['page.pagamentos.gare-dr.apelidoAlterar.placaVeiculo']}</h:outputLabel>
+								<p:inputText styleClass="form-control"
+									value="#{gareDRSPBBean.apelidoSelecionadoDTO.placa}"
+									disabled="{gareDRSPBBean.usarApelido}" maxlength="7"
+									onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for="observacoes">#{msg['page.pagamentos.gare-dr.apelidoAlterar.obs']}</h:outputLabel>
+						<p:inputTextarea id="observacoes" styleClass="form-control"
+							rows="5" cols="60" autoResize="false" maxlength="51"
+							value="#{gareDRSPBBean.apelidoSelecionadoDTO.observaciones}"
+							disabled="{gareDRSPBBean.usarApelido}"
+							onblur="replaceSpecialChars(this); stringToUpperCase(this)">
+						</p:inputTextarea>
+						<p:spacer width="10" />
+					</p:outputPanel>
+					<p>&nbsp;</p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{gareDRSPBBean.goApelido()}"
+					value="#{msg['page.gare.preenchimento.botoes.voltar']}"
+					immediate="true" />
+
+				<p:blockUI block="continuarButton" trigger="continuarButton" />
+				<p:commandLink styleClass="btn btn-default" role="button"
+					id="continuarButton"
+					action="#{gareDRSPBBean.confirmarAlteracaoApelido()}"
+					onclick="enviarHash()"
+					value="#{msg['page.gare.preenchimento.botoes.continuar']}"
+					update=":formGeral" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+		<!-- FIM html/pimefaces -->
+	</ui:define>
+</ui:composition>

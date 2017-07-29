@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+		<p:outputPanel styleClass="row"
+			rendered="#{agendamentoBBean.dto.detalheAgendamentosDTO.exibeMsgBoletoBancario}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle" />
+					<p>
+						<h:outputText
+							value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.msgDetalhesAgendamentoCodBarras']}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['pages.agendamento.detalhe.titulo']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<ui:include
+								src="/pages/transferencias/agendamentos/informacoesDetalheAgendamento.xhtml" />
+
+							<p:outputPanel
+								rendered="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoAgendamento != null}">
+								<p:separator />
+								<ui:include
+									src="/pages/transferencias/agendamentos/detalhes/#{agendamentoBBean.dto.detalheAgendamentosDTO.nomePagina}.xhtml" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+
+					<p:outputPanel>
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{agendamentoBBean.voltarEmLista}"
+					value="#{msg['page.btn.voltar']}" />
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnCancelar" styleClass="btn btn-default"
+					rendered="#{agendamentoBBean.agendamentoAgendado}" role="button"
+					action="#{agendamentoBBean.continuarEmConfirmacao}"
+					value="#{msg['pages.agendamento.detalhe.btn.cancelarAgendamento']}" />
+				<p:blockUI block="btnCancelar" trigger="btnCancelar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

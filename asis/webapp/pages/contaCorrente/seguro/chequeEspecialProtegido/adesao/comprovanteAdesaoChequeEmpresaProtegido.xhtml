@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel" rendered="#{!adesaoChequeEmpresaProtegidoBBean.pendencia}">
+					<h4>#{msg['page.gare.comprovante.pagamento.fimPendencia']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel" rendered="#{adesaoChequeEmpresaProtegidoBBean.pendencia}">
+					<h4>#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.contratar.seguro.cheque.protegido']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row no-padding no-print no-visible">
+						<p:outputPanel styleClass="col-xs-6 ">
+							<p:outputLabel value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.label.nome.empresa']}" />
+							<h:outputText value=" #{adesaoChequeEmpresaProtegidoBBean.session.nomeTitularConta}"></h:outputText>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-3 no-print no-visible">
+							<p:outputLabel value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.label.agencia']}"/>
+							<h:outputText value=" #{adesaoChequeEmpresaProtegidoBBean.session.agencia}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-3 no-no-print no-visiblepadding">
+							<p:outputLabel value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.label.conta']}"></p:outputLabel>
+							<h:outputText value=" #{adesaoChequeEmpresaProtegidoBBean.session.conta}"></h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12 no-margin no-padding ">
+						<h5 class="space-b bold">#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.contratacao']}
+							-
+							#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.seguro.cheque.empresa.protegido']}
+						</h5>
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.seguro.garante.descricao']}"/></p>
+
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.dentre.condicoes.descricao1']} 
+									   #{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.dentre.condicoes.descricao2']}" /></p>
+
+						<p><h:outputText
+								value=" #{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.premio.seguro.descricao1']} 
+										#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.premio.seguro.descricao2']} 
+										#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.premio.seguro.descricao3']}" /></p>
+
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.nao.haja.saldo.descricao']}" /></p>
+
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.valor.indenizacao.seguro.descricao']}" /></p>
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.valor.indenizacao.vigencia.seguro.descricao']}" /></p>
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.banco.estipulante.descricao']}" /></p>
+
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.caso.de.sinitro.descricao']}" /></p>
+
+						<p><h:outputText
+								value="#{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.seguro.garantido.zurich.descricao1']} 
+									   #{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.seguro.garantido.zurich.descricao2']} 
+									   #{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.seguro.garantido.zurich.descricao3']}
+									   #{msg['pages.conta.corrente.seguro.chequeEmpresaProtegido.adesao.comprovante.msg.seguro.garantido.zurich.descricao4']}" /></p>
+					
+					
+					
+					
+					<p:outputPanel styleClass="row" rendered="#{adesaoChequeEmpresaProtegidoBBean.pendencia}">
+						<p:outputPanel>
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-3">
+							<p>
+								<strong>#{msg['pages.contacorrente.cheques.cancelarSolicitacao.comprovante.autenticacaoBancaria']}</strong>
+							</p>
+							<p>#{adesaoChequeEmpresaProtegidoBBean.session.referOper}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5">
+							<p>
+								<strong>#{msg['pages.contacorrente.cheques.cancelarSolicitacao.comprovante.dataHora']}</strong>
+							</p>
+							<p>#{adesaoChequeEmpresaProtegidoBBean.dataComprovante}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="quebra"></p:outputPanel>
+					</p:outputPanel>
+					
+					
+					
+					<p:outputPanel rendered="#{!adesaoChequeEmpresaProtegidoBBean.pendencia}" styleClass="col-xs-12 text-center space-t no-padding">
+						<p:outputPanel styleClass="rodape-painel border-right border-left border-top border-bottom">
+							<p:outputPanel styleClass="space-b space-t">
+								<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.label.informativo.apenas.conferencia']}" styleClass="bold"  />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					
+					
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row" >
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel >
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel >
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+				</p:outputPanel>
+				
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

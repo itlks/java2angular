@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
+import JSZip from 'jszip/dist/jszip';
+import S from 'string';
+import * as FileSaver from 'file-saver';
+
 declare var jQuery: any;
 @Component({
   selector: 'app-root',
@@ -10,6 +15,10 @@ export class AppComponent implements OnInit {
   title = 'app';
   public fileString;
   private content;
+  private componente: string= "";
+  private tag: string = "";
+   
+  values: number[] = [102, 115, 130, 137];
 
   constructor() {
     this.fileString;
@@ -51,23 +60,132 @@ export class AppComponent implements OnInit {
     myReader.readAsText(file); //ler o arquivo inserido ao mesmo tempo que o onloadend e carregado.
   }
 
-  downloadContent(){ // 
+  downloadContent(returnString: boolean = false){ // 
 
     var uriContent = encodeURIComponent(this.content);  // this.content variavel global que recebe o resultado do motor principal.
     
     let file: any = document.getElementById("origem");
-    let filename :string = file.files[0].name;
-    filename = filename.slice(0, filename.length-5); 
+    //let filename :string = file.files[0].name;
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
 
     var link = document.createElement('a');
-    link.download = filename.concat('html'); // nome do arquivo gerado
+    link.download = filename + '.html'; // nome do arquivo gerado
     link.href = 'data:,' + uriContent;
-    link.click(); // ação do botão
+    
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
 
   }
 
+  private downloadComponent(returnString: boolean = false){ // 
+
+    var uriContent = 
+    `
+    import {Component, OnInit} from '@angular/core';
+    import {Router} from '@angular/router';
+
+      @Component({
+          selector: '${this.tag}',
+          templateUrl: '${this.componente.toLowerCase()}.html',
+          styleUrls: ['${this.componente.toLowerCase()}.less']
+      })
+      export class ${S('-'+this.componente.replace('.','-')).camelize().s} implements OnInit {
+
+          constructor(public router: Router) {
+          }
+
+
+          ngOnInit() {
+              
+          }
+
+      }
+    `;
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.ts'; // nome do arquivo gerado 
+    link.href = 'data:,' + uriContent;
+  
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
+
+  }
+
+  private downloadLess(returnString: boolean = false){ // 
+
+    var uriContent = "";
+
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.less'; // nome do arquivo gerado 
+    link.href = 'data:,' + uriContent;
+    
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
+
+  }
+
+  private downloadSpec(returnString:boolean = false){ // 
+
+    var uriContent = "";
+
+    
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.spec'; // nome do arquivo gerado 
+    link.href = 'data:,' + uriContent;
+
+    if(returnString)
+      return {"content": uriContent, name: link.download};
+    else
+      link.click(); // ação do botão
+
+  }
+
+  
+  private downloadZip(){ // 
+
+    let _component = this.componente.replace('.component', '');
+
+    var zip = new JSZip();
+    
+    let img = zip.folder(_component);
+    
+    
+
+    zip.file(`${_component}\\${this.downloadLess(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadSpec(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadComponent(true).name}`, this.downloadSpec(true).content);
+    zip.file(`${_component}\\${this.downloadContent(true).name}`, this.downloadSpec(true).content);
+    
+    zip.generateAsync({type:"blob"})
+    .then(function(content) {
+        // see FileSaver.js
+        //saveAs(content, "example.zip");
+
+        let _blob = new Blob([content], { type: 'blob' });
+        FileSaver.saveAs(_blob, `${_component}.zip`);
+    });
+  }
+
   displayFile(){
-    window.open("https://angular.io/docs", "_blank");
+    window.open("../assets/ibpj/index.html", "_blank");
 }
 
   convMain(strHtml: string): void { //motor principal, concentra todas as chamadas para invocar os demais ações.
@@ -376,8 +494,24 @@ export class AppComponent implements OnInit {
   }
  
   convCheckBox(html: string): string {
-    html = html.replace("p:outputPanel", "div");
-  
+
+    console.log(html);
+    //converter tag abertura e substitui por tag nova
+    html = html.replace("<p:selectBooleanCheckbox", "<input type='checkbox'");
+    
+    //procurar atributo value(não é necessario)
+    //procurar atributo binding
+    html = html.replace("binding","ngmodel");
+    //procurar tag fechamento possibilidade 1
+    html = html.replace("</p:selectBooleanCheckbox>", ">");
+    //procurar tag fechamento possibilidade 2
+    html = html.replace("/>", ">");
+    //se funçõ forem sendo chamadas pelo checkbox
+    //html = html.replace("#{", "");
+    //html = html.replace("}", "");
+    
+    console.log(html);
+
     return html;
   }
   
@@ -404,9 +538,6 @@ export class AppComponent implements OnInit {
         }
 
       if (html.match(regxValueApas) != null) { //verifica se tem value
-        //valorTagValue = this.pegaConteudo(html, regxValueApas, regxValue);
-        //var valorTagValueSemCaracEspec = valorTagValue.replace(regxEspecial, "");
-        //valorTagValueSemCaracEspec = contador + " in " + valorTagValueSemCaracEspec;
 
         if(html.match(regxIdApas) != null){ //verifica se tem layout="conteudo"
           html = html.replace(regxIdApas, "");
@@ -431,10 +562,7 @@ export class AppComponent implements OnInit {
   }
 
   convCalendar(html: string): string {
-    
-     if(html != null){
-
-     }
+    html = html.replace("p:calendar","");
     return html;
   }
 
@@ -450,8 +578,6 @@ export class AppComponent implements OnInit {
     var regexValueAspas = /value\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/g;
     var regexValue = /value\s*=*\s*/g;
     if(html != null){
-
-      //html = html.replace("itemValue", "value");
 
       if(html.match(regexSelectedItem) !== null){
         html = html.replace(regexSelectedItem, tagInputTypeRadio);

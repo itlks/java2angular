@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel no-print no-visible">
+					<h4>#{msg['page.contaCorrente.pacoteservico.contratar.termo.dados.conf']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass=" no-print no-visible">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel for="pacote" styleClass="space"
+									value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.descricaoPacote']}" />
+								<h:outputText id="pacote"
+									value="#{pacoteServicoContratarAlterarBBean.selecionado.pacote}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel for="diaDebito" styleClass="space"
+									value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.dia.debito']}" />
+								<h:outputText id="diaDebito"
+									value="#{pacoteServicoContratarAlterarBBean.pacoteAtualDTO.diaDebito}">
+									<f:convertNumber pattern="00" />
+								</h:outputText>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel for="" styleClass="space"
+									value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.adesao']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<p:outputPanel>
+						<p:outputPanel id="txtMsg" styleClass="termos-block value-inline"
+							disabled="true" style="background: #EEEEEE">
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.1']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.2']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.3']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.4']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.5']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.6']}" />
+							<h:outputText styleClass="col-xs-12"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.termo.aceite.7']}" />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel
+								styleClass="table-responsive radio radio-label radio-block no-print no-visible">
+								<h:selectOneRadio id="_1"
+									value="#{pacoteServicoContratarAlterarBBean.pacoteServicoDTO.termoAceite}"
+									styleClass="radio-auto-adjust">
+									<f:selectItem
+										itemLabel="#{msg['page.contaCorrente.pacoteservico.contratar.termo.condicoes']}"
+										itemValue="_1" selected="true" itemEscaped="false" />
+									<f:selectItem
+										itemLabel="#{msg['page.contaCorrente.pacoteservico.contratar.termo.nao']}"
+										itemValue="_2" itemEscaped="false" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					id="btnVoltar" onstart="openLoad()" oncomplete="closeLoad()"
+					action="#{pacoteServicoContratarAlterarBBean.voltarParaPacotes}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+				<p:commandButton styleClass="btn btn-default" id="btnContinuar"
+					action="#{pacoteServicoContratarAlterarBBean.continuarConfirmacao}"
+					onstart="openLoad()" oncomplete="closeLoad()" role="button"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

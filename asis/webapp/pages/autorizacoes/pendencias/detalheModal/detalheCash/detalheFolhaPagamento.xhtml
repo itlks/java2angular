@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:param name="item"
+		value="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash}" />
+	<p:outputPanel styleClass="row form-horizontal space-r space-l">
+		<p:outputPanel styleClass="col-xs-6 ">
+			<h:outputLabel value="Convênio: " />
+			<h:outputText value=" #{item.convenio}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="Conta de Débito: " />
+			<h:outputText value=" #{item.contaDebito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="Nome Funcionário: " />
+			<h:outputText value=" #{item.YLW63NOMEFAVORECIDO}" />
+		</p:outputPanel>
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="CPF/CNPJ do Funcionário: " />
+			<!-- SE -> veriicar condição no asp -->
+			<h:outputText value=" #{item.YLW63CODFORNCONS}" />
+			<!-- END -->
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Pagamento: " />
+			<h:outputText value=" #{item.tipoPagamentoFP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Número do Pagamento: " />
+			<h:outputText value="#{itemYLW63NUMCOMPRO.}" />
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Número da Remessa: " />
+			<h:outputText value=" " />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data de Pagamento: " />
+			<h:outputText value=" #{item.YLW63FECVALORCRED}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data Agendamento: " />
+			<h:outputText value=" Verificar como é montado a Data noc classico" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data Débito: " />
+			<h:outputText value=" Verificar como é montado a Data no classico" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputText value=" #{item.descFinOrHist}" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputText value=" #{item.YLW63CODHIST}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Situação: " />
+			<h:outputText value=" #{item.situacaoFP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. compromisso cliente: " />
+			<h:outputText value=" #{item.YLW63SEUNUMERO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Motivo: " />
+			<h:outputText value=" #{item.YLW63INDESTACOMP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{item.YLW63FORMPAG eq 'STR'}">
+			<h:outputLabel value="Hora: " />
+			<h:outputText value=" #{item.YLW63HORENVIOTED}" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Banco: " />
+			<h:outputText value=" #{item.bancoFP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Agência: " />
+			<h:outputText value=" #{item.YLW63CENTROALTACRED}" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="Conta enviada pelo cliente: " />
+			<h:outputText value=" #{item.YLW63CUENTACRED}" />
+		</p:outputPanel>
+		<p:outputPanel styleClass="col-xs-6">
+			<h:outputLabel value="Valor: " />
+			<h:outputText value=" Verificar no classico" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{item.YLW63INDESTACOMP eq '0' and item.YLW63INDESTACOMP eq 'V' and item.YLW63INDESTACOMP eq 'Z'}">
+			<p:outputPanel styleClass="col-xs-12"
+				rendered="#{!item.YLW63FORMPAG eq 'CARSA'}">
+				<h:outputLabel value="Banco, Agência e Conta Salário:" />
+				<h:outputText value="" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{item.YLW63FORMPAG eq 'CARSA' and item.YLW63FORMPAG eq 'OP'}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Banco, Agência e Conta de Crédito:" />
+				<h:outputText value="" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Forma Final de Pagamento: " />
+			<h:outputText value="#{item.tipoPagamentoFP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:separator />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Serviço: " />
+			<h:outputText value=" #{item.YLW63TPSERV}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Complemento do Tipo de Serviço: " />
+			<h:outputText value=" " />
+		</p:outputPanel>
+		
+	</p:outputPanel>
+</ui:composition>

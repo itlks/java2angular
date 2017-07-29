@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:remoteCommand id="remoteLimparCombos" autoRun="true"
+			action="#{limitesUtilizadosBBean.limparCombos}"
+			update="panelPrincipal"></p:remoteCommand>
+
+		<div class="row space-b">
+			<div class="col-md-6 col-xs-6 site-map">
+				<span>#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.autorizacoes']}
+					<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.separador']}</strong>
+					#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.consultas']}
+				</span>
+				<h1>#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.limitesUtilizados']}</h1>
+			</div>
+		</div>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.consultaLimitesUtilizados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" id="panelPrincipal">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 ">
+							<p>
+								#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.escolhaOpcoes']}
+							</p>
+
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="usuario"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.usuario']}" />
+								<h:selectOneMenu name="usuario" id="selectUsuario"
+									value="#{limitesUtilizadosBBean.usuarioSelecionado}">
+									<p:ajax update="panelPrincipal"
+										listener="#{limitesUtilizadosBBean.onSelectUsuario}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="usuario"
+										value="#{limitesUtilizadosBBean.listaUsuario}"
+										itemLabel="#{usuario.nomeConcatenado}"
+										itemValue="#{usuario.idUsuario}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="produto"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.produto']}" />
+								<h:selectOneMenu name="produto" id="selectProduto"
+									value="#{limitesUtilizadosBBean.produtoSelecionado}">
+
+									<p:ajax update="panelPrincipal"
+										listener="#{limitesUtilizadosBBean.onSelectProduto}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="produto"
+										value="#{limitesUtilizadosBBean.listaProdutos}"
+										itemLabel="#{produto.nomeGrupoServico}"
+										itemValue="#{produto.nrSequGrupServ}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group"
+								rendered="#{limitesUtilizadosBBean.renderTransacao and !limitesUtilizadosBBean.exibirTransacaoDepois}">
+								<h:outputLabel for="transacao"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.transacao']}" />
+								<h:selectOneMenu name="transacao" id="selectTransacao"
+									value="#{limitesUtilizadosBBean.transacaoSelecionada}">
+
+									<p:ajax update="panelPrincipal"
+										listener="#{limitesUtilizadosBBean.onSelectTransacao}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="transacao"
+										value="#{limitesUtilizadosBBean.listaTransacoesProduto}"
+										itemLabel="#{transacao.nomeTransacao}"
+										itemValue="#{transacao.nrSequTran}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group"
+								rendered="#{limitesUtilizadosBBean.renderConvenio and limitesUtilizadosBBean.exibirConvenioConta}">
+								<h:outputLabel for="convenio"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.convenio']}" />
+								<h:selectOneMenu name="convenio" id="selectConvenio"
+									value="#{limitesUtilizadosBBean.convenioSelecionado}">
+
+									<p:ajax update="panelPrincipal"
+										listener="#{limitesUtilizadosBBean.onSelectConvenio}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="convenio"
+										value="#{limitesUtilizadosBBean.listaConvenios}"
+										itemLabel="#{convenio.nomeConcatenado}"
+										itemValue="#{convenio.nomecon}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group"
+								rendered="#{limitesUtilizadosBBean.renderContaDebito and limitesUtilizadosBBean.exibirConvenioConta}">
+								<h:outputLabel for="contaDebito"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.contaDebito']}" />
+								<h:selectOneMenu name="contaCebito" id="selectContaDebito"
+									value="#{limitesUtilizadosBBean.contaDebitoSelecionada}">
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="contaDebito"
+										value="#{limitesUtilizadosBBean.listaConvenios}"
+										itemLabel="#{contaDebito.nomecon}"
+										itemValue="#{contaDebito.nomecon}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group"
+								rendered="#{limitesUtilizadosBBean.renderConvenio and !limitesUtilizadosBBean.exibirConvenioConta}">
+								<h:outputLabel for="convenio"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.convenio']}" />
+								<h:selectOneMenu name="convenio" id="selectConvenio2"
+									value="#{limitesUtilizadosBBean.convenioSelecionado}">
+
+									<p:ajax update="panelPrincipal"
+										listener="#{limitesUtilizadosBBean.onSelectConvenio}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="convenio"
+										value="#{limitesUtilizadosBBean.listaConvenioContaDebito}"
+										itemLabel="#{convenio.nomeConcatenado}"
+										itemValue="#{convenio.nomconv}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group"
+								rendered="#{limitesUtilizadosBBean.renderContaDebito and !limitesUtilizadosBBean.exibirConvenioConta}">
+								<h:outputLabel for="contaDebito"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.contaDebito']}" />
+								<h:selectOneMenu name="contaCebito" id="selectContaDebito2"
+									value="#{limitesUtilizadosBBean.contaDebitoSelecionada}">
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="contaDebito"
+										value="#{limitesUtilizadosBBean.listaConvenioContaDebito}"
+										itemLabel="#{contaDebito.nomconv}"
+										itemValue="#{contaDebito.nomconv}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group"
+								rendered="#{limitesUtilizadosBBean.renderTransacao and limitesUtilizadosBBean.exibirTransacaoDepois}">
+								<h:outputLabel for="transacao"
+									value=" #{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.transacao']}" />
+								<h:selectOneMenu name="transacao" id="selectTransacaoDepois"
+									value="#{limitesUtilizadosBBean.transacaoSelecionada}">
+
+									<p:ajax update="panelPrincipal"
+										listener="#{limitesUtilizadosBBean.onSelectTransacao}" />
+
+									<f:selectItem
+										itemLabel="#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.selecione']}"
+										noSelectionOption="true" />
+									<f:selectItems var="transacao"
+										value="#{limitesUtilizadosBBean.listaTransacoesProduto}"
+										itemLabel="#{transacao.nomeTransacao}"
+										itemValue="#{transacao.nrSequTran}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="commandCancelar"
+					styleClass="btn btn-default btn-cinza pull-left"
+					action="#{limitesUtilizadosBBean.cancelarTransacao}" role="button">
+             		#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.cancelar']} 
+        		</p:commandLink>
+				<p:commandLink id="commandVoltar"
+					styleClass="btn btn-default btn-cinza"
+					action="#{limitesUtilizadosBBean.voltarAutorizacaoLimite}"
+					role="button">
+             		#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.voltar']} 
+        		</p:commandLink>
+        		
+        		<p:blockUI block="commandContinuar" trigger="commandContinuar" />	
+				<p:commandLink id="commandContinuar" styleClass="btn btn-default"
+					action="#{limitesUtilizadosBBean.prosseguirAutorizacaoLimite}"
+					role="button">
+             		#{msg['pages.autorizacoes.consultas.limitesUtilizados.consultaDados.continuar']} 
+        		</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

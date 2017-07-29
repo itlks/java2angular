@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.ConfiOsDadosDeSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- LICENCIAMENTO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.comprovante.RENAV']}</strong>
+								#{licenciamentoRenavamBBean.renavamDTO.numero}
+							</h5>
+							<br />
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.Propr']}</strong>
+								#{licenciamentoRenavamBBean.renavamDTO.proprietario}
+							</h5>
+							<br />
+							<h5>
+								<strong>Ano do licenciamento:</strong>
+								#{licenciamentoRenavamBBean.renavamDTO.anoLicenciamento}
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.CodigDoMunic']}</strong>
+								#{licenciamentoRenavamBBean.renavamDTO.codMunicipio}
+							</h5>
+							<br />
+
+							<h5>
+								<strong>CPF/CNPJ:</strong>
+								#{licenciamentoRenavamBBean.renavamDTO.numCpfCnpj}
+							</h5>
+							<br />
+
+							<h5>
+								<strong>Taxa de licenciamento</strong>
+								<h:outputText
+									value="#{licenciamentoRenavamBBean.renavamDTO.taxaLicenciamento}">
+									<f:convertNumber type="currency" currencySymbol="R$" />
+								</h:outputText>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong></strong>
+
+							</h5>
+							<br />
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.PlacaDoVeicu']}</strong>
+								#{licenciamentoRenavamBBean.renavamDTO.placa}
+							</h5>
+							<br />
+							<h5>
+								<strong>Taxa de postagem:</strong>
+								<h:outputText
+									value="#{licenciamentoRenavamBBean.renavamDTO.taxaPost}">
+									<f:convertNumber type="currency" currencySymbol="R$" />
+								</h:outputText>
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+					<!-- dpvat -->
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>DPVAT</strong>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Pendentes:</strong>
+								#{licenciamentoRenavamBBean.qtdPendentesDpvat}
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Valor Total:</strong>
+								<h:outputText
+									value="#{licenciamentoRenavamBBean.valorTotalDpvat}">
+									<f:convertNumber type="currency" currencySymbol="R$" />
+								</h:outputText>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<ui:repeat id="tblDpvat" var="item"
+							value="#{licenciamentoRenavamBBean.lDpvat}">
+							<p:outputPanel styleClass="col-md-2">
+								<h5>
+									<strong>Exercícios:</strong> #{item.anoExercicio}
+								</h5>
+								<br />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-2">
+								<h5>
+									<strong>Valor:</strong>
+									<h:outputText value="#{item.valor}">
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</h:outputText>
+								</h5>
+								<br />
+							</p:outputPanel>
+						</ui:repeat>
+					</p:outputPanel>
+
+					<p:separator />
+					<!-- IPVA -->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>IPVA</strong>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Pendentes:</strong>
+								#{licenciamentoRenavamBBean.qtdPendentesIpva}
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Valor Total:</strong>
+								<h:outputText
+									value="#{licenciamentoRenavamBBean.valorTotalIpva}">
+									<f:convertNumber type="currency" currencySymbol="R$" />
+								</h:outputText>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<ui:repeat id="tblIpva" var="item"
+							value="#{licenciamentoRenavamBBean.lIpva}">
+							<p:outputPanel styleClass="col-md-2">
+								<h5>
+									<strong>Exercícios:</strong> #{item.anoExercicio}
+								</h5>
+								<br />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-2">
+								<h5>
+									<strong>Valor:</strong>
+									<h:outputText value="#{item.valor}">
+										<f:convertNumber type="currency" currencySymbol="R$" />
+									</h:outputText>
+								</h5>
+								<br />
+							</p:outputPanel>
+						</ui:repeat>
+					</p:outputPanel>
+
+					<!-- mULTAS -->
+					<p:separator />
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Multas</strong>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Pendentes:</strong>
+								#{licenciamentoRenavamBBean.dto.qntMulta}
+							</h5>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>Valor Total:</strong>
+								<h:outputText
+									value="#{licenciamentoRenavamBBean.valorTotalIpva}">
+									<f:convertNumber type="currency" currencySymbol="R$" />
+								</h:outputText>
+							</h5>
+							<br />
+						</p:outputPanel>
+						<ui:repeat id="tabelaMultas" var="multa"
+							value="#{licenciamentoRenavamBBean.dto.listaMultas}">
+
+							<p:outputPanel styleClass="col-md-3">
+
+								<h5>
+									<strong>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.guia']}</strong>
+									#{multa.guia}
+								</h5>
+								<br />
+
+								<h5>
+									<strong>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.dataDeInfra']}</strong>
+									#{multa.dataInfracao}
+								</h5>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-3">
+
+								<h5>
+									<strong>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.autoDeInfra']}</strong>
+									#{multa.autoInfracao}
+								</h5>
+								<br />
+
+								<h5>
+									<strong>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.dataDeVenci']}</strong>
+									#{multa.dataVencimento}
+								</h5>
+
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-3">
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-3">						
+								<h5>
+									<strong>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.orgaoAutua']}</strong>
+									#{multa.orgaoAutuador}
+								</h5>
+								<br />
+								<h5>
+									<strong>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.valor']}</strong>
+									#{msg['pages.moeda']} #{multa.valor}
+								</h5>
+								<br />
+							</p:outputPanel>
+						</ui:repeat>
+
+					</p:outputPanel>					
+					<p:separator />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-3 col-md-offset-9">
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.VALORTOTAL']}</strong>
+								R$ 324,60
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.AssinEletr']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-3">
+							<p>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.ContaCorre']}</strong>
+							</p>
+							<p>
+								<strong><h:outputText value="#{licenciamentoRenavamBBean.session.agencia} #{licenciamentoRenavamBBean.session.conta}" /></strong>
+							</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-3">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.AssinEletr']}</h:outputLabel>
+								<p:password id="pswAssinatura" maxlength="8"
+									value="#{licenciamentoRenavamBBean.assinaturaEletronica}"
+									styleClass="form-control text-center"></p:password>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					action="#{licenciamentoRenavamBBean.voltarPagamento}"
+					styleClass="btn btn-default btn-cinza" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.Volta']}</p:commandLink>
+				<p:commandLink id="cmdLnkContinuar"
+					action="#{licenciamentoRenavamBBean.continuarComprovante}"
+					styleClass="btn btn-default" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.confirmacao.Conti']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

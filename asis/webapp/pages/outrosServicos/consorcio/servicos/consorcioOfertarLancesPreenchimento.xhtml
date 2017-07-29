@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<!--ALERTA-->
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Confira os dados da sua oferta de lance</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!--FIM ALERTA -->
+
+		<!--T�TULO -->
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Cliente:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.nomeCliente}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="CNPJ/CPF:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.numeroCpfCnpj}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Grupo:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.codigoGrupo}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Cota:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.codigoCota}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Bem:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.codigoBem}" />
+									<p:spacer width="10px" />
+									<span><h:outputText value="#{consorcioOfertarLancesBBean.nomeBem}" /></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h:outputLabel for="" value="Dados da oferta do lance" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Data da Assembléia:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.dataAssembleia}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Percentual:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.percentualLance}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Número de prestações:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.numeroPrestacoes}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Valor do Lance:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+							    <h:outputText value="#{consorcioOfertarLancesBBean.valorLance}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-4 col-xs-5 no-padding">
+								<h:outputLabel for="" value="Forma de Pagamento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-8 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.formaPagamento}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-lg-12">
+							<h:outputLabel for=""
+								value="Esta oferta de lance poderá ser cancelada até às 18 horas do último dia útil que antecede a data da assembléia" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-3">
+							<p><h:outputLabel for="" value="Conta Corrente: " /></p>
+							<p><span>#{consorcioOfertarLancesBBean.agenciaConta}</span></p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!--FIM PAINEL PRINCIPAL -->
+
+		<!--BOT�ES PADR�O -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" actionListener="#{consorcioOfertarLancesBBean.voltarEmSelecao}" role="button">Voltar</p:commandLink>
+				<p:commandLink styleClass="btn btn-default " actionListener="#{consorcioOfertarLancesBBean.continuarEmComprovante}"	role="button">Continuar</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!--FIM BOT�ES PADR�O -->
+	</ui:define>
+</ui:composition>

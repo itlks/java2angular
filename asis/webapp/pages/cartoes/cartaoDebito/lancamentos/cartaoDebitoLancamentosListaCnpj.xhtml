@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cartaoDebitoLancamentosBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+          
+    	 <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4><h:outputText value="#{msg['pages.cartoes.cartao.debito.lancamentos.selecione.cnpj']}"/></h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow">    
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:outputPanel styleClass="table-responsive table table-striped">
+                             <p:dataTable tableStyleClass="table-hover" var="item" id="tabela1" 
+	                             rowKey="#{item.cnpjComMascara}"
+	                             value="#{cartaoDebitoLancamentosBBean.dto.cnpjs}"
+	                             selection="#{cartaoDebitoLancamentosBBean.dto.cnpjSelecionado}" selectionMode="single">
+	                             
+	                             <p:ajax event="rowSelect" listener="#{cartaoDebitoLancamentosBBean.onRowSelectCnpj}" process="@all"/>
+                             
+                                <p:column headerText="#{msg['pages.cartoes.cartao.debito.lancamentos.header.cnpj']}">
+                                   <p:outputLabel value="#{item.cnpjComMascara}" />
+                                </p:column>
+                                <p:column headerText="#{msg['pages.cartoes.cartao.debito.lancamentos.header.empresa']}">
+                                   <p:outputLabel value="#{item.nomeEmpresa}" />
+                                </p:column>
+                             </p:dataTable>
+                          </p:outputPanel>                                                                                
+                        </p:outputPanel>                               
+                    </p:outputPanel>  
+                                                            
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>      
+
+		<p:outputPanel styleClass="row space-b">
+		    <p:outputPanel styleClass="col-xs-12 text-right">
+		       
+		       <p:blockUI block="btnVoltar" trigger="btnVoltar" />
+		       <p:commandLink id="btnVoltar" action="#{cartaoDebitoLancamentosBBean.voltarDaTelaListaCnpj}" styleClass="btn btn-default btn-cinza"
+		       		action="#{cartaoDebitoLancamentosBBean.voltarDaTelaListaCnpj}" role="button">#{msg['pages.cartoes.cartao.debito.lancamentos.voltar']}</p:commandLink>
+		   
+		    </p:outputPanel>
+		</p:outputPanel> 
+    	    
+        
+	</ui:define>
+</ui:composition>         

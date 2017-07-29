@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:outputLabel styleClass="space-b" value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+  
+	<p:outputPanel styleClass="row">
+			 
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento
+			 			and agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento.tipo eq 'S'}">
+			<h:outputLabel for="tipoRecorrenteTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipo']}" />
+			<h:outputText id="tipoRecorrenteTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento.descricao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="tipoTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipoTED']}" />
+			<h:outputText id="tipoTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoTED}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="numeroBancoTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.numeroBancoISPB']}" />
+			<h:outputText id="numeroBancoTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.bancoDestino}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="agenciaTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.agencia']}" />
+			<h:outputText id="agenciaTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.agenciaDestino}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.conta']}" />
+			<h:outputText id="contaTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaDestino}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="favorecidoTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.favorecido']}" />
+			<h:outputText id="favorecidoTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.favorecido}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="finalidadeTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.finalidade']}" />
+			<h:outputText id="finalidadeTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.finalidadeTED.descricao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="historicoTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.historico']}" />
+			<h:outputText id="historicoTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.historico}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="tipoContaTed" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipoConta']}" />
+			<h:outputText id="tipoContaTed"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoConta.descricao}" />
+		</p:outputPanel>
+			 
+	</p:outputPanel>
+			
+</ui:composition>

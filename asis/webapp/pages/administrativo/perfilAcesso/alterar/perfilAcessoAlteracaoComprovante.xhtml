@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:santander="http://santander.com/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{!perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.pendencias}">
+					<h4>#{msg['page.perfilAcesso.alterarComprovante.alterarFinalizadaSucesso']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.pendencias}">
+					<h4>#{msg['page.perfilAcesso.alterarComprovante.alterarFinalizadaSucessoPendenteAutorizacao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.nomePerfil']}" />
+							<h:outputText
+								value="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.nomePerfil}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.descricao']}" />
+							<h:outputText
+								value="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.descricao}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include
+						src="/pages/administrativo/perfilAcesso/perfilAcessoTreeViewVisualizacao.xhtml">
+						<ui:param name="DTOlistaPerfilAcesso"
+							value="#{perfilAcessoAlteracaoBBean.listaPerfilAcesso}" />
+					</ui:include>
+
+					<p:outputPanel
+						rendered="#{perfilAcessoAlteracaoBBean.perfilAcessoSelecionado.pendencias}">
+						<ui:include
+							src="/templates/templateDemonstrativo.xhtml" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

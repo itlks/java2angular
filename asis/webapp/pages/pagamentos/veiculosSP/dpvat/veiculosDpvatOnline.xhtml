@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:include	src="/pages/pagamentos/veiculosSP/dpvat/dpvatDadosComuns.xhtml" />
+
+	<p:separator />
+
+	<p:outputPanel styleClass="row space-b">
+		<ui:repeat id="tabelaExec"
+				var="exec"
+				value="#{dpvatSpBBean.exerciciosSelecionados}">
+
+			<p:outputPanel styleClass="col-xs-4">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamentos.veiculossp.dpvat.confirmacao.Exercicio']} " styleClass="bold" />
+					<h:outputText value="#{exec.exercicio}" />
+				</h5>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-8">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.ValorTotal']} " styleClass="bold" />
+					<h:outputText id="txtValorTotal" value="#{exec.valorTotal}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+				</h5>
+			</p:outputPanel>
+		
+			<br />
+			<br />
+		</ui:repeat>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-4" />
+				
+		<p:outputPanel styleClass="col-xs-8">
+			<h5>
+				<h:outputText value="#{msg['pages.pagamentos.veiculossp.dpvat.confirmacao.ValorTotal']} " styleClass="bold" />
+				<span>
+					<h:outputText id="txtTotal" value="#{dpvatSpBBean.dpvatDTO.valorTotal}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+				</span>
+			</h5>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+</ui:composition>

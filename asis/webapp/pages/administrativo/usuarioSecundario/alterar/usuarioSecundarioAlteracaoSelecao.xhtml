@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:remoteCommand action="#{usuarioSecundarioAlterarBBean.exibirErro}"
+			autoRun="true" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass=" titulo-painel">
+					<h4>#{msg['page.administrativo.usuarioSecundario.alterar.alterarSelecaoUsuario.escolha.usuario.deseja']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabelaUsuarios" rowKey="#{usuario.nomeLogon}"
+									value="#{usuarioSecundarioAlterarBBean.listaUsuarios}"
+									var="usuario"
+									selection="#{usuarioSecundarioAlterarBBean.usuarioSelecionado}">
+									<p:column selectionMode="single" />
+									<p:column
+										headerText="#{msg['page.administrativo.usuarioSecundario.alterar.alterarSelecaoUsuario.nome.completo']}">
+										<h:outputText value="#{usuario.nomeUsuario}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.administrativo.usuarioSecundario.alterar.alterarSelecaoUsuario.nome.acesso']}">
+										<p:commandLink
+											action="#{usuarioSecundarioAlterarBBean.detalharUsuarioSecundario(usuario)}"
+											value="#{usuario.nomeLogon}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.administrativo.usuarioSecundario.alterar.alterarSelecaoUsuario.mobile.banking']}">
+										<h:outputText value="#{usuario.habilitado}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default"
+					action="#{usuarioSecundarioAlterarBBean.navDadosCadastrais}"
+					role="button" id="btnVoltar"
+					value="#{msg['page.administrativo.usuarioSecundario.alterar.alterarSelecaoUsuario.dados.cadastrais']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+
+				<p:commandButton styleClass="btn btn-default"
+					action="#{usuarioSecundarioAlterarBBean.navAlterarPerfis}"
+					role="button" id="btnContinuar"
+					value="#{msg['page.administrativo.usuarioSecundario.alterar.alterarSelecaoUsuario.alterar.perfis']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<div class="row space-b">
+			<div class="col-md-6 col-xs-6 site-map">
+				<span>Pagamentos <strong>&gt;</strong> Veículos São Paulo
+				</span>
+				<h1>Transferência</h1>
+			</div>
+		</div>       
+
+	<p:outputPanel styleClass="row space-b">
+		   <p:outputPanel styleClass="col-md-12">
+		      <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+		         <i class="fa fa-exclamation-circle"></i>
+		         <span>
+			         <p>TransaÃ§Ã£o exclusiva para pagamentos  de taxas do Detran SP.</p>
+			         <p>Os pagamentos efetuados apÃ³s Ã s 22h30 serÃ£o executados com data contÃ¡bil do prÃ³ximo dia Ãºtil. Preencha cuidadosamente, pois os dados informados sÃ£o de sua responsabilidade</p>
+					 <p>Para mais informaÃ§Ãµes acesse o site da <p:commandLink actionListener="#">Secretaria da Fazenda do Estado de SÃ£o Paulo.</p:commandLink></p>
+			         <br/>
+			          <p>
+				         <p:commandLink actionListener="#">
+				            <h:outputText value="Confira os limites para esse pagamento" />
+				         </p:commandLink>
+			         </p>
+		         </span>
+		      </p:outputPanel>
+		   </p:outputPanel>
+		</p:outputPanel>
+
+		 <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>Informe os dados para o seu pagamento</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-lg-12">
+            <p:outputPanel styleClass="box-shadow">
+
+              <p:outputPanel styleClass="row">
+              	<p:outputPanel styleClass="col-md-12">
+      				<h5>Digite corretamente o nÃºmero do Renavam do veÃ­culo:</h5>
+				</p:outputPanel>
+         	  </p:outputPanel>
+
+              <p:outputPanel styleClass="row">
+              	<p:outputPanel styleClass="col-md-4">
+					<p:outputPanel styleClass="form-group">
+					   <h:outputLabel for="" value="Label do input:" />
+					   <p:inputText disable="disable" styleClass="form-control" />
+					</p:outputPanel>
+				</p:outputPanel>
+         	  </p:outputPanel>          	         	  
+
+            </p:outputPanel>
+          </p:outputPanel>
+        </p:outputPanel>
+
+		<p:outputPanel styleClass="col-md-12 text-right">
+			<p:commandLink styleClass="btn btn-default"  role="button">Continuar</p:commandLink>
+		</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>
+		

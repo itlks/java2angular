@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<!-- ############################################################### DADOS RENAVAM INICIO ####################################################################### -->   
+
+        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeBancoCliente.xhtml"/>
+
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-4">
+              <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.cpfcnpj']}"/>
+              <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.cpfcNPJ2Formatado}"/>
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="col-xs-4">
+              <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.taxaderegistro']}"/>
+              <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.valTot}">
+                <f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+              </h:outputText>
+            </p:outputPanel>
+        </p:outputPanel>
+    
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:separator styleClass="space-b" />
+            </p:outputPanel>
+        </p:outputPanel>
+        
+         <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+               <p>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.registro.aviso1']}</p>
+               <p>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.registro.aviso2']}</p>
+               <p>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.registro.aviso3']}</p>
+             </p:outputPanel>
+         </p:outputPanel>
+
+         <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:separator styleClass="space-b" />
+            </p:outputPanel>
+         </p:outputPanel>
+
+	     <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeRodape1.xhtml"/>
+	     <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeRodape2.xhtml"/>
+    
+  <!-- ####################################################################### DADOS RENAVAM FIM ######################################################################### -->
+</ui:composition>

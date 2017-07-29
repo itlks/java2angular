@@ -1,0 +1,76 @@
+﻿<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row space-b">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="transacao" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.transacao']}" />
+			<h:outputText id="transacao"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.transacao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="dataHoraSolicitacao" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.dataHoraSolicitacao']}" />
+			<h:outputText id="dataHoraSolicitacao"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.dataSolicitacao}">
+				<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="dataAgendada" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.dataAgendada']}" />
+			<h:outputText id="dataAgendada"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.dataAgendamento}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="dataHoraExecucao" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.dataHoraExecucao']}" />
+			<h:outputText id="dataHoraExecucao"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.dataExecucao}">
+				<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="numeroProtocolo" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.numeroProtocolo']}" />
+			<h:outputText id="numeroProtocolo"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.protocolo}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="canal" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.origem']}" />
+			<h:outputText id="canal"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.canalAgendamento.descricao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="situacaoAgendamento" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.situacao']}" />
+			<h:outputText id="situacaoAgendamento"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.situacaoAgendamento.descricao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="valorAgendamento" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.valor']}" />
+			<h:outputText id="valorAgendamento"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorAgendamento}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="R$"></f:convertNumber>
+			</h:outputText>
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+</ui:composition>

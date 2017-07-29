@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:dialog id="empresas" widgetVar="empresas" closable="true"
+		resizable="false" draggable="false" showHeader="true" width="60%"
+		height="600" modal="true" styleClass="modalGray modal-box"
+		header="Empresas Conveniadas" rendered="false">
+
+		<p:scrollPanel mode="native" style="width:100%;height:600px;">
+
+			<h:body>
+
+				<h:outputStylesheet name="css/jquery-ui-themes.css"></h:outputStylesheet>
+
+				<p:accordionPanel activeIndex="null" styleClass="accordion" cache="true" dynamic="true" >
+					<p:tab title="CONTAS DE ÁGUA">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('1001')}"
+							 var="lista">
+							<p:column>
+								<h:outputText value="#{lista.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="CONTAS DE LUZ">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('1002')}"
+							 var="lista1">
+							<p:column>
+								<h:outputText value="#{lista1.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="CONTAS DE GÁS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('1003')}"
+							 var="lista2">
+							<p:column>
+								<h:outputText value="#{lista2.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="CONTAS DE TELEFONE">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('1004')}"
+							 var="lista3">
+							<p:column>
+								<h:outputText value="#{lista3.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="CONTAS - DEMAIS DOCUMENTOS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('1005')}"
+							 var="lista4">
+							<p:column>
+								<h:outputText value="#{lista4.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="DARF">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('2001')}"
+							 var="lista5">
+							<p:column>
+								<h:outputText value="#{lista5.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="GPS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('2002')}"
+							 var="lista6">
+							<p:column>
+								<h:outputText value="#{lista6.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="FGTS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('2003')}"
+							 var="lista7">
+							<p:column>
+								<h:outputText value="#{lista7.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="SIMPLES NACIONAL">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('2004')}"
+							 var="lista8">
+							<p:column>
+								<h:outputText value="#{lista8.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="GARE ICMS IMPORTAÇÃO SP">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('3001')}"
+							 var="lista9">
+							<p:column>
+								<h:outputText value="#{lista9.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="GNRE">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('3002')}"
+							 var="lista10">
+							<p:column>
+								<h:outputText value="#{lista10.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="DARE / DAE / TRIBUTOS ESTADUAIS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('3003')}"
+							 var="lista11">
+							<p:column>
+								<h:outputText value="#{lista11.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="IPTU PMSP">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('4001')}"
+							 var="lista12">
+							<p:column>
+								<h:outputText value="#{lista12.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="TRIBUTOS E TAXAS MUNICIPAIS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('4002')}"
+							 var="lista13">
+							<p:column>
+								<h:outputText value="#{lista13.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="TRIBUTO PMSP">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('4003')}"
+							 var="lista14">
+							<p:column>
+								<h:outputText value="#{lista14.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="IPVA SP">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5001')}"
+							 var="lista15">
+							<p:column>
+								<h:outputText value="#{lista15.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="DPVAT SP">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5002')}"
+							 var="lista16">
+							<p:column>
+								<h:outputText value="#{lista16.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="Veículos São Paulo Inspeção Veicular">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5003')}"
+							 var="lista17">
+							<p:column>
+								<h:outputText value="#{lista17.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="IPVA MG">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5101')}"
+							 var="lista18">
+							<p:column>
+								<h:outputText value="#{lista18.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="IPVA SP">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5102')}"
+							 var="lista19">
+							<p:column>
+								<h:outputText value="#{lista19.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="MULTAS DE TRANSITO">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5103')}"
+							 var="lista20">
+							<p:column>
+								<h:outputText value="#{lista20.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+
+					<p:tab title="DPVAT DE OUTROS ESTADOS">
+						<p:dataList value="#{relacaoEmpresasBBean.buscarEmpresa('5001')}"
+							 var="lista21">
+							<p:column>
+								<h:outputText value="#{lista21.TSOENOMECONV}"></h:outputText>
+							</p:column>
+						</p:dataList>
+
+					</p:tab>
+				</p:accordionPanel>
+			</h:body>
+
+		</p:scrollPanel>
+
+	</p:dialog>
+
+</ui:fragment>
+

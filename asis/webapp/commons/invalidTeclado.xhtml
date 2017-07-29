@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+                
+				<script type="text/javascript" language="javascript">
+					jQuery(window).load(function() {
+						validarSessaoTeclado();
+					});
+				</script>
+				
+				<p:remoteCommand name="validarSessaoTeclado" action="#{sessionBBean.validarSessaoTeclado}" async="false" />
+</ui:composition>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.confiraDadosExclusao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.identificacao']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.identificacao}
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.receita']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.codigoReceita}
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.inscricaoEstadual']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.inscricaoEstadual}
+							</h5>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.cpfCnpj']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnpjCpf}
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.inscricaoDivida']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.inscricaoDivida}
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.nrAiim']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.nrAiim}
+							</h5>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.contribuinte']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.contribuinte}
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.endereco']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.endereco}
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.telefone']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.telefone}
+							</h5>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.cnae']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnae}
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>
+								<strong>#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.observacoes']}
+								</strong>#{apelidoBBean.configuracaoApelido.apelidoEscolhido.observacoes}
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					actionListener="#{apelidoBBean.goApelido()}" id="btnVoltar"
+					role="button"
+					value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.voltar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton styleClass="btn btn-default"
+					actionListener="#{gareIcmsSpBBean.continuarApelidoExcluirConfirmacao}"
+					id="btnContinuar" role="button"
+					value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosExcluir.continuar']}" />
+
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

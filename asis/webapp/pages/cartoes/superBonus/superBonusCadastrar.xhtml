@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:jsp="http://java.sun.com/JSP/Page"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:c="http://java.sun.com/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui" 
+				template="/templates/templateConsultaNovo.xhtml">
+
+
+	<ui:define name="content"> 
+
+
+	<p:outputPanel styleClass="row space-b">
+	  <p:outputPanel styleClass="col-xs-12">
+	    <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow boxShadowOnPrint no-visible">
+	        <i class="fa fa-exclamation-circle"></i>
+	        <span>
+		        <p>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.readmeText1']}</p>
+		        <p>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.readmeText2']} #{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.readmeText3']}</p>
+	        </span>
+	    </p:outputPanel>
+	  </p:outputPanel>
+	</p:outputPanel>
+	
+	
+	<p:outputPanel styleClass="row">
+	    <p:outputPanel styleClass="col-xs-12">
+	        <p:outputPanel styleClass="box-shadow no-margin-bottom">
+	
+	            <p:outputPanel styleClass="row">
+	              	<p:outputPanel styleClass="col-xs-12">
+                 			<h:outputLabel for="cnpj" value="#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.cnpj']}" />
+		                  <span> 
+	                  			<h:outputText id="cnpj" value="#{superBonusCadastrarBBean.cartaoDebitoLancamentosCnpjDTO.cnpjComMascara}" />
+		                  </span>
+		                  
+		                  <br/>
+	                  			<h:outputLabel for="nomePortEmpresa" value="#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.empresa']}" />
+		                  <span>
+		                  		<h:outputText id="nomePortEmpresa" value="#{superBonusCadastrarBBean.cartaoDebitoLancamentosCnpjDTO.nomeEmpresa}" />
+		                  </span>
+		                  
+		                  <br/>
+		                  
+	              	</p:outputPanel>
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row space-b">
+		              <p:outputPanel styleClass="col-xs-12">
+		                	<p:separator />
+		              </p:outputPanel>
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row space-b">
+		            
+		              <p:outputPanel styleClass="col-xs-3">
+		               		<h5>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.cartaoselecionado']} </h5>
+		              </p:outputPanel>
+		              
+		              <p:outputPanel styleClass="col-xs-1">
+		                	<p:graphicImage value="/images/img_visa.gif"  rendered="#{superBonusCadastrarBBean.cartaoDebitoLancamentosContratoDTO.codigoBandeira == 2}"/>
+		                	<p:graphicImage value="/images/img_master.gif" rendered="#{superBonusCadastrarBBean.cartaoDebitoLancamentosContratoDTO.codigoBandeira == 1}"/>
+		              </p:outputPanel>
+		              
+		              <p:outputPanel styleClass="col-xs-4">
+		                	<h5><h:outputText value="#{superBonusCadastrarBBean.cartaoDebitoLancamentosContratoDTO.produto}" /></h5>
+		              </p:outputPanel>
+		              
+		              <p:outputPanel styleClass="col-xs-4">
+		                	<h5><h:outputText value="#{superBonusCadastrarBBean.consContratoMRSDTO.concatContrato}" /> </h5>
+		              </p:outputPanel>
+		              
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row space-b">
+		              <p:outputPanel styleClass="col-xs-12">
+		                	<p:separator />
+		              </p:outputPanel>
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row space-b">
+	            
+		              <p:outputPanel styleClass="col-xs-4">
+		                	<h:outputLabel for="numeroContrato" value="#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.numeroContrato']}" />
+		                	<span>
+								<h:outputText id="numeroContrato" value="#{superBonusCadastrarBBean.consContratoMRSDTO.contrMRS}" />
+							</span>
+		              </p:outputPanel>
+		             
+		              <p:outputPanel styleClass="col-xs-4">
+		                	<h:outputLabel for="pan" value="#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.pan']}"/>
+		                	<span>
+		                		<h:outputText id="pan" value="#{superBonusCadastrarBBean.cartaoDebitoLancamentosContratoDTO.cartaoComMascara}" />
+	                		</span>
+		              </p:outputPanel>
+		            
+		              <p:outputPanel styleClass="col-xs-4">
+		                	<h:outputLabel for="nomePort" value="#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.nomePort']}" />
+		                	<span> 
+		                		<h:outputText id="nomePort" value="#{superBonusCadastrarBBean.consContratoMRSDTO.nomePort}" />
+		                	</span>
+		              </p:outputPanel>
+		              
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row space-b">
+		              <p:outputPanel styleClass="col-xs-12">
+		                	<p:separator />
+		              </p:outputPanel>
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row space-b">
+	              	<p:outputPanel styleClass="col-xs-12">
+                 		<h5><strong>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.atencao']}</strong></h5>
+	                  	<br/>
+              			<p>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.atencaoText1']}</p>
+	                  	<p>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.atencaoText2']}</p>
+	                 	<p>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.atencaoText3']}</p>
+                  		<br/>
+	                  	<p>#{msg['pages.cartoes.cartoesDebito.superBonus.cadastrarConsultar.acessar']}
+	                  		<p:commandLink  action="#{superBonusCadastrarBBean.finalizarSessao}" onstart="window.open('http://www.santander.com.br/esfera', '_blank')" styleClass="no-visible" >www.santander.com.br/esfera</p:commandLink>
+	                  		<h:outputText styleClass="link-termos show-print" value="www.santander.com.br/esfera"/>
+	                  	</p>
+	              		
+	              </p:outputPanel>
+	            </p:outputPanel>
+	
+	            <p:outputPanel styleClass="row">
+	                <p:outputPanel styleClass="col-xs-12">
+	                    <p:separator />
+	                </p:outputPanel>
+	            </p:outputPanel>
+	
+				<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+	
+	        </p:outputPanel>
+	        
+           <ui:include src="/commons/pdf/pdfButtons.xhtml" />
+           <br/>
+	           
+	    </p:outputPanel>
+	    
+	</p:outputPanel>
+	
+	</ui:define>
+	
+</ui:composition>

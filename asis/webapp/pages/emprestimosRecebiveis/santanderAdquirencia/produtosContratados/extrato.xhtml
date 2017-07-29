@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:jsp="http://java.sun.com/JSP/Page"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:c="http://java.sun.com/jstl/core"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+       template="/templates/templateConsultaNovo.xhtml">
+
+       <ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.emprestimosRecebiveis.santanderAdquirencia.produtosContratados.extrato.extrato']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.santanderAdquirencia.produtosContratados.extrato.escolhaDadoConsultar']}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row no-print no-visible">
+							<p:outputPanel id="panelFormulario" styleClass="col-xs-12">
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel styleClass="form-group space-t">
+										<h:outputLabel for="estabelecimento" value="Estabelecimento:" />
+										<p:inputText id="estabelecimento" value="#{santanderAdquirenciaProdutosContratadosBBean.estabelecimento}" maxlength="9" styleClass="form-control numberOnly"/>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel id="panelBotaoExibir" styleClass="space-t col-xs-4 pull-right">
+									<p:outputPanel styleClass="space-t pull-right ">
+									     <p:commandLink id="btnExibir" styleClass="btn btn-default" role="button" 
+                       						action="#{santanderAdquirenciaProdutosContratadosBBean.continuarEmExibir}" 
+                       						update="formGeral:panelTabela,panelBotoesPdf">#{msg['page.btn.exibir']}
+                       					</p:commandLink>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:blockUI block="panelBotaoExibir" trigger="btnExibir"></p:blockUI>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel id="panelTabela">
+						<p:outputPanel rendered="#{santanderAdquirenciaProdutosContratadosBBean.exibirTabela == true}">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="lblEstabelecimento" styleClass="space"	value="Estabelecimento:" />
+											<h:outputText id="lblEstabelecimento" value="#{santanderAdquirenciaProdutosContratadosBBean.estabelecimento}" />
+										</p:outputPanel>
+									</p:outputPanel>
+		
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-7">
+											<h:outputLabel for="nome" styleClass="space" value="Nome:" />
+											<h:outputText id="nome" value="#{santanderAdquirenciaProdutosContratadosBBean.titularConta}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="cnpj" styleClass="space" value="CNPJ:" />
+											<h:outputText id="cnpj" value="#{santanderAdquirenciaProdutosContratadosBBean.cnpj}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+	
+	
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="table-responsive table table-striped">
+										<p:dataTable id="tabela"
+											value="#{santanderAdquirenciaProdutosContratadosBBean.listaProdutos}" var="produto"
+											emptyMessage="#{santanderAdquirenciaProdutosContratadosBBean.msgConsulta}">
+	
+											<p:column styleClass="col-xs-2">
+												<f:facet name="header">
+													<h:outputText value="#{msg['pages.emprestimoserecebiveis.santanderAdquirencia.extrato.produto']}" />
+												</f:facet>
+												<h:outputText value="#{produto.descBandeira}" />
+											</p:column>
+											
+											<p:column styleClass="col-xs-2">
+												<f:facet name="header">
+													<h:outputText value="#{msg['pages.emprestimoserecebiveis.santanderAdquirencia.extrato.prazo']}" />
+												</f:facet>
+												<h:outputText value="#{produto.prazo}" />
+											</p:column>
+											
+											<p:column  styleClass="col-xs-4 text-right">
+												<f:facet name="header">
+													<h:outputText value="#{msg['pages.emprestimoserecebiveis.santanderAdquirencia.extrato.taxa']}" />
+												</f:facet>
+												<h:outputText value="#{produto.taxa}" >
+													<f:convertNumber type="percent" pattern="###,##"/>
+												</h:outputText>
+											</p:column>
+											
+											<p:column styleClass="col-xs-3 text-right">
+												<f:facet name="header" >
+													<h:outputText value="#{msg['pages.emprestimoserecebiveis.santanderAdquirencia.extrato.tarifar$']}" />
+												</f:facet>
+												<h:outputText value="#{produto.vlTarifa}">
+													<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+												</h:outputText>
+											</p:column>
+											
+										</p:dataTable>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+					<p:outputPanel id="panelBotoesPdf">
+						<p:outputPanel
+							rendered="#{santanderAdquirenciaProdutosContratadosBBean.exibirTabela}">
+							<ui:include src="/commons/pdf/pdfButtons.xhtml">
+								<ui:param name="excel" value="tabela" />
+								<ui:param name="nomeExcel" value="Extrato Santander" />
+							</ui:include>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 no-print no-visible text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{santanderAdquirenciaProdutosContratadosBBean.voltarEmMenu}">#{msg['page.btn.voltar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		</ui:define>
+</ui:composition>

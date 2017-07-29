@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cartaoAmexBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		
+       
+    <p:outputPanel styleClass="row">
+        <p:outputPanel styleClass="col-lg-12">
+            <p:outputPanel styleClass="titulo-painel">
+                <h4>#{msg['page.cartoes.amex.confirmacao.confira']}</h4>
+            </p:outputPanel>
+        </p:outputPanel>
+    </p:outputPanel>  
+
+    <p:outputPanel styleClass="row">
+        <p:outputPanel styleClass="col-lg-12">
+            <p:outputPanel styleClass="box-shadow">    
+
+                <p:outputPanel styleClass="row">
+                    <p:outputPanel styleClass="col-md-12">
+
+                        <h:outputLabel for="" value="Cartão:" />
+                        <span>#{cartaoAmexBBean.dto.nomeCartaoSelecionado}</span><br/>
+                        
+                        <h:outputLabel for="" value="Número do Cartão:" />
+                        <span>#{cartaoAmexBBean.dto.numeroCartaoPrimeiraParte} #{cartaoAmexBBean.dto.numeroCartaoSegundaParte} #{cartaoAmexBBean.dto.numeroCartaoTerceiraParte}</span><br/>
+                        
+                        <h:outputLabel for="" value="Valor a Pagar:" />
+                        <span>R$ #{cartaoAmexBBean.dto.valorAPagar}</span>
+                                                                      
+                    </p:outputPanel>                               
+                </p:outputPanel>  
+                                                        
+            </p:outputPanel>
+        </p:outputPanel>
+    </p:outputPanel>   
+
+	<p:outputPanel>
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+	</p:outputPanel>
+				
+	<p:outputPanel styleClass="row space-b">
+	    <p:outputPanel styleClass="col-md-12 text-right">
+      	   <p:blockUI block="btnVoltar" trigger="btnVoltar" />
+	       <p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"  role="button" tabindex="2"
+	       		action="#{cartaoAmexBBean.voltarDaTelaConfirmacao}">#{msg['page.cartoes.amex.confirmacao.voltar']}</p:commandLink>
+	       		
+	       <p:blockUI block="btnContinuar" trigger="btnContinuar" />
+	       <p:commandLink id="btnContinuar" styleClass="btn btn-default"  role="button" tabindex="3" onstart="encryptSecureDL();"
+	       		action="#{cartaoAmexBBean.continuarDaTelaConfirmacao}">#{msg['page.cartoes.amex.confirmacao.continuar']}</p:commandLink>
+	       		
+	    </p:outputPanel>
+	</p:outputPanel> 
+			
+        
+	</ui:define>
+</ui:composition>         

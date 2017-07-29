@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set id="v_#{id}" var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set  id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<p:outputPanel styleClass="row form-horizontal space-t space-r"  id="idExternoCConsumo_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12 space-b" id="idDadosCConsumo_#{posicaoLista}">
+			<p:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDaDosCConsumoLbl_#{posicaoLista}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idFormaPgtoCConsumo_#{posicaoLista}">
+			<h:outputLabel value="Forma de Pagamento:" styleClass="space" id="idFormaPgtoLblCConsumo_#{posicaoLista}"/>
+			<h:outputText value="Conta Corrente" styleClass="control-label" rendered="#{fn:trim(compHisParts[3])==''}"  id="idCCorrenteCConsumo_#{posicaoLista}"/>
+			<h:outputText value="Cartão de Crédito" styleClass="control-label" rendered="#{fn:trim(compHisParts[3])!=''}" id="idCCreditoCConsumo_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idCodBarrasCConsumo_#{posicaoLista}">
+			<h:outputLabel value="Código de Barra:" styleClass="space"  id="idCodBarrasLblCConsumo_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]} " id="idCodBarrasTxtCConsumo_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel rendered="#{fn:trim(compHisParts[1])!=''}" id="idClienteExtCConsumo_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idClienteIntCConsumo_#{posicaoLista}">
+				<h:outputLabel value="Cliente / Consumidor:" styleClass="space" id="idClienteLblCConsumo_#{posicaoLista}"/>
+				<h:outputText value="${compHisParts[1]}" id="idClienteTxtCConsumo_#{posicaoLista}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel rendered="${compHisParts[2]} ne ''" id="idVencimentoExtCConsumo_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idVencimentoIntCConsumo_#{posicaoLista}">
+				<h:outputLabel value="Vencimento:" styleClass="space" id="idVencimentoLblCConsumo_#{posicaoLista}"/>
+				<h:outputText value="${compHisParts[2]}" id="idVencimentoTxtCConsumo_#{posicaoLista}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idValorCConsumo_#{posicaoLista}">
+			<h:outputLabel value="Valor:" styleClass="space" id="idValorLblCConsumo_#{posicaoLista}"/>
+			<h:outputText value="#{detalheParam.valor} " id="idValorTxtCConsumo_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b" id="idSepaExtCConsumo_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idSepaIntCConsumo_#{posicaoLista}">
+				<p:separator id="idSepaLineCConsumo_#{posicaoLista}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+</ui:composition>

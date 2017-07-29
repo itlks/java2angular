@@ -9,6 +9,24 @@
         </div>
         <div id="conteudo">
             <div class="row">
+                
+                <div class="col-xs-3">
+                    <div class="input-group ">
+                        <label>Nome do Componente</label>
+                        <input type="text" [(ngModel)]="componente" placeholder="template.component">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group ">
+                        <label>Nome da tag</label>
+                        <input type="text" [(ngModel)]="tag" placeholder="sigla-seletor">
+                    </div>
+                </div>
+                
+            </div>
+                <div id="espaco">
+            </div>
+            <div class="row">
                 <div class="col-xs-3">
                 </div>
                 <div class="col-xs-6">
@@ -31,7 +49,15 @@
                 <div class="col-xs-6">
                     <div class="input-group ">
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" (click)="downloadContent()">Download <span class="glyphicon glyphicon-download-alt"></span></button>
+                            <button type="button" class="btn btn-default" (click)="downloadContent()">Download do HTML <span class="glyphicon glyphicon-download-alt"></span></button>
+
+                            <button type="button" class="btn btn-default" (click)="downloadComponent()">Download do Component <span class="glyphicon glyphicon-download-alt"></span></button>
+
+                            <button type="button" class="btn btn-default" (click)="downloadLess()">Download do lees <span class="glyphicon glyphicon-download-alt"></span></button>
+
+                            <button type="button" class="btn btn-default" (click)="downloadSpec()">Download do spec <span class="glyphicon glyphicon-download-alt"></span></button>
+
+                            <button type="button" class="btn btn-default" (click)="downloadZip()">Download do ZIP <span class="glyphicon glyphicon-download-alt"></span></button>
                         </div>
                          <div class="input-group-btn">
                             <button type="button" class="btn btn-default" (click)="displayFile()">Exibir <span class="glyphicon glyphicon glyphicon-list-alt"></span></button>

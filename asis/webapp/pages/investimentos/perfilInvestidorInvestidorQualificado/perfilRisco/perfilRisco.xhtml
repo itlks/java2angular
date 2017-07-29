@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:jsp="http://java.sun.com/JSP/Page"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:c="http://java.sun.com/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui" 
+				template="/templates/templateConsultaNovo.xhtml">
+
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-10">
+							<span>#{msg['pages.investimento.perfilInvestidor.perfil.risco.info.questionario']}
+								<strong>#{perfilRiscoBBean.cBconsultaPerfilSDTO.dsPerfil}</strong>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br/>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-5">
+							<h:outputLabel styleClass="bold space" 
+									value="#{msg['pages.investimento.perfilInvestidor.perfil.risco.nome']} " />
+							<h:outputText value="#{perfilRiscoBBean.session.nomeTitularConta}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-3">
+							<p:outputPanel rendered="#{perfilRiscoBBean.session.tipoPessoa eq'F'}">
+								<h:outputLabel styleClass="bold space" value="#{msg['pages.investimento.perfilInvestidor.perfil.risco.CPF']} " /> 
+								<h:outputText value="#{perfilRiscoBBean.documentoFormatado}" />
+							</p:outputPanel>
+							<p:outputPanel rendered="#{perfilRiscoBBean.session.tipoPessoa eq 'J'}">
+								<h:outputLabel styleClass="bold space" value="#{msg['pages.investimento.perfilInvestidor.perfil.risco.CNPJ']} " />
+								<h:outputText value="#{perfilRiscoBBean.documentoFormatado}" />
+							</p:outputPanel>
+						</p:outputPanel>	
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-5">
+							<h:outputLabel styleClass="bold space" 
+											value="#{msg['pages.investimento.perfilInvestidor.perfil.risco.status']}" />
+							<h:outputText 
+										value="#{perfilRiscoBBean.cBconsultaPerfilSDTO.dsSituPerfil}" />
+						</p:outputPanel>						
+				
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold space" value="#{msg['pages.investimento.perfilInvestidor.perfil.risco.data.validade']}" />
+							<h:outputText value="#{perfilRiscoBBean.cBconsultaPerfilSDTO.dtValQuest}" />
+						</p:outputPanel>				
+				
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="col-xs-12 form-group textAreaImp">
+								<h:outputText value="#{perfilRiscoBBean.exibirTexto}" escape="false"/>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+	           
+		            <p:outputPanel styleClass="row">
+		                <p:outputPanel styleClass="col-xs-12">
+		                    <p:separator />
+		                </p:outputPanel>
+		            </p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include  src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink 	styleClass="btn btn-default btn-cinza"
+								actionListener="#" action="#{perfilRiscoBBean.voltar}"
+								role="button">
+                  		#{msg['pages.investimento.perfilInvestidor.perfil.risco.voltar']} 
+               	</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+			
+	</ui:define>
+	
+</ui:composition>

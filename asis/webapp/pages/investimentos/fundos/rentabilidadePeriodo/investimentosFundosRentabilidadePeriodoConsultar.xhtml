@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b no-print no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>	<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.alerta.primeiroParagrafo']}</p>
+							<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.alerta.segundoParagrafo']}</p>
+							<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.alerta.terceiroParagrafo']}</p>
+							<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.alerta.quartoParagrafo']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.title']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:tabView id="abasFundos" styleClass="no-visible-list">
+			<p:ajax event="tabChange" update="@form" listener="#{investimentosFundosRentabilidadePeriodoBBean.mudarAba}"></p:ajax>
+			
+			<p:tab id="tabFundosInvestimentos" titleStyleClass="no-print no-visible" title="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.titleAbaFundosInvestimentos']}">
+				<p:outputPanel styleClass="row no-print no-visible">
+					<p:outputPanel styleClass="col-xs-12">
+						<h5 class="space-b">
+							<strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.mensagemSelecioneFundo']}</strong>
+						</h5>
+						<h:outputLabel  value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.mensagemPeriodoData']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b data-ate no-print no-visible">
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="calendarioInicialDe" 
+											value="#{investimentosFundosRentabilidadePeriodoBBean.dataInicial}" 
+											pattern="dd/MM/yyyy" 
+											maxlength="10" 
+											onblur="mascaraData(this, event);"
+											onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+											converter="dateConverterFormat">
+									<p:ajax event="change" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioInicialDe @form:abasFundos:calendarioInicialAba2De @form:abasFundos:tabelaFundosRentabilidadeDetalhes @form:botoes" />	
+									<p:ajax event="dateSelect" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioInicialDe @form:abasFundos:calendarioInicialAba2De @form:abasFundos:tabelaFundosRentabilidadeDetalhes @form:botoes" />							
+								</p:calendar>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-1 text-center">
+						<span>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.separadorEntreCalendarios']}</span>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i> 
+								<p:calendar id="calendarioFimAte" 
+											value="#{investimentosFundosRentabilidadePeriodoBBean.dataFim}" 
+											pattern="dd/MM/yyyy"
+											maxlength="10"
+											onblur="mascaraData(this, event);"
+											onkeyup="mascaraData(this, event);"
+											mask="99/99/9999" tabindex="2" 
+											converter="dateConverterFormat">									
+									<p:ajax event="change" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioFimAte @form:abasFundos:calendarioFimAba2Ate @form:abasFundos:tabelaFundosRentabilidadeDetalhes @form:botoes" /> 
+									<p:ajax event="dateSelect" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioFimAte @form:abasFundos:calendarioFimAba2Ate @form:abasFundos:tabelaFundosRentabilidadeDetalhes @form:botoes" /> 							 
+								</p:calendar>
+								
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-3 text-left">
+						<p:commandLink  action="#{investimentosFundosRentabilidadePeriodoBBean.consultarDetalheRentabilidadePeriodo}" immediate="true" styleClass="btn btn-default" 
+										update="@form:abasFundos:tabelaFundosRentabilidadeDetalhes @form:botoes @form:pdf" role="button">
+							#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.btnOk']}
+						</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:remoteCommand name="scrollDownSelect" onstart="scrollDownSelected();"></p:remoteCommand>	
+				<p:remoteCommand update="@form:botoes" name="atualizarDetalhes" action="#{investimentosFundosRentabilidadePeriodoBBean.mudarAba}" />
+				
+				<p:outputPanel styleClass="row no-print no-visible">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="table-responsive table table-striped">
+							<p:dataTable 	id="dataTableFundosInvestimento"
+							 				tableStyleClass="table-click"
+											rowKey="#{rentabilidade.cdFundo}"
+											value="#{investimentosFundosRentabilidadePeriodoBBean.listaFundosInvestimento}"
+											var="rentabilidade"
+											selection="#{investimentosFundosRentabilidadePeriodoBBean.selecionadoFundosInvestimento}"
+											selectionMode="single" >
+											
+								<p:ajax event="rowSelect" update="@form:abasFundos:tabelaFundosRentabilidadeDetalhes @form:botoes @form:pdf"
+										listener="#{investimentosFundosRentabilidadePeriodoBBean.consultarDetalheRentabilidadePeriodo}" />
+	
+								<p:column headerText="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaFundosInvestimentos.colunaFundo']}">
+									<i class="fa fa-circle space-r" style="color: #{investimentosFundosRentabilidadePeriodoBBean.obterCorTipoFamilia(rentabilidade.tpFamiliaFund)}" aria-hidden="true"></i>
+									<h:outputText value="#{rentabilidade.nmReduzidoIB}" />
+								</p:column> 
+								<p:column styleClass="text-right space-rr" >	
+									<f:facet name="header">
+										<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaFundosInvestimentos.colunaValorAplicacao']}" styleClass="space-rr" />
+									</f:facet>								
+									<h:outputText value="#{rentabilidade.vlrMinAplic}" converter="valorMonetarioConverter" styleClass="space-rr" />
+								</p:column>
+								<p:column >
+									<f:facet name="header">	
+										<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaFundosInvestimentos.colunaHorarioLimite']}" styleClass="space-ll" />
+									</f:facet>
+									<h:outputText value="#{rentabilidade.horarioDesc}" styleClass="space-ll" > 
+									</h:outputText>
+								</p:column>
+							</p:dataTable>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>		
+				
+				<p:outputPanel styleClass="row space-b no-print no-visible">
+					<p:outputPanel styleClass="col-xs-12">
+						
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="familia-fundos no-print no-visible">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5>
+								<strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.titleFamiliaFundos']}</strong>
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<ui:repeat 
+								var="legenda"
+								value="#{investimentosFundosRentabilidadePeriodoBBean.legendas.datos.familia}"
+								varStatus="status">
+
+								<h:panelGroup rendered="#{status.index % 2 eq 0}" styleClass="col-xs-6 space-b">
+									<i class="fa fa-circle space-r" style="color: #{investimentosFundosRentabilidadePeriodoBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+									<h:outputText value="#{legenda.nomeRedFundo}" />
+								</h:panelGroup>
+
+								<h:panelGroup rendered="#{status.index % 2 eq 1}" styleClass="col-xs-6 space-b">
+									<i class="fa fa-circle space-r" style="color: #{investimentosFundosRentabilidadePeriodoBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+									<h:outputText value="#{legenda.nomeRedFundo}" />
+									<br />
+								</h:panelGroup>
+							</ui:repeat>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel> 
+				
+				<p:outputPanel styleClass="row space-b no-print no-visible">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:separator />
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row space-b" id="tabelaFundosRentabilidadeDetalhes"  >
+					<p:outputPanel styleClass="col-xs-12">
+
+						<p:dataTable
+							rendered="#{investimentosFundosRentabilidadePeriodoBBean.renderizaDetalhe and investimentosFundosRentabilidadePeriodoBBean.solicitaDetalharAbaFundos == true}"
+							value="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento}"
+							var="investimentoExtrato"
+							emptyMessage="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.labelListaVazia']}"
+							styleClass="table-responsive ">
+
+							<p:columnGroup type="header" >
+								<p:row>
+									<p:column colspan="3" styleClass="strippedLinhaClear" >
+										<f:facet name="header"  >
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.label.RentabilidadePorPeriodo']} " />
+											<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.dataInicial}" />
+											#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.separadorEntreCalendarios']} 
+											<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.dataFim}" />
+										</f:facet>
+									</p:column>
+								</p:row>
+				
+								<p:row >
+									<p:column colspan="3" styleClass="strippedLinhaClear" >
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.labelFundo']} " /> 
+											<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.nomeFundoDetalhe}" />
+										</f:facet>
+									</p:column>
+								</p:row>
+				
+								<p:row rendered="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento != null}">
+									<p:column colspan="1" styleClass="text-right">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.colunaValorCotaEm']}" />
+											<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento.dataInicio}" />
+										</f:facet>
+									</p:column>
+				
+									<p:column colspan="1" styleClass="text-right space-rr">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.colunaValorCotaEm']}" />
+											<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento.dataFim}" styleClass="space-rr"/> 
+										</f:facet>
+									</p:column>
+				
+									<p:column colspan="1" styleClass="text-right">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.colunaRentabilidadePeriodo']}"/>
+										</f:facet>
+									</p:column>
+								</p:row>
+							</p:columnGroup>
+		
+							<p:column styleClass="text-right">
+								<h:outputText value=" #{msg['pages.investimentos.fundos.rentabilidadePeriodo.rs']} " />							
+								<h:outputText value="#{investimentoExtrato.valorInicioStr}"/>
+							</p:column>
+				
+							<p:column styleClass="text-right">
+								<h:outputText value=" #{msg['pages.investimentos.fundos.rentabilidadePeriodo.rs']} " />
+								<h:outputText value="#{investimentoExtrato.valordefimStr}" styleClass="space-rr"/>
+							</p:column>
+				
+							<p:column styleClass="text-right">
+								<h:outputText value="#{investimentoExtrato.rentPeriod}">
+									<f:convertNumber maxFractionDigits="6"></f:convertNumber>
+								</h:outputText> 
+								<h:outputText value=" #{msg['pages.investimentos.fundos.rentabilidadePeriodo.percent']}" />
+							</p:column>
+
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="no-print no-visible pleft8">
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>		
+					  
+			</p:tab>
+						
+			<p:tab id="tabMeusFundosInvestimento" titleStyleClass="no-print no-visible" title="Meus Fundos de Investimento">
+				<p:outputPanel rendered="#{!investimentosFundosRentabilidadePeriodoBBean.listaMeusFundosInvestimento.isEmpty()}">
+					
+					<p:outputPanel styleClass="row no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								<strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.mensagemSelecioneFundo']}</strong>
+							</h5>
+							<h:outputLabel value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.mensagemPeriodoData']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+	
+					<p:outputPanel styleClass="row space-b data-ate no-print no-visible">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="calendarioInicialAba2De" 
+												value="#{investimentosFundosRentabilidadePeriodoBBean.dataInicial}"
+												pattern="dd/MM/yyyy" 
+												maxlength="10" 
+												onblur="mascaraData(this, event);"
+												onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+												converter="dateConverterFormat">
+										<p:ajax event="change" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioInicialAba2De @form:abasFundos:calendarioInicialDe @form:abasFundos:tabelaMeusFundosRentabilidadeDetalhes @form:botoes" /> 
+										<p:ajax event="dateSelect" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioInicialAba2De @form:abasFundos:calendarioInicialDe @form:abasFundos:tabelaMeusFundosRentabilidadeDetalhes @form:botoes" />								
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+	
+						<p:outputPanel styleClass="col-xs-1 text-center">
+							<span>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.separadorEntreCalendarios']}</span>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="calendarioFimAba2Ate" 
+												value="#{investimentosFundosRentabilidadePeriodoBBean.dataFim}" 
+												pattern="dd/MM/yyyy" 
+												maxlength="10" 
+												onblur="mascaraData(this, event);"
+												onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)" 
+												converter="dateConverterFormat">
+										<p:ajax event="change" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioFimAba2Ate @form:abasFundos:calendarioFimAte @form:abasFundos:tabelaMeusFundosRentabilidadeDetalhes @form:botoes" /> 									
+										<p:ajax event="dateSelect" listener="#{investimentosFundosRentabilidadePeriodoBBean.validarExibicaoDetalhar}" update="@form:abasFundos:calendarioFimAba2Ate @form:abasFundos:calendarioFimAte @form:abasFundos:tabelaMeusFundosRentabilidadeDetalhes @form:botoes" />								
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+	
+						<p:outputPanel styleClass="col-xs-3 text-left">
+							<p:commandLink 	action="#{investimentosFundosRentabilidadePeriodoBBean.consultarDetalheRentabilidadePeriodoMeusFundos}"
+											update="@form:abasFundos:tabelaMeusFundosRentabilidadeDetalhes @form:botoes @form:pdf" styleClass="btn btn-default" role="button">
+							#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.btnOk']}
+							
+							</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel >
+							
+								<p:dataTable 	id="tabelaMeusFundosRentabilidade"
+								 				tableStyleClass="table-responsive table table-striped table-click"
+												rowKey="#{meuInvestimento.codigoFundoContaFundo}"
+												value="#{investimentosFundosRentabilidadePeriodoBBean.listaMeusFundosInvestimento}"
+												var="meuInvestimento"
+												selection="#{investimentosFundosRentabilidadePeriodoBBean.selecionadoMeusFundosInvestimento}"
+												selectionMode="single">
+		
+									<p:ajax event="rowSelect" update="@form:abasFundos:tabelaMeusFundosRentabilidadeDetalhes @form:botoes @form:pdf"
+											listener="#{investimentosFundosRentabilidadePeriodoBBean.consultarDetalheRentabilidadePeriodoMeusFundos}" />
+		
+									<p:column headerText="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaFundosInvestimentos.colunaFundo']}" >
+										<i class="fa fa-circle space-r" style="color: #{investimentosFundosRentabilidadePeriodoBBean.obterCorTipoFamilia(meuInvestimento.tipoFamilia)}" aria-hidden="true"></i>
+										<h:outputText value="#{meuInvestimento.nomeReduzidoIb}" />
+									</p:column> 
+									
+									<p:column styleClass="text-right space-rr" >	
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaFundosInvestimentos.colunaSaldoLiquidoDisp']}" styleClass="space-rr" />
+										</f:facet>								
+										<h:outputText value="#{meuInvestimento.valorDispResgatNumber}" converter="valorMonetarioConverter" styleClass="space-rr" />
+									</p:column>
+									
+									<p:column >
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaFundosInvestimentos.colunaHorarioLimite']}" styleClass="space-ll" />
+										</f:facet>
+										<h:outputText value="#{meuInvestimento.horarioLimite}" styleClass="space-ll" />
+									</p:column>
+								</p:dataTable>
+								
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="familia-fundos no-print no-visible">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5>
+									<strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.titleFamiliaFundos']}</strong>
+								</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+	
+								<ui:repeat 
+									var="legenda"
+									value="#{investimentosFundosRentabilidadePeriodoBBean.legendas.datos.familia}"
+									varStatus="status">
+	
+									<h:panelGroup rendered="#{status.index % 2 eq 0}" styleClass="col-xs-6 space-b">
+										<i class="fa fa-circle space-r" style="color: #{investimentosFundosRentabilidadePeriodoBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+										<h:outputText value="#{legenda.nomeRedFundo}" />
+									</h:panelGroup>
+	
+									<h:panelGroup rendered="#{status.index % 2 eq 1}" styleClass="col-xs-6 space-b">
+										<i class="fa fa-circle space-r" style="color: #{investimentosFundosRentabilidadePeriodoBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+										<h:outputText value="#{legenda.nomeRedFundo}" />
+										<br />
+									</h:panelGroup>
+								</ui:repeat>
+	
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+	
+					<p:outputPanel styleClass="row space-b" id="tabelaMeusFundosRentabilidadeDetalhes"  >
+						<p:outputPanel styleClass="col-xs-12" >
+	
+							<p:dataTable
+								id="tabelaDetalheMeusFund"
+								rendered="#{investimentosFundosRentabilidadePeriodoBBean.renderizaDetalhe and investimentosFundosRentabilidadePeriodoBBean.solicitaDetalharAbaFundos == false}"
+								value="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento}"
+								var="investimentoExtrato"
+								emptyMessage="Não há rentabilidade para o período selecionado."
+								styleClass="table-responsive" >
+	
+								<p:columnGroup type="header" >
+									<p:row>
+										<p:column colspan="3" exportable="true">
+											<f:facet name="header" >
+												<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.label.RentabilidadePorPeriodo']} " />
+												<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.dataInicial}" />
+												#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.separadorEntreCalendarios']}
+												<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.dataFim}" />
+											</f:facet>
+										</p:column>
+									</p:row>
+					
+									<p:row >
+										<p:column colspan="3"  >
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.labelFundo']} " /> 
+												<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.nomeFundoDetalhe}" />
+											</f:facet>
+										</p:column>
+									</p:row>
+					
+									<p:row rendered="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento != null}">
+										<p:column colspan="1" styleClass="text-right">
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.colunaValorCotaEm']}" />
+												<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento.dataInicio}" />
+											</f:facet>
+										</p:column>
+					
+										<p:column colspan="1" styleClass="text-right space-rr">
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.colunaValorCotaEm']}" />
+												<h:outputText value="#{investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento.dataFim}" styleClass="space-rr"/> 
+											</f:facet>
+										</p:column>
+					
+										<p:column colspan="1" styleClass="text-right">
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.tabelaDetalhe.colunaRentabilidadePeriodo']}" />
+											</f:facet>
+										</p:column>
+									</p:row>
+				`				</p:columnGroup>
+			
+								<p:column styleClass="text-right">
+									<h:outputText value=" #{msg['pages.investimentos.fundos.rentabilidadePeriodo.rs']} " />
+									<h:outputText value="#{investimentoExtrato.valorInicioStr}"/>
+								</p:column>
+					
+								<p:column styleClass="text-right">
+									<h:outputText value=" #{msg['pages.investimentos.fundos.rentabilidadePeriodo.rs']} " />
+									<h:outputText value="#{investimentoExtrato.valordefimStr}" styleClass="space-rr"/>
+								</p:column>
+					
+								<p:column styleClass="text-right">
+									<h:outputText value="#{investimentoExtrato.rentPeriodStr}"/> 
+									<h:outputText> #{msg['pages.investimentos.fundos.rentabilidadePeriodo.percent']}</h:outputText>
+								</p:column>
+	
+							</p:dataTable>
+						</p:outputPanel>
+					</p:outputPanel>		
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row no-print no-visible"
+					rendered="#{investimentosFundosRentabilidadePeriodoBBean.listaMeusFundosInvestimento.isEmpty()}">
+					<p:outputPanel styleClass="col-xs-12 space-b">
+						<p:outputPanel styleClass="strippedLinhaClear">
+							<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.sem.fundo.msg1']}</p>
+							<br />
+							<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.sem.fundo.msg2']}</p>
+							<p>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.sem.fundo.msg3']}</p>
+							<br />
+						</p:outputPanel>
+						<p>
+							<h:link styleClass="link-termos"> #{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.aplicar']} </h:link>
+						</p>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row no-print no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:tab>
+					
+		</p:tabView>
+		
+			<p:outputPanel  id="botoes">
+				<p:outputPanel styleClass="row space-b" id="botoes222">
+					<p:outputPanel styleClass="col-xs-12 text-right" id="pdf"
+						rendered="#{investimentosFundosRentabilidadePeriodoBBean.renderizaDetalhe and investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento != null}">
+						<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+					
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row space-b" id="botoes2">	
+					<p:outputPanel styleClass="col-xs-12 text-right"> 
+							
+						<p:commandLink 	styleClass="btn btn-default btn-cinza no-print no-visible" 
+										role="button" 
+										action="#{investimentosFundosRentabilidadePeriodoBBean.voltarMenu}">
+							#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.btnVoltar']}
+						</p:commandLink>
+						 
+						<p:commandLink  id="consultarAbaFundos"
+										rendered="#{investimentosFundosRentabilidadePeriodoBBean.renderizaDetalhe and investimentosFundosRentabilidadePeriodoBBean.detalheCotaFundosInvestimento != null}" 
+										action="#{investimentosFundosRentabilidadePeriodoBBean.consultarHistoricoRentabilidadePeriodo}"
+										immediate="true"
+										styleClass="btn btn-default space-l no-print no-visible"
+										role="button" >
+							#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.btnConsultarHistorico']}
+						</p:commandLink>
+						
+						<p:blockUI block="consultarAbaFundos" trigger="consultarAbaFundos" />	
+							
+					</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<script>
+			$(".table-click tbody tr").click(function() {
+				$(".table-click tbody tr").removeClass("yellow");
+				$(this).toggleClass("yellow"); 
+			}); 
+			
+			
+			function scrollDownSelected() {
+				$('html, body').animate({scrollTop:$(".btn-cinza").offset().top}, 1000);
+			}
+			
+			$(window).load(function() {
+				   atualizarDetalhes();
+				});
+			
+		</script>
+		</ui:define>
+</ui:composition>

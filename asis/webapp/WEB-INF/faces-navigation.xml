@@ -1,0 +1,3120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE faces-config PUBLIC
+    "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+	<navigation-rule>
+		<description>Todas as telas</description>
+		<from-view-id>*</from-view-id>
+
+		<!-- MENU -->
+		<navigation-case>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/pages/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!--SEM MENU -->
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/indexSemMenu.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAtivacaoMaster</from-outcome>
+			<to-view-id>/pages/cadastroPj/ativacaoMasterPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goLogin</from-outcome>
+			<to-view-id>/pages/login/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goLogout</from-outcome>
+			<to-view-id>/commons/logout.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goLoginTeclado</from-outcome>
+			<to-view-id>/pages/login/loginTeclado.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goHome</from-outcome>
+			<to-view-id>#{homeBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMenu</from-outcome>
+			<to-view-id>/pages/menu/menuNovo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSenhaAcessoLogin</from-outcome>
+			<to-view-id>/pages/senhaAcessoLogin/cadastrarSenha.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goLimites</from-outcome>
+			<to-view-id>/pages/limites/limites.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!--Transferencia de Arquivos - Inicio -->
+		<navigation-case>
+			<from-outcome>goTransfArqPreenchimento</from-outcome>
+			<to-view-id>#{transArqPersonalizarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTransfArqConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/personalizarTransArquivo/transfArqConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTransfArqComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/personalizarTransArquivo/transfArqComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Transferencia de Arquivos - Fim -->
+
+		<!--Imprimir Aditivo - Inicio -->
+		<navigation-case>
+			<from-outcome>goImprimirAditivo</from-outcome>
+			<to-view-id>#{contratoImprimirAditivoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goImprimirAditivoPage</from-outcome>
+			<to-view-id>/pages/administrativo/contrato/imprimir.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Imprimir Aditivo - Fim -->
+
+		<!--Correspondencias Enviadas - Inicio -->
+		<navigation-case>
+			<from-outcome>goDevolvidas</from-outcome>
+			<to-view-id>#{consultaCorrespondenciaDevolvidaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!--Gare DR SP - Inicio -->
+		<navigation-case>
+			<from-outcome>goApelidoGareDrSp</from-outcome>
+			<to-view-id>#{gareDRSPBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPreenchimentoGareDrSp</from-outcome>
+			<to-view-id>#{gareDRSPBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoGareDrSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareDrSp/gareConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteGareDrSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareDrSp/gareComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarApelidoConfirmacaoGareDrSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareDrSp/tributos-gare-dr-ApelidosConfirma.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarApelidoComprovanteGareDrSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareDrSp/tributos-gare-dr-ApelidosComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirApelidoConfirmacaoGareDrSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareDrSp/gareApelidosExcluirDados.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirApelidoComprovanteGareDrSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareDrSp/gareApelidosExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Gare DR SP - Fim -->
+
+		<!-- Operacoes Realizadas - Inicio -->
+		<navigation-case>
+			<from-outcome>goOperacoesRealizadas</from-outcome>
+			<to-view-id>#{operacoesRealizadasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goOperacoesRealizadasPagamentos</from-outcome>
+			<to-view-id>#{operacoesRealizadasBBean.redirectPagamentos}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goOperacoesRealizadasTransferencia</from-outcome>
+			<to-view-id>#{operacoesRealizadasBBean.redirectTransferencia}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goOperacoesRealizadasPrevidencia</from-outcome>
+			<to-view-id>#{operacoesRealizadasBBean.redirectPrevidencia}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goOperacoesRealizadasConsulta</from-outcome>
+			<to-view-id>/pages/operacoesRealizadas/consultar/listarOperacoesRealizadas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>godetalheOperacoesRealizadas</from-outcome>
+			<to-view-id>/pages/operacoesRealizadas/consultar/detalheOperacoesRealizadas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Operacoes Realizadas - Fim -->
+
+		<!--GPS - Inicio -->
+		<navigation-case>
+			<from-outcome>goPreencherDadosGPS</from-outcome>
+			<to-view-id>#{tributosFederaisGPSBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPreenchimentoGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/gpsPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/excluirGpsApelidosConfirma.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/excluirGpsApelidosComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/alterarGpsApelidosConfirma.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarComprovanteGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/alterarGpsApelidosComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/gpsConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteGPS</from-outcome>
+			<to-view-id>/pages/pagamentos/gps/gpsComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--GPS - Fim -->
+
+		<!-- Recarga Programada Incluir - Inicio -->
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaIncluir</from-outcome>
+			<to-view-id>#{recargaProgramadaIncluirBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Recarga Programada Incluir - Fim -->
+
+		<!-- Recarga Programada Excluir - Inicio -->
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaExcluirConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/incluir/excluir/recargaProgramadaExcluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaExcluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/incluir/excluir/recargaProgramadaExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Recarga Programada Excluir - Fim -->
+
+		<!-- Recarga Programada Alterar - Inicio -->
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaAlterarConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/incluir/alterar/recargaProgramadaAlterarConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaAlterarComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/incluir/alterar/recargaProgramadaAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Recarga Programada Alterar - Fim -->
+
+		<!-- Cadastrar Celular - Inicio -->
+		<navigation-case>
+			<from-outcome>goCadastrarCelular</from-outcome>
+			<to-view-id>#{cadastrarCelularBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCadastrarCelularConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/cadastrarCelular/cadastrarCelularConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCadastrarCelularComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/cadastrarCelular/cadastrarCelularComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Cadastrar Celular - Fim -->
+
+		<!--Cheques - Inicio -->
+		<navigation-case>
+			<from-outcome>goConsultaChequesSustados</from-outcome>
+			<to-view-id>#{chequesSustadosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goChequesSolicitarTaloes</from-outcome>
+			<to-view-id>#{chequesSolicitarTaloesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>goAdesaoChequeEspecialProtegido</from-outcome>
+			<to-view-id>#{adesaoChequeEspecialProtegidoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goChequesConsultaEmitidos</from-outcome>
+			<to-view-id>#{chequesConsultaEmitidosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goChequesConsultaTaloes</from-outcome>
+			<to-view-id>#{chequesConsultarTaloesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Cheques - Fim -->
+
+		<!--Mobile Token Servico - Inicio -->
+		<navigation-case>
+			<from-outcome>goMobileTokenServicoPreenchimento</from-outcome>
+			<to-view-id>#{adesaoMobileTokenBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMobileTokenServicoConfirmacao</from-outcome>
+			<to-view-id>#{adesaoMobileTokenBBean.initMobileTokenConfirmacao}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMobileTokenServicoComprovante</from-outcome>
+			<to-view-id>#{adesaoMobileTokenBBean.initMobileTokenComprovante}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Mobile Token Servico - Fim -->
+
+		<!-- Imposto de renda Pessoa Fisica IRPF -->
+		<navigation-case>
+			<from-outcome>goPreencherDadosIRPF</from-outcome>
+			<to-view-id>#{darfBBean.redirectIRPF}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoDadosIRPF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteDadosIRPF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoIRPF</from-outcome>
+			<to-view-id>#{darfBBean.redirectAlterarApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarComprovanteIRPF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfApelidoAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoIRPF</from-outcome>
+			<to-view-id>#{darfBBean.redirectExcluirApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteIRPF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfApelidoExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- IRPF Fim -->
+
+
+		<!-- DARF -->
+		<navigation-case>
+			<from-outcome>goPreencherDadosDARF</from-outcome>
+			<to-view-id>#{darfBBean.redirectDARF}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goBackPreencherDadosDARF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfPreenchimento.xhtml?faces-redirect=true</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoDadosDARF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteDadosDARF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoDARF</from-outcome>
+			<to-view-id>#{darfBBean.redirectAlterarApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarComprovanteDARF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfApelidoAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoDARF</from-outcome>
+			<to-view-id>#{darfBBean.redirectExcluirApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteDARF</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosFederais/darfApelidoExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- DARF - FIM -->
+
+		<!-- GARE ICMS SP - INICIO -->
+		<navigation-case>
+			<from-outcome>goGareIcmsSp</from-outcome>
+			<to-view-id>#{gareIcmsSpBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareIcmsSpPreenchimento</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosEstaduais/gareIcmsSpPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareIcmsSpConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosEstaduais/gareIcmsSpConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareIcmsSpComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosEstaduais/gareIcmsSpComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareIcmsSpDemonstrativo</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosEstaduais/gareIcmsSpDemonstrativo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoGareIcmsSp</from-outcome>
+			<to-view-id>#{gareIcmsSpBBean.redirectAlterarApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarComprovanteGareIcmsSp</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosEstaduais/gareIcmsSpApelidoAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoGareIcmsSp</from-outcome>
+			<to-view-id>#{gareIcmsSpBBean.redirectExcluirApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteGareIcmsSp</from-outcome>
+			<to-view-id>/pages/pagamentos/tributosEstaduais/gareIcmsSpApelidoExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- GARE ICMS SP - FIM -->
+
+		<!-- GARE ITCMD SP - INICIO -->
+		<navigation-case>
+			<from-outcome>goGareItCmdSp</from-outcome>
+			<to-view-id>#{gareItCmdSpBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItCmdSpConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItCmdSp/gareItCmdSpConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItCmdSpComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItCmdSp/gareItCmdSpComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItCmdSpDemonstrativo</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItCmdSp/gareItCmdSpDemonstrativo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoGareItcmdSp</from-outcome>
+			<to-view-id>#{gareItCmdSpBBean.redirectAlterarApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarComprovanteGareItcmdSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItCmdSp/apelidosAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoGareItcmdSp</from-outcome>
+			<to-view-id>#{gareItCmdSpBBean.redirectExcluirApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteGareItcmdSp</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItCmdSp/apelidosExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- GARE ITCMD SP - FIM -->
+
+		<!--Validação de Dispositivos de Segurança -->
+		<navigation-case>
+			<from-outcome>goHubIndisponivel</from-outcome>
+			<to-view-id>/pages/dispositivoSeguranca/hubIndisponivel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTokenNaoAtivo</from-outcome>
+			<to-view-id>/pages/dispositivoSeguranca/tokenNaoAtivo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSolicitaSecundario</from-outcome>
+			<to-view-id>/pages/dispositivoSeguranca/solicitaSecundario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goVerificaAssinaturaIBPJ</from-outcome>
+			<to-view-id>/pages/dispositivoSeguranca/verificaAssinaturaIBPJ.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAssinaturaBloqueadaErro</from-outcome>
+			<to-view-id>/pages/dispositivoSeguranca/assinaturaBloqueadaErro.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAssinaturaBloqueadaUser</from-outcome>
+			<to-view-id>/pages/dispositivoSeguranca/assinaturaBloqueadaUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goApelido</from-outcome>
+			<to-view-id>/pages/apelidos/listaApelidos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMensagemErroGenerico</from-outcome>
+			<to-view-id>/pages/mensagem/mensagemTelaErroGenerico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMensagemLoginErroGenerico</from-outcome>
+			<to-view-id>/pages/mensagem/mensagemLoginTelaErroGenerico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMensagemAssinaturaErroGenerico</from-outcome>
+			<to-view-id>/pages/mensagem/mensagemAssinaturaTelaErroGenerico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- USUARIOS ASSOCIADOS PERFIL DE ACESSO - INICIO -->
+		<navigation-case>
+			<from-outcome>goPerfilAcessoUsuariosAssociados</from-outcome>
+			<to-view-id>#{perfilAcessoUsuariosAssociadosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuariosAssociadosListarUsuarios</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/usuarioAssociado/perfilAcessoUsuariosAssociadosListar.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- USUARIOS ASSOCIADOS PERFIL DE ACESSO - FIM -->
+
+		<!-- CONSULTAR ANTECIPACAO - INICIO -->
+		<navigation-case>
+			<from-outcome>goConsultarAntecipacaoGetNet</from-outcome>
+			<to-view-id>#{consultarAntecipacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- CONSULTAR ANTECIPACAO - FIM -->
+
+		<!-- EXCLUIR PERFIL DE ACESSO - INICIO -->
+		<navigation-case>
+			<from-outcome>goExcluirSelecaoPerfilAcesso</from-outcome>
+			<to-view-id>#{excluirPerfilAcessoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirPerfilAcessoConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/excluir/excluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirPerfilAcessoComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/excluir/excluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- EXCLUIR PERFIL DE ACESSO - FIM -->
+
+		<!-- EXCLUIR MOBILE TOKEN - INICIO -->
+		<navigation-case>
+			<from-outcome>goExcluirValidacaoMobileToken</from-outcome>
+			<to-view-id>#{excluirMobileTokenBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirPreenchimentoMobileToken</from-outcome>
+			<to-view-id>/pages/administrativo/mobileToken/mobileTokenExcluirListaSelecao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoMobileToken</from-outcome>
+			<to-view-id>/pages/administrativo/mobileToken/mobileTokenExcluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteMobileToken</from-outcome>
+			<to-view-id>/pages/administrativo/mobileToken/mobileTokenExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- EXCLUIR MOBILE TOKEN - FIM -->
+
+		<!-- GARE ITCMD SP - INICIO -->
+		<navigation-case>
+			<from-outcome>goGareItcmdSpCadastro</from-outcome>
+			<to-view-id>#{gareItcmdSPBBean.redirect}</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItcmdSpConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItcmdSp/tributosGareItcmdPgto.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItcmdSpComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItcmdSp/tributosGareItcmdComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItcmdSpApelidoAlterar</from-outcome>
+			<to-view-id>#{gareItcmdSPBBean.redirectApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItcmdSpApelidoAlterarComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItcmdSp/apelidosAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItcmdSpApelidoExcluir</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItcmdSp/apelidosExcluirDados.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goGareItcmdSpApelidoExcluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/gareItcmdSp/apelidosExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- GARE ITCMD SP - FIM -->
+
+		<!-- CONSULTA PERFIL DE ACESSO - INICIO -->
+		<navigation-case>
+			<from-outcome>goPerfilAcessoConsultarLista</from-outcome>
+			<to-view-id>#{perfilAcessoConsultarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoConsultar</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/consultar/perfilAcessoConsultar.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- CONSULTA PERFIL DE ACESSO - FIM -->
+
+		<!-- ALTERAR PERFIL DE ACESSO - INICIO -->
+		<navigation-case>
+			<from-outcome>goPerfilAcessoAlteracaoPreenchimento1</from-outcome>
+			<to-view-id>#{perfilAcessoAlteracaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoAlteracaoPreenchimento2</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/alterar/perfilAcessoAlteracaoPreenchimento2.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoAlteracaoConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/alterar/perfilAcessoAlteracaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoAlteracaoComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/alterar/perfilAcessoAlteracaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ALTERAR PERFIL DE ACESSO - FIM -->
+
+		<!-- INCLUIR PERFIL DE ACESSO - INICIO -->
+		<navigation-case>
+			<from-outcome>goPerfilAcessoInclusaoPreenchimento1</from-outcome>
+			<to-view-id>#{perfilAcessoInclusaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoInclusaoPreenchimento2</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/incluir/perfilAcessoInclusaoPreenchimento2.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoInclusaoConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/incluir/perfilAcessoInclusaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAcessoInclusaoComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAcesso/incluir/perfilAcessoInclusaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- INCLUIR PERFIL DE ACESSO - FIM -->
+
+		<!--IPTU - Inicio -->
+		<navigation-case>
+			<from-outcome>goPreencherDadosIptuSp</from-outcome>
+			<to-view-id>#{tribMunPreenchimentoIptuSpBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoIptuSp</from-outcome>
+			<to-view-id>/pages/pagamentos/iptu-sp/excluirPgtoIPTUApelidosConfirma.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovanteIptuSp</from-outcome>
+			<to-view-id>/pages/pagamentos/iptu-sp/excluirPgtoIPTUApelidosComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoIptuSp</from-outcome>
+			<to-view-id>/pages/pagamentos/iptu-sp/pgtoIPTUBanespa_Apelidos_Confirma.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarComprovanteIptuSp</from-outcome>
+			<to-view-id>/pages/pagamentos/iptu-sp/pgtoIPTUBanespa_apelidos_comprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--IPTU - Fim -->
+
+		<!--CODIGO BARRA - Inicio -->
+		<navigation-case>
+			<from-outcome>goPreenchimentoCodigoBarraGPS</from-outcome>
+			<to-view-id>#{codigoBarraBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoCodigoBarra</from-outcome>
+			<to-view-id>/pages/transacoes/pagCodigoBarras/pagamentosCodigoBarrasConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteCodigoBarra</from-outcome>
+			<to-view-id>/pages/transacoes/pagCodigoBarras/pagamentosCodigoBarrasComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--CODIGO BARRA - Fim -->
+
+		<!-- Perfil Autorização - Consulta -->
+		<navigation-case>
+			<from-outcome>goConsultarSelecaoPerfilAutorizacao</from-outcome>
+			<to-view-id>#{perfilAutorizacaoConsultaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarConfirmacaoPerfilAutorizacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/consultar/autorizacoesConsultaConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarConfirmacaoPerfilAutorizacaoLista</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/consultar/autorizacaoConsultaConfirmacaoLista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM Perfil Autorização - Consulta -->
+
+		<!-- Perfil Autorização - Excluir -->
+		<navigation-case>
+			<from-outcome>goExcluirPreenchimentoPerfilAutorizacao</from-outcome>
+			<to-view-id>#{perfilAutorizacaoExclusaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoPerfilAutorizacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/excluir/autorizacoesExclusaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirComprovantePerfilAutorizacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/excluir/autorizacoesExclusaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMensagemAdministracaoConta</from-outcome>
+			<to-view-id>/pages/administrativo/mensagemAdministracaoConta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM Perfil Autorização - Excluir -->
+
+		<!-- INÍCIO: Perfil Autorização - ALTERAR -->
+		<navigation-case>
+			<from-outcome>goAlterarPerfilAutorizacaoSelecao</from-outcome>
+			<to-view-id>#{alterarPerfilAutorizacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarPerfilAutorizacaoPreenchimento</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/alterar/autorizacoesAlteracaoFiltro.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarPerfilAutorizacaoConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/alterar/autorizacoesAlteracaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarPerfilAutorizacaoComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/alterar/autorizacoesAlteracaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM: Perfil Autorização - ALTERAR -->
+
+		<!-- INÍCIO - Cadastramento Contrato - 1.3.2 -->
+		<navigation-case>
+			<from-outcome>goContratoCadastroCadastramento</from-outcome>
+			<to-view-id>#{cadastroContratoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goContratoCadastroPreenchimento</from-outcome>
+			<to-view-id>/pages/cadastro/contrato/preenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goContratoCadastroConfirmacao</from-outcome>
+			<to-view-id>/pages/cadastro/contrato/confirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goContratoCadastroComprovante</from-outcome>
+			<to-view-id>/pages/cadastro/contrato/comprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Cadastramento Contrato - 1.3.2 -->
+
+		<!-- INICIO ATUALIZAR MASTER -->
+		<navigation-case>
+			<from-outcome>goAtualizarCadastroMaster</from-outcome>
+			<to-view-id>#{atualizarMasterBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAtualizarCadastroMasterPreenchimento</from-outcome>
+			<to-view-id>/pages/cadastroPj/atualizarMaster/atualizarMasterPreenchimento.xhtm</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTermoAdesaoAtualizacaoMaster</from-outcome>
+			<to-view-id>/pages/cadastroPj/atualizarMaster/termoAdesaoAtualizacaoMaster.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM ATUALIZAR MASTER -->
+
+		<!-- INICIO RECADASTRAMENTO MASTER -->
+		<navigation-case>
+			<from-outcome>goRecadastramentoMasterComprovante</from-outcome>
+			<to-view-id>/pages/cadastroPj/recadastrarMaster/recadastrarMasterConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecadastramentoMasterRecadastramento</from-outcome>
+			<to-view-id>/pages/cadastroPj/recadastrarMaster/recadastrarMasterPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecadastramentoMasterTelaInicial</from-outcome>
+			<to-view-id>#{recadastramentoMasterBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecadastramentoMasterSenhaNaoLiberada</from-outcome>
+			<to-view-id>#{recadastramentoMasterBBean.senhaNaoLiberada}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTermoAdesaoAtualizacaoMaster</from-outcome>
+			<to-view-id>/pages/cadastroPj/atualizarMaster/termoAdesaoRecadastroMaster.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM RECADASTRAMENTO MASTER -->
+
+		<!-- INICIO - Token sincronizar - 1.2.1 -->
+		<navigation-case>
+			<from-outcome>goToSincronizacao1</from-outcome>
+			<to-view-id>#{sincronizarTokenBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goToSincronizacao2</from-outcome>
+			<to-view-id>/pages/administrativo/token/toSincronizacao2.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Token sincronizar - 1.2.1 -->
+
+		<!-- Inicio Cadastro Rápido -->
+		<navigation-case>
+			<from-outcome>goAcessoRapidoConfiguracao</from-outcome>
+			<to-view-id>#{acessoRapidoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAcessoRapidoConfirmacao</from-outcome>
+			<to-view-id>/pages/contratoGenerico/acessoRapido/cadastrar/acessoRapidoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim Cadastro Rápido -->
+
+		<!-- INICIO DPVAT -->
+		<navigation-case>
+			<from-outcome>goVeiculosDpvatRenavamOnlineApelidos</from-outcome>
+			<to-view-id>#{dpvatSpBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM DPVAT -->
+
+		<navigation-case>
+			<from-outcome>goPreencherVeiculosDpvatRenavamOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/dpvat/veiculosDpvatRenavamOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentoVeiculosDpvatConsultaOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/dpvat/veiculosDpvatConsultaOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoVeiculosDpvatPgtoOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/dpvat/veiculosDpvatPagtoOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteVeiculosDpvatComprovanteOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/dpvat/veiculosDpvatComprovanteOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Inicio Assinatura eletronica alterar -->
+		<navigation-case>
+			<from-outcome>goAssinaturaAlterarPreenchimento1</from-outcome>
+			<to-view-id>#{assinaturaEletronicaAlterarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAssinaturaAlterarPreenchimento2</from-outcome>
+			<to-view-id>/pages/administrativo/assinaturaEletronica/assinaturaAlterarPreenchimento2.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAssinaturaAlterarComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/assinaturaEletronica/assinaturaAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim assinatura eletronica alterar -->
+
+		<!-- INÍCIO: Perfil Autorização - INCLUIR -->
+		<navigation-case>
+			<from-outcome>goPerfilAutorizacaoInclusao</from-outcome>
+			<to-view-id>#{perfilAutorizacaoIncluirBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAutorizacaoInclusaoFiltro</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/incluir/autorizacoesInclusaoFiltro.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAutorizacaoInclusaoConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/incluir/autorizacoesInclusaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAutorizacaoInclusaoComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/incluir/autorizacoesInclusaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM: Perfil Autorização - INCLUIR -->
+
+		<!-- AD-19 - Consultar Usuário -->
+		<navigation-case>
+			<from-outcome>goConsultarUsuarioValidacao</from-outcome>
+			<to-view-id>#{usuarioSecundarioConsultarValidacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarUsuarioSelecao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/usuarioConsulta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarUsuarioConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/usuarioConsultaConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-19 - Consultar Usuário -->
+
+		<!-- AD-16 - Usuario Secundario - Excluir -->
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioExcluirValidacao</from-outcome>
+			<to-view-id>#{usuarioSecundarioExcluirBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioExcluirPreenchimento</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/excluir/usuarioSecundarioExcluirListaSelecao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioExcluirConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/excluir/usuarioSecundarioExcluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioExcluirComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/excluir/usuarioSecundarioExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Inicio Assinatura eletronica alterar -->
+		<navigation-case>
+			<from-outcome>goAlteracaoSenhaPreenchimento</from-outcome>
+			<to-view-id>#{senhaAcessoDeAlterarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlteracaoSenhaComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/senhaDeAcesso/alterar/alteracaoSenhaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim assinatura eletronica alterar -->
+
+		<!-- Inicio perfil de auorização - usuarios associados -->
+		<navigation-case>
+			<from-outcome>goPerfilAutorizacaoUsuariosAssociadosPreenchimento</from-outcome>
+			<to-view-id>#{perfilAutorizacaoUsuariosAssociadosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPerfilAutorizacaoUsuariosAssociadosConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/perfilAutorizacao/usuariosAssociados/perfilAutorizacaoUsuariosAssociadosConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim perfil de auorização - usuarios associados -->
+
+		<!-- INICIO IPVA -->
+		<navigation-case>
+			<from-outcome>goVeiculosSPIpva</from-outcome>
+			<to-view-id>#{ipvaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPreencherVeiculosIpvaRenavamOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/ipva/veiculosIpvaRenavamOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentoVeiculosIpvaConsultaOnline</from-outcome>
+			<to-view-id>#{ipvaBBean.redirectConsultaDebitosIPVA}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoVeiculosIpvaPgtoOnline</from-outcome>
+			<to-view-id>#{ipvaBBean.redirecPagamentoIPVA}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteVeiculosIpvaComprovanteOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/ipva/veiculosIpvaComprovanteOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- FIM IPVA -->
+
+		<!-- INICIO IPVA MINAS GERAIS -->
+		<navigation-case>
+			<from-outcome>goVeiculosMGIpva</from-outcome>
+			<to-view-id>#{ipvaMinasGeraisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentoVeiculosIpvaConsultaOnline</from-outcome>
+			<to-view-id>#{ipvaBBean.redirectConsultaDebitosIPVA}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteVeiculosIpvaComprovanteOnlineMG</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosMinasGerais/ipva/veiculosIpvaComprovanteOnlineMG.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM IPVA MINAS GERAIS -->
+
+		<!-- INICIO DPVAT MINAS GERAIS -->
+		<navigation-case>
+			<from-outcome>goVeiculosDpvatMG</from-outcome>
+			<to-view-id>#{dpvatMinasGeraisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM DPVAT MINAS GERAIS -->
+
+		<!-- INICIO LICENCIAMENTO MINAS GERAIS -->
+		<navigation-case>
+			<from-outcome>goLicenciamentoVeiculosMG</from-outcome>
+			<to-view-id>#{licenciamentoVeiculosMinasGeraisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM LICENCIAMENTO MINAS GERAIS -->
+
+		<!-- OS-11 - Alterar Limite Diário -->
+		<navigation-case>
+			<from-outcome>goAlterarLimiteDiarioPreenchimento</from-outcome>
+			<to-view-id>#{limiteDiarioAlterarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarLimiteDiarioContrato</from-outcome>
+			<to-view-id>/pages/internetBanking/limiteDiario/alterar/alterarLimiteDiarioTermo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM OS-11 - Alterar Limite Diário -->
+
+		<!-- Inicio Usuario Secundario Senha -->
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioSenhasValidacao</from-outcome>
+			<to-view-id>#{usuarioSecundarioSenhaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioSenhaListaSelecao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/senhas/usuarioSecundarioSenhaListaSelecao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioSenhasPreenchimento</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/senhas/usuarioSecundarioSenhasPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioSenhasConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/senhas/usuarioSecundarioSenhasConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim Usuario Secundario Senha -->
+
+		<!-- Transferencia Arquivos Faixa Cep -->
+		<navigation-case>
+			<from-outcome>goFaixaCep</from-outcome>
+			<to-view-id>#{transferenciaFaixaCepBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Senha Expirada -->
+		<navigation-case>
+			<from-outcome>goPreenchimentoSenhaExpirada</from-outcome>
+			<to-view-id>/pages/contrato/senhaExpirada/senhaExpiradaPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteSenhaExpirada</from-outcome>
+			<to-view-id>/pages/contrato/senhaExpirada/senhaExpiradaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Senha Expirada -->
+
+		<!-- Inicio Pagamento Multas Interestaduais -->
+		<navigation-case>
+			<from-outcome>goApelidosVeiculoSPMultaInterestadual</from-outcome>
+			<to-view-id>#{veiculoSPMultaInterestadualBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentoVeiculoSPMultaInterestadual</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/multasInterestaduais/multasInterestaduaisConsultaOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoVeiculoSPMultaInterestadual</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/multasInterestaduais/multasInterestaduaisPagtoOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteVeiculoSPMultaInterestadual</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/multasInterestaduais/multasInterestaduaisComprovanteOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim Pagamento Multas Interestaduais -->
+
+		<!-- Multas Transito SP -->
+		<navigation-case>
+			<from-outcome>goMultasVeiculosRenavamOnlineApelidos</from-outcome>
+			<to-view-id>#{multasVeiculosBBean.redirectTo}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMultasVeiculosRenavamOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculos/multasTransitoSp/multasVeiculosRenavamOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMultasVeiculosConsultaOnline</from-outcome>
+			<to-view-id>#{multasVeiculosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMultasVeiculosPagtoOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculos/multasTransitoSp/multasVeiculosPagtoOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goMultasVeiculosComprovanteOnline</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculos/multasTransitoSp/multasVeiculosComprovanteOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM Multas Transito -->
+
+		<!-- Usuario Master - Finalizar Cadastro -->
+		<navigation-case>
+			<from-outcome>goUsuarioMasterFinalizarCadastroLista</from-outcome>
+			<to-view-id>#{usuarioMasterFinalizarCadastroBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioMasterFinalizarCadastroPreenchimento</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioMaster/finalizarCadastro/usuarioMasterFinalizarCadastroPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioMasterFinalizarCadastroConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioMaster/finalizarCadastro/usuarioMasterFinalizarCadastroConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioMasterFinalizarCadastroComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioMaster/finalizarCadastro/usuarioMasterFinalizarCadastroComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM Usuario Master - Finalizar Cadastro -->
+
+		<!-- SenhaAcesso -->
+		<navigation-case>
+			<from-outcome>goPreenchimentoAlterarSenhaAcesso</from-outcome>
+			<to-view-id>#{senhaAcessoDeAlterarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- DEBITO AUTOMATICO SUSPENSAO TEMPORARIA INCLUIR -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoConsulta</from-outcome>
+			<to-view-id>#{debitoAutomaticoSuspensaoConsultaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSusIncluirExcluir</from-outcome>
+			<to-view-id>#{debitoAutomaticoSuspensaoConsultaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoIncluirBusca</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/incluir/debitoAutomaticoSuspensaoIncluirBusca.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoIncluir</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/incluir/debitoAutomaticoSuspensaoIncluir.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoIncluirPreencher</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/incluir/debitoAutomaticoSuspensaoIncluirPreencher.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoIncluirConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/incluir/debitoAutomaticoSuspensaoIncluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoIncluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/incluir/debitoAutomaticoSuspensaoIncluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM DEBITO AUTOMATICO SUSPENSAO TEMPORARIA INCLUIR -->
+
+		<!-- DEBITO AUTOMATICO SUSPENSAO TEMPORARIA EXCLUIR -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoExcluirConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/excluir/debitoAutomaticoSuspensaoExcluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoSuspensaoExcluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/excluir/debitoAutomaticoSuspensaoExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM DEBITO AUTOMATICO SUSPENSAO TEMPORARIA EXCLUIR -->
+
+		<!-- RENAVAM -->
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamLista</from-outcome>
+			<to-view-id>#{renavamListaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamRedirectInclusao</from-outcome>
+			<to-view-id>#{renavamListaBBean.redirectInclusao}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamInclusao</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamInclusao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamInclusaoConfirma</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamInclusaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamInclusaoComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamInclusaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamAlterar</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamAlterar.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamExcluirConfirma</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamExclusaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosRenavamExcluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/renavam/renavamExclusaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM RENAVAM -->
+
+		<!-- INÍCIO AUTORIZAÇÕES CONSULTAS AUTORIZAÇÕES CANCELADAS -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesConsultasAutorizacoesCanceladas</from-outcome>
+			<to-view-id>#{autorizacoesConsultarDadosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAutorizacoesConsultasAutorizacoesCanceladasDetalhe</from-outcome>
+			<to-view-id>/pages/autorizacoes/consultas/autorizacoesCanceladas/consultarAutorizacoesCanceladasDetalhe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FINAL AUTORIZAÇÕES CONSULTAS AUTORIZAÇÕES CANCELADAS -->
+
+		<!-- INICIO AUTORIZAÇÕES DE PENDÊNCIAS POR CONTA CONVENIO -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesPendenciasAutorizacoesContaConvenio</from-outcome>
+			<to-view-id>#{autorizacoesPendenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FINAL AUTORIZAÇÕES DE PENDÊNCIAS POR CONTA CONVÊNIO -->
+
+		<!-- INICIO AUTORIZAÇÕES DE PENDÊNCIAS -->
+		<navigation-case>
+			<from-outcome>goConfirmacaoAutorizacoesPendencias</from-outcome>
+			<to-view-id>/pages/autorizacoes/pendencias/confirmacaoAutorizacoesPendencias.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteAutorizacoesPendencias</from-outcome>
+			<to-view-id>/pages/autorizacoes/pendencias/comprovanteAutorizacoesPendencias.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AUTORIZAÇÕES DE PENDÊNCIAS -->
+
+		<!-- INICIO AUTORIZAÇÕES DE PENDÊNCIAS POR DATA DE EFETIVAÇÃO -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesPendenciasAutorizacoesDataEfetivacao</from-outcome>
+			<to-view-id>#{autorizacoesPendenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoAutorizacoesDataEfetivacao</from-outcome>
+			<to-view-id>/pages/autorizacoes/pendencias/dataEfetivacao/confirmacaoAutorizacoesDataEfetivacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCoprovanteAutorizacoesDataEfetivacao</from-outcome>
+			<to-view-id>/pages/autorizacoes/pendencias/dataEfetivacao/comprovanteAutorizacoesDataEfetivacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FINAL AUTORIZAÇÕES DE PENDÊNCIAS POR DATA DE EFETIVAÇÃO -->
+
+		<!-- INICIO AUTORIZAÇÕES DE PENDÊNCIAS POR DATA DE INCLUSÃO -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesPendenciasAutorizacoesDataInclusao</from-outcome>
+			<to-view-id>#{autorizacoesPendenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoAutorizacoesDataInclusao</from-outcome>
+			<to-view-id>/pages/autorizacoes/pendencias/dataInclusao/confirmacaoAutorizacoesDataInclusao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCoprovanteAutorizacoesDataInclusao</from-outcome>
+			<to-view-id>pages/autorizacoes/pendencias/dataInclusao/comprovanteAutorizacoesDataInclusao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FINAL AUTORIZAÇÕES DE PENDÊNCIAS POR DATA DE INCLUSÃO -->
+
+		<!-- INICIO AUTORIZAÇÕES DE PENDÊNCIAS POR PRODUTO -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesPendenciasAutorizacoesProduto</from-outcome>
+			<to-view-id>#{autorizacoesPendenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FINAL AUTORIZAÇÕES DE PENDÊNCIAS POR PRODUTO -->
+
+		<!-- INICIO AUTORIZAÇÕES DE PENDÊNCIAS POR REMESSA -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesPendenciasAutorizacoesRemessa</from-outcome>
+			<to-view-id>#{autorizacoesPendenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FINAL AUTORIZAÇÕES DE PENDÊNCIAS POR REMESSA -->
+
+
+		<!-- INICIO AUTORIZAÇÕES HISTORICO CONSULTAR -->
+		<navigation-case>
+			<from-outcome>goHistoricoAutorizacoesConsultar</from-outcome>
+			<to-view-id>#{autorizacoesHistoricoConsultaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteAlterarSenhaAcesso</from-outcome>
+			<to-view-id>/pages/administrativo/senhaDeAcesso/alterar/alteracaoSenhaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM 410 SenhaAcesso -->
+
+		<!-- INICIO - 411 - ASSINATURA E. SOLICITAR -->
+		<navigation-case>
+			<from-outcome>goAssinaturaSolicitarPreenchimento</from-outcome>
+			<to-view-id>#{assinaturaEletronicaSolicitarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAssinaturaSolicitarComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/assinaturaEletronica/assinaturaSolicitarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - 411 - ASSINATURA E. SOLICITAR -->
+
+		<!-- INICIO - 405 - LIMITES UTILIZADOS -->
+		<navigation-case>
+			<from-outcome>goAutorizacoesLimitesUtilizados</from-outcome>
+			<to-view-id>#{limitesUtilizadosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAutorizacoesLimitesUtilizadosConsulta</from-outcome>
+			<to-view-id>/pages/autorizacoes/consultas/limitesUtilizados/autorizacoesLimitesUtilizadosConsulta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAutorizacoesConsultaConfirmacao</from-outcome>
+			<to-view-id>/pages/autorizacoes/consultas/limitesUtilizados/autorizacoesConsultaConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - 405 - LIMITES UTILIZADOS -->
+
+		<!-- INICIO DE ATIVAR TOKEN -->
+		<navigation-case>
+			<from-outcome>goTokenAtivarPreenchimento</from-outcome>
+			<to-view-id>#{tokenAtivarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTokenAtivarUsuarioBloqueado</from-outcome>
+			<to-view-id>/pages/administrativo/token/ativar/tokenAtivarPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTokenAtivarConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/token/ativar/tokenAtivarConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTokenAtivarComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/token/ativar/tokenAtivarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM DE ATIVAR TOKEN -->
+
+		<!-- INICIO - Débito Automático -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoLancamentoSelecao</from-outcome>
+			<to-view-id>#{debitoAutomaticoSelecaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoLancamentoConsulta</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/lancamento/consultar/debitoAutomaticoConsulta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Débito Automático -->
+
+		<!-- Pagamentos Debito Automatico Cadastro Generico -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoCadastroSelecao</from-outcome>
+			<to-view-id>#{debitoAutomaticoCadastroGenericoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoCadastroConsultaConta</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/consultar/debitoAutomaticoConsultaConta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim Pagamentos Debito Automatico Cadastro Generico -->
+
+		<!-- Pagamentos Debito Automatico Cadastro Alterar -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoAlterarPreenchimento</from-outcome>
+			<to-view-id>#{debitoAutomaticoAlterarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoAlterarConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/alterar/debitoAutomaticoAlterarConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoAlterarComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/alterar/debitoAutomaticoAlterarComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim Pagamentos Debito Automatico Cadastro Alterar -->
+
+		<!-- Pagamentos Debito Automatico Cadastro Incluir -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoIncluirPreenchimento</from-outcome>
+			<to-view-id>#{debitoAutomaticoIncluirBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoIncluirConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/incluir/debitoAutomaticoIncluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoIncluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/incluir/debitoAutomaticoIncluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim - Pagamentos Debito Automatico Cadastro Incluir -->
+
+		<!-- Pagamentos Debito Automatico Cadastro excluir -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoExcluirPreenchimento</from-outcome>
+			<to-view-id>#{debitoAutomaticoExcluirBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoExcluirConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/excluir/debitoAutomaticoExcluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoExcluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/cadastro/excluir/debitoAutomaticoExcluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim - Pagamentos Debito Automatico Cadastro excluir -->
+
+		<!-- INICIO 104 - Débito Pendentes -->
+		<navigation-case>
+			<from-outcome>goPagamentosVeiculosSelecao</from-outcome>
+			<to-view-id>#{pagamentosVeiculosSelecaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitosPendentesConfirmacao</from-outcome>
+			<to-view-id>#{debitosPendentesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitosPendentesComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/debitosPendentes/debitosPendentesComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Débito Pendentes -->
+
+		<!-- INICIO - Master Consultar -->
+		<navigation-case>
+			<from-outcome>goConsultarValidacao</from-outcome>
+			<to-view-id>#{usuarioMasterConsultarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Master Consultar -->
+
+		<!-- Lançamentos pendentes e ou Futuro -->
+		<navigation-case>
+			<from-outcome>goLancamentosPendentesOuFuturos</from-outcome>
+			<to-view-id>#{lancamentosPendentesOuFuturosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--FIM Lançamentos pendentes e ou Futuro -->
+
+		<!-- INICIO - Debito Automatico - Lançamentos - Bloquear -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoBloquearConfirmacao</from-outcome>
+			<to-view-id>#{debitoAutomaticoBloquearBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoBloquearComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/lancamento/bloquear/debitoAutomaticoBloquearComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Debito Automatico - Lançamentos - Bloquear -->
+
+		<!-- INICIO - Debito Automatico - Lançamentos - Desbloquear -->
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoDesbloquear</from-outcome>
+			<to-view-id>#{debitoAutomaticoDesbloquearBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoDesbloquearResultado</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/lancamento/desbloquear/debitoAutomaticoDesbloquearResultado.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoDesbloquearConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/lancamento/desbloquear/debitoAutomaticoDesbloquearConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDebitoAutomaticoDesbloquearComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/debitoAutomatico/lancamento/desbloquear/debitoAutomaticoDesbloquearComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Debito Automatico - Lançamentos - Desbloquear -->
+
+		<!-- INICIO - Pagamentos - Veículos São Paulo - 2ª Via de Licenciamento -->
+		<navigation-case>
+			<from-outcome>goSegundaViaLicenciamentoSelecao</from-outcome>
+			<to-view-id>#{pagamentosVeiculosSelecaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaLicenciamentoPreenchimento</from-outcome>
+			<to-view-id>#{segundaViaLicenciamentoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaLicenciamentoConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSaoPaulo/segundaViaLicenciamento/segundaViaLicenciamentoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaLicenciamentoComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSaoPaulo/segundaViaLicenciamento/segundaViaLicenciamentoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Pagamentos - Veículos São Paulo - 2ª Via de Licenciamento -->
+
+		<!-- INICIO - Pagamentos - Veículos São Paulo - Licenciamento -->
+		<navigation-case>
+			<from-outcome>goLicenciamentoVeiculoSP</from-outcome>
+			<to-view-id>#{licenciamentoVeiculosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Pagamentos - Veículos São Paulo - Licenciamento -->
+
+		<!--Veiculos SP 1º Registro -->
+		<navigation-case>
+			<from-outcome>goVeiculosSP1RegistroPreenchimento</from-outcome>
+			<to-view-id>#{veiculosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goVeiculosSP1RegistroConfirmacao</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/primeiroRegistro/primeiroRegistroConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goVeiculosSP1RegistroComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSP/primeiroRegistro/primeiroRegistroComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Veiculos SP 1º Registro - Fim -->
+
+		<!--Veiculos SP - 2ª VIA TRANSFERÊNCIA INÍCIO -->
+		<navigation-case>
+			<from-outcome>goVeiculosSPSegundaViaTranfSelecao</from-outcome>
+			<to-view-id>#{pagamentosVeiculosSelecaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goVeiculosSPSegundaViaTranfConfirmacao</from-outcome>
+			<to-view-id>#{segundaViaTransferenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goVeiculosSPSegundaViaTranfComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/veiculosSaoPaulo/segundaViaTransferencia/segundaViaTransferenciaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Veiculos SP - 2ª VIA TRANSFERÊNCIA FINAL -->
+
+		<!--Veiculos SP - TRANSFERÊNCIA INÍCIO -->
+		<navigation-case>
+			<from-outcome>goVeiculosSaoPauloTransferencia</from-outcome>
+			<to-view-id>#{transferenciaVeiculosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Veiculos SP - TRANSFERÊNCIA FIM -->
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosEstaduais</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.tributosEstaduais}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosFederais</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.tributosFederais}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosFederaisLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTributosFederaisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosEstaduaisLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTributosEstaduaisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<!-- Cadastrar QR Token - 496 -->
+		<navigation-case>
+			<from-outcome>goPreenchimentoQrToken</from-outcome>
+			<to-view-id>#{qrTokenCadastroBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCapturarCodigoQrToken</from-outcome>
+			<to-view-id>/pages/administrativo/qrToken/cadastrar/qrCapturaCodigo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goHabilitarQrToken</from-outcome>
+			<to-view-id>/pages/administrativo/qrToken/cadastrar/qrHabilitacaoAparelho.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoQrToken</from-outcome>
+			<to-view-id>/pages/administrativo/qrToken/cadastrar/qrHabilitarAparelhoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteQrToken</from-outcome>
+			<to-view-id>/pages/administrativo/qrToken/cadastrar/qrHabilitarAparelhoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!--Cadastrar QR Token - 496 FINAL -->
+
+		<!-- Início - Autorizações > Consultas> Posição Consolidada -->
+		<navigation-case>
+			<from-outcome>goPosicaoConsolidada</from-outcome>
+			<to-view-id>#{consultaPosicaoConsolidadaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPosicaoConsolidadaResult</from-outcome>
+			<to-view-id>/pages/autorizacoes/consultas/posicaoConsolidada/consultaPosicaoConsolidadaResultado.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim - Autorizações > Consultas> Posição Consolidada -->
+
+		<!-- Início - Conta Corrente > Consultas> Posição Consolidada -->
+		<navigation-case>
+			<from-outcome>goContaCorrenteConsultasPosicaoConsolidada</from-outcome>
+			<to-view-id>#{contaCorrenteConsultasPosicaoConsolidadaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Fim - Conta Corrente > Consultas> Posição Consolidada -->
+
+		<!-- AD-20 Administrativo > Usuário Secundário > Consultar -->
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioConsultarValidacao</from-outcome>
+			<to-view-id>#{usuarioSecundarioConsultarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioConsultarListaSelecao</from-outcome>
+			<to-view-id>#{usuarioSecundarioConsultarBBean.carregarTelaSelecao}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioConsultarVisualizacao</from-outcome>
+			<to-view-id>#{usuarioSecundarioConsultarBBean.carregarTelaVisualizacao}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-20 Administrativo > Usuário Secundário > Consultar -->
+
+		<!-- INICIO AD-17 Administrativo > Usuário Secundário > Incluir -->
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirPreenchimento</from-outcome>
+			<to-view-id>#{usuarioSecundarioIncluirBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirSelecaoPerfil</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/incluir/usuarioSecundarioIncluirSelecaoPerfil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirSelecaoPerfilRedirect</from-outcome>
+			<to-view-id>#{usuarioSecundarioIncluirBBean.goVoltarTelaUsuarioSecundarioIncluirPreenchimentoPerfilAposInclusao}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirPreenchimentoPerfil</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/incluir/usuarioSecundarioIncluirPreenchimentoPerfil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirPreenchimentoConvenio</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/incluir/usuarioSecundarioIncluirPreenchimentoConvenio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/incluir/usuarioSecundarioIncluirConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioIncluirComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/incluir/usuarioSecundarioIncluirComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTesteDarf</from-outcome>
+			<to-view-id>${darfBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-17 Administrativo > Usuário Secundário > Incluir -->
+
+		<!-- AD-15 Administrativo > Usuário Secundário > Alterar -->
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarValidacao</from-outcome>
+			<to-view-id>#{usuarioSecundarioAlterarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarSelecao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/usuarioSecundarioAlteracaoSelecao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarCadastro</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/usuarioSecundarioAlteracaoPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarCadastroConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/usuarioSecundarioAlteracaoConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarCadastroComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/usuarioSecundarioAlteracaoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAtribuirPerfil</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/alteracaoPerfilSelecao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAtribuirConvenio</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/alteracaoPerfilPreenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarPerfisConfirmacao</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/alteracaoPerfilConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goUsuarioSecundarioAlterarPerfisComprovante</from-outcome>
+			<to-view-id>/pages/administrativo/usuarioSecundario/alterar/alteracaoPerfilComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-15 Administrativo > Usuário Secundário > Alterar -->
+
+		<!-- AD-15 Administrativo > Usuário Secundário > Alterar -->
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosHoje</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosSeteDias</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectSeteDias}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosQuinzeDias</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectQuinzeDias}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosTrintaDias</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectTrintaDias}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosSessentaDias</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectSessentaDias}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosPorPeriodo</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectPorPeriodo}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosMesAtual</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectMesAtual}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarContaCorrenteExtratosMesAnterior</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarExtratosBBean.redirectMesAnterior}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAdesaoDocOnline</from-outcome>
+			<to-view-id>#{contaCorrenteExtratosAdesaoDocOnlineBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAdesaoDocOnlineConfirmacao</from-outcome>
+			<to-view-id>/pages/contaCorrente/extratos/docOnline/confirmacaoAdesaoDocOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAdesaoDocOnlineComprovante</from-outcome>
+			<to-view-id>/pages/contaCorrente/extratos/docOnline/comprovanteAdesaoDocOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultaAdesaoDocOnline</from-outcome>
+			<to-view-id>/pages/contaCorrente/extratos/docOnline/consultaDocOnline.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goDocOnlineExtratoDetalhe</from-outcome>
+			<to-view-id>/pages/contaCorrente/extratos/docOnline/consultaDocOnlineDetalhe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-15 Administrativo > Usuário Secundário > Alterar -->
+
+		<!-- INIT AD-15 Pacote Atual > Consultar -->
+		<navigation-case>
+			<from-outcome>goConsultaPacoteAtual</from-outcome>
+			<to-view-id>#{pacoteServicoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-15 Pacote Atual > Consultar -->
+
+		<!-- INICIO AD-15 Conta Corrente > Pacote de Serviços > Pacotes Disponiveis -->
+		<navigation-case>
+			<from-outcome>goPacotesDisponiveis</from-outcome>
+			<to-view-id>#{pacotesDisponiveisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCompararaPacotesDisponiveis</from-outcome>
+			<to-view-id>#{pacotesDisponiveisBBean.redirectComparar}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- INICIO AD-15 Conta Corrente > Pacote de Serviços > Pacotes Disponiveis -->
+
+		<!-- INICIO AD-15 Conta Corrente > Pacote de Serviços > Pacote Atual Detalhe -->
+		<navigation-case>
+			<from-outcome>goPacoteServicoDetalhe</from-outcome>
+			<to-view-id>/pages/contaCorrente/pacoteServicos/pacoteAtual/consulta/pacoteAtualDetalhe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-15 Conta Corrente > Pacote de Serviços > Pacote Atual Detalhe -->
+
+		<!-- Conta Corrente / Limites - INICIO -->
+		<navigation-case>
+			<from-outcome>goChequeEmpresaPlus</from-outcome>
+			<to-view-id>#{chequeEmpresaPlusBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Conta Corrente / Limites - FIM -->
+
+		<!-- ######## CHEQUES - Desbloquear Talões BEGIN ######## -->
+		<navigation-case>
+			<from-outcome>goChequesDesbloquearTaloes</from-outcome>
+			<to-view-id>#{chequesDesbloquearTaloesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ######## CHEQUES - Desbloquear Talões END ######## -->
+
+		<!-- ################# CONSULTA CANCELAMENTO CHEQUES BEGIN ################# -->
+		<navigation-case>
+			<from-outcome>goChequesCancelarSolicitacao</from-outcome>
+			<to-view-id>#{chequesCancelarSolicitacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ################# CONSULTA CANCELAMENTO CHEQUES END ################# -->
+
+		<!-- FIM AD-15 Pacote Servico > Contratar -->
+
+		<!-- Conta Corrente / Limites - INICIO -->
+		<navigation-case>
+			<from-outcome>goChequeEmpresaPlus</from-outcome>
+			<to-view-id>#{chequeEmpresaPlusBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Conta Corrente / Limites - FIM -->
+
+		<!-- INICIO CT-25 Conta Corrente > Saldo -->
+		<navigation-case>
+			<from-outcome>goSaldoContaCorrente</from-outcome>
+			<to-view-id>#{contaCorrenteConsultaSaldoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CT-25 Conta Corrente > Saldo -->
+
+		<!-- ######## CHEQUES - Desbloquear Talões BEGIN ######## -->
+		<navigation-case>
+			<from-outcome>goChequesDesbloquearTaloes</from-outcome>
+			<to-view-id>#{chequesDesbloquearTaloesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ######## CHEQUES - Desbloquear Talões END ######## -->
+
+		<!-- ################# CONSULTA CANCELAMENTO CHEQUES BEGIN ################# -->
+		<navigation-case>
+			<from-outcome>goChequesCancelarSolicitacao</from-outcome>
+			<to-view-id>#{chequesCancelarSolicitacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ################# CONSULTA CANCELAMENTO CHEQUES END ################# -->
+
+		<!-- Conta Corrente / Limites - INICIO -->
+		<navigation-case>
+			<from-outcome>goChequeEmpresaPlus</from-outcome>
+			<to-view-id>#{chequeEmpresaPlusBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Conta Corrente / Limites - FIM -->
+
+		<!-- ######## CHEQUES - Desbloquear Talões BEGIN ######## -->
+		<navigation-case>
+			<from-outcome>goChequesDesbloquearTaloes</from-outcome>
+			<to-view-id>#{chequesDesbloquearTaloesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ######## CHEQUES - Desbloquear Talões END ######## -->
+
+		<!-- ################# CONSULTA CANCELAMENTO CHEQUES BEGIN ################# -->
+		<navigation-case>
+			<from-outcome>goChequesCancelarSolicitacao</from-outcome>
+			<to-view-id>#{chequesCancelarSolicitacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- ################# CONSULTA CANCELAMENTO CHEQUES END ################# -->
+
+		<!-- INIT AD-15 Pacote Servico > Contratar/Alterar -->
+		<navigation-case>
+			<from-outcome>goPacoteServicoContratar</from-outcome>
+			<to-view-id>#{pacoteServicoContratarAlterarBBean.redirectContratar}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPacoteServicoAlterar</from-outcome>
+			<to-view-id>#{pacoteServicoContratarAlterarBBean.redirectAlterar}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO CONFIRMAÇÕES -->
+		<navigation-case>
+			<from-outcome>goConfirmacaoPacoteServico</from-outcome>
+			<to-view-id>/pages/contaCorrente/pacoteServicos/confirmacaoPacoteServico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovantePacoteServico</from-outcome>
+			<to-view-id>/pages/contaCorrente/pacoteServicos/comprovantePacoteServico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CONFIRMACAO -->
+
+		<!-- FIM AD-15 Pacote Servico > Contratar/Alterar -->
+
+		<navigation-case>
+			<from-outcome>goSegViaComprovantes</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.segViaContas}</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovante</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.centralComprovantes}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO AD-15 Pagamentos > Segunda Via > Comprovante Telefone Pre-Pago -->
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTelefonePrePago</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.segViaTelefonePrePago}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTelefonePrePagoLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTelefonePrePagoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTelefonePrePagoDetalhe</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTelefonePrePagoBBean.redirectDetalhe}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteContasLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteContasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteContasDetalhe</from-outcome>
+			<to-view-id>#{segundaViaComprovanteContasBBean.redirectDetalhe}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- FIM AD-15 Pagamentos > Segunda Via > Comprovante Telefone Pre-Pago -->
+
+		<!-- INIT Pagamentos > Segunda Via > Comprovante Tributos Municipais -->
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosMunicipais</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.segViaTributosMunicipais}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosMunicipaisLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTributosMunicipaisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTributosMunicipaisDetalhe</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTributosMunicipaisBBean.redirectDetalhe}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM Pagamentos > Segunda Via > Comprovante Tributos Municipais -->
+
+		<!-- INIT AD-15 Pagamentos > Segunda Via > Comprovante Cartao Credito -->
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteCartaoCredito</from-outcome>
+			<to-view-id>#{segundaViaComprovanteCartaoCreditoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteCartaoCreditoAmex</from-outcome>
+			<to-view-id>#{segundaViaComprovanteCartaoCreditoBBean.redirectDetalheAmex}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteCartaoCreditoSantander</from-outcome>
+			<to-view-id>#{segundaViaComprovanteCartaoCreditoBBean.redirectDetalheSantander}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM AD-15 Pagamentos > Segunda Via > Comprovante Cartao Credito -->
+
+		<!-- INIT - Pagamentos > Segunda Via > Comprovante Titulos em Cartorio -->
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTituloCartorio</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTituloCartorioBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Pagamentos > Segunda Via > Comprovante Titulos em Cartorio -->
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTitulos</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.segViaTitulos}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTitulosLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTitulosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteTitulosDetalhe</from-outcome>
+			<to-view-id>#{segundaViaComprovanteTitulosBBean.redirectDetalhe}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INIT - Pagamentos > Segunda Via > Comprovante Veiculos -->
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteVeiculosPreencher</from-outcome>
+			<to-view-id>#{segundaViaComprovanteConsultarBBean.segViaVeiculosRenavam}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteVeiculosLista</from-outcome>
+			<to-view-id>#{segundaViaComprovanteVeiculosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteVeiculosCodBarraLista</from-outcome>
+			<to-view-id>#{segundaViaVeicCodBarraBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteVeiculosComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/segundaViaComprovantes/veiculos/segundaViaComprovanteVeiculosComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteVeiculosComprovanteMG</from-outcome>
+			<to-view-id>/pages/pagamentos/segundaViaComprovantes/veiculos/segundaViaComprovanteVeiculosComprovanteMG.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSegundaViaComprovanteVeiculosComprovanteTaxaDetran</from-outcome>
+			<to-view-id>/pages/pagamentos/segundaViaComprovantes/veiculos/segundaViaComprovanteVeiculosComprovanteTaxaDetran.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Pagamentos > Segunda Via > Comprovante Veiculos -->
+
+		<!-- Agendamentos - Transferencia - Inicio -->
+		<navigation-case>
+			<from-outcome>goAgendamentosTransferenciaConsulta</from-outcome>
+			<to-view-id>#{agendamentoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAgendamentosTransferenciaLista</from-outcome>
+			<to-view-id>/pages/transferencias/agendamentos/agendamentoTransferenciaLista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goInvestimentoAgendamentoDetalhe</from-outcome>
+			<to-view-id>/pages/transferencias/agendamentos/agendamentoTransferenciaDetalhe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goInvestimentoAgendamentoConfirma</from-outcome>
+			<to-view-id>/pages/transferencias/agendamentos/agendamentoTransferenciaConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goInvestimentoAgendamentoComprovante</from-outcome>
+			<to-view-id>/pages/transferencias/agendamentos/agendamentoTransferenciaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Agendamentos - Transferencia - Fim -->
+
+		<!-- Conta Corrente - Extrato Consolidado - Solicitar 2a Via - BEGIN -->
+		<navigation-case>
+			<from-outcome>goExtratoConsolidadoSegundaVia</from-outcome>
+			<to-view-id>#{contaCorrenteSegundaViaExtratosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Conta Corrente - Extrato Consolidado - Solicitar 2a Via - END -->
+
+
+		<!-- INIT CC-18 Conta Corrente > Cheques > Cópia de Cheques -->
+		<navigation-case>
+			<from-outcome>goListaCopiaDeCheques</from-outcome>
+			<to-view-id>#{contaCorrenteConsultaChequesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoCopiaDeChequesExtrato</from-outcome>
+			<to-view-id>#{contaCorrenteConsultaChequesBBean.redirectExtrato}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoCopiaDeCheques</from-outcome>
+			<to-view-id>/pages/contaCorrente/cheques/copiaDeCheques/consultaChequesConfirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteCopiaDeCheques</from-outcome>
+			<to-view-id>/pages/contaCorrente/cheques/copiaDeCheques/consultaChequesComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goVisualizarCheques</from-outcome>
+			<to-view-id>/pages/contaCorrente/cheques/copiaDeCheques/consultaChequesVisualizaCheque.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CC-18 Conta Corrente > Cheques > Cópia de Cheques -->
+
+		<navigation-case>
+			<from-outcome>goConsultaTipoLacamento</from-outcome>
+			<to-view-id>#{contaCorrenteConsultaTipoLancamentoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCartaoDeDebitoLancamentos</from-outcome>
+			<to-view-id>#{cartaoDebitoLancamentosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goInvestimentosFundosResgatar</from-outcome>
+			<to-view-id>#{investimentosFundosResgatarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- INVESTIMENTOS CONTA MAX - INICIO -->
+		<navigation-case>
+			<from-outcome>goInvestimentosCMPosicaoMensal</from-outcome>
+			<to-view-id>#{investimentosCMPosicaoMensalBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>goInvestimentosCMExtrato</from-outcome>
+			<to-view-id>#{investimentosCMExtratoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>		
+		<!-- INVESTIMENTOS CONTA MAX - FIM -->
+
+		<!-- Gerenciar - Aparelhos - Inicio -->
+		<navigation-case>
+			<from-outcome>goGerenciarAparelhoConsultar</from-outcome>
+			<to-view-id>#{gerenciarAparelhosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarAparelhos</from-outcome>
+			<to-view-id>#{consultarAparelhosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSolicitarToken</from-outcome>
+			<to-view-id>#{solicitarTokenBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarToken</from-outcome>
+			<to-view-id>#{tokenConsultaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Taxas Detran -->
+		<navigation-case>
+			<from-outcome>goTaxasDetranSp</from-outcome>
+			<to-view-id>#{taxasDetranSpBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Cartao Amex -->
+		<navigation-case>
+			<from-outcome>goCartaoAmex</from-outcome>
+			<to-view-id>#{cartaoAmexBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Recarga Programada consultar -->
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaConsultar</from-outcome>
+			<to-view-id>#{recargaProgramadaConsultarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaConsultarAlterarConfirmar</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/consulta/alterar-confirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaConsultarAlterarConfirmarComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/consulta/alterar-comprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaConsultarExcluirComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/consulta/comprovante-excluir.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO - Pagamentos > Telefone Pré-Pago > Recarga Programada Histórico -->
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaHistorico</from-outcome>
+			<to-view-id>#{recargaProgramadaHistoricoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goListaRecargaProgramadaHistorico</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/historico/listaRecargaProgramadaHistorico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM - Pagamentos > Telefone Pré-Pago > Recarga Programada Histórico -->
+
+		<!-- INICIO Recarga Pre Pago -->
+		<navigation-case>
+			<from-outcome>goRecargaIncluir</from-outcome>
+			<to-view-id>#{recargaPrePagoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+
+		<!-- Alterar apelido Recarga INICIO -->
+		<navigation-case>
+			<from-outcome>goApelidoAlterarConfirmar</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recarga/alterar/apelidoConfirmar.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goApelidoAlterarComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recarga/alterar/apelidoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Alterar apelido Recarga FIM -->
+
+		<!-- Excluir apelido Recarga INICIO -->
+		<navigation-case>
+			<from-outcome>goApelidoRemoverComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recarga/excluir/apelidoComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goApelidoRemoverConfirmar</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recarga/excluir/apelidoConfirmacao.xhtm</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Excluir apelido Recarga FIM -->
+
+		<!-- FIM Recarga Pre Pago -->
+
+		<!-- Saldo bloqueado -->
+		<navigation-case>
+			<from-outcome>goSaldoBloqueadoContaCorrente</from-outcome>
+			<to-view-id>#{contaCorrenteConsultarSaldoBloqueadoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaPrencher</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/consulta/alterar-preenchimento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goRecargaProgramadaConsultarExcluir</from-outcome>
+			<to-view-id>/pages/pagamentos/telefonePrePago/recargaProgramada/consulta/confirmacao-excluir.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goInvestimentosFundosRentabilidadePeriodo</from-outcome>
+			<to-view-id>#{investimentosFundosRentabilidadePeriodoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goCartoesSuperBonusCadastrarEConsultar</from-outcome>
+			<to-view-id>#{superBonusCadastrarBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAlterarConfirmacaoAmex</from-outcome>
+			<to-view-id>#{cartaoAmexBBean.redirectAlterarApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goExcluirConfirmacaoAmex</from-outcome>
+			<to-view-id>#{cartaoAmexBBean.redirectExcluirApelido}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- Consulta correspondencias enviadas -->
+		<navigation-case>
+			<from-outcome>goConsultaCorrespondenciasEnviadas</from-outcome>
+			<to-view-id>#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultaCorrespondenciasEnviadasConsulta</from-outcome>
+			<to-view-id>/pages/contaCorrente/correspondenciasEnviadas/contaCorrenteConsultaCorrespondenciaEnviadasConsulta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultaCorrespondenciasEnviadasConfirmacao</from-outcome>
+			<to-view-id>/pages/contaCorrente/correspondenciasEnviadas/contaCorrenteConsultaCorrespondenciaEnviadasConfirmacao.xhtmll</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultaCorrespondenciasEnviadasComprovante</from-outcome>
+			<to-view-id>/pages/contaCorrente/correspondenciasEnviadas/contaCorrenteConsultaCorrespondenciaEnviadasComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- Consulta correspondencias devolvida -->
+
+		<navigation-case>
+			<from-outcome>goConsultaCorrespondenciasDevolvida</from-outcome>
+			<to-view-id>/pages/contaCorrente/correspondenciasDevolvidas/contaCorrenteConsultaCorrespondenciaDevolvidaConsulta.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultaCorrespondenciasDevolvidaComprovante</from-outcome>
+			<to-view-id>/pages/contaCorrente/correspondenciasDevolvidas/contaCorrenteConsultaCorrespondenciaDevolvidaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO ATM BLOQUEIO E DESBLOQUEIO -->
+		<navigation-case>
+			<from-outcome>goBloqDesbloqATM</from-outcome>
+			<to-view-id>#{bloqDesbloqAtmBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goBloqDesbloqAtmComprovante</from-outcome>
+			<to-view-id>/pages/contaCorrente/atmSaldoELimite/bloquearInformacoes/comprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goBloqDesbloqAtmConfirma</from-outcome>
+			<to-view-id>/pages/contaCorrente/atmSaldoELimite/bloquearInformacoes/confirmacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM ATM BLOQUEIO E DESBLOQUEIO -->
+
+		<!-- INICIO CONSORCIO CONSULTAR CALENDARIO ASSEMBLEIA -->
+		<navigation-case>
+			<from-outcome>goConsorcioConsultarCalendarioAssembleia</from-outcome>
+			<to-view-id>#{consorcioListaCotasAtivasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CONSORCIO CONSULTAR CALENDARIO ASSEMBLEIA -->
+
+		<!-- INICIO CONSORCIO CONSULTAR DADOS COTA -->
+		<navigation-case>
+			<from-outcome>goConsorcioConsultarDadosCota</from-outcome>
+			<to-view-id>#{ConsorcioDadosCotaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CONSORCIO CONSULTAR DADOS COTA -->
+
+		<!-- INICIO CONSORCIO OFERTAR LANCES -->
+		<navigation-case>
+			<from-outcome>goConsorcioOfertarLances</from-outcome>
+			<to-view-id>#{consorcioOfertarLancesBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CONSORCIO OFERTAR LANCES -->
+
+		<navigation-case>
+			<from-outcome>goPerfilRisco</from-outcome>
+			<to-view-id>#{perfilRiscoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO CONSORCIO CONSULTAR DADOS DO GRUPO -->
+		<navigation-case>
+			<from-outcome>goConsultaConsorcioDadosGrupo</from-outcome>
+			<to-view-id>#{consorcioListaCotasAtivasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CONSORCIO CONSULTAR DADOS DO GRUPO -->
+
+		<!-- INICIO INVESTIMENTOS FUNDOS RESGATE AUTOMATICO -->
+		<navigation-case>
+			<from-outcome>goInvestimentosFundosResgateAutomatico</from-outcome>
+			<to-view-id>#{investimentosFundosResgateAutomaticoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM INVESTIMENTOS FUNDOS RESGATE AUTOMATICO -->
+
+		<!-- INICIO ADMINISTRATIVO CONTRATO MANUTENCAO -->
+		<navigation-case>
+			<from-outcome>goContratoManutencao</from-outcome>
+			<to-view-id>#{contratoManutencaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConfirmacaoContratoManutencao</from-outcome>
+			<to-view-id>/pages/administrativo/contrato/manutencao/confirmacaoContratoManutencao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM ADMINISTRATIVO CONTRATO MANUTENCAO -->
+
+		<navigation-case>
+			<from-outcome>goDDAPainelResumo</from-outcome>
+			<to-view-id>#{debitoDiretoAutorizadoPainelResumoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO INVESTIMENTOS FUNDOS EXTRATO POR MOVIMENTAÇÃO -->
+		<navigation-case>
+			<from-outcome>goInvestimentosFundosExtratoMovimentacao</from-outcome>
+			<to-view-id>#{investimentosFundosExtratoMovimentacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM INVESTIMENTOS FUNDOS EXTRATO POR MOVIMENTAÇÃO -->
+
+		<!-- PREENCHIMENTO RENAVAN -->
+		<navigation-case>
+			<from-outcome>goFormularioRenavan</from-outcome>
+			<to-view-id>#{formularioRenavamBbean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goFormularioRenavanComprovante</from-outcome>
+			<to-view-id>/pages/pagamentos/autorizacaoRenavam/veiculosSpMg/comprovanteAutorizacaoRenavam.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goIBPJClassico</from-outcome>
+			<to-view-id>/pages/IBPJClassico/inicioIBPJClassico.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- FIM DO CANCELAMENTO SEGURO CHEQUE EMPRESA -->
+		<navigation-case>
+			<from-outcome>goInvestimentosFundosDescricaoFundos</from-outcome>
+			<to-view-id>#{investimentosFundosDescricaoFundoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goInvestimentosFundosDescricaoFundos</from-outcome>
+			<to-view-id>#{investimentosFundosDescricaoFundoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO INVESTIMENTOS RENDA FIXA CANCELAR OPERACAO -->
+		<navigation-case>
+			<from-outcome>goInvestimentosRendaFixaCancelarOperacao</from-outcome>
+			<to-view-id>#{investimentosRendaFixaCancelarOperacaoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM INVESTIMENTOS RENDA FIXA CANCELAR OPERACAO -->
+
+		<!-- EMPRÉSTIMOS E RECEBÍVEIS - Antecipação Cielo, Rede e Outras - Inicio -->
+		<navigation-case>
+			<from-outcome>goAdesaoTermoAntecipacao</from-outcome>
+			<to-view-id>#{termoAdesaoRecebiveisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goConsultarAntecipacao</from-outcome>
+			<to-view-id>#{consultaAntecipacoesRecebiveisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPosicaoRecebimentos</from-outcome>
+			<to-view-id>#{posicaoRecebimentoManageBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAntecipacaoDemaisCredenciadoras</from-outcome>
+			<to-view-id>#{antecipacaoDemaisCredenciadorasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- EMPRÉSTIMOS E RECEBÍVEIS - Antecipação Cielo, Rede e Outras - Inicio -->
+		<navigation-case>
+			<from-outcome>goSaldoPorPeriodo</from-outcome>
+			<to-view-id>#{consultaSaldoPeriodoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentosTributosMunicipaisIptuSP</from-outcome>
+			<to-view-id>#{pagamentosTributosMunicipaisIptuSPBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO EMPRESTIMOS E RECEBIVEIS -->
+		<navigation-case>
+			<from-outcome>goEmprestimosRecebiveisConsultar</from-outcome>
+			<to-view-id>#{emprestimoRecebiveisBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goAdquirenciaLancamentosFuturos</from-outcome>
+			<to-view-id>#{adquirenciaLancamentosFuturosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSolicitarOperacaoAdquirenciaConsulta</from-outcome>
+			<to-view-id>#{solicitarOperacaoAdquirenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goEmprestimoRecebiveisConsultarExtrato</from-outcome>
+			<to-view-id>#{getnetConsultarExtratoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goSantanderAdquirenciaProdutosContratados</from-outcome>
+			<to-view-id>#{santanderAdquirenciaProdutosContratadosBBean.redirect}</to-view-id>
+			<!-- <to-view-id>/pages/emprestimosRecebiveis/santanderAdquirencia/produtosContratados/extrato.xhtml</to-view-id> -->
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO CONTA CORRENTE DEPOSITOS -->
+		<navigation-case>
+			<from-outcome>goContaCorrenteDepositos</from-outcome>
+			<to-view-id>#{depositosBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM CONTA CORRENTE DEPOSITOS -->
+
+		<!-- INICIO PAGAMENTO COM CODIGO BARRAS -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>goPagamentoCodigoDeBarras</from-outcome> -->
+<!-- 			<to-view-id>#{pagamentoCodigoDeBarrasBBean.redirect}</to-view-id> -->
+<!-- 			<redirect /> -->
+<!-- 		</navigation-case> -->
+		<navigation-case>
+			<from-outcome>goConfirmacaoCodigoDeBarras</from-outcome>
+			<to-view-id>#{confirmaPagtoCodBarrasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goComprovanteCodigoDeBarras</from-outcome>
+			<to-view-id>#{confirmaPagtoCodBarrasBBean.redirectComprovante}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<!-- INICIO EMPRESTIMOS GIRO ELETRONICO SIMULAR -->
+		<navigation-case>
+			<from-outcome>goEmprestimosGiroEletronicoSimular</from-outcome>
+			<to-view-id>#{creditoPessoalBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM EMPRESTIMOS GIRO ELETRONICO SIMULAR -->
+
+		<!-- INICIO TRANSFERENCIAS -->
+		<navigation-case>
+			<from-outcome>goTranferencias</from-outcome>
+			<to-view-id>#{transferenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- FIM TRANSFERENCIAS -->
+
+		<!-- TRANSFERENCIA SEGUNDA VIA DOC INICIO -->
+		<navigation-case>
+			<from-outcome>goTransferenciaSegundaViaDOC</from-outcome>
+			<to-view-id>#{transferenciaSegundaViaComprovanteBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTransferenciaComprovanteSegundaViaConsultar</from-outcome>
+			<to-view-id>#{transferenciaSegundaViaComprovanteBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTransferenciaComprovanteSegundaViaListar</from-outcome>
+			<to-view-id>/pages/transferencias/segundaViaComprovante/listarSegundaViaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>goTransferenciaComprovanteSegundaViaListarTED</from-outcome> -->
+<!-- 			<to-view-id>/pages/transferencias/segundaViaComprovante/listarSegundaViaComprovanteTED.xhtml</to-view-id> -->
+<!-- 			<redirect /> -->
+<!-- 		</navigation-case> -->
+
+		<navigation-case>
+			<from-outcome>goTransferenciaComprovanteSegundaViaDetalhar</from-outcome>
+			<to-view-id>/pages/transferencias/segundaViaComprovante/detalheSegundaViaComprovante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<!-- TRANSFERENCIA SEGUNDA VIA DOC FINAL -->
+
+		<navigation-case>
+			<from-outcome>goTrocaConta</from-outcome>
+			<to-view-id>#{trocaContaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTrocaContaQuickLink</from-outcome>
+			<to-view-id>#{trocaContaBBean.goTrocaContaQuickLink}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goPagamentoCodigoDeBarras</from-outcome>
+			<to-view-id>#{pagamentosContasCodigoBarrasBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>goTranferencias</from-outcome>
+			<to-view-id>#{transferenciaBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>goConsultaContaMaxSaibaMais</from-outcome>
+			<to-view-id>#{contaMaxEmpresarialBBean.redirect}</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>goAdesaoChequeEmpresaProtegido</from-outcome>
+			<to-view-id>#{adesaoChequeEmpresaProtegidoBBean.redirect}</to-view-id>
+			<redirect />
+		</navigation-case>
+
+	</navigation-rule>
+</faces-config>

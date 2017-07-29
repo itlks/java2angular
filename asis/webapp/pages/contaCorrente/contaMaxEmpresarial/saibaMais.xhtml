@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h4>#{msg['pages.contaCorrente.contaMax.saibaMais.oQueEh']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>#{msg['pages.contaCorrente.contaMax.saibaMais.servico']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-t">
+						<h4><h:outputText styleClass="bold" value="#{msg['pages.contaCorrente.contaMax.saibaMais.quemDestina']}"/></h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>#{msg['pages.contaCorrente.contaMax.saibaMais.pessoaJuridica']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-t">
+						<h4><h:outputText styleClass="bold" value="#{msg['pages.contaCorrente.contaMax.saibaMais.vantagens']}"/></h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>
+							#{msg['pages.contaCorrente.contaMax.saibaMais.rentabilizaRescursos']}
+						</p>
+						<p>
+							#{msg['pages.contaCorrente.contaMax.saibaMais.saldoDisponivel']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-t">
+						<h4><h:outputText styleClass="bold" value="#{msg['pages.contaCorrente.contaMax.saibaMais.condicoes']}" /></h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>
+							#{msg['pages.contaCorrente.contaMax.saibaMais.valoresMinimos']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel styleClass="space"
+							value="#{msg['pages.contaCorrente.contaMax.saibaMais.valorMinimoCC']} " />
+						<h:outputText styleClass="bold"
+							value="#{contaMaxEmpresarialBBean.contaMaxEmpresas.valorContaCorrente}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel styleClass="space"
+							value="#{msg['pages.contaCorrente.contaMax.saibaMais.valorMinimoRendaFixa']} " />
+						<h:outputText styleClass="bold"
+							value="#{contaMaxEmpresarialBBean.contaMaxEmpresas.valorRendaFixa}" />	
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>#{msg['pages.contaCorrente.contaMax.saibaMais.obs']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>#{msg['pages.contaCorrente.contaMax.saibaMais.garantia']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-t">
+						<h4><h:outputText styleClass="bold" value="#{msg['pages.contaCorrente.contaMax.saibaMais.comoContratar']}"/></h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p>#{msg['pages.contaCorrente.contaMax.saibaMais.adesao']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+</ui:composition>

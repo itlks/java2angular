@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{darfBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<h:inputHidden value="#{darfBBean.clientHash}" id="clientHash"
+			partialSubmit="true" />
+
+		<!-- alerta -->
+		<ui:include src="/pages/pagamentos/tributosFederais/darfAviso.xhtml" />
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!-- alerta fim -->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.federais.darfCadastro.informeDados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputPanel styleClass="titulo-destaque">
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-2">
+
+										<p:graphicImage id="republicaFBrasil"
+											styleClass="republicaFb-darfSimples" value="/images/u132.gif" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-10">
+										<p>
+											<h:outputText value="#{darfBBean.tituloDocumento1}" />
+											<br />
+											<h:outputText value="#{darfBBean.tituloDocumento2}" />
+											<br />
+											<h:outputText styleClass="bold"
+												value="#{darfBBean.tituloDocumento3}" />
+											<br />
+										</p>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group textArea-darf">
+								<h:outputLabel for="nomeEmpresaTelefone"
+									value="#{msg['page.pagamentos.tributos.federais.darfCadastro.nomeEmpresaTelefone']}" />
+								<p:inputTextarea id="nomeEmpresaTelefone"
+									value="#{darfBBean.darfDTO.nomeEmpresaTelefone}" rows="5"
+									cols="60" autoResize="false" maxlength="50"
+									onblur="stringToUpperCase(this); removeAcento(this)"
+									counter="maxChar" counterTemplate="{0}" tabindex="1"
+									styleClass="form-control"></p:inputTextarea>
+								<h:outputText value="Limite Máximo de 50 caracteres" />
+								<p:spacer width="10" />
+								<h:outputLabel id="maxChar" styleClass="inline" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel id="PanelPreenchimento"
+							styleClass="col-xs-6 border-left-col inline-form">
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.periodoApuracao']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputPanel styleClass="icon-data-input">
+											<i class="fa fa-calendar" />
+											<p:calendar value="#{darfBBean.darfDTO.periodoApuracao}"
+												maxlength="10" id="periodoApuracao" pattern="dd/MM/yyyy"
+												mask="99/99/9999" onkeyup="mascaraData(this, event)"
+												tabindex="2" showButtonPanel="today"
+												converter="dateStringConverter" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.cpfCnpj']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<p:inputText id="cpfCnpj_hash_1" styleClass="form-control"
+											disabled="#{darfBBean.usarApelido}"
+											value="#{darfBBean.darfDTO.cpfCnpj}"
+											onblur="maskCpfCnpj(this, event)"
+											onchange="CheckCGCCPF(this)" maxlength="18" tabindex="5" />
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.codigoReceita']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6">
+										<p:inputMask id="codigoReceita"
+											onkeypress="onlyNumbers(event)" styleClass="form-control"
+											value="#{darfBBean.darfDTO.codigoReceita}" maxlength="4"
+											tabindex="5"
+											disabled="#{darfBBean.usarApelido or darfBBean.codigoReceitaActive}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfPgto.numeroReferencia']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6">
+										<p:inputText id="numeroReferencia" styleClass="form-control"
+											value="#{darfBBean.darfDTO.numeroReferencia}" maxlength="17"
+											onkeypress="onlyNumbers(event)" tabindex="6"
+											disabled="#{darfBBean.usarApelido}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.dataVencimento']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputPanel styleClass="icon-data-input">
+											<p:calendar id="dataVencimento"
+												value="#{darfBBean.darfDTO.dataVencimento}" maxlength="10"
+												pattern="dd/MM/yyyy" onkeyup="mascaraData(this, event)"
+												tabindex="7" onkeypress="onlyNumbers(event)"
+												converter="dateStringConverter">
+												<i class="fa fa-calendar" />
+											</p:calendar>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.valorPrincipal']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6">
+										<p:inputText id="valorPrincipal_hash_2"
+											styleClass="form-control"
+											value="#{darfBBean.darfDTO.valorPrincipal}" tabindex="8"
+											onblur="maskMoneyOnBlur(this)" maxlength="24">
+											<p:ajax update="valorTotal_hash_5" event="blur"
+												listener="#{darfBBean.calcularValorTotal}" />
+										</p:inputText>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.valorMulta']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6">
+										<p:inputText id="valorMulta_hash_3" styleClass="form-control"
+											value="#{darfBBean.darfDTO.valorMulta}" tabindex="9"
+											onblur="maskMoneyOnBlur(this)" maxlength="24">
+											<p:ajax update="valorTotal_hash_5" event="blur"
+												listener="#{darfBBean.calcularValorTotal}" />
+										</p:inputText>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.valorJurosEncargos']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6">
+										<p:inputText id="valorJurosEncargos_hash_4"
+											styleClass="form-control"
+											value="#{darfBBean.darfDTO.valorJurosEncargos}" tabindex="10"
+											onblur="maskMoneyOnBlur(this)" maxlength="24">
+											<p:ajax update="valorTotal_hash_5" event="blur"
+												listener="#{darfBBean.calcularValorTotal}" />
+										</p:inputText>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="total-label" tabindex="11">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel
+												value="#{msg['page.pagamentos.tributos.federais.darfCadastro.valorTotal']}" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6">
+											<p:inputText id="valorTotal_hash_5" styleClass="form-control"
+												disabled="true" value="#{darfBBean.darfDTO.valorTotal}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="ui-widget col-xs-12">
+
+								<p:separator rendered="#{!darfBBean.usarApelido}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel id="panelApelidocheck" styleClass="col-xs-12"
+							rendered="#{!darfBBean.usarApelido}">
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-5">
+									<p:outputPanel styleClass="checkbox">
+										<p:selectBooleanCheckbox
+											value="#{darfBBean.darfDTO.gravaApelido}" tabindex="12"
+											id="cb1">
+											<p:ajax update="panelApelidocheck" />
+										</p:selectBooleanCheckbox>
+										<h:outputLabel for="cb1"
+											value="#{msg['page.pagamentos.tributos.federais.darfCadastro.desejoCadastrar']}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-7 inline-form darf-apelido"
+									rendered="#{darfBBean.darfDTO.gravaApelido}">
+									<p:outputPanel styleClass="row">
+
+										<p:outputPanel styleClass="col-xs-2">
+											<h:outputLabel for="cb1" styleClass="pull-right"
+												value="#{msg['page.pagamentos.tributos.federais.darfCadastro.apelido']}" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-4">
+											<p:inputText id="apelido" styleClass="form-control"
+												tabindex="13" value="#{darfBBean.darfDTO.apelido}"
+												maxlength="20"
+												onblur="removeAcento(this); stringToUpperCase(this)" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6"
+											rendered="#{darfBBean.darfDTO.gravaApelido}">
+											<h:outputLabel
+												value="#{msg['page.pagamentos.tributosFederais.darfCadastro.preenchimento.limiteCaracter']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button" tabindex="15"
+					action="#{darfBBean.voltarDaTelaDePreenchimento}"
+					value="#{msg['page.pagamentos.tributos.federais.darfCadastro.voltar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					role="button" tabindex="16" onstart="enviarHash()"
+					action="#{darfBBean.confirmarTelaPreenchimento}"
+					onclick="this.focus()"
+					value="#{msg['page.pagamentos.tributos.federais.darfCadastro.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							<strong><h:outputText value="Transação exclusiva para pagamento on-line do IPTU da Prefeitura do Município de São Paulo." /></strong>
+						</p>
+						
+						<p>
+							<h:outputText value="Serviço disponível somente em dias úteis, das 7h às 21h. No vencimento, o pagamento deverá ser efetuado até as 21h." />
+						</p>
+						
+						<p>
+							<h:outputText value="Os campos assinalados com * são de preenchimento obrigatório. Preencha cuidadosamente, pois os dados informados são de sua responsabilidade. " />
+						</p>
+						
+						<p>
+							<h:outputText value="Para mais informações, acesse o site da " />
+							<p:commandLink 	style="margin-left: 5px;"
+											oncomplete="window.open('http://portal.prefeitura.sp.gov.br/secretarias/financas/tributos/iptu/', '_blank')">
+								Prefeitura de São Paulo
+							</p:commandLink>
+						</p>
+						
+						<p>
+							<strong>
+								<p:commandLink
+									style="text-decoration: underline;"
+									actionListener="#{gareDRSPBBean.initLimites}"
+									value="#{msg['pages.apelidos.gpsAviso.confira.limites']}">
+								</p:commandLink>
+							</strong>
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<ui:include src="/pages/limites/limites.xhtml" />
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.apelidos.listaApelidos.informe.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel> 
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+				
+					<strong><h4>#{msg['pages.apelidos.listaApelidos.novo.pagamento']}</h4></strong>
+					<br />
+					<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+					<p:commandLink value="#{msg['page.gare.apelidos.botao.preencher']}" action="#{pagamentosTributosMunicipaisIptuSPBBean.goPaginaPreenchimento}" />
+					<p:separator />
+					<h5>#{msg['page.gare.apelidos.titulo']}</h5>
+					
+		
+					<p:outputPanel styleClass="table-responsive table table-striped space-t">
+					
+						<p:dataTable 	id="dtApelidos"
+										value="#{pagamentosTributosMunicipaisIptuSPBBean.listaApelidosWrapper}"
+										tableStyleClass="table-hover"
+										var="apelido"
+										rowKey="#{apelido.id}"
+										selection="#{pagamentosTributosMunicipaisIptuSPBBean.apelidoSelecionado}"
+										selectionMode="single">
+		
+							<p:ajax event="rowSelect" listener="#{pagamentosTributosMunicipaisIptuSPBBean.selecionarApelido}"  /> 
+		
+							<p:column headerText="#{msg['page.pagamentos.tributos.municipais.iptu.sp.apelido.consulta.identificacao']}" style="text-align: left;" >
+								<h:outputText value="#{apelido.apelido}" />
+							</p:column>
+							
+							<p:column headerText="#{msg['page.pagamentos.tributos.municipais.iptu.sp.apelido.consulta.numerocontribuinte']}" >
+								<h:outputText value="#{apelido.numContribuinteSTR}" />
+							</p:column>
+		
+							<p:column styleClass="text-right">
+								<p:blockUI block="alterar" trigger="alterar" />
+								<p:commandLink 	id="alterar" 
+												role="button" 
+												action="#{pagamentosTributosMunicipaisIptuSPBBean.goPaginaAlteracaoApelidoConfirmar(apelido)}">
+									<h:graphicImage id="imgAlterar" 
+													styleClass="custom-icons"
+													value="/images/u1239.png" /> 
+									#{msg['pages.apelidos.listaApelidos.alterar']}
+								</p:commandLink>
+							</p:column>
+							
+							<p:column styleClass="text-center">
+								<p:blockUI block="excluir" trigger="excluir" />
+								<p:commandLink 	id="excluir" 
+												role="button" 
+												action="#{pagamentosTributosMunicipaisIptuSPBBean.goPaginaExcluirApelidoConfirmar(apelido)}">
+												
+									<h:graphicImage id="imgExcluir" 
+													styleClass="custom-icons"
+													value="/images/u1241.png" /> 
+												#{msg['pages.apelidos.listaApelidos.excluir']}
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+		
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+			
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			   <p:commandLink styleClass="btn btn-default btn-cinza" action="#{pagamentosTributosMunicipaisIptuSPBBean.voltarParaMenu}"  role="button">
+			   		#{msg['page.pagamentos.tributos.municipais.iptu.sp.apelido.consulta.btn.voltar']}
+			   </p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel> 
+	</ui:define>
+</ui:composition>

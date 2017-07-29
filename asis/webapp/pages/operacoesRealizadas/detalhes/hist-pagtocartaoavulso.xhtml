@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<c:set var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row form-horizontal space-t space-r" id="idExternoPagtoCartoAvulso_#{posicaoLista}">
+
+		<p:outputPanel styleClass="col-xs-12 space-b" id="idDadosPagtoCartoAvulso_#{posicaoLista}">
+			<p:outputLabel
+				value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosPagtoCartoAvulsoLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12" id="idPlacaAutoPagtoCartoAvulso_#{posicaoLista}">
+			<p:outputLabel value="Placa do Veículo:" styleClass="space" id="idPlacaAutoLblPagtoCartoAvulso_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]}" styleClass="control-label" id="idPlacaAutoTxtPagtoCartoAvulso_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idRenavamPagtoCartoAvulso_#{posicaoLista}">
+			<p:outputLabel value="Renavam:" styleClass="space" id="idRenavamLblPagtoCartoAvulso_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" styleClass="control-label" id="idRenavamTxtPagtoCartoAvulso_#{posicaoLista}"/>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12" id="idMunicipioPagtoCartoAvulso_#{posicaoLista}">
+			<p:outputLabel value="Município:" styleClass="space" id="idMunicipioLblPagtoCartoAvulso_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" styleClass="control-label" id="idMunicipioTxtPagtoCartoAvulso_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b" id="idSepaExtPagtoCartoAvulso_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idSepaIntPagtoCartoAvulso_#{posicaoLista}">
+				<p:separator id="idSepaLinePagtoCartoAvulso_#{posicaoLista}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

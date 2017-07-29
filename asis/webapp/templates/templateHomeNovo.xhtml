@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<f:view contentType="text/html" encoding="UTF-8">
+	<f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg" />
+
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="robots" content="noindex,nofollow"/>
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/styleNovo.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css" />
+		<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/images/icones/favicon.ico" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/icones/icones.css" />		
+		 
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/acc-rec.js"/>
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/utils.js"/>
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/default.js"/>
+		
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/ie10-viewport-bug-workaround.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/aes.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/Clumpy.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/DLECC.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/ec.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn2.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/pad-nopadding-min.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/pbkdf2.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/prng4.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/rng.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/sec.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/sha256.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/codeDL.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/blockUI.js" />
+		<title>#{ msg['page.home.label.titulo'] }</title>
+		
+	</h:head>
+	<h:body>
+		
+		<p:outputPanel id="divCoachMark" style="visibility:hidden; background-color:#3f3223; z-index:20000; min-width:100%; min-height:120%; position: fixed; margin-top:-80px; opacity:0">
+			
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-12" style="top:0; margin-top: 20px; left: -135px; position: fixed;">
+					<p:commandButton styleClass="btn btn-link" style=" float:right; color: #fff; border: 1px solid; border-radius: 15px; padding: padding: 5px 5px; text-decoration: none;" value="OK, entendi" onclick="closeCookieCoachMark();" />
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-12" style="bottom:0; margin-bottom: 10px; position: fixed;">
+					<ol class="carousel-indicators" id="indCarousel" style="bottom: -10px;"></ol>
+					<p:commandButton id="btnProximo" styleClass="btn btn-link" style="outline: none; float:right; color: #41555E; border: 1px solid; border-radius: 15px; padding: 5px 5px; background-color:#FFF; text-decoration: none;" value="Próximo" />
+					<p:commandButton id="btnVoltar" styleClass="btn btn-link" style="outline: none; margin-left:30px; float:left; color: #fff; border: 1px solid; border-radius: 15px; padding: 5px 5px; text-decoration: none;" value="Voltar"  />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<ui:include src="/commons/topoHomeNovo.xhtml" />
+		
+		<section class="edicao-coluna homeNova">
+			<p:outputPanel id="container-fluid"	styleClass="container home">
+				<p:outputPanel id="row" styleClass="row">
+					<form jsfc="h:form" id="formGeral">
+						<p:panel  visible="false"> 
+	             			<h:outputLink id="btnSair" styleClass="no-visible no-print" value="https://www.santander.com.br/br/pessoa-juridica" >
+	             				<p:ajax event="click" listener="#{mensagemBBean.sair}"></p:ajax>
+	             			</h:outputLink>                
+	      				</p:panel>
+	              					
+						<ui:include src="/commons/menuEsquerdo.xhtml" />
+		
+						<p:outputPanel id="idFormGeral" styleClass="col-xs-12 miolo home">																		
+							<ui:insert name="content"/>
+						</p:outputPanel>
+						
+						<div id="wait" class="no-visible no-print" style="position:fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow:hidden; background-color:rgb(0,0,0); opacity: 0.7; display:none;">
+							<img src="#{facesContext.externalContext.requestContextPath}/images/aguarde.gif" style="margin: 25% 50%; width:50px;" />
+						</div>
+	
+						<ui:include src="/commons/rodapeHomeNovo.xhtml" />
+						<ui:include src="/commons/invalidInternas.xhtml" />
+						<ui:include src="/commons/loadingAction.xhtml" />
+						<ui:include src="/commons/tagueamento.xhtml" />
+						
+					</form>
+				</p:outputPanel>
+			</p:outputPanel>
+		</section>
+
+		<p:dialog widgetVar="widDlgConfirmation" position="center" modal="true" dynamic="true" resizable="false">	    
+	 		<ui:include src="../pages/mensagem/confirmaGenerico.xhtml"/>
+	 	</p:dialog>
+	 	
+	 	<p:dialog widgetVar="widDlgConfirmationLogout" position="center" modal="true" dynamic="true" resizable="false">	    
+	 		<ui:include src="../pages/mensagem/confirmaLogout.xhtml"/>
+	 	</p:dialog>
+		
+		<p:dialog widgetVar="widDlgMessagem" position="center" modal="true" dynamic="true" resizable="false" >	 		
+	 		<ui:include src="/pages/mensagem/mensagemGenerica.xhtml"/>
+	 	</p:dialog>
+	
+		<script language="JavaScript" charset="UTF-8">
+			//VARIAVEIS GLOBAIS UTILIZADAS NO COACH MARK
+			var className = "";
+			var cookieName = "";
+			var contador = 0;
+			var totalEtapas = 0;
+			var autoCoachMark = "";
+			var textCoachMark = "";
+			var posicao = "";
+			
+			var menuEsquerdo = 0;
+			var painelCodBarra = 0;
+			var bannerCRM = 0;
+			var acessoRapido = 0;
+			var btnMenu1 = 0;
+			var btnMenu2 = 0;
+			var btnMenu3 = 0;
+			
+			$(function() {
+
+				if (window.performance.navigation.type == 2){
+					window.location = "#{facesContext.externalContext.requestContextPath}/commons/logout.xhtml";
+				}else{
+										
+					$(".homeCoachMark7").css("cssText", "pointer-events: none; cursor: default !important;");	
+					$(".homeCoachMark7").css("cssText", "opacity:0.5");
+					
+					if("#{menuBBean.idItemMenu}" == "" || "#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == "4066" || "#{menuBBean.idItemMenu}" == "4191"){
+													
+						if("#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == ""){
+							
+							className = "homeCoachMark";
+							cookieName = className;
+							totalEtapas = 7;
+							
+							menuEsquerdo = 1;
+							painelCodBarra = 2;
+							bannerCRM = 3;
+							acessoRapido = 4;
+							btnMenu1 = 5;
+							btnMenu2 = 6;
+							btnMenu3 = 7;
+
+							$(".homeCoachMark7").css("cssText", "");
+							checkCookieCoachMark();
+						}else{
+							totalEtapas = 1;
+							className = "menuCoachMark";
+							
+							if("#{menuBBean.idItemMenu}" == "4066"){
+								
+								$(".menu-title").each(function() {
+									if( $(this).text() == "Pagamentos com código de barra" ){
+										cookieName = "pagCoachMark";
+										textCoachMark = "Pagamentos de Boletos, Contas Concessionárias e Tributos em um único lugar.";
+										posicao = "position: relative; z-index: 20003 !important; width: 680px; left: 30px; top: 0px;";
+										$(".homeCoachMark7").css("cssText", "");
+										checkCookieCoachMark();
+										return false;
+									}
+								});
+							}
+							if("#{menuBBean.idItemMenu}" == "4191"){
+									
+								$(".links-submenu li").each(function() {
+									if( $(this).hasClass("menu-title") == false &#38;&#38; $(this).text() == ">Entre Contas Santander, DOC e TED" ){
+										cookieName = "transCoachMark";
+										textCoachMark = "Mais simples:<br/>Transferência entre contas <br/> DOC e TED num só lugar.";
+										posicao = "position: relative; z-index: 20003 !important; width: 680px; left: 30px; top: 0px;";
+										$(".homeCoachMark7").css("cssText", "");
+										checkCookieCoachMark();
+										return false;
+									}
+								});
+							}
+							
+						}
+						
+						//alert(cookieName);
+						//alert(document.cookie);
+						//checkCookieCoachMark();
+						
+					
+					}
+				}
+				
+				$("#btnProximo").click(function(e) {  
+					clearInterval(autoCoachMark);
+					navegaCoachMark(contador,'prox');
+					//autoCoachMark = setInterval(function(){ navegaCoachMark(contador,'prox'); }, 4000);
+		    	});
+				$("#btnVoltar").click(function(e) {  
+					clearInterval(autoCoachMark);
+					navegaCoachMark(contador,'ant');
+					//autoCoachMark = setInterval(function(){ navegaCoachMark(contador,'prox'); }, 4000);
+		    	});
+				
+			});
+			
+			function setCookieCoachMark(cname, cvalue, exdays) {
+			    var d = new Date();
+			    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+			    var expires = "expires="+d.toUTCString();
+			    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+			}
+
+			function getCookieCoachMark(cname) {
+				var name = cname + "=";
+			    var decodedCookie = decodeURIComponent(document.cookie);
+			    var ca = decodedCookie.split(';');
+			    for(var i = 0; ca.length > i; i++) {
+			        var c = ca[i];
+			        while (c.charAt(0) == ' ') {
+			            c = c.substring(1);
+			        }
+			        if (c.indexOf(name) == 0) {
+			            return c.substring(name.length, c.length);
+			        }
+			    }
+			    return "";
+			}
+
+			function checkCookieCoachMark() {
+				//alert(cookieName);
+			    var name = getCookieCoachMark(cookieName);
+			    
+			   //alert("name: "+name);
+			    if (name != 1) {
+			    	setTimeout(function(){ 
+			    		ativaCoachMark();
+					}, 1000);
+			    	  
+			    }else{
+			    	if("#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == ""){
+						habilitarDialog();
+					}
+			    }
+			}
+			
+			function ativaCoachMark(){
+
+				$('html,body').animate({scrollTop: 0},'fast');
+				
+				if(className == "menuCoachMark"){
+					var i = 0;
+					$("ul li").each(function() {
+						if( $(this).hasClass("menu-title") == true ){
+							i++;
+							$(this).addClass("titleCoachMark"+i);
+						}else{
+							$(this).addClass("menuCoachMark"+i);
+						}	
+					});
+				}
+				
+				contador = 0;
+				
+				var total = "";
+				for(var i = 1; totalEtapas >= i; i++){
+					if( $('.'+className+i).length != "0" ){
+						if(i == 1){
+							total += '<li id="liCarousel'+i+'" style="width: 12px; height: 12px; margin: 5px; border: 2px solid #fff;" class="active" onclick="carouselCoachMark('+i+');"></li>';
+						}else{
+							total += '<li id="liCarousel'+i+'" style="width: 12px; height: 12px; margin: 5px; border: 2px solid #fff;" onclick="carouselCoachMark('+i+');"></li>';
+						}
+					}
+				}
+				
+				$("#divCoachMark").css("visibility","visible");
+				$("#divCoachMark").fadeTo("fast", 0.9);
+				$("#indCarousel").html(total);
+				
+				if(totalEtapas == 1){
+					$("#btnProximo").hide();
+				}
+				
+				navegaCoachMark(contador,'prox');
+				
+				autoCoachMark = setInterval(function(){ navegaCoachMark(contador,'prox'); }, 6000);
+			}
+		
+			function navegaCoachMark(c, acao){
+				var cA = c;
+				switch(acao){
+					case 'prox':
+						contador++;
+						break;
+					case 'ant':
+						contador--;
+						break;
+				}
+				if(contador == 1){
+					$("#btnVoltar").hide();
+				}else{
+					$("#btnVoltar").show();
+				}
+				c = contador;
+				
+				if (c == 1 &#38;&#38; acao == "prox"){
+					ativaElemCoachMark(c);		
+				}else{
+					if( $('.'+className+c).length == "0" ){
+						switch(acao){
+							case 'prox':
+								contador++;
+								break;
+							case 'ant':
+								contador--;
+								break;
+						}
+						c = contador;
+					}
+					proxElemCoachMark(cA,c);
+				}	
+			}
+			
+			function ativaElemCoachMark(c){
+				if("#{menuBBean.idItemMenu}" != "0"){
+					$('.'+className+c).closest("ul").prepend('<div class="divElemCoachMark" style="display: block; width: 100%; height: 100%; position: relative; float:left; z-index: 20003; background: #fff; padding: 1px 10px; border-radius: 10px; box-shadow:2px 8px 10px #140b00;"></div><div class="infoCoachMark" style="'+posicao+'"><h1 style="color:white; font-size:20px;">'+textCoachMark+'</h1></div>');
+					$(".titleCoachMark"+c).appendTo(".divElemCoachMark");
+				}
+
+				$('.'+className+c).fadeOut("fast",function(){
+					if("#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == ""){
+						
+						textCoachMark = $('.'+className+c).find(".textCoachMark").val();
+						posicao = $('.'+className+c).find(".posicaoPainel").val();
+												
+						if(c == menuEsquerdo){
+							$(this).prepend('<div class="divElemCoachMark" style="display:block;width:110%;height:100%;position:absolute;z-index:20003;"></div><div class="infoCoachMark" style="'+posicao+' z-index:20003;"><h1 style="color:white; font-size:20px;">'+textCoachMark+'</h1></div>');
+							$(this).css("cssText", "z-index: 20001 !important; overflow: visible !important; border-radius: 10px; box-shadow:2px 8px 10px #140b00;");
+						}
+						if(c == painelCodBarra || c == acessoRapido){
+							$(this).prepend('<div class="divElemCoachMark" style="display:block;width:100%;height:100%;position:absolute;z-index:20003;left: -10px;"></div><div class="infoCoachMark" style="'+posicao+' z-index:20003;"><h1 style="color:white; font-size:20px;">'+textCoachMark+'</h1></div>');
+							$(this).css("cssText", "z-index: 20001 !important; overflow: visible !important;");	
+						}
+						if(c == bannerCRM){
+							$(this).prepend('<div class="divElemCoachMark" style="display:block;width:100%;height:100%;position:absolute;z-index:20003;left: -10px;"></div><div class="infoCoachMark" style="'+posicao+' z-index:20003;"><h1 style="color:white; font-size:20px;">'+textCoachMark+'</h1></div>');
+							$(this).css("cssText", "z-index: 20001 !important; overflow: visible !important; position:relative;");
+							$(this).find(".carouselHome").css("cssText", "box-shadow:2px 8px 10px #140b00; overflow: hidden; border-radius: 10px;");
+						}
+						if(c == btnMenu1 || c == btnMenu2 || c == btnMenu3){
+							$(this).prepend('<div class="divElemCoachMark" style="display:block;width:100%;height:100%;position:absolute;z-index:20003;left: -10px;"></div><div class="infoCoachMark" style="'+posicao+' z-index:20003;"><h1 style="color:white; font-size:20px;">'+textCoachMark+'</h1></div>');
+							$("#topo").css("cssText", "position:relative; margin-top:-79px; z-index: inherit;");
+							$(this).css("cssText", "pointer-events: none; cursor: default !important; z-index: 20001 !important; overflow: visible !important; position:relative;");	
+							$(this).attr("disabled", 'disabled');
+							if(c == btnMenu1){
+								$(this).find(".notification").css("cssText", "left:-6px; top:-24px;");
+								$(this).prop("disabled", true);
+							}
+							if(c == btnMenu2){
+								$(this).find(".notification").css("cssText", "left:0;");
+								$(this).prop("disabled", true);
+							}
+						}
+						if ($(this).find(".radiusT").length == '1'){
+							$(this).find(".radiusT").css("cssText", "border-radius: 10px 10px 0px 0px; box-shadow:2px 8px 10px #140b00;");
+							$(this).find(".radiusB").css("cssText", "border-radius: 0px 0px 10px 10px; box-shadow:2px 8px 10px #140b00;");
+						}
+						if ($(this).find(".imagemPainel").length == '1'){
+							$(this).find(".imagemPainel > img").css("cssText", "display: block;");
+						}
+						$("#liCarousel"+c).addClass( "active" );
+						
+					}else{
+						if("#{menuBBean.idItemMenu}" == "4066"){
+							$(this).appendTo(".divElemCoachMark");
+							$(this).css("cssText", "pointer-events: none; cursor: default !important; z-index: 20001 !important; overflow: visible !important; position:relative;");	
+							$(this).prop("disabled", true);
+						}
+						if("#{menuBBean.idItemMenu}" == "4191"){
+							$('.'+className+c+':first').appendTo(".divElemCoachMark");
+							$('.'+className+c+':first').css("cssText", "pointer-events: none; cursor: default !important; z-index: 20001 !important; overflow: visible !important; position:relative;");	
+							$('.'+className+c+':first').prop("disabled", true);
+						}
+					}
+				});
+				$('.'+className+c).focus();
+			}
+			
+			function closeElements(c){
+				$('.'+className+c).fadeOut("fast",function(){
+					if("#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == ""){
+						$(this).css("cssText", "");
+						$(this).find(".divElemCoachMark").remove();
+						$(this).find(".infoCoachMark").remove();
+						$("#liCarousel"+c).removeClass( "active" );
+					
+						if( $(this).find(".radiusT").length == '1'){
+							$(this).find(".radiusT").css("cssText", "");
+							$(this).find(".radiusB").css("cssText", "");
+						}
+						
+						if(c == bannerCRM){
+							$(this).find(".carouselHome").css("cssText", "");
+						}
+						
+						if(c == btnMenu1 || c == btnMenu2 || c == btnMenu3){
+							$("#topo").css("cssText", "");
+							if(c == btnMenu1){
+								$(this).find(".notification").css("cssText", "");
+								$(this).prop("disabled", true);
+							}
+							if(c == btnMenu2){
+								$(this).find(".notification").css("cssText", "");
+								$(this).prop("disabled", false);
+							}
+						}
+						
+						if ( $(this).find(".imagemPainel").length == '1'){
+							$(this).find(".imagemPainel > img").css("cssText", "display: none;");
+						}
+						
+					}else{
+						$(".divElemCoachMark li").unwrap();
+						$(".infoCoachMark").remove();
+						$("#liCarousel"+c).removeClass("active");
+						$(this).css("cssText", "");
+						$(this).prop("disabled", false);
+					}
+				});
+			}
+			
+			function proxElemCoachMark(cA, c){
+				closeElements(cA);
+				if ( totalEtapas >= c){
+					ativaElemCoachMark(c);
+				}else{
+					closeCookieCoachMark();
+				} 	
+			}
+			
+			function carouselCoachMark(c){
+				if(contador != c){
+					clearInterval(autoCoachMark);
+					if(c == 1){
+						$("#btnVoltar").hide();
+					}else{
+						$("#btnVoltar").show();
+					}
+					proxElemCoachMark(contador,c);	
+					contador = c;
+				}
+			}
+			
+			function closeCookieCoachMark()
+			{
+				closeCoachMark();
+				setCookieCoachMark(cookieName,1,365);
+			}
+			
+			function closeCoachMark()
+			{
+				clearInterval(autoCoachMark);
+				
+				$("#divCoachMark").fadeTo("fast", 0.0, function(){
+					$(this).css("visibility","hidden");
+					$("#indCarousel").html("");
+					closeElements(contador);
+					contador = 0;
+					if("#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == ""){
+						habilitarDialog();
+					}
+				});
+			}
+			
+			function btnInfoCoachMark() {
+				var name = getCookieCoachMark(cookieName);
+			    if (name == 1) {
+			    	if("#{menuBBean.idItemMenu}" == "" || "#{menuBBean.idItemMenu}" == "0" || "#{menuBBean.idItemMenu}" == "4066" || "#{menuBBean.idItemMenu}" == "4191"){
+						if(contador == 0){
+							ativaCoachMark();
+						}
+					}
+				}
+			}
+		</script>
+	</h:body>
+
+</f:view>
+</html>

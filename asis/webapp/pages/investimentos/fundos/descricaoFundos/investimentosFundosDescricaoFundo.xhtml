@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow p-alert">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> #{msg['pages.investimentos.fundos.descricao.label.1']}<br />
+						#{msg['pages.investimentos.fundos.descricao.label.2']}<br />
+						#{msg['pages.investimentos.fundos.descricao.label.3']}<br />
+						#{msg['pages.investimentos.fundos.descricao.label.4']}
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.investimentos.fundos.descricao.label.5']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:tabView id="tabFundos">
+			<p:tab id="tabMeusFundos" title="Fundos de Investimento" styleClass="no-visible"
+				titleStyleClass="no-print no-visible">
+				<p:outputPanel styleClass="no-visible">
+					<p:outputPanel rendered="#{!tabIndex.listaInvestimentos.isEmpty()}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-12">
+								<h5 class="space-b">
+									<strong>#{msg['pages.investimentos.fundos.descricao.selecione.fundo']}</strong>
+								</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-4">
+								<p:outputPanel>
+									<h:outputLabel for="" value="#{msg['pages.investimentos.fundos.resgatar.ordenar.por']}" />
+									<br />
+									<h:selectOneMenu name="tipoOrigemApreensao"
+										value="#{investimentosFundosDescricaoFundoBBean.ordenacaoSelecionada}">
+										<f:selectItems value="#{investimentosFundosDescricaoFundoBBean.listaTiposOrdenacao}" />
+										<p:ajax update="dataTableInvestimentos" event="change"
+											listener="#{investimentosFundosDescricaoFundoBBean.ordenarFundosInvestimentos()}" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+								<p:outputPanel styleClass="table-responsive table table-striped">
+									<p:dataTable id="dataTableInvestimentos" tableStyleClass="table-click"
+										rowKey="#{inves.codigoFundo}" value="#{investimentosFundosDescricaoFundoBBean.listaInvestimentos}"
+										var="inves" selection="#{investimentosFundosDescricaoFundoBBean.detalheWrapper}" selectionMode="single">
+										<p:ajax event="rowSelect" listener="#{investimentosFundosDescricaoFundoBBean.exibirDescricaoFundo()}" />
+										<p:column headerText="#{msg['pages.investimentos.fundos.resgatar.fundo']}">
+											<i class="fa fa-circle space-r" style="color: ##{inves.codCorFamilia}" aria-hidden="true"></i>
+											<h:outputText value="#{inves.nomeReduzidoIb}" />
+										</p:column>
+										<p:column styleClass="text-right space-rr">
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.valor.aplicacao']}" styleClass="space-rr" />
+											</f:facet>
+											<h:outputText value="#{inves.valorMinimoAplicSTR}" converter="valorMonetarioConverter"
+												styleClass="space-rr" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.horario']}" styleClass="space-ll" />
+											</f:facet>
+											<h:outputText value="#{inves.horarioLimite}" styleClass="space-ll" />
+										</p:column>
+									</p:dataTable>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="familia-fundos">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h5>
+										<strong>#{msg['pages.investimentos.fundos.resgatar.familias.fundos']}</strong>
+									</h5>
+								</p:outputPanel>
+							</p:outputPanel>
+							<ui:include src="/pages/investimentos/fundos/rentabilidadePeriodo/legendaFamiliaFundos.xhtml">
+								<ui:param name="listaLegenda" value="#{investimentosFundosDescricaoFundoBBean.legendas.datos.familia}"></ui:param>
+							</ui:include>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:tab>
+		</p:tabView>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12 text-right space-t">
+				<p:commandLink styleClass="btn btn-default btn-cinza" action="#{investimentosFundosDescricaoFundoBBean.voltarMenu}"
+					role="button">
+			         #{msg['page.btn.voltar']}
+			    </p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

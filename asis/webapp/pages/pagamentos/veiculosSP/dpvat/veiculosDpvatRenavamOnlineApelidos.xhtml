@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p><strong>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.TransExcluParaPagamDo']}</strong></p>
+						<br />
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.SeVoceOptarPeloLicen']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.dpvat.inicial.OVenciDaTaxaDe']}
+							<a href="http://www.detran.sp.gov.br" target="_blank">#{msg['pages.pagamentos.veiculossp.dpvat.inicial.WwwDetraSpGovBr']}</a>
+						</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.dpvat.inicial.EmCasoDeDuvidSobre']}
+							<a href="http://www.dpvatseguro.com.br" target="_blank">#{msg['pages.pagamentos.veiculossp.dpvat.inicial.WwwDpvatComBr']}</a>
+						</p>
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.OsPagamEfetuAposAs']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.TransNaoDispoParaAgend']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.dpvat.inicial.ParaMaisInforAcessO']}
+							<a href="http://www3.fazenda.sp.gov.br/ipvanet/" target="_blank">#{msg['pages.pagamentos.veiculossp.dpvat.inicial.SecreDaFazenDoEstad']}</a>
+						</p>
+						<p>#{msg['pages.pagamento.veiculosSP.ipva.pagamento.AOpcaoDeAgendEsta']}</p>
+						<br />
+						<p>
+							<p style="padding-top: 15px; margin-top: 15px;">
+								<!-- <ui:include src="/pages/generico/limites2.xhtml"></ui:include> -->
+							</p>
+						</p> <p:separator />
+
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.AquiVocePodeInclu']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.OBSAposOCadas']}</p>
+						<br />
+						<p>
+							<h:inputHidden value="#{ipvaBBean.hdnApelidos}" id="situacao"/>
+							<p:commandLink action="#{ipvaBBean.incluirRenavam}">
+								#{msg['pages.pagamentos.veiculossp.dpvat.inicial.IncluNovoRENAV']}
+							</p:commandLink>
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.dpvat.inicial.RenavCadas']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5 class="space-b">#{msg['pages.pagamentos.veiculossp.dpvat.inicial.SelecUmRenavParaEfetu']}</h5>
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1" var="ren"
+									value="#{dpvatSpBBean.lRenavam}" rowKey="#{ren.apelido}"
+									selection="#{dpvatSpBBean.renavamDTO}" selectionMode="single">
+
+									<p:ajax event="rowSelect" listener="#{dpvatSpBBean.onRowSelect}" />
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.dpvat.inicial.Identificacao']}">
+										<h:outputText id="txtApelido" value="#{ren.apelido}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.dpvat.inicial.Renavam']}">
+										<h:outputText id="txtNumero" value="#{ren.numero}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.dpvat.inicial.Placa']}">
+										<h:outputText id="txtPlaca" value="#{ren.placa}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{dpvatSpBBean.voltarMenu}" role="button">#{msg['pages.pagamentos.veiculossp.dpvat.inicial.Volta']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{antecipacaoDemaisCredenciadorasBBean.acessoDiretoComprovante()}" />
+
+		<f:event type="postValidate"
+			listener="#{antecipacaoDemaisCredenciadorasBBean.fechaAcessoDireto()}" />
+
+		<!-- TERMO DE ADESÃO COMRPOVANTE INICIO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						valor="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.detalhes']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelNome']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.nomeCliente}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTipoDocumento']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.tipoDocumento}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelNumeroDocumento']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.numeroDocumento}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<!-- =================================================================== -->
+					<p:separator styleClass="custom-separator" />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelData']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.dataOperacao}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.operaCessao']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.numeroOperacao+0}">
+								<f:convertNumber maxIntegerDigits="10" pattern="##########" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelDomicilioBancarioAgencia']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.nomeAgencia}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelContaCorrente']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.numeroContaCorrente+0}">
+								<f:convertNumber maxIntegerDigits="9" pattern="#########" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- =================================================================== -->
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelValorTotalCreditos']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.valorTotalBruto}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaMensalCessao']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOper}">
+							</h:outputText>
+							<h:outputText
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.percentagem']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.valorIOF']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.valorIoc}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.tarifaContrat']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.tarifaContratacao}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelPrecoTotalCessaoTaxaIOF']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.valorTotalLiquido}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaJuros']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOper}" />
+							<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.aoMesE']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOperAno}" />
+							<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.aoAno']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.jurosAtrasoInadimp']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.jurosRemun']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOper}" />
+							<h:outputText
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.percentAoMes2']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOperAno}" />
+							<h:outputText
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.percentAoAnoAcresc']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subitem2']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subitem3']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<!-- ======================================================================================================================================== -->
+					<p:separator styleClass="custom-separator" />
+					<br />
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table table-striped foot-correction">
+
+								<p:dataTable id="dataOperacoes" var="o"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaOperacoesBandeiraSelecionados}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}">
+
+									<p:column styleClass="col-xs-3" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.band']}">
+										<h:outputText value="#{o.nomeBandeira}" />
+									</p:column>
+									<p:column styleClass="col-xs-4" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.credenciadora']}">
+										<h:outputText value="#{o.nomeOperacao}" />
+									</p:column>
+									<p:column styleClass="col-xs-4" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.data']}">
+										<h:outputText value="#{o.dataFluxoWeb}" />
+									</p:column>
+									<p:column styleClass="col-xs-4 text-right"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.vlrDisponivel2']}">
+										<h:outputText value="#{o.valorFluxoWeb}"
+											styleClass="text-right">
+											<f:convertNumber currencySymbol="" type="currency"
+												locale="pt_BR" />
+										</h:outputText>
+									</p:column>
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" styleClass="text-left">
+												<f:facet name="footer">
+													<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.vlrSelec']}" />
+												</f:facet>
+											</p:column>
+											<p:column styleClass="text-right">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.strValorSolicWeb}">
+														<f:convertNumber currencySymbol="" type="currency"
+															locale="pt_BR" />
+													</h:outputText>
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<!-- =================================================================== -->
+					<p:separator styleClass="custom-separator" />
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p><h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.termo']}" /></p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- =================================================================== -->
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3">
+									<h:outputLabel
+										value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.auth']}" />
+									<p>
+										<h:outputText
+											value="#{antecipacaoDemaisCredenciadorasBBean.autenticacao}" />
+									</p>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-3">
+									<h:outputLabel
+										value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.dthora']}" />
+									<p>
+										<h:outputText
+											value="#{antecipacaoDemaisCredenciadorasBBean.dataHoraTransacao}">
+											<f:convertDateTime pattern="dd/MM/yyyy - HH:mm" />
+										</h:outputText>
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml">
+					<ui:param name="enviarEmail" value="true" />
+				</ui:include>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- TERMO DE ADESÃO COMPROVANTE FIM -->
+	</ui:define>
+</ui:composition>

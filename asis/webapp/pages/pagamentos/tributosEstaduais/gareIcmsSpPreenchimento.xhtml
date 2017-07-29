@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<!-- alerta -->
+		<ui:include
+			src="/pages/pagamentos/tributosEstaduais/gareIcmsAviso.xhtml" />
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!-- alerta fim -->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel h4 no-margin box-shadow">
+					<h:outputText
+						value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.informe.dados']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:inputHidden value="#{gareIcmsSpBBean.clientHash}"
+								id="clientHash" />
+
+							<p:outputPanel styleClass="titulo-destaque">
+								<p:outputPanel styleClass="row">
+									<h:outputText styleClass="h5"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.guia']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<h:outputText styleClass="bold h5"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.gareIcms']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.contribuinte']}" />
+								<p:inputText styleClass="form-control" maxlength="50"
+									value="#{gareIcmsSpBBean.dto.contribuiente}" tabindex="15"
+									onblur="removeAcento(this); replaceSpecialChars(this);"
+									disabled="#{gareIcmsSpBBean.dto.usarApelido}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.endereco']}" />
+								<p:inputText id="txt_endereco"
+									onblur="removeAcento(this); replaceSpecialChars(this);"
+									label="txt_endereco" styleClass="form-control" maxlength="38"
+									value="#{gareIcmsSpBBean.dto.endereco}" tabindex="16"
+									disabled="#{gareIcmsSpBBean.dto.usarApelido}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.municipio']}" />
+										<p:inputText
+											onblur="removeAcento(this); replaceSpecialChars(this);"
+											styleClass="form-control" maxlength="25"
+											value="#{gareIcmsSpBBean.dto.municipio}" tabindex="17">
+										</p:inputText>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.uf']}" />
+										<p:inputText styleClass="form-control" readonly="true"
+											value="#{gareIcmsSpBBean.dto.uf}">
+										</p:inputText>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.telefone']}" />
+										<p:inputText styleClass="form-control" maxlength="10"
+											value="#{gareIcmsSpBBean.dto.telefone}" tabindex="18"
+											disabled="#{gareIcmsSpBBean.dto.usarApelido}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.cnae']}" />
+										<p:inputText
+											onblur="removeAcento(this); replaceSpecialChars(this);"
+											maxlength="8" styleClass="form-control"
+											value="#{gareIcmsSpBBean.dto.cnae}" tabindex="19"
+											disabled="#{gareIcmsSpBBean.dto.usarApelido}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.observacao']}" />
+								<p:inputTextarea rows="5" maxlength="30"
+									onblur="removeAcento(this); replaceSpecialChars(this);"
+									styleClass="form-control" counter="maxChar"
+									value="#{gareIcmsSpBBean.dto.observacao}" counterTemplate="{0}"
+									tabindex="20" disabled="#{gareIcmsSpBBean.dto.usarApelido}" />
+								<span> <p:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.limite.caracteres']}" />
+								</span>
+								<p:spacer width="10" />
+								<h:outputLabel id="maxChar" styleClass="inline" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-6 border-left-col">
+							<p:outputPanel styleClass="form-group">
+
+								<p:outputPanel styleClass="row flex-align-v form-group"
+									id="div-periodo-especifico">
+									<p:outputPanel styleClass="col-xs-6">
+										<h:outputLabel
+											value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.dataVencimento']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputPanel styleClass="icon-data-input">
+											<i class="fa fa-calendar" />
+											<p:calendar id="dataVencimento"
+												value="#{gareIcmsSpBBean.dto.dataVencimento}" maxlength="10"
+												pattern="dd/MM/yyyy" mask="99/99/9999"
+												onkeypress="onlyNumbers(event)"
+												onkeyup="mascaraData(this, event)"
+												converter="dateStringConverter" tabindex="2">
+											</p:calendar>
+										</p:outputPanel>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputLabel for="codigoReceita"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.codigoReceita']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputMask id="codigoReceita" styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.codigoReceita}"
+										disabled="#{gareIcmsSpBBean.dto.usarApelido}"
+										onkeypress="onlyNumbers(event)" maxlength="4" tabindex="3" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputLabel for="inscricaoEstadual"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.inscricaoEstadual']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="inscricaoEstadual" styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.inscricaoEstadual}"
+										onkeypress="onlyNumbers(event)"
+										disabled="#{gareIcmsSpBBean.dto.usarApelido}" maxlength="12"
+										tabindex="4" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.cnpjCpf']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="cnpjCpf_hash_1" styleClass="form-control"
+										disabled="#{gareIcmsSpBBean.dto.usarApelido}"
+										value="#{gareIcmsSpBBean.dto.cnpjCpf}"
+										onblur="maskCpfCnpj(this, event)" onchange="CheckCGCCPF(this)"
+										maxlength="18" tabindex="5" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.inscricaoDividaEtiquera']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.inscricaoDividaAtivaNumeroEtiqueta}"
+										onkeypress="onlyNumbers(event)"
+										disabled="#{gareIcmsSpBBean.dto.usarApelido}" maxlength="13"
+										tabindex="6" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.referencia']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.referencia}"
+										onkeyup="apenasNumerosGare(this)"
+										maxlength="6" tabindex="7" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="aiimDeicmemeParcelamento"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.aiimNotificacao']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="aiimDeicmemeParcelamento"
+										styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.aiimDeicmemeParcelamento}"
+										onkeypress="onlyNumbersGare(this)"
+										onkeyup="onlyNumbersGare(this)"
+										disabled="#{gareIcmsSpBBean.dto.usarApelido}" maxlength="14"
+										tabindex="8" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="valorReceita"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.valorReceita']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="valorReceita" styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.valorReceita}"
+										onblur="maskMoneyOnBlur(this)" maxlength="14" tabindex="9">
+										<p:ajax update="valor_total" event="blur"
+											listener="#{gareIcmsSpBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="jurosMora"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.jurosMora']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="jurosMora" styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.jurosMora}"
+										onblur="maskMoneyOnBlur(this)" maxlength="14" tabindex="10">
+										<p:ajax update="valor_total" event="blur"
+											listener="#{gareIcmsSpBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="multaMoraInfracao"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.multaMoraInfracao']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="multaMoraInfracao" styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.multaMoraInfracao}"
+										onblur="maskMoneyOnBlur(this)" maxlength="14" tabindex="11">
+										<p:ajax update="valor_total" event="blur"
+											listener="#{gareIcmsSpBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="acrescimentoFinanceiro"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.acrescimo']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="acrescimentoFinanceiro"
+										styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.acrescimentoFinanceiro}"
+										onblur="maskMoneyOnBlur(this)" maxlength="14" tabindex="12">
+										<p:ajax update="valor_total" event="blur"
+											listener="#{gareIcmsSpBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="honorariosAdvocaticios"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.honorarios']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="honorariosAdvocaticios"
+										styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.honorariosAdvocaticios}"
+										onblur="maskMoneyOnBlur(this)" maxlength="14" tabindex="13">
+										<p:ajax update="valor_total" event="blur"
+											listener="#{gareIcmsSpBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel
+								styleClass="row flex-align-v form-group total-label"
+								style="padding: 10px 0px;">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="valor_total"
+										value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.valorTotal']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="valor_total" styleClass="form-control"
+										value="#{gareIcmsSpBBean.dto.valorTotal}" maxlength="14"
+										disabled="true" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="ui-widget col-xs-12">
+								<p:separator rendered="#{!gareIcmsSpBBean.dto.usarApelido}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel id="panelApelidocheck" styleClass="col-xs-12"
+							rendered="#{!gareIcmsSpBBean.dto.usarApelido}">
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-5">
+									<p:outputPanel styleClass="checkbox">
+										<p:selectBooleanCheckbox
+											value="#{gareIcmsSpBBean.dto.gravaApelido}" tabindex="21"
+											id="cb1">
+											<p:ajax update="panelApelidocheck" />
+										</p:selectBooleanCheckbox>
+										<h:outputLabel for="cb1"
+											value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.cadastrarApelidoGare']}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-7 inline-form darf-apelido"
+									rendered="#{gareIcmsSpBBean.dto.gravaApelido}">
+									<p:outputPanel styleClass="row">
+
+										<p:outputPanel styleClass="col-xs-2">
+											<h:outputLabel for="cb1" styleClass="pull-right"
+												value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.apelido']}" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-4">
+											<p:inputText id="apelido" styleClass="form-control"
+												tabindex="22" value="#{gareIcmsSpBBean.dto.apelido}"
+												maxlength="20"
+												onblur="removeAcento(this); replaceSpecialChars(this);" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6"
+											rendered="#{gareIcmsSpBBean.dto.gravaApelido}">
+											<h:outputLabel
+												value="#{msg['page.pagamentos.tributosEstaduais.gareIcmsSp.preenchimento.limiteCaracter']}" />
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					id="btnVoltar" role="button" tabindex="23"
+					value="#{msg['page.btn.voltar']}"
+					action="#{gareIcmsSpBBean.voltarTelaPreenchimento}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton styleClass="btn btn-default" role="button"
+					id="btnContinuar" value="#{msg['page.btn.continuar']}"
+					onclick="this.focus(); enviarHash()"
+					action="#{gareIcmsSpBBean.confirmarTelaPreenchimento}"
+					tabindex="24" />
+
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

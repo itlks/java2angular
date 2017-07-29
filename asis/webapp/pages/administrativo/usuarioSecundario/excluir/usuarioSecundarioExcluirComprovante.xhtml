@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentComprovante">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-4">
+
+				<p:outputPanel>
+					<h:outputLabel for="nomeUsuario"
+						value="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.coluna.nomeCompleto']}"
+						styleClass="space" />
+					<h:outputText id="nomeUsuario"
+						value="#{usuarioSecundarioExcluirBBean.usuarioSelecionado.nomeUsuario}" />
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<h:outputLabel for="nomeArea"
+						value="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.area']}"
+						styleClass="space" />
+					<h:outputText id="nomeArea"
+						value="#{usuarioSecundarioExcluirBBean.usuarioSelecionado.nomeArea}" />
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<h:outputLabel for="nomeLogon"
+						value="#{msg['page.usuario.master.consultar.administrativas.nomeAcesso']}:"
+						styleClass="space" />
+					<h:outputText id="nomeLogon"
+						value="#{usuarioSecundarioExcluirBBean.usuarioSelecionado.nomeLogon}" />
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<h:outputLabel for="nrTelefone"
+						value="#{msg['pages.usuarioSecundario.usuarioInclusaoConfirmacao.telefone.fixo']}"
+						styleClass="space" />
+					<h:outputText id="nrTelefone"
+						value="#{usuarioSecundarioExcluirBBean.usuarioSelecionado.nrTelefone}" />
+				</p:outputPanel>
+
+				<p:outputPanel
+					rendered="#{usuarioSecundarioExcluirBBean.exibeCelular}">
+					<h:outputLabel for="nrCelular"
+						value="#{msg['page.administrativo.usuarioSecundario.excluir.telefoneCelular']}"
+						styleClass="space" />
+					<h:outputText id="nrCelular"
+						value="#{usuarioSecundarioExcluirBBean.usuarioSelecionado.nrCelular}" />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="space-t">
+					<h:outputLabel for="inAcesMobl"
+						value="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.acesso.mobile']}"
+						styleClass="space" />
+					<h:outputText id="inAcesMobl"
+						value="#{usuarioSecundarioExcluirBBean.usuarioSelecionado.inAcesMobl}" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<p:outputPanel>
+					<h:outputLabel for="nrCpf"
+						value="#{msg['pages.usuarioSecundario.userSecExcluirValidacao.CPF']}"
+						styleClass="space" />
+					<h:outputText id="nrCpf" converter="converterCpfCnpj"
+						value=" #{usuarioSecundarioExcluirBBean.usuarioSelecionado.nrCpf}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

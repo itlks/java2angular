@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row form-horizontal space-t space-r" id="idExternoPagtoDarf_#{posicaoLista}">
+
+		<p:outputPanel styleClass="col-xs-12 space-b" id="idDadosPagtoDarf_#{posicaoLista}">
+			<h:outputLabel
+				value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosPagtoDarfLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idCodBarraPagtoDarf_#{posicaoLista}">
+			<h:outputLabel value="Código de Barra: " styleClass="space" id="idCodBarraLblPagtoDarf_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]}" id="idCodBarraTxtPagtoDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idCodPagtoDarf_#{posicaoLista}">
+			<h:outputLabel value="Código: " styleClass="space" id="idCodLblPagtoDarf_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" id="idCodTxtPagtoDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="${compHisParts[2]} ne ''" id="idVencPagtoDarf_#{posicaoLista}">
+			<h:outputLabel value="Vencimento: " styleClass="space" id="idVencLblPagtoDarf_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" id="idVencTxtPagtoDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idValorPagtoDarf_#{posicaoLista}">
+			<h:outputLabel value="Valor: " styleClass="space" id="idValorlblPagtoDarf_#{posicaoLista}"/>
+			<h:outputText
+				value="#{detalheParam.valor}" id="idValorTxtPagtoDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b" id="idSepaExtPagtoDarf_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idSepaIntPagtoDarf_#{posicaoLista}">
+				<p:separator id="idSepaLinePagtoDarf_#{posicaoLista}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</p:outputPanel>
+</ui:composition>

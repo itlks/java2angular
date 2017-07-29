@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<f:event type="preRenderView"
+			listener="#{licenciamentoVeiculosBBean.acessoDiretoConfirmacao}" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamento.veiculoSP.multasInterestaduaisPgto.confiraDados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!--INICIO PAINEL DEMONSTRATIVO-->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<!--DADOS RENAVAM INICIO-->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.renavam']}" />
+							<span> #{licenciamentoVeiculosBBean.nomeRenavamFormatado}</span>
+							<br />
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.propietario']}" />
+							<span> #{licenciamentoVeiculosBBean.dadosRenavam.nomePro}</span>
+							<br />
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.ano.licenciamento']}" />
+							<span>
+								#{licenciamentoVeiculosBBean.dadosRenavam.anoLicenc}</span>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.cod.municipio']}" />
+							<span>
+								#{licenciamentoVeiculosBBean.dadosRenavam.codMuniEst}</span>
+							<br />
+							<h:outputLabel for="cpfCnpj" styleClass="bold"
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.cpf.cnpj']}" />
+							<span> </span>
+							<h:outputText id="cpfCnpj" converter="converterCpfCnpj"
+								value="#{licenciamentoVeiculosBBean.dadosRenavam.documen}" />
+							<br />
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.taxa.licenciamento']}" />
+							<span> <h:outputText
+									value="#{licenciamentoVeiculosBBean.dadosRenavam.txLicenci}">
+									<f:convertNumber type="currency" locale="pt_br"
+										currencySymbol="(R$) "></f:convertNumber>
+								</h:outputText></span>
+							<br />
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+
+							<p:spacer height="25" />
+							<br />
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.placa.veiculo']}" />
+							<span> #{licenciamentoVeiculosBBean.dadosRenavam.placa}</span>
+
+							<br />
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.taxa.postagem']}" />
+							<span> <h:outputText
+									value="#{licenciamentoVeiculosBBean.dadosRenavam.txCorreio}">
+									<f:convertNumber type="currency" locale="pt_br"
+										currencySymbol="(R$) "></f:convertNumber>
+								</h:outputText></span>
+							<br />
+						</p:outputPanel>
+					</p:outputPanel>
+					<!--DADOS RENAVAM FINAL-->
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<!--DPVAT - INICIO -->
+					<p:outputPanel styleClass="row"
+						rendered="#{licenciamentoVeiculosBBean.listaDpvats.size() > 0}">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.dpvat']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.pendentes']}" />
+							<span> #{licenciamentoVeiculosBBean.listaDpvats.size()}</span>
+							<br />
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor.total']}" />
+							<span> <h:outputText
+									value="#{licenciamentoVeiculosBBean.totalDpvats()}">
+									<f:convertNumber type="currency" locale="pt_br"
+										currencySymbol="(R$) "></f:convertNumber>
+								</h:outputText></span>
+							<br />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{licenciamentoVeiculosBBean.listaDpvats.size() > 0}">
+						<ui:repeat var="dpvat"
+							value="#{licenciamentoVeiculosBBean.listaDpvats}">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.exercicio']}" />
+								<span> #{dpvat.anoExercicio}</span>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor']}" />
+								<span> <h:outputText value="#{dpvat.valor}">
+										<f:convertNumber type="currency" locale="pt_br"
+											currencySymbol="(R$) "></f:convertNumber>
+									</h:outputText></span>
+								<br />
+							</p:outputPanel>
+							<br />
+							<br />
+						</ui:repeat>
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<!--DPVAT - FIM -->
+
+					<!--IPVA INICIO -->
+					<p:outputPanel styleClass="row"
+						rendered="#{licenciamentoVeiculosBBean.listaIpvas.size() > 0}">
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.ipva']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.pendentes']}" />
+							<span> #{licenciamentoVeiculosBBean.listaIpvas.size()}</span>
+							<br />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor.total']}" />
+							<span> <h:outputText
+									value="#{licenciamentoVeiculosBBean.totalIpvas()}">
+									<f:convertNumber type="currency" locale="pt_br"
+										currencySymbol="(R$) "></f:convertNumber>
+								</h:outputText></span>
+							<br />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel
+						rendered="#{licenciamentoVeiculosBBean.listaIpvas.size() > 0}">
+						<p:outputPanel styleClass="row">
+							<ui:repeat var="ipva"
+								value="#{licenciamentoVeiculosBBean.listaIpvas}">
+								<p:outputPanel styleClass="col-xs-4">
+									<h:outputLabel styleClass="bold" for=""
+										value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.exercicio']}" />
+									<span> #{ipva.anoExercicio}</span>
+									<br />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<h:outputLabel styleClass="bold" for=""
+										value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor']}" />
+									<span> <h:outputText value="#{ipva.valor}">
+											<f:convertNumber type="currency" locale="pt_br"
+												currencySymbol="(R$) "></f:convertNumber>
+										</h:outputText></span>
+									<br />
+								</p:outputPanel>
+								<br />
+								<br />
+							</ui:repeat>
+						</p:outputPanel>
+						<!--IPVA FIM -->
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+
+								<p:separator />
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!--MULTAS INICIO -->
+					<p:outputPanel styleClass="row"
+						rendered="#{licenciamentoVeiculosBBean.listaMultas.size() > 0}">
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.multas']}" />
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.pendentes']}" />
+							<span> #{licenciamentoVeiculosBBean.listaMultas.size()}</span>
+							<br />
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor.total']}" />
+							<span> <h:outputText
+									value="#{licenciamentoVeiculosBBean.totalMultas()}">
+									<f:convertNumber type="currency" locale="pt_br"
+										currencySymbol="(R$) "></f:convertNumber>
+								</h:outputText></span>
+							<br />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{licenciamentoVeiculosBBean.listaMultas.size() > 0}">
+						<ui:repeat var="multa"
+							value="#{licenciamentoVeiculosBBean.listaMultas}">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.guia']}" />
+								<span> #{multa.numGuia}</span>
+								<br />
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.data.infracao']}" />
+								<span> #{multa.dataInfracao}</span>
+								<br />
+								<br />
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.auto.infracao']}" />
+								<span> #{multa.autoInfracao}</span>
+								<br />
+								<h:outputLabel styleClass="bold" for=""
+									value="Data de vencimento:" />
+								<span> #{multa.dataVcto}</span>
+								<br />
+								<br />
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.orgao.autuador']}" />
+								<span> #{multa.dadosMulta}</span>
+								<br />
+								<h:outputLabel styleClass="bold" for=""
+									value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor']}" />
+								<span> <h:outputText value="#{multa.valorMuta}">
+										<f:convertNumber type="currency" locale="pt_br"
+											currencySymbol="(R$) "></f:convertNumber>
+									</h:outputText></span>
+								<br />
+
+							</p:outputPanel>
+						</ui:repeat>
+					</p:outputPanel>
+
+					<!--MULTAS FINAL -->
+					<p:outputPanel styleClass="row" for=""
+						rendered="#{licenciamentoVeiculosBBean.listaMultas.size() > 0}">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<!--VALOR TOTAL INICIO -->
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-xs-4">
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.confirmacao.valor.total']}" />
+							<span> <h:outputText
+									value="#{licenciamentoVeiculosBBean.totalGeral}">
+									<f:convertNumber type="currency" locale="pt_br"
+										currencySymbol="(R$) "></f:convertNumber>
+								</h:outputText></span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- VALOR TOTAL FINAL -->
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!--FINAL PAINEL DEMONSTRATIVO-->
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				
+				<p:commandButton id="btnVoltar"
+					action="#{licenciamentoVeiculosBBean.voltarEmPagamento}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" />
+				
+				<p:commandButton id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{licenciamentoVeiculosBBean.continuarEmComprovante}"
+					role="button" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" />
+				<p:defaultCommand target="btnConfirmar" />
+				
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:blockUI block="panelBotoes" trigger="btnConfirmar" />
+
+	</ui:define>
+</ui:composition>

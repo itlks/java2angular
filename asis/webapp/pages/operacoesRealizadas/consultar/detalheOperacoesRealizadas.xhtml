@@ -1,0 +1,1689 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<span id="divHtml"> <p:dataTable
+				value="#{operacoesRealizadasBBean.listaDetalhes}" var="detalhe"
+				styleClass="tableHeaderInvisible 	noBorder  noHover">
+
+				<p:column>
+					<span class="multiplosPdfsCss"> <p:outputPanel
+							styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="box-shadow no-margin-bottom">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-12 no-margin-bottom">
+											<p:outputPanel styleClass="row no-visible">
+												<p:outputPanel styleClass="col-xs-12">
+													<p:outputPanel>
+														<h4>
+															<h:outputText
+																value="#{msg['pages.transferencia.consultar.detalhe.detalhetransacao']}" />
+														</h4>
+													</p:outputPanel>
+													<p:separator></p:separator>
+												</p:outputPanel>
+
+											</p:outputPanel>
+											<p:outputPanel styleClass="container"
+												style="margin-left:0px !important;">
+												<p:outputPanel styleClass="row space-b">
+													<p:outputLabel styleClass="bold space"
+														value="#{msg['page.operacoes.realizadas.detalhe.label.transacao']}" />
+													<h:outputText value="#{detalhe.nomeTransacao}" />
+												</p:outputPanel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-12 no-margin-bottom">
+													<p:outputLabel styleClass="bold space"
+														value="#{msg['page.operacoes.realizadas.detalhe.label.contacorrente']}" />
+													<h:outputText
+														value="#{detalhe.codigoAgencia} #{detalhe.contaCorrente}" />
+												</p:outputPanel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-12 no-margin-bottom">
+													<p:outputLabel styleClass="bold space"
+														value="#{msg['page.operacoes.realizadas.detalhe.label.nomeusuario']}" />
+													<h:outputText value="#{detalhe.nomeUsuario}" />
+												</p:outputPanel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-12 no-margin-bottom">
+													<p:outputLabel styleClass="bold space"
+														value="#{msg['page.operacoes.realizadas.detalhe.label.datatransacao']}" />
+													<h:outputText value="#{detalhe.dataTransacao}" />
+												</p:outputPanel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-12 no-margin-bottom">
+													<p:outputLabel styleClass="bold space"
+														value="#{msg['page.operacoes.realizadas.detalhe.label.horariotransacao']}" />
+													<h:outputText value="#{detalhe.horaTransacao}" />
+												</p:outputPanel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-12 no-margin-bottom">
+													<p:outputLabel styleClass="bold space"
+														value="#{msg['page.operacoes.realizadas.detalhe.label.numeroautenticacao']}" />
+													<h:outputText value="#{detalhe.numeroAutenticacao}" />
+												</p:outputPanel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 space">
+												<p:outputLabel value="  "></p:outputLabel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 space"
+												rendered="#{detalhe.operacao.cabecalho ne null}">
+												<p:outputLabel value="#{detalhe.operacao.cabecalho}"></p:outputLabel>
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.convenio ne null}">
+												<h:outputLabel
+													value="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.convenio']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.convenio}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.quantidadeRegistros ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.quantidadeRegistros']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.quantidadeRegistros}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroDaRemessa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroDaRemessa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroDaRemessa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataCredito ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataCredito']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.dataCredito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.chave ne null}">
+												<h:outputLabel
+													value="#{msg['page.segunda.via.comprovantes.titulo.chave']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.chave}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.diaVencimento ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.diaVencimento']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.diaVencimento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataPrimeiraParcela ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataPrimeiraParcela']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.dataPrimeiraParcela}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contratoRenegociado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contratoRenegociado']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.contratoRenegociado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.totalDivida ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.totalDivida']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.totalDivida}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorDesconto ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorDesconto']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorDesconto}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeBeneficiario ne null}">
+												<h:outputLabel
+													value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.nomeBeneficiario']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeBeneficiario}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nossoNumero ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nossoNumero']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nossoNumero}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.informacoesAdicionaisValor ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.informacoesAdicionaisValor']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.informacoesAdicionaisValor}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.informacoesAdicionaisData ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.informacoesAdicionaisData']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.informacoesAdicionaisData}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.informacoesAdicionaisDias ne null}">
+												<h:outputLabel
+													value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.informacoesAdicionaisDias']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.informacoesAdicionaisDias}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomePagador ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomePagador']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomePagador}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.placaVeiculo ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.placaVeiculo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.placaVeiculo}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.renavam ne null and detalhe.operacao.renavam ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.renavam']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.renavam}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contrato ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contrato']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.contrato}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cpfSolicitante ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfSolicitante']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cpfSolicitante}"
+													converter="converterCpfCnpj" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cpfSegurado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfSegurado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cpfSegurado}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.metodoHabilitacao ne null and detalhe.operacao.metodoHabilitacao ne '' and detalhe.operacao.metodoHabilitacao ne '0'}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.metodoHabilitacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.metodoHabilitacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeAparelho ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeAparelho']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeAparelho}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroContribuinte ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroContribuinte']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroContribuinte}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nsuProdam ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nsuProdam']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nsuProdam}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.parcela ne null}">
+												<h:outputLabel
+													value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.vencimento.parcela']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.parcela}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroPoupanca ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroPoupanca']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroPoupanca}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipo ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.tipo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tipo}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorPoupanca ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorPoupanca}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.clienteDestino ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.favorecido']}" />
+												<h:outputText value="#{detalhe.operacao.clienteDestino}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.bancoDestino ne null and detalhe.operacao.bancoDestino ne '' or detalhe.operacao.bancoDestinoIspb eq '' and  detalhe.operacao.bancoDestinoIspb eq null }">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancoDestino']}" />
+												<h:outputText value="#{detalhe.operacao.bancoDestino}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.bancoDestinoIspb ne null and detalhe.operacao.bancoDestinoIspb ne ''}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancoDestinoIspb']}" />
+												<h:outputText value="#{detalhe.operacao.bancoDestinoIspb}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.agencia ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.administrativo.solicitar.token.agencia']}" />
+												<h:outputText value="#{detalhe.operacao.agenciaDestino}" />
+											</p:outputPanel>
+											<!-- 										<p:outputPanel styleClass="col-xs-12 no-padding" -->
+											<!-- 											rendered="#{detalhe.operacao.tipo ne null}"> -->
+											<!-- 											<h:outputLabel styleClass="space" -->
+											<!-- 												value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoTed']}" /> -->
+											<!-- 											<h:outputText -->
+											<!-- 												value="#{detalhe.operacao.tipo}" /> -->
+											<!-- 										</p:outputPanel> -->
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.historico ne null and detalhe.operacao.historico.trim() ne ''}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.transferencias.transferir.historico']}" />
+												<h:outputText value="#{detalhe.operacao.historico}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.acao ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.acao']}" />
+												<h:outputText value="#{detalhe.operacao.acao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoApelido ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoApelido']}" />
+												<h:outputText value="#{detalhe.operacao.tipoApelido}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.identificacao ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.identificacao']}" />
+												<h:outputText value="#{detalhe.operacao.identificacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoAdesao ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoAdesao']}" />
+												<h:outputText value="#{detalhe.operacao.tipoAdesao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorTarifa ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorTarifa']}" />
+												<h:outputText value="#{detalhe.operacao.valorTarifa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoContaOrigem ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoContaOrigem']}" />
+												<h:outputText value="#{detalhe.operacao.tipoContaOrigem}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoContaDestino ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoContaDestino']}" />
+												<h:outputText value="#{detalhe.operacao.tipoContaDestino}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaInvestimentoDebito ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaInvestimentoDebito']}" />
+												<h:outputText
+													value="#{detalhe.operacao.contaInvestimentoDebito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaDestino ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaDestino']}" />
+												<h:outputText value="#{detalhe.operacao.contaDestino}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaOrigem ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaOrigem']}" />
+												<h:outputText value="#{detalhe.operacao.contaOrigem}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaDebitoCredito ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaDebito']}" />
+												<h:outputText value="#{detalhe.operacao.contaDebitoCredito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaCredito ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.agendamento.detalhe.contaCredito']}" />
+												<h:outputText value="#{detalhe.operacao.contaCredito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoDoc ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.agendamento.detalhe.tipoDOC']}" />
+												<h:outputText value="#{detalhe.operacao.tipoDoc}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.finalidade ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.finalidade']}" />
+												<h:outputText value="#{detalhe.operacao.finalidade}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.clientePagador ne null}">
+												<h:outputLabel
+													value="#{msg['page.segunda.via.comprovantes.titulos.clientepagador']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.clientePagador}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cpfCnpj ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.cpfOuCnpj']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cpfCnpj}"
+													converter="converterCpfCnpj" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.favorecidoCpfCnpj ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.documentoFavorecidoCpfCnpj']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.favorecidoCpfCnpj}"
+													converter="converterCpfCnpj" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.favorecido ne null and detalhe.operacao.favorecido ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.pagtotitulos.dados.label.favorecido']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.favorecido}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.agContaCadastro ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.agContaCadastro']}" />
+												<h:outputText value="#{detalhe.operacao.agContaCadastro}" />
+												<h:outputText
+													value="#{msg['pages.agendamento.detalhe.barra']}" />
+												<h:outputText value="#{detalhe.operacao.agContaCadastro}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataDaSolicitacao ne null}">
+												<h:outputLabel
+													value="#{msg['pages.detranSp.dataDaSolicitacao']}" />
+												<h:outputText value="#{detalhe.operacao.dataDaSolicitacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.municipio ne null}">
+												<h:outputLabel
+													value="#{msg['page.gare.conteudo.municipio']}" />
+												<h:outputText value="#{detalhe.operacao.municipio}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.documento ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.documento']}" />
+												<h:outputText value="#{detalhe.operacao.documento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.proprietario ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.proprietario']}" />
+												<h:outputText value="#{detalhe.operacao.proprietario}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.quantidadeMultasPagas ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.quantidadeMultasPagas']}" />
+												<h:outputText
+													value="#{detalhe.operacao.quantidadeMultasPagas}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.formaPagamento ne null and detalhe.operacao.formaPagamento ne ''}">
+												<h:outputLabel
+													value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.comprovante.formaPagamento']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.formaPagamento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.codigoBarras ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoBarras']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.codigoBarras}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.clienteConsumidor ne null and detalhe.operacao.clienteConsumidor ne ''}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.clienteConsumidor']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.clienteConsumidor}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.razaoSocialPagadorEfetivo ne null and detalhe.operacao.razaoSocialPagadorEfetivo ne ''}">
+												<h:outputLabel
+													value="Nome / Razão Social do Pagador Efetivo:"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.razaoSocialPagadorEfetivo}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.razaoSocialBeneficiarioOriginal ne null and detalhe.operacao.razaoSocialBeneficiarioOriginal ne ''}">
+												<h:outputLabel
+													value="Nome / Razão Social do Beneficiário Original:"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.razaoSocialBeneficiarioOriginal}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.vencimento ne null and detalhe.operacao.vencimento ne '  /  /' and detalhe.operacao.vencimento ne '' and detalhe.operacao.vencimento.trim() ne '/  /'  }">
+												<h:outputLabel
+													value="#{msg['pages.pagamento.veiculosSP.ipva.comprovante.vencimento']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.vencimento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.codigo ne null and detalhe.operacao.codigo ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.codigo}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.premioLiquido ne null and detalhe.operacao.premioLiquido ne ''}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.premioLiquido']}" />
+												<h:outputText value="#{detalhe.operacao.premioLiquido}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.IOF ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.agendamento.detalhe.IOF']}" />
+												<h:outputText value="#{detalhe.operacao.IOF}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.premioBruto ne null and detalhe.operacao.premioBruto ne ''}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.premioBruto']}" />
+												<h:outputText value="#{detalhe.operacao.premioBruto}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nome ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.nome']}" />
+												<h:outputText value="#{detalhe.operacao.nome}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.telefone ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.telefone']}" />
+												<h:outputText value="#{detalhe.operacao.telefone}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.ramal ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['pages.usuarioMaster.masterCadastrar2.ramal']}" />
+												<h:outputText value="#{detalhe.operacao.ramal}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.fax ne null}">
+												<h:outputLabel styleClass="space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.fax']}" />
+												<h:outputText value="#{detalhe.operacao.fax}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.percentual ne null and detalhe.operacao.percentual ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.percentual']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.percentual}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeRazaoSocial ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeRazaoSocial']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeRazaoSocial}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.identificador ne null}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.identificador']}" />
+												<h:outputText value="#{detalhe.operacao.identificador}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.empresaConveniada ne null}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.empresaConveniada']}" />
+												<h:outputText value="#{detalhe.operacao.empresaConveniada}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.limiteDebito ne null}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.limiteDebito']}" />
+												<h:outputText value="#{detalhe.operacao.limiteDebito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorLimite ne null}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorLimite']}" />
+												<h:outputText value="#{detalhe.operacao.valorLimite}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataCadastramento ne null and detalhe.operacao.dataCadastramento ne ''}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataCadastramento']}" />
+												<h:outputText value="#{detalhe.operacao.dataCadastramento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataUltimoLancamento ne null}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataUltimoLancamento']}" />
+												<h:outputText
+													value="#{detalhe.operacao.dataUltimoLancamento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.historicoComplementar ne null}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.historicoComplementar']}" />
+												<h:outputText
+													value="#{detalhe.operacao.historicoComplementar}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.motivoExclusao ne null and detalhe.operacao.motivoExclusao ne ''}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.motivoExclusao']}" />
+												<h:outputText value="#{detalhe.operacao.motivoExclusao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataAutorizacaoOutroPagador ne null}">
+												<h:outputLabel
+													value="#{detalhe.operacao.labelDataAutorizacaoOutroPagador}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.dataAutorizacaoOutroPagador}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataOperacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataOperacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.dataOperacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.referencia ne null and detalhe.operacao.referencia ne '// /'}">
+												<h:outputLabel styleClass="bold space"
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.referencia']}" />
+												<h:outputText value="#{detalhe.operacao.referencia}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.prefeitura ne null and detalhe.operacao.prefeitura ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.prefeitura']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.prefeitura}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.codigoArea ne null and detalhe.operacao.codigoArea ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoArea']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.codigoArea}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.empresa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.empresa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.empresa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroFundos ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroFundo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroFundos}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.vinculo ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.vinculo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.vinculo}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorJuros ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorJuros']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorJuros}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.abatDesc ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorDescontoAbatimento']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.abatDesc}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.quantidadeParcelas ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.quantidadeParcelas']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.quantidadeParcelas}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoTaxa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoTaxa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tipoTaxa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.taxaJurosMes ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.taxaJurosMes']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.taxaJurosMes}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.taxaJurosAno ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.taxaJurosAno']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.taxaJurosAno}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tarifaAberturaCredito ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tarifaAberturaCreditoTAC']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.tarifaAberturaCredito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cetMes ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cetMes']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cetMes}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cetAno ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cetAno']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cetAno}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorTotalFinanciado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorTotalFinanciado']}:"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.valorTotalFinanciado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorEmprestimoEncargos ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorEmprestimoEncargos']}:"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.valorEmprestimoEncargos}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorParcela ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorParcela']}:"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorParcela}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorPrimeiraParcela ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorPrimeiraParcela']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.valorPrimeiraParcela}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorDemaisParcelas ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorDemaisParcelas']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.valorDemaisParcelas}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.custoEfetivoTotal ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.custoEfetivoTotal']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.custoEfetivoTotal}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeEmpresa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeEmpresa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeEmpresa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.inicioSuspensao ne null}">
+												<h:outputLabel
+													value="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaInicioDaSuspensao']}:"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.inicioSuspensao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.terminoSuspensao ne null}">
+												<h:outputLabel
+													value="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaTeminnoDaSuspensao']}:"
+													styleClass="space" /> 
+												<h:outputText value="#{detalhe.operacao.terminoSuspensao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorEntrada ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorEntrada']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorEntrada}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.segurado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.segurado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.segurado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cnpjSegurado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cnpjSegurado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cnpjSegurado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorParcelado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorParcelado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorParcelado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.primeiroVencimento ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataPrimeiroVencimento']}:"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.primeiroVencimento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.ultimoVencimento ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataUltimoVencimento']}:"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.ultimoVencimento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.encargosInadimplencia ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.encargosInadimplencia']}:"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.encargosInadimplencia}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.multaHora ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.multaMora']}:"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.multaHora}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.data ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.data']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.data}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.exclusaoParticipanteAte ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.exclusaoParticipanteAte']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.exclusaoParticipanteAte}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.horaEnvio ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.horaEnvio']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.horaEnvio}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.agenciaCredito ne null}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.agenciaCredito']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.agenciaCredito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.codigoBandeira ne null}">
+												<h:graphicImage value="#{detalhe.operacao.urlImagem}" />
+												<h:outputText
+													value="#{detalhe.operacao.setDescBandeiraCartao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroCartao ne null and detalhe.operacao.numeroCartao ne ''}">
+												<h:outputLabel
+													value="#{msg['pages.agendamento.detalhe.numeroCartao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroCartao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoCartao ne null and detalhe.operacao.tipoCartao ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoCartao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tipoCartao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorCompromisso ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorCompromisso']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorCompromisso}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.plano ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.plano']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.plano}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dtIniVig ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dtIniVig']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.dtIniVig}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.saldoReserva ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.saldoReserva']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.saldoReserva}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorAporte ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorAporte']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorAporte}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroAgrupamento ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroAgrupamento']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroAgrupamento}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.inicio ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.inicio']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.inicio}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroMes ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroMes']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroMes}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.fim ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.fim']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.fim}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cnpj ne null}">
+												<h:outputLabel
+													value="#{msg['page.contaCorrente.consulta.correspondencias.enviadas.perfil']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cnpj}"
+													converter="converterCpfCnpj" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaColetiva ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaColetiva']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.contaColetiva}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoRelatorio ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoRelatorio']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tipoRelatorio}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeAparelhoAutorizado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeAparelhoAutorizado']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.nomeAparelhoAutorizado}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.usuarioSolicitante ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.usuarioSolicitante']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.usuarioSolicitante}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeCompletoAutorizado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeCompletoAutorizado']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.nomeCompletoAutorizado}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cpfAutorizado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfAutorizado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.cpfAutorizado}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroCelular ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroCelular']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroCelular}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorEmprestimo ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorEmprestimo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorEmprestimo}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.premioSeguro ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.premioSeguro']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.premioSeguro}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.repasseEncargosOperacoesCredito ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.repasseEncargosOperacoesCredito']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.repasseEncargosOperacoesCredito}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.diaDebito ne null}">
+												<h:outputLabel
+													value="#{msg['page.contaCorrente.pacoteservico.contratar.telaToken.dia.debito']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.diaDebito}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorSaqueParcelado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorSaqueParcelado']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.valorSaqueParcelado}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroParcelas ne null}">
+												<h:outputLabel
+													value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.numero.parcelas']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroParcelas}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.limiteCompromisso ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.limiteCompromisso']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.limiteCompromisso}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.travaValorFolha ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.travaValorFolha']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.travaValorFolha}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.bancoAgenciaContaDestino ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancoAgenciaContaDestino']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.bancoAgenciaContaDestino}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeDestinatario ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeDestinatario']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeDestinatario}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorTransacao ne null}">
+												<h:outputLabel
+													value="#{msg['pages.investimentos.fundos.extratoMovimentacao.valorTransacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorTransacao}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.operacaoAnterior ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.operacaoAnterior']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.operacaoAnterior}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.novaOperacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.novaOperacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.novaOperacao}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeCompleto ne null}">
+												<h:outputLabel
+													value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoComprovante.nomeCompleto']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeCompleto}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.nomeDispositivo ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeDispositivo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.nomeDispositivo}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoTransacao ne null}">
+												<h:outputLabel
+													value="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.TipoTrans']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tipoTransacao}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.arquivo ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.arquivo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.arquivo}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.situacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.administrativo.usuarioMaster.finalizarCadastroPreenchimento.situacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.situacao}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.sequencia ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.sequencia']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.sequencia}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.registros ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.registros']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.registros}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tamanhoBytes ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tamanhoBytes']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tamanhoBytes}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataHoraTransferencia ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataHoraTransferencia']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.dataHoraTransferencia}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroControle ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroControle']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroControle}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.diaDebito ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.diaDebito']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.diaDebito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.produto ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.produto']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.produto}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorResgatado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorResgatado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorResgatado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.taxa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.taxa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.taxa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorTotalCobrar ne null and detalhe.operacao.valorTotalCobrar ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorTotalCobrar']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorTotalCobrar}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorResgatado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorResgatado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorResgatado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.taxa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.taxa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.taxa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorTotal ne null and detalhe.operacao.valorTotal ne '-'}">
+												<h:outputLabel
+													value="#{msg['page.autorizacoes.historico.consulta.valorTotal']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorTotal}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tipoAlegacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoAlegacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.tipoAlegacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.mesExtrato ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.mesExtrato']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.mesExtrato}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.opcaoEntrega ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.opcaoEntrega']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.opcaoEntrega}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataAlegacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataAlegacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.dataAlegacao}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroInicial ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroInicial']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroInicial}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroFinal ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroFinal']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroFinal}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.quantidadeTaloes ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.quantidadeTaloes']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.quantidadeTaloes}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataSolicitacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataSolicitacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.dataSolicitacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.reconhecimentoApresentacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.reconhecimentoApresentacao']}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tituloEletronicoDDA ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tituloEletronicoDDA']}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.saldoDevedor ne null and detalhe.operacao.saldoDevedor ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.saldoDevedor']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.saldoDevedor}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.emailEnvioFatura ne null and detalhe.operacao.emailEnvioFatura ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.emailEnvioFatura']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.emailEnvioFatura}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.operadora ne null and detalhe.operacao.operadora ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.operadora']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.operadora}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.telefoneDDD ne null and detalhe.operacao.telefoneDDD ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.telefoneComDDD']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.telefoneDDD}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.anoCalendario ne null and detalhe.operacao.anoCalendario ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.anoCalendario']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.anoCalendario}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.dataNascimento ne null and detalhe.operacao.dataNascimento ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataNascimento']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.dataNascimento}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.email ne null and detalhe.operacao.email ne ''}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.email']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.email}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.periodo ne null}">
+												<h:outputLabel
+													value="#{msg['pages.conta.corrente.saldo.bloqueado.periodo']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.periodo}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.atualizadaPara ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.atualizadaPara']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.atualizadaPara}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroRemessa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroRemessa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroRemessa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.mesReferencia ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.mesreferencia']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.mesReferencia}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.banco ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.banco']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.banco}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.agenciaConta ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.agenciaConta']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.agenciaConta}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.opcoesDebito ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.opcaoDebito']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.opcoesDebito}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.cpfDespachanteRepresentante ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfDespachanteRepresentante']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.cpfDespachanteRepresentante}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorAntecipado ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorAntecipado']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorAntecipado}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.percentualLance ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.percentualLance']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.percentualLance}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valorLance ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorLance']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valorLance}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.diaVencimentoParcela ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.diaVencimentoParcela']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.diaVencimentoParcela}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.percentualCET ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.percentualCET']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.percentualCET}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.qtdContratoRenegociados ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.qtdContratoRenegociados']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.qtdContratoRenegociados}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.razaoSocial ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.razaosocial']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.razaoSocial}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.codigoConvenio ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoConvenio']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.codigoConvenio}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaDebitoTarifa ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaDebitoTarifa']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.contaDebitoTarifa}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.geradorArquivos ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.geradorArquivos']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.geradorArquivos}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.tarifaEnvioHolerite ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tarifaEnvioHolerite']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.tarifaEnvioHolerites}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.contaDebito ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaDebito']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.contaDebito}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.floatCompHistParts ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.float']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.floatCompHistParts}" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.consolidarDebitoExtrato ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.consolidarDebitoExtrato']}"
+													styleClass="space" />
+												<h:outputText
+													value="#{detalhe.operacao.consolidarDebitoExtrato}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.formaAutorizacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.formaAutorização']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.formaAutorizacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.numeroOperacao ne null}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroOperacao']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.numeroOperacao}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.valor ne null and detalhe.operacao.valor ne '-'}">
+												<h:outputLabel
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}"
+													styleClass="space" />
+												<h:outputText value="#{detalhe.operacao.valor}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.labelPropostaCancelada eq true}">
+												<h:outputText
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.propostaCancelada']}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding"
+												rendered="#{detalhe.operacao.labelFrasesSeguro eq true}">
+												<h:outputText
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.registroSusep']}"
+													styleClass="space-b" />
+												<h:outputText
+													value="#{msg['page.operacoes.realizadas.detalhe.dados.label.canalOuvidoria']}" />
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-12 no-padding">
+												<p:separator styleClass="col-xs-12  no-padding">
+												</p:separator>
+												<p:outputPanel styleClass="col-xs-12 no-margin no-padding ">
+													<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+												</p:outputPanel>
+											</p:outputPanel>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</span>
+				</p:column>
+			</p:dataTable>
+			<p:outputPanel styleClass="row" style="
+    padding-right: 8px;
+    padding-left: 8px;
+">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml">
+					<ui:param name="divHtml" value="true" />
+					<ui:param name="imprimir" value="true" />
+				</ui:include>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		</span>
+
+
+
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					value="#{msg['pages.transferencia.consultar.home.voltar']}"
+					action="#{operacoesRealizadasBBean.voltarListarOperacao()}"
+					immediate="true" role="button" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

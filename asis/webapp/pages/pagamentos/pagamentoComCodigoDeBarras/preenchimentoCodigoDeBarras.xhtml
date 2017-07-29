@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{pagamentoCodigoDeBarrasBBean.verificaExibicaoMensagemErroTelaConfirmacao(true)}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+	
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-1" style="width: 50px">&nbpsp;</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-11">
+							<strong><p:outputLabel value="#{pagamentoCodigoDeBarrasBBean.pagamentoCodigoBarrasRequest.strtextoDestaque}" escape="false" /></strong>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-1" style="width: 50px">
+							<i class="fa fa-exclamation-circle"></i>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-11">
+							<h:outputText value="#{pagamentoCodigoDeBarrasBBean.pagamentoCodigoBarrasRequest.strTextoComum}" escape="false" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1" style="width: 45px">&nbpsp;</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-11">
+							<span class="site-map">   
+										<ui:include src="/pages/pagamentos/codigoBarras/limites/LimitesModal.xhtml"></ui:include>
+								<p>
+									<strong>						
+										<p:commandLink value="Confira os limites para esse pagamento" oncomplete="PF('limites').show()"  >
+										</p:commandLink>
+									</strong>
+								</p>
+								<span class="space-b" />	                	
+			                	<p>
+									<strong>
+									<a href="#">Empresas Conveniadas</a>										
+									</strong>
+								</p>           	
+		                	</span>
+	                	</p:outputPanel>
+                	</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Dados do pagamento</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow">
+                	<p:outputPanel styleClass="row space-b">   
+	                	<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel for="" styleClass="space-b" value="Digite a sequência numérica localizada junto ao código de barras da conta, ou utilize seu leitor ótico." />									
+							<p:inputText 	styleClass="form-control barcode" id="codBarras" 
+											autocomplete="off" 
+											value="#{pagamentoCodigoDeBarrasBBean.pagamentoCodigoBarrasRequest.codBarras}"> 
+								<p:ajax event="blur"  
+										onstart="document.getElementById('boxAguarde').style.display='block'" 
+										oncomplete="document.getElementById('boxAguarde').style.display='none'"
+										update="panelExibirClienteConsumidor, panelFormasDePagto, panelExibirApelido, panelValorAPagar, panelPeriodocheck, @form" 
+										listener="#{pagamentoCodigoDeBarrasBBean.validaCodigoDeBarras}" />
+										
+							</p:inputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b" rendered="true">
+						<p>#{msg['pages.pagamentos.codBarra.titulos.informacoes']}</p>
+						
+
+						<p:outputPanel id='PanelFavorecido' styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.isTitulo}">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['pages.pagamentos.codBarra.titulos.favorecido']}" />
+								<p:inputText styleClass="form-control" id="favorecido" label="nome do favorecido" 
+	  		  					value="#{pagamentoCodigoDeBarrasBBean.favorecido}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel id='PanelCliente' styleClass="row space-b" >
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['pages.pagamentos.codBarra.titulos.clientepagador']}" />
+								<p:inputText styleClass="form-control" id="cliente" label="nome do cliente" 
+	  		  					value="#{pagamentoCodigoDeBarrasBBean.cliente}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel id='PanelVencimentoTitulo' styleClass="row space-b" >
+		                	<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['pages.pagamentos.codBarra.titulos.vencimento']}" />
+								<p:inputText styleClass="form-control" id="cliente" label="nome do cliente" 
+  		  						value="#{pagamentoCodigoDeBarrasBBean.cliente}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel id="panelValorTitulo" styleClass="row space-b">   
+		                	<p:outputPanel styleClass="col-xs-4">
+		                		<h:outputLabel for="" value="Valor:" />
+								<p:inputText id="valor" styleClass="form-control"
+									value="#{pagamentoCodigoDeBarrasBBean.valorTitulo}"
+									onkeypress="onlyNumbers(event)"
+									onkeyup="maskMoney(this, null, event)"
+									onblur="maskMoneyOnBlur(this)" maxlength="17">
+								</p:inputText>
+		                	</p:outputPanel>
+	                	</p:outputPanel>
+	                	
+	                </p:outputPanel>
+
+
+					</p:outputPanel>
+
+
+	                
+	                <p:outputPanel id="panelExibirClienteConsumidor" styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.exibirClienteConsumidor}">   
+	                	<p:outputPanel styleClass="col-xs-6">
+	                		<h:outputLabel for="" value="Informe cliente/consumidor da conta para continuar o pagamento:" />
+	                		<br/><br/>
+	                		<h:outputLabel for="" value="Cliente/Consumidor:" />						
+							<p:inputText styleClass="form-control" maxlength="40" value="#{pagamentoCodigoDeBarrasBBean.pagamentoCodigoBarrasRequest.clienteConsumidor}" autocomplete="off" />
+	                	</p:outputPanel>
+	                </p:outputPanel>
+	                
+	                <p:outputPanel id="panelValorAPagar" styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.renderValorAPagar}">   
+	                	<p:outputPanel styleClass="col-xs-4">
+	                		<h:outputLabel for="" value="Valor:" />
+							<p:inputText id="valor" styleClass="form-control"
+								value="#{pagamentoCodigoDeBarrasBBean.pagamentoCodigoBarrasRequest.valorAPagar}"
+								onkeypress="onlyNumbers(event)"
+								onkeyup="maskMoney(this, null, event)"
+								onblur="maskMoneyOnBlur(this)" maxlength="17">
+							</p:inputText>
+	                	</p:outputPanel>
+	                </p:outputPanel>
+	                
+	                <p:outputPanel id="panelExibirApelido" styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.exibirApelido}">   
+	                	<p:outputPanel styleClass="col-xs-4">
+	                		<p:selectBooleanCheckbox value="#{pagamentoCodigoDeBarrasBBean.cadastroApelido}" itemLabel="" name="cb2_3" id="ckeck" styleClass="op1" >
+								<p:ajax event="change" process="@this" update="formGeral:panelApelido" listener="#{pagamentoCodigoDeBarrasBBean.onChangeApelido}" />										
+							</p:selectBooleanCheckbox>
+							<h:outputLabel for="cb2_3" styleClass="checkbox-inline op" value="Desejo cadastrar esse favorecido para futuros pagamentos" />
+	                	</p:outputPanel>
+	                	
+	                	<p:outputPanel id="panelApelido"  styleClass="col-xs-8">
+							<p:outputPanel rendered="#{pagamentoCodigoDeBarrasBBean.exibirApelido}">
+								<p:outputPanel styleClass="col-xs-1 margeInput">
+									<!--<h:outputText value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.apelido']}"></h:outputText>-->
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-4 margeInput space-b">
+									<p:outputPanel styleClass="form-group margeInput">
+										<p:inputText id="apelido" value="" styleClass="form-control" />
+										<h:outputLabel for="cb2_3" styleClass="checkbox-inline op" value="(preencha um valor de 0 a 10)" />
+									</p:outputPanel>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-3 margeInput space-b">
+									<!--<span>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.limite']}</span>-->
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+	                </p:outputPanel>
+	                
+	                <p:outputPanel id="panelFormasDePagto" styleClass="row radioGrid tpoLanca" rendered="#{pagamentoCodigoDeBarrasBBean.renderFormasPagamento}">   
+	                	<p:outputPanel styleClass="col-xs-12">
+	                		<p:outputLabel for="formasPagamentoRadio" value="#{msg['page.segundaViaComprovantes.segvia.title.combobox.forma.de.pagamento']}" />
+	
+							<p:outputPanel styleClass="row radioGrid tpoLanca">
+							<p:outputPanel styleClass="col-lg-12">
+							<p:outputPanel styleClass="table-responsive radio radio-label radio-block no-print no-visible">
+	
+							<h:selectOneRadio id="formasPagamentoRadio" layout="custom" value="#{pagamentoCodigoDeBarrasBBean.formaPagamentoSelecionada}" >	
+								<p:ajax
+									listener="#{pagamentoCodigoDeBarrasBBean.selectFormaPagamento}"
+									update="panelPeriodocheck, @form"/>
+
+
+								<f:selectItems itemLabel="#{formaPagamento.nome}"
+									itemValue="#{formaPagamento.codigo}"
+									value="#{pagamentoCodigoDeBarrasBBean.listaFormasPagamento}"
+									var="formaPagamento" />								
+							</h:selectOneRadio>
+							</p:outputPanel>
+							</p:outputPanel>
+							</p:outputPanel>
+							
+	                	</p:outputPanel>
+	                </p:outputPanel>
+
+	               <p:outputPanel id="panelPeriodocheck" styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.renderAgendar}">
+						<p:outputPanel styleClass="col-lg-12" >
+							<p:outputPanel  styleClass="row radioGrid tpoLanca" value="#{pagamentoCodigoDeBarrasBBean.agendarPagamento}">
+								<p:selectOneRadio id="setAgendarPagamento" layout="custom" value="#{pagamentoCodigoDeBarrasBBean.pgAgoraAgendar}">
+									<f:selectItem itemLabel="Pagar Agora" itemValue="PA" />
+									<f:selectItem itemLabel="Agendar Para: " itemValue="AP" />
+									<p:ajax listener="#{pagamentoCodigoDeBarrasBBean.onChangeAgendamento}" event="change" update="panelPeriodocheck"></p:ajax>
+								</p:selectOneRadio>
+
+								<p:outputPanel styleClass="col-xs-8">
+                                	<p:outputPanel styleClass="pull-left">
+							      		<p:radioButton id="opt1" for="setAgendarPagamento" itemIndex="0"/>
+										<h:outputLabel value=" Pagar Agora" for="opt1" />	
+										<p:radioButton id="opt2" for="setAgendarPagamento" itemIndex="1" />
+										<h:outputLabel value=" Agendar Para:" for="opt2" />	
+										<p:graphicImage id="tooltip" value="/images/icon-i.png" style="width: 15px;" />
+										<p:tooltip for="tooltip" style="top: 110.583px">
+											<h:outputText>
+												<p>#{msg['pages.pagamento.codBarras.pagamento.toolTip']}</p>
+											</h:outputText>
+										</p:tooltip>
+									</p:outputPanel>
+								
+									<p:outputPanel id="div-periodo-especifico" styleClass="icon-data-input col-xs-3" >
+										<i class="fa fa-calendar"></i>		
+										<p:calendar    id="dataAgendamento"
+													   mindate="#{pagamentoCodigoDeBarrasBBean.tomorrow}"
+			                                           showOtherMonths="true" 
+			                                           pattern="dd/MM/yyyy"
+			                                           value="#{pagamentoCodigoDeBarrasBBean.dataPagamento}"
+			                                           maxlength="10"
+			                                           converter="dateConverterFormat" 
+			                                           onkeyup="mascaraData(this, event)" 
+			                                           onkeypress="mascaraData(this, event)">			
+											
+											<p:ajax event="change" 
+													process="@this" 
+													update="setAgendarPagamento, dataAgendamento, @form"/>		
+																								
+											<p:ajax event="dateSelect"																
+													listener="#{pagamentoCodigoDeBarrasBBean.dateSelectedDataAgendamento}" 
+													update="panelPeriodocheck, setAgendarPagamento, dataAgendamento, @form"/>																						
+										</p:calendar>										
+									</p:outputPanel>
+								</p:outputPanel>								
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+						
+					<!-- Tabela de Cartoes -->
+					<p:outputPanel styleClass="tabela-cartoes" id="idTabelaCartoes">
+				
+						<p:outputPanel styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.renderTabelaCartoes}">
+							<p:outputPanel styleClass="col-xs-12">
+	                    		<p:separator />
+	                    	</p:outputPanel>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="row space-b" rendered="#{pagamentoCodigoDeBarrasBBean.renderTabelaCartoes}">
+	                        <p:outputPanel styleClass="col-xs-12">
+								<p:outputLabel value="#{msg['page.segundaViaComprovantes.segvia.tabela.cartoes.facet']}" styleClass="bold"/>
+							</p:outputPanel>
+						</p:outputPanel>
+					
+						<p:dataTable 
+							var="cartao"
+							rowKey="#{cartao.numero}"
+							rendered="#{pagamentoCodigoDeBarrasBBean.renderTabelaCartoes}"
+							tableStyleClass="tacle-custom table-zebrada"
+							styleClass="data-table-header-custom"
+							value="#{pagamentoCodigoDeBarrasBBean.listaTabelaCartoes}"
+							selection="#{pagamentoCodigoDeBarrasBBean.cartaoDto}"
+							emptyMessage="#{'Não foram encontrados cartões válidos para efetuar pagamentos'}">
+							
+							<p:ajax event="rowSelectRadio"
+											listener="#{pagamentoCodigoDeBarrasBBean.onRowSelect}" />
+							
+							<p:column selectionMode="single" width="50"/>
+							
+							<p:column 
+								headerText="#{msg['page.segundaViaComprovantes.segvia.tabela.cartoes.header.tipo']}"
+								styleClass="col-xs-4 text-left">
+								<div class="text-left">
+								<p:graphicImage value="#{cartao.img}"  />
+								<h:outputLabel value="#{cartao.tipo}" styleClass="space-l"/>
+								<h:outputText value="#{cartao.nomeCartao}" styleClass="text-left" />
+								</div>
+							</p:column>
+
+							<p:column
+								headerText="#{msg['page.segundaViaComprovantes.segvia.tabela.cartoes.header.numero']}"
+								styleClass="col-xs-4 text-left">
+								<h:outputText value="#{cartao.numeroFormatado}"/>
+							</p:column>
+
+							<p:column
+								headerText="#{msg['page.segundaViaComprovantes.segvia.tabela.cartoes.header.nome']}"
+								styleClass="col-xs-4 text-left">
+								<h:outputText value="#{cartao.nomeTitular}" styleClass="text-left" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:outputPanel>
+					<!-- Tabela de Cartoes FIM-->					
+	               
+                </p:outputPanel>                
+            </p:outputPanel>
+        </p:outputPanel>
+
+		<!-- RENDERIZA QUANDO SELECIONADO A OPERADORA -->
+		<p:outputPanel id="panelPreenchimento">
+			
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="cmdLnkVoltar" value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{pagamentoCodigoDeBarrasBBean.voltarMenu}" />
+
+				<p:commandLink id="btnContinuar"
+					value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" role="button"
+					action="#{pagamentoCodigoDeBarrasBBean.continuarConsulta}" />
+			</p:outputPanel>
+		</p:outputPanel>
+				
+		<div id="boxAguarde" style="display:none; top:10px; left:10px; width:99%; height:100%; position:absolute; margin:auto; border:0px solid #73AD21; ;">
+				<p:graphicImage  value="/images/aguarde.gif" alt="aguarde" style="top:40%; left:46%; position:relative; width:50px; height:50px; margin:auto; border:0px solid #73AD21" />
+		</div>
+				    	
+    
+		<!-- 
+		FORMATAÇÃO DA MASCARA DE CODIGO DE BARRAS
+		-->
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/barcode.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/validaCodeBar.js" />
+		
+	</ui:define>
+	
+</ui:composition>

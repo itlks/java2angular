@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	
+	<style>
+	.box-shadow .col-md-4, .box-shadow .row .quebra{
+		margin: 10px 0;
+	}
+	</style>
+	
+		<p:outputPanel styleClass="row">
+           <p:outputPanel styleClass="col-lg-12">
+               <p:outputPanel styleClass="titulo-painel">
+                   <h:outputText styleClass="h4" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.confiraDados']}"/>
+               </p:outputPanel>
+           </p:outputPanel>
+       </p:outputPanel>
+
+       <p:outputPanel styleClass="row">
+         <p:outputPanel styleClass="col-lg-12">
+           <p:outputPanel styleClass="box-shadow">
+             <p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-4">
+					<p>
+						<h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.renavam']}" />
+						<h:outputText id="idNrRenavam"
+									converter="converterNumeroRenavam"
+									value="#{multasVeiculosBBean.multas.renavam}"  />
+						
+					</p>
+					<p:outputPanel styleClass="quebra"/>	
+					<p>
+						<h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.proprietario']}" />
+						#{multasVeiculosBBean.multas.proprietario}
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-4">
+					<p>
+						<h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.codigoMunicipio']}" />
+						#{multasVeiculosBBean.multas.codigoMunicipio}
+					</p>
+					<p:outputPanel styleClass="quebra"/>	
+					<p>
+						<h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.cpfCnpj']}" />
+						#{multasVeiculosBBean.multas.cpfCnpj}
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-4">
+					<br />
+					<p:outputPanel styleClass="quebra"/>	
+					<p>
+						<h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.placaVeiculo']}" />
+						#{multasVeiculosBBean.multas.placaVeiculo}
+					</p>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-12 space-b">						
+		        	<p:separator />		                
+		        </p:outputPanel>
+		                
+               <p:outputPanel styleClass="col-md-12">                   
+                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.multasPendentes']}" /></p>
+                   <p:outputPanel styleClass="quebra"/>
+               </p:outputPanel>
+               
+               <ui:repeat value="#{multasVeiculosBBean.selecionadoListaGuias}" var="gui">
+	               <p:outputPanel styleClass="col-md-4">              
+	                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.guia']}" /> #{gui.guia}</p>
+	                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.dataInfracao']}" />#{gui.dataInfracao}</p>
+	               </p:outputPanel>
+	               <p:outputPanel styleClass="col-md-4">
+	                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.autoInfracao']}" /> #{gui.autoInfracao}</p>
+	                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.dataVencimento']}" /> #{gui.dataVencimento}</p>
+	               </p:outputPanel>
+	               <p:outputPanel styleClass="col-md-4">
+	                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.orgaoAutuador']}" /> #{gui.orgaoAutuador}</p>
+	                   <p><h:outputText styleClass="bold" value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.valor']}" /> R$ #{multasVeiculosBBean.formataValor(gui.valor)}</p>
+	               </p:outputPanel>       
+	               
+               </ui:repeat>
+                <p:outputPanel styleClass="quebra"/>
+                	<p:outputPanel styleClass="col-md-4">
+						<br />
+					</p:outputPanel>
+                	<p:outputPanel styleClass="col-md-4">
+						<br />
+					</p:outputPanel>
+                	<p:outputPanel styleClass="col-md-4">
+							<h:outputText styleClass="bold"
+								value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosPagtoOnline.valorTotal']} " />R$ #{multasVeiculosBBean.calcularValorTotalConfirmacao()}
+					</p:outputPanel>
+             </p:outputPanel>
+           </p:outputPanel>
+         </p:outputPanel>
+       </p:outputPanel>
+
+		<p:outputPanel>						
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			
+				<p:blockUI block="cmdLnkVoltar" trigger="cmdLnkVoltar" />
+				<p:commandButton id="cmdLnkVoltar"
+					value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{multasVeiculosBBean.voltarMultasVeiculosPagtoOnline}" />
+								
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandButton id="btnConfirmar" 
+					value="#{msg['page.btn.continuar']}" 
+					styleClass="btn btn-default"
+					role="button" 
+					action="#{multasVeiculosBBean.continuarMultasVeiculosPagtoOnline}"
+					onclick="encryptSecureDL();" />												
+				<p:defaultCommand target="btnConfirmar" />
+										
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

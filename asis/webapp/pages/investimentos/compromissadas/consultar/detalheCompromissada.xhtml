@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	
+	<ui:define name="content">
+		<!-- Linha de Aviso -->
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span class="site-map">
+						<h:outputText value="#{msg['pages.investimento.compromissada.Consultar.disponibilizadas']}" />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		
+			<!-- Geração PDF-->
+			<span id="divHtml">
+			<h:outputText value="#{msg['pages.investimento.compromissada.Consultar.posicao']} #{compromissadaBBean.dataAtual}" />
+			
+			<!--  Começo do GRID -->
+			<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						
+						<p:dataTable id="dtGrid" var="linha" value="#{compromissadaBBean.listaCompromissadaDetalhadaDTO}"
+							
+							emptyMessage="#{msg['pages.investimento.compromissada.consulta.aviso']}"
+							
+							rowKey="#{linha.dataInicio}"
+							
+							tableStyleClass="table-responsive table table-striped">
+											
+							<p:column >
+								<f:facet name="header">
+									<h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.data.inico']}" />
+								</f:facet>
+								<h:outputText value="#{linha.dataInicio}" />
+							</p:column>
+							
+							<p:column width="125" >
+								<f:facet name="header">
+									<div align="left"><h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.data.vencimento']}" /></div>
+								</f:facet>
+								<h:outputText value="#{linha.dataVencimento}" />
+							</p:column>
+							
+							<p:column >
+								<f:facet name="header">
+									<div align="right"><h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.valor.principal']}" /></div>
+								</f:facet>
+								<div align="right"><h:outputText value="#{linha.valorPrincipal}" /></div>
+							</p:column>
+							
+							<p:column >
+								<f:facet name="header">
+									<div align="right"><h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.taxa']}" /></div>
+								</f:facet>
+								<div align="right"><h:outputText value="#{linha.taxa}" /></div>
+							</p:column>
+													
+							<p:column >
+								<f:facet name="header">
+									<div align="right"><h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.rendimento']}" /></div>
+								</f:facet>
+								<div align="right"><h:outputText value="#{linha.rendimento}" /></div>
+							</p:column>
+							
+							<p:column >
+								<f:facet name="header">
+									<div align="right"><h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.imposto']}" /></div>
+								</f:facet>
+								<div align="right"><h:outputText value="#{linha.imposto}" /></div>
+							</p:column>				
+				
+							<p:column >
+								<f:facet name="header">
+									<div align="right"><h:outputText
+										value="#{msg['pages.investimento.compromissada.detalhada.saldo']}" /></div>
+								</f:facet>
+								<div align="right"><h:outputText value="#{linha.saldo}" /></div>
+							</p:column>	
+							<p:column/>
+							<p:column >
+								<f:facet name="header">
+									<br/>
+									<br/>
+									<p>#{msg['pages.investimento.compromissada.detalhada.titulo']}</p>
+								</f:facet>
+								<h:outputText value="#{linha.titulo}" />
+							</p:column>	
+							
+							<p:column >
+								<f:facet name="header">
+									<p style = "text-align:center">#{msg['pages.investimento.compromissada.detalhada.lastros']}</p><br/><p style = "text-align:center"> #{msg['pages.investimento.compromissada.detalhada.vencimento']}</p>
+								</f:facet>
+								<div align="center"><h:outputText value="#{linha.lOVencimento}" /></div>
+							</p:column>	
+							
+							<p:column >
+								<f:facet name="header">
+									<br/>
+									<br/>
+									<p> #{msg['pages.investimento.compromissada.detalhada.quantidade']}</p>
+								</f:facet>
+								<h:outputText value="#{linha.quantidade}" />
+							</p:column>
+							
+						    <p:columnGroup type="footer">  
+						        <p:row>  
+						            <p:column style="text-align:left" footerText="TOTAL"/>  
+									<p:column style="text-align:left" footerText="--"/>			
+						            <p:column style="text-align:right" footerText="#{compromissadaBBean.valorPrincipal()}"/>  
+						            <p:column style="text-align:right" footerText="--"/>  
+									<p:column style="text-align:right" footerText="#{compromissadaBBean.rendimento()}"/>  
+									<p:column style="text-align:right" footerText="#{compromissadaBBean.imposto()}"/>  
+									<p:column style="text-align:right" footerText="#{compromissadaBBean.saldo()}"/>
+									<p:column/>
+									<p:column style="text-align:left" footerText="--"/>	
+									<p:column style="text-align:center" footerText="--"/>	
+									<p:column style="text-align:left" footerText="--"/>	
+						        </p:row>  
+						    </p:columnGroup>
+							
+						</p:dataTable>
+						
+					<ui:include src="/commons/pdf/pdfButtons.xhtml"></ui:include>
+					
+				</p:outputPanel>
+			</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		</span>
+		<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{compromissadaBBean.voltarLista}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		</p:outputPanel>
+		
+	
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentHeader">
+
+		<p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-md-12">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">                               
+                <i class="fa fa-exclamation-circle"></i>
+                <p:outputPanel >
+                 	#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.aviso']}
+                 </p:outputPanel>
+            </p:outputPanel>  
+          </p:outputPanel>                        
+        </p:outputPanel>  
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.subtitulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+	<ui:define name="contentComprovante">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.empresa']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.nomeEmpresaConveniada}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.identConsumidor']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.identificacaoConsumidor}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.limiteMaxDebito']} " />					
+					<h:outputText
+						value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.possuiLimiteDebitoFormatada}" />
+				</p>
+				<p>
+					<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.autorizoDebito']}: " />					
+					<h:outputText
+						value="#{debitoAutomaticoAlterarBBean.dto.empresaConveniada.valorMaximoDebito}">
+						<f:convertNumber currencySymbol="" type="currency" />
+					</h:outputText>
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.emitirAvisoCorreio']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.emitirAvisoCorreios == true ? msg['page.txt.simMaiusculo'] : msg['page.txt.naoMaiusculo']}" />
+					<h:outputText
+						value=" (#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.servicoSujeitoCobranca']}.)" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.formaPagamento']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoAlterarBBean.dto.formaPagamentoSelecionadaFormatada}" />
+				</p>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12"
+				rendered="#{debitoAutomaticoAlterarBBean.renderizaLabel eq 'N' and debitoAutomaticoAlterarBBean.formaDePagamento eq 'C1'}">
+				<h:outputLabel
+					value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.avisoCobranca1']}"
+					styleClass="space" />
+									
+				<h:outputLabel
+					id="tabelaServico"
+					value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.avisoCobrancaLink']}"
+					styleClass="space" />
+					
+				<h:outputLabel
+					value="  #{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.avisoCobranca2']}"
+					styleClass="space" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">				
+				<h:outputLabel value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.historico']}: " />
+				<h:outputText value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.historicoComplementar}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

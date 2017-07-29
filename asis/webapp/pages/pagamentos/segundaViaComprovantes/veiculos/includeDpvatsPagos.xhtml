@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+    <p:outputPanel styleClass="row">
+        <p:outputPanel styleClass="col-xs-12">
+            <p:separator styleClass="space-b" />
+        </p:outputPanel>
+    </p:outputPanel>
+    
+    <p:outputPanel styleClass="row space-b">
+        <p:outputPanel styleClass="space-b">
+
+            <p:outputPanel styleClass="col-xs-3">
+                <h:outputLabel styleClass="bold" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.dpvat']}" />
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="col-xs-3">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.pagos']}" />
+                <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nroOcorrDpvat}" />
+            </p:outputPanel>
+
+        	<p:outputPanel styleClass="col-xs-3">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.valortotal']}" />
+                <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.vlTotalDpvat}">
+                      <f:convertNumber type="currency" locale="pt_br" currencySymbol="(R$)" />
+                </h:outputText>
+            </p:outputPanel>
+
+        </p:outputPanel>
+    </p:outputPanel>
+	   		
+</ui:composition>

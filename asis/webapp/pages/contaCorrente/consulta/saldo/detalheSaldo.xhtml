@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+
+			<p:outputPanel styleClass="fakeFooter space-b">
+
+	<p:panelGrid id="tabelaSaldo"
+		styleClass="table-striped">
+		<c:set var="ultimaLinhaSaldo"
+				value="#{contaCorrenteSaldoDTO.saldoDeContaCorrenteItemList.get(contaCorrenteSaldoDTO.saldoDeContaCorrenteItemList.size()-1)}" />
+			<f:facet name="header">
+				<p:row>
+					<p:column>
+						<h:outputText styleClass="space" />
+					</p:column>
+
+					<p:column style="width:75%;">
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.saldo.label.saldo']}" />
+					</p:column>
+
+					<p:column styleClass="text-right">
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.saldo.label.saldo.valor']}" />
+					</p:column>
+
+					<p:column style="text-align: center; width: 50px;">
+						<h:outputText style="margin-left:15px;" styleClass="space" />
+					</p:column>
+				</p:row>
+			</f:facet>
+			<c:forEach
+				items="#{contaCorrenteSaldoDTO.saldoDeContaCorrenteItemList}"
+				var="linhaItemSaldo" varStatus="status">
+				<p:row
+					rendered="#{status.index lt contaCorrenteSaldoDTO.saldoDeContaCorrenteItemList.size()-1}">
+					<p:column style="text-align: center; width: 50px;">
+						<p:commandLink
+							rendered="#{not empty linhaItemSaldo.detalhes and linhaItemSaldo.detalhes.size() > 0}"
+							action="#{linhaItemSaldo.toggleExibeDetalhes}" role="button"
+							update="@form" process="@this">
+							<h:graphicImage
+								value="#{linhaItemSaldo.getImagemExpandCollapse(linhaItemSaldo.exibeDetalhes)}"
+								alt="expandir" styleClass="no-visible" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column style="width:75%;">
+						<h:outputText value="#{linhaItemSaldo.descricao}" />
+						<p:graphicImage id="info#{status.index}"
+							value="#{linhaItemSaldo.imagemInfoIcon}" alt="expandir"
+							style="margin: 0 20px;" styleClass="no-visible"
+							rendered="#{not empty linhaItemSaldo.aviso}">
+							<pe:tooltip myPosition="left center" atPosition="right center"
+								styleClass="ui-tooltip" for="info#{status.index}"
+								value="#{linhaItemSaldo.aviso}" />
+						</p:graphicImage>
+					</p:column>
+
+					<p:column styleClass="text-right">
+						<h:outputText value="#{linhaItemSaldo.valor}" />
+					</p:column>
+
+					<p:column style="text-align: center; width: 50px;">
+						<h:outputText style="margin-left:15px;" styleClass="space" />
+					</p:column>
+				</p:row>
+				<c:if
+					test="#{not empty linhaItemSaldo.detalhes and linhaItemSaldo.exibeDetalhes}">
+					<c:forEach items="#{linhaItemSaldo.detalhes}"
+						var="linhaItemSaldoDetalhe">
+						<p:row styleClass="ui-datatable ui-datatable-footer">
+							<p:column style="text-align: center; width: 50px;">
+								<h:outputText styleClass="space" />
+							</p:column>
+
+							<p:column style="width:75%; padding-left:35px;">
+								<h:outputText value="#{linhaItemSaldoDetalhe.descricao}" />
+							</p:column>
+
+							<p:column styleClass="text-right">
+								<h:outputText value="#{linhaItemSaldoDetalhe.valor}" />
+							</p:column>
+
+							<p:column style="text-align: center; width: 50px;">
+								<h:outputText style="margin-left:15px;" styleClass="space" />
+							</p:column>
+						</p:row>
+					</c:forEach>
+				</c:if>
+			</c:forEach>
+
+		</p:panelGrid>
+
+		<p:outputPanel styleClass="col-xs-12 fakeDiv">
+			<p:outputPanel style="width:58%; text-align: left; padding-left: 60px;" styleClass="first">
+				<h:outputText value="#{ultimaLinhaSaldo.descricao}" />
+				<p:graphicImage id="infoUltimo"
+					value="#{ultimaLinhaSaldo.imagemInfoIcon}" alt="expandir"
+					style="margin: 0 20px;" styleClass="no-visible"
+					rendered="#{not empty ultimaLinhaSaldo.aviso}">
+					<p:tooltip for="infoUltimo" styleClass="ui-tooltip"
+						value="#{ultimaLinhaSaldo.aviso}" position="right" />
+				</p:graphicImage>
+
+			</p:outputPanel>
+			<p:outputPanel style="width:42%; text-align: right; padding-right: 50px" styleClass="second">
+				<span><h:outputText value="#{ultimaLinhaSaldo.valor}" /></span>
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+
+</ui:composition>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.pagamento.finalizado']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" id="panelGeral">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 text-center">
+
+							<h5>#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.comprovante']}</h5>
+							<br />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.empresa']}
+								#{codigoBarraBBean.dto.empresa}</h5>
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.codigo.barra']}
+								#{codigoBarraBBean.dto.bloco1} #{codigoBarraBBean.dto.bloco2}
+								#{codigoBarraBBean.dto.bloco3} #{codigoBarraBBean.dto.bloco4}</h5>
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.data.pagamento']}
+								#{codigoBarraBBean.dto.dataPagamento}</h5>
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.valor']}
+								#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.formato.dinheiro']}
+								#{codigoBarraBBean.dto.valor}</h5>
+							<br />
+
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.data.transacao']}
+								#{codigoBarraBBean.dto.dataTransacao}</h5>
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.hora.transacao']}
+								#{codigoBarraBBean.dto.horaTransacao}</h5>
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.canal']} 
+							#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.internet.banking']}</h5>
+							<h5 class="space-b">#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.autenticacao']}
+								#{codigoBarraBBean.dto.autenticacao}</h5>
+							<br />
+
+							<p>#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.pagamento.efetuado']}</p>
+							<p>#{msg['pages.codigoBarra.pagamentosCodigoBarrasComprovante.guarde.este.recibo']}</p>
+							<br />
+							<br />
+
+							<p>Primeira Via.</p>
+							<br />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p>#{msg['pages.pagamento.gps.em.caso.de.duvida']}</p>
+							<p>#{msg['pages.pagamento.gps.capitais.regioes.metropolitanas']}</p>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,56 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set var="compPeriodoMes"
+		value="${fn:substring(compHisParts[2],1,3)}" />
+	<c:set var="compPeriodoAno"
+		value="${fn:substring(compHisParts[2],3,7)}" />
+
+	<p:outputPanel styleClass="row form-horizontal space-t space-r" id="idDadosExtPagtGps_#{posicaoLista}">
+			
+				<p:outputPanel styleClass="col-xs-12" id="idOpRelDadosIntPagtGps2_#{posicaoLista}">
+					<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idOpRelDadosLblPagtGps3_#{posicaoLista}"/>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-8 no-margin-bottom" id="idOpRelIdIntPagtGps5_#{posicaoLista}">
+					<h:outputLabel styleClass="bold space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.identificador']}" 
+					id="idOpRelIdLblPagtGps6_#{posicaoLista}"/>
+					<h:outputText value="${compHisParts[0]}" id="idOpRelIdTxtPagtGps7_#{posicaoLista}"/>
+				</p:outputPanel>
+
+
+				<p:outputPanel styleClass="col-xs-8 no-margin-bottom" id="idOpRelCodigoIntPagtGps9_#{posicaoLista}">
+					<h:outputLabel styleClass="bold space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigo']}" 
+					id="idOpRelCodigoLblPagtGps10_#{posicaoLista}"/>
+					<h:outputText value="${compHisParts[1]}" id="idOpRelCodigoTxtPagtGps11_#{posicaoLista}"/>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-8 no-margin-bottom" id="idOpRelRefIntPagtGps13_#{posicaoLista}">
+					<h:outputLabel styleClass="bold space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.referencia']}" 
+					id="idOpRelRefLblPagtGps14_#{posicaoLista}"/>
+					<h:outputText value="${compPeriodoMes.concat('/').concat(compPeriodoAno)}"  rendered="#{compPeriodoMes ne null and compPeriodoMes ne ''}" id="idOpRelRefTxtPagtGps15_#{posicaoLista}"/>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-8 no-margin-bottom" id="idOpRelValorIntPagtGps17_#{posicaoLista}">
+					<h:outputLabel styleClass="bold space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" id="idOpRelValorLblPagtGps18_#{posicaoLista}"/>
+					<h:outputText	value="#{detalheParam.valor}" id="idOpRelValorTxtPagtGps19_#{posicaoLista}"/>
+				</p:outputPanel>
+
+	</p:outputPanel>
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPagtGps20_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPagtGps21_#{posicaoLista}">
+			<p:separator id="idSepaLinePagtGps22_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+
+
+</ui:fragment>

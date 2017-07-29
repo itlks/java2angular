@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <p>
+					#{msg['pages.investimentos.resgate.automatico.cancelar.label1']}</p> <p>#{msg['pages.investimentos.resgate.automatico.cancelar.label2']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.investimentos.resgate.automatico.cancelar.label3']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:tabView id="panelTokens2" styleClass="abas">
+					<p:tab title="Meus Fundos de Investimento">
+						<p:outputPanel
+							rendered="#{!investimentosFundosResgateAutomaticoBBean.listaCancelar.isEmpty()}">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h5 class="space-b"> <strong>#{msg['pages.investimentos.resgate.automatico.cancelar.label4']}</strong>
+									</h5>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel
+							rendered="#{investimentosFundosResgateAutomaticoBBean.listaCancelar.isEmpty()}">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<span class="space-b"> <p>
+									#{msg['pages.investimentos.resgate.automatico.cancelar.label5']}</p>
+									<br /> <p>#{msg['pages.investimentos.resgate.automatico.cancelar.label6']}</p>
+									<p>#{msg['pages.investimentos.resgate.automatico.cancelar.label7']}</p>
+									</span>
+									<br />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p> <h:link styleClass="link-termos"> #{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.aplicar']} </h:link></p>
+						</p:outputPanel>
+						<br />
+						<p:outputPanel
+							rendered="#{!investimentosFundosResgateAutomaticoBBean.listaCancelar.isEmpty()}">
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-lg-12">
+									<p:outputPanel
+										styleClass="table-responsive table table-striped">
+
+										<p:dataTable id="tableMeusFundosInvestimento"
+											tableStyleClass="table-responsive table table-striped table-click"
+											rowKey="#{fundo.codigoFundoContaFundo}"
+											value="#{investimentosFundosResgateAutomaticoBBean.listaCancelar}"
+											var="fundo" selectionMode="single"
+											selection="#{investimentosFundosResgateAutomaticoBBean.fundoSelecionado}">
+
+											<p:ajax event="rowSelect"
+												listener="#{investimentosFundosResgateAutomaticoBBean.cancelarCadastro}" />
+
+											<p:column headerText="Fundo">
+												<i class="fa fa-circle space-r"
+													style="color: #{investimentosFundosResgateAutomaticoBBean.obterCorTipoFamilia(fundo.tipoFamilia)}"
+													aria-hidden="true"></i>
+												<h:outputText value="#{fundo.descFundo}" />
+											</p:column>
+
+											<p:column headerText="#{msg['pages.investimentos.resgate.automatico.cancelar.saldo.bruto']}"
+												styleClass="text-right">
+												<h:outputText value="#{fundo.saldoBruto}"
+													converter="valorMonetarioConverter" />
+											</p:column>
+
+											<p:column headerText="#{msg['pages.investimentos.resgate.automatico.cancelar.saldo.liquido']}"
+												styleClass="text-right">
+												<h:outputText value="#{fundo.saldoLiquido}"
+													converter="valorMonetarioConverter" />
+											</p:column>
+										</p:dataTable>
+
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:separator />
+
+
+							<p:outputPanel styleClass="familia-fundos no-print no-visible">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-md-12">
+										<h5> <strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.titleFamiliaFundos']}</strong>
+										</h5>
+									</p:outputPanel>
+								</p:outputPanel>
+								<ui:include
+									src="/pages/investimentos/fundos/rentabilidadePeriodo/legendaFamiliaFundos.xhtml">
+									<ui:param name="listaLegenda"
+										value="#{investimentosFundosResgateAutomaticoBBean.legendas.datos.familia}" />
+								</ui:include>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:tab>
+				</p:tabView>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-t">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza no-visible"
+					action="#{investimentosFundosResgateAutomaticoBBean.voltarMenu}"
+					role="button">#{msg['pages.investimentos.resgate.automatico.cancelar.voltar']}</p:commandLink>
+
+				<p:commandLink styleClass="btn btn-default"
+					rendered="#{!investimentosFundosResgateAutomaticoBBean.exibeBtnAplicar}"
+					action="#{investimentosFundosResgateAutomaticoBBean.cadastrarNovoFundo}"
+					role="button">#{msg['pages.investimentos.resgate.automatico.cancelar.cadastrar']}
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<script>
+			$(".table-click tbody tr").click(function() {
+				$(".table-click tbody tr").removeClass("yellow");
+				$(this).toggleClass("yellow");
+			});
+		</script>
+	</ui:define>
+</ui:composition>

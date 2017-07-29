@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+    <p:outputPanel id="panelLicenciamentoMG"
+             styleClass="aviso-interno-blocos alert-information box-shadow">
+          <i class="fa fa-exclamation-circle"></i>
+       		<span>                 	
+          	<strong>#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.1']}</strong>
+          	<br />
+          	<br />
+            #{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.2']}  
+          	<br />
+          	#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.3']}
+          	<br />
+          	#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.4']}  
+          	<br />
+          	#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.5']}
+          	<br />
+          	#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.6']}  
+          	<br />
+			<p>
+				<p:commandLink style="text-decoration: underline;" actionListener="#{licenciamentoVeiculosMinasGeraisBBean.initLimites}"
+								value="#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.9']}">
+				</p:commandLink>
+			</p>
+			<span class="space-b" />
+          	<p:separator />                	                           	
+          	<p>#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.10']}</p>           	
+          	<p><strong>#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.11']}</strong></p>                	
+          	<br />
+          	<p><strong>
+          		<p:commandLink value="#{msg['page.pagamentos.veiculosMG.licenciamento.listarenavam.mensagem.12']}" action="#{licenciamentoVeiculosMinasGeraisBBean.incluirRenavam}"/>
+          	</strong></p>
+		</span>
+	</p:outputPanel>
+		<ui:include src="/pages/limites/limites.xhtml" />
+		
+		<script type="text/javascript" language="javascript">
+			$(document).ready(function(){
+			    $(window).scrollTop(0);
+			});
+		</script>
+     
+</ui:composition>

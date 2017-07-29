@@ -1,0 +1,23 @@
+.loading {
+	display: none;
+	overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(0, 0, 0, 0.6);
+
+	.load-container {
+	    position: relative;
+    	margin: 20% auto;
+	    text-align: center;		
+
+
+		img {
+			width: 50px;
+		}	    
+	}
+}

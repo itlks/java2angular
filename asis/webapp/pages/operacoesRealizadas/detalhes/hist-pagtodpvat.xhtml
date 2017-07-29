@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row form-horizontal space-t space-r space-l" id="idExternoPagtoDpvat_#{posicaoLista}">
+
+		<p:outputPanel styleClass="col-xs-12 space-b" id="idDadosPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosPagtoDpvatLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idPlacaPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel value="Placa:" styleClass="space" id="idPlacaLblPagtoDpvat_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" styleClass="control-label" id="idPlacaTxtPagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idRenavamPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel value="Código do Renavam:" styleClass="space" id="idRenavamLblPagtoDpvat_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" styleClass="control-label" id="idRenavamTxtPagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idPreLiqPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel value="Prêmio Líquido:" styleClass="space" id="idPreLiqLblPagtoDpvat_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[3]}" styleClass="control-label" id="idPreLiqTxtPagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel class="col-xs-12" id="idIofPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel value="IOF:" styleClass="space" id="idIofLblPagtoDpvat_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[3]}" styleClass="control-label" id="idIofTxtPagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel class="col-xs-12" id="idCodBarrasPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel value="Código de Barras:" styleClass="space" id="idCodBarrasLblPagtoDpvat_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" styleClass="control-label" id="idCodBarrasTxtPagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+
+
+		<p:outputPanel class="col-xs-12" id="idValorPagtoDpvat_#{posicaoLista}">
+			<h:outputLabel value="Valor:" styleClass="space" id="idValorLblPagtoDpvat_#{posicaoLista}"/> 
+			<h:outputText value="#{detalheParam.valor}" id="idValorTxtPagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPagtoDpvat_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPagtoDpvat_#{posicaoLista}">
+			<p:separator id="idSepaLinePagtoDpvat_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

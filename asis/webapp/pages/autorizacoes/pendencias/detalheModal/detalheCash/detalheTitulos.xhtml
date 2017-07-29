@@ -1,0 +1,193 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="item"
+		value="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash}" />
+	<p:outputPanel styleClass="row form-horizontal space-r space-l">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Convênio: " />
+			<h:outputText value=" #{item.convenio}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Conta de Débito: " />
+			<h:outputText value=" #{item.contaDebito}" />
+		</p:outputPanel>
+		<p:outputPanel
+			rendered="#{item.YLW63FORMPAG eq 'DOC' or item.YLW63FORMPAG eq 'CIP' or item.YLW63FORMPAG eq 'STR' }">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Tipo do Documento: " />
+				<h:outputText value=" #{item.tipoDocumento}" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="CPF/CNPJ do Fornecedor: " />
+				<h:outputText value=" #{item.YLW63CODFORNCONS}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Nome do Fornecedor: " />
+			<!-- adiconar Replace(+," ") no delegate -->
+			<h:outputText value=" #{item.YLW63NOMEFAVORECIDO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. compromisso banco: " />
+			<h:outputText value=" #{item.YLW63NUMCOMPRO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. compromisso cliente: " />
+			<h:outputText value=" #{item.YLW63SEUNUMERO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Valor nominal: " />
+			<h:outputText value=" #{item.YLW63IMPNOMDOCMONEY}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data de Vencimento:  " />
+			<!-- formatar data -->
+			<h:outputText value=" #{item.YLW63FECVENC}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data de Pagamento: " />
+			<h:outputText value=" #{item.YLW63FECVALORCRED}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Situação: " />
+			<h:outputText value=" #{item.YLW63INDESTACOMP}" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. Lista de Débito: " />
+			<!-- criar validacao se for "000000" colocar vazio -->
+			<h:outputText value=" #{item.YLW63NUMLISTADEB}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. Protocolo: " />
+			<h:outputText value=" #{item.YLW63NUMPROTOCOLO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:separator />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Autenticação: " />
+			<h:outputText value=" #{item.YLW63CODAUT}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Valor a Pagar: " />
+			<h:outputText value=" #{item.valorTotal}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Pagamento: " />
+			<h:outputText value=" #{item.YLW63FORMPAGSTR}" />
+		</p:outputPanel>
+
+		<!-- SE vStrBanco = 0353 or 0008 or "" então
+									seta vStrBanco = 0033
+									
+									//CRIAR LOGICA no BBEAN
+									
+									 END -->
+
+		<!-- SE vStrTipoPag = DOC or CIP or STR -->
+		<p:outputPanel
+			rendered="#{item.YLW63FORMPAG eq 'DOC' or item.YLW63FORMPAG eq 'CIP' or item.YLW63FORMPAG eq 'STR' }">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Banco: " />
+				<h:outputText value=" #{item.YLW63ENTIDADCRED}"
+					rendered="#{item.YLW63FORMPAG eq 'CIP' or item.YLW63FORMPAG eq 'STR' }" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="ISPB: "
+					rendered="#{item.YLW63FORMPAG eq 'CIP' or item.YLW63FORMPAG eq 'STR' }"/>
+				<h:outputText value=" #{item.YLW63OBS1TRIB}"
+					rendered="#{item.YLW63FORMPAG eq 'CIP' or item.YLW63FORMPAG eq 'STR' }" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Agência: " />
+			<h:outputText value=" #{item.YLW63CENTROALTACRED}" />
+		</p:outputPanel>
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Conta de Crédito: " />
+			<h:outputText value=" #{item.YLW63CUENTACRED}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{item.YLW63FORMPAG eq 'DOC' or item.YLW63FORMPAG eq 'CIP' or item.YLW63FORMPAG eq 'STR' }">
+			<h:outputLabel value="Finalidade: " />
+			<!-- NAO INCLUIR NADA-->
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{item.YLW63FORMPAG ne 'DOC' and item.YLW63FORMPAG ne 'CIP' and item.YLW63FORMPAG ne 'STR' }"
+			styleClass="col-xs-12">
+			<h:outputLabel value="Histórico: " />
+			<h:outputText value=" #{item.YLW63CODHISTCOMP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Transferência: " />
+			<h:outputText value=" #{item.YLW63TIPOTRANSF}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Serviço: " />
+			<h:outputText value=" #{item.YLW63TPSERV}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Complemento do Tipo de Serviço: " />
+			<h:outputText value=" #{item.YLW63DSCOMPSERV}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Emitir Aviso: " />
+			<h:outputText value=" #{item.YLW63INDAVISOPAG}" />
+		</p:outputPanel>
+
+		<!-- Condicional de vChkAviso  = "5" or "6" renderiza abaixo-->
+		<p:outputPanel
+			rendered="#{item.YLW63INDAVISOPAG eq 'Favorecido' or item.YLW63INDAVISOPAG eq 'Remetente e Favorecido'}">
+
+			<h:outputLabel value="Endereço: " />
+			<h:outputText value=" #{item.YLW63LOGR}" />
+
+			<h:outputLabel value="Número: " />
+			<h:outputText value=" #{item.YLW63NUMLOGR}" />
+
+			<h:outputLabel value="Complemento: " />
+			<h:outputText value=" #{item.YLW63NUMLOGR}" />
+
+			<h:outputLabel value="Bairro: " />
+			<h:outputText value=" #{item.YLW63BAIRRO}" />
+
+			<h:outputLabel value="Cidade: " />
+			<h:outputText value=" #{item.YLW63CIDADE}" />
+
+			<h:outputLabel value="UF: " />
+			<h:outputText value=" #{item.YLW63UF}" />
+
+			<h:outputLabel value="CEP: " />
+			<h:outputText value=" #{item.YLW63CEP-item.YLW63COMPLCEP}" />
+		</p:outputPanel>
+		<!-- FIM Condicional -->
+	</p:outputPanel>
+</ui:composition>

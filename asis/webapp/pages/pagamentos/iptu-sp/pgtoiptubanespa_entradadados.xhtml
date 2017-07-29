@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+<ui:define name="content">
+	<div class="row space-b">
+    	<div class="col-md-6 col-xs-6 site-map">
+        	<span>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.pagamentos']} <strong>&gt;</strong> #{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.tributosMunicipais']}</span>
+        	<h1>IPTU SP</h1>
+    	</div>
+	</div>
+
+	<p:outputPanel styleClass="row space-b">
+       <p:outputPanel styleClass="col-lg-12">
+             <p:outputPanel styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>
+                    	<p style="font-weight: bold;">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p1']}</p>
+                        <p>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p2']}</p>
+                        <p>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p3']}</p>
+                        <p>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p4']} <a href="http://portal.prefeitura.sp.gov.br/secretarias/financas/tributos/iptu/">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.linkPrefeitura']}</a></p>
+                        <br/>
+                        <p><a href="#">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p5']}</a></p>
+                   	</span>
+             </p:outputPanel>
+       </p:outputPanel>
+	</p:outputPanel>
+
+	<h4 style="margin-bottom:10px;">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.informeDados']}</h4>
+	<p:outputPanel styleClass="row" id="painelGeral">
+    	<p:outputPanel styleClass="col-lg-12">
+        	<p:outputPanel styleClass="box-shadow">
+            	<p:outputPanel styleClass="row">
+            		<p:outputPanel styleClass="col-md-4">
+            	            		
+            			<p:outputPanel style="margin-bottom:25px;" styleclass="form-group">
+            				<h:outputText value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.nr.contribuinte']}" />            			
+							<p:inputText styleClass="form-control" id="txtNrContribuinte" value="#{tribMunPreenchimentoIptuSpBBean.contribuinte.nrContribuinte}" Style="width:25% !important;" maxlength="11"/>                                                                                                           								    						
+            			</p:outputPanel>
+            		
+            			<p:outputPanel style="margin-bottom:25px;" styleclass="form-group">
+            				<h:outputText value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.ano.exercicio']}" />	
+							<p:inputText id="txtAnoExer" value="#{tribMunPreenchimentoIptuSpBBean.contribuinte.anoExercicio}" styleClass="form-control" maxlength="4"/>												
+            			</p:outputPanel>
+            		            		
+            			<p:outputPanel style="margin-bottom:25px;" styleclass="form-group">
+            				<h:outputText value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.numero.notificacao']}" />	
+							<p:inputText id="txtNrNotificacao" value="#{tribMunPreenchimentoIptuSpBBean.nrNotificacao}" styleClass="form-control" maxlength="2"/>
+            			</p:outputPanel>
+            			            			            			            			
+            		</p:outputPanel>  
+            		       		            		            		            																				            			            		                                   					                                                      		
+        		</p:outputPanel> 
+        		<p:outputPanel styleClass="row">
+            			<p:outputPanel styleClass="col-md-12">
+            				<p:separator/>
+            			</p:outputPanel>
+            	</p:outputPanel>  
+            	
+            	<p:outputPanel styleClass="row">
+            			
+            			<p:outputPanel id="div1" styleClass="col-md-6">
+							<p:selectBooleanCheckbox id="chkApelido" value="#{tribMunPreenchimentoIptuSpBBean.cadastrar}" style="margin-right:16px;">
+								<p:ajax process="formGeral" update="formGeral" listener="#{tribMunPreenchimentoIptuSpBBean.mostrarApelido}" />
+							</p:selectBooleanCheckbox>
+							<h:outputText value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.desejo.cadastrar']}" />
+						</p:outputPanel>
+						
+						<p:outputPanel id="div2" styleClass="col-md-6" rendered="#{tribMunPreenchimentoIptuSpBBean.exibirApelido}">										
+									
+							<p:outputPanel styleClass="form-group">
+								<h:outputText styleClass="control-label col-sm-2" style="margin-left:65px;" value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.apelido']}" />
+								<p:outputPanel styleClass="col-sm-6">
+									<p:inputText id="txtApelido" value="#{tribMunPreenchimentoIptuSpBBean.contribuinte.apelidoContribuinte}" styleClass="form-control" maxlength="20"/>
+								</p:outputPanel>
+								<p:graphicImage id="imgInfo" value="/images/u30.png" width="15px" height="18px"/>
+								<p:tooltip id="toolTipInfo" for="imgInfo"
+										   styleClass="associar-tooltip"
+										   value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.informe.aqui']}"
+										   myPosition="Right center" atPosition="left center" />  
+								</p:outputPanel>       
+							     				            				          			
+						</p:outputPanel>											
+				</p:outputPanel>
+            		            
+			</p:outputPanel>
+				
+				<p:outputPanel styleClass="row space-b">
+    				<p:outputPanel styleClass="col-md-12 text-right">
+       					<p:commandLink id="cmdLnkCancelar" styleClass="btn btn-default btn-cinza pull-left" action="#{tribMunPreenchimentoIptuSpBBean.cancelar}"  role="button">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.btn.cancelar']}</p:commandLink>
+       					<p:commandLink id="cmdLnkVoltar" styleClass="btn btn-default btn-cinza"  action="#{tribMunPreenchimentoIptuSpBBean.voltarPreenchimento}" role="button">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.btn.voltar']}</p:commandLink>
+       					<p:commandLink id="cmdLnkContinuar" styleClass="btn btn-default" action="#{tribMunPreenchimentoIptuSpBBean.continuarPreenchimento}" role="button">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.btn.continuar']}</p:commandLink>
+    				</p:outputPanel>
+				</p:outputPanel>				
+			</p:outputPanel>			
+		</p:outputPanel>      
+	</ui:define>
+</ui:composition> 

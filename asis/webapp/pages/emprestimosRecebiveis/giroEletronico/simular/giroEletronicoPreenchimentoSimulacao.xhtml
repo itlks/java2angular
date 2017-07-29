@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.label1']}</p>
+						<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.label2']}</p> </span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.title']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow space-b">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.disponivel']}"
+								styleClass="space" />
+							<span> <h:outputText value="#{creditoPessoalBBean.lblValorDisponivel}" />
+							</span>
+							<br />
+							<p:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.minimo']}"
+								styleClass="space" />
+							<span><h:outputText value="#{creditoPessoalBBean.lblValorMinimo}" /> </span>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.dados.simulacao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow space-b">
+					<p:remoteCommand name="esconderParcelas" action="#{creditoPessoalBBean.esconderParcelas}" update="@form" />
+					<p:remoteCommand name="esconderTblOutroPrazo" action="#{creditoPessoalBBean.esconderTblOutroPrazo}" update="@form" />
+					<p:remoteCommand name="limpaTxtOutroValor" action="#{creditoPessoalBBean.limpaTxtOutroValor}" />
+					<p:outputPanel id="pnlPreenchimento">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel value="Valor desejado:" styleClass="col-xs-12 no-padding" />
+								<p:outputPanel styleClass="table-responsive radio label100 col-xs-12 no-padding">
+									<h:selectOneRadio id="rdValor" value="#{creditoPessoalBBean.rdValor}" >
+										<p:ajax event="change" oncomplete="limpaTxtOutroValor(); esconderParcelas();" />
+										<f:selectItem itemLabel="R$ #{creditoPessoalBBean.lblValorDisponivel}" itemValue="valorDisp" />
+										<f:selectItem
+											itemLabel="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.dados.simulacao.outro']}"
+											itemValue="outroValor" />
+									</h:selectOneRadio>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2">
+								<p:outputPanel styleClass="form-group">
+									<p:inputText value="#{creditoPessoalBBean.txtOutroValor}" styleClass="form-control"
+										readonly="#{creditoPessoalBBean.rdValor eq 'valorDisp'}" maxlength="9" onclick="esconderParcelas();"
+										onkeypress="return blockNonNumbers(this, event, true, false)" onblur="maskMoney(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12 form-group">
+
+								<h:outputLabel styleClass="no-margin-bottom"
+									value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.escolha.dia.debito']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2" style="width:120px;">
+								<p:inputText value="#{creditoPessoalBBean.txtDiaDebito}" styleClass="form-control" maxlength="2"
+									onkeypress="if(!SomenteNumeros(event)){return false;};" onclick="esconderParcelas();" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2 ">
+								<p:commandLink styleClass="btn btn-default" style="margin-top:3px;"
+									actionListener="#{creditoPessoalBBean.pesquisarParcelas}" role="button" update="@form">#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.exibir']}</p:commandLink>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-12">
+								<span class="obs"><p>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.dias.vencimento']}</p></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="pnlParcelas" rendered="#{creditoPessoalBBean.exibePnlParcelas}">
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row radio total-label-radio space-b">
+							<p:selectOneRadio id="tpEscolhaParcela" value="#{creditoPessoalBBean.rdEscolhaParcela}">
+								<f:selectItem itemLabel="" itemValue="parcelas" />
+								<p:ajax event="change" listener="#{creditoPessoalBBean.exibeOutrosPrazos}" update="@form" />
+							</p:selectOneRadio>
+							<h:outputLabel styleClass="bold space-l"
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.parcelas']}" />
+						</p:outputPanel>
+						<p:outputPanel id="pnlParcelasTbl" rendered="#{creditoPessoalBBean.exibePnlParcelasTbl}">
+							<p:outputPanel styleClass="row space-b space-t">
+								<p:outputPanel styleClass="col-xs-12">
+									<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.escolha.numero.parcelas']}</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="table-responsive table table-striped">
+
+										<p:dataTable id="tblParcelas" value="#{creditoPessoalBBean.listaParcelas}" var="linha"
+											rowKey="#{linha.numParcelas}"
+											emptyMessage="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.prazos.nao.disponiveis']}"
+											selection="#{creditoPessoalBBean.parcelaSelec}">
+
+											<p:column selectionMode="single" />
+											<p:ajax event="rowSelectRadio" update="@form" listener="#{creditoPessoalBBean.escondePnlOutrosPrazos}" />
+											<p:column width="80%">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.numero.parcelas']}" />
+												</f:facet>
+												<h:outputText value="#{linha.numParcelas}" />
+											</p:column>
+											<p:column styleClass="text-right">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.parcela']}" />
+												</f:facet>
+												<h:outputText value="#{linha.valorParcela}" />
+											</p:column>
+
+											<p:column styleClass="">
+												<p:rowToggler />
+											</p:column>
+
+											<p:rowExpansion id="detalheParcela">
+												<p:outputLabel
+													value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.desejado']}"
+													styleClass="space margin-left-48" />
+												<h:outputText value="#{linha.valorDesejado}" styleClass="space-rr">
+													<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+												</h:outputText>
+												<p:outputLabel
+													value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.taxa.mes.ano']}"
+													styleClass="space " />
+												<h:outputText value="#{linha.taxaMesAno}" styleClass="space-rr" />
+												<p:outputLabel
+													value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.data.primeiro.venc']}"
+													styleClass="space" />
+												<h:outputText value="#{linha.dtPrimVcto}" styleClass="space-rr" />
+											</p:rowExpansion>
+										</p:dataTable>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row radio total-label-radio space-t">
+							<p:selectOneRadio id="tpEscolhaOutroPrazo" value="#{creditoPessoalBBean.rdEscolhaParcela}">
+								<f:selectItem itemLabel="" itemValue="outroPrazo" />
+								<p:ajax event="change" listener="#{creditoPessoalBBean.exibeOutrosPrazos}" update="@form" />
+							</p:selectOneRadio>
+							<h:outputLabel styleClass="bold space-l"
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.outro.prazo']}"></h:outputLabel>
+						</p:outputPanel>
+						<p:outputPanel id="pnlOutroPrazoTbl" rendered="#{creditoPessoalBBean.exibePnlOutroPrazo}" styleClass="space-t">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel
+												value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.solicitado']}"
+												styleClass="space" />
+											<h:outputText value="R$ #{creditoPessoalBBean.lblValorDesejado}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.prazo']}"
+												styleClass="space" />
+											<h:outputText value="de #{creditoPessoalBBean.lblQtdPrazoMin} a #{creditoPessoalBBean.lblQtdPrazoMax} meses" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12 form-group space-t">
+
+									<h:outputLabel styleClass="no-margin-bottom"
+										value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.digite.numero.parcelas']}" />
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2" style="width:120px;">
+									<p:inputText value="#{creditoPessoalBBean.txtOutroPrazo}" styleClass="form-control" maxlength="2"
+										onkeypress="return blockNonNumbers(this, event, true, false)" onclick="esconderTblOutroPrazo();" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 ">
+									<p:commandLink styleClass="btn btn-default" style="margin-top:3px;"
+										actionListener="#{creditoPessoalBBean.pesquisarOutroPrazo}" role="button" update="@form">#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.exibir']}</p:commandLink>
+								</p:outputPanel>
+
+
+							</p:outputPanel>
+
+							<p:outputPanel rendered="#{creditoPessoalBBean.exibeTblOutroPrazo}">
+								<p:outputPanel styleClass="row space-b space-t">
+									<p:outputPanel styleClass="col-xs-12">
+										<p>#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.defina.condicoes.simulacao']}</p>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel styleClass="table-responsive table table-striped">
+
+											<p:dataTable id="tblOutroPrazo" value="#{creditoPessoalBBean.listaOutroPrazo}" var="linha"
+												rowKey="#{linha.numParcelas}"
+												emptyMessage="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.prazos.nao.disponiveis']}"
+												selection="#{creditoPessoalBBean.parcelaSelec}">
+
+												<p:ajax event="rowSelectRadio" update="@form" listener="#{creditoPessoalBBean.escondePnlParcelasTbl}" />
+												<p:column selectionMode="single" />
+
+												<p:column width="80%">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.numero.parcelas']}" />
+													</f:facet>
+													<h:outputText value="#{linha.numParcelas}" />
+												</p:column>
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.parcela']}" />
+													</f:facet>
+													<h:outputText value="#{linha.valorParcela}">
+														<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+													</h:outputText>
+												</p:column>
+
+												<p:column>
+													<p:rowToggler />
+												</p:column>
+
+												<p:rowExpansion id="detalheParcelaOutroPrazo">
+
+													<p:outputLabel
+														value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.valor.desejado']}"
+														styleClass="space margin-left-48" />
+													<h:outputText value="#{linha.valorDesejado}" styleClass="space-rr">
+														<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+													</h:outputText>
+													<p:outputLabel
+														value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.taxa.mes.ano']}"
+														styleClass="space " />
+													<h:outputText value="#{linha.taxaMesAno}" styleClass="space-rr" />
+													<p:outputLabel
+														value="#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.preenchimento.data.primeiro.venc']}"
+														styleClass="space" />
+													<h:outputText value="#{linha.dtPrimVcto}" styleClass="space-rr" />
+												</p:rowExpansion>
+											</p:dataTable>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza no-visible" action="#{creditoPessoalBBean.voltar}"
+					role="button">#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.voltar']}</p:commandLink>
+				<p:blockUI block="btnContinuarSimulacao" trigger="btnContinuarSimulacao" />
+				<p:commandLink styleClass="btn btn-default" action="#{creditoPessoalBBean.continuar}" role="button"
+					id="btnContinuarSimulacao" rendered="#{creditoPessoalBBean.exibePnlParcelas}">#{msg['pages.emprestimosRecebiveis.giroEletronico.simular.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

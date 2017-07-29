@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+      <f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg" />
+
+      <h:head>
+            <link type="text/css" rel="stylesheet"
+                  href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+            <link type="text/css" rel="stylesheet"
+                  href="#{facesContext.externalContext.requestContextPath}/css/styleNovo.css" />
+            <link type="text/css" rel="stylesheet"
+                  href="#{facesContext.externalContext.requestContextPath}/css/pdf-style.css" />
+            <link type="text/css" rel="stylesheet"
+                  href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css" />
+            <title>#{ msg['page.home.label.titulo'] }</title>
+      </h:head>
+
+      <h:body>
+
+ 		<f:event type="preRenderView" listener="#{consultarAntecipacaoBBean.acessoDiretoResumo()}" />
+ 
+            <div class="col-lg-12">
+                  <div class="row tamanhoMinimoPDF">
+                        <div class="col-xs-3 img-content">
+                              <img
+                                    src="#{facesContext.externalContext.requestContextPath}/images/santander-u29.png" />
+                        </div>
+                        <div class="titulo text-right col-xs-9">
+                              <p>
+                                    <span><h:outputText id="tituloSistema"
+                                               value="#{ msg['page.home.label.titulo.sistema'] }" /></span>
+                              </p>
+                        </div>
+                  </div>
+
+                  <hr
+                        class="ui-separator ui-state-default ui-corner-all separator tamanhoMinimoPDF" />
+
+                  <div class="row tamanhoMinimoPDF">
+                        <div class="col-xs-6 text-left name">#{loginBBean.session.nomeTitularConta}</div>
+                        <div class="col-xs-6 text-right info-account">
+                              <div>
+                                    <strong><h:outputText id="agencia"
+                                               value="#{ msg['page.home.label.agencia'] }" />: </strong>#{loginBBean.session.agencia}
+                              </div>
+                              <div>
+                                    <strong><h:outputText id="conta"
+                                               value="#{ msg['page.home.label.conta'] }" />: </strong>#{loginBBean.session.conta}
+                              </div>
+                        </div>
+                  </div>
+
+                  <hr
+                        class="ui-separator ui-state-default ui-corner-all separator tamanhoMinimoPDF" />
+
+                  <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-12 ">
+                              <p:outputPanel styleClass="titulo-painel">
+                                    <h4>#{msg['page.adquirencia.resumo.titulo']}</h4>
+                              </p:outputPanel>
+                        </p:outputPanel>
+                  </p:outputPanel>
+
+                  <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-12">
+                              <p:outputPanel styleClass="box-shadow no-margin-bottom">
+                              
+                                   <p:outputPanel styleClass="row space-b ">
+                                         <p:outputPanel styleClass="col-xs-12">
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.estabelecimentoUm']}" />
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+                                    <p:outputPanel styleClass="row space-b space-t">
+                                         <p:outputPanel styleClass="col-xs-4">
+                                         
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.nome']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.consultaDetalheOperacoesVisa.strNomeCliente}" />
+                                               <br />
+
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.detalhe.cnpj']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheNumeroDocumento}" />
+                                               <br />
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.agencia']}" />
+                                               <h:outputText
+                                                     value="#{consultarAntecipacaoBBean.dto.detalheNumeroAgencia}" />
+                                               <br />
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.conta']}" />
+                                               <h:outputText
+                                                     value="#{consultarAntecipacaoBBean.dto.detalheNumeroConta}" />
+                                                     
+                                         </p:outputPanel>
+
+                                         <p:outputPanel styleClass="col-xs-8">
+                                               <p:graphicImage value="/images/adquirencia.png" alt="Imagem"
+                                                     styleClass="pull-left " />
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+                                    <p:outputPanel styleClass="row space-b ">
+                                         <p:outputPanel styleClass="col-xs-12">
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.dadosOperacao']}" />
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+
+
+
+                                    <p:outputPanel styleClass="row space-b">
+                                         <p:outputPanel styleClass="col-xs-4">
+                                         
+                                               <h:outputLabel styleClass="space bold" 
+                                               value="#{msg['page.adquirencia.resumo.numeroOperacao']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheNumeroOperacao}" />
+                                               <br />
+                                         
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.dataOperacao']}" />
+                                                     <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheDataOperacao}" />
+                                               <br />
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.taxaAntecipacaoPorCento']}" />
+                                                     <h:outputText  value="#{consultarAntecipacaoBBean.dto.detalheTaxaAntecipacaoAM}" />
+                                               <br />
+
+                                         </p:outputPanel>
+
+
+                                         <p:outputPanel styleClass="col-xs-8">
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.valorBruto']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheValorBruto}" />
+                                               <br />
+
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.taxaAntecipacaoReais']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheTaxaAntecipacaoRS}" />
+                                               <br />
+                                               
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.tarifaOperacao']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheValorTarifa}" />
+                                               <br />
+                                               
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.valorLiquido']}" />
+                                               <h:outputText value="#{consultarAntecipacaoBBean.dto.detalheValorLiquido}" />
+                                               <br />
+
+
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+
+                                    <p:outputPanel styleClass="row space-b ">
+                                         <p:outputPanel styleClass="col-xs-12">
+
+                                               <h:outputLabel styleClass="space bold"
+                                                     value="#{msg['page.adquirencia.resumo.recebiveisAntecipados']}" />
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+
+
+
+                                    <p:outputPanel styleClass="row space-t">
+                                         <p:outputPanel styleClass="col-xs-12">
+                                               <p:outputPanel
+                                                     styleClass="table-responsive table table-striped fakeFooter">
+                                                     <p:dataTable id="dtAdquirencia" emptyMessage=""
+                                                           value="#{consultarAntecipacaoBBean.listaResumos}"
+                                                           var="resumoRecebimento">
+                                                           
+                                                           <p:column headerText="#{msg['page.adquirencia.resumo.dataCredito']}"></p:column>
+                                                           <p:column headerText="#{msg['page.adquirencia.resumo.bandeira']}"></p:column>
+                                                           <p:column headerText="#{msg['page.adquirencia.resumo.estabelecimento']}"></p:column>
+                                                           <p:column headerText="#{msg['page.adquirencia.resumo.valorReais']}" styleClass="text-right"></p:column>
+
+                                                           <p:subTable var="resumo" value="#{resumoRecebimento.listaResumo}">
+
+                                                                 <p:column>
+                                                                       <h:outputText value="#{resumo.dtVencTitu}" />
+                                                                 </p:column>
+                                                                 <p:column>
+                                                                       <h:outputText value="#{resumo.codBandeira}" />
+                                                                 </p:column>
+                                                                 <p:column>
+                                                                       <h:outputText value="#{resumo.nrEstabelecimento}" />
+                                                                 </p:column>
+                                                                 <p:column styleClass="text-right">
+                                                                       <h:outputText value="#{resumo.valorTituloAtual}"  />
+                                                                 </p:column>
+                                                                 <p:columnGroup type="footer">
+                                                                       <p:row>
+                                                                             <p:column footerText="#{msg['page.adquirencia.consulta.subTotal']}"/>
+                                                                             <p:column footerText=""/>
+                                                                             <p:column footerText=""/>
+                                                                             <p:column footerText="#{resumoRecebimento.subTotalFormatado}" styleClass="text-right"/>
+                                                                       </p:row>
+                                                                 </p:columnGroup>
+                                                           </p:subTable>
+                                                     </p:dataTable>
+
+                                                     <p:outputPanel styleClass="col-xs-12 fakeDiv">
+                                                           <p:outputPanel
+                                                                 style="width:80%; padding-left: 8px; text-align:left"
+                                                                 styleClass="first">
+                                                                 <span>#{msg['page.adquirencia.resumo.valorTotalReais']}</span>
+                                                           </p:outputPanel>
+                                                           <p:outputPanel styleClass="second">
+                                                                 <h:outputText value="#{consultarAntecipacaoBBean.dto.valorTotalDetalheOperacao}" converter="valorMonetarioConverter"/>
+                                                           </p:outputPanel>
+
+
+                                                     </p:outputPanel>
+
+
+                                               </p:outputPanel>
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+                                    <p:outputPanel styleClass="row">
+                                         <p:outputPanel styleClass="col-xs-12">
+                                               <p:outputPanel styleClass="row space-t">
+                                                     <p:outputPanel styleClass="col-xs-6 ">
+                                                           <h:outputLabel styleClass="space bold"
+                                                                 value="#{msg['page.adquirencia.resumo.getnetAdquirenciaServicos']}" />
+                                                     </p:outputPanel>
+                                               </p:outputPanel>
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+
+                                    <p:outputPanel styleClass="row space-t">
+                                         <p:outputPanel styleClass="col-xs-12">
+                                               <p>
+                                                     <h:outputText value="#{msg['page.adquirencia.resumo.atencao']}"></h:outputText>
+                                               </p>
+                                               <p>
+                                                     <h:outputText
+                                                           value="#{msg['page.adquirencia.resumo.valorInferiorPrevisto']}"></h:outputText>
+                                               </p>
+
+                                               <p class="space-t">
+                                                     <h:outputText
+                                                           value="#{msg['page.adquirencia.resumo.contratoDeCredenciamento']}"></h:outputText>
+                                               </p>
+
+                                               <p class="space-t">
+                                                     <h:outputText styleClass="space" value="#{msg['page.adquirencia.resumo.pontoUmPt1']}"></h:outputText>
+                                                     <h:outputText value="#{msg['page.adquirencia.resumo.pontoUmPt2']}"></h:outputText>
+                                               </p>
+
+                                               <p>
+                                                     <h:outputText
+                                                           value="#{msg['page.adquirencia.resumo.pontoDois']}"></h:outputText>
+                                               </p>
+
+                                               <p>
+                                                     <h:outputText
+                                                           value="#{msg['page.adquirencia.resumo.pontoTres']}" />
+                                               </p>
+
+                                               <p>
+                                                     <h:outputText
+                                                           value="#{msg['page.adquirencia.resumo.pontoQuatro']}" />
+                                               </p>
+
+                                               <p>
+                                                     <h:outputText
+                                                           value="#{msg['page.adquirencia.resumo.pontoCinco']}" />
+                                               </p>
+
+                                               <p:separator styleClass="space-t"></p:separator>
+
+                                         </p:outputPanel>
+                                    </p:outputPanel>
+
+
+
+
+
+                                    <p:outputPanel styleClass="row space-t">
+                                         <p:outputPanel styleClass="col-xs-6">
+                                               <h:outputLabel
+                                                     value="#{msg['page.adquirencia.resumo.autenticacao']}"
+                                                     styleClass="space bold"></h:outputLabel>
+                                               <h:outputText
+                                                     value="#{consultarAntecipacaoBBean.dto.autenticacaoBancaria}" />
+                                         </p:outputPanel>
+
+
+                                    </p:outputPanel>
+                                    <p:separator></p:separator>
+
+
+                                    <ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+                              </p:outputPanel>
+                        </p:outputPanel>
+                  </p:outputPanel>
+
+                  <div class="row space-b">
+                        <div class="col-xs-12 text-right print-btn-bottom">
+                              <h:commandButton value="Imprimir" onclick="window.print();"
+                                    styleClass="no-print btn btn-default pull-right" />
+                        </div>
+                  </div>
+            </div>
+
+      </h:body>
+</f:view>
+</html>

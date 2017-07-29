@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12 no-print no-visible">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['page.segunda.via.comprovantes.contas.consulta.paragrafo1']}</p>
+						<p>#{msg['page.segunda.via.comprovantes.contas.consulta.paragrafo2']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.segunda.via.comprovantes.contas.consulta.subtitulo1']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-md-8">
+							<h5>
+								<strong>#{msg['page.segunda.via.comprovantes.contas.consulta.subtitulo2']}</strong>
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-8">
+							<strong>#{msg['page.segunda.via.comprovantes.contas.consulta.tipoconsulta']}
+							</strong>
+							<span>#{msg['page.segunda.via.comprovantes.contas.titulo']}</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4 text-right">
+							<strong>#{msg['page.segunda.via.comprovantes.contas.consulta.periodo']}
+							</strong>
+                            #{msg['page.segunda.via.comprovantes.contas.consulta.periodo.de']}
+                            <h:outputLabel for=""
+								value="#{segundaViaComprovanteConsultarBBean.periodoInicialFormat}" /> 
+                            #{msg['page.segunda.via.comprovantes.contas.consulta.periodo.ate']}
+                            <h:outputLabel for=""
+								value="#{segundaViaComprovanteConsultarBBean.periodoFinalFormat}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="row text-right">
+								<ui:include src="/commons/pdf/pdfButtonsSegVia.xhtml">
+									<ui:param name="excel" value="segViaComprContasTable" />
+									<ui:param name="imprimir" value="false" />
+									<ui:param name="enviarEmail" value="false" />
+									<ui:param name="exibirShadow" value="false" />
+								</ui:include>
+							</p:outputPanel>
+							<br />
+							<p:outputPanel
+								styleClass="table-responsive table table-striped table-link">
+								<p:dataTable id="segViaComprContasTable"
+											 selection="#{segundaViaComprovanteContasBBean.listaSegViaCommpContasSelecionados}"
+											 value="#{segundaViaComprovanteContasBBean.listaSegViaCommpContas}"
+											 emptyMessage="#{msg['page.segunda.via.comprovantes.cartaocredito.tabela.vazia.msg']}"
+											 var="linha" 
+											 rowKey="#{linha}">
+											 
+								<p:column selectionMode="multiple" styleClass="no-visible" exportable="false" />
+
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.contas.consulta.header.data']}" />
+										</f:facet>
+										<h:outputText value="#{linha.dataPagamento}" />
+									</p:column>
+
+									<p:column styleClass="col-md-3">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.segunda.via.comprovantes.contas.consulta.header.descricao']}" />
+										</f:facet>
+										<h:outputText value="#{linha.empresa}" />
+									</p:column>
+									
+									<p:column styleClass="col-xs-3 text-right">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.segunda.via.comprovantes.contas.consulta.header.valor']}" />
+										</f:facet>
+										<h:outputText value="#{linha.valorPago}">
+											<f:convertNumber type="currency" currencySymbol="" />
+										</h:outputText>
+									</p:column>
+
+									<p:column styleClass="col-xs-3"
+										style="padding-left: 45px!important;">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.segunda.via.comprovantes.contas.consulta.header.canal']}" />
+										</f:facet>
+										<h:outputText value="#{linha.canalPagamentoCaseSensitive}" />
+									</p:column>
+								</p:dataTable>
+
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-t">
+				<p:outputPanel styleClass="col-md-12 text-right no-print no-visible">
+					<p:commandLink styleClass="btn btn-default btn-cinza"
+						action="#{segundaViaComprovanteContasBBean.voltarSegViaComprovantePesquisa}"
+						role="button" value="#{msg['page.btn.voltar']}">
+               </p:commandLink>
+
+					<p:commandLink styleClass="btn btn-default"
+						action="#{segundaViaComprovanteContasBBean.gerarMultiplosPDFs}"
+						role="button" value="#{msg['page.btn.visualizar.comprovantes']}">
+					</p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+	</ui:define>
+</ui:composition>
+

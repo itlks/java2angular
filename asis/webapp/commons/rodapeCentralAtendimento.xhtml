@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+				<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-8">
+												<p><h:outputText
+													value="#{msg['page.componente.rodape.informacoes.contato.dialog.central.atendimento']}"
+													styleClass="bold" /></p>
+			
+													<p><h:outputText
+														value="#{msg['page.componente.centralAtendimento.linha2']}" styleClass="space" /></p>
+								
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-2">
+												<p><h:outputText
+													value="#{msg['page.componente.rodape.informacoes.sac']}"
+													styleClass="bold" />
+												</p><p>
+												<h:outputText
+													value="#{msg['page.componente.rodape.informacoes.sac.numero']}" /></p>
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-2">
+												<p><h:outputText
+													value="#{msg['page.componente.rodape.informacoes.ouvidoria']}"
+													styleClass="bold" />
+												</p><p>
+												<h:outputText
+													value="#{msg['page.componente.rodape.informacoes.ouvidoria.numero']}" /></p>
+
+											</p:outputPanel>
+										</p:outputPanel>
+
+	
+
+</ui:composition>

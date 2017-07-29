@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentComprovante">
+	
+		<f:event type="preRenderView"
+			listener="#{qrTokenCadastroBBean.acessoDiretoComprovante()}" />
+		<f:event type="postValidate"
+			listener="#{qrTokenCadastroBBean.fechaAcessoDireto()}" />
+			
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.administrativo.qrToken.cadastrar.comprovante']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow ">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 bold">
+							<p>#{msg['pages.administrativo.qrToken.cadastrar.cadastramento']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-3">
+							<span><p:outputLabel styleClass="bold space b"
+									value="#{msg['pages.administrativo.qrToken.cadastrar.CPF']}" /><br /></span>
+							<span><p:outputLabel styleClass="bold" rendered="true"
+									value="#{msg['pages.administrativo.qrToken.cadastrar.NomeDoApare']}" /><br /></span>
+							<p:outputLabel styleClass="bold"
+								value="#{msg['pages.administrativo.qrToken.cadastrar.metodoHabilitacao']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-3">
+							<span><p:outputLabel
+									value="#{qrTokenCadastroBBean.session.cpfUsuario}"
+									converter="converterCpfCnpj" /><br /></span>
+							<span><p:outputLabel
+									value="#{qrTokenCadastroBBean.dto.nomeAparelho}" id="celular" /><br /></span>
+							<p:outputLabel
+								value="#{qrTokenCadastroBBean.dto.metodoDeHabilitacaoEscolhido}"
+								id="metodoHabilitacao" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow" rendered="#{qrTokenCadastroBBean.dto.metodoDeHabilitacao eq 'AG'}">
+
+
+					<p:outputPanel id="novotermo"
+						style="border:1px solid #c0c0c0;margin-top:5px;margin-bottom:20px;padding:10px;">
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12 text-center">
+								Carta de Autorização
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputLabel value="Autorizamos o portador desta carta a retirar na agência bancária do Santander o código para habilitação do QRCode para:" />
+							</p:outputPanel>
+						</p:outputPanel>
+												
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12 space-b">
+								<p:outputLabel value="CPF:" styleClass="space" /> <p:outputLabel value="#{qrTokenCadastroBBean.session.cpfUsuario}" converter="converterCpfCnpj" styleClass="space" /><br />
+								<p:outputLabel value="Agência:" styleClass="space" />#{qrTokenCadastroBBean.session.agencia} <br />
+								<p:outputLabel value="Conta:" styleClass="space" />#{qrTokenCadastroBBean.session.conta}<br />
+								<p:outputLabel value="Nome do aparelho registrado no cadastramento:" styleClass="space" />#{qrTokenCadastroBBean.dto.nomeAparelho}<br />
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						<p:spacer></p:spacer>
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12 space-b">
+								_________________________________, #{qrTokenCadastroBBean.dto.dataComprovante}.
+							</p:outputPanel>
+						</p:outputPanel>
+									
+						
+					</p:outputPanel>	
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

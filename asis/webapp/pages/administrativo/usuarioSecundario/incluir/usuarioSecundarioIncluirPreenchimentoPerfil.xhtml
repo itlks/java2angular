@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<ui:define name="content">
+
+		<p:remoteCommand autoRun="true"
+			name="verificaExibicaoMensagemErroTelaConfirmacao"
+			action="#{usuarioSecundarioIncluirBBean.verificaExibicaoMensagemErroTelaConfirmacao(false)}" />
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information flex-align-v box-shadow">
+					<i class="fa fa-exclamation-circle space-rr"></i>
+					<span><h:outputText styleClass="row"
+							value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.alerta.linha1']}" />
+						<h:outputText styleClass="row"
+							value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.alerta.linha2']}" />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.administrativo.usuarioSecundarioIncluir.wizard2']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="space-b">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecNomeCompleto" styleClass="space"
+									value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.nome']}" />
+								<h:outputText id="usuSecNomeCompleto"
+									value="#{usuarioSecundarioIncluirBBean.dto.nomeUsuario}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="cpf" styleClass="space"
+									value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.cpf']}" />
+								<h:outputText id="cpf"
+									value="#{usuarioSecundarioIncluirBBean.dto.nrCpf}"
+									converter="converterCpfCnpj" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecArea" styleClass="space"
+									value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.area']}" />
+								<h:outputText id="usuSecArea"
+									value="#{usuarioSecundarioIncluirBBean.dto.nomeArea}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecAcesso" styleClass="space"
+									value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.acesso']}" />
+								<h:outputText id="usuSecAcesso"
+									value="#{usuarioSecundarioIncluirBBean.dto.nomeLogon}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecTelFixo" styleClass="space"
+									value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.contato']}" />
+								<h:outputText id="usuSecTelFixo"
+									value="#{usuarioSecundarioIncluirBBean.dto.nrTelefone}"
+									converter="converterCelularTelefone" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row"
+							rendered="#{usuarioSecundarioIncluirBBean.exibeCelular}">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecTelCel" styleClass="space"
+									value="#{msg['page.administrativo.usuarioSecundario.incluir.telefoneCelular']}" />
+								<h:outputText id="usuSecTelCel"
+									value="#{usuarioSecundarioIncluirBBean.dto.nrCelular}"
+									converter="converterCelularTelefone" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="acessoMobile" styleClass="space"
+									value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.mobile.banking']}" />
+								<h:outputText id="acessoMobile"
+									value="#{usuarioSecundarioIncluirBBean.dto.inAcesMobl == msg['pages.administrativo.usuarioSecundarioAlterar.table.habilitado'] ?  msg['padrao.sim'] : msg['padrao.nao']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row update-class" id="inclusaoPerfil_Autorizacao">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:panelGrid
+								styleClass="table-perfil-autorizacao grid-header no-border">
+								<f:facet name="header">
+									<p:row>
+										<p:column styleClass="col-xs-4" />
+										<p:column styleClass="col-xs-4">
+											<p:commandLink id="idCriarPerfil"
+												oncomplete="PF('dialogTelaInterna').show();"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.link.acesso']}"
+												action="#{usuarioSecundarioIncluirBBean.incluirPerfilAcesso}" />
+
+										</p:column>
+										<p:column styleClass="col-xs-4">
+											<p:commandLink id="idCriarPerfilAutorizacao"
+												rendered="#{usuarioSecundarioIncluirBBean.exibeAssin}"
+												oncomplete="PF('dialogTelaInterna').show();"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.link.autorizacao']}"
+												action="#{usuarioSecundarioIncluirBBean.incluirPerfilAutorizacao}" />
+										</p:column>
+									</p:row>
+
+									<p:row>
+										<p:column styleClass="col-xs-4">
+											<p:outputLabel
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.label.agencia']}" />
+										</p:column>
+
+										<p:column styleClass="col-xs-4">
+											<p:outputLabel
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.label.perfil.acesso']}"
+												styleClass="space" />
+
+											<p:graphicImage id="tooltipAcesso" value="/images/icon-i.png"
+												styleClass="tooptip-usuario acesso" />
+
+											<pe:tooltip for="tooltipAcesso" styleClass="associar-tooltip"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioAlteracaoPerfil.table.tooltip.perfil.acesso']}"
+												myPosition="left center" atPosition="right center" />
+										</p:column>
+
+										<p:column styleClass="col-xs-4">
+
+											<p:outputLabel
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.label.perfil.autorizacao']}"
+												styleClass="space" />
+
+											<p:graphicImage id="tooltipAutorizacao"
+												value="/images/icon-i.png"
+												styleClass="tooptip-usuario autorizacao" />
+											<pe:tooltip for="tooltipAutorizacao"
+												styleClass="associar-tooltip"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.tooltip.perfil.autorizacao']}"
+												myPosition="left center" atPosition="right center" />
+										</p:column>
+									</p:row>
+
+									<p:row>
+										<p:column styleClass="col-xs-4">
+											<p:selectBooleanCheckbox styleClass="space"
+												value="#{usuarioSecundarioIncluirBBean.habilitarTodos}">
+												<p:ajax update="@(.update-class)"
+													listener="#{usuarioSecundarioIncluirBBean.habilitaDesabilitaParaTodasContas}" />
+											</p:selectBooleanCheckbox>
+											<h:outputText
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.aplicar.todos']}" />
+										</p:column>
+										<p:column styleClass="col-xs-4">
+											<h:selectOneMenu
+												value="#{usuarioSecundarioIncluirBBean.todosPerfilAcessoSelecionado}"
+												disabled="#{usuarioSecundarioIncluirBBean.habilitarTodos == false}">
+
+												<p:ajax update="@(.update-class)"
+													listener="#{usuarioSecundarioIncluirBBean.definirPerfilAcessoTodos}" />
+
+												<f:selectItem
+													itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+													itemValue="0" noSelectionOption="true" />
+
+												<f:selectItems itemLabel="#{perfil.nomePerfilAcesso}"
+													itemValue="#{perfil.numeroSeqPerfilAcessoSec}" var="perfil"
+													value="#{usuarioSecundarioIncluirBBean.listaPerfisAcessoContrato}" />
+											</h:selectOneMenu>
+										</p:column>
+										<p:column styleClass="col-xs-4">
+											<h:selectOneMenu
+												value="#{usuarioSecundarioIncluirBBean.todosPerfilAutorizacaoSelecionado}"
+												disabled="#{usuarioSecundarioIncluirBBean.habilitarTodos == false}">
+
+												<p:ajax update="@(.update-class)"
+													listener="#{usuarioSecundarioIncluirBBean.definirPerfilAutorizacaoTodos}" />
+
+												<f:selectItem
+													itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+													itemValue="0" noSelectionOption="true" />
+
+												<f:selectItems itemLabel="#{perfil.numPerfilAcesso}"
+													itemValue="#{perfil.numSequPerfilAutorizacaoSec}"
+													var="perfil"
+													value="#{usuarioSecundarioIncluirBBean.listaPerfisAutorizacaoContrato}" />
+											</h:selectOneMenu>
+										</p:column>
+									</p:row>
+
+								</f:facet>
+							</p:panelGrid>
+
+							<p:outputPanel styleClass="update-class table-no-header">
+
+								<p:dataTable id="idTable2"
+									tableStyleClass="table-td-equals table-striped"
+									value="#{usuarioSecundarioIncluirBBean.dtoPreenchimentoPerfil}"
+									var="usuario">
+									<p:column styleClass="col-xs-4">
+										<h:outputText value="#{usuario.agencia}" styleClass="space" />
+										<h:outputText value="#{usuario.numeroConta}" />
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:selectOneMenu value="#{usuario.perfilAcesso}" id="idPerfil"
+											disabled="#{usuarioSecundarioIncluirBBean.habilitarTodos}">
+
+											<f:selectItem
+												itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+												itemValue="0" noSelectionOption="true" />
+
+											<f:selectItems itemLabel="#{perfil.nomePerfilAcesso}"
+												itemValue="#{perfil.numeroSeqPerfilAcessoSec}" var="perfil"
+												value="#{usuarioSecundarioIncluirBBean.listaPerfisAcessoContrato}" />
+
+										</h:selectOneMenu>
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:selectOneMenu id="idAutorizacao"
+											value="#{usuario.perfilAutorizacao}"
+											disabled="#{usuarioSecundarioIncluirBBean.habilitarTodos}">
+											<f:selectItem
+												itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+												itemValue="0" noSelectionOption="true" />
+
+											<f:selectItems itemLabel="#{perfilAuto.numPerfilAcesso}"
+												itemValue="#{perfilAuto.numSequPerfilAutorizacaoSec}"
+												var="perfilAuto"
+												value="#{usuarioSecundarioIncluirBBean.listaPerfisAutorizacaoContrato}" />
+										</h:selectOneMenu>
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton id="commandVoltar" role="button"
+					action="#{usuarioSecundarioIncluirBBean.voltarParaPreenchimento}"
+					styleClass="btn btn-default btn-secundario"
+					value="#{msg['page.administrativo.usuarioSecundario.incluir.btn.voltar']}" />
+
+
+				<p:blockUI block="commandContinuar" trigger="commandContinuar" />
+				<p:commandButton id="commandContinuar" styleClass="btn btn-default"
+					action="#{usuarioSecundarioIncluirBBean.confirmarPreenchimentoPerfil}"
+					role="button"
+					value="#{msg['page.administrativo.usuarioSecundario.incluir.btn.continuar']}" />
+				<p:defaultCommand target="commandContinuar" />
+
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+
+			<c:if test="#{wizardDialogBBean.numeroPagina eq '99'}">
+				<ui:include
+					src="/pages/mensagem/mensagemTelaErroDialogGenerico.xhtml" />
+			</c:if>
+
+			<c:if test="#{wizardDialogBBean.numeroPagina eq '999'}">
+				<ui:include
+					src="/pages/mensagem/mensagemAssinaturaTelaErroDialogGenerico.xhtml" />
+			</c:if>
+
+			<ui:include src="/pages/administrativo/usuarioSecundario/incluir/perfilAcesso/perfilAcessoIncluirNavegacaoDialog.xhtml" />
+
+			<c:if
+				test="#{wizardDialogBBean.fluxoDialog eq 'usuarioSecundarioIncluirPerfilAutorizacao'}">
+				<c:if test="#{wizardDialogBBean.numeroPagina eq '1'}">
+					<ui:include
+						src="/pages/administrativo/usuarioSecundario/incluir/perfilAutorizacao/perfilAutorizacoesInclusaoDialog.xhtml" />
+				</c:if>
+
+				<c:if test="#{wizardDialogBBean.numeroPagina eq '2'}">
+					<ui:include
+						src="/pages/administrativo/usuarioSecundario/incluir/perfilAutorizacao/perfilAutorizacoesInclusaoFiltroDialog.xhtml" />
+				</c:if>
+
+				<c:if test="#{wizardDialogBBean.numeroPagina eq '3'}">
+					<ui:include
+						src="/pages/administrativo/usuarioSecundario/incluir/perfilAutorizacao/perfilAutorizacoesInclusaoConfirmacaoDialog.xhtml" />
+				</c:if>
+			</c:if>
+
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

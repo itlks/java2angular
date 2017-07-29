@@ -1,0 +1,104 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set var="compQtdeItens" value="${fn:length(compHisParts) - 1}" />
+	<c:set var="compCodigoBarra01" value="${fn:substring(compHisParts[0],0,5)}" />
+	<c:set var="compCodigoBarra02" value="${fn:substring(compHisParts[0],5,10)}" />
+	<c:set var="compCodigoBarra03" value="${fn:substring(compHisParts[0],10,15)}" />
+	<c:set var="compCodigoBarra04" value="${fn:substring(compHisParts[0],15,21)}" />
+	<c:set var="compCodigoBarra05" value="${fn:substring(compHisParts[0],21,26)}" />
+	<c:set var="compCodigoBarra06" value="${fn:substring(compHisParts[0],26,32)}" />
+	<c:set var="compCodigoBarra07" value="${fn:substring(compHisParts[0],32,33)}" />
+	<c:set var="compCodigoBarra08" value="${fn:substring(compHisParts[0],33,47)}" />
+	<c:set var="compBcoHlp" value="${fn:substring(compHisParts[0],0,3)}" />
+	<c:set var="compBcoReal" value="${compBcoHlp eq '356' or compBcoHlp eq '347'}" />
+	<c:set var="compVerifyBenefPagd" value="${fn:trim(compHisParts[6])}" />
+	
+	 <p:outputPanel styleClass="row space-b" id="idExternoTitulos_#{posicaoLista}">		
+        <p:outputPanel rendered="#{compQtdeItens >= 12}" id="idQtdeItensTitulos_#{posicaoLista}">
+			<c:set var="compCartao" value="${compHisParts[12].trim()}" />
+			
+			<p:outputPanel styleClass="col-xs-12" id="idDadosTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosTitulosLbl_#{posicaoLista}"/>
+			</p:outputPanel>
+		
+			<p:outputPanel styleClass="col-xs-12" id="idFormaPagamentoTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.formaPagamento']}" id="idFormaPagamentoLblTitulos_#{posicaoLista}"/>
+			  
+				<c:choose>
+					<c:when test="#{not empty compCartao}">
+						<c:set var="compCartaoInibido" value="XXXX.XXXX.XXXX.${fn:substring(compCartao,12,16)}" />
+						
+						<c:when test="#{compQtdeItens >= 14}">
+							<c:set var="compBandeiraCartao" value="${compHisParts[13].trim() eq '1' ? 'Master Card' : 'Visa'}" />
+							<h:outputText value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.cartaoCredito']} - #{compBandeiraCartao} #{compHisParts[14].trim()} #{compCartaoInibido}"/>
+						</c:when>
+					</c:when>
+					
+					<c:when test="#{empty compCartao}">
+						<h:outputText value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.contaCorrente']}" id="idContaCorrenteTxt1Titulos_#{posicaoLista}"/>
+					</c:when>
+				</c:choose>			  
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12" id="idCodigoBarrasTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['pages.pagamentos.codbarras.codigobarras']}" id="idCodigoBarrasLblTitulos_#{posicaoLista}"/>
+			  <h:outputText value="${compCodigoBarra01.concat('.').concat(compCodigoBarra02).concat(' ').concat(compCodigoBarra03).concat('.').concat(compCodigoBarra04).concat(' ').concat(compCodigoBarra05).concat('.').concat(compCodigoBarra06).concat(' ').concat(compCodigoBarra07).concat(' ').concat(compCodigoBarra08)}" id="idCodigoBarrasTxt1Titulos_#{posicaoLista}"/>
+			</p:outputPanel>			
+				
+			<p:outputPanel rendered="#{!(compVerifyBenefPagd eq '0')}" id="idVerifyBenefPagdTitulos_#{posicaoLista}">
+				<p:outputPanel styleClass="col-xs-12" id="idBeneficiarioTitulos_#{posicaoLista}">
+				  <h:outputLabel styleClass="space" value="#{msg['pages.segundaViaComprovantes.segundaViaDetalhe.beneficiario']}" id="idBeneficiarioLblTitulos_#{posicaoLista}"/>
+				  <h:outputText value="${compHisParts[2]}" id="idBeneficiarioTxt1Titulos_#{posicaoLista}"/>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel rendered="#{compVerifyBenefPagd eq '1' or (compVerifyBenefPagd eq '3' and !compBcoReal)}" id="idVerifyBenefPagdBcoRealTitulos_#{posicaoLista}">
+				<p:outputPanel styleClass="col-xs-12" id="idPagadorTitulos_#{posicaoLista}">
+				  <h:outputLabel styleClass="space" value="#{msg['pages.segundaViaComprovantes.segundaViaDetalhe.pagador']}" id="idPagadorLblTitulos_#{posicaoLista}"/>
+				  <h:outputText value="${compHisParts[3]}" id="idPagadorTxt1Titulos_#{posicaoLista}"/>
+				</p:outputPanel>
+			</p:outputPanel>
+				
+			<p:outputPanel styleClass="col-xs-12" id="idFavorecidoTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.favorecido']}" id="idFavorecidoLblTitulos_#{posicaoLista}"/>
+			  <h:outputText value="${compHisParts[4]}" id="idFavorecidoTxt1Titulos_#{posicaoLista}"/>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12" id="idClientePagadorTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['page.segunda.via.comprovantes.titulos.clientepagador']}" id="idClientePagadorLblTitulos_#{posicaoLista}"/>
+			  <h:outputText value="${compHisParts[5]}" id="idClientePagadorTxt1Titulos_#{posicaoLista}"/>
+			</p:outputPanel>
+				
+			<p:outputPanel styleClass="col-xs-12" id="idDataVencimentoTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['page.segunda.via.comprovantes.titulos.dataVencimento']}" id="idDataVencimentoLblTitulos_#{posicaoLista}"/>
+			  <h:outputText value="${compHisParts[1]}" id="idDataVencimentoTxt1Titulos_#{posicaoLista}"/>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12" id="idValorTitulos_#{posicaoLista}">
+			  <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" id="idValorLblTitulos_#{posicaoLista}"/>
+			  <h:outputText value="#{detalheParam.valor}" id="idValorTxt1Titulos_#{posicaoLista}"/>
+			</p:outputPanel>			
+		</p:outputPanel>
+		
+        <p:outputPanel rendered="#{!(compQtdeItens >= 12)}" id="idQtdeItens1Titulos_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idDadosDisponiveis2ViaTitulos_#{posicaoLista}">
+			  <h4 align="center">#{msg['page.operacoes.realizadas.detalhe.dados.label.dadosdisponiveis2via']}</h4>
+			</p:outputPanel>
+		</p:outputPanel>		
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idRowSpaceTitulos_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idColXSTitulos_#{posicaoLista}">
+			<p:separator id="idSeparatorTitulos_#{posicaoLista}" />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

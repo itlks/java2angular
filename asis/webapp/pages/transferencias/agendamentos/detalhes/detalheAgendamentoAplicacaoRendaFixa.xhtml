@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:outputLabel styleClass="space-b" value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+  
+	<p:outputPanel styleClass="row">
+			 
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="numeroContratoCDB" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.numeroContratoCDB']}" />
+			<h:outputText id="numeroContratoCDB"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.numeroContratoCDB}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="valorTaxa" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.taxaCDB']}" />
+			<h:outputText id="valorTaxa"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorTaxaCDB}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="prazoMax" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.prazoCDB']}" />
+			<h:outputText id="prazoMax"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.prazoCDB}" />
+		</p:outputPanel>
+			 
+	</p:outputPanel>
+			
+</ui:composition>

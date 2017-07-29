@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovoSemMenuSair.xhtml">
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+
+		<ui:include src="/commons/invalidTeclado.xhtml" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.msgErro}" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{ativacaoMasterBBean.session.nomeUsuarioLogado}" />
+
+		<h:inputHidden id="cpfHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.cpfHash}" />
+
+		<h:inputHidden id="cnpjHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.cnpjHash}" />
+
+		<h:inputHidden id="perguntaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.perguntaHash}" />
+
+		<h:inputHidden id="respostaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.respostaHash}" />
+
+		<h:inputHidden id="senhaAntigaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.senhaAntigaHash}" />
+
+		<h:inputHidden id="senhaNovaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.senhaNovaHash}" />
+
+		<h:inputHidden id="senhaNovaConfirmaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.senhaNovaConfirmaHash}" />
+
+		<h:inputHidden id="assinaturaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.assinaturaHash}" />
+
+		<h:inputHidden id="assinaturaConfirmaHash" partialSubmit="true"
+			value="#{ativacaoMasterBBean.dto.assinaturaConfirmaHash}" />
+
+		<h:inputHidden id="showCnpj" partialSubmit="true"
+			value="#{ativacaoMasterBBean.showCnpj}" />
+		<h:inputHidden id="showNomeAcesso" partialSubmit="true"
+			value="#{ativacaoMasterBBean.showNomeAcesso}" />
+
+		<p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="space-b">
+						<h1>#{msg['pages.cadastroPj.ativacao']}</h1>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.cadastroPj.ativacao.titulo']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong>#{msg['pages.cadastroPj.ativacao.label.nomeTitular']}</strong>
+									#{ativacaoMasterBBean.dto.cliente}
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.ativacao.label.agencia']}</strong>
+									#{ativacaoMasterBBean.dto.agencia}
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.ativacao.label.conta']}</strong>
+									#{ativacaoMasterBBean.dto.contaCorrente}
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h5 class="space-b">#{msg['pages.cadastroPj.ativacao.preencha.campos']}</h5>
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.ativacao.identificacao']}</strong>
+								</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row"
+							rendered="#{ativacaoMasterBBean.showCnpj}">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.label.cnpj']}" />
+									<p:inputMask id="userCnpj" styleClass="form-control"
+										size="25" value="#{ativacaoMasterBBean.dto.cnpj}" 
+										mask="99.999.999/9999-99">
+									</p:inputMask>
+									
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row"
+							rendered="#{!ativacaoMasterBBean.showCnpj}">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.label.cpfTitular']}" />
+									<p:inputMask id="userCpfTitular" styleClass="form-control"
+										size="25" value="#{ativacaoMasterBBean.dto.cnpj}"
+										mask="999.999.999-99">
+									</p:inputMask>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.label.cpf']}" />
+									<p:inputMask id="userCpf" styleClass="form-control"
+										maxlength="25" mask="999.999.999-99"
+										value="#{ativacaoMasterBBean.dto.cpf}">
+									</p:inputMask>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-b"
+							rendered="#{ativacaoMasterBBean.showNomeAcesso}">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.ativacao.NomeAcesso.Titulo']}</strong>
+								</h5>
+								<p>
+									<strong>#{msg['pages.cadastroPj.ativacao.escolhe.um.nome']}</strong>
+								</p>
+								<p>
+									<strong>#{msg['pages.cadastroPj.ativacao.nome.devera.conter']}</strong>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row"
+							rendered="#{ativacaoMasterBBean.showNomeAcesso}">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.NomeAcesso']}" />
+									<p:inputText id="nomeAcesso" styleClass="form-control"
+										maxlength="14" value="#{ativacaoMasterBBean.dto.nomeAcesso}"></p:inputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.NomeAcesso.Confirmacao']}" />
+									<p:inputText id="nomeAcessoConfirmacao"
+										styleClass="form-control" maxlength="14"
+										value="#{ativacaoMasterBBean.dto.nomeAcessoConfirmacao}"></p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row"
+							rendered="#{ativacaoMasterBBean.showNomeAcesso}">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.ativacao.senha.acesso']}</strong>
+								</h5>
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.senha.atual']}" />
+									<p:password id="userPassword" styleClass="form-control"
+										maxlength="8" value="#{ativacaoMasterBBean.dto.senhaAtual}"></p:password>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.senha.nova']}" />
+									<p:password id="userNewPassword" styleClass="form-control"
+										maxlength="8" value="#{ativacaoMasterBBean.dto.senhaNova}">
+									</p:password>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 input-help">
+								<h:outputLabel
+									value="#{msg['pages.cadastroPj.ativacao.senha.length']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.senha.confirmacao']}" />
+									<p:password id="userPasswordConfirmation"
+										styleClass="form-control" maxlength="8"
+										value="#{ativacaoMasterBBean.dto.senhaConfirmacao}"></p:password>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-8">
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.ativacao.dados.master']}</strong>
+								</h5>
+								<p>#{msg['pages.cadastroPj.ativacao.digite.uma.pergunta']}</p>
+								<br />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-8">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.pergunta']}" />
+									<p:inputText id="userQuestion" styleClass="form-control"
+										maxlength="60" value="#{ativacaoMasterBBean.dto.pergunta}"></p:inputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for=""
+										value="#{msg['pages.cadastroPj.ativacao.resposta']}" />
+									<p:inputText id="userAnswer" styleClass="form-control"
+										maxlength="60" value="#{ativacaoMasterBBean.dto.resposta}"></p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel rendered="#{!ativacaoMasterBBean.contratoConsulta}">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:separator />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-12">
+									<h5 class="space-b">
+										<strong>#{msg['pages.cadastroPj.ativacao.assinatura.eletronica.titulo']}</strong>
+									</h5>
+									<p>#{msg['pages.cadastroPj.ativacao.para.a.realizacao']}</p>
+									<p>
+										#{msg['pages.cadastroPj.ativacao.assinatura.eletronicaCadastre']}
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for=""
+											value="#{msg['pages.cadastroPj.ativacao.assinatura.eletronica']}" />
+										<p:password id="userAssinatura" styleClass="form-control"
+											maxlength="8" value="#{ativacaoMasterBBean.dto.assinatura}"></p:password>
+									</p:outputPanel>
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for=""
+											value="#{msg['pages.cadastroPj.ativacao.assinatura.eletronicaConfirmar']}" />
+										<p:password id="userAssinaturaConfirmacao"
+											styleClass="form-control" maxlength="8"
+											value="#{ativacaoMasterBBean.dto.assinaturaConfirmacao}"></p:password>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 text-right space-b">
+							<p:blockUI block="continuarButton" trigger="continuarButton" />
+							<p:commandLink id="continuarButton"
+								styleClass="btn btn-default space-b"
+								action="#{ativacaoMasterBBean.continuarPreenchimento()}"
+								onclick="validarFormAtivacaoMaster();" role="button">#{msg['page.btn.continuar']}
+                           </p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

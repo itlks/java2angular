@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.perfilAcesso.administrativo.escolha.perfil.escolher.usuarios.associados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table table-striped">
+
+								<h:panelGroup
+									rendered="#{perfilAcessoUsuariosAssociadosBBean.listaPerfisAcesso.size() > 0}">
+									<p:blockUI block="dtPerfis" trigger="dtPerfis" />
+									<p:dataTable id="dtPerfis" selectionMode="single"
+										rendered="#{perfilAcessoUsuariosAssociadosBBean.listaPerfisAcesso.size() > 0}"
+										value="#{perfilAcessoUsuariosAssociadosBBean.listaPerfisAcesso}"
+										var="per" tableStyleClass="tacle-custom tacle-custom-zebrada"
+										selection="#{perfilAcessoUsuariosAssociadosBBean.perfilAcessoSelecionado}"
+										rowKey="#{per.nomePerfil}">
+										<p:ajax event="rowSelect" onstart="openLoad()"
+											oncomplete="closeLoad()"
+											listener="#{perfilAcessoUsuariosAssociadosBBean.onRowSelect}"
+											update=":formGeral:dtPerfis" />
+										<p:column
+											headerText="#{msg['page.perfilacesso.alterar.selecao.coluna.perfil']}">
+											<h:outputText value="#{per.nomePerfil}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['page.perfilacesso.alterar.selecao.coluna.descricao']}">
+											<h:outputText value="#{per.descricao}" />
+										</p:column>
+									</p:dataTable>
+									<p:blockUI block="dtPerfis" trigger="dtPerfis" />
+								</h:panelGroup>
+
+								<h:panelGroup
+									rendered="#{perfilAcessoUsuariosAssociadosBBean.listaPerfisAcesso.size() == 0}">
+									<h:outputText
+										value="#{msg['page.perfilAcesso.alterarSelecao.semPerfil']}" />
+								</h:panelGroup>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{perfilAcessoUsuariosAssociadosBBean.voltar}" role="button"
+					value="#{msg['page.administrativo.perfilAcesso.incluir.botaoVoltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>
+

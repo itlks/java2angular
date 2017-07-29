@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:outputPanel styleClass="col-md-7 col-lg-7 time-date">
+		<form jsfc="h:form" id="formData" class="sub-data pull-left">
+			<h:outputText id="idDataHora" escape="false" value="#{menuBBean.dataHora}" /> 
+			<p:poll interval="10"	listener="#{counterBBean.atualizarDataHora}" update="formData:idDataHora" />
+		</form>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="col-md-5 col-lg-5" style="padding-right: 0">
+		<form jsfc="h:form" id="formPainelSecundario">
+			<div class="sub-menu-links pull-right">
+				<ul>
+					<!-- Imagens devem ser transformadas em SVG antes de subir em prod. -->
+					<li>
+						<p:commandLink action="#{painelSecundarioBBean.exibirSaldo}" update="formPainelSecundario" id="painelSecundarioBotaoSaldo">
+							<p:graphicImage width="21px" height="21px" value="/images/u916.png" alt="Saldos"/>
+						</p:commandLink>
+					</li>
+					<li>
+						<p:commandLink action="#{painelSecundarioBBean.exibirAutorizacoes}" update="formPainelSecundario" id="painelSecundarioBotaoAutorizacoes">
+							<p:graphicImage	width="21px" height="21px" value="/images/u921.png" alt="Autorizações"/>
+						</p:commandLink>
+					</li>
+							
+					<li>
+						<p:commandLink action="#{painelSecundarioBBean.exibirLimites}" update="formPainelSecundario" id="painelSecundarioBotaoLimites">
+							<p:graphicImage	width="21px" height="21px" value="/images/u926.png" alt="Limites"/>
+						</p:commandLink>
+					</li>
+					<li>
+						<p:commandLink action="#{painelSecundarioBBean.exibirCentral}" update="formPainelSecundario" id="painelSecundarioBotaoCentral">
+							<p:graphicImage	width="21px" height="21px" value="/images/u931.png" alt="Central de atendimento"/>
+						</p:commandLink>
+					</li>
+					<li>
+						<p:commandLink action="#{painelSecundarioBBean.exibirAcessoRapido}" update="formPainelSecundario" id="painelSecundarioBotaoAcesso" styleClass="last-child-menu">
+							<p:graphicImage	width="21px" height="21px" value="/images/u598.png" alt="Acesso rápido"/>
+							Acesso rápido
+						</p:commandLink>
+					</li>
+				</ul>
+			</div>
+			
+			<ui:include src="/commons/painelSecundario/saldo.xhtml"/>
+			<ui:include src="/commons/painelSecundario/autorizacoes.xhtml"/>
+			<ui:include src="/commons/painelSecundario/limites.xhtml"/>
+			<ui:include src="/commons/painelSecundario/centralAtendimento.xhtml"/>
+			<ui:include src="/commons/painelSecundario/acessoRapido.xhtml"/>
+		</form>
+	</p:outputPanel>
+</ui:composition>
+

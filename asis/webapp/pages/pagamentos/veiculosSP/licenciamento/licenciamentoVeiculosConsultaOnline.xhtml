@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+<!-- 		<div class="row space-b"> -->
+<!-- 			<div class="col-md-6 col-xs-6 site-map"> -->
+<!-- 				<span>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Pagam']} <strong>&gt;</strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.VeicuSaoPaulo']} -->
+<!-- 				</span> -->
+<!-- 				<h1>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Licen']}</h1> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.TransExcluParaLicenDe']}</strong>
+						</p>
+						<br />
+						<p>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SeVocêDesejLicenO']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.OsPagamEfetuAposAs']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.ParaMaisInforAcessO']}
+							<p:commandLink>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SecreDaFazenDoEstad']}</p:commandLink>
+						</p>
+						<br /></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.InforOsDadosParaSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-4">
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.RENAV']}</strong> 
+								<h:outputText id="txtRenavam" style="margin-left:15px;" value="#{licenciamentoRenavamBBean.renavamDTO.numero}"  />
+							</h5>
+							<br />
+
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Propr']}</strong> 
+								<h:outputText id="txtProp" style="margin-left:15px;" value="#{licenciamentoRenavamBBean.renavamDTO.proprietario}"  />
+							</h5>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.CodigDoMunic']}</strong> 
+								<h:outputText id="txtCodMun" style="margin-left:15px;" value="#{licenciamentoRenavamBBean.renavamDTO.codMunicipio}" />
+							</h5>
+							<br />
+
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.CPFC']}</strong> 
+								<h:outputText id="txtCpf" style="margin-left:15px;" value="#{licenciamentoRenavamBBean.renavamDTO.numCpfCnpj}"  />
+							</h5>
+
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+
+							<h5>
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.PlacaDoVeicu']}</strong> 
+								<h:outputText id="txtPlaca" style="margin-left:15px;" value="#{licenciamentoRenavamBBean.renavamDTO.placa}"  />
+							</h5>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h:outputLabel for=""
+								value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SelecUmaOpcaoParaO']}" />
+							<p:outputPanel styleClass="table-responsive radio">
+								<h:selectOneRadio id="_1" value="#{licenciamentoRenavamBBean.opcaoRemessa}" layout="custom">
+									<f:selectItem itemLabel="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.RemesDoCRLVPeloCorre']}"
+										itemValue="_1" />
+									<f:selectItem 
+										itemLabel="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SolicARemesDoCRLV']}"
+										itemValue="_2" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar" action="#{licenciamentoRenavamBBean.voltarPreenchimento}" styleClass="btn btn-default btn-cinza" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Volta']}</p:commandLink>
+				<p:commandLink id="cmdLnkContinuar" action="#{licenciamentoRenavamBBean.continuarConfirmacao}" styleClass="btn btn-default" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Conti']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

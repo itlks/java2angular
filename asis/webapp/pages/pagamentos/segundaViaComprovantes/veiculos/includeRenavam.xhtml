@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- ############################################################### INFORMACOES RENAVAM INICIO ####################################################################### -->
+
+ 		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-4">
+               <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.renavam']}"/>
+               <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.renava}"/>
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="col-xs-4">
+               <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.codigomunicipio']}"/>
+               <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.munEst}"/>
+            </p:outputPanel>
+        </p:outputPanel>
+    
+	<!-- ####################################################################### INFORMACOES RENAVAM FIM ######################################################################### -->
+</ui:composition>

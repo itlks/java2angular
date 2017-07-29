@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+	<h:inputHidden value="#{pagamentosContasCodigoBarrasBBean.clientHash}" id="clientHash" partialSubmit="true"/>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+	        	<p:outputPanel styleClass="titulo-painel" rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento eq null}">
+	          		<h4>#{msg['pages.pagamento.codBarras.pagamento.confirmacao.titulo']} </h4>
+	        	</p:outputPanel>
+	        	
+	        	<p:outputPanel styleClass="titulo-painel" rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento ne null}">
+	          		<h4>#{msg['pages.pagamento.codBarras.pagamento.confirmacao.titulo.com.agendamento']} </h4>
+	        	</p:outputPanel>
+			</p:outputPanel>
+	    </p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<ui:include
+							src="/pages/pagamentos/contas/pagamentoComCodigoBarras/titulos/codigoBarrasInformacoes.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row assinatura-abas">
+      		<p:outputPanel styleClass="col-xs-12">
+      			<p:outputPanel>						
+					<ui:include src="/commons/inicializaDL.xhtml" />
+					<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+				</p:outputPanel>
+      		</p:outputPanel>
+    	</p:outputPanel>
+
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandButton id="btnVoltar"
+					action="#{pagamentosContasCodigoBarrasBBean.voltarConfirmacao}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" />
+
+				<p:commandButton id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{pagamentosContasCodigoBarrasBBean.finalizarPagamentoTitulo}"
+					role="button" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" />
+				<p:defaultCommand target="btnConfirmar" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:blockUI block="panelBotoes" trigger="btnConfirmar" />
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+	
+	<p:dialog id="dialogoExclusao" closable="true" header="#{msg['pages.pagamentos.recargaProgramada.consultar.dialog.exclusao']}" visible="#{recargaProgramadaConsultarBBean.popupVisivel}"
+	styleClass="modal-box box-shadow" modal="true" widgetVar="painelExcluirRecargaVar">
+			
+			<div class="popover-content">
+		
+				<div class="row space-b">
+					<div class="col-md-12">
+						<p:outputPanel styleClass="label520" >
+							#{msg['pages.pagamentos.recargaProgramada.consultar.dialog.comentarios']} 
+							<p:outputLabel value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataProxParcela}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+			 				</p:outputLabel >
+						</p:outputPanel>
+					</div>
+				</div>
+				
+				<div class="row space-b">
+					<div class="col-md-12">
+						<p:outputPanel styleClass="label520">
+							#{msg['pages.pagamentos.recargaProgramada.consultar.dialog.selecione']}
+						</p:outputPanel>	
+					</div>
+				</div>
+	    
+	           <div class="row space-b">
+		           <div class="col-md-12">
+					  <p:outputPanel styleClass="radio label300">
+						  <p:selectOneRadio id="periodicidade" value="#{recargaProgramadaConsultarBBean.programacaoEnum}"  layout="custom">
+							<f:selectItem itemLabel="#{recargaProgramadaConsultarBBean.programacoes[0].descricao}" itemValue="#{recargaProgramadaConsultarBBean.programacoes[0]}" />
+							<f:selectItem itemLabel="#{recargaProgramadaConsultarBBean.programacoes[1].descricao}" itemValue="#{recargaProgramadaConsultarBBean.programacoes[1]}" />
+						 </p:selectOneRadio>
+						<p:outputPanel styleClass="radio label300">
+									<p:radioButton id="periodicidadeMensal" for="periodicidade" itemIndex="0" styleClass="radioGrid" />
+									<h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.dialog.programacao']}"  for="periodicidadeMensal" styleClass="space-r" />
+
+									<p:radioButton id="periodicidadeSemanal" for="periodicidade" itemIndex="1" styleClass="radioGrid" />
+									<h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.dialog.programacaoManter']}" for="periodicidadeSemanal" styleClass="space-r" />
+						</p:outputPanel>	
+					</p:outputPanel>	
+	                 </div>
+	            </div>
+	        	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+			
+			</div>
+			<div class="popover-footer">
+				<p:outputPanel styleClass="text-right"> 
+					<p:commandLink id="continuar" styleClass="btn btn-default btn-cinza" role="button" action="#{recargaProgramadaConsultarBBean.continuarEmExclusaoConfirmacao()}">#{msg['page.btn.continuar']}</p:commandLink>
+				</p:outputPanel>
+			</div>
+	     </p:dialog>
+    
+</ui:composition>

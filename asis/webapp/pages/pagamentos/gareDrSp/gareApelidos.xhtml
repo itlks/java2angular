@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/pages/pagamentos/gareDrSp/gareAviso.xhtml"></ui:include>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.apelidos.listaApelidos.informe.dados']}</h4>	
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel >
+						<strong><h5 class="space-b">#{msg['pages.apelidos.listaApelidos.novo.pagamento']}</h5></strong>
+						<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+						<p:commandLink
+							value="#{msg['page.gare.apelidos.botao.preencher']}"
+							action="#{gareDRSPBBean.preencherDados}" />
+						<p:separator styleClass="space-b"/>
+						<h5 class="space-b">#{msg['pages.apelidos.listaApelidos.pagamentos.cadastrados']}</h5>
+						<p:dataTable id="dtApelidos" emptyMessage="" styleClass="space-t"
+							value="#{gareDRSPBBean.listaApelidos}" var="apelido" selection="#{gareDRSPBBean.dtoSelecionado}" selectionMode="single"
+							rowKey="#{apelido.apelido}">
+							
+							<p:ajax event="rowSelect" listener="#{gareDRSPBBean.onRowSelect}" />
+
+							<p:column headerText="#{msg['page.gare.apelidos.header.id']}">
+								<h:outputText value="#{apelido.apelido}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['page.gare.apelidos.header.cpfcnpj']}">
+								<h:outputText value="#{apelido.numeroCPF}" converter="converterCpfCnpj"/>
+							</p:column>
+							<p:column styleClass="text-right">
+								<p:commandLink id="cmdLnkAlterar" role="button"
+									action="#{gareDRSPBBean.alterarApelido(apelido)}"
+									>
+								<h:graphicImage styleClass="custom-icons"
+									value="/images/u1239.png" />
+									#{msg['page.gare.apelidos.botoes.alterar']}
+								</p:commandLink>
+							</p:column>
+							<p:column styleClass="text-center">
+								<p:commandLink id="cmdLnkExcluir" role="button"
+									action="#{gareDRSPBBean.excluirApelido(apelido)}">
+									<h:graphicImage styleClass="custom-icons"
+										value="/images/u1241.png" />
+								 #{msg['page.gare.apelidos.botoes.excluir']}
+								 </p:commandLink>
+							</p:column>
+						</p:dataTable>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{gareDRSPBBean.goApelidoMenu()}"
+					value="#{msg['page.gare.preenchimento.botoes.voltar']}"
+					immediate="true" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

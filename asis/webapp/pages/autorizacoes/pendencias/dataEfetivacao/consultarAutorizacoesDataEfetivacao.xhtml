@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+	<p:outputPanel styleClass="space-l">
+		<p:outputPanel id="panelBotoesPeriodosDtEfetivacao"
+			styleClass="row space-b">
+
+			<p:outputPanel>
+				<h:outputLabel for="periodoDeConsulta"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.periodoDeConsulta']}" />
+			</p:outputPanel>
+
+
+
+
+			<p:outputPanel styleClass="row col-xs-11"> 
+					<input 
+						type="button" 
+						id="btnConsultaPeriodoHojeDtEfetivacao"
+						class="btn btn-default btn-period"
+						onclick=";PF('dlgDtEfetivacao').hide();consultarPorPeriodoSelecionado('0','dtEvetivacao');"
+						value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.hoje']}" />
+				
+				
+
+				<input 
+					type="button"
+					id="btnConsultaPeriodoTresDiasDtEfetivacao"
+					class="btn btn-default btn-cinza btn-period"
+					onclick="PF('dlgDtEfetivacao').hide();consultarPorPeriodoSelecionado('1','dtEvetivacao');"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.tresDias']}" />
+
+				<input 
+					type="button"
+					id="btnConsultaPeriodoCincoDiasDtEfetivacao"
+					class="btn btn-default btn-cinza btn-period"
+					onclick="PF('dlgDtEfetivacao').hide();consultarPorPeriodoSelecionado('2','dtEvetivacao');"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.cincoDias']}" />
+
+				<input 
+					type="button"
+					id="btnConsultaPeriodoSeteDiasDtEfetivacao"
+					class="btn btn-default btn-cinza btn-period"
+					onclick="PF('dlgDtEfetivacao').hide();consultarPorPeriodoSelecionado('3','dtEvetivacao');"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.seteDias']}" />
+					
+				<p:commandButton id="btnOutrosPeriodosDtEfetivacao"
+					styleClass="btn btn-default btn-cinza btn-period" style="padding:8.2px 44px !important;font-size: 14px !important;"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.outrosPeriodos']}" />
+
+			</p:outputPanel>
+			<p:overlayPanel id="overlayPanelDtEfetivacao" dismissable="false" styleClass="painelCalendario"
+				for="btnOutrosPeriodosDtEfetivacao" widgetVar="dlgDtEfetivacao"
+				onShow="adjustPositionningRight($('#formGeral\\:panelTokens\\:btnOutrosPeriodosDtEfetivacao'), $('#formGeral\\:panelTokens\\:overlayPanelDtEfetivacao'), 0)">
+
+				<p:outputPanel styleClass="arrow">
+					<p:graphicImage value="../../../images/arrow-popover.png" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-b font-14">
+					<h:outputText
+						value="#{msg['pages.consulta.agendamento.label.DataInicial']}" />
+					<p:outputPanel styleClass="icon-data-input">
+						<i class="fa fa-calendar" />
+						<p:calendar id="deDtresultadosAutorizacoesDataEfetivacao"
+							value="#{autorizacoesPendenciaConvenioBBean.dto.dataInicioOutrosPeriodos}"
+							pattern="dd/MM/yyyy" converter="dateConverterFormat"
+							maxlength="10"
+							onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+							readonlyInput="false">
+							<p:ajax event="change" />
+						</p:calendar>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b font-14">
+					<h:outputText
+						value="#{msg['pages.consulta.agendamento.label.DataFinal']}" />
+					<p:outputPanel styleClass="icon-data-input">
+						<i class="fa fa-calendar" />
+						<p:calendar id="ateDtresultadosAutorizacoesDataEfetivacao"
+							value="#{autorizacoesPendenciaConvenioBBean.dto.dataFimOutrosPeriodos}"
+							pattern="dd/MM/yyyy" converter="dateConverterFormat"
+							maxlength="10" 
+							onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+							readonlyInput="false">
+							<p:ajax event="change" />
+						</p:calendar>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b font-14">
+						<input 
+							type="button"
+							class="btn btn-default pull-right" 
+							onclick=";consultarPorPeriodoSelecionado('4','dtEvetivacao');fecharOutrasDatasEfetivacao();openLoad();"	 
+							oncomplete="PdlgDtEfetivacao').hide()"
+							value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.button.ok']}" />
+					
+				</p:outputPanel>
+			</p:overlayPanel>
+		</p:outputPanel>
+		
+		<p:remoteCommand name="fecharOutrasDatasEfetivacao" onstart="PF('dlgDtEfetivacao').hide();" />
+		
+
+		<p:outputPanel id="panelPendenciasPorDataEfetivacao" styleClass="row remessa">
+			 <p:outputPanel styleClass="col-xs-12">
+					<div id="resultadosAutorizacoesDataEfetivacao"></div>
+				</p:outputPanel>
+<!-- 			<h:panelGroup -->
+<!-- 				rendered="#{empty autorizacoesPendenciaDataEfetivacaoBBean.pendenciasPorData}"> -->
+<!-- 				<center> -->
+<!-- 					<p:outputLabel styleClass="space-a" -->
+<!-- 						value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.datatable.emptyMessage']}" /> -->
+<!-- 				</center> -->
+<!-- 			</h:panelGroup> -->
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<script type="text/javascript">
+		var btnSete = document.querySelector('#btnConsultaPeriodoSeteDiasDtEfetivacao');
+		btnSete.addEventListener('click', openLoad());
+	</script>
+</ui:composition>

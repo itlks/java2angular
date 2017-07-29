@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/templateSemMenu.xhtml">
+                          
+   <ui:define name="content">  
+	  	<p:outputPanel styleClass="container-fluid">
+	  		<ui:include src="/commons/loadingStaus.xhtml" />
+			<ui:include src="/commons/invalidLogin.xhtml" />
+			<h:inputHidden id="msgErroJavaStript"  partialSubmit="true" value="#{loginBBean.loginDTO.msgErroJavaStript}"/>				
+		    <p:outputPanel styleClass="row">
+		      <p:outputPanel styleClass="col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 ">
+		        <p:outputPanel styleClass="box-shadow bloco-login">
+		         
+		            <p:outputPanel styleClass="form-group">
+		              <p:outputLabel>#{ msg['page.login.label.agencia'] }</p:outputLabel>
+		              <p:inputText maxlength="4" id="agencia" value="#{loginBBean.loginDTO.agencia}" onkeyup="onTrocaFoco('agencia','conta');" onfocus="this.select();" onkeypress="if(!isNumberKey(event)){return false;}" styleClass="form-control" placeholder="" />	 
+		            </p:outputPanel>
+		            
+		            <p:outputPanel styleClass="form-group">
+		              <p:outputLabel>#{ msg['page.login.label.conta'] }</p:outputLabel>
+		              <p:inputText maxlength="9" id="conta" styleClass="form-control" placeholder="" value="#{loginBBean.loginDTO.conta}" onfocus="this.select();"  onkeypress="if(!isNumberKey(event)){return false;}"/>
+		            </p:outputPanel>
+
+		            <p:commandButton id="btnEntrar" widgetVar="btnEntrar" onclick="validarAgenciaConta(); PF('btnEntrar').disable()" oncomplete="PF('btnEntrar').enable()"  process=":formGeral" update=":formGeral" value="#{ msg['page.login.label.entrar'] }" action="#{loginBBean.redirect}" partialSubmit="true" style="margin: 0px"  styleClass="btn btn-default btn-login">
+		              <f:param name="redirectPage" value="goLoginTeclado"/> 
+		            </p:commandButton>
+		            
+		          <p></p>
+		          
+		          <p:outputPanel styleClass="rodape-bloco-login">
+		            <h4>#{ msg['page.login.label.esqueceu'] }</h4>
+		            <strong>#{ msg['page.login.label.central.atendimento'] }</strong>
+		            <p>#{ msg['page.login.label.capital'] }<strong>#{ msg['page.login.label.tel.capital'] }</strong></p>
+		            <p>#{ msg['page.login.label.demais.localidade'] }<strong>#{ msg['page.login.label.tel.demais.localidade'] }</strong></p>
+		            <p:graphicImage value="/images/selo.gif"  alt=""/>
+		          </p:outputPanel>
+		          
+		        </p:outputPanel>
+		      </p:outputPanel>
+		    </p:outputPanel>
+		    
+	  </p:outputPanel>
+	  
+	  	<p:dialog widgetVar="widDlgContaDepara" position="center" modal="true" dynamic="true" visible="#{loginBBean.habilitarDePara}" resizable="false">	    
+	 		<ui:include src="/pages/login/contaDeparada.xhtml"/>
+	 	</p:dialog>
+	 	
+	 	<script>
+        	document.getElementById("formGeral:agencia").focus();
+        </script>
+	  
+	</ui:define>
+	
+
+	 
+</ui:composition> 

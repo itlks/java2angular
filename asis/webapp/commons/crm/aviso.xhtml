@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel id="idAviso" autoUpdate="true" rendered="#{campanhasCRMBBean.avisoDTO.habilitarAviso}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="box-shadow avisoHome">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<i class="fa fa-exclamation-circle"></i>
+						<p>
+							<h:commandLink value="#{campanhasCRMBBean.avisoDTO.textoDiv2}" rendered="#{campanhasCRMBBean.avisoDTO.tpCampanha eq 'C'}" actionListener="#{campanhasCRMBBean.aceite}" action="#{campanhasCRMBBean.redrectAviso}" target="#{campanhasCRMBBean.avisoDTO.blank}">
+								<f:param name="aceiteBoId" value="#{campanhasCRMBBean.avisoDTO.boId}" />
+								<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.avisoDTO.raAttribSeg}" />
+							</h:commandLink>
+												
+							<h:commandLink value="#{campanhasCRMBBean.avisoDTO.textoDiv2}" action="#{campanhasCRMBBean.redrectAviso}" target="#{campanhasCRMBBean.avisoDTO.blank}" rendered="#{not (campanhasCRMBBean.avisoDTO.tpCampanha eq 'C')}"/>
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

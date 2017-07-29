@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/templateConsultaNovoSemMenuSair.xhtml">
+	
+	<ui:define name="content">
+	
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		
+		<ui:include src="/commons/invalidTeclado.xhtml" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{senhaExpiradaBBean.session.nomeUsuarioLogado}" />
+		<h:inputHidden id="hashAcesso" partialSubmit="true"
+			value="#{senhaExpiradaBBean.session.hashAcesso}" />
+		<h:inputHidden id="hashAcessoNovo" partialSubmit="true"
+			value="#{senhaExpiradaBBean.session.hashAcessoNovo}" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{senhaExpiradaBBean.loginDTO.msgErroJavaStript}" />
+
+		
+		<p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="space-b">
+						<h1>#{msg['page.contrato.generico.cadastramento']}</h1>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 space-b">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['page.contrato.generico.efetivaSecuncario0.paraMaiorSeguranca']}</p>
+						<p>#{msg['page.contrato.generico.efetivaSecuncario0.efetuetroca']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.contrato.generico.efetivaSecuncario0.dados.cadastramento']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<p>
+								<p:outputLabel styleClass="bold space" value="#{msg['page.contrato.generico.cliente']} " />
+								<h:outputText 
+									value="#{senhaExpiradaBBean.session.nomeTitularConta}" />
+							</p>	
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="text-right">
+								<p:outputLabel styleClass="bold space" value="#{msg['page.contrato.generico.efetivaSecuncario0.agencia']} " />
+								<h:outputText 
+									value="#{senhaExpiradaBBean.session.agencia}" />
+							</p>
+						</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-3">
+								<p class="text-right">
+									<p:outputLabel styleClass="bold space" value="#{msg['page.contrato.generico.efetivaSecuncario0.contaCorrente']}" />
+									<h:outputText 
+										value="#{senhaExpiradaBBean.session.conta}" />
+								</p>		
+							</p:outputPanel>		
+			
+						
+				 	</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h5 class="space-b">#{msg['page.contrato.generico.efetivaSecuncario0.preencherCampos']}</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+
+							<h5 class="space-b">
+								<strong>#{msg['page.contrato.generico.efetivaSecuncario0.senhaAcessoSem']}</strong>
+							</h5>
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel value="#{msg['page.administrativo.senhaAcesso.alterar.senha.atual']}" />
+								<p:password styleClass="form-control" id="senhaAcesso"
+									maxlength="8" value="#{senhaExpiradaBBean.loginDTO.senha}"
+									placeholder="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel value="#{msg['page.administrativo.senhaAcesso.alterar.nova.senha']}" />
+								<p:password styleClass="form-control" id="senhaAcessoNova"
+									maxlength="8" value="#{senhaExpiradaBBean.loginDTO.senhaNova}"
+									placeholder="" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4 input-help">
+								<p:outputLabel>#{msg['page.contrato.generico.efetivaSecuncario0.caracteresSendo']}</p:outputLabel>
+						</p:outputPanel>						
+					</p:outputPanel>							
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel value="#{msg['page.administrativo.senhaAcesso.alterar.nova.senha.confirmar']}"/>
+								<p:password styleClass="form-control"
+									id="senhaAcessoConfirmacao" maxlength="8"
+									value="#{senhaExpiradaBBean.loginDTO.senhaConfirmacao}"
+									placeholder="" />
+							</p:outputPanel>
+						</p:outputPanel>											
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right space-b">
+				<p:blockUI block="btnEntrar" trigger="btnEntrar" />
+				<p:commandLink id="btnEntrar" oncomplete=""
+					onclick="encryptNewPasswordAccessDLInterno();" update="@form"
+					action="#{senhaExpiradaBBean.continuarPreenchimento}"
+					styleClass="btn btn-default space-b" role="button">
+					#{ msg['page.btn.continuar'] }
+					</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		</p:outputPanel>
+	
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<f:event type="preRenderView"
+			listener="#{renavamListaBBean.acessoDireto()}" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+
+					<h4>#{msg['pages.renavam.alterarRenavam.confiraosdados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" id="panelGeral">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								#{msg['pages.renavam.alterarRenavam.renavam']}
+								<h:outputText id="idNrRenavam"
+									converter="converterNumeroRenavam"
+									value="#{renavamListaBBean.dto.numero}" />
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 no-padding">
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel id="lblApelido" for="idApelido"
+										value="#{msg['pages.renavam.alterarRenavam.apelido']}" />
+
+									<p:inputText id="idApelido" maxlength="20"
+										styleClass="form-control"
+										value="#{renavamListaBBean.dto.apelido}" />
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-1 no-padding tooltip-col">
+								<h:graphicImage id="idTooltip" value="/images/icon-i.png"
+									styleClass="tooltip-icon tooltip-center-col"
+									alt="#{msg['pages.renavam.alterarRenavam.alt.tooltip']}" />
+
+								<pe:tooltip for="idTooltip"
+									value="#{msg['pages.renavam.alterarRenavam.tooltip']}"
+									myPosition="left center" atPosition="right center" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+
+									<p:outputLabel id="lblEstado" for="selUf"
+										value="#{msg['pages.renavam.alterarRenavam.estado']}" />
+
+									<h:selectOneMenu id="selUf"
+										value="#{renavamListaBBean.ufSelecionada}">
+
+										<f:selectItems value="#{renavamListaBBean.lEstados}" var="uf"
+											itemLabel="#{uf.descricao}" itemValue="#{uf.id}" />
+									</h:selectOneMenu>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<p:outputLabel id="lblPlaca"
+											value="#{msg['pages.renavam.alterarRenavam.placa']}" />
+									</p>
+									<p>
+										<p:outputPanel style="height: 34px;">
+											<h:outputText id="idPlaca"
+												style="padding: 6px 12px; font-size: 14px; color: #555; line-height: 33px;"
+												value="#{renavamListaBBean.dto.placa}" />
+										</p:outputPanel>
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton id="btnVoltar"
+					value="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.voltar']}"
+					styleClass="btn btn-default btn-cinza"
+					action="#{renavamListaBBean.voltarParaLista}" />
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+
+				<p:commandButton id="btnContinuar"
+					value="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.continuar']}"
+					styleClass="btn btn-default"
+					action="#{renavamListaBBean.continuarAlteracao}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

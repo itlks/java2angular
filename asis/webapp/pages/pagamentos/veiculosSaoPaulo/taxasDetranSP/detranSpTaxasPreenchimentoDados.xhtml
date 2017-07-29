@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<!--  Comentando este f:event, pois o método referido aqui não existe. Ou seja, não está implementado. -->
+<!-- 	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{taxasDetranSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+ -->
+	<ui:define name="content">
+		<ui:include src="/pages/pagamentos/veiculosSaoPaulo/taxasDetranSP/detranSpTaxasAviso.xhtml" />
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.detranSp.preenchimento.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12" id="panel">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-4">
+							<strong>#{msg['pages.detranSp.preenchimento.subservico']}</strong>
+							<span>
+								<h:outputText value="#{taxasDetranSpBBean.dto.subServicoSelecionado.descricaoSubServico}" />
+							</span>                          
+     				 	</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-3">
+							<h:outputLabel for="" value="#{msg['pages.detranSp.preenchimento.tipoSubservico']}" />
+							<h:selectOneMenu id="tiposSubServico"
+								value="#{taxasDetranSpBBean.subServicoSelecionado}">
+
+								<p:ajax event="change" process="@this"
+									update="@form"
+									listener="#{taxasDetranSpBBean.mostrarValor}" />
+
+								<f:selectItem itemLabel="Selecione" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{taxasDetranSpBBean.dto.tiposSubServico}" var="tipo"
+									itemLabel="#{tipo.descricaoSubServico}"
+									itemValue="#{tipo.tipoSubServico}" />
+
+							</h:selectOneMenu>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row" id="consulta" rendered="#{taxasDetranSpBBean.showPanel eq 'T'}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="op displayNone">
+								<p:outputPanel styleClass="row space-b">
+									<p:outputPanel styleClass="form-group col-md-3 space-t">
+										<h:outputLabel for="" value="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.descricaoId}:" />
+										
+										<p:inputText id="identificadorCpfCnpj" styleClass="form-control" 
+											rendered="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.tamanhoId == 14}"
+											maxlength="18"
+											onkeyup="maskCpfCnpj(this, event)"/>
+											
+										<p:inputText id="identificador" styleClass="form-control" 
+											rendered="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.tamanhoId != 14}"
+											maxlength="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.tamanhoId}" />
+										
+										<h:inputHidden id="identificadorCripto" partialSubmit="true" value="#{taxasDetranSpBBean.dto.identificador}" />
+											
+									</p:outputPanel>
+								</p:outputPanel>
+		
+								<p:outputPanel styleClass="row" rendered="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.flagCorreio eq '3'}">
+									<p:outputPanel styleClass="col-md-12 space-b">
+										<strong><h:outputText value="#{msg['pages.detranSp.preenchimento.tipoenvio']}"></h:outputText></strong>
+									</p:outputPanel>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row" rendered="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.flagCorreio eq '3'}">
+									<p:outputPanel styleClass="col-md-12">
+										<p:selectOneRadio id="customRadio" layout="custom" value="#{taxasDetranSpBBean.dto.tipoEnvio}">
+											<f:selectItem itemValue="1" /> 
+											<f:selectItem itemValue="0" />
+										</p:selectOneRadio> 
+										
+										<p:outputPanel styleClass="col-xs-12 no-padding space-b"> 
+											<p:radioButton id="remessa" for="customRadio" itemIndex="0" /> 
+											<h:outputText value="#{msg['pages.detranSp.preenchimento.remessa']}" for="remessa" /> 
+										
+											<p:radioButton id="solicitar" for="customRadio" styleClass="space-l" itemIndex="1" /> 
+											<h:outputText value="#{msg['pages.detranSp.preenchimento.solicitar']}" for="solicitar" /> 
+										</p:outputPanel>					
+									</p:outputPanel>
+								</p:outputPanel>
+		
+								<p:outputPanel styleClass="row" 
+									rendered="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.flagCorreio eq '3' or taxasDetranSpBBean.dto.tipoSubServicoSelecionado.flagCorreio eq '1'}">
+									<p:outputPanel styleClass="form-group col-md-12">
+										<strong>#{msg['pages.detranSp.preenchimento.valor.correio']}</strong>
+										<span>#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.valorCorreioString}</span>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="form-group col-md-12">
+										<strong>#{msg['pages.detranSp.preenchimento.valor']}</strong>
+										<span>#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.valorString}</span>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							
+						</p:outputPanel>
+					
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+						<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+						<p:commandButton id="btnVoltar"
+							styleClass="btn btn-default btn-cinza" role="button"
+							tabindex="10"
+							action="#{taxasDetranSpBBean.voltarDaTelaPreenchimento}"
+							value="#{msg['pages.detranSp.botao.voltar']}" />
+						<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+						<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+							rendered="#{taxasDetranSpBBean.showPanel eq 'T'}" role="button"
+							tabindex="10"
+							action="#{taxasDetranSpBBean.continuarDaTelaPreenchimento}"
+							onclick="taxasDetranEncriptarCpfCnpj()"
+							value="#{msg['pages.detranSp.botao.continuar']}" />
+						<p:defaultCommand target="btnContinuar" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

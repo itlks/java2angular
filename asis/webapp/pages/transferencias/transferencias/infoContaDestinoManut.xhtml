@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+      				<p:outputPanel styleClass="row">
+				         <p:outputPanel styleClass="col-xs-8">
+				          
+				             <p:outputPanel styleClass="row space-t">
+				                 <p:outputPanel styleClass="form-group col-xs-4 no-margin-bottom" >
+				                     <h:outputLabel for="" value="Banco:" />
+				                     <p:outputPanel styleClass="form-group">
+				                         <p:inputText styleClass="form-control numberOnly" maxlength="3" value="#{transferenciaFavorecidosBBean.bancom}" />
+				                     </p:outputPanel>
+				                 </p:outputPanel>
+				
+								<p:outputPanel styleClass="col-xs-2">
+				                     <p:outputPanel styleClass="form-group">
+				                         <h:outputLabel for="" value="#{msg['page.transferencias.transferir.ispb']}" />
+				                         <p:inputText styleClass="form-control numberOnly" maxlength="8" value="#{transferenciaFavorecidosBBean.ispbm}" />
+				                     </p:outputPanel>
+				                 </p:outputPanel>
+			          		</p:outputPanel>
+				
+				         </p:outputPanel>
+				     </p:outputPanel>
+				     
+				      <p:outputPanel styleClass="row "> 
+ 				         <p:outputPanel styleClass="col-xs-8"> 
+				
+ 				             <p:outputPanel styleClass="row"> 
+ 				                 <p:outputPanel styleClass="col-xs-2 "> 
+		
+ 				                     <p:outputPanel styleClass="form-group"> 
+ 				                         <h:outputLabel for="" 
+ 				                             value="#{msg['page.transferencias.transferir.agencia']}" /> 
+ 				                         <p:inputText styleClass="form-control numberOnly" 
+ 				                             maxlength="4" value="#{transferenciaFavorecidosBBean.agenciam}" /> 
+ 				                     </p:outputPanel> 
+ 				                 </p:outputPanel> 
+			
+ 				                 <p:outputPanel styleClass="col-xs-4"> 
+ 				                     <p:outputPanel styleClass="form-group"> 
+ 				                         <h:outputLabel for="" 
+ 				                             value="#{msg['page.transferencias.transferir.conta']}" /> 
+ 				                         <p:inputText styleClass="form-control numberOnly" 
+ 				                             maxlength="13" value="#{transferenciaFavorecidosBBean.contam}" /> 
+ 				                     </p:outputPanel> 
+ 				                 </p:outputPanel> 
+ 				             </p:outputPanel> 
+				
+ 				         </p:outputPanel> 
+ 				     </p:outputPanel> 
+ 				     
+ 				    <p:outputPanel styleClass="row ">	
+						 <p:outputPanel styleClass="col-xs-8">
+	
+			                 <p:outputPanel styleClass="row">
+			                     <p:outputPanel styleClass="col-xs-5">
+			
+			                         <p:outputPanel styleClass="form-group">
+			                             <h:outputLabel for=""
+			                                 value="#{msg['page.transferencias.transferir.confirmacao.nome']}" />
+			                             <p:inputText styleClass="form-control" maxlength="80"
+			                                 value="#{transferenciaFavorecidosBBean.nomem}" />
+			                         </p:outputPanel>
+			                     </p:outputPanel>
+			
+			                     <p:outputPanel styleClass="col-xs-3">
+			
+			                         <p:outputPanel styleClass="table-responsive radio label100 no-padding"
+													style="margin-top: -17px; width: 300px;">
+											<h:selectOneRadio  tabindex="-1"
+																value="#{transferenciaFavorecidosBBean.tipoDocumentom}">
+												<f:selectItems 	value="#{transferenciaBBean.tiposDocumentos}" var="i"
+																itemLabel="#{i.label}" itemValue="#{i.label}" />
+														<p:ajax event="change" process="@this" listener="#{transferenciaBBean.onChangeTipoDocumento}" />
+												</h:selectOneRadio>
+									</p:outputPanel>
+			
+			                      <p:outputPanel
+			                          styleClass="form-group">
+			                          <p:inputText styleClass="form-control"
+			                              value="#{transferenciaFavorecidosBBean.documentom}"
+			                               maxlength="18" />
+			                      </p:outputPanel>
+			                  </p:outputPanel>
+			              </p:outputPanel>
+			          </p:outputPanel>
+		          </p:outputPanel>
+		    
+ </ui:composition>
+ 

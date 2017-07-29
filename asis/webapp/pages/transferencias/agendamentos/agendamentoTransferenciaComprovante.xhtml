@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.investimento.agendamentos.cancelar.comprovante.confirmacaoCancelamento']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<ui:include
+								src="/pages/transferencias/agendamentos/informacoesDetalheAgendamento.xhtml" />
+
+							<p:outputPanel
+								rendered="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoAgendamento != null}">
+								<p:separator />
+								<ui:include
+									src="/pages/transferencias/agendamentos/detalhes/#{agendamentoBBean.dto.detalheAgendamentosDTO.nomePagina}.xhtml" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<div align="center">
+								<strong>#{msg['pages.investimento.agendamentos.cancelar.comprovante.texto']}</strong>
+							</div>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator styleClass="margin-bottom-25" />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+						
+					       <p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3">
+									<p><h:outputLabel value="#{msg['page.commons.comprovante.autenticacao']}" /></p>	
+									<p><h:outputText value="#{agendamentoBBean.dto.autenticacaoBancaria}" /></p>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-3">
+									<p><h:outputLabel value="#{msg['page.commons.comprovante.data.hora']}" /></p>
+									<p><h:outputText value="#{agendamentoBBean.dto.dataHoraTransacao}">
+										<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+									   </h:outputText>
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator styleClass="custom-separator" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-7">
+							<p>#{msg['page.commons.comprovante.central.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p>#{msg['page.commons.comprovante.sac.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>
+

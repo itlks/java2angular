@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<!-- Inicio Codigo Barras -->
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel styleClass="space"
+			value="#{msg['page.pagamentos.codigoBarrasinformacoesPagamento.codigoDeBarras']}" />
+		<h:outputText
+			value="#{pagamentosContasCodigoBarrasBBean.fixedRSBarraDTO.OESCCODIGOBARRAS}" />
+	</p:outputPanel>
+	<!-- Fim Codigo Barras -->
+
+
+	<!-- Inicio Campos Estáticos -->
+	<ui:include
+		src="/pages/pagamentos/contas/pagamentoComCodigoBarras/codigoBarrasDetalhes.xhtml" />
+	<!-- Fim Campos Estáticos -->
+
+
+	<!-- Inicio Cartão -->
+	<p:outputPanel
+		rendered="#{not empty pagamentosContasCodigoBarrasBBean.cartaoDto}"
+		styleClass="space-t">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dadosCartao']}" />
+			<p:graphicImage
+				value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.img}"
+				styleClass="space" />
+			<h:outputText
+				value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.nomeCartao}"
+				styleClass="space" />
+			<h:outputText
+				value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.numeroFormatado}"
+				styleClass="space" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorTarifa']}" />
+			<h:outputText
+				value="#{pagamentosContasCodigoBarrasBBean.valorTarifa}">
+				<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+			</h:outputText>
+		</p:outputPanel>
+	</p:outputPanel>
+	<!-- Fim Cartão -->
+
+</ui:composition>

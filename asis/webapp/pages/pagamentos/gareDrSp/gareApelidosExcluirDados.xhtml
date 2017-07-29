@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.gare-dr.apelidoAlterar.confiraosdados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+					
+						<p:outputPanel styleClass="col-xs-4">
+							
+							
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.identificacao']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.apelido}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.codigoRecieta']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.codReceitaFormatado}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.inscEstadual']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.municipioFormatado}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.cnpjCpf']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.numeroCPF}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.inscDivida']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.inscDividaFormatado}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.nrAii']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.aimFormatado}</span>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.contribuinte']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.nomeContribuinte}</span>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.endereco']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.endereco}</span>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.telefone']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.telefoneFormatado}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+
+
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.tituloReceita']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.tributo}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.CNAE']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.cnae}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel  value="#{msg['page.pagamentos.gare-dr.apelidoAlterar.placaVeiculo']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.placaFormatado}</span>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+
+						<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel value="#{msg['page.pagamentos.gareDRSP.apelidos.label.observacoes']}" />
+								<span>#{gareDRSPBBean.apelidoSelecionadoDTO.observaciones}</span>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-12 text-right">
+					<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+						action="#{gareDRSPBBean.goApelido()}"
+						value="#{msg['page.gare.preenchimento.botoes.voltar']}" />
+
+					<p:blockUI block="continuarButton" trigger="continuarButton" />
+					<p:commandLink styleClass="btn btn-default" role="button"
+						id="continuarButton"
+						action="#{gareDRSPBBean.confirmarExclusaoApelido()}"
+						onclick="enviarHash"
+						value="#{msg['page.gare.preenchimento.botoes.continuar']}" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

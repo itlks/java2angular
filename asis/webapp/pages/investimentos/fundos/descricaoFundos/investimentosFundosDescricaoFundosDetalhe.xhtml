@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel id="panelComparacao">
+								<p:outputPanel>
+									<p:panelGrid styleClass="table-striped text-left" columnClasses="space-t">
+										<f:facet name="header">
+											<p:row>
+												<p:column colspan="1">
+													<h:outputText value="#{investimentosFundosDescricaoFundoBBean.detalheWrapper.nomeReduzido}" />
+												</p:column>
+												<p:column colspan="1"></p:column>
+											</p:row>
+										</f:facet>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.familia']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.nmFamilia}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.aplicacao.minima.inicial']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.aplicMinIni}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.aplicacao.minima.adicional']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.aplicMinIni}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.resgate.minimo']}" />
+											</p:column>
+											<p:column colspan="1">R$ <h:outputText converter="valorMonetarioConverter"
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.resgateMin}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{msg['pages.investimentos.fundos.descricao.saldo.minimo.permanencia']}" />
+											</p:column>
+											<p:column colspan="1">
+													<h:outputText value="#{investimentosFundosDescricaoFundoBBean.detalheWrapper.valorMinimoPerm}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="Resgate automático" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.resgateAuto eq 'S' ? 'Sim':'Não'}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.cota.fechamento.abertura']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.tpCota eq '0' ? 'Fechamento': 'Abertura'}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.movimentacao.aplicacao']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.msgMovimentacaoAplicacao}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.movimentacao.resgate']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.msgMovimentacaoResgate}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.credito.conta.resgate']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.msgCreditoEmConta}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.taxa.administracao']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.stringTaxaAdm eq '0' ? '0,00' : investimentosFundosDescricaoFundoBBean.stringTaxaAdm} %" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.taxa.saida']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.txSaida eq 'S' ? 'Sim':'Não'}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.taxa.performance']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.txPerformance eq 'S' ? 'Sim':'Não' }" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<a href="javascript:abrePopIR()" id="lnkIR" onFocus="this.blur();" class="link-termos">#{msg['pages.investimentos.fundos.resgatar.imposto.renda']}</a>
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.impostoRenda eq 'S' ? 'Sim':'Não' }" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<a href="javascript:abrePopIOF()" id="lnkIOF" onFocus="this.blur();" class="link-termos">#{msg['pages.investimentos.fundos.resgatar.iof']}</a>
+											</p:column>
+
+											<p:column colspan="1">
+												<h:outputText
+													value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.IOF eq 'S' ? 'Sim':'Não'}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.horario.movimentacao']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.caracteristicasFundoDTO.hrlimHB}" />
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="3">
+												<b>#{msg['pages.investimentos.fundos.descricao.canais.movimentacao']}</b>
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.internet.banking']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.mensagemMovimentacaoCanal.get(0)}"></h:outputText>
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.agencia']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.mensagemMovimentacaoCanal.get(1)}"></h:outputText>
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.auto.atendimento']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.mensagemMovimentacaoCanal.get(2)}"></h:outputText>
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1">
+												<h:outputText value="#{msg['pages.investimentos.fundos.descricao.superlinha']}" />
+											</p:column>
+											<p:column colspan="1">
+												<h:outputText value="#{investimentosFundosDescricaoFundoBBean.mensagemMovimentacaoCanal.get(3)}"></h:outputText>
+											</p:column>
+										</p:row>
+										<p:row>
+											<p:column colspan="1" styleClass="no-visible"></p:column>
+											<p:column colspan="1" styleClass="no-visible">
+												<p:commandLink value="#{msg['pages.investimentos.fundos.descricao.link.mais.informacoes']}"
+													oncomplete="window.open('http://www.santander.com.br/portal/pam/script/lamina/LaminaFundoAsset.do?codFundo=BCSB0019', '_blank')"
+													styleClass="link-termos no-visible" />
+											</p:column>
+										</p:row>
+									</p:panelGrid>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b no-visible no-print">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{investimentosFundosDescricaoFundoBBean.voltarMenu}">
+					#{msg['page.btn.voltar']}
+				</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" role="button" disabled="true">
+			        #{msg['pages.investimentos.fundos.descricao.btn.aplicar']}
+			    </p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		<script>
+			$(".table-click tbody tr").click(function() {
+				$(".table-click tbody tr").removeClass("yellow");
+				$(this).toggleClass("yellow");
+				$('html, body').animate({scrollTop:$(".btn-cinza").offset().top}, 1000);
+			});
+			function abrePop(pagina,largura,altura,rolagem,nome){
+				centroLeft = (screen.width / 2) - (largura / 2);
+				centroTop = (screen.height / 2) - (altura / 2);
+				window.open(pagina, nome, "width=" + largura + " ,height=" + altura + " ,top=" + centroTop + " ,left=" + centroLeft + ",scrollbars=" + rolagem +",status=yes");
+			}
+			function abrePopIR(){
+				abrePop('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=1959',714,521,'no','IR');
+			}	
+			function abrePopIOF(){
+				abrePop('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=1958',714,560,'no','IOF');
+			}
+			function tratarPaginaParaImpressaoPDF(){
+				$(".ui-tabs-nav").addClass("no-visible");
+			}
+		</script>
+	</ui:define>
+</ui:composition>

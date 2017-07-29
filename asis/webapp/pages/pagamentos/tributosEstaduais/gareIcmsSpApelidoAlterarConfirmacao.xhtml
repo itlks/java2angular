@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.confiraDados']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h:outputLabel class="h5 bold"
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.identificacao']}" />
+									<h:outputText class="h5 bold"
+										value=" #{apelidoBBean.configuracaoApelido.apelidoEscolhido.identificacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<br />
+							<hr />
+							<br />
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.receita']}" />
+										<p:inputText
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.codigoReceita}"
+											id="codigoReceita" onkeypress="onlyNumbers(event)"
+											onkeyup="onlyNumbers(event)" maxlength="4"
+											styleClass="form-control" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.inscricaoEstadual']}:" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.inscricaoEstadual}"
+											onkeyup="onlyNumbersGare(this)"
+											onkeypress="onlyNumbers(event)" maxlength="12" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.cpfCnpj']}" />
+										<p:inputText
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnpjCpf}"
+											id="cpfCnpj" styleClass="form-control"
+											onblur="maskCpfCnpj(this, event)"
+											onkeypress="onlyNumbers(event)" maxlength="18" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.inscricaoDivida']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.inscricaoDivida}"
+											id="inscricaoDivida" onkeypress="onlyNumbers(event)"
+											maxlength="13" onkeyup="onlyNumbersGare(this)" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.nrAiim']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.nrAiim}"
+											onkeyup="onlyNumbersGare(this)"
+											onkeypress="onlyNumbers(event)" maxlength="14" id="nrAiim" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.contribuinte']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.contribuinte}"
+											id="contribuinte" maxlength="50"
+											onblur="stringToUpperCase(this); removeAcento(this);" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-8">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.endereco']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.endereco}"
+											id="endereco"
+											onblur="stringToUpperCase(this); removeAcento(this);"
+											maxlength="38" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-md-4">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.telefone']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.telefone}"
+											id="telefone" maxlength="10" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.cnae']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnae}"
+											id="cnae" onblur="removeAcento(this)" maxlength="8" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.observacoes']}" />
+										<p:inputText styleClass="form-control"
+											value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.observacoes}"
+											id="observacoes" maxlength="30"
+											onblur="stringToUpperCase(this); removeAcento(this);"
+											rows="5" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					actionListener="#{apelidoBBean.goApelido()}" id="btnVoltar"
+					role="button"
+					value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.voltar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton styleClass="btn btn-default"
+					actionListener="#{gareIcmsSpBBean.continuarApelidosAlterarConfirmacao}"
+					id="btnContinuar" role="button"
+					value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.apelidosAlterar.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

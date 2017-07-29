@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<script type="text/javascript" language="javascript">
+			jQuery(window).load(function() {
+				validarChamadaPaginaSolicitarToken();
+			});
+		</script>
+		<p:remoteCommand name="validarChamadaPaginaSolicitarToken"
+			action="#{solicitarTokenBBean.validarChamadaPagina}" />
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow p-alert">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <h:outputText escape="false"
+							value="#{msg['page.administrativo.solicitar.token.info']}" />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.solicitar.token.selecione.token']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-xs-8">
+							<p:outputPanel styleClass="table-responsive radio mgHidden">
+								<h:selectOneRadio id="solTokenRdo"
+									value="#{solicitarTokenBBean.solicitarTokenAtivo}">
+									<f:selectItem itemLabel="Solicitar Token " itemValue="01" />
+									<p:ajax event="change" onstart="openLoad()" oncomplete="closeLoad()"
+										listener="#{solicitarTokenBBean.radioButtonSolicitarToken}"
+										update="formGeral" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+
+							<p:outputPanel styleClass="pull-right form-inline"
+								rendered="#{not empty solicitarTokenBBean.listaTokenEmpresaDTO}">
+								<h:outputLabel for="numeroTokens"
+									value="#{msg['page.administrativo.solicitar.token.quantidade']} "/>
+								<p:inputText styleClass=" form-control numeroChequeInput" id="numeroTokens"
+									value="#{solicitarTokenBBean.numeroTokens}" maxlength="5" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12" id="listaEmpresa"
+							rendered="#{not empty solicitarTokenBBean.listaTokenEmpresaDTO}">
+							<p:outputPanel>
+								<p:outputPanel styleClass="row"
+									rendered="#{solicitarTokenBBean.statusAtivo and not empty solicitarTokenBBean.listaTokenEmpresaDTO}">
+									<p:outputPanel styleClass="col-xs-6 space-t">
+										<p:outputPanel styleClass="form-group tamInput">
+											<h:outputLabel for="numeroParp"
+												value="#{msg['page.administrativo.solicitar.token.filial']}" />
+											<h:selectOneMenu name="tipoOrigemApreensao" id="numeroParp"
+												value="#{solicitarTokenBBean.numeroParp}">
+
+												<f:selectItem
+													itemLabel="#{msg['page.conta.corrente.consulta.copiaDeCheques.form.option.selecione']}"
+													itemValue="T" itemDisabled="" />
+												<f:selectItems
+													value="#{solicitarTokenBBean.listaTokenEmpresaSelectItem}" />
+												<p:ajax
+													listener="#{solicitarTokenBBean.atualizarListaEndereco}"
+													event="change" update="@form" />
+											</h:selectOneMenu>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:dataTable styleClass="tableHeaderInvisible"
+									id="tableEndereco"
+									selection="#{solicitarTokenBBean.listarDomicilioDTO}"
+									rendered="#{solicitarTokenBBean.statusAtivo and solicitarTokenBBean.listasDomicilio != null}"
+									rowKey="#{domicilio.seqEnder}"
+									value="#{solicitarTokenBBean.listasDomicilio}" var="domicilio"
+									emptyMessage="">
+									<p:column selectionMode="single"></p:column>
+									<p:column>
+										<p>
+											<h:outputText
+												value="#{domicilio.descLograd} #{msg['page.administrativo.solicitar.token.virgula']} #{domicilio.numImovel} 
+										#{domicilio.descComplem} #{msg['page.administrativo.solicitar.token.hifen']} #{domicilio.descBairro}" />
+										</p>
+										<p>
+											<h:outputText
+												value="#{domicilio.descMunic} #{msg['page.administrativo.solicitar.token.hifen']} #{domicilio.descUf}" />
+										</p>
+										<p>
+											<h:outputText value="#{domicilio.codCep}" />
+
+										</p>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+
+					</p:outputPanel>
+
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-cinza" id="btnVoltar"
+					action="#{solicitarTokenBBean.voltar}" role="button"
+					value="#{msg['page.btn.voltar']}" />
+				<p:commandButton styleClass="btn btn-default" id="btnContinuar"
+					action="#{solicitarTokenBBean.continuarSolicitacao}" role="button"
+					rendered="#{not empty solicitarTokenBBean.listaTokenEmpresaDTO}"
+					onstart="openLoad()" oncomplete="closeLoad()"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+
+</ui:composition>

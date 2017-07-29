@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareDRSPBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+
+	<ui:define name="content">
+
+		<!-- alerta -->
+		<ui:include src="/pages/pagamentos/gareDrSp/gareAviso.xhtml" />
+		<ui:include src="//commons/inicializaDL.xhtml"></ui:include>
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!-- alerta fim -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['gare.dr.preeenchimento.dados.pagamento']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- alerta -->
+
+		<!-- alerta fim -->
+		<p:outputPanel id="PanelPreenchimento" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputPanel styleClass="text-center flex-align-vh xs-height">
+								<p>
+									<strong>#{msg['page.gare.preenchimento.title.principal']}</strong>
+									<strong>#{msg['page.gare.preenchimento.title.principal2']}</strong>
+								</p>
+							</p:outputPanel>
+							<h:inputHidden value="#{gareDRSPBBean.clientHash}"
+								id="clientHash" />
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.gare.preenchimento.nome.razao']}</h:outputLabel>
+								<p:inputText id="nomeOuRazaoSocial_hash_7"
+									styleClass="form-control" maxlength="50"
+									disabled="#{gareDRSPBBean.usarApelido}"
+									value="#{gareDRSPBBean.dto.nomeOuRazaoSocial}"
+									onblur="stringToUpperCase(this)" />
+
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.gare.preenchimento.endereco']}</h:outputLabel>
+								<p:inputText id="endereco" styleClass="form-control"
+									maxlength="50" value="#{gareDRSPBBean.dto.endereco}"
+									disabled="#{gareDRSPBBean.usarApelido}"
+									onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.preenchimento.municipio']}</h:outputLabel>
+										<p:inputText styleClass="form-control"
+											onblur="replaceSpecialChars(this) ; stringToUpperCase(this)"
+											disabled="#{gareDRSPBBean.usarApelido}"
+											value="#{gareDRSPBBean.dto.municipio}" maxlength="50" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.preenchimento.uf']}</h:outputLabel>
+										<p:inputText id="uf" styleClass="form-control" maxlength="2"
+											disabled="true" value="#{gareDRSPBBean.dto.uf}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.preenchimento.telefone']}</h:outputLabel>
+										<p:inputMask id="telefone" styleClass="form-control"
+											maxlength="9" value="#{gareDRSPBBean.dto.telefone}"
+											disabled="#{gareDRSPBBean.usarApelido}"
+											onkeypress="onlyNumbersGare(this)" mask="99999-9999" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-8">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.preenchimento.tributo']}</h:outputLabel>
+										<p:inputTextarea id="tributoReceita" styleClass="form-control"
+											style="height:114px" rows="5" cols="26" autoResize="false"
+											maxlength="30" disabled="true"
+											value="#{gareDRSPBBean.dto.tributoReceita}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.preenchimento.cnae']}</h:outputLabel>
+										<p:inputText id="cnae" styleClass="form-control" maxlength="8"
+											value="#{gareDRSPBBean.dto.cnae}"
+											disabled="#{gareDRSPBBean.usarApelido}"
+											onblur="replaceSpecialCharsWithHifen(this); stringToUpperCase(this)" />
+										<p:spacer width="100%" height="20" />
+										<h:outputLabel>#{msg['page.gare.preenchimento.placa.veiculo']}</h:outputLabel>
+										<p:inputText styleClass="form-control"
+											value="#{gareDRSPBBean.dto.placaVeiculo}"
+											onkeypress="replaceSpecialChars(this)"
+											onblur="replaceSpecialChars(this); stringToUpperCase(this)"
+											disabled="#{gareDRSPBBean.usarApelido}" maxlength="7" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="observacoes">#{msg['page.gare.preenchimento.obs']}</h:outputLabel>
+								<p:inputTextarea id="observacoes" styleClass="form-control"
+									rows="5" cols="60" autoResize="false" maxlength="30"
+									value="#{gareDRSPBBean.dto.observacoes}"
+									disabled="#{gareDRSPBBean.usarApelido}" counter="maxChar"
+									counterTemplate="{0}"
+									onblur="stringToUpperCase(this); replaceSpecialChars(this)">
+								</p:inputTextarea>
+								<h:outputText
+									value="#{msg['gare.dr.preeenchimento.dados.limite']}" />
+								<h:outputLabel id="maxChar" styleClass="inline" />
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6 border-left">
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.vencimento']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<!-- 									<p:inputMask id="dataVencimento" styleClass="form-control" -->
+									<!-- 										mask="99/99/9999" value="#{gareDRSPBBean.dto.dataVencimento}" /> -->
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar value="#{gareDRSPBBean.dto.dataVencimento}"
+											maxlength="10" id="dataVencimento" pattern="dd/MM/yyyy"
+											mask="99/99/9999" onkeyup="mascaraData(this, event)"
+											showButtonPanel="today" converter="dateStringConverter">
+										</p:calendar>
+
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.code.receita']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="codigoReceita_hash_1"
+										styleClass="form-control" maxlength="4"
+										disabled="#{gareDRSPBBean.usarApelido}"
+										value="#{gareDRSPBBean.dto.codigoReceita}"
+										onkeyup="onlyNumbersGare(this)"
+										onkeypress="onlyNumbersGare(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.inscricao.estadual']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="inscricaoEstadual_hash_2"
+										styleClass="form-control" maxlength="12"
+										disabled="#{gareDRSPBBean.usarApelido}"
+										value="#{gareDRSPBBean.dto.inscricaoEstadual}"
+										onkeyup="onlyNumbersGare(this)"
+										onkeypress="onlyNumbersGare(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.cpf.cnpj']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="cpfCnpj_hash_3" styleClass="form-control"
+										label="cpfCnpj" maxlength="18"
+										disabled="#{gareDRSPBBean.usarApelido}"
+										value="#{gareDRSPBBean.dto.cpfCnpj}"
+										onchange="CheckCGCCPF(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.inscricao.divida']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="inscricaoDivida_hash_4"
+										styleClass="form-control" maxlength="13"
+										disabled="#{gareDRSPBBean.usarApelido}"
+										value="#{gareDRSPBBean.dto.inscricaoDivida}"
+										onkeyup="onlyNumbersGare(this)"
+										onkeypress="onlyNumbersGare(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.referencia']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputMask id="referencia" styleClass="form-control"
+										maxlength="6" value="#{gareDRSPBBean.dto.referencia}"
+										onkeyup="onlyNumbersGare(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.aiim']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="numeroAIIM_hash_5" styleClass="form-control"
+										maxlength="13" value="#{gareDRSPBBean.dto.numeroAIIM}"
+										disabled="#{gareDRSPBBean.usarApelido}"
+										onkeyup="onlyNumbersGare(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.valor.receita']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="valorReceita" styleClass="form-control"
+										maxlength="18" value="#{gareDRSPBBean.dto.valorReceita}"
+										onblur="maskMoneyOnBlur(this)">
+										<p:ajax update="valorTotal_hash_6" event="blur"
+											listener="#{gareDRSPBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.juros.mora']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="jurosMora" styleClass="form-control"
+										maxlength="14" value="#{gareDRSPBBean.dto.jurosMora}"
+										onblur="maskMoneyOnBlur(this)">
+										<p:ajax update="valorTotal_hash_6" event="blur"
+											listener="#{gareDRSPBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="">#{msg['page.gare.preenchimento.multa.mora']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="multaMora" styleClass="form-control"
+										maxlength="14" value="#{gareDRSPBBean.dto.multaMora}"
+										onblur="maskMoneyOnBlur(this)">
+										<p:ajax update="valorTotal_hash_6" event="blur"
+											listener="#{gareDRSPBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="">#{msg['page.gare.preenchimento.vago.12']}</h:outputLabel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="" value="#{msg['page.gare.preenchimento.honorario.advocativos']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="honorariosAdvocaticios"
+										styleClass="form-control" maxlength="14"
+										value="#{gareDRSPBBean.dto.honorariosAdvocaticios}"
+										onblur="maskMoneyOnBlur(this)">
+										<p:ajax update="valorTotal_hash_6" event="blur"
+											listener="#{gareDRSPBBean.calcularValorTotal}" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="" value="#{msg['page.gare.preenchimento.valor.total']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<p:inputText id="valorTotal_hash_6" styleClass="form-control"
+										maxlength="15" disabled="true"
+										value="#{gareDRSPBBean.dto.valorTotal}"
+										onkeyup="maskMoney(this)" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p>&nbsp;</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="ui-widget col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="panelApelidocheck" styleClass="col-xs-12"
+						rendered="#{!gareDRSPBBean.usarApelido}">
+						<p:outputPanel styleClass="row">
+
+							<p:outputPanel styleClass="col-xs-5">
+								<p:outputPanel styleClass="checkbox">
+									<p:selectBooleanCheckbox id="cb1"
+										value="#{gareDRSPBBean.dto.gravaApelido}">
+										<p:ajax update="panelApelidocheck" />
+									</p:selectBooleanCheckbox>
+									<h:outputLabel for="cb1"
+										value="#{msg['page.gare.preenchimento.confirma.cadastro']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel id="panelApelido"
+								styleClass="col-xs-7 inline-form darf-apelido"
+								rendered="#{gareDRSPBBean.dto.gravaApelido}">
+								<p:outputPanel styleClass="col-xs-2">
+									<h:outputLabel>#{msg['page.gare.preenchimento.apelido']}</h:outputLabel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<p:inputText id="apelido" styleClass="form-control"
+										value="#{gareDRSPBBean.dto.apelido}" maxlength="20"
+										onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6"
+									rendered="#{gareDRSPBBean.dto.gravaApelido}">
+									<h:outputLabel
+										value="#{msg['page.pagamentos.tributos.federais.darfSimples.preenchimento.apelido.limite.caracter']}" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br></br>
+					<br></br>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row form-group">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{gareDRSPBBean.voltarParaMenu}"
+					value="#{msg['page.gare.preenchimento.botoes.voltar']}"
+					immediate="true" />
+
+				<p:blockUI block="continuarButton" trigger="continuarButton" />
+				<p:commandLink styleClass="btn btn-default" role="button"
+					id="continuarButton"
+					action="#{gareDRSPBBean.confirmarTelaPreenchimento}"
+					onclick="enviarHash()"
+					value="#{msg['page.gare.preenchimento.botoes.continuar']}" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+
+		<!-- FIM html/pimefaces -->
+
+	</ui:define>
+</ui:composition>

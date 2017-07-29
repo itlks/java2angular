@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<f:event type="preRenderView"
+			listener="#{recargaPrePagoBBean.carregaListaTelefones()}" />
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p:outputLabel> #{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto1']}</p:outputLabel>
+						<p>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto2']}</p>
+						<p>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto3']}</p>
+						<p>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto4']}</p>
+						<p:commandLink action="#{recargaPrePagoBBean.initLimites}">
+							<h:outputText
+								value="#{msg['page.pagamentos.telefoneprepago.recarga.limites']}" />
+						</p:commandLink>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+			
+		<ui:include src="/pages/limites/limites.xhtml" />
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.telefoneprepago.recarga.informe']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel>
+						<strong><h5 class="space-b">#{msg['page.pagamentos.telefoneprepago.recarga.novopagamento']}</h5></strong>
+						<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+
+						<p:commandLink
+							action="#{recargaPrePagoBBean.continuarEmPreencher}"
+							onstart="openLoad()" oncomplete="closeLoad()"
+							value="#{msg[ 'page.pagamentos.telefoneprepago.recarga.preencherdados']}" />
+						<p:separator styleClass="space-b" />
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5 class="space-b">#{msg['page.pagamentos.telefoneprepago.recarga.apelido.recargascadastradas']}</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel>
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela" rowKey="#{tel}" selectionMode="single"
+									value="#{recargaPrePagoBBean.listaTelefones}" var="tel"
+									emptyMessage="#{msg['page.pagamentos.telefoneprepago.recarga.lista.empty']}">
+
+									<p:ajax event="rowSelect"
+										listener="#{recargaPrePagoBBean.onSelectLinha}" />
+									<p:column styleClass="col-xs-2"
+										headerText="#{msg['page.pagamentos.telefoneprepago.recarga.apelido.identificacao']}">
+										<h:outputText value="#{tel.apelido}" />
+									</p:column>
+									<p:column styleClass="col-xs-5"
+										headerText="#{msg['page.pagamentos.telefoneprepago.recarga.telefone']}">
+										<h:outputText value="#{tel.celularFormatado}" />
+									</p:column>
+									<p:column styleClass="text-right">
+										<h:graphicImage styleClass="custom-icons"
+											value="/images/u1239.png" />
+										<p:commandLink id="cmdLnkAlterar" role="button"
+											action="#{recargaApelidoBBean.continuarEmAlterarConfirmacao(tel)}"
+											value="#{msg['pages.pagamentos.telefonePrePago.recarga.lista.column.alterar']}" />
+									</p:column>
+									<p:column styleClass="text-center">
+										<h:graphicImage styleClass="custom-icons"
+											value="/images/u1241.png" />
+										<p:commandLink id="cmdLnkExcluir" role="button"
+											action="#{recargaApelidoBBean.continuarEmExcluirConfirmacao(tel)}"
+											value="#{msg['pages.pagamentos.telefonePrePago.recarga.lista.column.excluir']}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<!-- Gerar nova referencia de operaçãoo inicio -->
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!--  Gerar nova referencia de operação  fim -->
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button" action="#{recargaPrePagoBBean.voltarEmMenu}"
+					value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

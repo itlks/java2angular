@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateHomeNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-6 noPaddingR">
+
+				<p:outputPanel styleClass="row" id="painelTopoEsquerdo">
+
+					<p:outputPanel autoUpdate="true">
+						<ui:include src="/commons/crm/aviso.xhtml" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12" id="painelSaldo"
+						rendered="#{homeBBean.exibirBannerSaldo}">
+						<p:outputPanel styleClass="titulo-painel">
+							<h4 class="pull-left">
+								<h:outputText value="#{msg['pages.home.saldo']}" />
+							</h4>
+							<p:commandLink styleClass="pull-right"
+								value="#{homeBBean.saldoVisivel ? msg['pages.home.saldo.ocultar'] : msg['pages.home.saldo.exibir']}"
+								action="#{homeBBean.exibirOcultarSaldo}"
+								update=":formGeral:painelTopoEsquerdo" />
+						</p:outputPanel>
+
+						<p:outputPanel
+							styleClass="box-shadow saldo #{campanhasCRMBBean.avisoDTO.classeSaldoCompleto}"
+							rendered="#{homeBBean.saldoVisivel}" autoUpdate="true">
+
+							<p:outputPanel styleClass="listaSaldo"
+								rendered="#{homeBBean.exibirConteudoSaldo}">
+								<p:outputPanel styleClass="row space-t">
+									<p:outputPanel styleClass="col-xs-12">
+										<p>
+											<span>#{homeBBean.saldos[0].descricao}</span> <span
+												class="pull-right">#{homeBBean.saldos[0].valor}</span>
+										</p>
+										<p>
+											<span>#{homeBBean.saldos[1].descricao}</span> <span
+												class="pull-right">#{homeBBean.saldos[1].valor}</span>
+										</p>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row last">
+									<p>
+										<span>#{homeBBean.saldos[2].descricao}</span> <span
+											class="pull-right">#{homeBBean.saldos[2].valor}</span>
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="listaSaldo"
+								rendered="#{!homeBBean.exibirConteudoSaldo}">
+								<p:outputPanel styleClass="row space-t">
+									<p:outputPanel styleClass="col-xs-12 text-center"
+										style="padding: 30px 0;">
+										<span><h:outputText
+												value="#{msg['pages.home.homenovo.naoAcessoVisSaldos']}" /></span>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row"
+								rendered="#{homeBBean.exibirConteudoSaldo}">
+								<p:outputPanel styleClass="col-xs-12 text-right">
+									<p:commandLink value="#{msg['pages.home.saldo.completo']}"
+										action="#{menuBBean.redirectAcessoRapido}">
+										<f:param name="idMenu" value="4004" />
+										<f:param name="descricaoMenuAvo" value="Conta Corrente" />
+									</p:commandLink>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<ui:include src="/commons/crm/carousel.xhtml" />
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-6 noPaddingR "
+				rendered="#{homeBBean.totalDePaineisExibidos>0}">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 homeCoachMark2">
+
+						<p:outputPanel styleClass="titulo-painel homeCarrosel radiusT">
+							<p:outputPanel styleClass="tituloCarrosel">
+
+								<p:remoteCommand name="proxPainel"
+									rendered="#{homeBBean.totalDePaineisExibidos>1}"
+									actionListener="#{homeBBean.avancarPainel}"
+									update=":formGeral, graficoInvestimento" />
+
+								<p:commandLink styleClass="pull-left"
+									rendered="#{homeBBean.totalDePaineisExibidos>1}"
+									actionListener="#{homeBBean.voltarPainel}"
+									update=":formGeral, graficoInvestimento">
+									<i class="fa fa-arrow-circle-left" aria-hidden="true" />
+								</p:commandLink>
+
+								<h4>
+									<h:outputText
+										rendered="#{homeBBean.widgetFavorito eq 'maquininhaGetNet'}"
+										value="#{msg['page.home.GetNet.titulo']}" />
+									<h:outputText
+										rendered="#{homeBBean.widgetFavorito eq 'painelCobranca'}"
+										value="#{msg['page.home.painelCobranca.titulo']}" />
+									<h:outputText
+										rendered="#{homeBBean.widgetFavorito eq 'painelInvestimento'}"
+										value="#{msg['page.home.painelInvestimentos.titulo']}" />
+									<h:outputText
+										rendered="#{(homeBBean.widgetFavorito eq 'CodigoDeBarras') and (homeBBean.exibeCodigoDeBarras eq 'S')}"
+										value="#{msg['pages.home.PagamentoComCodigoDeBarras']}" />
+								</h4>
+
+								<p:commandLink styleClass="pull-right"
+									rendered="#{homeBBean.totalDePaineisExibidos>1}"
+									actionListener="#{homeBBean.avancarPainel}"
+									update=":formGeral, graficoInvestimento">
+									<i class="fa fa-arrow-circle-right pull-right"
+										aria-hidden="true" />
+								</p:commandLink>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel
+							rendered="#{(homeBBean.widgetFavorito eq 'CodigoDeBarras') and (homeBBean.exibeCodigoDeBarras eq 'S')}">
+							<ui:include src="pagamentoCodigoBarra.xhtml" />
+						</p:outputPanel>
+
+						<ui:include src="painelInvestimentos.xhtml" />
+						<ui:include src="painelGetNet.xhtml" />
+						<ui:include src="painelCobranca.xhtml" />
+						<ui:include src="painelFixo.xhtml" />
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-6 noPaddingR"
+				rendered="#{homeBBean.totalDePaineisExibidos eq 0}">
+
+				<p:outputPanel styleClass="row ">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:graphicImage value="/images/homeEsfera.png" height="235px"
+							width="550px">
+						</p:graphicImage>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-6 paddingL7">
+
+				<p:outputPanel styleClass="row">
+
+					<p:outputPanel styleClass="col-xs-12 homeCoachMark4">
+						<p:inputText type="hidden" styleClass="textCoachMark"
+							value="Aqui você pode configurar o Acesso Rápido como desejar." />
+						<p:inputText type="hidden" styleClass="posicaoPainel text-right"
+							value="width: 400px; left: -425px; display: block; position: absolute;" />
+
+						<p:outputPanel styleClass="titulo-painel radiusT">
+							<h4>
+								<h:outputText value="#{msg['pages.home.acessoRapido']}" />
+							</h4>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="box-shadow acessoRapido radiusB">
+							<p:outputPanel styleClass="row" id="painelAcessoRapido"
+								autoUpdate="true">
+
+								<ui:repeat var="menuAcessoRapido"
+									value="#{homeBBean.listaAcessoRapido}" varStatus="status">
+									<p:outputPanel styleClass="col-xs-4"
+										rendered="#{! menuAcessoRapido.naoCadastrado and status.index lt 6}">
+										<p:outputPanel styleClass="fill">
+											<p:commandLink
+												action="#{homeBBean.excluirAcessoRapido(menuAcessoRapido)}"
+												update=":formGeral:painelAcessoRapido">
+												<i class="fa fa-times" aria-hidden="true" />
+											</p:commandLink>
+											<i class="#{menuAcessoRapido.icone}" />
+											<br />
+											<span>#{menuAcessoRapido.descricaoMenuAvo}</span>
+											<br />
+											<p:commandLink disabled="#{menuAcessoRapido.bloquearAcesso}"
+												async="true" immediate="true"
+												action="#{menuBBean.redirectAcessoRapido}"
+												value="#{menuAcessoRapido.descricaoMenuNeto}">
+												<f:param name="idMenu"
+													value="#{menuAcessoRapido.idMenuNeto}" />
+												<f:param name="descricaoMenuAvo"
+													value="#{menuAcessoRapido.descricaoMenuAvo}" />
+											</p:commandLink>
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:remoteCommand name="habilitarDialog"
+										actionListener="#{campanhasCRMBBean.habilitarDialog}"
+										update=":formGeral:dialogTelaInterna" immediate="true" />
+
+									<p:commandLink
+										rendered="#{menuAcessoRapido.naoCadastrado and status.index lt 6}"
+										action="#{acessoRapidoBBean.goAcessoRapidoConfiguracao}">
+										<p:outputPanel styleClass="col-xs-4">
+											<p:outputPanel styleClass="empty">
+												<i class="ic icon-outros-servicos" />
+												<br />
+												<span><h:outputText
+														value="#{msg['pages.home.acessoRapido.inserir']}" /></span>
+											</p:outputPanel>
+										</p:outputPanel>
+									</p:commandLink>
+								</ui:repeat>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+		</p:outputPanel>
+		<ui:include src="/commons/crm/crmHome.xhtml" />
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" /> 
+		<script>
+			function changeStyleIcon(atributo) {
+				var className = document.getElementById(atributo).className;
+				if (className === 'fa fa-angle-down pull-right') {
+					document.getElementById(atributo).className = 'fa fa-angle-up pull-right';
+				} else {
+					document.getElementById(atributo).className = 'fa fa-angle-down pull-right';
+				}
+			};
+		</script>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['page.mobileToken.excluirPreenchimento.alerta.texto1']}</p>
+						<p>
+							<strong>#{msg['page.mobileToken.excluirPreenchimento.alerta.atencao']}</strong>
+							#{msg['page.mobileToken.excluirPreenchimento.alerta.se.voce.excluir']}
+							<strong>#{msg['page.mobileToken.excluirPreenchimento.alerta.todos']}</strong>
+							#{msg['page.mobileToken.excluirPreenchimento.alerta.texto2']}
+						</p>
+						<p>
+							#{msg['page.mobileToken.excluirPreenchimento.alerta.texto3']}
+							<h:outputLink
+								value="#{msg['page.mobileToken.excluirPreenchimento.alerta.link.endereco']}"
+								target="_blank"
+								
+								title="#{msg['page.mobileToken.excluirPreenchimento.alerta.link.title']}">
+								<p:commandLink oncomplete="window.open('http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=8987', 'popup', 'toolbar=no,menubar=no,scrollbars=yes,location=no,left=350,top=50,width=650, height=600')">#{msg['page.mobileToken.excluirPreenchimento.alerta.link.texto']}</p:commandLink>.
+							</h:outputLink>
+						</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" rendered="#{!excluirMobileTokenBBean.usuariosSemDados}">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.mobileToken.excluirPreenchimento.titulo.escolha.usuarios']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+							<!-- Inicio das propriedades Master -->
+							<p:outputPanel
+								rendered="#{excluirMobileTokenBBean.listMasters != null &amp;&amp; !excluirMobileTokenBBean.listMasters.isEmpty()}">
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-md-12">
+										<p:outputPanel styleClass="sub-open">
+											<h4>
+												#{msg['page.mobileToken.excluirPreenchimento.table.header.masters']}
+												<i id="iconExpandirMaster"
+													class="fa fa-angle-down pull-right"
+													style="cursor: hand; cursor: pointer;"
+													onclick="showGrid('formGeral:dataMaster'); changeStyleIcon('iconExpandirMaster')">
+												</i>
+											</h4>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:dataTable id="dataMaster" var="user"
+									value="#{excluirMobileTokenBBean.listMasters}"
+									selection="#{excluirMobileTokenBBean.listMastersSelecionados}"
+									rowKey="#{user.id}"
+									tableStyleClass="table table-striped">
+
+									<p:column id="selectAllMasters" selectionMode="multiple" onclick="chkCLick" />
+
+									<p:column style="width:40%"
+										headerText="#{msg['page.mobileToken.excluirPreenchimento.table.header.nome.completo']}">
+										<h:outputText value="#{user.nomeCompleto}" />
+									</p:column>
+									<p:column style="width:40%"
+										headerText="#{msg['page.mobileToken.excluirPreenchimento.table.header.nome.acesso']}">
+										<h:outputText value="#{user.nomeAcesso}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.mobileToken.excluirPreenchimento.table.header.situacao']}">
+										<h:outputText value="#{user.situacao}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+							<!-- Final das propriedades Master -->
+
+							<p:outputPanel style="margin:50px" />
+
+							<!-- Inicio das propriedades Secundario -->
+							<p:outputPanel id="panelPropriedadesSecundario"
+								rendered="#{excluirMobileTokenBBean.listSecundarios != null &amp;&amp; !excluirMobileTokenBBean.listSecundarios.isEmpty()}">
+								
+								
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-md-12">
+										<p:outputPanel styleClass="sub-open">
+											<h4>
+											#{msg['page.mobileToken.excluirPreenchimento.titulo.secundarios']}
+											<i id="iconExpandirSecundario"
+												class="fa fa-angle-down pull-right"
+												style="cursor: hand; cursor: pointer;"
+												onclick="showGrid('formGeral:panelSecundario'); changeStyleIcon('iconExpandirSecundario')"></i>
+											</h4>
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:separator />
+								</p:outputPanel>
+									
+								<p:outputPanel id="panelSecundario">
+									<p>
+										<span>#{msg['page.mobileToken.excluirPreenchimento.texto.deseja.pesquisar']}</span>
+									</p>
+									<br />
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-md-3">
+											<p:outputLabel for="inBxNome"
+												value="#{msg['page.mobileToken.excluirPreenchimento.busca.nome']}" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-md-3">
+											<p:outputLabel for="calDe"
+												value="#{msg['page.mobileToken.excluirPreenchimento.busca']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="row space-b">
+
+										<p:outputPanel styleClass="col-md-3">
+											
+											<p:inputText id="inBxNome" styleClass="form-control"
+												value="#{excluirMobileTokenBBean.mobileToken.nome}" />
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="col-md-3">
+											
+											<p:outputPanel styleClass="icon-data-input">
+												<i class="fa fa-calendar"></i>
+												<p:calendar id="calDe"
+													value="#{excluirMobileTokenBBean.mobileToken.dataInicial}"
+													pattern="dd/MM/yyyy" converter="dateConverterFormat"
+													placeholder="#{msg['page.mobileToken.excluirPreenchimento.busca.de']}" 
+													onkeypress="mascaraData(this, event)">
+
+													<p:ajax event="change" update="calDe"></p:ajax>
+
+												</p:calendar>
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="col-md-3">
+											<p:outputPanel styleClass="icon-data-input">
+												<i class="fa fa-calendar"></i>
+												<p:calendar id="calAte" 
+													value="#{excluirMobileTokenBBean.mobileToken.dataFinal}"
+													pattern="dd/MM/yyyy" converter="dateConverterFormat"
+													placeholder="#{msg['page.mobileToken.excluirPreenchimento.busca.ate']}"
+													onkeypress="mascaraData(this, event);">
+
+													<p:ajax event="change" update="calAte"></p:ajax>
+												</p:calendar>
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="col-md-3">
+											
+											<p:commandLink id="btnBuscar" styleClass="btn btn-default"
+												role="button"
+												action="#{excluirMobileTokenBBean.validarPesquisarUsuarioSecundario}"
+												value="#{msg['page.mobileToken.excluirPreenchimento.commandlink.buscar']}" />
+
+											<p:spacer width="30" />
+
+											<p:commandLink id="btnMostrarTodos"
+												styleClass="btn btn-default" role="button"
+												action="#{excluirMobileTokenBBean.mostrarTodos}"
+												rendered="#{excluirMobileTokenBBean.btnMostrarTodos}"
+												value="#{msg['page.mobileToken.excluirPreenchimento.commandlink.mostrarTodos']}"
+												update="formGeral:panelSecundario"/>
+
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row space-b" rendered="false">
+										<p:outputPanel styleClass="col-md-12">
+												<h4>#{msg['page.mobileToken.excluirPreenchimento.titulo.secundarios']}</h4>	
+										</p:outputPanel>
+									</p:outputPanel>
+									
+									<p:dataTable id="dataSecundario" var="user"
+										value="#{excluirMobileTokenBBean.listSecundarios}"
+										selection="#{excluirMobileTokenBBean.listSecundariosSelecionados}"
+										rowKey="#{user.id}" emptyMessage="Nenhum dado encontrado"
+										tableStyleClass="table table-striped"
+										styleClass="space-b">
+
+										<p:column id="selectAllSecundarios" selectionMode="multiple" onclick="chkCLick" />
+
+										<p:column style="width:40%"
+											headerText="#{msg['page.mobileToken.excluirPreenchimento.table.header.nome.completo']}">
+											<h:outputText value="#{user.nomeCompleto}" />
+										</p:column>
+										<p:column style="width:40%"
+											headerText="#{msg['page.mobileToken.excluirPreenchimento.table.header.nome.acesso']}">
+											<h:outputText value="#{user.nomeAcesso}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['page.mobileToken.excluirPreenchimento.table.header.situacao']}">
+											<h:outputText value="#{user.situacao}" />
+										</p:column>
+
+									</p:dataTable>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+	
+
+		<p:outputPanel styleClass="row space-b">
+			<h:panelGroup styleClass="col-md-12 text-right">
+				<p:commandButton id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{excluirMobileTokenBBean.voltar}" role="button"
+					value="#{msg['page.btn.voltar']}" />
+
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					rendered="#{!excluirMobileTokenBBean.usuariosSemDados}"
+					action="#{excluirMobileTokenBBean.continuarEmPreenchimento}"
+					role="button" value="#{msg['page.btn.continuar']}" />
+					<p:defaultCommand target="btnContinuar"/>
+			</h:panelGroup>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

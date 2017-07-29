@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog style="overflow-y" header="Central de Atendimento" id="painelSecundarioAcesso" modal="false" closable="true" visible="#{painelSecundarioBBean.acessoRapidoVisivel}" styleClass="popover-submenu box-shadow"
+		onShow="adjustPositionning($('#formPainelSecundario\\:painelSecundarioBotaoAcesso'), $('#formPainelSecundario\\:painelSecundarioAcesso'), 115)" 
+		widgetVar="painelSecundarioAcessoVar">
+		
+		<div class="arrow-submenu">
+			<p:graphicImage value="/images/arrow-popover.png"/>
+		</div>
+		
+		<div class="popover-content" style="overflow-x: hidden; max-height: 450px; width:268px">
+			<div class="row">
+				<div id="idPainelSecundario" class="col-md-12">
+					<ui:repeat var="itemAvo" value="#{painelSecundarioBBean.listaAcessoRapido}">
+						<p>
+							<h:outputText value="#{itemAvo.descricaoMenu}" styleClass="titulo-acesso-rapido" style="font-weight: bold; font-size: 14px"/>
+						</p>
+						
+						<ui:repeat var="item" value="#{itemAvo.menusNetos}">
+							<p>
+								<p:commandLink disabled="#{item.bloquearAcessoRapido}" async="true" immediate="true" action="#{menuBBean.redirectAcessoRapido}"	value="#{item.descricaoMenu}" styleClass="link-acesso-rapido">
+									<f:param name="idMenu" value="#{item.idMenu}" />
+									<f:param name="descricaoMenuAvo" value="#{itemAvo.descricaoMenu}" />
+								</p:commandLink>
+							</p>	
+						</ui:repeat>
+						
+						<p>
+							<p:spacer height="10"></p:spacer>
+						</p>
+					</ui:repeat>
+					
+					<p:outputPanel rendered="#{empty painelSecundarioBBean.listaAcessoRapido}">
+						<p class="text-center">Você ainda não configurou seus links de Acesso Rápido.</p>
+						<p class="text-center"><h:commandLink value="Clique aqui " action="#{painelSecundarioBBean.configurarAcessoRapido}"/> para configurar.</p>
+					</p:outputPanel>
+				</div>
+			</div>
+		</div>		
+				
+		<div class="popover-footer">
+			<p:commandLink disabled="#{painelSecundarioBBean.bloquearAcessoRapido}" styleClass="btn btn-default" action="goAcessoRapidoConfiguracao" role="button" value="Alterar" rendered="#{not empty painelSecundarioBBean.listaAcessoRapido}"/>
+		</div>
+	</p:dialog>
+</ui:composition>

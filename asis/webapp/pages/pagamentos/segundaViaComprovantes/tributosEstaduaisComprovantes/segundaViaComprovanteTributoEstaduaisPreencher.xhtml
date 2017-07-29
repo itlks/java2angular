@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+        <p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-md-12">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">                               
+                <i class="fa fa-exclamation-circle"></i>
+                 <span class="site-map">
+                 <p>#{msg['page.segundaViaComprovantes.veiculos.segvia.alerta.30dias']}</p>
+                  <p>#{msg['page.segundaViaComprovantes.veiculos.segvia.help.1']}
+                 		<p:commandLink id="info" role="button" action="#{segundaViaComprovanteTributosEstaduaisBBean.initLimites}" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.link']}"></p:commandLink>
+                    </p>
+                </span>
+            </p:outputPanel>  
+          </p:outputPanel>                        
+        </p:outputPanel>     
+           
+		<ui:include src="/pages/limites/limites.xhtml"/>
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['page.segundaViaComprovantes.veiculos.segvia.subTitulo']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+		<p:outputPanel styleClass="row" id="painelGeral">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+				
+					<p:outputPanel styleClass="row space-b">
+                    	<p:outputPanel styleClass="col-md-2">
+                    	
+                    	
+		                   <!-- SELECT PAGAMENTO SELEÇÃO -->
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel for="pagamentoComboBox" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.title.combobox.pagamento']}" />
+								<h:selectOneMenu id="pagamentoComboBox" value="#{segundaViaComprovanteTributosEstaduaisBBean.pagamentoSelecionado}">
+									<f:selectItem itemLabel="#{msg['page.segundaViaComprovantes.veiculos.segvia.combobox.selecione']}" itemValue="" noSelectionOption="true" />
+									<f:selectItems value="#{segundaViaComprovanteTributosEstaduaisBBean.listaPagamento}" itemLabel="#{pagamento.nome}" itemValue="#{pagamento.codigo}"  var="pagamento" />
+									<p:ajax listener="#{segundaViaComprovanteTributosEstaduaisBBean.selectPagamento}" update="painelGeral" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+							<!-- SELECT PAGAMENTO SELEÇÃO -->
+						</p:outputPanel>
+
+                          <!-- SELECT TRIBUTO SELEÇÃO -->
+						<p:outputPanel styleClass="col-md-3" rendered="#{segundaViaComprovanteTributosEstaduaisBBean.renderContas}">
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel for="contasComboBox" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.title.combobox.contas']}" />
+								<h:selectOneMenu id="contasComboBox" value="#{segundaViaComprovanteTributosEstaduaisBBean.contaSelecionada}">
+									<f:selectItem itemLabel="#{msg['page.segundaViaComprovantes.veiculos.segvia.combobox.selecione']}" itemValue="" noSelectionOption="true" />
+									<f:selectItems itemLabel="#{conta.nome}" itemValue="#{conta.codigo}" value="#{segundaViaComprovanteTributosEstaduaisBBean.listaContas}" var="conta" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+						  <!-- SELECT TRIBUTO SELEÇÃO -->
+						
+						 <!-- SELECT PAGAMENTO SELEÇÃO -->
+						<p:outputPanel styleClass="col-md-3" rendered="#{segundaViaComprovanteTributosEstaduaisBBean.renderFormasPagamento}">
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel for="formasPagamentoComboBox" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.title.combobox.forma.de.pagamento']}" />
+								<h:selectOneMenu id="formasPagamentoComboBox" value="#{segundaViaComprovanteTributosEstaduaisBBean.formaPagamentoSelecionada}">
+									<p:ajax listener="#{segundaViaComprovanteTributosEstaduaisBBean.selectFormaPagamento}" update="@(.tabela-cartoes)" />
+									<f:selectItem itemLabel="#{msg['page.segundaViaComprovantes.veiculos.segvia.combobox.selecione']}" itemValue="" noSelectionOption="true" />
+									<f:selectItems itemLabel="#{formaPagamento.nome}" itemValue="#{formaPagamento.codigo}" value="#{segundaViaComprovanteTributosEstaduaisBBean.listaFormasPagamento}" var="formaPagamento" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+						 <!-- SELECT PAGAMENTO SELEÇÃO -->
+						
+						  <!-- SELECT PAGAMENTO CARTÕES SELEÇÃO -->
+						<p:outputPanel styleClass="col-md-3" rendered="#{segundaViaComprovanteTributosEstaduaisBBean.renderCartoes}">
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel for="cartoesComboBox" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.title.combobox.cartoes']}" />
+								<h:selectOneMenu id="cartoesComboBox" value="#{segundaViaComprovanteTributosEstaduaisBBean.cartaoSelecionado}">
+									<p:ajax listener="#{segundaViaComprovanteTributosEstaduaisBBean.selectCartao}" update="painelGeral" />
+									<f:selectItem itemLabel=" #{msg['page.segundaViaComprovantes.veiculos.segvia.combobox.selecione']}" itemValue="" noSelectionOption="true" />
+									<f:selectItems value="#{segundaViaComprovanteTributosEstaduaisBBean.listaCartoes}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+						 <!-- SELECT PAGAMENTO CARTÕES SELEÇÃO -->
+		
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b">
+						  <!-- SELECT TRIBUTOS SELEÇÃO -->
+						<!-- <p:outputPanel styleClass="col-xs-2" rendered="#{segundaViaComprovanteTributosEstaduaisBBean.renderTributos}">-->
+						<p:outputPanel styleClass="col-xs-2" >
+							<p:outputPanel styleClass="form-group">
+								<p:outputLabel for="tributosComboBox" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.title.combobox.tributos']}" />
+								<h:selectOneMenu id="tributosComboBox" value="#{segundaViaComprovanteTributosEstaduaisBBean.tributoSelecionado}">
+									<f:selectItem itemLabel="#{msg['page.segundaViaComprovantes.veiculos.segvia.combobox.selecione']}" itemValue="" noSelectionOption="true" />
+									<f:selectItems value="#{segundaViaComprovanteTributosEstaduaisBBean.listaTributos}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+						  <!-- SELECT TRIBUTOS SELEÇÃO -->
+						  </p:outputPanel>
+						
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-md-12">
+							<p:outputLabel value="#{msg['page.segundaViaComprovantes.veiculos.segvia.label.disponibilidade']}"/>
+							#{segundaViaComprovanteTributosEstaduaisBBean.strDisponibilidade}		
+						</p:outputPanel>
+					</p:outputPanel>
+				
+					<p:separator />
+				
+					<p:outputPanel styleClass="row space-b" id="div-periodo-especifico">
+			
+						<br />	
+						<br />
+						
+						<p:outputPanel styleClass="col-md-2">
+							<p:outputPanel styleClass="form-group">							 	
+								<h5>#{msg['page.segundaViaComprovantes.veiculos.segvia.title.combobox.periodo.especifico']}</h5>								
+								<br />								
+								<h:selectOneMenu id="periodoComboBox" value="#{segundaViaComprovanteTributosEstaduaisBBean.periodoEspecificoSelecionado}">
+									<p:ajax listener="#{segundaViaComprovanteTributosEstaduaisBBean.resetOutroPeriodo}" update="painelPeriodo" />
+									<f:selectItem itemLabel="#{msg['page.segundaViaComprovantes.veiculos.segvia.combobox.selecione']}" itemValue="" noSelectionOption="true" />
+									<f:selectItems itemLabel="#{periodo.nome}" itemValue="#{periodo.codigo}" value="#{segundaViaComprovanteTributosEstaduaisBBean.listaPeriodosEspecificos}" var="periodo" />
+								</h:selectOneMenu>								
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+                        <p:outputPanel  styleClass="row space-b"> 
+                           <p:outputPanel styleClass="form-group">	   
+                               <p:outputPanel styleClass="col-md-10">	               
+                                   <h5>#{msg['page.segundaViaComprovantes.veiculos.segvia.title.outro.periodo']}</h5>
+                                </p:outputPanel>
+                             </p:outputPanel>
+                        </p:outputPanel>
+                                  
+					<p:outputPanel styleClass="row" id="painelPeriodo">
+				
+                    <p:outputPanel styleClass="col-md-2">
+                            <!-- SELECT DATA COMPROVANTE INICIAL SELEÇÃO -->
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel for="" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.placeholder.data.inicial']}" />
+							   <p:outputPanel styleClass="icon-data-input">
+							      	<i class="fa fa-calendar"></i>						      								      	
+							      	<p:calendar id="dataInicial" 
+							      				showOtherMonths="true" 
+							      				pattern="dd/MM/yyyy" 
+							      				value="#{segundaViaComprovanteTributosEstaduaisBBean.dataInicial}"  
+							      				maxlength="10"
+							      				converter="dateConverterFormat"   
+												onkeyup="bloqueioCTRLV(this, event); mascaraData(this, event)" 
+												onkeypress="mascaraData(this, event)">										
+										<p:ajax event="dateSelect"
+												listener="#{segundaViaComprovanteTributosEstaduaisBBean.resetPeriodoEspecifico}"
+												update="div-periodo-especifico" />	
+												
+										<p:ajax event="change" 
+												process="@this" 
+												update="dataInicial"/>																					
+									</p:calendar>	
+							   </p:outputPanel>
+							</p:outputPanel>
+							</p:outputPanel>
+							  <!-- SELECT DATA COMPROVANTE INICIAL SELEÇÃO -->
+							  
+                              <!-- SELECT DATA COMPROVANTE FINAL SELEÇÃO -->
+                               <p:outputPanel styleClass="col-md-2">
+                            <p:outputPanel styleClass="form-group">
+                                <h:outputLabel for="" value="#{msg['page.segundaViaComprovantes.veiculos.segvia.placeholder.data.final']}" />
+   	                            <p:outputPanel styleClass="icon-data-input">
+	                                <i class="fa fa-calendar"></i>															
+									<p:calendar id="dataFinal" 
+												showOtherMonths="true"									
+												pattern="dd/MM/yyyy" 
+												value="#{segundaViaComprovanteTributosEstaduaisBBean.dataFinal}"
+												maxlength="10"
+												converter="dateConverterFormat" 
+												onkeyup="bloqueioCTRLV(this, event); mascaraData(this, event);"
+												onkeypress="mascaraData(this, event)">
+										<p:ajax event="dateSelect"
+												listener="#{segundaViaComprovanteTributosEstaduaisBBean.resetPeriodoEspecifico}"
+												update="div-periodo-especifico" />
+												
+										<p:ajax event="change" 
+												process="@this" 
+												update="dataFinal"/>
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>  
+							  <!-- SELECT DATA COMPROVANTE FINAL SELEÇÃO -->                          
+                          </p:outputPanel>
+					                             
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>   
+           
+	    </p:outputPanel>
+	    
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza pull-left"  action="#{blankBBean.cancelar}" role="button">
+				     #{msg['page.btn.cancelar']}</p:commandLink>
+					
+               	<p:commandLink styleClass="btn btn-default btn-cinza"  action="#{segundaViaComprovanteTributosEstaduaisBBean.voltar}"  role="button">
+               	     #{msg['page.btn.voltar']} </p:commandLink>
+
+                <p:commandLink styleClass="btn btn-default"  action="#{segundaViaComprovanteTributosEstaduaisBBean.continuarEmLista}" ajax="true"  role="button">
+               		 #{msg['page.btn.continuar']}</p:commandLink>
+		</p:outputPanel>
+		</p:outputPanel>
+		
+	</ui:define>
+
+</ui:composition>

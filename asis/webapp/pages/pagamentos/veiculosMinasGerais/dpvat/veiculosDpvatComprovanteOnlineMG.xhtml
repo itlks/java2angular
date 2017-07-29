@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+       <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">                   
+                    <p:outputLabel rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.geraPendencia and !dpvatMinasGeraisBBean.veiculoDTO.habilitaAgendamento}"><h4>#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.AlterFinalComSuces']}</h4></p:outputLabel>
+                    <p:outputLabel rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.geraPendencia and dpvatMinasGeraisBBean.veiculoDTO.habilitaAgendamento}"><h4>#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.AgenFinalComSuces']}</h4></p:outputLabel>
+                    <p:outputLabel rendered="#{dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}"><h4>#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.PendenteAutorizacao']}</h4></p:outputLabel>                                        
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="box-shadow no-margin-bottom">    
+					
+					<p:outputPanel rendered="#{dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">
+						<ui:include src="/pages/pagamentos/veiculosMinasGerais/dpvat/veiculosDpvatComprovanteOnlinePendenciaMG.xhtml"></ui:include>
+					</p:outputPanel>
+					
+					<p:outputPanel rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">						
+						<c:forEach items="#{dpvatMinasGeraisBBean.veiculoDTO.dados}" var="dado" varStatus="iteratorDados">
+					
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+								 	<h5 align="center">
+	                          			<h:outputText value="#{dado.valor}" rendered="#{dado.tpLinha=='C'}"/>	                          				                          		
+	                          		</h5>
+								</p:outputPanel>																
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row" rendered="#{iteratorDados.index==0}">
+								<p:outputPanel styleClass="space-b"/>								 																
+							</p:outputPanel>
+														
+						 	<p:outputPanel styleClass="row">
+		                        <p:outputPanel styleClass="col-xs-3">					                
+									<h:outputText value="#{dado.label}" rendered="#{dado.tpLinha=='L'}" styleClass="bold"/>										
+		                        </p:outputPanel>
+		                    
+		                        <p:outputPanel styleClass="col-xs-8">							            
+									<h:outputText value="#{dado.valor}" rendered="#{dado.tpLinha=='L'}"/>																			
+		                        </p:outputPanel>
+		                    </p:outputPanel>  			                    								
+																
+						</c:forEach>							
+						
+					</p:outputPanel>	
+										
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>                      					
+
+                    <p:outputPanel styleClass="row space-b" rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <c:forEach items="#{dpvatMinasGeraisBBean.veiculoDTO.dados}" var="dado" varStatus="iteratorDados">
+								<p><h:outputText value="#{dado.valor}" rendered="#{dado.tpLinha=='I'}"/></p>										
+							</c:forEach>
+                        </p:outputPanel>
+                    </p:outputPanel>  
+                    
+                    <p:outputPanel styleClass="row space-b" rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />                         
+                        </p:outputPanel>
+                    </p:outputPanel>  
+                    
+					<p:outputPanel styleClass="row space-b" rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.habilitaAgendamento and !dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">                    
+                       <p:outputPanel styleClass="col-xs-4">
+                          <p><h:outputLabel value="#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.AutenBanca']}" styleClass="bold" /></p>
+                          <p><h:outputText value="#{dpvatMinasGeraisBBean.veiculoDTO.autBancaria}"/></p>                         
+                       </p:outputPanel>
+                       
+                       <p:outputPanel styleClass="col-xs-4">
+                          <p><h:outputLabel value="#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.DataHoraDoPagam']}" styleClass="bold" /></p>
+                          <p><h:outputText value="#{dpvatMinasGeraisBBean.veiculoDTO.dataHoraPagamento}"/></p>                                                
+                       </p:outputPanel>                       
+                    </p:outputPanel> 
+                    
+                    <p:outputPanel styleClass="row space-b" rendered="#{dpvatMinasGeraisBBean.veiculoDTO.habilitaAgendamento and !dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">
+                       <p:outputPanel styleClass="col-xs-4">
+                          <p><h:outputLabel value="#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.AutenBanca']}" styleClass="bold" /></p>
+                          <p><h:outputText value="#{dpvatMinasGeraisBBean.veiculoDTO.autBancaria}"/></p>                         
+                       </p:outputPanel>
+                       
+                       <p:outputPanel styleClass="col-xs-4">
+                          <p><h:outputLabel value="#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.DataHoraTrans']}" styleClass="bold" /></p>
+                          <p><h:outputText value="#{dpvatMinasGeraisBBean.veiculoDTO.dataHoraPagamento}"/></p>                                                
+                       </p:outputPanel>                       
+                    </p:outputPanel> 
+                                       
+                    <p:outputPanel styleClass="row space-b" rendered="#{dpvatMinasGeraisBBean.veiculoDTO.geraPendencia}">
+         				<p:outputPanel styleClass="col-xs-12">	   							
+	                          <h4 align="center">
+	                          		<strong>#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.Demonstrativo']}</strong>
+	                          </h4>
+	                    </p:outputPanel>
+	                </p:outputPanel>
+                    
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                             <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>  
+
+					<p:outputPanel styleClass="row space-b">
+ 						<p:outputPanel styleClass="form-group col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />						
+ 						</p:outputPanel> 										
+ 					</p:outputPanel> 
+ 										                   
+                </p:outputPanel>
+
+			  	<p:outputPanel styleClass="no-print no-visible">
+	            	 <ui:include src="/commons/pdf/pdfButtons.xhtml" />
+	           	</p:outputPanel>
+				
+             </p:outputPanel>
+         </p:outputPanel>                  
+
+	</ui:define>
+</ui:composition>

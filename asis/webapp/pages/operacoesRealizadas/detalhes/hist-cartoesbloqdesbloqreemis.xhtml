@@ -1,0 +1,37 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoCartaoBloqDesbloq_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosCartaoBloqDesbloq_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosBloqDesbloqLbl_#{posicaoLista}" />
+		</p:outputPanel>
+	
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroCartaoCartoesBloqDesbloq_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroCartao']}"
+							styleClass="space" id="idNumeroCartaoLblCartoesBloqDesbloq_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" id="idNumeroCartaoTxtCartoesBloqDesbloq_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idTipoCartaoCartoesBloqDesbloq_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoCartao']}"
+			 				styleClass="space" id="idTipoCartaoLblCartoesBloqDesbloq_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[3]}" id="idTipoCartaoTxtCartoesBloqDesbloq_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row" id="idSeparatorCartoesBloqDesbloq_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepCartoesBloqDesbloq_#{posicaoLista}">
+			<p:separator id="separatorCartoesBloqDesbloq_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

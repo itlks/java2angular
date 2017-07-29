@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:santander="http://santander.com/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="titulo-painel">
+				<h4>#{msg['page.administrativo.perfilAcesso.incluir.subtituloConfirme']}</h4>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-12">
+
+			<p:outputPanel styleClass="box-shadow">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.nomePerfil']}" />
+						<h:outputText
+							value="#{perfilAcessoInclusaoBBean.perfilAcessoDTO.nomePerfil}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.descricao']}" />
+						<h:outputText
+							value="#{perfilAcessoInclusaoBBean.perfilAcessoDTO.descricao}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row"
+					rendered="#{perfilAcessoInclusaoBBean.perfilAcessoSelecionado.nomePerfil != null}">
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel styleClass="space"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.perfilUtilizado']}" />
+						<h:outputText
+							value="#{perfilAcessoInclusaoBBean.perfilAcessoSelecionado.nomePerfil}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<ui:include
+					src="/pages/administrativo/perfilAcesso/perfilAcessoTreeViewVisualizacao.xhtml">
+					<ui:param name="DTOlistaPerfilAcesso"
+						value="#{perfilAcessoInclusaoBBean.listaPerfilAcesso}" />
+				</ui:include>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel rendered="#{perfilAcessoInclusaoBBean.exibeAssinatura}">
+		<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+	</p:outputPanel>
+
+</ui:composition>

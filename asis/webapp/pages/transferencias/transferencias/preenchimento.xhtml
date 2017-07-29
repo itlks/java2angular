@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <h:outputLabel
+							value="#{msg['page.transferencias.transferir.informativo.titulo.linha1']}"></h:outputLabel>
+						<h:outputText
+							value=" #{msg['page.transferencias.transferir.informativo.titulo.linha1.1']}" />
+
+						<p>
+							<h:outputLabel
+								value="#{msg['page.transferencias.transferir.informativo.titulo.linha2']}"></h:outputLabel>
+							<h:outputFormat
+								value=" #{msg['page.transferencias.transferir.informativo.titulo.linha2.2']}">
+								<f:param value="#{transferenciaBBean.strValorMaximoDoc}" />
+							</h:outputFormat>
+						</p>
+
+						<p>
+							<h:outputLabel
+								value="#{msg['page.transferencias.transferir.informativo.titulo.linha3']}"></h:outputLabel>
+							<h:outputFormat
+								value=" #{msg['page.transferencias.transferir.informativo.titulo.linha3.3']} ">
+								<f:param value="#{transferenciaBBean.strValorMinimoTed}" />
+							</h:outputFormat>
+						</p> <p:outputPanel styleClass="space-b space-t">
+							<p>
+								<h:outputFormat
+									value="#{msg['page.transferencias.transferir.informativo.titulo.linha4']} " />
+								<h:outputLabel
+									value="#{msg['page.transferencias.transferir.informativo.titulo.linha4.1']}"></h:outputLabel>
+							</p>
+						</p:outputPanel> <p:commandLink action="#{transferenciaBBean.initLimites}">
+							<h:outputText
+								value="#{msg['page.transferencias.transferir.informativo.topo.limites']}" />
+						</p:commandLink>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<ui:include
+			src="/pages/transferencias/transferencias/popupContas.xhtml" />
+		<ui:include src="/pages/limites/limites.xhtml" />
+		<ui:include src="/commons/inicializaDL.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.transferencias.transferir.dadosTransferencia']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+
+			<h:inputHidden value="#{transferenciaBBean.clientHash}"
+				id="clientHash" />
+
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<h:outputText
+								value="#{msg['page.transferencias.transferir.paraQuem']}"></h:outputText>
+
+							<p:tabView id="tabView"
+								activeIndex="#{transferenciaBBean.tabSelecionada}">
+
+								<p:ajax event="tabChange"
+									listener="#{transferenciaBBean.onTabChange}"
+									update="@form:panelTipoTransferencia,@form:panelFinalidade,@form" />
+
+								<p:tab id="tabForm"
+									title="#{msg['page.transferencias.transferir.novoFavorecido']}">
+									<p:outputPanel styleClass="row" id="panelFormulario"
+										rendered="#{not transferenciaBBean.favoritoSelecionado}">
+										<p:outputPanel styleClas="col-xs-12 no-padding">
+
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-8">
+
+													<p:outputPanel styleClass="row space-t">
+														<p:outputPanel
+															styleClass="form-group col-xs-4 no-margin-bottom">
+															<h:outputLabel for="" value="Banco:" />
+
+															<p:commandLink
+																value="#{msg['page.transferencias.transferir.selBanco']}"
+																styleClass="text-right pull-right">
+																<p:ajax event="click" update="@form:popupBanco"
+																	listener="#{transferenciaBBean.carregarPopupBancos()}" />
+															</p:commandLink>
+
+															<p:outputPanel id="panelBanco" styleClass="form-group">
+																<p:inputText styleClass="form-control numberOnly"
+																	maxlength="3" id="bancoSelecionado_hash_1"
+																	value="#{transferenciaBBean.dtoParaValidacaoHash2.banco}">
+
+																	<p:ajax event="change" process="@this"
+																		update="@form:panelTipoTransferencia,@form:panelFinalidade,
+																		    @form:panelDataTransferencia,panelOutraTitularidade,panelExibeOutra"
+																		listener="#{transferenciaBBean.onChangeBanco}" />
+
+																	<p:ajax event="change" process="@this"
+																		update="@form, panelIspb, panelBanco"
+																		listener="#{transferenciaBBean.carregarListaBancosPorBanco}" />
+																</p:inputText>
+															</p:outputPanel>
+														</p:outputPanel>
+
+														<p:outputPanel id="panelIspb" styleClass="col-xs-2">
+															<p:outputPanel styleClass="form-group">
+																<h:outputLabel for=""
+																	value="#{msg['page.transferencias.transferir.ispb']}" />
+																<p:inputText id="ispb_hash_2"
+																	styleClass="form-control numberOnly" maxlength="8"
+																	value="#{transferenciaBBean.dtoParaValidacaoHash2.ispb}">
+																	<p:ajax event="change" process="@this"
+																		update="@form, panelBanco, panelIspb"
+																		listener="#{transferenciaBBean.carregarListaBancosPorIspb}" />
+																</p:inputText>
+															</p:outputPanel>
+														</p:outputPanel>
+
+													</p:outputPanel>
+
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="row ">
+												<p:outputPanel styleClass="col-xs-8">
+
+													<p:outputPanel styleClass="row">
+														<p:outputPanel styleClass="col-xs-2 ">
+
+															<p:outputPanel styleClass="form-group">
+																<h:outputLabel for=""
+																	value="#{msg['page.transferencias.transferir.agencia']}" />
+																<p:inputText id="agencia_hash_3"
+																	styleClass="form-control numberOnly" maxlength="4"
+																	value="#{transferenciaBBean.dtoParaValidacaoHash2.agencia}" />
+															</p:outputPanel>
+														</p:outputPanel>
+
+														<p:outputPanel styleClass="col-xs-4">
+															<p:outputPanel styleClass="form-group">
+																<h:outputLabel for=""
+																	value="#{msg['page.transferencias.transferir.conta']}" />
+																<p:inputText id="conta_hash_4"
+																	styleClass="form-control numberOnly" maxlength="13"
+																	value="#{transferenciaBBean.dtoParaValidacaoHash2.conta}" />
+															</p:outputPanel>
+														</p:outputPanel>
+													</p:outputPanel>
+
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel id="panelExibeOutra">
+												<p:outputPanel styleClass="table-responsive radio label200"
+													rendered="#{transferenciaBBean.habilitaTipoTransferencia}" style="margin-top: 1px">
+													<h:selectOneRadio id="tipoTitularidade" tabindex="-1"
+														value="#{transferenciaBBean.tipoTitularidade}">
+														<f:selectItems
+															value="#{transferenciaBBean.tiposTitularidades}" var="i"
+															itemLabel="#{i.label}" itemValue="#{i.value}" />
+														<p:ajax event="change" process="@this"
+															update="@form:panelFinalidade,@form:panelTipoConta,@form:panelHistorico,panelOutraTitularidade"
+															listener="#{transferenciaBBean.onChangeTipoTitularidade}" />
+													</h:selectOneRadio>
+												</p:outputPanel>
+
+
+												<p:outputPanel id="panelOutraTitularidade"
+													rendered="#{transferenciaBBean.habilitaTipoTransferencia}">
+													<p:outputPanel
+														rendered="#{transferenciaBBean.exibePanelOutraTitularidade}"
+														styleClass="row">
+														<p:outputPanel styleClass="col-xs-10">
+
+															<p:outputPanel styleClass="row">
+																<p:outputPanel styleClass="col-xs-5">
+
+																	<p:outputPanel styleClass="form-group">
+																		<h:outputLabel for=""
+																			value="#{msg['page.transferencias.transferir.confirmacao.nome']}" />
+																		<p:inputText styleClass="form-control" maxlength="80"
+																			value="#{transferenciaBBean.nome}"
+																			onkeyup="replaceSpecialAndAccentChars(this)" />
+																	</p:outputPanel>
+																</p:outputPanel>
+
+																<p:outputPanel styleClass="col-xs-3">
+
+																	<p:outputPanel id="panelTiposDocumentos"
+																		styleClass="table-responsive radio label100 no-padding"
+																		style="margin-top: -16px; width: 300px;">
+																		<h:selectOneRadio id="tiposDocumento" tabindex="-1"
+																			value="#{transferenciaBBean.tipoDocumento}">
+																			<f:selectItems
+																				value="#{transferenciaBBean.tiposDocumentos}"
+																				var="i" itemLabel="#{i.label}"
+																				itemValue="#{i.label}" />
+																			<p:ajax event="change" process="@this"
+																				update="panelDocumento"
+																				listener="#{transferenciaBBean.onChangeTipoDocumento}" />
+																		</h:selectOneRadio>
+																	</p:outputPanel>
+
+																	<p:outputPanel id="panelDocumento"
+																		styleClass="form-group">
+																		<p:inputText id="docto_hash_6"
+																			styleClass="form-control"
+																			value="#{transferenciaBBean.dtoParaValidacaoHash2.documento}"
+																			onblur="maskCpfCnpj(this, event)"
+																			onchange="CheckCGCCPF(this)"
+																			maxlength="#{transferenciaBBean.getTamanhoDocumento()}">
+																			<p:ajax event="change" process="@this"
+																				update="@this,panelTiposDocumentos"
+																				listener="#{transferenciaBBean.onChangeDocumento}" />
+																		</p:inputText>
+																	</p:outputPanel>
+																</p:outputPanel>
+															</p:outputPanel>
+
+														</p:outputPanel>
+													</p:outputPanel>
+												</p:outputPanel>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-8">
+
+													<p:outputPanel styleClass="row">
+														<p:outputPanel styleClass="col-xs-6">
+															<p:outputPanel styleClass="checkbox">
+																<p:selectBooleanCheckbox id="cadastrarConta"
+																	tabindex="-1"
+																	value="#{transferenciaBBean.cadastrarConta}">
+																</p:selectBooleanCheckbox>
+																<h:outputLabel for="cadastrarConta"
+																	styleClass="checkbox-inline">
+																	#{msg['page.transferencias.transferir.cadastrarContaParaFuturasTransf']}
+																</h:outputLabel>
+															</p:outputPanel>
+														</p:outputPanel>
+													</p:outputPanel>
+
+												</p:outputPanel>
+											</p:outputPanel>
+
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:tab>
+
+								<p:tab id="tabTable"
+									title="#{msg['page.transferencias.transferir.favorecidoCadastrado']}">
+									<p:outputPanel id="panelFavorecidos" styleClass="row">
+
+										<p:outputPanel id="panelTableFavorecidos"
+											styleClass="col-xs-12 no-padding">
+											<p:outputPanel
+												rendered="#{transferenciaBBean.exibePanelTableFavorecidos}"
+												styleClass="table table-striped space-t">
+
+												<p:dataTable id="tableFavorecidos" widgetVar="favTable"
+													var="fav" selectionMode="single" rowKey="#{fav}"
+													value="#{transferenciaBBean.listaFavorecidos}"
+													filteredValue="#{transferenciaBBean.listaFavorecidosFiltrados}"
+													emptyMessage="#{msg['page.transferencias.transferir.naoExistemFavorecidosCadastrados']}"
+													scrollable="true" scrollHeight="200">
+
+													<p:ajax event="rowSelect" process="@this" onsuccess="setFocusValor()"
+														update="@form:panelTipoTransferencia,@form:panelFinalidade,@form"
+														listener="#{transferenciaBBean.onSelectFavorecido}" />
+
+													<f:facet name="header">
+														<p:outputPanel styleClass="text-left">
+															<h:outputText value="Busca: " />
+															<p:inputText id="globalFilter"
+																onkeyup="PF('favTable').filter()" style="width:150px"
+																onclick="PF('favTable').clearFilters()" />
+														</p:outputPanel>
+													</f:facet>
+
+													<p:column filterBy="TSOENMETIT1" filterMatchMode="contains"
+														filterStyle="display:none"
+														headerText="#{msg['page.transferencias.transferir.favorecido']}"
+														sortBy="TSOENMETIT1"
+														styleClass="col-xs-3" >
+														<h:outputText value="#{fav.TSOENMETIT1}" />
+													</p:column>
+
+													<p:column sortBy="bancoFormatado" filterBy="bancoFormatado"
+														filterStyle="display:none" 
+														filterMatchMode="contains"
+														headerText="#{msg['page.transferencias.transferir.banco2']}" 
+														styleClass="col-xs-3">
+														<h:outputText value="#{fav.bancoFormatado}" />
+													</p:column>
+
+													<p:column sortBy="agenciaContaFormatada"
+														filterBy="agenciaContaFormatada"
+														filterStyle="display:none" filterMatchMode="contains"
+														headerText="#{msg['page.transferencias.transferir.agConta']}"
+														styleClass="col-xs-2">
+														<h:outputText value="#{fav.agenciaContaFormatada}" />
+													</p:column>
+
+													<p:column sortBy="TSOEINDMMTIT.descricaoAbreviada"
+														filterBy="TSOEINDMMTIT.descricaoAbreviada"
+														filterStyle="display:none" filterMatchMode="contains"
+														headerText="#{msg['page.transferencias.transferir.titularidade']}"
+														styleClass="col-xs-1">
+														<h:outputText
+															value="#{fav.TSOEINDMMTIT.descricaoAbreviada}" />
+													</p:column>
+
+													<p:column sortBy="TSOEINREGTAUTORIZ.descricao"
+														filterBy="TSOEINREGTAUTORIZ.descricao"
+														filterStyle="display:none"
+														filterMatchMode="contains"
+														headerText="#{msg['page.transferencias.transferir.situacao']}"
+														 styleClass="col-xs-2">
+
+														<h:outputText value="#{fav.TSOEINREGTAUTORIZ.descricao}" />
+
+														<p:graphicImage value="/images/icon-i.png"
+															rendered="#{fav.TSOEINREGTAUTORIZ.descricao ne 'Autorizado'}"
+															id="tabelaFavorecidos"
+															style="height:15px; margin-left:5px">
+															
+															<pe:tooltip for="tabelaFavorecidos"
+																myPosition="left center" atPosition="right center"
+																value="#{msg['page.transferencias.transferir.tabelaFavorecidos.tooltip']}" />
+															
+														</p:graphicImage>
+
+													</p:column>
+
+
+
+												</p:dataTable>
+
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel id="panelFavorecido"
+											rendered="#{transferenciaBBean.favoritoSelecionado}">
+											<ui:include
+												src="/pages/transferencias/transferencias/infoContaDestino.xhtml" />
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</p:tab>
+
+							</p:tabView>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row total-label"
+						style="margin: auto 4px">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel styleClass="form-group ">
+										<h:outputLabel for="valor"
+											value="#{msg['page.transferencias.transferir.confirmacao.valor']}" />
+										<p:inputText
+											value="#{transferenciaBBean.dtoParaValidacaoHash2.valor}"
+											id="valor_hash_5" maxlength="17"			
+											onblur="maskMoneyOnBlur(this)"
+											converter="valorDecimalConverter" styleClass="form-control" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel id="panelTipoTransferencia">
+									<p:outputPanel styleClass="col-xs-4"
+										rendered="#{transferenciaBBean.habilitaTipoTransferencia}">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel
+												value="#{msg['page.transferencias.transferir.tipoTransferencia']}" />
+											<h:selectOneMenu id="tipoTransferencia"
+												value="#{transferenciaBBean.tipoTransferencia}">
+												<p:ajax event="change"
+													update="@form:panelFinalidade,@form:panelTipoConta,@form:panelHistorico"
+													listener="#{transferenciaBBean.onChangeTipoTransferencia}" />
+												<f:selectItem
+													itemLabel="#{msg['page.transferencias.transferir.selecione']}"
+													noSelectionOption="true" />
+												<f:selectItems
+													value="#{transferenciaBBean.tiposTransferencias}" var="i"
+													itemLabel="#{i.label}" itemValue="#{i.value}" />
+											</h:selectOneMenu>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel id="panelTipoConta">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel for=""
+												value="#{msg['page.transferencias.transferir.transferirPara']}" />
+											<h:selectOneMenu id="tipoConta"
+												value="#{transferenciaBBean.tipoConta}"
+												disabled="#{!transferenciaBBean.habilitaTipoConta}">
+												<p:ajax event="change" update="@form:tipoFinalidade"
+													listener="#{transferenciaBBean.onChangeTipoConta}" />
+												<f:selectItem
+													itemLabel="#{msg['page.transferencias.transferir.selecione']}"
+													noSelectionOption="true" />
+												<f:selectItems value="#{transferenciaBBean.tiposContas}"
+													var="i" itemLabel="#{i.label}" itemValue="#{i.value}" />
+											</h:selectOneMenu>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel id="panelFinalidade">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel for=""
+												value="#{msg['page.transferencias.transferir.finalidade']}" />
+											<h:selectOneMenu id="tipoFinalidade"
+												disabled="#{!transferenciaBBean.habilitaFinalidade}"
+												value="#{transferenciaBBean.tipoFinalidade}">
+												<p:ajax event="change" update="@this,panelHistorico"
+													listener="#{transferenciaBBean.onChangeTipoFinalidade}" />
+												<f:selectItem
+													itemLabel="#{msg['page.transferencias.transferir.selecione']}"
+													noSelectionOption="true" />
+												<f:selectItems
+													value="#{transferenciaBBean.tiposFinalidades}" var="i"
+													itemLabel="#{i.label}" itemValue="#{i.value}" />
+											</h:selectOneMenu>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel id="panelHistorico">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel for="historico"
+												value="#{msg['page.transferencias.transferir.historico']}" />
+											<p:inputText id="historico" styleClass="form-control"
+												onkeyup="stringToUpperCase(this)"
+												maxlength="#{transferenciaBBean.getTamanhoHistorico()}"
+												value="#{transferenciaBBean.historico}" />
+
+											<p:outputPanel id="panelInfoHistorico">
+
+												<p:outputPanel
+													rendered="#{!transferenciaBBean.exibeInfoHistoricoObrigatorio}">
+													<h:outputText
+														value="#{msg['page.transferencias.transferir.historico.info.opcional']}" />
+												</p:outputPanel>
+
+												<p:outputPanel
+													rendered="#{transferenciaBBean.exibeInfoHistoricoObrigatorio}">
+													<h:outputText
+														value="#{msg['page.transferencias.transferir.historico.info.obrigatorio']}" />
+												</p:outputPanel>
+
+											</p:outputPanel>
+
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h4>#{msg['page.transferencias.transferir.dataTransferencia']}</h4>
+									<p:outputPanel styleClass="table-responsive radio label150" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-4 radio label150 ">
+											<h:selectOneRadio id="tipoData" tabindex="-1" layout="custom"
+												value="#{transferenciaBBean.tipoData}">
+												<f:selectItems value="#{transferenciaBBean.tiposDatas}"
+													var="i" itemLabel="#{i.label}" itemValue="#{i.value}" />
+												<p:ajax event="change" process="@this"
+													update="formGeral:panelDataTransferencia"
+													listener="#{transferenciaBBean.onChangeTipoData}" />
+											</h:selectOneRadio>
+
+											<p:graphicImage value="/images/icon-i.png"
+												id="infoAgendamento" 
+												styleClass="negativeMLeft10">											
+												<pe:tooltip for="infoAgendamento"
+												myPosition="left center" atPosition="right center"
+													value="#{msg['page.transferencias.transferir.dataTransferencia.tooltip']}" />
+											</p:graphicImage>
+										</p:outputPanel>
+
+										<p:outputPanel id="panelDataTransferencia"
+											styleClass="col-xs-3 col-md-4">
+											<p:outputPanel
+												rendered="#{transferenciaBBean.exibeDataTransferencia}">
+												<p:outputPanel styleClass="icon-data-input bg-branco">
+													<i class="fa fa-calendar"></i>
+													<p:calendar id="dataTransferencia"
+														value="#{transferenciaBBean.dataTransferencia}"
+														mindate="#{transferenciaBBean.dataAtual}"
+														disabledWeekends="#{transferenciaBBean.desabilitaFinaisDeSemana}"
+														pattern="dd/MM/yyyy" maxlength="10"
+														converter="dateTelaConverter"
+														onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+														onkeypress="mascaraData(this, event)"
+														readonlyInput="false">
+														<p:ajax event="change" process="@this" update="@this"
+															listener="#{transferenciaBBean.onChangeDataTransferencia}" />
+													</p:calendar>
+												</p:outputPanel>
+											</p:outputPanel>
+										</p:outputPanel>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<!-- Gerar nova referencia de operação inicio -->
+				<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+				<!--  Gerar nova referencia de operação  fim -->
+
+				<!-- Botoes inicio-->
+				<p:outputPanel id="panelBotoes" styleClass="row space-t">
+					<p:outputPanel styleClass="col-md-12 text-right">
+						<p:commandButton id="btnVoltar"
+							styleClass="btn btn-default btn-cinza" role="button"
+							action="#{transferenciaBBean.voltarEmMenu}"
+							value="#{msg['page.btn.voltar']}" />
+
+						<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+							role="button"
+							
+							action="#{transferenciaBBean.continuarEmConfirmacao}"
+							onclick="this.focus();enviarHash()" value="#{msg['page.btn.continuar']}" />
+						<p:defaultCommand target="btnContinuar" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:blockUI block="panelBotoes" trigger="btnContinuar" />
+				<!-- Botoes inicio-->
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<script type="text/javascript">
+			function setFocusValor() {
+				document.getElementById("formGeral:valor_hash_5").focus();
+			}
+		</script>
+
+	</ui:define>
+</ui:composition>

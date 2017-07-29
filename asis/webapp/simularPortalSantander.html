@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<title>Redirecting...</title>
+		<script language="javascript">
+		function onLoadHandler()
+		{
+			document.redirectForm.submit();
+		}
+		
+		</script>
+	</head>
+	<body onLoad="onLoadHandler();">
+		<form name="redirectForm" action="http://localhost:8080/jab-ibeweb/" method="POST">
+			<noscript>
+				<br>
+				<br>
+				
+				<table width="50%" align="center" border="1" bgcolor="#F0F0F0">
+					<tr><td width="100%" align="center">
+						<table width="100%" align="center" bgcolor="#EFB445">
+							<tr>
+								<td width="100%" align="center">
+									<br/>
+								</td>
+							</tr>
+						</table>
+					</td></tr>	
+					<tr><td width="100%" align="center">
+						<table width="100%" align="center">
+							<tr>
+								<td width="100%" align="center">
+									<font face="Verdana" size="4">
+									Sua transação está sendo processada.
+									</font>
+									<br/>
+									<br/>
+									<font face="Verdana" size="3">
+									O JavaScript está desabilitado ou não é
+									suportado por seu browser. Assim, você deve continuar
+									o processamento de modo manual.
+									<br/>
+									<br/>
+									Por favor, clique em "Continuar" para continuar
+									com sua transação
+									</font>
+									<br/>
+									<br/>
+									<input type="submit" value="Continuar" />
+								</td>
+							</tr>
+						</table>
+					</td></tr>
+					<tr><td width="100%" align="center">
+						<table width="100%" align="center" bgcolor="#EFB445">
+							<tr>
+								<td width="100%" align="center">
+									<br/>
+								</td>
+							</tr>
+						</table>
+					</td></tr>
+				</table>		
+			
+			</noscript>
+
+			<br>
+			<br>
+			
+				<input type="hidden" name="txtAgencia" value="" ID="txtAgencia">
+			
+				<input type="hidden" name="txtConta" value="" ID="txtConta"> 
+			
+		</form>
+	</body>
+</html>

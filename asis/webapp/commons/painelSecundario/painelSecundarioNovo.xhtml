@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-6 dataHora">
+			<form jsfc="h:form" id="formData">
+				<p>
+					<h:outputText id="idDataHora" escape="false" value="#{menuBBean.dataHora}" />
+					<p:poll interval="10" listener="#{counterBBean.atualizarDataHora}"
+						update="formData:idDataHora" />
+				</p>
+			</form>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-6 text-right">
+			<p:outputPanel styleClass="agenciaConta">
+				<p>
+					<span class="space-r"><strong>#{ msg['page.home.label.agencia'] }:</strong> #{loginBBean.session.agencia}</span>
+					<span><strong>#{ msg['page.home.label.conta'] }:</strong> #{loginBBean.session.conta}</span>
+				</p>
+			</p:outputPanel>
+			<ui:include src="/commons/trocaConta/btnTrocaConta.xhtml" />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>
+

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	<ui:include src="//commons/inicializaDL.xhtml"></ui:include>
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="no-padding">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.protecaoEmpresa.desc']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow no-margin">
+						<ui:include src="descricaoPJ.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+					<p:outputPanel styleClass="row no-margin no-padding space-t">
+						<p:outputPanel styleClass="col-xs-12">
+						</p:outputPanel>
+					</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12 ">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.termocabecalho.desc']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+
+					<p:outputPanel styleClass="box-shadow no-margin">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p style="padding-left:0px;margin-top:-10px;" class="aviso-interno-blocos alert-information no-margin">
+									<i class="fa fa-exclamation-circle" style="margin-right: 20px; font-size: 30px !important; color: #FFD24D; width: 20px; height: 20px"></i>
+									<span style="margin-top: 8px">#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.leia']}</span>
+								</p>
+								<p:outputLabel value="#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.contrato']}" />
+								<p:outputPanel styleClass="termos-block">
+									<p:outputPanel styleClass="row space-b">
+										<span id="divHtml"> <span class="multiplosPdfsCss"> 
+												<p:outputPanel styleClass="col-xs-12">
+
+													<p:outputPanel styleClass="container"
+														style="margin-left: -15px; margin-right:-15px; !important;margin-bottom:-50px">
+														<ui:include src="termoPJ.xhtml" />
+													</p:outputPanel>
+													<br />
+													<p:separator styleClass="show-print"></p:separator>
+													<p:outputPanel styleClass="show-print col-xs-12 no-padding">
+														<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+													</p:outputPanel>
+												</p:outputPanel>
+										</span>
+										</span>
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p:outputPanel styleClass="radio ">
+									<h:selectOneRadio id="aceiteDeContrato"
+										value="#{adesaoChequeEmpresaProtegidoBBean.aceiteContrato}">
+										<f:selectItem
+											itemLabel="#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.aceito.condicoes.particulares']}"
+											itemValue="SIM" />
+										<f:selectItem
+											itemLabel="#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.nao.aceito.condicoes.particulares']}"
+											itemValue="NAO" />
+										<p:ajax event="change" update="@form:btnControle"
+											listener="#{adesaoChequeEmpresaProtegidoBBean.renderizarBtnContinuar}" />
+									</h:selectOneRadio>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-6">
+								<p:outputPanel styleClass="pull-right">									
+									<p:commandLink 	tyleClass="bold" onclick="window.open('https://www.santander.com.br/br/pessoa-fisica/santander/seguros/seguros-pessoal/cheque-especial-protegido','_blank')" 
+													value="#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.link.condicoes.gerais']}"
+													target="_blank" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<p:outputPanel style="" styleClass="custom-links no-print no-visible no-margin">
+						<ui:include src="/commons/pdf/pdfTermo.xhtml">
+							<ui:param name="divHtml" value="true" />
+						</ui:include>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+
+
+			<p:outputPanel styleClass="row space-b" id="btnControle">
+				<p:outputPanel styleClass="col-xs-12 text-right">
+					<p:commandLink styleClass="btn btn-default btn-cinza"
+						action="#{adesaoChequeEmpresaProtegidoBBean.voltar()}" role="button">
+						<h:outputText value="Voltar" />
+					</p:commandLink>
+					<p:commandLink styleClass="btn btn-default"
+						action="#{adesaoChequeEmpresaProtegidoBBean.continuar()}"						
+						rendered="#{adesaoChequeEmpresaProtegidoBBean.renderContinuar}" role="button">
+						<h:outputText value="Continuar" />
+					</p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

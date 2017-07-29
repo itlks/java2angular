@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel" rendered="#{!gareDRSPBBean.dto.pendencias}">
+					<h4>#{msg['page.gare.comprovante.pagamento.fim']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel" rendered="#{gareDRSPBBean.dto.pendencias}">
+					<h4>#{msg['page.gare.comprovante.pagamento.fimPendencia']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow no-margin-bottom" >
+					<ui:include src="/pages/pagamentos/gareDrSp/gareConteudo.xhtml"></ui:include>
+					<br></br>
+
+					<p:outputPanel styleClass="col-xs-12 text-center space-t">
+						<p><h:outputText value="#{msg['page.gare.comprovante.portaria']}" /></p>
+						<p><h:outputText value="#{msg['page.gare.comprovante.comprovante']}" /> 
+						<h:outputText value="#{msg['page.gare.comprovante.recolhimento']}" /></p>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12" rendered="false">
+						<p><h:outputText value="#{gareDRSPBBean.quantidadeVias}" /></p>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row form-group" style="clear:both">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row form-group" rendered="#{gareDRSPBBean.dto.pendencias}">
+						<p:outputPanel styleClass="col-md-12 text-center">
+							<strong>#{msg['page.commons.comprovante.demonstrativo']}</strong>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space" rendered="#{!gareDRSPBBean.dto.pendencias}">
+						<p:outputPanel styleClass="col-xs-4">
+							<p><strong>#{msg['page.commons.comprovante.autenticacao']}</strong></p>
+							<p>#{gareDRSPBBean.dto.chaveNSU}</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4 ">
+							<p><strong>#{msg['page.commons.comprovante.data.hora']}</strong></p>
+							<p>#{gareDRSPBBean.dataPagamento}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8">
+							<p class="bold">#{msg['page.commons.comprovante.central.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="bold">#{msg['page.commons.comprovante.sac.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="bold">#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

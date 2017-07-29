@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	<f:event type="preRenderView" listener="#{contaCorrenteSegundaViaExtratosBBean.acessoDiretoPreenchimento()}" />
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />	
+	<script type="text/javascript" language="javascript">
+		jQuery(window).load(function() {
+			validarChamadaPaginaExtratoConsSegVia();
+		});
+	</script>
+		<p:remoteCommand name="validarChamadaPaginaExtratoConsSegVia" action="#{contaCorrenteSegundaViaExtratosBBean.validarChamadaPagina}"/>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<label class="font-normal">#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.alerta']}
+						<br/> 
+						<strong>
+							<p:commandLink styleClass="link-termos" 
+								value="#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.linkTermos']}" 
+                   				onclick="window.open('http://www.santander.com.br/portal/bsb/script/RedirecionaLinkIB.do?produto=21'); return false">
+                   			</p:commandLink>
+                   		</strong>
+					</label>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.subtitle']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+
+
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputLabel styleClass="font-normal">#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.periodo']}</p:outputLabel>
+
+						<p:outputPanel styleClass="row" >
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="" value="#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.de']}" styleClass="font-normal " />
+									
+									<h:selectOneMenu name="anoInicio" id="anoIncio" value="#{contaCorrenteSegundaViaExtratosBBean.anoSelecionadoInicio}" label="">
+										<p:ajax event="change" 
+											update=":formGeral:panelPeriodoInicio"
+											listener="#{contaCorrenteSegundaViaExtratosBBean.updateAnoSelecionado('Inicio')}" />
+											
+										<f:selectItems	value="#{contaCorrenteSegundaViaExtratosBBean.listAno}" var="anoIS"
+											itemLabel="#{anoIS}" itemValue="#{anoIS}" />
+									
+									</h:selectOneMenu>
+								</p:outputPanel>
+								
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-2" id="panelPeriodoInicio">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel style="margin-top:39px" />	
+									
+									<h:selectOneMenu name="mesIncio" id="mesInicio" value="#{contaCorrenteSegundaViaExtratosBBean.mesSelecionadoInicio}" >
+										<f:selectItems	value="#{contaCorrenteSegundaViaExtratosBBean.listMesStr}" var="mesIS"
+											itemLabel="#{mesIS}" itemValue="#{mesIS}" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="" value="#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.ate']}" styleClass="font-normal" />
+									<h:selectOneMenu name="anoFim" id="anoFim" value="#{contaCorrenteSegundaViaExtratosBBean.anoSelecionadoFim}">
+										<p:ajax event="change" 
+											update=":formGeral:panelPeriodoFim"
+											listener="#{contaCorrenteSegundaViaExtratosBBean.updateAnoSelecionado('Fim')}" />
+										<f:selectItems	value="#{contaCorrenteSegundaViaExtratosBBean.listAno}" var="anoFS"
+											itemLabel="#{anoFS}" itemValue="#{anoFS}" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-2" id="panelPeriodoFim">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel style="margin-top:39px" />	
+									<h:selectOneMenu name="mesFim" id="mesFim" value="#{contaCorrenteSegundaViaExtratosBBean.mesSelecionadoFim}">
+										<f:selectItems	value="#{contaCorrenteSegundaViaExtratosBBean.listMesStr}" var="mesFS"
+											itemLabel="#{mesFS}" itemValue="#{mesFS}" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputLabel styleClass="font-normal">#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.formaDeRecebimento']}</p:outputLabel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4 radio-font-normal">
+								<p:outputPanel
+									styleClass="table-responsive radio label520 no-line-height-radio">
+									<h:selectOneRadio id="rdFormaRecebimento" value="#{contaCorrenteSegundaViaExtratosBBean.formaRecebimento}" layout="custom">
+										<f:selectItems	value="#{contaCorrenteSegundaViaExtratosBBean.listFormaRecebimento}" var="forma"
+											itemLabel="#{forma}" itemValue="#{forma}" />
+
+									</h:selectOneRadio>
+									
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+
+						<p:commandLink
+							action="#{contaCorrenteSegundaViaExtratosBBean.voltar}"
+							styleClass="btn btn-default btn-cinza" role="button">#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.btnVoltar']}</p:commandLink>
+
+						<p:commandLink
+							action="#{contaCorrenteSegundaViaExtratosBBean.solicitar}"
+							styleClass="btn btn-default" role="button">#{msg['G3.3.pages.contacorrente.extratoConsolidado.solicitarSegundaVia.preenchimento.btnSolicitar']}</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

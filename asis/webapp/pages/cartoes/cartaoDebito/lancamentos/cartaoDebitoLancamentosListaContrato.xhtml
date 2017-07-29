@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cartaoDebitoLancamentosBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<style type="text/css">
+			.testeMais1 td:first-child{
+				padding:0px !important;
+			}
+			.testeMais1 table thead, .testeMais1 table tfoot{display:none;}
+		</style>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.cartoes.cartao.debito.lancamentos.contrato.selecione.produto']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row" id="teste1">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable tableStyleClass="table-hover" var="item"
+									id="tabela1" rowKey="#{item.area}"
+									value="#{cartaoDebitoLancamentosBBean.dto.contratos}"
+									selection="#{cartaoDebitoLancamentosBBean.dto.contratoSelecionado}"
+									selectionMode="single">
+
+									<p:ajax event="rowToggle"
+										listener="#{cartaoDebitoLancamentosBBean.onToggleContrato}" update="@all" />
+									<p:column width="5%">
+										<p:rowToggler />
+									</p:column>
+									
+									<p:column width="5%" headerText="Bandeira">
+										<p:graphicImage url="#{item.urlImagemBandeira}"></p:graphicImage>
+									</p:column>
+
+									<p:column width="15%"
+										headerText="Tipo">
+										<p:outputLabel value="#{item.area}" />
+									</p:column>
+									<p:column width="30%"
+										headerText="Contrato">
+										<p:outputLabel value="#{item.produto}" />
+									</p:column>
+									<p:column width="20%"
+										headerText="#{msg['pages.cartoes.cartao.debito.lancamentos.contrato.header.numero.cartao']}">
+									</p:column>
+									
+									<p:column width="25%" headerText="Portador">
+										
+									</p:column>
+									<p:rowExpansion id="tabelaExpansaoCartoes" styleClass="testeMais1">
+										<p:dataTable var="cartao" id="tabelaCartoes"
+											value="#{cartaoDebitoLancamentosBBean.dto.cartoes}"
+											selection="#{cartaoDebitoLancamentosBBean.dto.cartaoSelecionado}"
+											rowKey="#{cartao.numeroCartaoComMascara}"
+											selectionMode="single" >
+
+											<p:ajax event="rowSelect"
+												listener="#{cartaoDebitoLancamentosBBean.onRowSelectCartao}"
+												process="@all" />
+
+											<p:column width="55%"/>
+											<p:column width="20%">
+												<h:outputText value="#{cartao.numeroCartaoComMascara}" />
+											</p:column>
+											<p:column width="25%">
+												<h:outputText value="#{cartao.titular}" />
+											</p:column>
+										</p:dataTable>
+									</p:rowExpansion>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{cartaoDebitoLancamentosBBean.voltarDaTelaListaContrato}">#{msg['pages.cartoes.cartao.debito.lancamentos.contrato.voltar']}</p:commandLink>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

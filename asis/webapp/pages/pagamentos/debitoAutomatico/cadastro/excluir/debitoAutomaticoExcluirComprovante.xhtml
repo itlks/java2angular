@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentHeader">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information flex-align-v box-shadow min-lines">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.pagamentos.debitoAutomatico.cadastro.excluir.comprovante.instrucaoConfirmacao']}.</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.debitoAutomatico.cadastro.excluir.exclusao.comprovante']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+	<ui:define name="contentComprovante">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.empresa']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.nomeEmpresaConveniada}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.identConsumidor']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.identificacaoConsumidor}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.possuiLimiteDebitoFormatada}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.autorizoDebito']}: " />
+					<h:outputText style="font-weight: normal;"
+						value="#{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.valorMaximoDebito}">
+						<f:convertNumber currencySymbol="" type="currency" />
+					</h:outputText>
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.emitirAvisoCorreio']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.emitirAvisoCorreios == true ? msg['page.txt.simMaiusculo'] : msg['page.txt.naoMaiusculo']}" />
+					<h:outputText
+						value=" (#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.servicoSujeitoCobranca']}.)" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.dataCadastramento']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.dataCadastramentoFormatada}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.dataUltimoLancamento']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.dataUltimoLancamentoFormatada}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.formaPagamento']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.formaPagamentoFormatada}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.historico']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.beanGenerico.empresaConveniadaSelecionadaGrid.historicoComplementar}" />
+				</p>
+				<p>
+					<h:outputLabel
+						value="#{msg['pages.pagamento.debitoAutomatico.cadastro.excluir.confirmacao.motivo']}: " />
+					<h:outputText
+						value=" #{debitoAutomaticoExcluirBBean.motivoSelecionado}" />
+				</p>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

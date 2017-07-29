@@ -1,0 +1,51 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set var="compPeriodoDia" value="${fn:substring(compHisParts[2],0,3)}" />
+	<c:set var="compPeriodoMes" value="${fn:substring(compHisParts[2],3,5)}" /> 
+	<c:set var="compPeriodoAno" value="${fn:substring(compHisParts[2],5,9)}" />
+	<c:set var="compContribuinte01" value="${fn:substring(compHisParts[0],0,3)}" />
+	<c:set var="compContribuinte02" value="${fn:substring(compHisParts[0],3,6)}" />
+	<c:set var="compContribuinte03" value="${fn:substring(compHisParts[0],6,10)}" />	
+	<c:set var="compContribuinte04" value="${fn:substring(compHisParts[0],10,11)}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoIptuOnline_#{posicaoLista}">	
+		<p:outputPanel styleClass="col-xs-12" id="idDadosIptuOnline_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosIptuOnlineLbl_#{posicaoLista}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroContribuinteIptuOnline_#{posicaoLista}">
+			 <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroContribuinte']}" styleClass="space"  id="idNumeroContribuinteLblIptuOnline_#{posicaoLista}" />			  
+			     <h:outputText value="${compContribuinte01.concat('.').concat(compContribuinte02).concat('.').concat(compContribuinte03).concat('-').concat(compContribuinte04)}" id="idNumeroContribuinteTxt1IptuOnline_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNsuProdamIptuOnline_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nsuProdam']}" styleClass="space" id="idNsuProdamLblIptuOnline_#{posicaoLista}" />			  
+			     <h:outputText value="${compHisParts[1]}" id="idNsuProdamTxt1IptuOnline_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idParcelaIptuOnline_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.comprovante.vencimento.parcela']}" styleClass="space" id="idParcelaLblIptuOnline_#{posicaoLista}" />			  
+			        <h:outputText value="${compPeriodoDia.concat('/').concat(compPeriodoMes).concat('/').concat(compPeriodoAno)}" id="idParcelaTxt1IptuOnline_#{posicaoLista}" />			  
+		</p:outputPanel>
+					
+		<p:outputPanel styleClass="col-xs-12" id="idValorIptuOnline_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" id="idValorLblIptuOnline_#{posicaoLista}" />			
+				<h:outputLabel value="#{detalheParam.valor}" id="idValorLbl1IptuOnline_#{posicaoLista}" />			
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idRowSpaceIptuOnline_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idColXSIptuOnline_#{posicaoLista}">
+			<p:separator id="idSeparatorIptuOnline_#{posicaoLista}" />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

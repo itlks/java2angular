@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>Dados complementares</strong>
+						</p>
+						<p>A efetivação do resgate parcial está condicionada a
+							existência de saldo superior ao mínimo de permanência após a
+							operação.</p>
+						<p>Para fundos com cota de fechamento o valor mencionado
+							poderá sofrer alterações de acordo com a variação da cota do
+							fundo.</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>O agendamento foi concluído com sucesso. Veja seu
+						comprovante</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Transação:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2">
+									<span>Resgate</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+
+									<h:outputLabel for="" value="Fundo:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.nomeReduzidoIb}</span>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Conta Fundo:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.contaFundo}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Resgate:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.tipoResgate.desc}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for=""
+										value="#{investimentosFundosResgatarBBean.dataDoResgateOuAgendamento}"
+										styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.dataAgendamentoFormatada}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Valor:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.valorResgateFormatado}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Data da conversão em cotas:"
+										styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.dataCotas}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Data do crédito em conta:"
+										styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.dataCreditoCC}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 aviso-comprovante">
+							<p>A efetivação do resgate parcial está condicionada a
+								existência de saldo superior ao mínimo de permanência após a
+								operação.</p>
+							<p>Para fundos com cota de fechamento o valor mencionado
+								poderá sofrer alterações de acordo com a variação da cota do
+								fundo.</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 space-b">
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p>	<strong>Data / hora da transação:</strong>
+							</p>
+							<span>#{investimentosFundosResgatarBBean.dataAutenticacao}</span>
+							</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p>
+								<strong>Autenticação bancária:</strong>
+							</p>
+							<span>#{investimentosFundosResgatarBBean.referOper}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+                	<ui:include src="/commons/rodapeCentralAtendimento.xhtml"/>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

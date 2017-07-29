@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<ui:define name="content">
+		
+		<f:event type="preRenderView" listener="#{bloqDesbloqAtmBBean.blockacessoDiretoComprovante()}" />
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.dadosTransacao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<p>
+								<h:outputLabel for="" styleClass="bold"
+									value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.opcaoAtual']} " />
+								#{bloqDesbloqAtmBBean.descOpcaoBloqCarregada}
+							</p>
+							<p>
+								<h:outputLabel for="" styleClass="bold"
+									value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.confirmar.trocarPara']} " />
+								#{bloqDesbloqAtmBBean.descOpcaoBloqueio}
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row b">
+						<p:outputPanel styleClass="col-md-12 ">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-md-12 text-center ">
+							<p>#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.exclusiva']}</p>
+							<p>
+								#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.msgBloqueio']}
+								<h:outputText
+									value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.bloqueioIntegral']}"
+									rendered="#{bloqDesbloqAtmBBean.opcaoBloqueio == 'S'}" />
+								<h:outputText
+									value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.bloqueiomadrugada']}"
+									rendered="#{bloqDesbloqAtmBBean.opcaoBloqueio == 'P'}" />
+								<h:outputText
+									value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.desbloqueado']}"
+									rendered="#{bloqDesbloqAtmBBean.opcaoBloqueio == 'N'}" />
+								#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.msgBloqueio2']}
+							</p>
+							<p>#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.msgBloqueio3']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+						
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 ">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+					
+						<p:outputPanel styleClass="col-md-12 text-center" rendered="#{bloqDesbloqAtmBBean.gerouPendencia}">
+							<h:outputText value="#{msg['pages.contacorrente.atmSaldoELimite.bloquearInformacoes.comprovante.demonstrativo']}" styleClass="bold" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-3" rendered="#{!bloqDesbloqAtmBBean.gerouPendencia}">
+							<p>
+								<strong>#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.comprovante.dataTransacao']}</strong>
+							</p>
+							<p>
+								<h:outputLabel value="#{bloqDesbloqAtmBBean.dataHoraTransacao}">
+									<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+								</h:outputLabel>
+							</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-3" rendered="#{!bloqDesbloqAtmBBean.gerouPendencia}">
+							<p>
+								<strong>#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.comprovante.autenticacao']}</strong>
+							</p>
+							<p>
+								<h:outputLabel value="#{bloqDesbloqAtmBBean.autenticacaoBancaria}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8">
+							<p class="bold">#{msg['page.commons.comprovante.central.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="bold">#{msg['page.commons.comprovante.sac.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p class="bold">#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+		</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

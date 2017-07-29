@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/pages/pagamentos/tributosFederais/darfAviso.xhtml"></ui:include>
+
+		<h4>#{msg['pages.apelidos.listaApelidos.informe.dados']}</h4>	
+		<br/>
+		<p:outputPanel styleClass="row placeholders">
+			<p:outputPanel>
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="titulo-painel">
+						<strong><h4>#{msg['pages.apelidos.listaApelidos.novo.pagamento']}</h4></strong>
+						<span style="color:red;margin-right:8px;"><strong>&gt;</strong>&nbsp;</span><p:commandLink value="#{msg['page.gare.apelidos.botao.preencher']}" action="#{darfBBean.preencherDados}" />
+						<p:separator/>
+						<h5>#{msg['page.darf.apelidos.titulo']}</h5>
+						<br/>
+						<p:dataTable id="dtApelidos" emptyMessage=""
+							value="#{darfBBean.listaApelidos}" var="apelido" selection="#{darfBBean.apelidoDTO}" selectionMode="single"
+							rowKey="#{apelido.apelido}">
+							
+							<p:ajax event="rowSelect" listener="#{darfBBean.onRowSelect}" />
+
+							<p:column headerText="#{msg['page.darf.apelidos.header.id']}">
+								<h:outputText value="#{apelido.apelido}" />
+							</p:column>
+
+							<p:column
+								headerText="#{msg['page.darf.apelidos.header.cpfcnpj']}">
+								<h:outputText value="#{apelido.numeroCPF}" converter="converterCpfCnpj"/>
+							</p:column>
+							<p:column>
+								<h:graphicImage styleClass="custom-icons"
+									value="/images/u1239.png" />
+								<p:commandLink id="cmdLnkAlterar" role="button"
+									action="#{darfBBean.alterarApelido(apelido)}"
+									value="#{msg['page.darf.apelidos.botoes.alterar']}" />
+							</p:column>
+							<p:column>
+								<h:graphicImage styleClass="custom-icons"
+									value="/images/u1241.png" />
+								<p:commandLink id="cmdLnkExcluir" role="button"
+									action="#{darfBBean.excluirApelido(apelido)}"
+									value="#{msg['page.darf.apelidos.botoes.excluir']}" />
+							</p:column>
+						</p:dataTable>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<script type="text/javascript">
+			$(window)
+					.load(
+							function() {
+
+								setTimeout(
+										function() {
+
+											$('input:radio')
+													.click(
+															function() {
+																$(
+																		".ui-radiobutton")
+																		.find(
+																				"input")
+																		.attr(
+																				"checked",
+																				false);
+																$(
+																		".ui-radiobutton")
+																		.find(
+																				".ui-radiobutton-box")
+																		.removeClass(
+																				"ui-state-active");
+																$(
+																		".ui-radiobutton")
+																		.find(
+																				"span")
+																		.removeClass(
+																				"ui-icon ui-icon-bullet");
+
+																$(this)
+																		.attr(
+																				"checked",
+																				true);
+																$(this)
+																		.parent()
+																		.next()
+																		.addClass(
+																				"ui-state-active");
+																$(this)
+																		.parent()
+																		.next()
+																		.find(
+																				"span")
+																		.addClass(
+																				"ui-icon ui-icon-bullet");
+															});
+										}, 500);
+								$('#formGeral\\:numeroCheque').val('');
+
+							});
+			function numeroDeCheque() {
+				$(".ui-radiobutton").find("input").prop("checked", false);
+				$(".ui-radiobutton").find(".ui-radiobutton-box").removeClass(
+						"ui-state-active");
+				$(".ui-radiobutton").find("span").removeClass(
+						"ui-icon ui-icon-bullet");
+
+				$(".ui-radiobutton:last").find("input").prop("checked", true);
+				$(".ui-radiobutton:last").find(".ui-radiobutton-box").addClass(
+						"ui-state-active");
+				$(".ui-radiobutton:last").find("span").addClass(
+						"ui-icon ui-icon-bullet");
+
+			}
+		</script>
+
+		<p:outputPanel styleClass="row space-b no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow min-lines">
+					<i class="fa fa-exclamation-circle" />
+					<h:outputText
+						value="#{msg['page.conta.corrente.consulta.contaCorrenteConsultarTipoLancamento.selecioneOpcao']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText class="h4"
+						value="#{msg['page.conta.corrente.consulta.contaCorrenteConsultarTipoLancamento.OpcaoPesquisa']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row no-visible" id="botoesSelecao">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="row radioGrid tpoLanca">
+
+								<p:selectOneRadio id="customRadio" layout="custom"
+									value="#{contaCorrenteConsultaTipoLancamentoBBean.request.tipoLancamento}">
+									<f:selectItem itemLabel="Depósitos" itemValue="01" />
+									<f:selectItem itemLabel="Créditos" itemValue="02" />
+									<f:selectItem itemLabel="Débitos" itemValue="03" />
+									<f:selectItem itemLabel="Cheques" itemValue="05" />
+									<f:selectItem itemLabel="Cheque nº:" itemValue="04" />
+									<p:ajax
+										listener="#{contaCorrenteConsultaTipoLancamentoBBean.limparCampoCheque()}"
+										update="@form" />
+								</p:selectOneRadio>
+
+								<p:outputPanel styleClass="col-xs-12">
+
+									<p:radioButton id="opt2" for="customRadio" itemIndex="0" />
+									<h:outputLabel value="Depósitos" for="opt2" />
+
+									<p:radioButton id="opt3" for="customRadio" itemIndex="1" />
+									<h:outputLabel value="Créditos" for="opt3" />
+
+									<p:radioButton id="opt5" for="customRadio" itemIndex="2" />
+									<h:outputLabel value="Débitos" for="opt5" />
+
+									<p:radioButton id="opt4" for="customRadio" itemIndex="3" />
+									<h:outputLabel value="Cheques" for="opt4" />
+
+									<p:radioButton id="opt6" for="customRadio" itemIndex="4" />
+									<h:outputLabel value="Cheque nº:" for="opt6" />
+
+									<p:outputPanel styleClass="form-group" for="opt6">
+										<p:inputMask styleClass="form-control" id="numeroCheque"
+											maxlength="6"
+											value="#{contaCorrenteConsultaTipoLancamentoBBean.request.numeroCheque}"
+											onfocus="numeroDeCheque()" mask="999999" />
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row no-visible">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for=""
+								value="#{msg['msg.contaCorrente.porTipoLancamento.periodo']}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2">
+
+							<h:outputLabel for="deDtEfetivacao"
+								value="#{msg['msg.contaCorrente.porTipoLancamento.de']}" />
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar" />
+									<p:calendar showOtherMonths="true" id="deDtEfetivacao"
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.request.dataInicial}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false">
+										<p:ajax event="change" />
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2">
+							<h:outputLabel for="ateDtEfetivacao"
+								value="#{msg['msg.contaCorrente.porTipoLancamento.ate']}" />
+
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar" />
+									<p:calendar showOtherMonths="true" id="ateDtEfetivacao"
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.request.dataFinal}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false">
+										<p:ajax event="change" />
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2">
+
+							<h:outputLabel for="btnExibir" value="" />
+							<p:defaultCommand target="btnExibir" />
+
+							<p:outputPanel styleClass="form-group">
+								<p:commandButton styleClass="btn btn-default modalLine"
+									id="btnExibir" onstart="openLoad();" oncomplete="closeLoad();"
+									update="gridListaMovimentos, botaoEnviar, opcaoPesquisa"
+									action="#{contaCorrenteConsultaTipoLancamentoBBean.consultarTiposLancamento}"
+									role="button"
+									value="#{msg['page.conta.corrente.consulta.contaCorrenteConsultarTipoLancamento.Exibir']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="show-print space-b">
+						<h:outputLabel for="opcaoPesquisa" styleClass="space"
+							value="Opção de Pesquisa:" />
+						<h:outputText id="opcaoPesquisa"
+							value="#{contaCorrenteConsultaTipoLancamentoBBean.opcaoPesquisa}" />
+					</p:outputPanel>
+
+					<p:outputPanel id="gridListaMovimentos">
+						<p:outputPanel styleClass="row"
+							rendered="#{not empty contaCorrenteConsultaTipoLancamentoBBean.listaTipoLancamento or contaCorrenteConsultaTipoLancamentoBBean.isExibeMsgmListaVazia()}">
+							<p:outputPanel styleClass="col-xs-6">
+								<h5>
+									<h:outputLabel class="space"
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.periodos']}" />
+									<h:outputText
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.request.dataInicial}">
+										<f:convertDateTime pattern="dd/MM/yyyy " />
+									</h:outputText>
+									<h:outputText
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.periodo']} " />
+									<h:outputText
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.request.dataFinal}">
+										<f:convertDateTime pattern="dd/MM/yyyy " />
+									</h:outputText>
+								</h5>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h5 class="pull-right">
+									<h:outputLabel class="space"
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.dataHora']}" />
+									<h:outputText
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.periodo}">
+										<f:convertDateTime pattern="dd/MM/yyyy " />
+									</h:outputText>
+									<h:outputText
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.dataAs']} " />
+									<h:outputText
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.periodo}">
+										<f:convertDateTime pattern="HH" />
+									</h:outputText>
+									<h:outputText
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.h']}" />
+									<h:outputText
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.periodo}">
+										<f:convertDateTime pattern="mm" />
+									</h:outputText>
+								</h5>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12 text-center">
+							<h:outputText
+								value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.nenhumItemEncontrado']}"
+								rendered="#{contaCorrenteConsultaTipoLancamentoBBean.isExibeMsgmListaVazia()}" />
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="table-responsive table table-striped">
+
+									<p:dataTable id="tabelaListaMovimentos"
+										value="#{contaCorrenteConsultaTipoLancamentoBBean.listaTipoLancamento}"
+										var="lancamentos"
+										rendered="#{not empty contaCorrenteConsultaTipoLancamentoBBean.listaTipoLancamento}">
+										<p:column>
+											<f:facet name="header">
+												<h:outputText
+													value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.data']}" />
+											</f:facet>
+											<h:outputText value="#{lancamentos.fechaMovimiento}"
+												id="fechaInicio">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</h:outputText>
+										</p:column>
+										<p:column>
+											<f:facet name="header" />
+											<h:outputText value="#{lancamentos.status.toLowerCase()}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText
+													value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.historico']}" />
+											</f:facet>
+											<h:outputText value="#{lancamentos.descripcion}" />
+										</p:column>
+										<p:column>
+											<f:facet name="header">
+												<h:outputText
+													value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.documento']}" />
+											</f:facet>
+											<h:outputText value="#{lancamentos.documento}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<f:facet name="header">
+												<h:outputText
+													value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.valor']}" />
+											</f:facet>
+											<h:outputText value="#{lancamentos.importe}"
+												styleClass="#{lancamentos.signoLanzamiento eq '-'?'negative-value':''}" />
+										</p:column>
+									</p:dataTable>
+									<p:outputPanel styleClass="col-xs-12 text-center">
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel
+							rendered="#{not empty contaCorrenteConsultaTipoLancamentoBBean.listaTipoLancamento}">
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputText
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.legenda.a']}" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputText
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.legenda.b']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputText
+										value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.legenda.p']}" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator></p:separator>
+					<p:outputPanel styleClass="space-t">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+					
+				</p:outputPanel>
+
+				<p:outputPanel id="botaoEnviar">
+					<p:outputPanel
+						rendered="#{not empty contaCorrenteConsultaTipoLancamentoBBean.listaTipoLancamento}">
+						<ui:include src="/commons/pdf/pdfButtons.xhtml">
+							<ui:param name="excel" value="#{'tabelaListaMovimentos'}" />
+						</ui:include>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+			
+		</p:outputPanel>
+		<br />
+
+		<p:outputPanel styleClass="row space-b no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					action="#{contaCorrenteConsultaTipoLancamentoBBean.voltar}"
+					role="button"
+					value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.voltar']}" />
+					
+			</p:outputPanel>
+			
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

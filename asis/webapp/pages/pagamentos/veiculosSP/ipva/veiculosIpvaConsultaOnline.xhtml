@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span class="site-map">                 	
+                	<p><strong>#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.1']}</strong></p>
+                	<br />
+                    <p>#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.2']}</p>  
+                	<p>#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.3']}</p>
+                    <p>#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.2.1']} #{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.2.2']}</p>
+                    <p>#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.2.3']}</p>      
+                	<p>#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.4']}</p>
+                	<br />
+                	<p>
+                		<ui:include src="/pages/generico/limites2.xhtml">#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.9']} </ui:include>															
+					</p>
+					<p><strong>						
+						<p:commandLink
+							actionListener="#{ipvaBBean.initLimites}"
+							value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.9']}">
+						</p:commandLink>
+						</strong>
+					</p>
+					<span class="space-b" />
+                	
+                	<p>#{msg['pages.pagamento.veiculosSP.ipva.preencher.AOpcaoDeAgendEsta']}</p>           	
+                	</span>
+                   
+					
+					
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamento.veiculosSP.ipva.preencher.InforOsDadosParaSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<ui:include
+						src="/pages/pagamentos/veiculosSP/ipva/ipvaDadosComuns.xhtml" />
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h5 class="space-b">
+								<strong>#{msg['pages.pagamento.veiculosSP.ipva.pagamento.Exerc']}</strong>
+							</h5>
+							<p>#{msg['pages.pagamento.veiculosSP.ipva.pagamento.EscolUmaFormaDePagam']}</p>
+							<p>#{msg['pages.pagamento.veiculosSP.ipva.pagamento.OsValorDosExercEm']}</p>
+							<p>#{msg['pages.pagamento.veiculosSP.ipva.pagamento.AOpcaoDeAgendEsta']}</p>
+							<br />
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:panelGrid id="exerciciosGrid"
+									styleClass="table-responsive table table-striped">
+									<f:facet name="header">
+										<p:row>
+										
+	   										<p:column width="40" exportable="false">
+											</p:column>
+											
+											<p:column styleClass="col-md-3">
+												<h:outputText
+													value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.Exercicio']}" />
+											</p:column>
+
+											<p:column styleClass="col-md-3">
+												<h:outputText
+													value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.CotaParcela']}" />
+											</p:column>
+
+											<p:column styleClass="col-md-3">
+												<h:outputText
+													value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.Vencimento']}" />
+											</p:column>
+
+											<p:column styleClass="col-md-2 text-right">
+												<h:outputText
+													value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.Total']}" />
+											</p:column>
+
+											<p:column styleClass="col-md-1">
+											</p:column>
+										</p:row>
+									</f:facet>
+
+									<c:forEach items="#{ipvaBBean.ipvaDTO.listaExercicio}"
+										var="exercicio" varStatus="iteratorExercicio">
+										<p:row>
+	   										<p:column width="40" exportable="false">
+												<p:selectBooleanCheckbox value="#{exercicio.selected}">
+													<p:ajax listener="#{ipvaBBean.selecionarExercicio}" 
+															process="exerciciosGrid" 
+															update="exerciciosGrid panelPeriodocheck dataAgendamento" />
+												</p:selectBooleanCheckbox> 																											
+											</p:column>
+
+											<p:column styleClass="col-md-3">
+												<h:outputText value="#{exercicio.exercicio}" />
+											</p:column>
+											
+											<p:column styleClass="col-md-3">
+												<p:selectOneRadio
+													id="customRadio_#{iteratorExercicio.index}"
+													value="#{ipvaBBean.cotaSelecionada}"
+													converter="cotaIpvaRadioConverter" layout="custom"
+													disabled="#{ipvaBBean.disableCotasRadio}">
+													<p:ajax listener="#{ipvaBBean.selecionarCota}"
+														process="exerciciosGrid"
+														update="exerciciosGrid panelPeriodocheck" />
+													<f:selectItem itemValue="#{exercicio}" />
+													<c:forEach items="#{exercicio.cotas}" var="cotaRadio">
+														<f:selectItem itemValue="#{cotaRadio}" />
+													</c:forEach>
+												</p:selectOneRadio>
+												<p:radioButton rendered="#{not empty exercicio.cotas}"
+													id="optExercicio_#{iteratorExercicio.index}"
+													for="customRadio_#{iteratorExercicio.index}" itemIndex="0" />
+
+												<h:outputText value="#{exercicio.icoTuniDescricao}" />
+											</p:column>
+
+											<p:column styleClass="col-md-3">
+												<h:outputText value="#{exercicio.vencimento}" />
+											</p:column>
+
+											<p:column styleClass="col-md-2 text-right">
+												<h:outputText value="#{exercicio.valorTotal}">
+													<f:convertNumber type="currency" currencySymbol="" />
+												</h:outputText>
+											</p:column>
+
+											<p:column styleClass="col-md-1">
+												<h:outputText value="" />
+											</p:column>
+										</p:row>
+
+										<c:forEach items="#{exercicio.cotas}" var="cota"
+											varStatus="iteratorCota">
+											<p:row>
+	   											<p:column width="40" exportable="false">
+												</p:column>
+												
+												<p:column styleClass="col-md-3">
+												</p:column>
+
+												<p:column styleClass="col-md-3">
+													<p:radioButton id="optCota_#{iteratorCota.index + 1}"
+														for="customRadio_#{iteratorExercicio.index}"
+														itemIndex="#{iteratorCota.index + 1}" />
+													<h:outputText value="#{cota.parcela}º parcela" />
+												</p:column>
+
+												<p:column styleClass="col-md-3">
+													<h:outputText value="#{cota.dataVencimento}" />
+												</p:column>
+
+												<p:column styleClass="col-md-2 text-right">
+													<h:outputText value="#{cota.valor}">
+														<f:convertNumber type="currency" currencySymbol="" />
+													</h:outputText>
+												</p:column>
+
+												<p:column styleClass="col-md-1">
+													<h:outputText value="" />
+												</p:column>
+											</p:row>
+										</c:forEach>
+									</c:forEach>
+								</p:panelGrid>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-12">
+								</p:outputPanel>
+							</p:outputPanel>
+						
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel
+										value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.DataPagamento']}"
+										styleClass="bold" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+						</p:outputPanel>
+
+						<!-- INICIO - AGENDAMETO OU PAGAMENTO ONLINE -->
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-lg-12">
+
+							<p:outputPanel id="panelPeriodocheck" styleClass="row radioGrid tpoLanca">
+
+								<p:selectOneRadio id="setAgendarPagamento" layout="custom"
+									value="#{ipvaBBean.agendarPagamento}">
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.PagarAgora']} "
+										itemValue="false" />
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.AgendarPara']}:"
+										itemValue="true" />
+
+									<p:ajax listener="#{ipvaBBean.onChangeAgendamento}"
+										process="exerciciosGrid" update="panelPeriodocheck dataAgendamento"
+										event="change"></p:ajax>
+								</p:selectOneRadio>
+
+								<p:outputPanel styleClass="col-xs-8">
+                                	<p:outputPanel styleClass="pull-left">
+							      		<p:radioButton id="opt1" for="setAgendarPagamento"
+											itemIndex="0" />
+										<h:outputLabel
+											value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.PagarAgora']} "
+											for="opt1" />
+	
+										<p:radioButton id="opt2" for="setAgendarPagamento"
+											itemIndex="1" />
+										<h:outputLabel
+											value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.AgendarPara']}:"
+											for="opt2" />
+	
+										<p:graphicImage id="tooltip" value="/images/icon-i.png"
+											style="width: 15px;" />
+										<p:tooltip for="tooltip" style="top: 110.583px">
+											<h:outputText>
+												<p>#{msg['pages.pagamento.veiculosSP.ipva.pagamento.agendar1']}</p>
+											</h:outputText>
+										</p:tooltip>
+									</p:outputPanel>
+								
+									<p:outputPanel styleClass="icon-data-input col-xs-3">
+										<i class="fa fa-calendar"></i>		
+										<p:calendar id="dataAgendamento"
+	                                           showOtherMonths="true" 
+	                                           pattern="dd/MM/yyyy"
+	                                           value="#{ipvaBBean.dataPagamento}"
+	                                           maxlength="10"
+	                                           converter="dateConverterFormat" 
+	                                           onkeyup="bloqueioCTRLV(this, event); mascaraData(this, event)" 
+	                                           onkeypress="mascaraData(this, event)">			
+											
+											<p:ajax event="change" 
+													process="@this" 
+													update="dataAgendamento"/>		
+																								
+											<p:ajax event="dateSelect" 																	
+													listener="#{ipvaBBean.dateSelectedDataAgendamento}" 
+													update="panelPeriodocheck dataAgendamento"/>																						
+										</p:calendar>										
+									</p:outputPanel>
+								</p:outputPanel>								
+							</p:outputPanel>
+						</p:outputPanel>
+						<!-- FIM - AGENDAMETO OU PAGAMENTO ONLINE -->
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink id="cmdLnkVoltar" value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{ipvaBBean.voltarListaRenavam}" />
+
+				<p:commandLink id="btnContinuar"
+					value="#{msg['pages.pagamento.veiculosSP.ipva.preencher.Conti']}"
+					styleClass="btn btn-default" role="button"
+					action="#{ipvaBBean.continuarPagamento}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

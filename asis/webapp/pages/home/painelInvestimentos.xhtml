@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+				
+				<p:outputPanel styleClass="box-shadow maquinaGetNet investimentos radiusB" rendered="#{homeBBean.widgetFavorito eq 'painelInvestimento'}">
+					
+					<p:inputText type="hidden" styleClass="textCoachMark" value="Painel de gestão dos seus Investimentos."></p:inputText>
+					<p:inputText type="hidden" styleClass="posicaoPainel" value="width: 400px; left: 15px; top:-50px; display: block; position: absolute;"></p:inputText>
+				
+					<p:outputPanel styleClass="row">
+					
+						<p:outputPanel styleClass="col-xs-6 space-t">
+									
+							<p class="totalReceber">
+								<span class="tituloTotal">#{msg['page.home.painelInvestimento.TotalInvestimentos']}</span><br/>
+								<span class="tituloTotal">#{msg['page.home.painelInvestimento.SaldoBruto']}</span><br/>
+								<span class="valorInvestimento">R$ 								<h:outputText
+														converter="valorMonetarioConverter"
+														value="#{homeBBean.painelInvestimentosHomeDTO.total}" /></span>
+							
+							</p>
+
+						</p:outputPanel>					
+
+						<p:outputPanel styleClass="col-xs-6 pull-left text-left investimentos">
+							<!-- <p:graphicImage styleClass="pull-left"
+								value="#{homeBBean.chart}" height="115px" /> -->
+							<script type="text/javascript">
+								$.jqplot.sprintf.decimalMark=',';
+								
+								function pieExtender() {							
+							    	this.cfg.highlighter = {
+							            show: true,
+							            tooltipLocation: 'nw',
+							            useAxesFormatters: false,
+							            formatString: '<div style="background-color: #ffffff;font-size:130%;text-align:left;"> <b>%s</b> <br/> %.2f%</div>',
+							            tooltipOffset:20
+							        };
+							        this.cfg.grid={ 
+							        	drawBorder:false,      
+							        	shadow:false,
+										background:'#FFFFFF'
+									}
+							       this.cfg.seriesDefaults={
+										renderer:$.jqplot.DonutRenderer,  
+							        	rendererOptions:{ 
+							        		 startAngle: -90,
+                                             innerDiameter: 80,
+                                             shadow:false
+							       		}
+							       };
+
+							    }
+							    
+							</script>
+						
+							<p:donutChart seriesColors="#{homeBBean.listaCoresInvestimentos}"  id="graficoInvestimento" value="#{homeBBean.donutGetNet}" extender="pieExtender" style="width:180px; height:180px;"   ></p:donutChart>
+
+							<span class="pull-right"><p:commandLink
+									value="#{msg['page.home.painelCobranca.VerPosicaoConsolidada']}" action="#{homeBBean.redirectInvestimentos}" styleClass="linkGrafico" /></span>
+							
+						</p:outputPanel>
+						
+						
+						
+	
+
+
+
+						
+
+
+
+			
+
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+
+</ui:composition>

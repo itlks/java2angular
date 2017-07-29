@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:outputLabel styleClass="space-b" value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+  
+	<p:outputPanel styleClass="row">
+			 
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="anoExercicioDPVATMG" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.anoExercicio']}" />
+			<h:outputText id="anoExercicioDPVATMG"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.anoExercicioIPVA}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="placaVeiculoDPVATMG" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.placaVeiculo']}" />
+			<h:outputText id="placaVeiculoDPVATMG"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.placaVeiculo}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="renavamDPVATMG" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.renavam']}" />
+			<h:outputText id="renavamDPVATMG"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.renavam}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="nomeProprietarioDPVATMG" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.proprietario']}" />
+			<h:outputText id="nomeProprietarioDPVATMG"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomeProprietario}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="cotaParcelaDPVATMG" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.cotaOuParcela']}" />
+			<h:outputText id="cotaParcelaDPVATMG"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.cotaParcela}" />
+		</p:outputPanel>
+			 
+	</p:outputPanel>
+			
+</ui:composition>

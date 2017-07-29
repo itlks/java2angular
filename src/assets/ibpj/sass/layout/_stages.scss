@@ -1,0 +1,73 @@
+.stages {
+
+	text-align: right;
+	padding: 0;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    width: auto;
+    margin-right: 20px;
+
+    .stage {
+
+        border-top: 1px dashed #BBBBBB;
+        color: #BBBBBB;
+        float: left;
+        padding: 0px 135px 0px 0px;
+
+        &.active {
+            
+            color:$green-color;
+        }
+
+        &.checked {
+            border-color: $green-color;
+            color:$green-color;
+            .fa-circle {
+                display: none!important;
+            }
+            .fa-check-circle {
+                display: table!important;
+                font-size: 20px !important;
+                margin: -5px 56px auto 56px;
+                text-align: center;
+                background: #F5F6F7;
+            }
+        }
+
+        &.last {
+            padding: 0px 0px 0px 28px;
+            border: none;
+
+            span {                    
+                margin-left: -60px;
+                width: 80px;
+
+                .fa-circle {
+                    margin: 1px 0px 5px 33px;
+                }
+            }
+        }                        
+        span {
+            font-size: 12px;
+            margin-left: -60px;
+            position: absolute;
+            width: 120px;
+            text-align: center;
+        }
+
+         .fa {
+            font-size: 9px!important;
+            margin-right: 0px;
+            &.fa-check-circle {
+                display: none;
+            }
+            &.fa-circle {
+                display: table;
+                margin: 1px 56px 5px 56px;
+                text-align: center;
+            }
+        }
+       
+    }
+}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content"> 
+	
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<h5>#{msg['pages.contacorrente.cheques.desbloquearTaloes.confirmacao.avisoInterno']}</h5>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.cheques.desbloquearTaloes.confirmacao.title']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 "> 
+							<h5>#{msg['pages.contacorrente.cheques.desbloquearTaloes.confirmacao.titleTbela']}</h5>
+							<br /> 
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1" value="#{chequesDesbloquearTaloesBBean.taloesSelecionados}" var="talao">
+								
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.comprovante.titleColuna1']}">
+											</p:column>
+											
+											<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.comprovante.titleColuna2']}">
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+
+									<p:column>
+										<h:outputText value="#{talao.folhaInicial}" />
+									</p:column>
+
+									<p:column>
+										<h:outputText value="#{talao.folhaFinal}" />
+									</p:column> 
+									
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{chequesDesbloquearTaloesBBean.voltar}">#{msg['pages.contacorrente.cheques.desbloquearTaloes.confirmacao.btnVoltar']}</p:commandLink>
+				
+				<p:commandLink id="btnContinuar" styleClass="btn btn-default" role="button" onstart="encryptSecureDL();"
+					action="#{chequesDesbloquearTaloesBBean.confirmar}">#{msg['pages.contacorrente.cheques.desbloquearTaloes.confirmacao.btnContinuar']}</p:commandLink>
+			
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

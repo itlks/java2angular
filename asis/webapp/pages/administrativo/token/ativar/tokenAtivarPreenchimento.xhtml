@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		
+		<h:inputHidden id="hashSenha" partialSubmit="true" value="#{tokenAtivarBBean.tokenAtivar.hashSenha}" />
+		<h:inputHidden id="hashNumeroSerie" partialSubmit="true" value="#{tokenAtivarBBean.tokenAtivar.hashNumeroSerie}" />
+		
+		 <p:remoteCommand autoRun="true" actionListener="#{tokenAtivarBBean.varificaErro}"/>
+
+		<!--alerta -->
+		<p:outputPanel styleClass="row space-b">
+      		<p:outputPanel styleClass="col-lg-12">
+            	<p:outputPanel styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>
+                    	<p>#{msg['page.administrativo.token.ativar.preenchimento.alert.linha1']}</p>
+                    </span>
+            	</p:outputPanel>
+       		</p:outputPanel>
+		</p:outputPanel>
+
+		<!--Sub	titulo -->
+		<p:outputPanel styleClass="row">
+			
+        	<p:outputPanel styleClass="col-lg-12">
+            	<p:outputPanel styleClass="titulo-painel">
+       				<h4>#{msg['page.administrativo.token.ativar.preenchimento.subTitulo']}</h4>
+            	</p:outputPanel>
+       		</p:outputPanel>
+       		
+		</p:outputPanel>
+
+		<p:outputPanel id="conteudo" styleClass="row">
+			
+       		<p:outputPanel styleClass="col-lg-12">
+            	<p:outputPanel styleClass="box-shadow">
+            	
+					<p:outputPanel styleClass="row" rendered="#{tokenAtivarBBean.painelErro}">
+						<ui:repeat var="msg" value="#{tokenAtivarBBean.msgErros}">
+							<p:outputPanel styleClass="col-lg-12">
+								<h5>#{msg}</h5>
+							</p:outputPanel>
+						</ui:repeat>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row" rendered="#{!tokenAtivarBBean.painelErro}">
+       					<p:outputPanel styleClass="col-lg-4">
+       						<p:outputPanel styleClass="form-group">
+   								<h:outputLabel value="#{msg['page.administrativo.token.ativar.preenchimento.numero.token']}"></h:outputLabel>
+   								<p:inputText id="numeroSerieToken" styleClass="form-control pull-left" onkeypress="onlyNumbersGare(this)" maxlength="10"
+       								value="#{tokenAtivarBBean.tokenAtivar.numeroSerie}"/>
+							</p:outputPanel>
+       					</p:outputPanel>
+       					
+       					<p:outputPanel styleClass="col-lg-1 input-help"> 
+							<p:graphicImage  value="/images/icon-i.png" id="tooltip" style="width:15px">
+	   							<pe:tooltip for="tooltip" myPosition="left center" atPosition="right center" 							
+									value="#{msg['page.administrativo.token.ativar.preenchimento.info1']}&lt;br /&gt;#{msg['page.administrativo.token.ativar.preenchimento.info2']}"/>
+  							</p:graphicImage> 
+       					</p:outputPanel> 
+       				
+       					<p:outputPanel styleClass="col-lg-4">
+       						<h:outputLabel value="#{msg['page.administrativo.token.ativar.preenchimento.senha.token']}" />
+       						<br />
+       						<p:password id="senhaGeradaToken" styleClass="form-control" onkeypress="onlyNumbersGare(this)"
+       							value="#{tokenAtivarBBean.tokenAtivar.senhaGerada}" maxlength="6"/>
+       					</p:outputPanel>
+       				</p:outputPanel>
+
+				</p:outputPanel>
+				<p:outputPanel styleClass="text-right rodape-button">
+					<h:panelGroup>
+	
+						<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+							rendered="#{!tokenAtivarBBean.painelErro}"
+							action="#{tokenAtivarBBean.voltar}">
+							#{msg['page.btn.voltar']}
+						</p:commandLink>
+	
+						<p:commandLink id="btnContinuar" styleClass="btn btn-default"
+							rendered="#{!tokenAtivarBBean.painelErro}" onclick="encryptDadosTokenAtivar()"
+							action="#{tokenAtivarBBean.continuarEmPreenhimento}" >
+							#{msg['page.btn.continuar']}
+						</p:commandLink>
+	
+					</h:panelGroup>
+			</p:outputPanel>
+       		</p:outputPanel>
+		</p:outputPanel>
+		
+		
+	</ui:define>
+</ui:composition>

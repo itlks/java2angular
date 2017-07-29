@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:outputPanel styleClass="row space-t space-r space-l">
+		
+		<ui:repeat var="dados" value="#{autorizacoesPendenciaDetalheBBean.detalheOnline.dadosDetalheOnilne}">
+			<div class="no-margin-bottom">
+				<p:outputPanel styleClass="col-xs-12">
+			  		<h:outputLabel>#{dados.label}:</h:outputLabel>
+			 		<h:outputText> #{dados.valor}</h:outputText>
+			  </p:outputPanel>
+			  </div>
+		</ui:repeat>
+	</p:outputPanel>
+	
+</ui:composition>

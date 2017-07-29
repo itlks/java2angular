@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cartaoAmexBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<ui:include src="/pages/cartoes/pagamentoDeFaturas/amexAviso.xhtml" />
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.cartoes.amex.preenchimento.informe']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>
+								<strong>#{msg['page.cartoes.amex.preenchimento.preencha']}</strong>
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['page.cartoes.amex.preenchimento.selecione']}" />
+								<h:selectOneMenu name="cartao" tabindex="1"
+									value="#{cartaoAmexBBean.dto.cartaoSelecionado}">
+									<f:selectItem itemValue="0" itemLabel="Selecione"
+										noSelectionOption="true" />
+									<f:selectItems value="#{cartaoAmexBBean.dto.listaCartoes}" />
+									<p:ajax update="amex" process="@all"></p:ajax>
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="amex">
+						<p:outputPanel
+							rendered="#{cartaoAmexBBean.dto.cartaoSelecionado eq '1'}">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h:outputLabel
+										value="#{msg['page.cartoes.amex.preenchimento.numero']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-1">
+									<p:outputPanel styleClass="form-group">
+										<p:inputText id="numeroCartaoPrimeiraParte"
+											styleClass="form-control numberOnly"
+											value="#{cartaoAmexBBean.dto.numeroCartaoPrimeiraParte}"
+											tabindex="2" maxlength="4"
+											onkeyup="onTrocaFoco('numeroCartaoPrimeiraParte','numeroCartaoSegundaParte');"
+											disabled="#{cartaoAmexBBean.usarApelido}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-1">
+									<p:outputPanel styleClass="form-group">
+										<p:inputText id="numeroCartaoSegundaParte"
+											styleClass="form-control numberOnly"
+											value="#{cartaoAmexBBean.dto.numeroCartaoSegundaParte}"
+											tabindex="3" maxlength="6"
+											onkeyup="onTrocaFoco('numeroCartaoSegundaParte','numeroCartaoTerceiraParte');"
+											disabled="#{cartaoAmexBBean.usarApelido}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-1">
+									<p:outputPanel styleClass="form-group">
+										<p:inputText id="numeroCartaoTerceiraParte"
+											styleClass="form-control numberOnly"
+											value="#{cartaoAmexBBean.dto.numeroCartaoTerceiraParte}"
+											tabindex="4" maxlength="5"
+											onkeyup="onTrocaFoco('numeroCartaoTerceiraParte','valor');"
+											disabled="#{cartaoAmexBBean.usarApelido}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-4">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel
+											value="#{msg['page.cartoes.amex.preenchimento.valor']}" />
+										<p:inputText id="valor" styleClass="form-control"
+											value="#{cartaoAmexBBean.dto.valorAPagar}"
+											onkeypress="onlyNumbers(event)" tabindex="5"
+											onkeyup="maskMoney(this, null, event)"
+											onblur="maskMoneyOnBlur(this)" maxlength="17">
+										</p:inputText>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:separator rendered="#{!cartaoAmexBBean.usarApelido}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel id="panelApelidoCheck" styleClass="col-md-12"
+							rendered="#{!cartaoAmexBBean.usarApelido}">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-5">
+									<p:outputPanel styleClass="checkbox">
+										<p:selectBooleanCheckbox
+											value="#{cartaoAmexBBean.dto.gravaApelido}" tabindex="6"
+											id="cb2_1">
+											<p:ajax update="panelApelidoCheck" />
+										</p:selectBooleanCheckbox>
+										<h:outputLabel for="cb2_1"
+											value="#{msg['page.cartoes.amex.preenchimento.desejo']}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-md-7 inline-form darf-apelido"
+									rendered="#{cartaoAmexBBean.dto.gravaApelido}">
+									<p:outputPanel styleClass="row">
+
+										<p:outputPanel styleClass="col-md-2">
+											<h:outputLabel for="cb2_1" styleClass="pull-right"
+												value="#{msg['page.cartoes.amex.preenchimento.apelido']}" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-md-4">
+											<p:inputText id="apelido" styleClass="form-control"
+												tabindex="7" value="#{cartaoAmexBBean.dto.apelido}"
+												maxlength="20"
+												onblur="removeAcento(this); stringToUpperCase(this)" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-md-6"
+											rendered="#{cartaoAmexBBean.dto.gravaApelido}" />
+										<h:outputLabel value="&#160;" />
+										<h:outputLabel
+											value="#{msg['page.cartoes.amex.preenchimento.limiteCaracter']}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					role="button" tabindex="9"
+					action="#{cartaoAmexBBean.voltarDaTelaPreenchimento}">#{msg['page.cartoes.amex.preenchimento.voltar']}</p:commandLink>
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandLink id="btnContinuar" styleClass="btn btn-default"
+					role="button" tabindex="10"
+					action="#{cartaoAmexBBean.continuarDaTelaPreenchimento}">#{msg['page.cartoes.amex.preenchimento.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

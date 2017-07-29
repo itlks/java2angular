@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+	<p:outputPanel 
+		style="display:none">
+		<span id="divHtml"> 
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel
+								value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.comprovanteSegundaViaTed']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<c:forEach items="#{operacoesRealizadasBBean.listaDetalhesSelecionados}"
+						var="item" >
+						<span class="multiplosPdfsCss"> 
+							<p:outputPanel styleClass="container">
+								<p:outputPanel styleClass="row no-visible">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel styleClass="titulo-painel">
+											<h4>
+												<h:outputText value="#{msg['pages.transferencia.consultar.detalhe.detalhetransacao']}" />
+											</h4>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 no-margin-bottom">
+							<p:outputLabel styleClass="bold space"
+								value="#{msg['page.operacoes.realizadas.detalhe.label.transacao']}"></p:outputLabel>
+									<h:outputText value="#{item.nomeTransacao}"></h:outputText>
+							</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 no-margin-bottom">
+							<p:outputLabel styleClass="bold space"
+								value="#{msg['page.operacoes.realizadas.detalhe.label.contacorrente']}"></p:outputLabel>
+								<h:outputText value="#{item.contaCorrente}"></h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 no-margin-bottom">
+							<p:outputLabel styleClass="bold space"
+								value="#{msg['page.operacoes.realizadas.detalhe.label.nomeusuario']}"></p:outputLabel>
+							<h:outputText
+								value="#{item.nomeUsuario}"></h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 no-margin-bottom">
+							<p:outputLabel styleClass="bold space"
+								value="#{msg['page.operacoes.realizadas.detalhe.label.datatransacao']}"></p:outputLabel>
+							<h:outputText
+								value="#{item.dataTransacao}"></h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 no-margin-bottom">
+							<p:outputLabel styleClass="bold space"
+								value="#{msg['page.operacoes.realizadas.detalhe.label.horariotransacao']}"></p:outputLabel>
+							<h:outputText
+								value="#{item.horaTransacao}"></h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 no-margin-bottom">
+							<p:outputLabel styleClass="bold space"
+								value="#{msg['page.operacoes.realizadas.detalhe.label.numeroautenticacao']}"></p:outputLabel>
+							<h:outputText
+								value="#{item.numeroAutenticacao}"></h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-8">
+							<p>#{msg['page.commons.comprovante.central.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2">
+							<p>#{msg['page.commons.comprovante.sac.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2">
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					value="#{msg['pages.transferencia.consultar.home.voltar']}"
+					action="#{operacoesRealizadasBBean.voltarListarOperacao()}"
+					immediate="true" role="button" />
+			</p:outputPanel>
+		</p:outputPanel>
+							</p:outputPanel>
+							</span>
+						</c:forEach>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</span>
+	</p:outputPanel>
+</ui:define>
+
+</ui:composition>

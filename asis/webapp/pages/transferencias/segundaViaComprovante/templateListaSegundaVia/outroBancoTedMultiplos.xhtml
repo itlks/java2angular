@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel
+		rendered="#{transferenciaSegundaViaComprovanteBBean.listaTed}"
+		style="display:none">
+		<span id="divHtml">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<h4>#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.vejaSeuComprovante']}</h4>
+				</p:outputPanel>
+			</p:outputPanel> 
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel value="#{transferenciaSegundaViaComprovanteBBean.detalhe.nome}" />
+							</p:outputPanel>
+
+							<c:forEach items="#{transferenciaSegundaViaComprovanteBBean.lstDetalhe}"
+								var="detalhe" varStatus="item">
+								<span class="multiplosPdfsCss">
+									<p:outputPanel styleClass="container">
+										<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.comprovanteSegundaViaTed']}" />
+					</p:outputPanel>					
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h4>#{transferenciaSegundaViaComprovanteBBean.tipoContaDestino}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<br />
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.titularidade']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.titularidade}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.finalidade']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.finalidade}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.bancoIspb']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.banco} - #{detalhe.nomeBancoDestino}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.agencia']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.agenciaDestino}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.numeroConta']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.contaDestino}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.favorecido']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.favorecido}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.cpf']}:"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.cpf}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.valor']}"
+							styleClass="space" />
+						<h:outputText value="#{detalhe.valor}" />
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.historico']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.historico}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.tipoDeTransferencia']}"
+						styleClass="space" />
+					<h:outputText value="#{detalhe.tipoTransferencia}" />
+				</p:outputPanel>
+			</p:outputPanel>							
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h4>#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.execucaoTed']}</h4>
+						<br />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.segundaVia']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<br />
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:separator />
+						<span>#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.transacaoExclusivaTed']}</span>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.dataTransacao']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{detalhe.dataTransacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.autenticacaoBancaria']}"
+							styleClass="space" />
+						<h:outputText
+							value=" #{detalhe.autenticacao}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.canal']}"
+							styleClass="space" />
+						<h:outputText
+							value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.internetBancking']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+									 <ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+									 
+				</p:outputPanel>
+								</span>
+							</c:forEach>
+							
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</span>
+	</p:outputPanel>
+</ui:composition>

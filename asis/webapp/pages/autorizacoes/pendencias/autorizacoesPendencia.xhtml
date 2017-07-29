@@ -1,0 +1,231 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+	<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dicionarioTipoAutorizacaoPendencia.js" />
+	<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/autorizacoesPendencias.js" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false"
+				styleClass="loading no-visible no-print" >
+				<p:graphicImage value="../../../images/aguarde.gif" />
+		</p:dialog>
+		
+		<ui:include src="/pages/autorizacoes/pendencias/detalheAutorizacoesModal.xhtml" />
+		<p:dialog id="modalMsgAutorizacao" widgetVar="modalMsgAutorizacao" position="center" modal="false" 
+			resizable="false" styleClass="modalMsg no-visible no-print" appendToBody="false" >
+	 		<p:outputPanel styleClass="boxMessagePadrao">
+ 				<p:outputPanel>
+ 					<p:outputPanel styleClass="text-left content-modal-text flex-align-v">
+						<p:graphicImage value="" styleClass="imgTipoErro"/>
+						<p:outputLabel styleClass="modalLine" value="erro" escape="false"/>	
+					</p:outputPanel>
+ 				</p:outputPanel>
+	 			<p:outputPanel styleClass="content-modal-footer">
+		 			<p:outputPanel>										
+						<p:commandLink value="OK" oncomplete="PF('modalMsgAutorizacao').hide(); closeLoad()" styleClass="btn btn-default"/>
+				    </p:outputPanel>
+	 			</p:outputPanel>
+	 		</p:outputPanel>
+ 		</p:dialog>
+ 		
+ 		<p:dialog id="modalMsgAutorizacaoConfirmar" widgetVar="modalMsgAutorizacaoConfirmar" position="center" modal="false" 
+			resizable="false" styleClass="modalMsgConfir no-visible no-print" appendToBody="false" >
+	 		<p:outputPanel styleClass="boxMessagePadrao">
+ 				<p:outputPanel>
+ 					<p:outputPanel styleClass="text-left content-modal-text flex-align-v">
+						<p:graphicImage value="" styleClass="imgTipoErroConfirmar"/>
+						<p:outputLabel styleClass="modalLineConfirmar" value="erro" escape="false"/>	
+					</p:outputPanel>
+ 				</p:outputPanel>
+	 			<p:outputPanel styleClass="content-modal-footer">
+		 			<p:outputPanel>										
+						<p:commandLink value="OK" oncomplete="PF('modalMsgAutorizacaoConfirmar').hide(); closeLoad();" styleClass="btn btn-default btncontinuemsgConfir"/>
+				    </p:outputPanel>
+	 			</p:outputPanel>
+	 		</p:outputPanel>
+ 		</p:dialog>
+ 		
+ 		
+		<p:remoteCommand name="abreMsgContinue" oncomplete="PF('abreMsgContinue').show();" async="false"/>
+		<p:remoteCommand name="abreMsgAutorizacao" oncomplete="PF('modalMsgAutorizacao').show();" async="false"/>
+		
+		<p:remoteCommand name="abreMsgAutorizacaoConfirmar" oncomplete="PF('modalMsgAutorizacaoConfirmar').show(); openLoad()" async="true"/>
+		<p:remoteCommand name="detalharAutorizacoes" action="#{autorizacoesPendenciaDetalheBBean.detalheDaPendencia}"/>
+		<p:remoteCommand name="openDialogDetalhe" update=":formGeral:dialogDetalhe" actionListener="#{autorizacoesPendenciaDetalheBBean.openModal}" async="false"/>
+		<p:remoteCommand name="showCarregando" onstart="PF('statusDialog').show();" />
+		<p:remoteCommand name="fecharCarregando" onstart="PF('statusDialog').hide();" />
+		<!-- 
+			SEÇÃO DE TEXTO INFORMATIVO DE CADA ABA
+		 -->
+		 
+		 
+		<p:outputPanel styleClass="row space-b no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle" />
+					<span><p>
+							<h:outputText
+								value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.header.textoInformativo']}" />
+						</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- 
+			PAINEL COM AS ABAS
+		 -->
+		<p:outputPanel id="panelTabsAutorizacoesPendencias" styleClass="row no-visible">
+
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:tabView id="panelTokens"
+					activeIndex="${autorizacoesPendenciaBBean.dto.tabAtiva}" styleClass="box-shadow">
+
+					<p:ajax 
+						event="tabChange" 
+						onstart="openLoad();consultaPorMudancaDeAba();"
+						onsuccess="closeLoad();"
+						listener="#{autorizacoesPendenciaBBean.onTabChange}"
+						update=":formGeral:idFormGeral @form:panelTokens:R:convenios" />
+
+					<!-- 
+						ABA POR DATA DE EFETIVAÇÃO
+					 -->
+					<p:tab id="E"
+						title="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.tab.titulo.dataEfetivacao']}">
+						<ui:include
+							src="/pages/autorizacoes/pendencias/dataEfetivacao/consultarAutorizacoesDataEfetivacao.xhtml" />
+					</p:tab>
+
+
+					<!-- 
+						ABA POR DATA DE INCLUSÃO
+					 -->
+					<p:tab id="I"
+						title="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.tab.titulo.dataInclusao']}">
+						<ui:include
+							src="/pages/autorizacoes/pendencias/dataInclusao/consultarAutorizacoesDataInclusao.xhtml" />
+					</p:tab>
+
+
+
+
+
+					<!-- 
+						ABA POR PRODUTO
+					-->
+					<p:tab id="P"
+						title="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.tab.titulo.produto']}">
+						<ui:include
+							src="/pages/autorizacoes/pendencias/produto/consultarAutorizacoesProduto.xhtml" />
+					</p:tab>
+
+
+					<!-- ABA POR CONTA CONVENIO -->
+					<p:tab id="C"
+						title="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.tab.titulo.contaConvenio']}">
+						<ui:include
+							src="/pages/autorizacoes/pendencias/contaConvenio/consultarAutorizacoesContaConvenio.xhtml" />
+					</p:tab>
+
+
+					<!-- 
+						ABA POR REMESSA
+					 -->
+					<p:tab id="R"
+						title="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.tab.titulo.remessa']}">
+						<p:outputPanel styleClass="padding-l-10">
+							<ui:include styleClass=""
+								src="/pages/autorizacoes/pendencias/remessa/consultarAutorizacoesRemessa.xhtml" />
+						</p:outputPanel>
+					</p:tab>
+
+				</p:tabView>
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="js-painel-selecionadas no-visible">
+			<p:outputPanel id="pendenciasSelecionadas"
+				
+				styleClass="row space-b pendencias-selecionadas" style="display:none">
+
+				<p:outputPanel styleClass="col-xs-5">
+					<p:outputPanel styleClass="pen" />
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="pen">
+						<h:outputLabel for="quantidadePendenciasSelecionadas"
+							value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.label.pendenciasSelecionadas']}" />
+						<h:outputText styleClass="space-l" id="quantidadePendenciaSelecionadas" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-2">
+					<p:outputPanel styleClass="pen">
+						<h:outputLabel for="valorTotalPendenciasSelecionadas"
+							value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.label.total']} #{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.label.simboloReal']}" />
+						<h:outputText styleClass="space-l" id="valorTotalPendenciaSelecionadas"
+							converter="valorDecimalConverter" />
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-2 text-right">
+					<p:outputPanel styleClass="pen">
+						<a href="javascript:void(0);" class="btn btn-default"
+							id="btnAutorizar">#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.button.autorizar']}</a>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b margin-bottom-80 no-visible">
+			<p:outputPanel styleClass="col-xs-12 text-right space-b">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					action="#{autorizacoesPendenciaBBean.voltarMenu}" role="button"
+					immediate="true"
+					value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.button.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel> 
+		<input value="#{autorizacoesPendenciaBBean.dto.tabAtiva}" class="abaInicial" type="hidden"/>
+		<script type="text/javascript">
+			
+		
+			jQuery('.btn-period').on('click', function() {
+
+				jQuery.each(jQuery('.btn-period'), function() {
+					jQuery(this).addClass('btn-cinza');
+				});
+
+				jQuery(this).removeClass('btn-cinza');
+			});
+
+			PrimeFaces.widget.OverlayPanel.prototype.applyFocus = function() {
+				if (this.id == "globalSearchForm:gsOverlay")
+					return;
+				else
+					this.jq
+							.find(
+									':not(:submit):not(:button):input:visible:disabled:first')
+							.focus();
+			};
+
+			PrimeFaces.widget.DataTable.prototype.bindExpansionEvents = function() {
+				var $this = this, togglerSelector = '> tr > td > div.ui-row-toggler';
+				this.tbody.off('click.datatable-expansion', togglerSelector)
+						.on('click.datatable-expansion', togglerSelector, null,
+								function() {
+									$this.toggleExpansion($(this));
+								});
+			};
+		</script>
+
+	</ui:define>
+
+</ui:composition>

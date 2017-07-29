@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">			
+
+		<span id="divHtml"> 
+		
+			<!-- Geração PDF-->
+			<c:forEach
+				items="#{segundaViaComprovanteTelefonePrePagoBBean.listaSegViaCommpTelefonePrePagoSelecionados}"
+				var="dto" varStatus="item">
+				<span class="multiplosPdfsCss">
+				
+					<p:outputPanel styleClass="container" style="margin-left: -15px; margin-right:-15px; !important">
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="box-shadow no-margin-bottom">
+									<h:outputText 	
+														value="#{msg['page.segunda.via.comprovantes.contas.comprovante']}" 
+														styleClass="bold" />
+										<hr/>
+				
+									<p:outputPanel styleClass="row space-b">
+										<p:outputPanel styleClass="col-md-12">
+											<h:outputLabel value="#{msg['page.segunda.via.comprovantes.telefoneprepago.empresa']}" styleClass="bold" />
+											<span><h:outputText 
+													value="#{dto.operadora}" /></span>
+											<br />
+											<h:outputLabel value="#{msg['page.segunda.via.comprovantes.telefoneprepago.codigoarea']}" styleClass="bold" />
+											<span><h:outputText  value="#{dto.codArea}" /></span>
+											<br />
+											<h:outputLabel value="#{msg['page.segunda.via.comprovantes.telefoneprepago.numerotelefone']}" styleClass="bold" />
+											<span><h:outputText  value="#{dto.numeroTelefone}" /></span>
+											<br />
+											<h:outputLabel value="#{msg['page.segunda.via.comprovantes.telefoneprepago.valor']}" styleClass="bold" />
+											<span><h:outputText 	value="#{dto.valorPago}"> 
+													<f:convertNumber type="currency" currencySymbol="R$ " />
+													</h:outputText>
+											</span>
+											<br />
+											<h:outputLabel value="#{msg['page.segunda.via.comprovantes.telefoneprepago.numerotransacao']}" styleClass="bold" />
+											<span><h:outputText  value="#{dto.numeroTransacao}" /></span>
+											<br />
+											<h:outputLabel value="#{msg['page.segunda.via.comprovantes.telefoneprepago.protocolo']}" styleClass="bold" />
+											<span><h:outputText  value="#{dto.protocolo}" /></span>
+										</p:outputPanel>
+									</p:outputPanel>
+				
+									<p:outputPanel styleClass="row space-b">
+										<p:outputPanel styleClass="col-md-12">
+										
+											<p:separator />
+											
+										</p:outputPanel>
+									</p:outputPanel>
+				
+									<p:outputPanel styleClass="row space-b">
+				
+										<p:outputPanel styleClass="col-md-4">
+											<p>
+												<strong>#{msg['page.segunda.via.comprovantes.telefoneprepago.data']}</strong>
+											</p>
+											<p>
+												<h:outputLabel
+													value="#{dto.dataTransacao} - #{dto.horaPagamento}" />
+											</p>
+											<br />
+											<p>
+												<strong>#{msg['page.segunda.via.comprovantes.telefoneprepago.autenticacao']}</strong>
+											</p>
+											<p>
+												<h:outputLabel
+													value="#{dto.autenticacaoBancaria}" />
+											</p>
+										</p:outputPanel>
+				
+									</p:outputPanel>
+				
+								</p:outputPanel>
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+								
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</span>
+				<br/>
+			</c:forEach>
+			
+		</span>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12" style="margin-top:-17px;">
+				
+				<ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml">
+						<ui:param name="divHtml" value="true" />
+						<ui:param name="imprimir" value="true" />
+				</ui:include>
+				
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="space-b text-right no-print no-visible">
+               <p:commandLink styleClass="btn btn-default btn-cinza" 
+               				  action="goSegundaViaComprovanteTelefonePrePagoLista" 
+               				  role="button">#{msg['page.btn.voltar']}
+               </p:commandLink>
+        </p:outputPanel>
+			
+	</ui:define>
+</ui:composition>
+

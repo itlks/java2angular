@@ -1,0 +1,75 @@
+.side-menu {
+    background: $light-grey-color !important;
+    bottom: 0;
+    position: fixed;
+    top: 79px;
+    width: 69px;
+    box-shadow: $box-shadow;
+    padding-left: 20px;
+    z-index: 10;
+	@include transition;
+
+    &:hover {
+		width: 225px;
+		@include transition;
+
+		ul {
+			li {
+
+				a {
+					width: 225px;
+					.menu-text {
+						transition: opacity 0.8s ease-out;
+	    				opacity: 1; 
+					}		
+				}
+
+			}
+		}
+    }
+
+	ul {
+		li {
+		padding-top: 7px;
+
+			a {
+				height: 32px;
+				color: $font-default-color;
+				float: left;
+				cursor: pointer;
+				width: 69px;
+				display: inline-block;
+				transition: width 0.4s;
+
+				&:hover {
+					color:$link-color;
+				}
+			}
+
+			.ic {
+			    float: left;
+			    font-size: 28px;
+			    margin-right: 10px;
+			}
+
+			.menu-text {
+				display: block;
+				opacity: 0; 
+			    font-size: 12px;
+			    padding-top: 7px;
+			}
+		}
+	}
+
+	&.internal {
+		width: 225px;
+
+		a {
+			width: 100%;
+
+			.menu-text {
+				opacity: initial;
+			}
+		}
+	}
+}

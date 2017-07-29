@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Central de Atendimento" id="painelSecundarioCentral" modal="false" closable="true" visible="#{painelSecundarioBBean.centralVisivel}" styleClass="popover-submenu box-shadow">
+		
+		<div class="arrow-submenu">
+			<p:graphicImage value="/images/arrow-popover.png"/>
+		</div>
+		
+		<h4 class="popover-title">#{msg['pages.painelSecundario.central.central']}</h4>
+		
+		<div class="popover-content">
+			<div class="row space-b">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-2">
+							<p><p:graphicImage width="54px" height="54px" value="/images/u490.png"/></p>
+						</div>
+						<div class="col-md-10">
+							<p>#{msg['pages.painelSecundario.central.central.linha1']}</p>
+							<p>#{msg['pages.painelSecundario.central.central.linha2']}</p>
+							<p>#{msg['pages.painelSecundario.central.central.linha3']}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row space-b">
+				<div class="col-md-12">	
+					<div class="row">
+						<div class="col-md-2">
+							<p><p:graphicImage width="54px" height="54px" value="/images/u492.png"/></p>
+						</div>
+						<div class="col-md-10">	
+							<p>#{msg['pages.painelSecundario.central.atendimento.linha1']}</p>
+							<p>#{msg['pages.painelSecundario.central.atendimento.linha2']}</p>
+							<p>#{msg['pages.painelSecundario.central.atendimento.linha3']}</p>
+						</div>
+					</div>		
+				</div>
+			</div>
+			<div class="row space-b">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-2">
+							<p><p:graphicImage width="54px" height="54px" value="/images/u488.png"/></p>
+						</div>
+						<div class="col-md-10">	
+							<p>#{msg['pages.painelSecundario.central.ouvidoria.linha1']}</p>
+							<p>#{msg['pages.painelSecundario.central.ouvidoria.linha2']}</p>
+							<p>#{msg['pages.painelSecundario.central.ouvidoria.linha3']}</p>
+						</div>
+					</div>		
+				</div>
+			</div>	
+		</div>
+	</p:dialog>
+</ui:composition>

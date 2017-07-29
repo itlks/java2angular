@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<f:event type="preRenderView" listener="#{termoAdesaoRecebiveisBBean.acessoDiretoConfirmacao}" />
+	
+ <f:event type="preRenderView" listener="#{termoAdesaoRecebiveisBBean.acessoDiretoConfirmacao}" /> 
+	
+	<!-- CONFIRMAÇÃO TERMO DE ADESÃO CONFIRMAÇÃO INICIO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<p><span>#{msg['page.emprestimosERecebiveis.termo.de.adesao.confirmar.txt1']}</span></p>
+				    <p><span>#{msg['page.emprestimosERecebiveis.termo.de.adesao.confirmar.txt2']}</span></p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+						  <p><b>#{msg['page.emprestimosERecebiveis.termo.de.adesao.confirmar.confira']}</b></p>
+						  <br/>
+							<p:outputPanel styleClass="row">
+                                 <p:outputPanel styleClass="col-xs-12">
+                                     <p:dataTable id="dataMaster" var="t" rowKey="#{t}"
+                                         value="#{termoAdesaoRecebiveisBBean.opcoesBandeiraSelecionados}"
+                                         emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+                                         tableStyleClass="table table-striped">
+                                         <p:column headerText="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.bandeirasSelecionadas']}">
+                                             <h:outputText value="#{t.label}" />
+                                         </p:column>
+                                     </p:dataTable>
+                                     <br />
+                                 </p:outputPanel>
+                                 <br />
+                            	<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="aviso-interno-blocos alert-information min-lines">
+										<span><p>#{msg['page.emprestimosERecebiveis.termo.de.adesao.confirmar.aviso']}</p></span>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+		
+		
+		
+        <!-- DISPOSITIVOS DE SEGURANÇA INIT -->
+  			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		<!-- DISPOSITIVOS DE SEGURANÇA FIM -->
+		
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<!-- Botoes inicio-->
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink
+					action="#{termoAdesaoRecebiveisBBean.voltarEmContrato}"
+					styleClass="btn btn-default btn-cinza" role="button">
+			      	#{msg['page.btn.voltar']}
+				</p:commandLink>
+
+				<p:commandLink id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{termoAdesaoRecebiveisBBean.continuarEmComprovante}"
+					role="button" value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.confirmar']}"
+					styleClass="btn btn-default" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:blockUI block="panelBotoes" trigger="btnConfirmar" />
+		<!-- Botoes fim-->
+	
+		<!--CONFIRMAÇÃO TERMO DE ADESÃO CONFIRMAÇÃO FIM -->
+	</ui:define>
+</ui:composition>

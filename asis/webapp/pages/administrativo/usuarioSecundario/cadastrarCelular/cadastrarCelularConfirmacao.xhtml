@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+  <!-- ÍNICIO HTML -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.administrativo.perfilSecundario.cadastrarCelular.confirmacao.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="box-shadow ">
+			<p:outputPanel styleClass="table-responsive table table-striped">
+			<!--Tabela inicio  -->
+				<p:dataTable id="tabela1">
+				
+					<p:column styleClass="col-md-3" headerText="CPF">
+						<h:outputText value="CPF" />
+					</p:column>
+					<p:column styleClass="col-md-3" headerText="Nome completo">
+						<h:outputText value="nome" />
+					</p:column>
+					<p:column styleClass="col-md-3" headerText="Usuário">
+						<h:outputText value="Usuário" />
+					</p:column>
+					<p:column styleClass="col-md-3" headerText="Confirmar o telefone">
+						<h:outputText value="ConfirmTel" />
+					</p:column>
+			<!-- Tabela fim -->		
+				</p:dataTable>
+				
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- Assinatura inicio-->
+		 <p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+		<!-- Assinatura fim-->
+
+	   <!-- ações inicio-->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink
+					action="#{cadastrarCelularBBean.voltarEmPreenchimento}"
+					styleClass="btn btn-default btn-cinza" role="button">
+			      	#{msg['page.btn.voltar']}
+				</p:commandLink>
+
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandLink id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{cadastrarCelularBBean.continuarEmComprovante}"
+					role="button" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- ações fim-->
+
+		<!-- FIM HTML -->
+			</ui:define>
+</ui:composition>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateConsultaNovoSemMenuSair.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/invalidTeclado.xhtml" />
+		
+		<p:outputPanel id="container-fluid" styleClass="container-fluid">
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.cadastroPj.recadastramento.titulo.1']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="box-shadow">
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-6">
+								<p>#{msg['pages.cadastroPj.atualizar.label.nomeTitular']}
+									#{atualizarMasterBBean.dto.cliente}</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-2">
+								<p class="text-right">#{msg['pages.cadastroPj.atualizar.label.agencia']}
+									#{atualizarMasterBBean.dto.agencia}</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-3">
+								<p class="text-right">#{msg['pages.cadastroPj.atualizar.label.conta']}
+									#{atualizarMasterBBean.dto.contaCorrente}</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+		
+									<h5>Você deve imprimir, assinar e enviar o aditivo para a agência no qual sua empresa possui conta. Para o acesso ao Internet Banking </h5>
+									<h5>Empresarial, você deverá aguardar a autorização de seu gerente.</h5>
+									<h5 align="center">Proposta de Adesão e Cadastramento do Usuário Master</h5>
+		
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-md-12">
+									<p:separator />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:scrollPanel mode="native" style="width:100%;height:200px">
+								<ui:include src="/pages/cadastroPj/recadastrarMaster/termoAdesao.xhtml"/>
+							</p:scrollPanel>			
+			
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+		
+
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

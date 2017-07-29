@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovoSemMenu.xhtml">
+	<ui:define name="content">
+		<p:outputPanel styleClass="row " style="margin-bottom: 40px; margin-left:-30px">
+			<p:outputPanel>
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow no-margin-bottom">
+						<p:outputPanel styleClass="col-xs-12 no-padding text-center">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.label.cet']}"
+								styleClass="col-xs-12 bold space-b" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding">
+							<p:separator />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.taxa.juros']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.txJuroMes}% a.m."
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.txJuroAno}% a.a."
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.label.cet.b']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.cetMes}% a.m."
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.cetAno}% a.a."
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.tipo.taxa.juros']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value=" " styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.tpTaxa}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.valor.rs']}" styleClass="col-xs-4 text-right bold break1 margin-top-10" />
+							<h:outputText value="#{msg[pages.emprestimosRecebiveis.giroEletronico.cet.percentual]}" styleClass="col-xs-4 text-right bold break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.valor.devido.contratacao']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.vlTotalDevolvido}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.txValorDevolvido}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.tarifa.contratacao.financiado']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.vlTariCntr}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.txTarifaCntr}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.valor.iof.financiado']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.vlIOF}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.txIOF}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.valor.liberado']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.vlLiberado}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.txVlLiberado}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.qtd.parcelas']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value=" " styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.numParcelas}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.valor.parcelas']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value=" " styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.vlParc}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.data.primeira.parcela']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value=" " styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.dtPrimVcto}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding border-bottom">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.ultimo.vencimento']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value=" " styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.dtUltiVcto}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding">
+							<h:outputText value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.data.hora.calculo']}" styleClass="col-xs-4 break1 margin-top-10" />
+							<h:outputText value=" " styleClass="col-xs-4 text-right break1 margin-top-10" />
+							<h:outputText value="#{creditoPessoalBBean.demonstrativoCET.dtCalc}"
+								styleClass="col-xs-4 text-right break1 margin-top-10" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding">
+							<p:separator />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding ">
+							<h:outputText
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.condicoes.calculadas']}"
+								styleClass="col-xs-12" />
+							<h:outputText
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.para.efeito']}"
+								styleClass="col-xs-12" />
+							<h:outputText
+								value="#{msg['pages.emprestimosRecebiveis.giroEletronico.cet.aplicavel']}"
+								styleClass="col-xs-12 space-b" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12 no-padding space-b">
+							<p:separator />
+						</p:outputPanel>
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

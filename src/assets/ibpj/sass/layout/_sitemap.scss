@@ -1,0 +1,18 @@
+.site-map {
+	font-size: 14px;
+	span {
+		strong {
+		  color: $red-color;
+		  padding: 0 3px;
+		  margin: 0px 5px ;
+		}
+
+		&:last-child {
+			display: block;
+		}
+	}
+	.h1 {
+		font-size: 18px;
+		margin: 5px 0px;
+	}
+}

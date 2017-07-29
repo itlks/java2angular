@@ -1,0 +1,26 @@
+/* line 1, ../sass/menu-internas.scss */
+.menu-lateral-internas {
+  width: 42px !important;
+  -webkit-transition: width 0.3s ease-in-out;
+  -moz-transition: width 0.3s ease-in-out;
+  -ms-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+/* line 9, ../sass/menu-internas.scss */
+.menu-lateral-internas:hover {
+  width: 225px !important;
+  -webkit-transition: width 0.3s ease-in-out;
+  -moz-transition: width 0.3s ease-in-out;
+  -ms-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+/* line 17, ../sass/menu-internas.scss */
+.menu-lateral-internas a {
+  width: 250px !important;
+}
+/* line 21, ../sass/menu-internas.scss */
+.menu-lateral-internas .menu-lateral .fa::before {
+  font-size: 21px;
+}

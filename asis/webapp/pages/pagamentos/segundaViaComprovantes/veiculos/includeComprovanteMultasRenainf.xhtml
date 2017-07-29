@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+<!-- ############################################################### DADOS RENAVAM INICIO ####################################################################### -->   
+
+        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeBancoCliente.xhtml"/>
+        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeRenavam.xhtml"/>
+    
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-4">
+              <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.proprietario']}"/>
+              <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nomProp}"/>
+            </p:outputPanel>
+              
+            <p:outputPanel styleClass="col-xs-4">
+              <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.cpfcnpj']}"/>
+              <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.cpfcNPJ2Formatado}"/>
+            </p:outputPanel>
+              
+            <p:outputPanel styleClass="col-xs-4">
+              <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.placadoveiculo']}"/>
+              <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.placa}"/>
+            </p:outputPanel>
+        </p:outputPanel>
+    
+        <!-- MULTAS -->
+        <p:outputPanel rendered="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nroOcorrMultaRenainf > 0}">
+        
+	         <p:outputPanel styleClass="row">
+	             <p:outputPanel styleClass="col-xs-12">
+	                 <p:separator styleClass="space-b" />
+	             </p:outputPanel>
+	         </p:outputPanel>
+
+	         <p:outputPanel styleClass="row">
+	            <p:outputPanel styleClass="col-xs-12 space-b">
+	                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.multasrenainfspagas']}"/>
+	            </p:outputPanel>
+            </p:outputPanel>
+	            
+	        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeMultasRenainf.xhtml"/>
+
+        </p:outputPanel>
+    
+         <!-- VALOR TOTAL -->
+	     <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeValorTotal.xhtml"/>
+
+         <p:outputPanel styleClass="row">
+             <p:outputPanel styleClass="col-xs-12">
+                 <p:separator styleClass="space-b" />
+             </p:outputPanel>
+         </p:outputPanel>
+
+         <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+               <p>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.multastransito.aviso1']}</p>
+               <p>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.multastransito.aviso2']}</p>
+             </p:outputPanel>
+         </p:outputPanel>
+
+         <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:separator styleClass="space-b" />
+            </p:outputPanel>
+         </p:outputPanel>
+
+	     <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeRodape1.xhtml"/>
+
+  <!-- ####################################################################### DADOS RENAVAM FIM ######################################################################### -->
+</ui:composition>

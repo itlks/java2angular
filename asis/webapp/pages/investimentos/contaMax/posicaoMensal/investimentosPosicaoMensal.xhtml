@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Posição Consolidada Mensal</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<center><h:outputLabel for="" value="Rendimento apurado no mês (2)" /></center>
+	
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:dataTable id="dtListaPosicao" var="r"
+									value="#{investimentosCMPosicaoMensalBBean.listaPosicao}"
+									emptyMessage="Dados não encontrados">
+					
+							<p:column headerText="Mês">
+								<h:outputText id="idMes" 
+									value="#{r.anoMesReferencia}" />
+							</p:column>
+							
+							<p:column headerText="Saldo bruto anterior (R$)">
+								<h:outputText id="idSaldoBruto"
+									value="#{r.valorBrutoAnterior}" />
+							</p:column>
+							
+							<p:column headerText="Aplicações (R$)">
+								<h:outputText id="idAplicacoes"
+									value="#{r.valorAplicacao}" />
+							</p:column>
+							
+							<p:column headerText="Resgates brutos R$ (1)">
+								<h:outputText id="idValorPrincipal"
+									value="Aceito" />
+							</p:column>
+							
+							<p:column headerText="Sobre o valor resgatado no mês (A)">
+								<h:outputText id="idValorRend"
+									value="#{r.valorRendimento}" />
+							</p:column>
+							<p:column headerText="Sobre o valor resgatado no mês (B)">
+								<h:outputText id="idValorBrutoFim"
+									value="#{r.valorBrutoFim}" />
+							</p:column>
+							<p:column headerText="Total no mês (A+B)">
+								<h:outputText id="idValorLiquidoFinal"
+									value="#{r.valorLiquidoFinal}" />
+							</p:column>
+							<p:column headerText="Saldo bruto final (R$) (3)">
+								<h:outputText id="idSaldoBrutoFinal"
+									value="#{r.valorLiquidoFinal}" />
+							</p:column>
+							<p:column headerText="Saldo liquido final (R$)">
+								<h:outputText id="idSaldoLiquidoFinal"
+									value="#{r.valorLiquidoFinal}" />
+							</p:column>
+							<p:column headerText="Rendimento total das aplicações resgatadas no mês (Base IR Fonte/IOF) (R$) (4)">
+								<h:outputText id="idValorResgate"
+									value="#{r.valorResgate}" />
+							</p:column>
+							<p:column headerText="IOF (R$)">
+								<h:outputText id="idIOF"
+									value="x.xxx,xx" />
+							</p:column>
+							<p:column headerText="IR (R$)">
+								<h:outputText id="idIR"
+									value="x.xxx,xx" />
+							</p:column>							
+						</p:dataTable>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="space-t">
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p>(1) - Valor resgatado acrescido dos rendimento desde a data da aplicação.</p>
+								<p>(2) - Refere-se ao rendimento bruto do mês, com ou sem resgate efetuado.</p>
+								<p>(3) - O Saldo Bruto Final corresponde ao Saldo Bruto Anterior, 
+								         acrescido das Aplicações e do Rendimento Total no Mês,
+								         descontados os Resgates Brutos.</p>
+								<p>(4) - Rendimentos brutos resgatados no mês, independente da data de
+								  		 aplicação e que sofreram tributação de IOF e IR na fonte.</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+			
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+					
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+

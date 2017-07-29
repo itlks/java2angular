@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:jsp="http://java.sun.com/JSP/Page"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:c="http://java.sun.com/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+			
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.contacorrente.seguro.chequeEspecialProtegido.protecaoEmpresa']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+	
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow">
+	
+						<ui:include src="descricaoPJ.xhtml" />
+	
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+	
+								<p:outputPanel style="" styleClass="custom-links no-print no-visible ">
+									<ui:include src="/commons/pdf/pdfTermo.xhtml">
+											<ui:param name="divHtml" value="true" />
+									</ui:include>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+	
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+	
+								<p:outputPanel styleClass="termos-block">
+									<p:outputPanel styleClass="row space-b">
+										<p:outputPanel styleClass="col-xs-12">
+	
+											<span id="divHtml"> 
+										
+											<span class="multiplosPdfsCss"> 
+								
+											<p:outputPanel styleClass="container" style="margin-left: -15px; margin-right:-15px; !important">
+												<ui:include src="termoPJ.xhtml"/>
+											</p:outputPanel>
+											<br/>
+											<p:outputPanel styleClass="show-print">
+												<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+											</p:outputPanel>
+															
+											</span>
+											</span>
+											</p:outputPanel>
+									</p:outputPanel>
+	
+								</p:outputPanel>
+	
+								<p:outputPanel styleClass="row">
+	
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputPanel styleClass="table-responsive radio">
+											<h:selectOneRadio id="aceiteDeContrato" value="#{adesaoChequeEspecialProtegidoBBean.aceiteContrato}" >
+												<f:selectItem 
+													itemLabel="Aceito as condicoes particulares do produto."
+													itemValue="SIM" />
+												<f:selectItem
+													itemLabel="Nao aceito as condicoes particulares do produto."
+													itemValue="NAO" />
+													<p:ajax event="change" update="btnControle" listener="#{adesaoChequeEspecialProtegidoBBean.renderizarBtnContinuar}"/>
+											</h:selectOneRadio>
+										</p:outputPanel>
+									</p:outputPanel>
+	
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputPanel styleClass="input-help pull-right">
+											<a href="https://www.santander.com.br/br/pessoa-fisica/santander/seguros/seguros-pessoal/cheque-especial-protegido" target="_blank" > 
+												<h:outputLabel for="" styleClass="link-termos " value="Condicoes gerais do produto" style="cursor:pointer">
+												</h:outputLabel>
+											</a>
+										</p:outputPanel>
+									</p:outputPanel>
+	
+								</p:outputPanel>
+	
+							</p:outputPanel>
+						</p:outputPanel>
+	
+					</p:outputPanel>
+	
+					<p:outputPanel styleClass="row space-b" id="btnControle">
+						<p:outputPanel styleClass="col-xs-12 text-right">
+							<p:commandLink styleClass="btn btn-default btn-cinza" action="#{adesaoChequeEspecialProtegidoBBean.voltar()}" role="button">
+						         <h:outputText value="Voltar"/>
+							</p:commandLink>
+							<p:commandLink styleClass="btn btn-default" action="#{adesaoChequeEspecialProtegidoBBean.continuar()}" rendered="#{adesaoChequeEspecialProtegidoBBean.renderContinuar}" role="button">
+					         	<h:outputText value="Continuar"/>	 
+					      </p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+	
+				</p:outputPanel>
+			</p:outputPanel>
+				
+				
+	</ui:define>
+</ui:composition>

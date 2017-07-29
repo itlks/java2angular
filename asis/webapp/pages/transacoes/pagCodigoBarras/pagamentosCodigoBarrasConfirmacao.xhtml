@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+<script type="text/javascript" language="javascript">
+		jQuery(window).load(function() {
+			initDL();
+			gerarChave();
+		});
+	</script>
+
+	<h:inputHidden id="chaveServer" partialSubmit="true"
+		value="#{loginBBean.session.serverPublicKey}" />
+
+	<h:inputHidden id="chaveClient" partialSubmit="true"
+		value="#{loginBBean.session.browserPublicKey}" />
+
+	<h:inputHidden id="usuario" partialSubmit="true"
+		value="#{loginBBean.session.nomeUsuarioLogado}" />
+
+	<h:inputHidden id="hashSenhaEletronica" partialSubmit="true"
+		value="#{loginBBean.session.hashSenhaEletronica}" />
+
+	<p:remoteCommand name="gerarChave"
+		action="#{dispositivoSecureBBean.gerarChave}" process=":formGeral"
+		update=":formGeral" />
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row" id="panelGeral">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.confira.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p>
+								<strong>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.empresa']}
+								</strong>#{codigoBarraBBean.dto.empresa}
+							</p>
+							<br />
+							<p>
+								<strong>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.codigo.barra']}
+								</strong>#{codigoBarraBBean.dto.bloco1} #{codigoBarraBBean.dto.bloco2} #{codigoBarraBBean.dto.bloco3} #{codigoBarraBBean.dto.bloco4}
+							</p>
+							<br />
+							<p>
+								<strong>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.data.pagamento']}
+								</strong>#{codigoBarraBBean.dto.dataPagamento}
+							</p>
+							<br />
+							<p>
+								<strong>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.valor']}
+								</strong>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.formato.dinheiro']} 
+								#{codigoBarraBBean.dto.valor}
+							</p>
+							<br />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	<h4>#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.assinatura.eletronica']}</h4>
+			<p:outputPanel styleClass="row ">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="box-shadow ">
+
+						<p:outputPanel styleClass="row ">
+							<p:outputPanel styleClass="col-lg-4 form-group">
+								<h:outputText
+									value="#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.conta.corrente']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-lg-4 form-group">
+								<h:outputText
+									value="#{msg['pages.codigoBarra.pagamentosCodigoBarrasConfirmacao.assinatura.eletronica']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row ">
+							<p:outputPanel styleClass="col-lg-4 form-group">
+								<h:outputText
+									value="#{codigoBarraBBean.session.agencia} #{codigoBarraBBean.session.conta}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-lg-4 form-group">
+								<p:password id="assinaturaEletronica" placeholder=""
+									styleClass="form-control largura-menor"
+									value="#{dispositivoSecureBBean.senhaEletronica}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{codigoBarraBBean.voltarCodigoBarraConfirmacao}"
+					id="voltar" value="#{msg['pages.codigoBarra.pagamentoCodigoBarras.voltar']}"></p:commandLink>
+				<p:commandLink styleClass="btn btn-default" role="button"
+					action="#{codigoBarraBBean.continuarCodigoBarraConfirmacao}"
+					id="continuar" value="#{msg['pages.codigoBarra.pagamentoCodigoBarras.continuar']}">
+					<p:ajax event="click" onstart="encryptSecureDL();" process="@all"
+							listener="#{dispositivoSecureBBean.autenticarAssinaturaEletronica()}" />
+							</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

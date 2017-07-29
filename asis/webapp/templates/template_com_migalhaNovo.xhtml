@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<f:view contentType="text/html" encoding="UTF-8">
+	<f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg" />
+
+
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="robots" content="noindex,nofollow"/>
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/icones/icones.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/styleNovo.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css" />
+		<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/images/icones/favicon.ico" />
+
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/acc-rec.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/utils.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/jquery.mask.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/default.js" />
+		<!-- Inicio JavaScript DL -->
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/ie10-viewport-bug-workaround.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/aes.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/Clumpy.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/DLECC.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/ec.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn2.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/pad-nopadding-min.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/pbkdf2.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/prng4.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/rng.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/sec.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/sha256.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/codeDL.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/blockUI.js" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/event.js" />
+		<script language="JavaScript">
+			$(function() {
+				if (window.performance.navigation.type == 2){
+					window.location = "#{facesContext.externalContext.requestContextPath}/commons/logout.xhtml";
+				}
+			});
+		</script>
+		<!-- Fim JavaScript DL -->
+
+		<title>#{ msg['page.home.label.titulo'] }</title>
+	</h:head>
+
+	<h:body>
+		<ui:include src="/commons/topoNovo.xhtml" />
+		<section class="edicao-coluna"> <p:outputPanel
+			id="container-fluid" styleClass="container">
+			<p:outputPanel id="row" styleClass="row">
+				<form jsfc="h:form" id="formGeral">
+					<p:panel visible="false">
+						<h:outputLink id="btnSair" styleClass="no-visible no-print"	value="https://www.santander.com.br/br/pessoa-juridica">
+							<p:ajax event="click" listener="#{mensagemBBean.sair}"></p:ajax>
+						</h:outputLink>
+					</p:panel>
+					
+					<ui:include src="/commons/menuEsquerdoInternas.xhtml" />
+
+					<p:outputPanel id="idFormGeral" styleClass="col-xs-12 miolo">
+						<!-- Título da página -->
+						<p:outputPanel styleClass="row space-b">
+
+							<p:outputPanel styleClass="col-xs-12 space-b space-t">
+								<p:outputPanel styleClass="boxTitulo">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-5 site-map #{wizardBBean.cssPanelBreadcrumb}">
+											<span>
+											<h:outputText value="#{atributosDaSessao.primeiroBreadcrumb}"/> 
+											   <strong class="space">&gt;</strong>
+												<h:outputText value="#{atributosDaSessao.segundoBreadcrumb}" />
+												 <strong class="space">&gt;</strong>
+											</span>
+											<h1>#{atributosDaSessao.terceiroBreadcrumb}</h1>
+										</p:outputPanel>
+
+
+										<p:outputPanel
+											styleClass="col-xs-7 no-print no-visible #{wizardBBean.cssPanelWizard}">
+											<p:outputPanel styleClass="text-right">
+												<ul class="etapas third-step">
+													<c:if test="#{wizardBBean.numeroPassos gt 1}">
+														<li class='#{wizardBBean.cssClass1}'><span><i
+																class="fa fa-circle"></i> <i class="fa fa-check-circle"></i>#{wizardBBean.label1}</span></li>
+													</c:if>
+
+													<c:if test="#{wizardBBean.numeroPassos gt 1}">
+														<li class='#{wizardBBean.cssClass2}'><span><i
+																class="fa fa-circle"></i> <i class="fa fa-check-circle"></i>
+																#{wizardBBean.label2} </span></li>
+													</c:if>
+
+													<c:if test="#{wizardBBean.numeroPassos gt 2}">
+														<li class='#{wizardBBean.cssClass3}'><span><i
+																class="fa fa-circle"></i> <i class="fa fa-check-circle"></i>
+																#{wizardBBean.label3} </span></li>
+													</c:if>
+
+													<c:if test="#{wizardBBean.numeroPassos gt 3}">
+														<li class='#{wizardBBean.cssClass4}'><span><i
+																class="fa fa-circle"></i> <i class="fa fa-check-circle"></i>
+																#{wizardBBean.label4} </span></li>
+													</c:if>
+
+													<c:if test="#{wizardBBean.numeroPassos gt 4}">
+														<li class='#{wizardBBean.cssClass5}'><span><i
+																class="fa fa-circle"></i> <i class="fa fa-check-circle"></i>
+																#{wizardBBean.label5} </span></li>
+													</c:if>
+												</ul>
+												<p:outputPanel styleClass="quebra"></p:outputPanel>
+											</p:outputPanel>
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<ui:insert name="content" />
+					</p:outputPanel>
+
+
+					<ui:include src="/commons/rodape.xhtml" />
+					<ui:include src="/commons/invalidInternas.xhtml" />
+					<ui:include src="/commons/tagueamento.xhtml" />
+					<ui:include src="/commons/loadingAction.xhtml" />
+					
+				</form>
+			</p:outputPanel>
+		</p:outputPanel> </section>
+
+		<p:dialog widgetVar="widDlgConfirmation" position="center"
+			modal="true" dynamic="true" resizable="false">
+			<ui:include src="../pages/mensagem/confirmaGenerico.xhtml" />
+		</p:dialog>
+		
+		<p:dialog widgetVar="widDlgConfirmationLogout" position="center" modal="true" dynamic="true" resizable="false">	    
+	 		<ui:include src="../pages/mensagem/confirmaLogout.xhtml"/>
+	 	</p:dialog>
+
+		<p:dialog widgetVar="widDlgMessagem" position="center" modal="true"
+			dynamic="true" resizable="false">
+			<ui:include src="/pages/mensagem/mensagemGenerica.xhtml" />
+		</p:dialog>
+	</h:body>
+</f:view>
+</html>

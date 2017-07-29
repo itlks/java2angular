@@ -1,0 +1,117 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Empresa Conveniada:" styleClass="space"/>
+
+			<h:outputText value="${compHisParts[5]}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Identificador:" styleClass="space"/>
+
+			<h:outputText value="${compHisParts[7]}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Limite para Débito:" styleClass="space"/>
+
+			<h:outputText value="Não" rendered="${compHisParts[22] eq '0'}" />
+			<h:outputText value="Sim" rendered="${compHisParts[22] ne '0'}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Valor do Limite:" styleClass="space"/>
+
+			<h:outputText value="${compHisParts[22]}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Emissão de Aviso:" styleClass="space"/>
+
+			<h:outputText value="Não" rendered="${compHisParts[27] eq 'N'}" />
+			<h:outputText value="Sim" rendered="${compHisParts[22] ne '0'}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data de Cadastramento:" styleClass="space"/>
+
+			<h:outputText value=""
+				rendered="${compHisParts[18] eq '01/01/0001'}" />
+			<h:outputText value="${compHisParts[18]}"
+				rendered="${compHisParts[18] ne '01/01/0001'}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data do Último Lançamento:" styleClass="space"/>
+
+			<h:outputText value="${compHisParts[19]}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data do Último Lançamento:" styleClass="space"/>
+
+			<h:outputText value="${compHisParts[30]}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Motivo da Exclusão:" styleClass="space"/>
+
+			<h:outputText value="Cancelamento do serviço"
+				rendered="${compHisParts[2] eq '0001'}" />
+			<h:outputText value="Mudança de Endereço"
+				rendered="${compHisParts[2] eq '0002'}" />
+			<h:outputText value="Mudança de Prestadora de serviço"
+				rendered="${compHisParts[2] eq '0003'}" />
+			<h:outputText value="Insatisfação com o banco"
+				rendered="${compHisParts[2] eq '0004'}" />
+			<h:outputText value="Preferência de pagamento manual"
+				rendered="${compHisParts[2] eq '0005'}" />
+			<h:outputText value="Débito automático em outro banco"
+				rendered="${compHisParts[2] eq '0006'}" />
+			<h:outputText value="Insatisfação com o serviço prestado pelo banco"
+				rendered="${compHisParts[2] eq '0007'}" />
+		</p:outputPanel>
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Forma de Pagamento:" styleClass="space"/>
+
+			<h:outputText value="Cartão de Crédito – "
+				rendered="${compHisParts[40] ne 'cb' || compHisParts[40] ne ''}" />
+			<h:outputText value="Mastercard -"
+				rendered="${compHisParts[41] eq '01'}" />
+			<h:outputText value="${compHisParts[42]}"
+				rendered="${compHisParts[41] eq '01'}" />
+			<h:outputText value=" XXXX.XXXX.XXXX."
+				rendered="${compHisParts[41] eq '01'}" />
+			<h:outputText value="Visa -" rendered="${compHisParts[41] ne '01'}" />
+			<h:outputText value="${compHisParts[42]}"
+				rendered="${compHisParts[41] ne '01'}" />
+			<h:outputText value=" XXXX.XXXX.XXXX."
+				rendered="${compHisParts[41] ne '01'}" />
+			<h:outputText value="Conta Corrente"
+				rendered="${compHisParts[40] eq 'cb' || compHisParts[40] eq ''}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:separator />
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

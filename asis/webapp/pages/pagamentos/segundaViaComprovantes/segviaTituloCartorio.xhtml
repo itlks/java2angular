@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+        <p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-md-12 no-print no-visible">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">                               
+                <i class="fa fa-exclamation-circle"></i>
+                <span>
+                 	<p>#{msg['page.segunda.via.comprovantes.confirmacao.paragrafo1']}</p>
+                	<p>#{msg['page.segunda.via.comprovantes.confirmacao.paragrafo2']}</p>
+                 </span>
+            </p:outputPanel>  
+          </p:outputPanel>                        
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['page.segunda.via.comprovantes.confirmacao.subtitle']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>      
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel styleClass="space">
+								<strong>#{msg['page.segunda.via.comprovantes.confirmacao.consulta.titulos']} </strong>
+							</h:outputLabel>
+							<h:outputText value="#{msg['page.segunda.via.comprovantes.tituloCartorio.consulta.tituloCartorio']}"/>    
+						</p:outputPanel>
+	                    
+	                	<p:outputPanel styleClass="col-xs-6 text-right">
+	                        <p:outputPanel>
+		                        <h:outputLabel styleClass="space">
+									<strong>#{msg['page.segunda.via.comprovantes.confirmacao.periodo']} </strong> 
+								</h:outputLabel>
+								
+								 <h:outputText styleClass="space" value="#{msg['page.segunda.via.comprovantes.cartaocredito.consulta.periodo.de']}"/>
+								<h:outputLabel styleClass="space" value="#{segundaViaComprovanteConsultarBBean.periodoInicial}"/>
+								<h:outputText styleClass="space" value="#{msg['page.segunda.via.comprovantes.confirmacao.periodo.ate']}"/>
+								<h:outputLabel  value="#{segundaViaComprovanteConsultarBBean.periodoFinal}"/>
+	                    	</p:outputPanel>
+	                    </p:outputPanel>
+	                </p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+						<p:outputPanel styleClass="row text-right">
+							<ui:include src="/commons/pdf/pdfButtonsSegVia.xhtml">
+								<ui:param name="excel" value="dtGrid" />
+								<ui:param name="imprimir" value="false" />
+								<ui:param name="enviarEmail" value="false" />
+								<ui:param name="exibirShadow" value="false"/>
+							</ui:include>
+							</p:outputPanel>
+						<br/>
+							<p:outputPanel styleClass="table-responsive table table-striped table-link">
+								<p:dataTable 	id="dtGrid"
+												selection="#{segundaViaComprovanteTituloCartorioBBean.listaTitulosCartorioSelecionados}"
+												value="#{segundaViaComprovanteTituloCartorioBBean.listaTitulosCartorio}"
+												emptyMessage="Não há comprovantes neste período."
+												var="titulo" 
+												rowKey="#{titulo.chaveUnica}">
+											
+									<p:column selectionMode="multiple" styleClass="no-visible" exportable="false" />
+		                            
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.confirmacao.coluna.data']}" />
+										</f:facet>
+										<h:outputText value="#{titulo.dataPagamento}"/>																					
+									</p:column>
+									
+									<p:column styleClass="col-md-3">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.confirmacao.coluna.chave']}" />
+										</f:facet>
+										<h:outputText value="#{titulo.chaveUnica}"/>
+									</p:column>
+
+									<p:column styleClass="text-right">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.confirmacao.coluna.valor']}" />
+										</f:facet>
+										<h:outputText value="#{titulo.valorTotal}">
+											<f:convertNumber type="currency" currencySymbol="" />
+										</h:outputText>											
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<br />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+	        <p:outputPanel styleClass="col-md-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza" 
+								  action="#{segundaViaComprovanteTituloCartorioBBean.voltar}" 
+								  role="button">#{msg['page.btn.voltar']}
+				</p:commandLink>
+		
+				<p:commandLink styleClass="btn btn-default  no-visible"
+							action="#{segundaViaComprovanteTituloCartorioBBean.gerarMultiplosPDFs}"
+							role="button"
+							value="#{msg['page.btn.visualizar.comprovantes']}"
+							update="@form" />
+						
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

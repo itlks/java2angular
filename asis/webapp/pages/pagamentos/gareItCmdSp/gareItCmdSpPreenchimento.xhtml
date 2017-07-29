@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareItCmdSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+
+		<!-- alerta -->
+		<ui:include src="/pages/pagamentos/gareItCmdSp/gareItCmdSpAviso.xhtml" />
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!-- alerta fim -->
+
+		<p:outputPanel styleClass="row" id="painelGeral">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<!-- Coluna 1 -->
+						<p:outputPanel styleClass="col-lg-6 label-14">
+							<h:inputHidden value="#{gareItCmdSpBBean.clientHash}"
+								id="clientHash" />
+							<p:outputPanel
+								styleClass="text-center flex-align-vh lg-height margin-bottom-70">
+								<p>
+									<h:outputText
+										value="#{msg['page.pagamentos.gareItCmdSp.mensagem.linha1']}" />
+								</p>
+								<p>
+									<h:outputText
+										value="#{msg['page.pagamentos.gareItCmdSp.mengasem.linha2']}" />
+								</p>
+								<p>
+									<h:outputText styleClass="bold"
+										value="#{msg['page.pagamentos.gareItCmdSp.mensagem.linha3']}" />
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="contribuinte"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.contribuinte']}" />
+										<p:inputText value="#{gareItCmdSpBBean.dto.contribuinte}"
+											id="contribuinte"
+											disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+											onblur="stringToUpperCase(this); removeAcento(this);"
+											styleClass="form-control" maxlength="50" tabindex="1" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="endereco"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.endereco']}" />
+										<p:inputText id="endereco" maxlength="38"
+											disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+											value="#{gareItCmdSpBBean.dto.endereco}"
+											onblur="stringToUpperCase(this); removeAcento(this);"
+											styleClass="form-control" tabindex="14" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-10">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="municipio"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.municipio']}" />
+										<p:inputText id="municipio" styleClass="form-control"
+											value="#{gareItCmdSpBBean.dto.municipio}" maxlength="18"
+											tabindex="15"
+											onblur="stringToUpperCase(this); removeAcento(this);" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-2">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="uf"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.uf']}" />
+										<p:inputText id="uf" styleClass="form-control"
+											onblur="stringToUpperCase(this); removeAcento(this);"
+											disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+											value="#{gareItCmdSpBBean.dto.uf}" maxlength="2"
+											tabindex="16" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="telefone"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.telefone']}" />
+										<p:inputText styleClass="form-control" id="telefone"
+											onkeypress="return onlyNumbers(this, event)"
+											disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+											value="#{gareItCmdSpBBean.dto.telefone}" maxlength="9"
+											tabindex="17" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="cep"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.cep']}" />
+										<p:inputMask mask="99999-999" styleClass="form-control"
+											disabled="#{gareItCmdSpBBean.dto.usarApelido}" id="cep"
+											onkeypress="return onlyNumbers(event)"
+											value="#{gareItCmdSpBBean.dto.cep}" tabindex="18" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputPanel styleClass="form-group">
+										<p:outputLabel for="observacao"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.observacao']}" />
+										<p:inputTextarea rows="7" maxlength="30" id="observacao"
+											onblur="stringToUpperCase(this); replaceSpecialChars(this);"
+											styleClass="form-control" counter="maxChar"
+											value="#{gareItCmdSpBBean.dto.observacao}"
+											counterTemplate="{0}" tabindex="19"
+											disabled="#{gareItCmdSpBBean.dto.usarApelido}" />
+
+										<span> <p:outputLabel
+												value="#{msg['page.pagamentos.gareItCmdSp.label.observacao.limite']}" />
+										</span>
+										<p:spacer width="10" />
+										<h:outputLabel id="maxChar" styleClass="inline" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<!-- Coluna 2 -->
+						<p:outputPanel id="PanelPreenchimento"
+							styleClass="col-md-6 border-left-col">
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-md-6">
+										<p:outputLabel for="dataVencimento" styleClass="margin-top-10"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.data.vencimento']}" />
+										<p:graphicImage id="imgTooltipDataVencimento"
+											value="/images/icon-i.png" styleClass="imgInfoApuracao" />
+										<p:tooltip id="toolTipDatavencimento"
+											for="imgTooltipDataVencimento"
+											value="#{msg['page.pagamentos.gareItCmdSp.tooltip.data.vencimento']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-md-6">
+										<p:outputPanel styleClass="icon-data-input">
+											<i class="fa fa-calendar"></i>
+											<p:calendar
+												value="#{gareItCmdSpBBean.dto.dataVencimentoConvertida}"
+												maxlength="10" id="dataVencimento" pattern="dd/MM/yyyy"
+												mask="99/99/9999" onkeyup="mascaraData(this, event)"
+												tabindex="2" showButtonPanel="today"
+												converter="dateStringConverter">
+											</p:calendar>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="codigoReceita"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.codigo.receita']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputMask value="#{gareItCmdSpBBean.dto.codigoReceita}"
+										disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+										styleClass="form-control" id="codigoReceita"
+										onkeypress="return onlyNumbers(event)" maxlength="4"
+										tabindex="3" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="numeroDeclaracao"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.numero.declaracao']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText value="#{gareItCmdSpBBean.dto.numeroDeclaracao}"
+										styleClass="form-control" id="numeroDeclaracao"
+										disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+										onkeypress="return onlyNumbers(event)" maxlength="15"
+										tabindex="4" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel
+										value="#{msg['page.pagamentos.gareItCmdSp.label.cnpj.cpf']}"
+										styleClass="margin-top-10" />
+									<p:graphicImage id="imgTooltipCpfCnpj"
+										value="/images/icon-i.png" styleClass="imgInfoApuracao" />
+									<p:tooltip id="toolTipCpfCnpj" for="imgTooltipCpfCnpj"
+										value="#{msg['page.pagamentos.gareItCmdSp.tooltip.cnpj.cpf']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText id="cnpjCpf_hash_1" styleClass="form-control"
+										maxlength="18" onblur="maskCpfCnpj(this, event)"
+										onchange="CheckCGCCPF(this)"
+										disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+										value="#{gareItCmdSpBBean.dto.cnpjCpf}" tabindex="5" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="inscricao"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.inscricao.divida']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText
+										value="#{gareItCmdSpBBean.dto.inscricaoDividaAtiva}"
+										styleClass="form-control" id="inscricao"
+										disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+										onkeypress="return onlyNumbers(event)" maxlength="15"
+										tabindex="6" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel
+										value="#{msg['page.pagamentos.gareItCmdSp.label.07']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="aiim"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.AIIM']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText value="#{gareItCmdSpBBean.dto.aiim}"
+										disabled="#{gareItCmdSpBBean.dto.usarApelido}"
+										styleClass="form-control" id="aiim" maxlength="15"
+										onkeypress="onlyNumbers(event)" tabindex="7" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="valorReceita"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.valor.receitaNominalOuCorrigida']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText value="#{gareItCmdSpBBean.dto.valorReceita}"
+										onblur="maskMoneyOnBlur(this)" maxlength="15"
+										styleClass="form-control" id="valorReceita"
+										converter="valorDecimalConverter" tabindex="8">
+										<p:ajax event="blur"
+											listener="#{gareItCmdSpBBean.calcularValorTotal}"
+											update="painelValorTotal" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="jurosMora"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.juros.mora']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText value="#{gareItCmdSpBBean.dto.jurosMora}"
+										onblur="maskMoneyOnBlur(this)" maxlength="15"
+										styleClass="form-control" id="jurosMora"
+										converter="valorDecimalConverter" tabindex="9">
+										<p:ajax event="blur"
+											listener="#{gareItCmdSpBBean.calcularValorTotal}"
+											update="painelValorTotal" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="multaMora"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.multa.mora']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText value="#{gareItCmdSpBBean.dto.multaMora}"
+										onblur="maskMoneyOnBlur(this)" maxlength="15"
+										styleClass="form-control" id="multaMora"
+										converter="valorDecimalConverter" tabindex="10">
+										<p:ajax event="blur"
+											listener="#{gareItCmdSpBBean.calcularValorTotal}"
+											update="painelValorTotal" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="acrescimoFinanceiro"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.acrescimo.financeiro']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText id="acrescimoFinanceiro"
+										value="#{gareItCmdSpBBean.dto.acrescimoFinanceiro}"
+										onblur="maskMoneyOnBlur(this)" maxlength="15"
+										styleClass="form-control" converter="valorDecimalConverter"
+										tabindex="11">
+										<p:ajax event="blur"
+											listener="#{gareItCmdSpBBean.calcularValorTotal}"
+											update="painelValorTotal">
+
+										</p:ajax>
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row flex-align-v form-group">
+								<p:outputPanel styleClass="col-md-6">
+									<p:outputLabel for="honorarios"
+										value="#{msg['page.pagamentos.gareItCmdSp.label.honorarios']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-md-6 text-right">
+									<p:inputText event="blur" maxlength="15"
+										value="#{gareItCmdSpBBean.dto.honorarios}"
+										styleClass="form-control" id="honorarios"
+										onblur="maskMoneyOnBlur(this)"
+										converter="valorDecimalConverter" tabindex="12">
+										<p:ajax event="blur"
+											listener="#{gareItCmdSpBBean.calcularValorTotal}"
+											update="painelValorTotal" />
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel
+								style=" background: #eee; padding: 3px; margin-left: -2px; height: 57px;">
+								<p:outputPanel id="painelValorTotal"
+									styleClass="row form-group ">
+									<p:outputPanel styleClass="col-md-6 space-t">
+										<p:outputLabel for="valorTotal"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.valor.total']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-md-6 text-right">
+										<p:inputText value="#{gareItCmdSpBBean.dto.valorTotal}"
+											styleClass="form-control" disabled="true" id="valorTotal"
+											onblur="maskMoneyOnBlur(this)"
+											converter="valorDecimalConverter" style="margin: 10px auto;" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="ui-widget col-md-12">
+								<p:separator rendered="#{!gareItCmdSpBBean.dto.usarApelido}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel id="panelApelidocheck" styleClass="col-md-12"
+							rendered="#{!gareItCmdSpBBean.dto.usarApelido}">
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-md-5">
+									<p:outputPanel styleClass="checkbox">
+										<p:selectBooleanCheckbox
+											value="#{gareItCmdSpBBean.dto.cadastrarApelido}"
+											tabindex="20" id="cb1">
+											<p:ajax update="panelApelidocheck" />
+										</p:selectBooleanCheckbox>
+										<h:outputLabel for="cb1"
+											value="#{msg['page.pagamentos.gareItCmdSp.label.gare']}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-md-7 inline-form darf-apelido"
+									rendered="#{gareItCmdSpBBean.dto.cadastrarApelido}">
+									<p:outputPanel styleClass="row">
+
+										<p:outputPanel styleClass="col-md-2">
+											<h:outputLabel for="cb1" styleClass="pull-right"
+												value="#{msg['page.pagamentos.gareItCmdSp.label.apelido']}" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-md-4">
+											<p:inputText id="apelido" styleClass="form-control"
+												tabindex="21" value="#{gareItCmdSpBBean.dto.apelido}"
+												maxlength="20"
+												onblur="replaceSpecialChars(this); stringToUpperCase(this)" />
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-md-6"
+											rendered="#{gareItCmdSpBBean.dto.cadastrarApelido}">
+											<h:outputLabel
+												value="#{msg['page.pagamentos.gareItCmdSp.label.limiteCaracter']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					id="btnVoltar" role="button" value="#{msg['page.btn.voltar']}"
+					style="margin-right:10px;"
+					action="#{gareItCmdSpBBean.voltarDePreenchimento}" tabindex="23" />
+
+				<p:commandButton styleClass="btn btn-default"
+					value="#{msg['page.pagamentos.gareItCmdSp.btn.continuar']}"
+					id="btnContinuar" onclick="enviarHash()"
+					action="#{gareItCmdSpBBean.confirmarTelaPreenchimento}"
+					tabindex="24" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

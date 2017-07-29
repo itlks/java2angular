@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.token.ativar.confirmacao.confira.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputLabel for="nomeUsuario" value="#{msg['page.administrativo.token.ativar.confirmacao.nome']}"/>
+					<h:outputText id="nomeUsuario" value="#{tokenAtivarBBean.tokenAtivar.nomeUsuario}" style="margin-left: 5px;"/>
+					<br />
+					<p:outputLabel for="numeroToken" value="#{msg['page.administrativo.token.ativar.confirmacao.numero.serie']}"/>
+					<h:outputText id="numeroToken" value="#{tokenAtivarBBean.tokenAtivar.numeroSerie}" style="margin-left: 5px;" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="text-right rodape-button">
+			<h:panelGroup>
+
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{tokenAtivarBBean.voltar}">
+					#{msg['page.btn.voltar']}
+				</p:commandLink>
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandLink id="btnContinuar" onclick="encryptSecureDL();" styleClass="btn btn-default"
+					action="#{tokenAtivarBBean.continuarEmConfirmacao}" >
+					#{msg['page.btn.continuar']}
+				</p:commandLink>
+
+			</h:panelGroup>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

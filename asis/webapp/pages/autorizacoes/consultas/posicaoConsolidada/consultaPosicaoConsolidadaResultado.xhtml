@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	<f:event type="preRenderView" listener="#{consultaPosicaoConsolidadaBBean.acessoDireto()}" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4><h:outputText value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.titulo']}"/></h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel>
+								<h:outputLabel value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.tipo.transacao']}"
+									styleClass="space"/>
+								<h:outputText value="#{consultaPosicaoConsolidadaBBean.dto.tipoTransacaoSelecionada.descricao}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel>
+								<h:outputLabel value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.produto']}"
+									styleClass="space"/>
+								<h:outputText value="#{consultaPosicaoConsolidadaBBean.dto.nomeProdutoSelecionado}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel
+								rendered="#{consultaPosicaoConsolidadaBBean.renderConvenioConta}">
+								<p:outputPanel>
+									<h:outputLabel value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.convenio']}"
+									styleClass="space"/>
+									<h:outputText value="#{consultaPosicaoConsolidadaBBean.dto.convenioFormatado}" />
+								</p:outputPanel>								
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel
+								rendered="#{consultaPosicaoConsolidadaBBean.renderConvenioConta}">
+								<p:outputPanel>
+									<h:outputLabel value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.conta']}"
+									styleClass="space"/>
+									<h:outputText value="#{consultaPosicaoConsolidadaBBean.dto.contaDebFormatada}" />
+								</p:outputPanel>								
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.data.inicial']}" styleClass="space" />
+							<h:outputText value="#{consultaPosicaoConsolidadaBBean.dto.dataInicial}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.data.final']}" styleClass="space" />
+							<h:outputText value="#{consultaPosicaoConsolidadaBBean.dto.dataFinal}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<br />
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tablePosicaoConsolidada" var="result"
+									value="#{consultaPosicaoConsolidadaBBean.dto.posicaoConsolidadaResult}"
+									emptyMessage="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.empty']}">
+
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.operacao']}">
+
+									</p:column>
+
+									<p:column styleClass="text-left"
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.qtde.pendentes']}">
+
+									</p:column>
+
+
+									<p:column styleClass="text-right"
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.valor.pendentes']}">
+
+									</p:column>
+									<p:column styleClass="text-left"
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.qtde.autorizadas']}">
+
+									</p:column>
+									<p:column styleClass="text-right"
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.valor.autorizadas']}">
+
+									</p:column>
+									<p:column styleClass="text-left"
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.qtde.canceladas']}">
+										<h:outputText value="" />
+									</p:column>
+									<p:column styleClass="text-right"
+										headerText="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidadaResult.table.header.valor.canceladas']}">
+
+									</p:column>
+
+
+
+									<p:subTable var="dadosGrupo"
+										value="#{result.dadosPosicaoConsolidada}">
+										<f:facet name="header">
+											<h:outputText value="#{result.nomeDoGrupo}" styleClass="bold"/>
+										</f:facet>
+
+										<p:column>
+											<h:outputText value="#{dadosGrupo.nomeDoProduto}" />
+										</p:column>
+										<p:column styleClass="text-left">
+											<h:outputText value="#{dadosGrupo.qttotalPendente}" />
+										</p:column>
+
+										<p:column styleClass="text-right">
+											<h:outputText value="#{dadosGrupo.vltotalPendente}">
+												<f:convertNumber currencySymbol="" type="currency" />
+											</h:outputText>
+										</p:column>
+										<p:column styleClass="text-left"> 
+											<h:outputText value="#{dadosGrupo.qttotalAutorizada}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText value="#{dadosGrupo.vltotalAutorizada}">
+												<f:convertNumber currencySymbol="" type="currency" />
+											</h:outputText>
+										</p:column>
+										<p:column styleClass="text-left">
+											<h:outputText value="#{dadosGrupo.qttotalCancelada}" />
+										</p:column>
+										<p:column styleClass="text-right">
+											<h:outputText value="#{dadosGrupo.vltotalCancelada}">
+												<f:convertNumber currencySymbol="" type="currency" />
+											</h:outputText>
+										</p:column>
+									</p:subTable>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12 text-right">
+					<p:commandLink styleClass="btn btn-default btn-cinza"
+						action="#{consultaPosicaoConsolidadaBBean.voltar}" role="button">
+         			<h:outputText value="#{msg['page.btn.voltar']}" />
+      			</p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+			</p:outputPanel>			
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

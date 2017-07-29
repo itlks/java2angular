@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Informe os dados do resgate</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for=""
+										value="Fundo #{investimentosFundosResgatarBBean.detalheWrapper.nomeReduzidoIb}:"
+										styleClass="bold" />
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>Valores máximos e mínimos</span>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Saldo Mínimo de Permanência:"
+										styleClass="bold" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.valorMinimoPerm}</span>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Movimentação Mínima:"
+										styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.valorMinimoResg}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Movimentação Máxima:"
+										styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.valorMaximoResg}</span>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:separator />
+
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+
+									<h:outputLabel for="" value="Hora limite:" styleClass="bold" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+
+									<h:outputText>#{investimentosFundosResgatarBBean.detalheWrapper.horarioLimite}</h:outputText>
+
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Tipo de cota:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.tipoCota.desc}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width300">
+							<h:outputLabel for="" value="Saldo Líquido:" styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2 width300">
+							<span>#{investimentosFundosResgatarBBean.detalheWrapper.valorLiqResgate}</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-3">
+							<h:outputLabel for="" value="Conta Fundo:" styleClass="bold" />
+							<span>#{investimentosFundosResgatarBBean.detalheWrapper.contaFundo}
+							</span>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<h:outputLabel for="" value="Valor Bloqueado:" styleClass="bold" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.valorLiqBloq}</span>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:separator />
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-2 width300">
+
+									<h:outputLabel for="" value="Saldo Líquido Disponível:" styleClass="bold" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 width300">
+									<span>#{investimentosFundosResgatarBBean.detalheWrapper.valorDispResgat}</span>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:separator />
+
+							<h:outputLabel for="" value="Resgatar:" />
+							<br />
+
+							<p:outputPanel
+								styleClass="table-responsive radio radio-label radio-pagamento">
+								<h:selectOneRadio id="tipoResgate"
+									value="#{investimentosFundosResgatarBBean.tipoResgate}"
+									layout="custom">
+									<f:selectItem itemLabel="Resgate Total"
+										itemValue="#{investimentosFundosResgatarBBean.resgateTotal}" />
+									<f:selectItem itemLabel="Resgate Parcial"
+										itemValue="#{investimentosFundosResgatarBBean.resgateParcial}" />
+									<p:ajax event="change" process="@all" update="pnlValorResgate"
+										listener="#{investimentosFundosResgatarBBean.renderizarValorResgate}" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel id="pnlValorResgate" styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="" value="VALOR DO RESGATE:" />
+								<p:inputText styleClass="form-control"
+									converter="valorDecimalConverter"
+									onkeyup="maskMoney(this, null, event)" 
+									onblur="maskMoneyOnBlur(this)"
+									maxlength="18"
+									disabled="#{investimentosFundosResgatarBBean.desabilitaValorResgate}"
+									value="#{investimentosFundosResgatarBBean.valorResgate}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row" id="painelAgendamento">
+
+						<p:outputPanel styleClass="col-xs-12">
+							<strong>Data do Resgate</strong>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4 radioGrid tpoLanca"
+							style="width: 335px; padding-top: 4px;">
+							<p:selectOneRadio id="momentoResgate" layout="custom"
+								value="#{investimentosFundosResgatarBBean.momentoResgate}"
+								styleClass="col-xs-12">
+								<f:selectItem itemLabel="Resgatar agora:"
+									itemValue="#{investimentosFundosResgatarBBean.resgatarAgora}" />
+								<f:selectItem itemLabel="Agendar para:"
+									itemValue="#{investimentosFundosResgatarBBean.agendarPara}" />
+
+								<p:ajax event="change" process="@all"
+									update="painelAgendamento"
+									listener="#{investimentosFundosResgatarBBean.renderizarDataAgendamento}" />
+							</p:selectOneRadio>
+
+							<p:radioButton id="opt1" for="momentoResgate" itemIndex="0" />
+							<h:outputLabel value="Resgatar agora:" for="opt1" />
+
+							<p:radioButton id="opt2" for="momentoResgate" itemIndex="1" />
+							<h:outputLabel value="Agendar para:" for="opt2" />
+
+							<p:graphicImage id="tooltip" value="/images/icon-i.png"
+								style="width: 15px;" />
+							<p:tooltip for="tooltip" style="top: 110.583px">
+								<h:outputText>
+									<p>Você pode agendar este resgate com até 365 dias de antecedência.</p>
+
+									<p>Preencha o campo da data apenas com números.</p>
+								</h:outputText>
+
+							</p:tooltip>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2"
+							rendered="#{investimentosFundosResgatarBBean.desabilitaDataAgendamento}"
+							style="width: 180px;">
+							<p:outputPanel styleClass="form-group" style="margin-bottom: 0px">
+
+								<p:outputPanel styleClass="icon-data-input">
+
+									<i class="fa fa-calendar"></i>
+
+									<p:calendar id="periodoApuracao"
+										converter="dateConverterFormat" maxlength="10"
+										pattern="dd/MM/yyyy"
+										value="#{investimentosFundosResgatarBBean.dataAgendamento}"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{investimentosFundosResgatarBBean.voltarListaFundos}"
+					role="button">Voltar</p:commandLink>
+
+				<p:commandLink styleClass="btn btn-default"
+					action="#{investimentosFundosResgatarBBean.confirmarResgate}"
+					role="button">Confirmar</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

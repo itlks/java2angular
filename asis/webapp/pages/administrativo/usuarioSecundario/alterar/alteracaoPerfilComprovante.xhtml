@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentComprovante">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="space-b">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecNomeCompleto" styleClass="space"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.nome.completo']}" />
+							<h:outputText id="usuSecNomeCompleto"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeUsuario}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="cpf" styleClass="space"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.cpf']}" />
+							<h:outputText id="cpf"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrCpf}"
+								converter="converterCpfCnpj" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecArea" styleClass="space"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.area']}" />
+							<h:outputText id="usuSecArea"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeArea}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecAcesso" styleClass="space"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.nome.acesso']}" />
+							<h:outputText id="usuSecAcesso"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeLogon}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecTelFixo" styleClass="space"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.telefone.fixo']}" />
+							<h:outputText id="usuSecTelFixo"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrTelefone}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row"
+						rendered="#{usuarioSecundarioAlterarBBean.exibirCelular}">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecTelCel" styleClass="space"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.celular']}" />
+							<h:outputText id="usuSecTelCel"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrCelular}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="acessoMobile" styleClass="space"
+								value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.acessoMobile']}" />
+							<h:outputText id="acessoMobile"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.habilitado == msg['pages.administrativo.usuarioSecundarioAlterar.table.habilitado'] ? msg['padrao.sim'] : msg['padrao.nao']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h5>
+							<h:outputText
+								value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.atrubuicao']}" />
+						</h5>
+
+
+						<p:outputPanel styleClass="table table-striped">
+							<p:dataTable id="tabelaPerfis"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.listaPerfilAtribuidos}"
+								var="perfil">
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.agenciaConta']}">
+									<h:outputText value="#{perfil.agencia}" styleClass="space"/>
+									<h:outputText value="#{perfil.conta}" />
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.perfilAcesso']}">
+									<h:outputText value="#{perfil.descricaoPerfilAcesso}"
+										rendered="#{perfil.perfilAcesso != '0'}" />
+									<h:outputText
+										value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+										rendered="#{perfil.perfilAcesso == '0'}" />
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.perfilAutorizacao']}">
+									<h:outputText value="#{perfil.descricaoPerfilAutorizacao}"
+										rendered="#{perfil.perfilAutorizacao != '0'}" />
+									<h:outputText
+										value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+										rendered="#{perfil.perfilAutorizacao == '0'}" />
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h5>
+							<h:outputText
+								value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.atribuicaoConvenios']}" />
+						</h5>
+
+						<p:outputPanel styleClass="table table-striped">
+							<p:dataTable id="tabela2" var="con"
+								value="#{usuarioSecundarioAlterarBBean.convenios}"
+								tableStyleClass="tacle-custom tacle-custom-header-left"
+								styleClass="data-table-header-custom label-custom tacle-custom-zebrada tacle-custom-border-transparente">
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.convenio']}">
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.permitirAcesso']}">
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.perfilAutorizacao']}">
+								</p:column>
+								<p:subTable var="convenioUsuario" value="#{con.list}"
+									rendered="#{con.list != null &amp;&amp; !con.list.isEmpty()}">
+									<f:facet name="header">
+										<h:outputText value="#{con.header}" />
+									</f:facet>
+									<p:column styleClass="col-xs-4">
+										<h:outputText value="#{convenioUsuario.convenio}" styleClass="space-l" />
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:outputText
+											value="#{convenioUsuario.permitirAcessoBoolean ?  msg['padrao.sim'] : msg['padrao.nao']}" />
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:outputText value="#{convenioUsuario.descricao}"
+											rendered="#{convenioUsuario.perfilAutorizacao != '0'}" />
+										<h:outputText
+											value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+											rendered="#{convenioUsuario.perfilAutorizacao eq '0'}" />
+										<h:outputText value="#{convenioUsuario.perfilAutorizacao}"
+											rendered="#{convenioUsuario.perfilAutorizacao eq '--'}" />
+									</p:column>
+								</p:subTable>
+							</p:dataTable>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+
+	</ui:define>
+</ui:composition>

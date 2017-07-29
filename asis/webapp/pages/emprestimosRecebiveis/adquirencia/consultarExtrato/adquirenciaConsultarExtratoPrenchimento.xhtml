@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow min-lines">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<h:outputText
+								value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.aviso']}" />
+						</p> </span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+						<h:outputText styleClass="h4"
+							value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.extrato']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="col-xs-4 pull-right text-right">
+						<p:graphicImage value="/images/selo-getnet-2.png" width="200px" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row no-print no-visible">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="estabelecimento_hash_1"
+									value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.estabelecimento']}" />
+								<p:inputMask styleClass="form-control"
+									id="estabelecimento_hash_1"
+									value="#{getnetConsultarExtratoBBean.dto.codigoEstabelecimento}"
+									mask="999999999" />
+							</p:outputPanel>
+							<!--Inicio Combo Bandeira -->
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="selTipoBandeira"
+									value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.bandeira']}" />
+								<h:selectOneMenu id="selTipoBandeira"
+									value="#{getnetConsultarExtratoBBean.dto.tipoBandeiraSelecionada}">
+									<p:ajax event="change" process="@this"
+										listener="#{getnetConsultarExtratoBBean.alterarBandeira}" />
+									<f:selectItems
+										value="#{getnetConsultarExtratoBBean.emprestimoRecebiveisBandeiraCartoes}"
+										var="bandeira" itemLabel="#{bandeira.descricao}"
+										itemValue="#{bandeira.descricao}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+							<!--Fim Combo Bandeira -->
+							<!--Inicio Combo Periodo -->
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="selTipoPeriodo"
+									value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.periodo']}" />
+								<h:selectOneMenu id="selTipoPeriodo"
+									value="#{getnetConsultarExtratoBBean.dto.tipoPeriodoSelecionada}">
+									<p:ajax event="change" process="@this" update="datePanel"
+										listener="#{getnetConsultarExtratoBBean.alterarPeriodo}" />
+									<f:selectItems
+										value="#{getnetConsultarExtratoBBean.emprestimoRecebiveisPeriodo}"
+										var="periodo" itemLabel="#{periodo.descricao}"
+										itemValue="#{periodo.descricao}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+							<!--Fim Combo Periodo -->
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row no-print no-visible space-b"
+						id="datePanel">
+						<p:outputPanel styleClass="col-xs-6">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="form-group col-xs-4">
+									<h:outputLabel
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.de']}"></h:outputLabel>
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar pattern="dd/MM/yyyy"
+											value="#{getnetConsultarExtratoBBean.dto.dataInicio}"
+											converter="dateConverterFormat" maxlength="10"
+											onkeyup="mascaraData(this, event); " readonlyInput="false"></p:calendar>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass=" col-xs-4 form-group">
+									<h:outputLabel
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.ate']}"></h:outputLabel>
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar pattern="dd/MM/yyyy"
+											value="#{getnetConsultarExtratoBBean.dto.dataFim}"
+											converter="dateConverterFormat" maxlength="10"
+											onkeyup="mascaraData(this, event); " readonlyInput="false"></p:calendar>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel
+									styleClass="col-xs-4 no-padding col-xs-4 text-left margin-top-22 ">
+									<p:commandButton id="cmdButtonExibir"
+										styleClass="btn btn-default"
+										action="#{getnetConsultarExtratoBBean.exibirConsulta}"
+										role="button" value="#{msg['page.btn.exibir']}"
+										update="panelRelatorio" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel id="panelRelatorio">
+						<p:outputPanel
+							rendered="#{getnetConsultarExtratoBBean.dto.habilitarConsulta}">
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.periodoExtrato']}"
+											styleClass="space" />
+										<h:outputText
+											value="#{getnetConsultarExtratoBBean.dto.periodoExtrado}"
+											styleClass="space" />
+									</p:outputPanel>
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.estabelecimento']}"
+											styleClass="space" />
+										<h:outputText
+											value="#{getnetConsultarExtratoBBean.dto.estabelecimento}"
+											styleClass="space" />
+									</p:outputPanel>
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.nome']}"
+											styleClass="space" />
+										<h:outputText value="#{getnetConsultarExtratoBBean.dto.nome}"
+											styleClass="space" />
+									</p:outputPanel>
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.cnpj']}"
+											styleClass="space" />
+										<h:outputText value="#{getnetConsultarExtratoBBean.dto.cnpj}"
+											styleClass="space" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-4">
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dataHora']}"
+											styleClass="space" />
+										<h:outputText
+											value="#{getnetConsultarExtratoBBean.dto.dataHoraConsulta}"
+											styleClass="space" />
+									</p:outputPanel>
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.qtdeDeTransacoes2']}"
+											styleClass="space" />
+										<h:outputText
+											value="#{getnetConsultarExtratoBBean.dto.totalTransacoes}"
+											styleClass="space" />
+									</p:outputPanel>
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorTotalBruto']}"
+											styleClass="space" />
+										<h:outputText
+											value="R$ #{getnetConsultarExtratoBBean.dto.totalBruto}"
+											styleClass="space" />
+									</p:outputPanel>
+									<p:outputPanel>
+										<p:outputLabel
+											value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorTotalLiquido']}"
+											styleClass="space" />
+										<h:outputText
+											value="R$ #{getnetConsultarExtratoBBean.dto.totalLiquido}"
+											styleClass="space" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel styleClass="h5"
+										value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dadosDoExtrato']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel
+										styleClass="space-t fakeFooter table-responsive table table-striped">
+										<p:dataTable id="tabela" var="lancamento"
+											value="#{getnetConsultarExtratoBBean.dto.listaExtrato}"
+											emptyMessage="#{getnetConsultarExtratoBBean.dto.emptyMessage}">
+											<p:column headerText="Estabelecimento" styleClass="text-left">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.estabelecimento2']}" />
+												</f:facet>
+												<h:outputText value="#{lancamento.codEstabelecimento}" />
+											</p:column>
+											<p:column headerText="Bandeira">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.bandeira2']}" />
+												</f:facet>
+												<h:outputText value="#{lancamento.descricaoBandeira}" />
+											</p:column>
+											<p:column
+												headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dataLancamento']}">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dataLancamento']}" />
+												</f:facet>
+												<h:outputText value="#{lancamento.dataLancamento}" />
+											</p:column>
+											<p:column
+												headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.qtdeDeTransacoes']}">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.qtdeDeTransacoes']}" />
+												</f:facet>
+												<h:outputText value="#{lancamento.quantidadeTransacoes}" />
+											</p:column>
+											<p:column
+												headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.descricao']}">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.descricao']}" />
+												</f:facet>
+												<h:outputText value="#{lancamento.rubrica}" />
+											</p:column>
+											<p:column
+												headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.parcelaDeAte']}"
+												footerText="#{getnetConsultarExtratoBBean.dto.totalTransacoes}"
+												styleClass="text-left">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.parcelaDeAte']}" />
+												</f:facet>
+												<h:outputText value="#{lancamento.parcela}" />
+											</p:column>
+											<p:column
+												headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorBruto']}"
+												footerText="R$ #{getnetConsultarExtratoBBean.dto.totalBruto}"
+												styleClass="text-right">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorBruto']}" />
+												</f:facet>
+												<h:outputText
+													value="#{lancamento.sinalBruto} #{lancamento.valorBruto}" />
+											</p:column>
+											<p:column
+												headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorLiquido']}"
+												footerText="R$ #{getnetConsultarExtratoBBean.dto.totalLiquido}"
+												styleClass="text-right">
+												<f:facet name="header">
+													<h:outputText
+														value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorLiquido']}" />
+												</f:facet>
+												<h:outputText
+													value="#{lancamento.sinalLiquido} #{lancamento.valorLiquido}" />
+											</p:column>
+										</p:dataTable>
+									</p:outputPanel>
+									<p:outputPanel styleClass="row no-visible no-print"
+										rendered="false">
+										<p:outputPanel
+											styleClass="space-t foot-correction table-responsive table table-striped">
+											<p:dataTable id="listaExcel" var="lancamento"
+												value="#{getnetConsultarExtratoBBean.dto.listaExcel}">
+												<p:column styleClass="text-left">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.estabelecimento2']}" />
+													</f:facet>
+													<h:outputText value="#{lancamento.codEstabelecimento}" />
+												</p:column>
+												<p:column>
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.bandeira2']}" />
+													</f:facet>
+													<h:outputText value="#{lancamento.descricaoBandeira}" />
+												</p:column>
+												<p:column>
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.dataLancamento']}" />
+													</f:facet>
+													<h:outputText value="#{lancamento.dataLancamento}" />
+												</p:column>
+												<p:column
+													headerText="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.qtdeDeTransacoes']}">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.qtdeDeTransacoes']}" />
+													</f:facet>
+													<h:outputText value="#{lancamento.quantidadeTransacoes}" />
+												</p:column>
+												<p:column>
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.descricao']}" />
+													</f:facet>
+													<h:outputText value="#{lancamento.rubrica}" />
+												</p:column>
+												<p:column styleClass="text-left">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.parcelaDeAte']}" />
+													</f:facet>
+													<h:outputText value="#{lancamento.parcela}" />
+												</p:column>
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorBruto']}" />
+													</f:facet>
+													<h:outputText
+														value="#{lancamento.sinalBruto} #{lancamento.valorBruto}" />
+												</p:column>
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText
+															value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.valorLiquido']}" />
+													</f:facet>
+													<h:outputText
+														value="#{lancamento.sinalLiquido} #{lancamento.valorLiquido}" />
+												</p:column>
+											</p:dataTable>
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel>
+										<ui:include src="/commons/pdf/pdfButtons.xhtml">
+											<ui:param name="excel" value="listaExcel" />
+										</ui:include>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

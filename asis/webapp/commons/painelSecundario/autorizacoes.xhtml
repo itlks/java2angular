@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:dialog header="Autorizações" id="painelSecundarioAutorizacoes" modal="false" closable="true" width="350px" visible="#{painelSecundarioBBean.autorizacoesVisivel}" styleClass="popover-submenu box-shadow"
+		onShow="adjustPositionning($('#formPainelSecundario\\:painelSecundarioBotaoAutorizacoes'), $('#formPainelSecundario\\:painelSecundarioAutorizacoes'), 35)"
+		widgetVar="painelSecundarioAutorizacoesVar">
+		
+        <div class="arrow-submenu">
+        	<p:graphicImage value="/images/arrow-popover.png"/>
+        </div>
+
+		<h4 class="popover-title">#{msg['pages.painelSecundario.autorizacoes.autorizacoes']}</h4>
+		
+		<div class="popover-content">
+			<div class="row space-b">
+				<div class="col-md-6">
+					<p>#{msg['pages.painelSecundario.autorizacoes.pagfor']}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.pendencias']} #{painelSecundarioBBean.autorizacoes.numeropendenciasPagFor}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.valor']} #{painelSecundarioBBean.autorizacoes.valorPendenciaPagFor}</p><br/>
+					
+					<p>#{msg['pages.painelSecundario.autorizacoes.fopag']}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.pendencias']} #{painelSecundarioBBean.autorizacoes.numeropendenciasFoPag}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.valor']} #{painelSecundarioBBean.autorizacoes.valorPendenciaFoPag}</p>
+				
+				</div>
+				<div class="col-md-6">
+					<p>#{msg['pages.painelSecundario.autorizacoes.transferencia']}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.pendencias']} #{painelSecundarioBBean.autorizacoes.numeropendenciasTransferencia}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.valor']} #{painelSecundarioBBean.autorizacoes.valorPendenciaTransferencia}</p><br/>
+
+					<p>#{msg['pages.painelSecundario.autorizacoes.administrativo']}</p>
+					<p>#{msg['pages.painelSecundario.autorizacoes.pendencias']}: #{painelSecundarioBBean.autorizacoes.numeropendenciasAdministrativo}</p>
+				</div>
+			</div>
+ 		</div>
+
+		<div class="popover-footer">
+			<p:commandLink styleClass="btn btn-default" href="#" role="button" value="#{msg['pages.painelSecundario.autorizacoes.botao']}" />
+		</div>
+	</p:dialog>
+	
+</ui:composition>	

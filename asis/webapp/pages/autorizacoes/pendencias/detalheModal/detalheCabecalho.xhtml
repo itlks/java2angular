@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row space-r space-l titulo-bloco">
+		<h5 class="bold">Pendência</h5>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row space-t space-r space-l">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.cliente']}: </h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.cliente}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.usuario']}: </h:outputLabel>
+
+			<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.usuario}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.produto']}: </h:outputLabel>
+
+			<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.produto}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['page.operacoes.realizadas.detalhe.label.transacao']} </h:outputLabel>
+
+			<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.transacao}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.data']}: </h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.data}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{autorizacoesPendenciaDetalheCabecalhoBBean.temConvenioCabecalho}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.convenio']}:</h:outputLabel>
+				<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.convenio}</h:outputText>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.permiteAcesso']}:</h:outputLabel>
+				<h:outputText> #{autorizacoesPendenciaDetalheCabecalhoBBean.detalheCabecalho.permiteAcesso}</h:outputText>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

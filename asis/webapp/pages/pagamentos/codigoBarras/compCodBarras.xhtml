@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row no-print no-visible" rendered="#{pagamentoCodigoDeBarrasBBean.getFormaPagamentoSelecionada() eq 'C1'}">    
+	        <p:outputPanel styleClass="row space-b">
+	            <p:outputPanel styleClass="col-xs-12">
+	              <p:separator />
+	            </p:outputPanel>
+	        </p:outputPanel>
+		</p:outputPanel>
+		
+		
+	
+		<p:outputPanel styleClass="row no-print no-visible">	
+		
+			<p:outputPanel styleClass="col-lg-12 teste1" rendered="#{!confirmaPagtoCodBarrasBBean.confirmaPagtoCodBarrasDTO.agendamento}">
+				<p:outputPanel styleClass="titulo-painel" rendered="#{confirmaPagtoCodBarrasBBean.saidaDTO.strGerouPendencia=='S'}">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.com.pendencia']}</h4>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="titulo-painel" rendered="#{confirmaPagtoCodBarrasBBean.saidaDTO.strGerouPendencia=='N'}">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.sem.pendencia']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-lg-12 teste2" rendered="#{confirmaPagtoCodBarrasBBean.confirmaPagtoCodBarrasDTO.agendamento}">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.com.agendamento']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">			
+				<p:outputPanel styleClass="box-shadow no-margin-bottom" rendered="#{confirmaPagtoCodBarrasBBean.saidaDTO.strGerouPendencia=='S'}">
+									
+					<c:forEach items="#{confirmaPagtoCodBarrasBBean.confirmaPagtoCodBarrasDTO.mensagensYA}" var="dado" varStatus="iteratorDados" >
+						<p:outputPanel styleClass="row"  >
+	           				<p:outputPanel styleClass="col-xs-12">					                
+		              				<h:outputLabel value="#{dado.label}" styleClass="space"  /><h:outputText value="#{dado.valor}"  />
+               				</p:outputPanel>                  
+           				</p:outputPanel>
+					</c:forEach>
+					
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>                      					
+
+                    <p:outputPanel styleClass="row space-b">
+         				<p:outputPanel styleClass="col-xs-12">	   							
+	                          <h4 align="center">
+	                          		<strong>#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.Demonstrativo']}</strong>
+	                          </h4>
+	                    </p:outputPanel>
+                    </p:outputPanel>
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>                      					
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="form-group col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="box-shadow no-margin-bottom" rendered="#{confirmaPagtoCodBarrasBBean.saidaDTO.strGerouPendencia=='N'}">
+					<c:forEach items="#{confirmaPagtoCodBarrasBBean.saidaDTO.rsMensagemYA.mensagemYARS}"
+						var="dado" varStatus="iteratorDados">
+						
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+							 	<h5 align="center">
+                          			<h:outputText value="#{dado.CPIBDADOS}" rendered="#{dado.CPIBTPLINHA=='C1'}"/>	                          				                          		
+                          		</h5>
+							</p:outputPanel>																
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="row space-b" rendered="#{dado.CPIBTPLINHA=='C1'}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value=" " />
+	                        </p:outputPanel>
+	                    </p:outputPanel> 
+						
+						<p:outputPanel styleClass="row" rendered="#{dado.CPIBTPLINHA=='C1' and pagamentoCodigoDeBarrasBBean.getFormaPagamentoSelecionada()=='C1'}">
+	            			<p:outputPanel styleClass="col-xs-4">
+	            				<h:outputText value="Nome do cartão: " />
+	              				<h:outputLabel value="#{pagamentoCodigoDeBarrasBBean.cartaoDto.nomeTitular}" />
+	              			</p:outputPanel>
+	              			<p:outputPanel styleClass="col-xs-8">              	
+			             		<h:outputText value="Cartão: " />
+			             		<h:outputLabel value="#{pagamentoCodigoDeBarrasBBean.cartaoDto.nomeCartao} - #{pagamentoCodigoDeBarrasBBean.cartaoDto.numeroFormatado}" />
+			             	</p:outputPanel>
+			             </p:outputPanel>
+						
+						<p:outputPanel styleClass="row space-b" rendered="#{dado.CPIBTPLINHA=='C1' and pagamentoCodigoDeBarrasBBean.getFormaPagamentoSelecionada()=='C1'}">
+	                        <p:outputPanel styleClass="col-xs-12">
+	                        	<h:outputText value=" " />
+	                        </p:outputPanel>
+	                    </p:outputPanel> 
+						
+			 			<p:outputPanel styleClass="row" rendered="#{dado.CPIBTPLINHA=='L1'}" >
+				 		
+		    	            <p:outputPanel styleClass="col-xs-12">					                
+					              <h:outputLabel value="#{dado.label}" styleClass="space"  /><h:outputText value="#{dado.valor}"  />
+		                    </p:outputPanel>
+
+				 		    <p:outputPanel styleClass="col-xs-12" rendered="#{dado.CPIBPULALINHA=='1'}">					                
+								<BR/>					              
+		                    </p:outputPanel>
+		                    
+						</p:outputPanel>
+
+					</c:forEach>
+					
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>                      					
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <c:forEach items="#{confirmaPagtoCodBarrasBBean.saidaDTO.rsMensagemYA.mensagemYARS}" var="dado" varStatus="iteratorDados">
+								<p><h:outputText value="#{dado.CPIBDADOS}" rendered="#{dado.CPIBTPLINHA=='I1'}"/></p>										
+							</c:forEach>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>                      					
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="form-group col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default" action="#{confirmaPagtoCodBarrasBBean.goHome}" role="button">#{msg['menu.item.home']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+

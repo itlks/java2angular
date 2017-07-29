@@ -1,0 +1,76 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row space-r space-l titulo-bloco">
+		<h5 class="bold">Pendência</h5>
+	</p:outputPanel>
+
+	<ui:param name="item" value="#{autorizacoesPendenciaDetalheBBean.detalheCabecalho}" />
+	
+	<p:outputPanel styleClass="row form-horizontal space-t space-r space-l">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.cliente']}:" />
+			<h:outputText styleClass="uppercase-text" value=" #{item.cliente}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.usuario']}:" />
+			<h:outputText styleClass="uppercase-text" value=" #{item.usuario}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.convenio']}" />
+			<h:outputText value=" #{item.convenio}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.contadebito']}:" />
+			<h:outputText value=" #{item.contaDebito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.produto']}:" />
+			<h:outputText styleClass="uppercase-text" value=" #{item.produto}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['page.operacoes.realizadas.detalhe.label.transacao']}" />
+			<h:outputText styleClass="uppercase-text" value=" #{item.transacao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.dataagendamento']}:" />
+			<h:outputText value=" #{item.data}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel
+				value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.datapagamento']}" />
+			<h:outputText value=" #{item.dataPagamento}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" rendered="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash == null}">
+			<h:outputLabel
+				value="Operação:" />
+			<h:outputText value=" #{item.operacao}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" rendered="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash == null}">
+			<h:outputLabel
+				value="Valor da Operação:" />
+			<h:outputText value=" #{item.valorDaOperacao}" />
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+</ui:fragment>

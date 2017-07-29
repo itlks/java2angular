@@ -1,0 +1,101 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<div class="row space-b">
+			<div class="col-md-6 col-xs-6 site-map">
+				<span>Pagamentos <strong>&gt;</strong> Veículos São Paulo
+				</span>
+				<h1>2ª Via Transferência</h1>
+			</div>
+		</div>
+
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.transacao.exclusiva']}</p>
+						<p>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.deseja.transferir']}</p>
+						<p>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.pagamentos.efetuados']}</p>
+						<p>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.mais.informacoes']}
+							<p:commandLink actionListener="#">#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.secretaria.fazenda']}</p:commandLink>
+						</p> <br />
+
+						<p>
+							<p:commandLink actionListener="#">#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.confira.limites']}</p:commandLink>
+						</p> <br /> <p:separator />
+
+						<p>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.pode.incluir']}</p>
+						<p>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.obs']}</p> <br />
+
+						<p>
+							<p:commandLink actionListener="#">#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.incluir.renavam']}</p:commandLink>
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.renavam.cadastrados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<h5 class="space-b">#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.selecione.renavam']}</h5>
+
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:blockUI block="tbRenavam" trigger="tbRenavam" />
+						<p:dataTable 	id="tbRenavam"
+										var="renavam"
+										rowKey="#{renavam.identif}"
+										selectionMode="single"
+										selection="#{segundaViaTranferenciaBBean.renavamSelecionado}" 
+										value="#{segundaViaTranferenciaBBean.listaRenavam.lResponse}"
+										
+						>
+							<p:column headerText="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.identificacao']}">
+								<h:outputText value="#{renavam.nome}" />
+							</p:column>
+							<p:column headerText="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.renavam']}">
+								<h:outputText value="#{renavam.identif}" />
+							</p:column>
+							<p:column headerText="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.selecao.placa']}">
+								<h:outputText value="#{renavam.placa}" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					actionListener="#" role="button" id="btnVoltar"
+					value="#{msg['pages.pagamentos.veiculosSaoPaulo.segundaViaTransferencia.btn.voltar']}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

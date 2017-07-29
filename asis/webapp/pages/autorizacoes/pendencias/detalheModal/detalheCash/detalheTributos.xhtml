@@ -1,0 +1,167 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:param name="item" value="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash}" />
+	<p:outputPanel styleClass="row form-horizontal space-r space-l">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Convênio: " />
+			<h:outputText value=" #{item.convenio}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Conta de Débito: " />
+			<h:outputText value=" #{item.contaDebito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Pagamento: " />
+			<h:outputText value=" #{item.YLW63FORMPAGSTR}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="no-border no-padding"
+			rendered="#{item.YLW63FORMPAG eq 'FGTS' and !item.bolGRRF}">
+			<!-- Se não for bolGRRF" -->
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="CNPJ/CEI Empresa: " />
+				<h:outputText value=" #{item.YLW63CODBARRAS}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Competência: " />
+				<h:outputText value=" #{item.YLW63COMPTTRIB}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="no-border no-padding"
+			rendered="#{item.YLW63FORMPAG eq 'FGTS' and item.bolGRRF}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Identificador: " />
+				<h:outputText value=" #{item.YLW63CODBARRAS}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Concessionária: " rendered="#{item.YLW63FORMPAG eq 'CDBAR'}" />
+			<h:outputLabel value="Descrição: " rendered="#{item.YLW63FORMPAG eq 'FGTS' and !item.bolGRRF}" />
+			<h:outputLabel value="Nome do Fornecedor: " rendered="#{(item.YLW63FORMPAG ne 'CDBAR') and (tem.YLW63FORMPAG ne 'FGTS' or item.bolGRRF)}" />
+			<h:outputText value=" #{item.YLW63NOMEFAVORECIDO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. compromisso banco: " />
+			<h:outputText value=" #{item.YLW63NUMCOMPRO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. compromisso cliente: " />
+			<h:outputText value=" #{item.YLW63SEUNUMERO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Valor Nominal: " />
+			<h:outputText value=" #{item.YLW63IMPNOMDOCMONEY}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data de Vencimento: " />
+			<h:outputText value=" #{item.YLW63FECVENC}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Data de Pagamento: " />
+			<h:outputText value=" #{item.YLW63FECVALORCRED}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Situação: " />
+			<h:outputText value=" #{item.YLW63INDESTACOMP}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. Lista de Débito: " />
+			<h:outputText value=" #{item.YLW63NUMLISTADEB}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="No. Protocolo: " />
+			<h:outputText value=" #{item.YLW63NUMPROTOCOLO}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Código de Barras: " />
+			<h:outputText value=" #{item.codigoBarrasTributos}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:separator />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Autenticação: " />
+			<h:outputText value=" #{item.YLW63CODAUT}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Valor a Pagar: " />
+			<h:outputText value=" #{item.valorTotal}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Tipo de Serviço: " />
+			<h:outputText value=" #{item.YLW63TPSERV}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Complemento do Tipo de Serviço: " />
+			<h:outputText value=" #{item.YLW63DSCOMPSERV}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="Emitir Aviso: " />
+			<h:outputText value=" #{item.YLW63INDAVISOPAG}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="no-border no-padding"
+			rendered="#{item.YLW63INDAVISOPAG eq 'Favorecido' or item.YLW63INDAVISOPAG eq 'Remetente e Favorecido'}">
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Endereço: " />
+				<h:outputText value=" #{item.YLW63LOGR}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Número: " />
+				<h:outputText value=" #{item.YLW63NUMLOGR}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Complemento: " />
+				<h:outputText value=" #{item.YLW63COMPLLOGR}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Bairro: " />
+				<h:outputText value=" #{item.YLW63BAIRRO}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Cidade: " />
+				<h:outputText value=" #{item.YLW63CIDADE}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="UF: " />
+				<h:outputText value=" #{item.YLW63UF}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="CEP: " />
+				<h:outputText value=" #{item.YLW63CEP}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

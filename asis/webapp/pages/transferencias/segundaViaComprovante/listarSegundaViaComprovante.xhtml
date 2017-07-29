@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content" id="content" >
+	<f:event type="preRenderView" listener="#{transferenciaSegundaViaComprovanteBBean.acessoDiretoLista()}" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v no-print no-visible">
+					<p:outputPanel>
+						<i class="fa fa-exclamation-circle"></i>
+					</p:outputPanel>
+					<p:outputPanel>
+						<span>#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.alertaLinhaUm']}	</span>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.transferenciasDeValores']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel	styleClass="col-md-12 no-print no-visible">
+						<h:commandLink styleClass="pull-right link-termos"
+							update="tabelaExcelNone">
+							<i class="fa fa-save"></i> #{msg['pages.agendamento.lista.confirmacao.salvar.excel']}
+							<p:dataExporter type="xls" target="tabelaExcelNone"
+								fileName="lista_agendamentos"
+								postProcessor="#{transferenciaSegundaViaComprovanteBBean.geraXLS}" />
+						</h:commandLink>
+					</p:outputPanel>
+					<p:outputPanel id="panelTableComprovantes"  styleClass="table-responsive table table-striped table-click table-comprovates">
+						<p:dataTable emptyMessage="Nenhum registro encontrado."
+							value="#{transferenciaSegundaViaComprovanteBBean.comprovantes}"
+							var="comprovante" selectionMode="single"
+							selection="#{transferenciaSegundaViaComprovanteBBean.comprovanteSelecionado}"
+							id="comprovanteId"
+							rowKey="#{comprovante.idTabela}">								
+							
+							<p:ajax event="rowSelect" listener="#{transferenciaSegundaViaComprovanteBBean.segundaViaDetalhe()}" />
+								
+							<p:column width="10" id="columnSelecionado">
+								<f:facet name="header">
+									<p:selectBooleanCheckbox value="#{transferenciaSegundaViaComprovanteBBean.verificaSelecaoTabela}">
+										<p:ajax event="change" update="@(.table-comprovates) @form" listener="#{transferenciaSegundaViaComprovanteBBean.selecionaConjuntoItensTabela()}"/>
+									</p:selectBooleanCheckbox>
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{comprovante.selecionado}">
+									<p:ajax event="change" update="@form" listener="#{transferenciaSegundaViaComprovanteBBean.selecionarComprovantes(comprovante)}" /> 
+								</p:selectBooleanCheckbox>
+							</p:column>
+
+							<p:column headerText="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.dataPagamento']}"
+                                              width="500">
+                                   <h:outputText value="#{comprovante.dataPagamento}" >
+                                         <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                   </h:outputText>
+                             	</p:column>
+
+                                <p:column headerText="#{msg['pages.transferencias.segundaViaComprovante.consultar.tabela.favorecido']}" width="1000">
+                                      <h:outputText value="#{comprovante.favorecido}" />
+                                </p:column>
+
+                                <p:column styleClass="text-right">
+                                      <f:facet name="header">
+                                      <p:outputPanel styleClass="text-right">
+                                            <h:outputText value="#{msg['pages.transferencias.segundaViaComprovante.consultar.tabela.valor']} (R$)"/>
+                                      </p:outputPanel>
+                                      </f:facet>
+                                      <h:outputText value="#{comprovante.valor}"/>
+                                </p:column>
+                                <p:column width="90">
+                                </p:column>
+						</p:dataTable>
+						<p:outputPanel styleClass="col-xs-12 no-print no-visible">
+							<p:commandLink value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.selecionarTodos']}">
+								<p:ajax event="click"
+									listener="#{transferenciaSegundaViaComprovanteBBean.selecionarTodos()}"
+									update="@(.table-comprovates)"/>
+							</p:commandLink>
+							<h:outputText value=" / " />
+							<p:commandLink value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.desmarcarTodos']}">
+								<p:ajax event="click"
+									listener="#{transferenciaSegundaViaComprovanteBBean.desmarcarTodos()}"
+									update="@(.table-comprovates)"/>
+							</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				
+				<ui:include src="templateListaSegundaVia/outroBancoDocMultiplos.xhtml" />
+				
+				<ui:include src="templateListaSegundaVia/mesmoBancoMultiplos.xhtml" />
+				
+				<ui:include src="listarSegundaViaComprovanteGerarExcel.xhtml" />							
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza space" role="button"
+					value="#{msg['page.btn.voltar']}" immediate="true"
+					action="#{transferenciaSegundaViaComprovanteBBean.voltarParaTelaConsulta()}" />
+					
+				<p:blockUI block="continuarButton" trigger="continuarButton" />
+				<p:commandLink styleClass="btn btn-default no-print no-visible" role="button"
+					value="#{msg['page.btn.continuar']}" immediate="true" id="continuarButton"
+					action="#{transferenciaSegundaViaComprovanteBBean.direcionarMultiplosRelatorios()}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

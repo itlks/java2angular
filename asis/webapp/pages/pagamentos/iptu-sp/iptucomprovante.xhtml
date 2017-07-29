@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+<ui:define name="content">
+
+	<div class="row space-b">
+    	<div class="col-md-6 col-xs-6 site-map">
+        	<span>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.pagamentos']} <strong>&gt;</strong> #{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.tributosMunicipais']}</span>
+        	<h1>IPTU SP</h1>
+    	</div>
+	</div>
+
+	<h4 style="margin-bottom:10px;">#{msg['page.pagamentos.iptu-sp.confirmacao.pagamento.finalizado']}</h4>
+	<p:outputPanel styleClass="row">
+    	<p:outputPanel styleClass="col-lg-12">
+        	<p:outputPanel styleClass="box-shadow">
+        		<p:outputPanel styleClass="row">
+            		<p:outputPanel style="font-size:120%;" styleClass="col-md-12">
+            				<p:outputPanel styleClass="col-md-2" style="margin-left:60px;">
+            					<p:graphicImage id="imgInfo" value="/images/u67.gif" width="78px" height="101px"/>
+            				</p:outputPanel>
+            				<p:outputPanel
+								styleClass="col-md-8 text-center flex-align-vh lg-height">
+								<p><h:outputText value="#{msg['page.pagamentos.iptu-sp.confirmacao.prefeitura.saopaulo']}" /></p>
+								<p><h:outputText value="#{msg['page.pagamentos.iptu-sp.confirmacao.documentacao.arrecada']}" /></p>
+								
+							</p:outputPanel>
+													
+            		</p:outputPanel>
+            		
+            	</p:outputPanel>
+            	
+            	
+            	<p:outputPanel styleClass="row">
+            	<p:separator/>
+            		<p:outputPanel style="font-size:120%;" styleClass="col-md-6">   
+            		         			            															           	            		
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.consulta.nome.contribuinte']}" />            			
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.contribuinte.nomeContribuinte}" />                                                                                                           								    						
+            			</p:outputPanel>
+            		
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.consulta.nr.contribuinteImovel']}" />            			
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.contribuinte.nrContribuinte}" />												
+            			</p:outputPanel>
+            		            		
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.consulta.ano.exercicio']}" />	
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.contribuinte.anoExercicio}" />
+            			</p:outputPanel>
+            			
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.numero.notificacao']}" />	
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.nrNotificacao}" />
+            			</p:outputPanel>
+            			
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.confirmacao.nrParcela']}" />	
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.nrParcela}" />
+            			</p:outputPanel>
+            			
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.confirmacao.vencimentoParcela']}" />	
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.vencimento}" />
+            			</p:outputPanel>
+						
+						<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.confirmacao.dataPagamento']}" />	
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.pagamento}" />
+            			</p:outputPanel>
+            			
+            			<p:outputPanel styleclass="form-group">
+            				<h:outputText style="margin-right:10px;font-weight: bold;" value="#{msg['page.pagamentos.iptu-sp.confirmacao.valorParcela']}" />	
+							<h:outputText value="#{tribMunConfirmacaoIptuSpBBean.valor}" >
+								<f:convertNumber type="currency" currencySymbol="R$" />
+							</h:outputText>
+            			</p:outputPanel>
+						            						            			            			
+            		</p:outputPanel>  
+            		       		            		            		            																				            			            		                                   					                                                      		
+        		</p:outputPanel> 
+        		                 	
+            	<p:outputPanel styleClass="row">
+            			<p:outputPanel styleClass="col-md-12">            				
+            				<p:separator/>
+            				<p:outputPanel styleclass="form-group" style="font-size:120%;">
+            					<h:outputText value="#{msg['page.pagamentos.iptu-sp.confirmacao.existem.dividas']}" />
+            					<h:outputText value=" #{tribMunConfirmacaoIptuSpBBean.getAno()}"/>
+            				</p:outputPanel>
+            				<p:outputPanel styleclass="form-group" style="font-size:120%;">
+            					<h:outputText value="#{msg['page.pagamentos.iptu-sp.consulta.dividas.em.exer.antigos']}" />	
+								
+            				</p:outputPanel>
+            				<p:outputPanel styleclass="form-group" style="font-size:120%;"><h:outputText value="#{msg['page.pagamentos.iptu-sp.consulta.dividas.em.exer.depto']}" /></p:outputPanel>
+            				
+            				<p:outputPanel styleclass="form-group" style="font-size:120%;">
+            					<h:outputText value="#{msg['page.pagamentos.iptu-sp.consulta.dividas.em.exer.antigos.depto']}" />
+            				</p:outputPanel>
+            				
+            				
+            			</p:outputPanel>
+            	</p:outputPanel>  
+            	
+            	<p:outputPanel styleClass="row">
+            		<p:outputPanel styleClass="col-md-12">
+            			<p:separator/>
+            		</p:outputPanel>
+           			<p:outputPanel styleClass="col-md-6">            				
+           				<p:outputPanel styleclass="form-group" style="font-size:120%;font-weight: bold;">
+           					<h:outputText value="#{msg['page.pagamentos.iptu-sp.confirmacao.autenticacao.banc']}" />            					
+           				</p:outputPanel>
+           				<p:outputPanel styleclass="form-group" style="font-size:120%;">            					
+           					<h:outputText value=" #{tribMunConfirmacaoIptuSpBBean.autentBanc}"/>
+           				</p:outputPanel>           			            				            				            				            				
+           			</p:outputPanel>
+            			
+           			<p:outputPanel styleClass="col-md-6">            				            				            			
+           				<p:outputPanel styleclass="form-group" style="font-size:120%;font-weight: bold;">
+           					<h:outputText value="#{msg['page.pagamentos.iptu-sp.confirmacao.data.hora']}" />						
+           				</p:outputPanel>
+           			    <p:outputPanel styleclass="form-group" style="font-size:120%;">           						
+							<h:outputText value=" #{tribMunConfirmacaoIptuSpBBean.dtTransacao}"/>
+           				</p:outputPanel>        				            				            				            				
+           			</p:outputPanel>
+            	</p:outputPanel>
+            	<br/>
+            	<p:outputPanel styleClass="row">
+            		<p:outputPanel styleClass="col-md-12">            				            				
+            			<p:outputPanel styleclass="form-group" style="font-size:120%;font-weight: bold;">
+            				<h:outputText value="#{msg['page.pagamentos.iptu-sp.confirmacao.controle.prodam']}" />            					
+            			</p:outputPanel>            				            	
+            			<p:outputPanel styleclass="form-group" style="font-size:120%;">            					
+            				<h:outputText value=" #{tribMunConfirmacaoIptuSpBBean.prodam}" />
+            			</p:outputPanel>  			            				            				
+            		</p:outputPanel>
+            	</p:outputPanel> 
+            	
+            	<p:outputPanel styleClass="row">
+            			<p:outputPanel styleClass="col-md-12">            				
+            				<p:separator/>
+            				<p:outputPanel styleclass="form-group" style="font-size:110%;">
+            					<h:outputText value="#{msg['page.administrativo.perfilAutorizacao.alterarConfirmacao.casoDuvidaAtendimento']}" />
+            					
+            				</p:outputPanel>
+            				<p:outputPanel styleclass="form-group" style="font-size:110%;">
+            					
+            					<h:outputText value="#{msg['page.administrativo.perfilAutorizacao.excluirConfirmacao.capitais.regioes']}" />
+            				</p:outputPanel>
+            				
+            				
+            			</p:outputPanel>
+            	</p:outputPanel> 
+            		            
+			</p:outputPanel>						
+			</p:outputPanel>
+			<ui:include src="/commons/pdf/pdfButtons.xhtml" />			
+		</p:outputPanel> 		     
+	</ui:define>
+</ui:composition> 

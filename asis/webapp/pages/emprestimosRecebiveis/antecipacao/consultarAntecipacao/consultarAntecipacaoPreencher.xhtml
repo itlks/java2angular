@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+    <ui:define name="content">
+    	<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v" id="panelTitulo">
+					<i class="fa fa-exclamation-circle"></i>
+					<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.alerta.preencher']}" rendered="#{consultaAntecipacoesRecebiveisBBean.exibirTabela == false}"/>
+					<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.alerta.resultado']}" rendered="#{consultaAntecipacoesRecebiveisBBean.exibirTabela == true}"/>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel id="panelSubTitulo" styleClass="titulo-painel">
+					<h4>#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.subtitulo.preencher']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+    
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+			    <p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+			         <p:outputPanel styleClass="row col-xs-12">
+			         	<p:outputLabel value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.operacoes']}" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row col-xs-12">
+						<p:outputPanel styleClass="row radio radioMax">
+							<p:selectOneRadio id="opcaoConsulta2" value="#{consultaAntecipacoesRecebiveisBBean.opcaoConsulta}">
+								<f:selectItems value="#{consultaAntecipacoesRecebiveisBBean.opcoesConsulta}" var="o" itemLabel="#{o.descricao}" itemValue="#{o}" />
+							</p:selectOneRadio>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row no-print no-visible">
+						<p:outputPanel styleClass="col-md-12 text-right">
+							<p:commandLink id="btnExibir" styleClass="btn btn-default" role="button" 
+           						action="#{consultaAntecipacoesRecebiveisBBean.continuarEmExibir}" 
+           						update="formGeral:panelTabela,panelBotoesPdf,formGeral:panelTitulo">#{msg['page.btn.exibir']}
+           					</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+		
+		
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:outputPanel id="panelTabela">
+							<p:outputPanel rendered="#{consultaAntecipacoesRecebiveisBBean.exibirTabela == true}">
+								<p:dataTable id="dtAntecipacoes" var="r" styleClass="space-t"
+									value="#{consultaAntecipacoesRecebiveisBBean.listaOperacoes}"
+									selectionMode="single"
+									rowKey="#{r}">
+		                            <p:ajax event="rowSelect" process="@this" update="" listener="#{consultaAntecipacoesRecebiveisBBean.selecionarOperacao}" />
+		                            
+		                            <p:column styleClass="col-xs-5" >
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.labelDataOperacao']}" />
+										</f:facet>
+		                          	    <h:outputText value="#{r.dtOperacao}" />
+		                           </p:column>
+		                           
+		                           <p:column >
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.labelNumeroOperacao']}" />
+										</f:facet>
+		                          	    <h:outputText value="#{r.numOperacao}" />
+		                           </p:column>
+		                           
+		                            <p:column styleClass="text-right">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.labelValor']}" />
+										</f:facet>
+		                          	    <h:outputText id="idValor" value="#{r.vlOperacao}">
+									    	<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+									    </h:outputText>
+		                           </p:column>
+		                           
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+
+				<p:outputPanel id="panelBotoesPdf">
+					<p:outputPanel rendered="#{consultaAntecipacoesRecebiveisBBean.exibirTabela}">
+						<ui:include src="/commons/pdf/pdfButtonsConsultaAntecipacoesRecebiveis.xhtml">
+							<ui:param name="enviarEmail" value="true" />
+							<ui:param name="excel" value="dtAntecipacoes" />
+							<ui:param name="nomeExcel" value="AntecipacaoRecebiveis_ListaOperacoes" />
+						</ui:include>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+					<p:commandLink
+						action="#{consultaAntecipacoesRecebiveisBBean.voltarEmMenu}"
+						styleClass="btn btn-default btn-cinza" role="button">#{msg['page.btn.voltar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+  		
+	</ui:define>
+</ui:composition>

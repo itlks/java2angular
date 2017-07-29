@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-md-12">
+			<p:outputPanel>
+				<h:outputLabel for="nomePerfilAutorizacao"
+					value="#{msg['page.administrativo.perfilAutorizacao.alterarConfirmacao.nomePerfil']}"
+					styleClass="space" />
+				<h:outputText id="nomePerfilAutorizacao"
+					value="#{perfilAutorizacaoIncluirBBean.novoPerfil.nomePerfilAutorizacao}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel for="descricaoPerfilAutorizacao"
+					value="#{msg['page.administrativo.perfilAutorizacao.alterarConfirmacao.descricao']}"
+					styleClass="space" />
+				<h:outputText id="descricaoPerfilAutorizacao"
+					value="#{perfilAutorizacaoIncluirBBean.novoPerfil.descricaoPerfilAutorizacao}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+
+	<p:outputPanel>
+		<ui:repeat var="servico"
+			value="#{perfilAutorizacaoIncluirBBean.grupos}">
+
+
+			<p:outputPanel styleClass="space-t">
+				<h:outputLabel styleclass="h5 bold" value="#{servico.nomeServico}"
+					for="panelGrupoHeader#{statusServico.index}" />
+			</p:outputPanel>
+
+
+			<p:outputPanel styleClass="table-responsive table table-striped"
+				id="panelGrupoHeader#{statusServico.index}">
+				<p:outputPanel>
+					<p:dataTable var="trans" value="#{servico.transacoes}"
+						tableStyleClass="first-td-40">
+
+						<p:column style="width:40%;"
+							headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.transacao']}">
+							<h:outputText value="#{trans.nomeTransacao}" />
+						</p:column>
+
+						<p:column styleClass="text-left" style="width:20%;"
+							headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.qtd.ass']}">
+							<h:outputText value="#{trans.qtdAssinaturas}" />
+						</p:column>
+
+						<p:column styleClass="text-right" style="width:20%;"
+							headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.valor']}">
+							<h:outputText value="--"
+								rendered="#{!servico.renderizaInputValorAlcada}" />
+							<h:outputText value="#{trans.valorAlcada}"
+								rendered="#{servico.renderizaInputValorAlcada}">
+								<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+
+						<p:column styleClass="text-right width22" style="width:20%;"
+							headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.limite.diario']}">
+							<h:outputText value="--"
+								rendered="#{!servico.renderizaInputValorDiario}" />
+							<h:outputText value="#{trans.valorDiario}"
+								rendered="#{servico.renderizaInputValorDiario}">
+								<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+							</h:outputText>
+						</p:column>
+
+					</p:dataTable>
+				</p:outputPanel>
+			</p:outputPanel>
+		</ui:repeat>
+
+	</p:outputPanel>
+
+</ui:composition>

@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- ############################################################### DPVATS INICIO #################################################################### -->
+	
+	<p:outputPanel styleClass="row">
+		    
+        <ui:repeat 
+            var="dpvat" 
+            varStatus="status" 
+            value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.listaDpvat}" 
+            size="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nroOcorrDpvat}">
+		     
+            <p:outputPanel styleClass="col-xs-2">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.exercicio']} " />
+                <h:outputText value="#{dpvat.exDpvt}" />
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="col-xs-4">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.valor']}" />
+                <h:outputText value="#{dpvat.vlDpvt}">
+                    <f:convertNumber type="currency" locale="pt_br" currencySymbol="(R$)" />
+                </h:outputText>
+            </p:outputPanel>
+
+        </ui:repeat>
+	
+	</p:outputPanel>
+		    
+	<!-- ############################################################### DPVATS FIM ####################################################################### -->
+</ui:composition>

@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovanteSemWizard.xhtml">
+
+	<ui:define name="contentHeader">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<strong><h:outputText styleClass="bold"
+								value="#{msg['page.pagamentos.tributos.estaduais.comprovante.titulo']}" /></strong>
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+
+	<ui:define name="contentComprovante">
+
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-6">
+				<p:outputPanel styleClass="titulo-destaque">
+					<h5 class="bold">
+						<h:outputText styleClass="bold"
+							value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.documentoArrecadacao']}" />
+						<br />
+						<h:outputText styleClass="bold"
+							value=" #{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.gareIcms']}" />
+					</h5>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="form-group">
+							<p>
+								<strong> <h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.contribuinte']}" />
+								</strong>
+							</p>
+							<p>
+								<h:outputText
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.nomeCon}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-b">
+						<p:outputPanel styleClass="form-group ">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.endereco']}" /></strong>
+							</p>
+							<p>
+								<h:outputText
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.endeCon}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.municipio']}" /></strong>
+							</p>
+							<p>
+								<h:outputText value="" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.uf']}" /></strong>
+							</p>
+							<p>
+								<h:outputText value="" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.telefone']}" /></strong>
+							</p>
+							<p>
+								<h:outputText
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.teleCon}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-b">
+						<p:outputPanel styleClass="form-group ">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.cnae']}" /></strong>
+							</p>
+							<p>
+								<h:outputText
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.cnae}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="form-group">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.observacao']}" /></strong>
+							</p>
+							<p>
+								<h:outputText
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.obs}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="form-group">
+							<p>
+								<strong><h:outputText
+										value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.numeroControle']}" /></strong>
+							</p>
+							<p>
+								<h:outputText
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.codigoNSU}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+
+
+			<p:outputPanel styleClass="col-xs-6 border-left-col">
+
+				<p:outputPanel styleClass="row space-b space-t">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.uf.favorecida']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText value="São Paulo" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.dataVencimento']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.dataVct}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.codigoReceita']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.codRece}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.inscricaoEstadual']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.insEsta}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.cpfCnpj']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.identif}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.inscricaoDividaAtivaOuNumeroEtiqueta']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.etiquet}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.referencia']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.refMa}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.aiimOuNumeroParcelamentoOuNumeroNotificacao']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.aiim}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row flex-align-v form-group">
+					<p:outputPanel styleClass="col-xs-7">
+
+						<h:outputText styleClass="bold"
+							value="#{msg['page.pagamentos.tributos.estaduais.icmsSp.comprovante.valor.receitaNominalOuCorrigida']}" />
+						<br />
+						<p:outputLabel>
+							<h:outputText styleClass="bold"
+								value="#{msg['page.pagamentos.tributos.estaduais.icmsSp.comprovante.valor.nominal']}" />
+						</p:outputLabel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="col-xs-5 text-right">
+
+						<h:outputText converter="valorMonetarioConverter"
+							value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valPrin}" />
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.juros']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText converter="valorMonetarioConverter"
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valJuro}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.multa']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText converter="valorMonetarioConverter"
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valMult}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.acrescimo']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText converter="valorMonetarioConverter"
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valAcre}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.honorarios']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText converter="valorMonetarioConverter"
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valHono}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row total-label"
+					style="padding: 10px 0px;">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.total']}" /></strong>
+						</p>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<strong><h:outputText
+									converter="valorMonetarioConverter"
+									value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valTota}" /></strong>
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.dataPagamento']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.dataMov}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b gray-row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p>
+							<strong><h:outputText value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.banco']}" /></strong>
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 text-right">
+						<p>
+							<h:outputText value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.entArre}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-center destaque-text">
+
+				<p>
+					<strong><h:outputText value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.aviso.lei']}" /></strong>
+				</p>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+	<ui:define name="rodape">
+		<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-secundario"
+					action="#{segundaViaComprovanteTributosEstaduaisBBean.voltar}"
+					role="button" value="#{msg['page.btn.voltar']}"
+					style="margin-right:10px;" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

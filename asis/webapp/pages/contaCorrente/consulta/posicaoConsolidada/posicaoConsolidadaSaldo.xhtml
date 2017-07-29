@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/crm/banner.xhtml" >
+			<ui:param name="idBanner"
+					  value="idBannerPosicaoConsolidada" />
+			<ui:param name="bannerDTO"
+					  value="#{campanhasCRMBBean.bannerPosicaoConsolidada}" />
+		</ui:include>
+				
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosDeCC']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:dataTable id="tabela1"
+							value="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaSaldoContaCorrente.posicaoConsolidada}"
+							var="saldo">
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldos']}"
+								width="100%;">
+								<h:outputText value="#{saldo.produto}"
+									rendered="#{saldo.codigo == D}" />
+
+								<h:outputText value="#{saldo.produto}"
+									rendered="#{saldo.codigo != D}" styleClass="space-l" />
+							</p:column>
+
+							<p:column>
+								<h:outputText value="#{saldo.vlBruto}"
+									styleClass=" text-right pull-right" />
+							</p:column>
+							<f:facet name="footer"></f:facet>
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row"
+			rendered="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaSaldoInvestimento.posicaoConsolidada != null and !contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaSaldoInvestimento.posicaoConsolidada.isEmpty()}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosFundosInvest.titulo']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaSaldoInvestimento.posicaoConsolidada != null and !contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaSaldoInvestimento.posicaoConsolidada.isEmpty()}"
+			styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel
+						styleClass="table-responsive table table-striped fakeFooter">
+
+						<p:dataTable id="tabela2"
+							value="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaSaldoInvestimento.posicaoConsolidada}"
+							var="investimentos">
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosFundosInvest.produto']}"
+								width="58%">
+								<h:outputText value="#{investimentos.produto}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosFundosInvest.valorBruto']}"
+								width="20%" styleClass="text-right">
+								<h:outputText value="#{investimentos.vlBruto}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosFundosInvest.valorLiquido']}"
+								styleClass="text-right">
+								<h:outputText value="#{investimentos.vlliquido}" />
+							</p:column>
+							
+						</p:dataTable>
+
+						<p:outputPanel styleClass="col-xs-12 fakeDiv">
+							<p:outputPanel style="width:58%" styleClass="first"></p:outputPanel>
+							<p:outputPanel style="width:20%" styleClass="second">
+								<span><h:outputText
+										value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosFundosInvest.totalLiqAplicado']}" /></span>
+							</p:outputPanel>
+							<p:outputPanel styleClass="third">
+								<span><h:outputText
+										value="#{contaCorrenteConsultasPosicaoConsolidadaBBean.totalInvestimento}" /></span>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaRendaFixa.posicaoConsolidada != null and !contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaRendaFixa.posicaoConsolidada.isEmpty()}"
+			styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosRendaFixa.titulo']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaRendaFixa.posicaoConsolidada != null and !contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaRendaFixa.posicaoConsolidada.isEmpty()}"
+			styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel
+						styleClass="table-responsive table table-striped fakeFooter">
+						<p:dataTable id="tabela3"
+							value="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaRendaFixa.posicaoConsolidada}"
+							var="rendaFixa">
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosRendaFixa.produto']}"
+								width="70%">
+								<h:outputText value="#{rendaFixa.produto}"
+									styleClass="text-right" />
+							</p:column>
+
+							<p:column styleClass="text-right"></p:column>
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosRendaFixa.saldoAtualBruto']}"
+								styleClass="text-right">
+								<h:outputText value="#{rendaFixa.vlBruto}" />
+							</p:column>
+						</p:dataTable>
+
+						<p:outputPanel styleClass="col-xs-12 fakeDiv">
+							<p:outputPanel style="width:58%" styleClass="first"></p:outputPanel>
+							<p:outputPanel style="width:20%" styleClass="second">
+								<span><h:outputText
+										value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosRendaFixa.total']}" /></span>
+							</p:outputPanel>
+							<p:outputPanel styleClass="third">
+								<span><h:outputText
+										value="#{contaCorrenteConsultasPosicaoConsolidadaBBean.totalRendaFixa}" /></span>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row"
+			rendered="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaPoupanca.posicaoConsolidada != null and !contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaPoupanca.posicaoConsolidada.isEmpty()}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosPoupanca.titulo']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaPoupanca.posicaoConsolidada != null and !contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaPoupanca.posicaoConsolidada.isEmpty()}"
+			styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:dataTable id="tabela4"
+							value="#{contaCorrenteConsultasPosicaoConsolidadaBBean.listaPosicaoConsolidadaPoupanca.posicaoConsolidada}"
+							var="poupanca">
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosPoupanca.produto']}"
+								width="80%">
+								<h:outputText value="#{poupanca.produto}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosPoupanca.valorTotal']}"
+								styleClass="text-right">
+								<h:outputText value="#{poupanca.vlBruto}" />
+							</p:column>
+							<f:facet name="footer" />
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!--<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.contaCorrente.consultas.posicaoConsolidada.saldosPoupanca.faleConosco']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>-->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel width="100%">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{contaCorrenteConsultasPosicaoConsolidadaBBean.voltarMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

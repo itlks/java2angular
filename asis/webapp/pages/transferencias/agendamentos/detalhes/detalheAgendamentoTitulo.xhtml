@@ -1,0 +1,183 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:outputLabel styleClass="space-b"
+		value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+
+	<p:outputPanel styleClass="row">
+
+		<!-- código de barras -->
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="tituloCodigoBarras" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.codigoDeBarras']}" />
+			<h:outputText id="tituloCodigoBarras"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.codigoBarra}" />
+		</p:outputPanel>
+
+		<!-- nosso número -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.nossoNumero 
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.nossoNumero > 0}">
+			<h:outputLabel for="tituloNossoNumero" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nossoNumero']}" />
+			<h:outputText id="tituloNossoNumero"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nossoNumero}" />
+		</p:outputPanel>
+
+		<!-- instutiução financeira -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.codigoISPB
+				and not empty agendamentoBBean.dto.detalheAgendamentosDTO.instituicaoFinanceira}">
+			<h:outputLabel for="tituloInstituicaoFinanceira" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.instituicaoFinanceiraFavorecida']}" />
+			<h:outputText id="tituloInstituicaoFinanceira"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.codigoISPB} - #{agendamentoBBean.dto.detalheAgendamentosDTO.instituicaoFinanceira}" />
+		</p:outputPanel>
+
+		<!-- beneficiário original - razão social -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.nomeBeneficiarioOriginal}">
+			<h:outputLabel for="tituloBeneficiarioOriginalRazaoSocial"
+				styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nomeRazaoSocialBeneficiarioOriginal']}" />
+			<h:outputText id="tituloBeneficiarioOriginalRazaoSocial"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomeBeneficiarioOriginal}" />
+		</p:outputPanel>
+
+		<!-- beneficiário original - CNPJ/CPF -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoBeneficiarioOriginal
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoBeneficiarioOriginal > 0}">
+			<h:outputLabel for="tituloBeneficiarioOriginalCNPJCPF"
+				styleClass="space"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoPessoaBeneficiarioOriginal} #{msg['page.pagamentos.codigoBarras.informacoesPagamento.doBeneficiarioOriginal']}" />
+			<h:outputText id="tituloBeneficiarioOriginalCNPJCPF"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.documentoBeneficiarioOriginal}" />
+		</p:outputPanel>
+
+		<!-- pagador original - razão social -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.nomePagadorOriginal}">
+			<h:outputLabel for="tituloPagadorOriginalRazaoSocial"
+				styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nomeRazaoSocialPagadorOriginal']}" />
+			<h:outputText id="tituloPagadorOriginalRazaoSocial"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomePagadorOriginal}" />
+		</p:outputPanel>
+
+		<!-- pagador original - CNPJ/CPF -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoPagadorOriginal
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoPagadorOriginal > 0}">
+			<h:outputLabel for="tituloPagadorOriginalCNPJCPF" styleClass="space"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoPessoaPagadorOriginal} #{msg['page.pagamentos.codigoBarras.informacoesPagamento.doPagadorOriginal']}" />
+			<h:outputText id="tituloPagadorOriginalCNPJCPF"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.documentoPagadorOriginal}" />
+		</p:outputPanel>
+
+		<!-- pagador efetivo - razão social -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.nomePagadorEfetivo}">
+			<h:outputLabel for="tituloPagadorEfetivoRazaoSocial"
+				styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nomeRazaoSocialPagadorEfetivo']}" />
+			<h:outputText id="tituloPagadorEfetivoRazaoSocial"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomePagadorEfetivo}" />
+		</p:outputPanel>
+
+		<!-- pagador efetivo - CNPJ/CPF -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoPagadorEfetivo
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoPagadorEfetivo > 0}">
+			<h:outputLabel for="tituloPagadorEfetivoCNPJCPF" styleClass="space"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoPessoaPagadorEfetivo} #{msg['page.pagamentos.codigoBarras.informacoesPagamento.doPagadorEfetivo']}" />
+			<h:outputText id="tituloPagadorEfetivoCNPJCPF"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.documentoPagadorEfetivo}" />
+		</p:outputPanel>
+
+		<!-- sacador avalista - razão social -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.nomeSacadorAvalista}">
+			<h:outputLabel for="tituloSacadorAvalistaRazaoSocial"
+				styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.nomeRazaoSocialSacadorAvalista']}" />
+			<h:outputText id="tituloSacadorAvalistaRazaoSocial"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomeSacadorAvalista}" />
+		</p:outputPanel>
+
+		<!-- sacador avalista - CNPJ/CPF -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoSacadorAvalista
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.numeroDocumentoSacadorAvalista > 0}">
+			<h:outputLabel for="tituloSacadorAvalistaCNPJCPF" styleClass="space"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoPessoaSacadorAvalista} #{msg['page.pagamentos.codigoBarras.informacoesPagamento.doSacadorAvalista']}" />
+			<h:outputText id="tituloSacadorAvalistaCNPJCPF"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.documentoSacadorAvalista}" />
+		</p:outputPanel>
+
+		<!-- data de vencimento -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.dataVencimentoTitulo}">
+			<h:outputLabel for="tituloDataVencimento" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.dataDeVencimento']}" />
+			<h:outputText id="tituloDataVencimento"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.dataVencimentoTitulo}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<!-- valor nominal -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.valorNominal
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.valorNominal > 0}">
+			<h:outputLabel for="tituloValorNominal" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorNominal']}" />
+			<h:outputText id="tituloValorNominal"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorNominal}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<!-- encargos -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.valorEncargos
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.valorEncargos > 0}">
+			<h:outputLabel for="tituloEncargos" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.encargos']}" />
+			<h:outputText id="tituloEncargos"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorEncargos}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<!-- desconto -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.valorDesconto
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.valorDesconto > 0}">
+			<h:outputLabel for="tituloDesconto" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.desconto']}" />
+			<h:outputText id="tituloDesconto"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorDesconto}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<!-- valor total a cobrar -->
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.valorPago
+						  and agendamentoBBean.dto.detalheAgendamentosDTO.valorPago > 0}">
+			<h:outputLabel for="tituloValorPagamento" styleClass="space"
+				value="#{msg['page.pagamentos.codigoBarras.informacoesPagamento.valorTotalACobrar']}" />
+			<h:outputText id="tituloValorPagamento"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorPago}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+</ui:composition>

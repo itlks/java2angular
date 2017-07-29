@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content">
+	
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel 	styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<h5>#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.avisoInterno']}</h5>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel id="panelPreenchimento" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.title']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+		
+			<p:outputPanel styleClass="col-xs-12">
+			
+				<p:outputPanel styleClass="box-shadow">
+				
+					<p:outputPanel styleClass="row">
+					
+						<p:outputPanel styleClass="col-xs-12">
+						
+						
+								<p:outputPanel>
+								
+								<p:dataTable 		id="tabelaChequeBloqueados"
+													rendered="#{chequesDesbloquearTaloesBBean.listaTaloes.size() > 0}"
+													value="#{chequesDesbloquearTaloesBBean.listaTaloes}" 
+													var="talao"
+													tableStyleClass="table table-striped"
+													selection="#{chequesDesbloquearTaloesBBean.talaoSelecionado}"
+													rowKey="#{talao.pricheq}">
+													
+									<p:column selectionMode="single" ></p:column>
+
+									<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.titleColuna1']}" style="width:35%">
+										<h:outputText value=" #{talao.descPricheq}" />
+									</p:column>
+
+									<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.titleColuna2']}" >
+										<h:outputText value=" #{talao.descUltcheq}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.titleColuna3']}" >
+										<h:outputText value=" #{talao.dataFormatadaDDMMYYYYY}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.titleColuna4']}" >
+										<h:outputText value=" #{talao.descricaoSituacao}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.titleColuna5']}" >
+										<h:outputText value=" #{talao.qtddisp}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.titleColuna6']}" >
+										<h:outputText value="#{talao.descricaoObservacao}" />
+									</p:column> 
+								</p:dataTable>
+										
+							</p:outputPanel>
+					
+						</p:outputPanel>
+					
+					</p:outputPanel>
+				
+				</p:outputPanel>
+			
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+				
+			<p:outputPanel styleClass="col-xs-12 text-right">
+					
+				<p:commandLink 	styleClass="btn btn-default btn-cinza" 
+								role="button"
+								action="#{chequesDesbloquearTaloesBBean.voltar}">
+					#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.btnVoltar']}
+				</p:commandLink>
+				
+				<p:commandLink 	styleClass="btn btn-default" 
+								role="button"
+								action="#{chequesDesbloquearTaloesBBean.continuar}">
+					#{msg['pages.contacorrente.cheques.desbloquearTaloes.desbloquear.btnContinuar']}
+				</p:commandLink>
+				
+			</p:outputPanel>
+			
+		</p:outputPanel>
+
+	</ui:define>
+	
+</ui:composition>
+
+

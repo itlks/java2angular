@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:outputLabel styleClass="space-b"
+		value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+
+	<p:outputPanel styleClass="row">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaPoupancaDebitoAplicacao" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.contaDebito']}" />
+			<h:outputText id="contaPoupancaDebitoAplicacao"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaCorrenteDebito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaPoupancaCreditoAplicacao" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.contaPoupancaCredito']}" />
+			<h:outputText id="contaPoupancaCreditoAplicacao"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaPoupancaCredito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="tipoAplicacao" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipo']}" />
+			<h:outputText id="tipoAplicacao"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipo}" />
+		</p:outputPanel>
+	</p:outputPanel>
+
+</ui:composition>

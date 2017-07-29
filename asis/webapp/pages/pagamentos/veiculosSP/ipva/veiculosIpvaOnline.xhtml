@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:include	src="/pages/pagamentos/veiculosSP/ipva/ipvaDadosComuns.xhtml" />
+
+	<p:separator />
+
+	<p:outputPanel styleClass="row space-b">
+		<ui:repeat id="tabelaExec" 
+			var="exec" 
+			varStatus="status"
+			value="#{ipvaBBean.exerciciosSelecionados}">
+			
+			<p:outputPanel styleClass="col-xs-4">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.Exercicio']}: " styleClass="bold" />
+					<h:outputText value="#{exec.exercicio}" />
+				</h5>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.CotaParcela']}: " styleClass="bold" />
+					<h:outputText rendered="#{exec.exercicioAtual==true  and ipvaBBean.cotaSelecionada!=null}" value="#{ipvaBBean.cotaSelecionada.getDescricaoCota(exec.icoTuni)}" />
+					<h:outputText rendered="#{exec.exercicioAtual==false or (exec.exercicioAtual and ipvaBBean.cotaSelecionada==null)}" value="#{exec.icoTuniDescricao}" />
+				</h5>
+			</p:outputPanel>
+			
+			<br />
+			<p:outputPanel styleClass="col-xs-4"  rendered="#{!ipvaBBean.ipvaDTO.habilitaAgendamento}">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.Vencimento']}: "  styleClass="bold" />
+					<h:outputText rendered="#{exec.exercicioAtual==true and ipvaBBean.cotaSelecionada!=null}" value="#{ipvaBBean.cotaSelecionada.dataVencimento}" />
+					<h:outputText rendered="#{exec.exercicioAtual==false or (exec.exercicioAtual and ipvaBBean.cotaSelecionada==null)}" value="#{exec.vencimento}" />
+				</h5>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4"  rendered="#{ipvaBBean.ipvaDTO.habilitaAgendamento}">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamento.veiculosSP.ipva.comprovante.Agendamento']} "  styleClass="bold" />					
+					<h:outputText value="#{ipvaBBean.ipvaDTO.dataAgendamento}" />
+				</h5>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<h5>
+					<h:outputText value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.SubValor']}: " styleClass="bold" />
+					<h:outputText id="txtValorTotal1" rendered="#{exec.exercicioAtual==true and ipvaBBean.cotaSelecionada!=null}" value="#{ipvaBBean.cotaSelecionada.valor}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+					<h:outputText id="txtValorTotal2" rendered="#{exec.exercicioAtual==false or (exec.exercicioAtual and ipvaBBean.cotaSelecionada==null)}" value="#{exec.valorTotal}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+				</h5>
+			</p:outputPanel>
+						
+			<br />
+			<br />								
+		</ui:repeat>
+	</p:outputPanel>	
+	
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-4" />
+				
+		<p:outputPanel styleClass="col-xs-4">
+			<h5>
+				<h:outputText value="#{msg['pages.pagamento.veiculosSP.ipva.pagamento.VALORTOTAL']}: " styleClass="bold" />
+				<span>
+					<h:outputText id="txtTotal" value="#{ipvaBBean.ipvaDTO.valorTotal}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</h:outputText>
+				</span>
+			</h5>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>
