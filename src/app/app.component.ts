@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
     let arrayTags: string[] = [''];
 
     // array de tags que serão procuradas ao pecorrer o metodo.
-    arrayTagFrom = ["p:outputPanel", "h:outputLabel", "p:inputText", "p:commandButton", "p:commandLink", "p:selectBooleanCheckbox", "p:selectOneRadio", "p:calendar"];
+    arrayTagFrom = ["p:outputPanel", "h:outputLabel", "p:inputText", "p:commandButton", "p:commandLink", "p:selectBooleanCheckbox", "p:selectOneRadio", "p:calendar", "f:selectItem"];
 
     
  while(strHtml.search(/\s\s+ /gm) > 0){ // enquanto existir espaçamentos entre as tags substitua por " "
@@ -129,6 +129,9 @@ export class AppComponent implements OnInit {
               break;
             case 8:
               next = this.convCalendar(strTag);
+              break;
+            case 9:
+              next = this.convSelectedItem(strTag);
               break;
             default:
               next = strTag.trim();
@@ -379,7 +382,6 @@ export class AppComponent implements OnInit {
   }
   
   convRadio(html: string): string {
-    var valorTagValue = "";
     var valorTagId = "";
     var valorTagInput = "";
     var valorTagValue = "";
@@ -393,10 +395,7 @@ export class AppComponent implements OnInit {
     var regxLayoutApas = /layout\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica layout="conteudo"
     var regxValueApas = /value\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica value="conteudo"
     var regxValue = /value\s*=*\s*/; //identifica value=
-    
-
-    var regxIdApas = /id\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica value="conteudo"
-    
+    var regxIdApas = /id\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica value="conteudo"    
     var regxEspecial = /[^a-zA-Z_.]\s*/g;
     
     if(html != null){
@@ -405,9 +404,9 @@ export class AppComponent implements OnInit {
         }
 
       if (html.match(regxValueApas) != null) { //verifica se tem value
-        valorTagValue = this.pegaConteudo(html, regxValueApas, regxValue);
-        var valorTagValueSemCaracEspec = valorTagValue.replace(regxEspecial, "");
-        valorTagValueSemCaracEspec = contador + " in " + valorTagValueSemCaracEspec;
+        //valorTagValue = this.pegaConteudo(html, regxValueApas, regxValue);
+        //var valorTagValueSemCaracEspec = valorTagValue.replace(regxEspecial, "");
+        //valorTagValueSemCaracEspec = contador + " in " + valorTagValueSemCaracEspec;
 
         if(html.match(regxIdApas) != null){ //verifica se tem layout="conteudo"
           html = html.replace(regxIdApas, "");
@@ -421,9 +420,6 @@ export class AppComponent implements OnInit {
           html = html.replace(regexSelectOneRadio, valorTagLabel);
         }
         
-        if( html.match(regxValueApas) !== null){
-          html = html.replace(regxValueApas, valorTypeOp + '="' + valorTagValueSemCaracEspec +'"');
-        }
       }
 
       return html;
@@ -435,7 +431,54 @@ export class AppComponent implements OnInit {
   }
 
   convCalendar(html: string): string {
-  
+    
+     if(html != null){
+
+     }
     return html;
+  }
+
+  convSelectedItem(html: string): string {
+    var valorTagItemLabel = "";
+    var tagInputTypeRadio = 'input type="radio" ';
+    var tagValue = "value";
+    var regexSelectedItem = /f:selectItem\s*/;
+    var regexItemLabelAspas = /itemLabel\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/;
+    var regexItemLabel = /itemLabel\s*/;
+    var regexItemValueAspas = /itemValue\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica value="conteudo"
+    var regexItemValue = /item\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/; //identifica itemValue=
+    var regexValueAspas = /value\s*=*\s*(["'])(?:(?=(\\?))\2.)*?\1/g;
+    var regexValue = /value\s*=*\s*/g;
+    if(html != null){
+
+      //html = html.replace("itemValue", "value");
+
+      if(html.match(regexSelectedItem) !== null){
+        html = html.replace(regexSelectedItem, tagInputTypeRadio);
+      }
+      
+      if(html.match(regexItemLabelAspas) !== null){
+        html = html.replace("itemValue", "item");
+        html = html.replace("itemLabel", tagValue);
+        
+        valorTagItemLabel = this.pegaConteudo(html, regexValueAspas, regexValue);
+      }
+
+      if(html.match(regexItemValue) !== null){
+        html = html.replace(regexItemValue, 'item="' + valorTagItemLabel + '" ');
+      }
+
+      if(html.match(regexValueAspas) !== null){
+         html = html.replace(regexValueAspas, "");
+      }
+
+      html = html.replace("item", "value");
+      var valorTag = html + valorTagItemLabel + "<br>";
+
+      return valorTag;
+    } else {
+      html = "Error";
+      return html;
+    }
   }
 }
