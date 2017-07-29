@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
-import JSZip from 'jszip';
+import JSZip from 'jszip/dist/jszip';
 
 
 
