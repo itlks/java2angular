@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
+
 declare var jQuery: any;
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   public fileString;
   private content;
-
+  values: number[] = [102, 115, 130, 137];
   constructor() {
     this.fileString;
   }
@@ -67,7 +69,7 @@ export class AppComponent implements OnInit {
   }
 
   displayFile(){
-    window.open("https://angular.io/docs", "_blank");
+    window.open("../assets/ibpj/index.html", "_blank");
 }
 
   convMain(strHtml: string): void { //motor principal, concentra todas as chamadas para invocar os demais ações.
@@ -373,8 +375,24 @@ export class AppComponent implements OnInit {
   }
  
   convCheckBox(html: string): string {
-    html = html.replace("p:outputPanel", "div");
-  
+
+    console.log(html);
+    //converter tag abertura e substitui por tag nova
+    html = html.replace("<p:selectBooleanCheckbox", "<input type='checkbox'");
+    
+    //procurar atributo value(não é necessario)
+    //procurar atributo binding
+    html = html.replace("binding","ngmodel");
+    //procurar tag fechamento possibilidade 1
+    html = html.replace("</p:selectBooleanCheckbox>", ">");
+    //procurar tag fechamento possibilidade 2
+    html = html.replace("/>", ">");
+    //se funçõ forem sendo chamadas pelo checkbox
+    //html = html.replace("#{", "");
+    //html = html.replace("}", "");
+    
+    console.log(html);
+
     return html;
   }
   
@@ -384,7 +402,7 @@ export class AppComponent implements OnInit {
   }
 
   convCalendar(html: string): string {
-  
+    html = html.replace("p:calendar","");
     return html;
   }
 }

@@ -1,0 +1,35 @@
+.sub-menu {
+    margin: 45px 16px 16px 245px;
+
+    .title {
+    	border-bottom: 1px solid #E3E6E7;
+	    padding-bottom: 8px;
+	    font-size: 21px;
+	    text-transform: uppercase;
+	    margin-bottom: 16px;
+    }
+
+    ul {
+
+    	margin-bottom: 16px;
+
+    	li {
+	    	
+	    	margin-bottom: 5px;
+
+	    	&:first-of-type{
+		    	font-weight:700;
+		    }
+
+		    span {
+		    	color: #EE1D23;
+				font-weight: 700;
+				margin-right: 5px;
+		    }
+	    }
+    }
+
+    .sub-title {
+
+    }
+}

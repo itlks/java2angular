@@ -1,0 +1,22 @@
+.sub-header {
+	padding: 10px 7px 8px 85px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	background-color: #f0f0f0;
+	z-index: 9;
+
+	.account-info {
+		display: inline-block;
+		margin-right: 16px;
+	}
+
+	.btn-switch-account {
+		display: inline-block;
+		margin-right: 25px;
+
+		a {
+			text-decoration: underline;
+		}
+	}
+}

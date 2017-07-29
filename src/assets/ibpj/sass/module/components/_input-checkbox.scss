@@ -1,0 +1,58 @@
+
+.label-check label {
+  display: inline;
+  margin-bottom: 0px;
+  font-weight: normal;
+}
+
+input[type=checkbox] {
+  display: none;
+  + label {
+
+    align-items: center;
+    position: relative;
+    font-weight: 300 !important;
+    font-family: 'RobotoRegular_0';
+    line-height: 1.5;
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 20px;
+    max-width: 100%;
+    margin-bottom: 5px;
+    color: #41555E;
+    padding-left: 0px!important;
+
+
+
+    &::before {
+        content: '';
+        background-color:#fafafa;
+        padding: 9px;
+        display: inline-block;
+        position: relative;
+        margin-left: 4px;
+        margin-right: 4px;
+        top: 5px;
+        width: 2px;
+        height: 2px;
+        border: 1px solid #cccccc;
+        background: #ffffff;
+        background-image: none;
+        box-shadow: none;
+        border-radius: 15%;
+        font-weight: normal;
+      }
+  }
+  &:checked + label {
+
+    &:after {
+      font-family: FontAwesome;
+      content: '\f00c';
+      font-size: 17px;
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      color: #00D15F;
+    }
+  }
+}

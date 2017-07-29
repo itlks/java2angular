@@ -1,0 +1,10 @@
+.box-shadow {
+	box-shadow: $box-shadow;
+    margin-bottom: 16px;
+	background: $white-color;
+    padding: 16px;
+
+    &.homeBlock {
+    	padding: 0px;
+    }
+}

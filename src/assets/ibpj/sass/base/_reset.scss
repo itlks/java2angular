@@ -1,0 +1,66 @@
+// _mixins.scss
+
+@font-face {
+  font-family: 'RobotoLight_0';
+  src: url("../fonts/roboto/RobotoLight_0.eot");
+  src: url("../fonts/roboto/RobotoLight_0.eot") format("embedded-opentype"), url("../fonts/roboto/RobotoLight_0.woff2") format("woff2"), url("../fonts/roboto/RobotoLight_0.woff") format("woff"), url("../fonts/roboto/RobotoLight_0.ttf") format("truetype"), url("../fonts/roboto/RobotoLight_0.svg#RobotoLight_0") format("svg"); }
+@font-face {
+  font-family: 'RobotoRegular_0';
+  src: url("../fonts/roboto/RobotoRegular_0.eot");
+  src: url("../fonts/roboto/RobotoRegular_0.eot") format("embedded-opentype"), url("../fonts/roboto/RobotoRegular_0.woff2") format("woff2"), url("../fonts/roboto/RobotoRegular_0.woff") format("woff"), url("../fonts/roboto/RobotoRegular_0.ttf") format("truetype"), url("../fonts/roboto/RobotoRegular_0.svg#RobotoRegular_0") format("svg"); }
+
+body {
+	background: $background-color;
+	height: 100%;
+	font-family:'RobotoRegular_0', Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin-top: 79px;
+	margin-bottom:32px;
+	color: #41555E;
+	-ms-overflow-x: hidden!important;
+}
+
+a{
+    color:$link-color;
+}
+
+p {
+	margin-bottom:0;
+}
+
+h1, h2, h3, h4, h5 {
+	margin:0;
+}
+
+.container-fluid {
+	padding: 0px;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+
+	li {
+		display: block;
+	}
+}
+
+.fa {
+    font-size: 30px !important;
+    margin-right: 16px;
+    float: left;
+    bottom: 6px;
+    position: relative;
+
+    &.fa-exclamation-circle {
+    	color: #FFD24D;
+    }
+
+    &.fa.fa-times-circle {
+    	color: #EE1D23;
+    }
+
+    &.fa.fa-check-circle {
+    	color: #59B200;
+    }
+}

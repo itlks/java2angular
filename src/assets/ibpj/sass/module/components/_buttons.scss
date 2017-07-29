@@ -1,0 +1,33 @@
+/* Buttons */
+.btn {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	color: $cor-branco;
+	font-size: 12px;
+	font-weight: 400;
+
+	&.btn-default {
+		background: #42555E;
+		margin-left: 5px;
+
+		&:hover {
+			background: #566D78;
+			color: $cor-branco;
+		}		
+	}
+
+	&.btn-grey {
+		background: #AAAAAA;
+
+		&:hover {
+			background: #8A8A8A;
+			color: $cor-branco;
+		}
+	}
+
+	&:focus {
+		color: $cor-branco;
+	}
+}
