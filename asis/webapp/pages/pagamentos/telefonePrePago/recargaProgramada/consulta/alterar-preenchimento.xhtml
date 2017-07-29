@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+		<ui:define name="content">	
+	
+	
+			<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+							<i class="fa fa-exclamation-circle"></i>
+							<span>#{msg['pages.pagamentos.recargaProgramada.preenchimento.transacao']}<br/> 
+							#{msg['pages.pagamentos.recargaProgramada.preenchimento.prencharcuidado']}<br/>
+							#{msg['pages.pagamentos.recargaProgramada.preenchimento.esteservico']}<br/>
+								<p:commandLink id="info" role="button" action="#{recargaProgramadaConsultarBBean.initLimites}" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.link']}"></p:commandLink>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<ui:include src="/pages/limites/limites.xhtml"/>
+				<p:outputPanel styleClass="row ">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<h4>#{msg['pages.pagamentos.recargaProgramada.preenchimento.informe']}</h4>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+		
+				<p:outputPanel styleClass="row ">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="box-shadow">
+		
+							<p:outputPanel styleClass="row">
+								<h:outputLabel styleClass="col-xs-6" for="" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.empresa']}" >
+									<span>#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.nomeOperadora}</span>
+								</h:outputLabel>
+		
+								<h:outputLabel styleClass="col-xs-6" for="" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.numeroTelefone']}" >
+									<span>#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.numeroTelefoneFormatado}</span>
+								</h:outputLabel>
+							</p:outputPanel>
+		
+							<p:separator />
+		
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3 ">
+									<p:outputPanel styleClass="form-group tamInput">
+									
+										<h:outputLabel styleClass="underlineLine" for="" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.selecioneValor']}" />
+											
+										<h:selectOneMenu name="tipoOrigemApreensao"
+											value="#{recargaProgramadaConsultarBBean.dto.valorAlterado}">
+
+											<f:selectItem
+												itemLabel="#{msg['pages.pagamentos.recargaProgramada.preenchimento.combo.selecione']}"
+												itemValue="-1" noSelectionOption="true" />
+		
+											<f:selectItems
+														value="#{recargaProgramadaConsultarBBean.listaRecargas}"
+														var="r"
+														itemLabel="#{recargaProgramadaConsultarBBean.formataRecarga(r.valorRecarga)}"
+														itemValue="#{r.valorRecarga}">
+													</f:selectItems>
+										</h:selectOneMenu>
+											
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:separator />
+		
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel for="" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.dadosProgramacao']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<!-- PERIODICIDADE -->
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-1">
+									<h:outputLabel styleClass="underlineLine link-marker"  value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.periodicidade']}" />
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-4">
+
+					              	       <p:selectOneRadio id="periodicidade" value="#{recargaProgramadaConsultarBBean.dto.periodicidadeAlterado}"  layout="custom">
+												<f:selectItem 
+														itemLabel="#{recargaProgramadaConsultarBBean.periodicidades[1].nome}" 
+														itemValue="#{recargaProgramadaConsultarBBean.periodicidades[1]}" />
+														
+												<f:selectItem 
+														itemLabel="#{recargaProgramadaConsultarBBean.periodicidades[0].nome}" 
+														itemValue="#{recargaProgramadaConsultarBBean.periodicidades[0]}" />
+											</p:selectOneRadio>
+										
+											<p:outputPanel styleClass="col-xs-12 radioGrid">
+												<p:radioButton id="periodicidadeMensal" for="periodicidade" itemIndex="0" styleClass="radioGrid" />
+												<h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.mensal']}" for="periodicidadeMensal" styleClass="space-r" />
+												<p:graphicImage value="/images/icon-i.png" id="infoMensal" style="width:15px" styleClass="space-r">
+													<pe:tooltip for="infoMensal" 
+														myPosition="left center"
+														atPosition="right center" 
+														value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.infoMensal']}" />
+												</p:graphicImage>
+												
+
+												<p:radioButton id="periodicidadeSemanal" for="periodicidade" itemIndex="1" styleClass="radioGrid" />
+												<h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.Semanal']}" for="periodicidadeSemanal" styleClass="space-r" />
+												<p:graphicImage value="/images/icon-i.png" id="infoSemanal" style="width:15px">
+													<pe:tooltip for="infoSemanal" 
+														myPosition="left center"
+														atPosition="right center" 
+														value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.infoSemanal']}" />
+												</p:graphicImage>
+												
+											</p:outputPanel>
+
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<!-- PERIODICIDADE FIM -->
+							
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="form-group col-xs-3">
+									<h:outputLabel for="" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.dataInicio']}" />
+										<p:outputPanel styleClass="icon-data-input">
+											<i class="fa fa-calendar"></i>
+											
+												<p:calendar id="dataInicio" showOtherMonths="true"
+													pattern="dd/MM/yyyy"
+													value="#{recargaProgramadaConsultarBBean.dto.dataInicialAlterado}"
+													maxlength="10"
+													mindate="#{recargaProgramadaConsultarBBean.dataAtual}"
+													converter="dateTelaConverter"
+													onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+													onkeypress="mascaraData(this, event)">
+														<p:ajax event="change" process="@this" update="@this" />
+												</p:calendar>
+										</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+					
+							<p:outputPanel id="panelDataFim">
+								<p:outputPanel rendered="#{recargaProgramadaConsultarBBean.exibeDataFim}" styleClass="row calen">
+									<p:outputPanel styleClass="form-group col-xs-3">
+										<h:outputLabel 	for="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.dtfim']}" value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.dtfim']}" />
+										<p:outputPanel styleClass="icon-data-input">
+											<i class="fa fa-calendar"></i>
+											
+												<p:calendar id="dataFim" showOtherMonths="true"
+													pattern="dd/MM/yyyy"
+													value="#{recargaProgramadaConsultarBBean.dto.prazoAlterado}"
+													maxlength="10"
+													mindate="#{recargaProgramadaConsultarBBean.dataAtual}"
+													converter="dateTelaConverter"
+													onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)"
+													onkeypress="mascaraData(this, event)">
+														<p:ajax event="change" process="@this" update="@this" />
+												</p:calendar>
+
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="checkbox-inline">
+									<p:selectBooleanCheckbox value="#{recargaProgramadaConsultarBBean.dataFimIndeterminada}" >
+										<p:ajax event="change" process="@this" update="formGeral:panelDataFim" listener="#{recargaProgramadaConsultarBBean.onChangeDataFimIndeterminada}" />
+									</p:selectBooleanCheckbox>
+									<h:outputLabel for="cb2_1" styleClass="checkbox-inline mgleft calen1" value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.marque']}"></h:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+		
+					<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12 ">
+								<h:outputLabel for="" value="#{msg['pages.pagamentos.recargaProgramada.preenchimento.solicitacoes']}" />
+							</p:outputPanel>
+					</p:outputPanel>
+		
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		
+				<p:outputPanel id="panelBotoes" styleClass="no-print no-visible">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel id="panelBotao" styleClass="col-md-12 text-right">
+							<p:commandLink id="btnVoltar" role="button" styleClass="btn btn-default btn-cinza" action="#{recargaProgramadaConsultarBBean.voltarEmConsulta}"> #{msg['page.btn.voltar']} </p:commandLink>
+							<p:commandLink id="btnConfirmar" role="button" styleClass="btn btn-default" action="#{recargaProgramadaConsultarBBean.continuarEmConfirmacao}"> #{msg['page.btn.continuar']} </p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+		
+		<p:blockUI block="panelBotoes" trigger="btnConfirmar" />
+		
+		</ui:define>
+
+</ui:composition>

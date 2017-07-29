@@ -1,0 +1,47 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<p:outputPanel styleClass="row space-b" id="idExternoPgoGareE_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosPgoGareE_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosPgoGareELbl_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idRazaoSocialPgoGareE_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomeRazaoSocial']}" styleClass="space" 
+			id="idRazaoSocialLblPgoGareE_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]}" id="idRazaoSocialTxtPgoGareE_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCpfCnpjPgoGareE_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfCnpj']}" styleClass="space" id="idCpfCnpjLblPgoGareE_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" converter="converterCpfCnpj" id="idCpfCnpjTxtPgoGareE_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCodBarrasPgoGareE_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoBarras']}" styleClass="space" id="idCodBarrasLblPgoGareE_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" id="idCodBarrasTxtPgoGareE_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idValorPgoGareE_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" id="idValorLblPgoGareE_#{posicaoLista}"/>
+			<h:outputText value="#{detalheParam.valor}" id="idValorTxtPgoGareE_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPgoGareE_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPgoGareE_#{posicaoLista}">
+			<p:separator id="idSepaLinePgoGareE_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+
+</ui:fragment>

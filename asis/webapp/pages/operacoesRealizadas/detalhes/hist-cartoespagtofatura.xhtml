@@ -1,0 +1,37 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoCartoesPagtoFatura_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosCartoesPagtoFatura_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosCartoesPagtoFatura_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroCartaoCartoesPagtoFatura_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroCartao']}"
+							styleClass="space" id="idNumeroCartaoLblCartoesPagtoFatura_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]}" id="idNumeroCartaoTxtCartoesPagtoFatura_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}"
+							styleClass="space" id="idValorLblCartoesPagtoFatura_#{posicaoLista}"/>
+			<h:outputText value="#{detalheParam.valor}" id="idValorTxtCartoesPagtoFatura_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+			
+	<p:outputPanel styleClass="row space-b" id="idSeparatorCartoesPagtoFatura_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepCartoesPagtoFatura_#{posicaoLista}">
+			<p:separator id="separatorCartoesPagtoFatura_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

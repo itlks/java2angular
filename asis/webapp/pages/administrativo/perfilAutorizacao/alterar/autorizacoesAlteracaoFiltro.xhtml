@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<h:inputHidden value="#{alterarPerfilAutorizacaoBBean.clientHash}"
+			id="clientHash" partialSubmit="true" />
+		<p style="font-size: 0px;">#{atributosDaSessao.browserPublicKey}</p>
+		<p style="font-size: 0px;">#{atributosDaSessao.serverPublicKey}</p>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<p><h:outputText value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.text1']}" /></p>
+					<p><h:outputText value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.text2']}" /></p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.text3']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel id="panelPreenchimento" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel for="nomePerfilAutorizacao"
+										value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.nomeperfil']}"
+										styleClass="space" />
+									<h:outputText id="nomePerfilAutorizacao"
+										value="#{alterarPerfilAutorizacaoBBean.perfilSelecionado.nomePerfilAutorizacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel for="descricaoPerfilAutorizacao"
+										value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.descricao']}"
+										styleClass="space" />
+									<h:outputText id="descricaoPerfilAutorizacao"
+										value="#{alterarPerfilAutorizacaoBBean.perfilSelecionado.descricaoPerfilAutorizacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-t">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText styleClass="space"
+										value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.clikimagem']}" />
+									<i class="fa fa-plus-square iconeTexto space"
+										aria-hidden="true" />
+									<h:outputText
+										value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.text4']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="link-marker space-t">
+								<p:outputLabel value="&gt;" />
+								<p:commandLink id="cmdLinkExpandir"
+									value="#{alterarPerfilAutorizacaoBBean.textComandoLink}">
+
+									<p:ajax event="click"
+										listener="#{alterarPerfilAutorizacaoBBean.expandirTodos}"
+										update=":formGeral:panelPreenchimento" />
+								</p:commandLink>
+							</p:outputPanel>
+
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:panelGrid
+								styleClass="table-perfil-autorizacao grid-header no-border">
+								<p:row>
+									<p:column>
+										<p:outputPanel styleClass="checkbox">
+											<p:selectBooleanCheckbox id="chkSelecionarTodos"
+												value="#{alterarPerfilAutorizacaoBBean.selectBooleanCheckbox}">
+												<p:ajax
+													listener="#{alterarPerfilAutorizacaoBBean.aplicarTransacoes}"
+													update=":formGeral:panelPreenchimento" />
+											</p:selectBooleanCheckbox>
+										</p:outputPanel>
+									</p:column>
+
+									<p:column style="width:40%; word-break: break-all;">
+										<br />
+										<p:outputLabel 
+											value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.text5']}" />
+									</p:column>
+
+									<p:column style="width: 25px; display: block;"
+										styleClass="no-border">
+
+									</p:column>
+
+									<p:column style="width: 10%;">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="qtdAssinaturas"
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.quantass']}" />
+
+											<p:inputText id="qtdAssinaturas" styleClass="form-control"
+												onkeypress="return onlyNumbers(event)"
+												value="#{alterarPerfilAutorizacaoBBean.qtdAssinaturasGlobal}"
+												disabled="#{!alterarPerfilAutorizacaoBBean.selectBooleanCheckbox}"
+												maxlength="2">
+
+												<p:ajax event="blur"
+													listener="#{alterarPerfilAutorizacaoBBean.aplicaValorAtodos}"
+													update="@(.transacoes-conteudo)" />
+
+											</p:inputText>
+
+										</p:outputPanel>
+									</p:column>
+
+									<p:column style="width: 25%; padding-left: 15px"
+										styleClass="text-right">
+										<p:outputPanel styleClass="form-group text-right">
+											<p:outputLabel for="txtValorAlcadaTodos"
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.valalcada']}" />
+											<p:inputText styleClass="form-control text-right"
+												onblur="maskMoneyOnBlur(this);"
+												converter="valorDecimalConverter"
+												onkeypress="return onlyNumbers(event)"
+												id="txtValorAlcadaTodos"
+												disabled="#{!alterarPerfilAutorizacaoBBean.selectBooleanCheckbox}"
+												value="#{alterarPerfilAutorizacaoBBean.valorAlcadaGlobal}"
+												maxlength="15">
+												<p:ajax event="blur"
+													listener="#{alterarPerfilAutorizacaoBBean.aplicaValorAtodos}"
+													update="@(.transacoes-conteudo)" />
+											</p:inputText>
+
+										</p:outputPanel>
+									</p:column>
+
+									<p:column style="width: 25%; padding-left: 15px"
+										styleClass="text-right">
+										<p:outputPanel styleClass="form-group text-right">
+											<p:outputLabel for="txtLimiteDiarioTodos"
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.limitdiario']}" />
+											<p:inputText styleClass="form-control text-right"
+												onblur="maskMoneyOnBlur(this);"
+												converter="valorDecimalConverter" id="txtLimiteDiarioTodos"
+												onkeypress="return onlyNumbers(event)"
+												disabled="#{!alterarPerfilAutorizacaoBBean.selectBooleanCheckbox}"
+												value="#{alterarPerfilAutorizacaoBBean.limiteDiarioGlobal}"
+												maxlength="15">
+												<p:ajax event="blur"
+													listener="#{alterarPerfilAutorizacaoBBean.aplicaValorAtodos}"
+													update="@(.transacoes-conteudo)" />
+											</p:inputText>
+										</p:outputPanel>
+
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<!-- /////////////////////////////////// UI:Repeat//////////////////////////////////////////////////// -->
+
+					<p:outputPanel id="panelGrupoTransacoes"
+						styleClass="transacoes-conteudo">
+
+						<c:forEach var="servico"
+							items="#{alterarPerfilAutorizacaoBBean.listaServicos}"
+							varStatus="statusServico">
+
+
+							<p:outputPanel styleClass="space-t">
+								<h:outputLabel styleclass="h5"
+									value="#{servico.nomeServico}"
+									for="panelGrupoHeader#{statusServico.index}" />
+							</p:outputPanel>
+							<p:panelGrid id="panelGrupoHeader#{statusServico.index}"
+								styleClass="grid-header header-left-grid table-perfil-autorizacao dotted-table">
+
+								<f:facet name="header">
+									<p:row>
+										<p:column colspan="3">
+											<h:outputText
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.transacoes']}" />
+										</p:column>
+
+										<p:column>
+											<h:outputText
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.quantass']}" />
+										</p:column>
+
+										<p:column styleClass="text-right">
+											<h:outputText style="margin-left:15px;"
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.valalcada']}" />
+										</p:column>
+
+										<p:column styleClass="text-right">
+											<h:outputText style="margin-left:15px;"
+												value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.limitdiario']}" />
+										</p:column>
+									</p:row>
+								</f:facet>
+								<p:row>
+									<p:column style="text-align: center;">
+										<h:commandLink>
+
+											<h:graphicImage value="#{servico.imagem}" alt="expandir" />
+											<f:ajax event="click"
+												listener="#{alterarPerfilAutorizacaoBBean.rendeerPanel(servico)}"
+												render=":formGeral:panelPreenchimento" />
+
+										</h:commandLink>
+									</p:column>
+
+									<p:column>
+										<p:selectBooleanCheckbox value="#{servico.checkPrincipal}"
+											disabled="#{alterarPerfilAutorizacaoBBean.selectBooleanCheckbox}">
+											<p:ajax event="change"
+												update="panelgrupo#{statusServico.index}, panelGrupoHeader#{statusServico.index}"
+												listener="#{alterarPerfilAutorizacaoBBean.aplicarTransacoesGrid(servico)}" />
+										</p:selectBooleanCheckbox>
+									</p:column>
+
+									<p:column style="width:40%; word-break: break-word;">
+										<h:outputLabel
+											value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.text6']}" />
+									</p:column>
+
+									<p:column style="width: 10%;">
+										<p:inputText styleClass="form-control"
+											value="#{servico.quantidadeTransacao}"
+											onkeypress="return onlyNumbers(event)" maxlength="2"
+											disabled="#{(alterarPerfilAutorizacaoBBean.selectBooleanCheckbox or !servico.checkPrincipal)}">
+											<p:ajax event="blur"
+												update="panelgrupo#{statusServico.index}"
+												listener="#{alterarPerfilAutorizacaoBBean.aplicarTransacoesGridAplicavlor(servico)}" />
+										</p:inputText>
+									</p:column>
+
+									<p:column style="width: 25%; padding-left: 15px"
+										styleClass="text-right">
+										<p:outputPanel>
+											<h:outputText value="--"
+												rendered="#{!servico.renderizaInputValorAlcada}" />
+										</p:outputPanel>
+
+										<p:inputText styleClass="form-control text-right"
+											rendered="#{servico.renderizaInputValorAlcada}"
+											onkeypress="return onlyNumbers(event)"
+											converter="valorDecimalConverter"
+											value="#{servico.valorAlcada}"
+											onblur="maskMoneyOnBlur(this);" maxlength="15"
+											disabled="#{(alterarPerfilAutorizacaoBBean.selectBooleanCheckbox or !servico.checkPrincipal)}">
+											<p:ajax event="blur"
+												update="panelgrupo#{statusServico.index}"
+												listener="#{alterarPerfilAutorizacaoBBean.aplicarTransacoesValorAlcada(servico)}" />
+										</p:inputText>
+									</p:column>
+
+									<p:column style="width: 25%; padding-left: 15px"
+										styleClass="text-right">
+										<p:outputPanel>
+											<h:outputText value="--"
+												rendered="#{!servico.renderizaInputValorDiario}" />
+										</p:outputPanel>
+
+										<p:inputText styleClass="form-control text-right"
+											rendered="#{servico.renderizaInputValorDiario}"
+											onkeypress="return onlyNumbers(event)"
+											converter="valorDecimalConverter"
+											value="#{servico.valorDiario}" onblur="maskMoneyOnBlur(this)"
+											maxlength="15"
+											disabled="#{(alterarPerfilAutorizacaoBBean.selectBooleanCheckbox or !servico.checkPrincipal)}">
+											<p:ajax event="blur"
+												update="panelgrupo#{statusServico.index}"
+												listener="#{alterarPerfilAutorizacaoBBean.aplicarTransacoesLimiteDiario(servico)}" />
+										</p:inputText>
+									</p:column>
+								</p:row>
+							</p:panelGrid>
+
+
+							<h:panelGroup id="panelgrupo#{statusServico.index}"
+								rendered="#{servico.renderPanel}">
+
+								<c:forEach var="tipoTransacoes" items="#{servico.transacoes}"
+									varStatus="status">
+
+									<p:panelGrid
+										id="panelTransacoes#{statusServico.index}#{status.index}"
+										styleClass="table-perfil-autorizacao grid-header border-column-dotted no-border">
+										<p:row id="rowTransacoes#{statusServico.index}#{status.index}">
+											<p:column
+												id="columnTransacoes#{statusServico.index}#{status.index}"
+												style="width: 25px; display: block;" styleClass="no-border">
+
+											</p:column>
+											<p:column
+												id="columnCheck#{statusServico.index}#{status.index}">
+												<p:selectBooleanCheckbox value="#{tipoTransacoes.checked}"
+													id="checkTransacao#{statusServico.index}#{status.index}"
+													disabled="#{servico.checkPrincipal}">
+													<p:ajax event="change"
+														process="panelTransacoes#{statusServico.index}#{status.index}"
+														update="panelTransacoes#{statusServico.index}#{status.index}"
+														listener="#{alterarPerfilAutorizacaoBBean.aplicarTransacoesGrids(tipoTransacoes)}" />
+												</p:selectBooleanCheckbox>
+											</p:column>
+
+											<p:column style="width:40%; word-break: break-all;"
+												id="columnNomeTransacao#{statusServico.index}#{status.index}">
+												<h:outputText value="#{tipoTransacoes.nomeTransacao}"
+													id="textNomeTransacao#{statusServico.index}#{status.index}" />
+											</p:column>
+
+											<p:column
+												id="columnAssinaturas#{statusServico.index}#{status.index}"
+												style="width: 10%;">
+												<p:inputText
+													disabled="#{!tipoTransacoes.checked or servico.checkPrincipal}"
+													onkeypress="return onlyNumbers(event)"
+													value="#{tipoTransacoes.qtdAssinaturas}"
+													styleClass="form-control" maxlength="2"
+													id="qtdAssinaturas_hashLista_#{statusServico.index}_#{status.index}_1">
+													<p:ajax />
+												</p:inputText>
+											</p:column>
+
+											<p:column style="width: 25%; padding-left: 15px"
+												styleClass="text-right"
+												id="columnAlcada#{statusServico.index}#{status.index}">
+												<p:outputPanel
+													id="panelAlcada#{statusServico.index}#{status.index}">
+													<h:outputText value="--"
+														id="alcadaText#{statusServico.index}#{status.index}"
+														rendered="#{!servico.renderizaInputValorAlcada}" />
+												</p:outputPanel>
+
+												<p:inputText styleClass="form-control text-right"
+													rendered="#{servico.renderizaInputValorAlcada}"
+													value="#{tipoTransacoes.valorAlcada}"
+													onkeypress="return onlyNumbers(event)"
+													onblur="maskMoneyOnBlur(this)"
+													converter="valorDecimalConverter" maxlength="15"
+													disabled="#{!tipoTransacoes.checked  or servico.checkPrincipal}"
+													id="valorAlcada_hashLista_#{statusServico.index}_#{status.index}_2">
+													<p:ajax event="blur" partialSubmit="true" />
+												</p:inputText>
+											</p:column>
+
+											<p:column style="width: 25%; padding-left: 15px"
+												styleClass="text-right"
+												id="columnValorDiario#{statusServico.index}#{status.index}">
+												<p:outputPanel
+													id="panelValorDiario#{statusServico.index}#{status.index}">
+													<h:outputText value="--"
+														id="textValorDiario#{statusServico.index}#{status.index}"
+														rendered="#{!servico.renderizaInputValorDiario}" />
+												</p:outputPanel>
+
+												<p:inputText styleClass="form-control text-right"
+													rendered="#{servico.renderizaInputValorDiario}"
+													value="#{tipoTransacoes.valorDiario}"
+													onkeypress="return onlyNumbers(event)" maxlength="15"
+													onblur="maskMoneyOnBlur(this)"
+													converter="valorDecimalConverter"
+													disabled="#{!tipoTransacoes.checked or servico.checkPrincipal}"
+													id="valorDiario_hashLista_#{statusServico.index}_#{status.index}_3">
+													<p:ajax event="blur" partialSubmit="true" />
+												</p:inputText>
+
+											</p:column>
+										</p:row>
+									</p:panelGrid>
+
+								</c:forEach>
+
+							</h:panelGroup>
+						</c:forEach>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button" id="voltarSelecao"
+					value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.voltar']}"
+					action="#{alterarPerfilAutorizacaoBBean.voltarTelaPreenchimento}" />
+
+				<p:commandButton styleClass="btn btn-default" role="button"
+					action="#{alterarPerfilAutorizacaoBBean.continuarTelaPreenchimento}"
+					id="continuarConfirmacao" onstart="enviarHashList()"
+					value="#{msg['pages.administrativo.perfilAutorizacao.alterarPreenchimento.continuar']}"
+					onclick="this.focus()" />
+
+				<p:defaultCommand target="continuarConfirmacao" />
+				<p:blockUI block="continuarConfirmacao"
+					trigger="continuarConfirmacao" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

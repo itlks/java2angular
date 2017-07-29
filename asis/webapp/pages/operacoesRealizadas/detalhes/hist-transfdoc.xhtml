@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<c:set var="compCodTipoDoc" value="${compHisParts[0]}" />
+	<c:set var="compCodFinalidade" value="${fn:substring(compHisParts[1],4,6)}" />
+	<c:set var="compNomeBancoDestino" value="${compHisParts[2]}" />
+	
+	<c:choose>
+	 <c:when test="${compCodTipoDoc == '4'}"><c:set var="compTipoDoc" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.docOutraTitularidade']}" /></c:when>
+	 <c:when test="${compCodTipoDoc == '5'}"><c:set var="compTipoDoc" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.docMesmaTitularidade']}" /></c:when>
+	</c:choose>
+	
+	<c:choose>
+	 <c:when test="${compCodFinalidade == '01'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.creditoContaCorrente']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '02'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoAluguel']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '03'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoDuplicatas']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '04'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoDividendos']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '05'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoMaterialEscolar']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '06'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoSalario']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '07'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoFornecedoresHonorarios']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '08'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cambioFundosBolsa']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '09'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.repasseArrecadacao']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '10'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.transferenciaInternacional']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '11'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.docPoupanca']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '12'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.docDepositoJudicial']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '13'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pensaoAlimenticia']}" /></c:when>
+	 <!-- <c:when test="${compCodFinalidade == '14'}"><c:set var="compFinalidade" value="OUTROS" /></c:when>  [WD29112005] -->
+	 <c:when test="${compCodFinalidade == '20'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.doacaoIncentivoFiscal']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '21'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.patrocinioIncentivoFiscal']}" /></c:when>
+	 <c:when test="${compCodFinalidade == '99'}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.outras" /></c:when>
+	</c:choose>
+	
+	 <p:outputPanel styleClass="row space-b" id="idExternoTransfDoc#{posicaoLista}">	 
+	 
+        <p:outputPanel styleClass="col-xs-12" id="idDadosTransfDoc#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosTransfDocLbl#{posicaoLista}"/>
+        </p:outputPanel>
+		
+        <p:outputPanel styleClass="col-xs-12" id="idFavorecidoTransfDoc#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.favorecido']}" id="idFavorecidoLblTransfDoc#{posicaoLista}" />
+          <h:outputText value="#{detalheParam.clienteDestino}" id="idFavorecidoTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>
+		
+        <p:outputPanel styleClass="col-xs-12" id="idBancoDestinoTransfDoc_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancoDestino']}" id="idBancoDestinoDocLblTransfDoc#{posicaoLista}"/>
+          <h:outputText value="${detalheParam.bancoDestino} - ${compNomeBancoDestino}" id="idBancoDestinoDocTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>
+		
+        <p:outputPanel styleClass="col-xs-12" id="idAgenciaTransfDoc#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.administrativo.solicitar.token.agencia']}" id="idAgenciaLblTransfDoc#{posicaoLista}" />
+          <h:outputText value="${detalheParam.agenciaDestino}" id="idAgenciaTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>
+		
+        <p:outputPanel styleClass="col-xs-12" id="idContaTransfDoc#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.adquirencia.detalhe.conta']}" id="idContaLblTransfDoc#{posicaoLista}" />
+          <h:outputText value="${fn:substring(detalheParam.contaDestino,0,11)}${fn:substring(detalheParam.contaDestino,12,13)}" id="idContaTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>
+		
+        <p:outputPanel styleClass="col-xs-12" id="idTipoDOCTransfDoc#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['pages.agendamento.detalhe.tipoDOC']}" id="idTipoDOCLblTransfDoc#{posicaoLista}"/>
+          <h:outputText value="${compTipoDoc}" id="idTipoDOCTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>
+		
+        <p:outputPanel styleClass="col-xs-12" id="idFinalidadeTransfDoc#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.finalidade']}" id="idFinalidadeLblTransfDoc#{posicaoLista}" />
+          <h:outputText value="${compFinalidade}" id="idFinalidadeTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>
+
+        <p:outputPanel styleClass="col-xs-12" id="idValorTransfDoc_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" id="idValorLblTransfDoc#{posicaoLista}"/>
+          <h:outputText value="#{detalheParam.valor}" id="idValorTxt1TransfDoc#{posicaoLista}"/>
+        </p:outputPanel>        
+	 </p:outputPanel>
+
+	<p:outputPanel styleClass="row space-b" id="idValorTxtOutTransfDoc#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idValorTxtOutIntTransfDoc#{posicaoLista}">
+			<p:separator id="idValorSeparatorTransfDoc#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>	
+	
+</ui:composition>

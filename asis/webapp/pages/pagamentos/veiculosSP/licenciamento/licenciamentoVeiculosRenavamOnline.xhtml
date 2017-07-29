@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.TransExcluParaLicenDe']}</strong>
+						</p> <br />
+						<p>
+							#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.SeVoceDesejLicenO']}
+						</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.OsPagamEfetuAposAs']}
+						</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.ParaMaisInforAcessO']}
+							<a href="http://www3.fazenda.sp.gov.br/ipvanet/">#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.SecreDaFazenDoEstad']}</a>
+						</p> <br />
+						<p style="padding-top: 15px; margin-top: 15px;">
+							<ui:include src="/pages/generico/limites2.xhtml"></ui:include>
+						</p> </span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.licenciamento.preencher.InforOsDadosParaSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h5 class="space-b">#{msg['pages.pagamentos.veiculossp.licenciamento.preencher.DigitCorreONumerDo']}</h5>
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['pages.pagamentos.veiculossp.licenciamento.preencher.RENAV']}" />
+								<p:inputText id="txtRenavam" readonly="true" value="#{licenciamentoRenavamBBean.renavamDTO.numero}" styleClass="form-control" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar" action="#{licenciamentoRenavamBBean.voltarTelaInicial}" styleClass="btn btn-default btn-cinza" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.Volta']}</p:commandLink>
+				<p:commandLink id="cmdeLnkContinuar" action="#{licenciamentoRenavamBBean.continuarPagamento}" styleClass="btn btn-default" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.preencher.Conti']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<div id="divHtml">
+	
+	<p:outputPanel styleClass="row space-t  space-l space-r">
+		<p:outputPanel styleClass="col-xs-7">
+			<p:outputPanel>
+				<p:graphicImage value="/images/logo_grupo_santander.gif" alt="logo" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="col-xs-5 space-t">
+			<p:outputPanel>
+				<b>#{msg['pages.recadastro.master.termo.adesao.aditamento']}</b>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	
+		<p:outputPanel styleClass="row space-l space-r">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12 space-t">
+					<p:outputPanel>
+							#{msg['pages.recadastro.master.termo.adesao.parte']}
+						</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12 space-t">
+					<p:outputPanel>
+						<p>
+							<b>BANCO SANTANDER (BRASIL) S.A.</b>, instituição financeira com
+							sede no Município de São Paulo, Estado de São Paulo, na Avenida
+							Presidente Juscelino Kubitschek, 2041 e 2235 - Bloco A, Vila
+							Olímpia, São Paulo/SP - CEP 04543-011, inscrita no CNPJ/MF sob o
+							nº 90.400.888/0001-42, doravante designado simplesmente “<b>SANTANDER</b>”
+							e
+						</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="space-t">
+						<c:if test="#{atualizarMasterBBean.session.tipoPessoa eq 'J'}">
+							<p>
+								#{atualizarMasterBBean.termoAdesaoDTO.nomeTitularConta}, com
+								endereço na #{atualizarMasterBBean.termoAdesaoDTO.endereco}, no
+								Município de #{atualizarMasterBBean.termoAdesaoDTO.descMunic},
+								Estado de #{atualizarMasterBBean.termoAdesaoDTO.descUf}, CEP
+								#{atualizarMasterBBean.termoAdesaoDTO.codCep}, inscrita no
+								CNPJ/MF sob nº #{atualizarMasterBBean.termoAdesaoDTO.cpfCnpj},
+								com conta corrente nº
+								#{atualizarMasterBBean.termoAdesaoDTO.contaPrincipal} - agência
+								#{atualizarMasterBBean.termoAdesaoDTO.agenciaPrincipal},
+								doravante designado simplesmente “<b>CLIENTE</b>”.
+							</p>
+						</c:if>
+						<c:if test="#{atualizarMasterBBean.session.tipoPessoa eq 'F'}">
+							<p>
+								#{atualizarMasterBBean.termoAdesaoDTO.nomeTitularConta}, com
+								endereço na #{atualizarMasterBBean.termoAdesaoDTO.endereco}, no
+								Município de #{atualizarMasterBBean.termoAdesaoDTO.descMunic},
+								Estado de #{atualizarMasterBBean.termoAdesaoDTO.descUf}, CEP
+								#{atualizarMasterBBean.termoAdesaoDTO.codCep}, inscrita no CPF
+								sob nº #{atualizarMasterBBean.termoAdesaoDTO.cpf}, com conta
+								corrente nº
+								#{atualizarMasterBBean.termoAdesaoDTO.contaPrincipal} - agência
+								#{atualizarMasterBBean.termoAdesaoDTO.agenciaPrincipal},
+								doravante designado simplesmente “<b>CLIENTE</b>”.
+							</p>
+						</c:if>
+					</p:outputPanel>
+					<p:outputPanel styleClass="space-t">
+						<p>PROJETO 13839 NAO UTILIZAR, com endereço na
+							#{atualizarMasterBBean.termoAdesaoDTO.endereco} , no Município de
+							#{atualizarMasterBBean.termoAdesaoDTO.descMunic}, Estado de
+							#{atualizarMasterBBean.termoAdesaoDTO.descUf}, CEP
+							#{atualizarMasterBBean.termoAdesaoDTO.codCep}, inscrita no
+							CNPJ/MF sob no #{atualizarMasterBBean.termoAdesaoDTO.cpfCnpj},
+							com conta corrente no
+							#{atualizarMasterBBean.termoAdesaoDTO.contaPrincipal} ­ agência
+							#{atualizarMasterBBean.termoAdesaoDTO.agenciaPrincipal},
+							doravante designado simplesmente “AUTORIZADA”.</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="space-t">
+						<p>DIGUJELO ARTOPAXIV AMSOFAEJOL, com endereço na
+							#{atualizarMasterBBean.termoAdesaoDTO.endereco}, no Município de
+							#{atualizarMasterBBean.termoAdesaoDTO.descMunic}, Estado de
+							#{atualizarMasterBBean.termoAdesaoDTO.descUf}, CEP
+							#{atualizarMasterBBean.termoAdesaoDTO.codCep}, inscrita no
+							CNPJ/MF sob no #{atualizarMasterBBean.termoAdesaoDTO.cpfCnpj},
+							com conta corrente no
+							#{atualizarMasterBBean.termoAdesaoDTO.contaPrincipal} ­ agência
+							#{atualizarMasterBBean.termoAdesaoDTO.agenciaPrincipal},
+							doravante designado simplesmente “AUTORIZADA”.</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="space-t">
+						<p>Por meio deste instrumento o Termo de Adesão aos Serviços
+							do Internet Banking Empresarial, datado de
+							#{atualizarMasterBBean.termoAdesaoDTO.data}, é aditado para:</p>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="checkbox row ui-chkbox">
+				<p:selectBooleanCheckbox value="true" disabled="true" />
+				<span> <strong>#{msg['pages.recadastro.master.termo.adesao.recadastramento']}</strong></span>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="table table-striped space-t">
+				<p:dataTable value="#{atualizarMasterBBean.listaUsuario}"
+					id="tbUsuarios" var="item">
+					<p:column>
+						<h:outputText value="1" />
+					</p:column>
+					<p:column
+						headerText="#{msg['pages.recadastro.master.termo.adesao.nome']}">
+						<h:outputText value="#{item.nome}" />
+					</p:column>
+					<p:column headerText="CPF/MF">
+						<h:outputText value="#{item.cpf}" />
+					</p:column>
+					<p:column
+						headerText="#{msg['pages.recadastro.master.termo.adesao.telefone']}">
+						<h:outputText value="#{item.telefone}" />
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel>
+						<p>#{msg['pages.recadastro.master.termo.adesao.acordo']}</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="space-t">
+						<p>#{msg['pages.recadastro.master.termo.adesao.vias']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12" style="text-align: center;">
+					<p:outputLabel style="margin-top: 50px;">
+						SAO PAULO, #{atualizarMasterBBean.data}.	
+		 				</p:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12"
+					style="margin-top: 50px; text-align: center;">
+					<p:outputPanel styleClass="col-xs-6">
+						<p:outputPanel>
+								__________________________________
+			 				</p:outputPanel>
+						<p:outputPanel>
+							<b>#{msg['pages.recadastro.master.termo.adesao.banco']}</b>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-6">
+						<p:outputPanel>
+								__________________________________
+			 				</p:outputPanel>
+						<p:outputPanel>
+							<b>#{msg['pages.recadastro.master.termo.adesao.banco']}</b>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12"
+					style="margin-top: 50px; text-align: center;">
+					<p:outputPanel>
+							__________________________________
+		 				</p:outputPanel>
+					<p:outputPanel>
+							#{msg['pages.recadastro.master.termo.adesao.cliente']}: #{atualizarMasterBBean.termoAdesaoDTO.nomeTitularConta}
+						</p:outputPanel>
+					<p:outputPanel>
+							#{msg['pages.recadastro.master.termo.adesao.cnpj']}: #{atualizarMasterBBean.termoAdesaoDTO.cpfCnpj}
+						</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12" style="margin-top: 50px;">
+					<p:outputLabel>
+								#{msg['pages.recadastro.master.termo.adesao.testemunha']}:
+							</p:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-12"
+					style="margin-top: 50px; text-align: center;">
+					<p:outputPanel styleClass="col-xs-6">
+						<p:outputPanel styleClass="col-xs-3"></p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4" style="text-align: left;">
+								<p:outputPanel>
+									____________________________________
+				 				</p:outputPanel>
+				 				<p:outputPanel >
+				 					#{msg['pages.recadastro.master.termo.adesao.nome']}
+								</p:outputPanel>
+								<p:outputPanel>
+				 					#{msg['pages.recadastro.master.termo.adesao.rg']}
+								</p:outputPanel>
+								<p:outputPanel>
+				 					#{msg['pages.recadastro.master.termo.adesao.cnpj']}
+								</p:outputPanel>
+							</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5"></p:outputPanel>
+
+							
+				 				</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+						<p:outputPanel styleClass="col-xs-3"></p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4" style="text-align: left;">
+							<p:outputPanel>
+								__________________________________
+			 				</p:outputPanel>
+							<p:outputPanel>
+			 					#{msg['pages.recadastro.master.termo.adesao.nome']}
+							</p:outputPanel>
+							<p:outputPanel>
+			 					#{msg['pages.recadastro.master.termo.adesao.rg']}
+							</p:outputPanel>
+							<p:outputPanel>
+			 					#{msg['pages.recadastro.master.termo.adesao.cnpj']}
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5"></p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+	</div>
+
+</ui:composition>

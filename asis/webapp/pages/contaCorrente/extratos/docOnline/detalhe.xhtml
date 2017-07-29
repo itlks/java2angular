@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>Detalhe do crÃ©dito</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-4">
+                            <h:outputLabel styleClass="bold">Dados do destinatÃ¡rio</h:outputLabel>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+
+                    <p:outputPanel styleClass="row space-t">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Nome do beneficiÃ¡rio:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>Juliana Montrezor Longo</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Data do movimento:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Banco:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">AgÃªncia:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Conta</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">CNPJ/CPF do beneficiÃ¡rio:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">IdentificaÃ§Ã£o:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Tipo da conta:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Valor:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Documento:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-2 width180 space-b">
+                            <h:outputLabel styleClass="bold">Finalidade:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6 space-b">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+
+                    <p:outputPanel styleClass="row space-b ">
+                        <p:outputPanel styleClass="col-xs-4">
+                            <h:outputLabel styleClass="bold">Dados do remetente</h:outputLabel>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Nome do remetente:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>Mercadopago Com. RepresentaÃ§Ãµes LTDA.</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Data do movimento:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Banco:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">AgÃªncia:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Conta:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">CNPJ/CPF do Remetente:</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-2 width180">
+                            <h:outputLabel styleClass="bold">Tipo da conta</h:outputLabel>
+                        </p:outputPanel>
+                        <p:outputPanel styleClass="col-xs-6">
+                            <span>teste</span>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+            </p:outputPanel>
+            <p:outputPanel styleClass="rodape-comprovante">
+                <p:commandLink actionListener="#">
+                    <i class="ic icon-PDF"></i> Salvar em PDF 
+               </p:commandLink>
+                <p:commandLink actionListener="#">
+                    <i class="ic icon-email"></i> Enviar por e-mail 
+               </p:commandLink>
+                <p:commandLink actionListener="#">
+                    <i class="ic icon-imprimir"></i> Imprimir 
+               </p:commandLink>
+            </p:outputPanel>
+        </p:outputPanel>
+        </p:outputPanel>
+
+        <p:outputPanel styleClass="row space-b">
+            <p:outputPanel styleClass="col-xs-12 text-right">
+
+                <p:commandLink styleClass="btn btn-default btn-cinza"
+                    actionListener="#" role="button">
+         Voltar 
+      </p:commandLink>
+
+            </p:outputPanel>
+        </p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

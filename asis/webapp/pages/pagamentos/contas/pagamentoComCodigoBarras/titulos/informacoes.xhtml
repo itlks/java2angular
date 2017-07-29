@@ -1,0 +1,118 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- ############################################################### INFORMACOES PGTO TITULOS INICIO ####################################################################### -->
+
+	<p:outputPanel styleClass="row">
+	
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.codBarras']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.fixedRSBarraDTO.OESCCODIGOBARRAS}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{not empty pagamentosContasCodigoBarrasBBean.nomeBeneficiario}">
+			<p:outputPanel styleClass="col-xs-12" rendered="#{not empty pagamentosContasCodigoBarrasBBean.nomeBeneficiario}">
+				<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.beneficiario']}" />
+				<h:outputText value="#{pagamentosContasCodigoBarrasBBean.nomeBeneficiario}"/>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.codBeneficiario']}" />
+				<h:outputText value="#{pagamentosContasCodigoBarrasBBean.codBeneficiario}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.favorecido']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.favorecido}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" rendered="#{pagamentosContasCodigoBarrasBBean.renderFieldsVr}">
+			<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.favorecido.cpfCnpj']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.documentoFavorecido}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" rendered="#{pagamentosContasCodigoBarrasBBean.renderFieldsVr}">
+			<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.cliente']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.clientePagador}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" rendered="#{pagamentosContasCodigoBarrasBBean.renderFieldsVr}">
+			<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.cliente.cpfCnpj']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.docTitularConta}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" rendered="#{!pagamentosContasCodigoBarrasBBean.renderFieldsVr}">
+			<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.codBarra.titulos.clientepagador']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.clientePagador}"/>
+		</p:outputPanel>
+			
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento ne null}">
+				<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.dtAgendada']}" />
+				<h:outputText  value="#{pagamentosContasCodigoBarrasBBean.dataPagamento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:outputPanel>
+
+			<p:outputPanel >
+				<h:outputLabel styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.dtVencimento']}" />
+				<h:outputText value="#{pagamentosContasCodigoBarrasBBean.vencimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:outputPanel>
+		</p:outputPanel>
+			
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="space" value="#{msg['pages.pagamentos.codBarra.titulos.valordotitulo']}" />
+			<h:outputText value="#{pagamentosContasCodigoBarrasBBean.valorPrincipal}">
+				<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+			</h:outputText>
+		</p:outputPanel>
+			
+		<p:outputPanel styleClass="col-xs-12" rendered="#{pagamentosContasCodigoBarrasBBean.fixedRSBarraDTO.OESCINDFORMPGTO =='C1'}" >
+			<h:outputLabel styleClass="space" value="#{msg['pages.pagamento.codBarras.titulos.pagamento.cartao']}" />	
+			<h:outputText styleClass="space">
+				<h:outputText styleClass="space-l" />	
+				<p:graphicImage value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.img}"  />
+				<h:outputText value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.tipo}" styleClass="space-l"/>
+				<h:outputText value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.nomeCartao} " />
+				<h:outputText styleClass="space-l" />
+				<h:outputText value="#{pagamentosContasCodigoBarrasBBean.cartaoDto.numeroFormatado}" />
+			</h:outputText>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12 space-t text-justify" 
+			rendered="#{pagamentosContasCodigoBarrasBBean.fixedRSBarraDTO.OESCINDFORMPGTO =='C1'}">
+			<h:outputLabel styleClass="space" value="#{msg['pages.pagamento.codBarras.titulos.pagamento.tarifaServico']}" />	
+			<h:outputText styleClass="space" value="R$ #{pagamentosContasCodigoBarrasBBean.tarifaServico == null ? '0,00' : pagamentosContasCodigoBarrasBBean.tarifaServico}" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="col-xs-12 space-t text-justify" rendered="#{pagamentosContasCodigoBarrasBBean.pgAgoraAgendar eq 'PA'}">
+			<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.pagamento1']}" />
+			<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.pagamento2']}" />
+			<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.pagamento3']}" />
+		</p:outputPanel>
+			
+
+		<p:outputPanel styleClass="col-xs-12 space-t text-justify" rendered="#{pagamentosContasCodigoBarrasBBean.pgAgoraAgendar eq 'AP'}">
+			<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.agendamento1']}" />
+			<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.agendamento2']}" />
+			<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.agendamento3']}" />
+		</p:outputPanel>
+
+
+		
+
+	</p:outputPanel>
+	  
+	<!-- ############################################################### INFORMACOES PGTO TITULOS FIM ####################################################################### -->
+</ui:composition>

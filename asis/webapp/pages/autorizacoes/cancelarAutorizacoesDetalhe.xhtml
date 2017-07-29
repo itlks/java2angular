@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-lg-12">
+
+							<p:outputPanel styleClass="titulo-painel">
+								<h4>#{msg['page.autorizacoes.cancelar.titulo']}</h4>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<p:dataTable
+									emptyMessage="#{msg['page.autorizacoes.cancelar.semDadosResultado']}"
+									value="">
+									<f:facet name="header">
+										<h:outputLabel
+											value="#{msg['page.autorizacoes.cancelar.pendencias']}" />
+									</f:facet>
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.dataEfetivacao']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.grupo']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.qntTransacoes']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.vlrTotalAssinado']}">
+										<h:outputLabel value="" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<p:dataTable
+									emptyMessage="#{msg['page.autorizacoes.cancelar.semDadosResultado']}"
+									value="">
+									<!--  selection="">
+									<p:column selectionMode="single"></p:column> -->
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.tipoPagamento']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.Favorecido']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.valor']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.dataInclusao']}">
+										<h:outputLabel value="" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.autorizacoes.cancelar.dataAssinatura']}">
+										<h:outputLabel value="" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<br />
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-md-12 text-right">
+						<p:commandLink id="commandVoltar"
+							styleClass="btn btn-default btn-cinza"
+							action="#{limitesUtilizadosBBean.voltarAutorizacaoLimite}"
+							role="button">
+             				#{msg['page.btn.voltar']} 
+        				</p:commandLink>
+
+						<p:blockUI block="commandContinuar" trigger="commandContinuar" />
+						<p:commandLink id="commandContinuar" styleClass="btn btn-default"
+							action="#{limitesUtilizadosBBean.prosseguirAutorizacaoLimite}"
+							role="button">
+             				#{msg['page.btn.continuar']} 
+        		</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

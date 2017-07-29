@@ -1,0 +1,54 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row" id="idExternoAtivaDespsis_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosAtivaDespsis_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosAtivaDespsisLbl_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idBancoAtivaDespsis_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.banco']}"
+							styleClass="space" id="idBancoLblAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]}" id="idBancoTxtAtivaDespis_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idAgenciaContaAtivaDespsis_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.agenciaConta']}"
+							styleClass="space" id="idAgenciaContaLblAtivaDespis_#{posicaoLista}"/>
+			<h:outputText 	value="${compHisParts[1]}" converter="agenciaContaCorrenteConverter"
+							id="idAgenciaContaTxtAtivaDespis_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCpfDespachanteRepresentanteAtivaDespsis_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfDespachanteRepresentante']}"
+							styleClass="space" id="idCpfDespachanteRepresentanteLblAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" rendered="${compHisParts[2] ne ''}" id="idHistPartDoisTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[3]}" rendered="${compHisParts[3] ne ''}" id="idHistPartTresTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[4]}" rendered="${compHisParts[4] ne ''}" id="idHistPartQuatroTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[5]}" rendered="${compHisParts[5] ne ''}" id="idHistPartCincoTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[6]}" rendered="${compHisParts[6] ne ''}" id="idHistPartSeisTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[7]}" rendered="${compHisParts[7] ne ''}" id="idHistPartSeteTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[8]}" rendered="${compHisParts[8] ne ''}" id="idHistPartOitoTxtAtivaDespis_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[9]}" rendered="${compHisParts[9] ne ''}" id="idHistPartNoveTxtAtivaDespis_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	
+	<p:outputPanel styleClass="row space-b" id="idSeparatorAtivaDespsis_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepAtivaDespsis_#{posicaoLista}">
+			<p:separator id="SeparatorSepAtivaDespis_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+
+
+</ui:fragment>

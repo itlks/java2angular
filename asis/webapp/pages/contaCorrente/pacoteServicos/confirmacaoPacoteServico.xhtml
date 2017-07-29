@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel styleClass="space" for="pacote"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.telaToken.descricaoPacote']}" />
+							<h:outputText id="pacote"
+								value="#{pacoteServicoContratarAlterarBBean.selecionado.pacote}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel styleClass="space" for="diaDebito"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.telaToken.dia.debito']}" />
+							<h:outputText id="diaDebito"
+								value="#{pacoteServicoContratarAlterarBBean.pacoteAtualDTO.diaDebito}">
+								<f:convertNumber pattern="00" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button"
+					value="#{msg['page.contaCorrente.pacoteservico.contratar.voltar']}"
+					immediate="true"
+					action="#{pacoteServicoContratarAlterarBBean.voltarConfirmarTermo}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" role="button"
+					onclick="encryptSecureDL();" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default"
+					action="#{pacoteServicoContratarAlterarBBean.continuarTelaComprovante}" />
+				<p:defaultCommand target="btnContinuar" />
+
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

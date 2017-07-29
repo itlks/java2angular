@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:santander="http://santander.com/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+	<script>
+		$(document).ready(function() {
+			$('tr').click(function(event) {
+				if (event.target.type !== 'radio') {
+					$(':radio', this).trigger('click');
+				}
+			});
+		});
+	</script>
+
+	<ui:include
+		src="/pages/administrativo/perfilAcesso/incluir/perfilAcessoInclusaoAviso.xhtml" />
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="titulo-painel">
+				<h4>#{msg['page.administrativo.perfilAcesso.incluir.subtitulo']}</h4>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-12">
+
+			<!-- titulo blocos -->
+			<p:outputPanel styleClass="box-shadow">
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-5">
+
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="nomePerfil"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.nomePerfil']}" />
+							<p:inputText id="nomePerfil"
+								value="#{perfilAcessoInclusaoBBean.perfilAcessoDTO.nomePerfil}"
+								styleClass="form-control" maxlength="40" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="descricaoPerfil"
+								value="#{msg['page.administrativo.perfilAcesso.incluir.descricao']}" />
+							<p:inputText id="descricaoPerfil"
+								value="#{perfilAcessoInclusaoBBean.perfilAcessoDTO.descricao}"
+								styleClass="form-control" maxlength="50" />
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row"
+		rendered="#{perfilAcessoInclusaoBBean.listaPerfisAcesso.size() > 0}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="titulo-painel">
+				<h4>#{msg['page.administrativo.perfilAutorizacao.preenchimento1.perfis']}</h4>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row"
+		rendered="#{perfilAcessoInclusaoBBean.listaPerfisAcesso.size() > 0}">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="box-shadow">
+
+				<h5>#{msg['page.administrativo.perfilAcesso.incluir.selecionePerfil']}
+				</h5>
+
+				<p:outputPanel styleClass="table-responsive table-striped space-t">
+
+					<p:dataTable id="dtPerfis"
+						value="#{perfilAcessoInclusaoBBean.listaPerfisAcesso}" var="per"
+						tableStyleClass="tacle-custom tacle-custom-zebrada"
+						selection="#{perfilAcessoInclusaoBBean.perfilAcessoSelecionado}"
+						rowKey="#{per.nomePerfil}" sortBy="#{per.nomePerfil}">
+
+						<p:column selectionMode="single" />
+						<p:column sortBy="#{per.nomePerfil}"
+							headerText="#{msg['page.administrativo.perfilAcesso.incluir.gridHeaderPerfil']}">
+							<h:outputText value="#{per.nomePerfil}" />
+						</p:column>
+						<p:column sortBy="#{per.nomePerfil}"
+							headerText="#{msg['page.administrativo.perfilAcesso.incluir.gridHeaderDescricao']}">
+							<h:outputText value="#{per.descricao}" />
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+</ui:composition>

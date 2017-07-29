@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+				<c:if test="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.isCredito}">
+					<h4>#{msg['msg.contaCorrente.extrato.consultaDetalheDocOnline.detalheCredito']}</h4>
+				</c:if>
+				<c:if test="#{!contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.isCredito}">
+					<h4>#{msg['msg.contaCorrente.extrato.consultaDetalheDocOnline.detalheDebito']}</h4>
+				</c:if>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold"
+								value="#{msg['msg.contaCorrente.extrato.consultaDetalheDocOnline.dadosDestinatario']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<br/>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.dataMovimento']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.fecha}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.banco']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.empresaContratoDestino}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.agencia']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.sucursalContratoDestino}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.contaCorrente']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.numCuentaContratoDestino}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoContaCorrente']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.tipoCuentaDestino}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.nomeBeneficiario']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.nomeFavorecido}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.cnpjCpfBeneficiario']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.cpfCnpjDestino}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.status']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.situacion}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.docExtratoDetalhe.valorDebito']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.importe}"
+								converter="valorMonetarioConverter" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.identificacao']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.numIdentificacionDoc}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.finalidade']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.descripcionFinalidade}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2 width180">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.origem']}"
+								styleClass="bold" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel
+								value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.codigoCanalOrigen}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:separator></p:separator>
+					<p:outputPanel
+						rendered="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.isCredito}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['msg.contaCorrente.extrato.consultaDetalheDocOnline.dadosRemetente']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<br/>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2 width180">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['msg.contaCorrente.extrato.consultaDetalheDocOnline.nomeRemetente']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.nomeRemetente}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2 width180">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.dataMovimento']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.fecha}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2 width180">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.banco']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.empresaContratoRemetente}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2 width180">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.agencia']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.sucursalContratoRemetente}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2 width180">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.contaCorrente']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.numCuentaContratoRemetente}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-2 width180">
+								<h:outputLabel styleClass="bold"
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoContaCorrente']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6">
+								<h:outputLabel
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine.descTipoCuentaRemetente}"/>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{contaCorrenteExtratosAdesaoDocOnlineBBean.voltarTelaConsulta}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

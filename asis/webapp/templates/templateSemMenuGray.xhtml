@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	lang="pt-br">
+
+<f:view contentType="text/html" encoding="ISO-8859-1" > 
+	<f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg"/>
+	
+	<h:head>
+		<meta charset="utf-8"/>
+	  	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="description" content=""/>
+		<meta name="author" content=""/>
+		<meta name="robots" content="noindex,nofollow"/>
+	  	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css"/>
+	  	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/style.css" />
+	 	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css"/>
+	 	<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/login.css"/>
+	    <link href="#{facesContext.externalContext.requestContextPath}/images/icones/favicon.ico" rel="shortcut icon" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/default.js"/>
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/loginkeyboard.js"/>
+		<title>#{ msg['page.home.label.titulo'] }</title>
+		<!-- Inicio JavaScript DL -->
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/ie10-viewport-bug-workaround.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/aes.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/Clumpy.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/DLECC.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/ec.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/jsbn2.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/pad-nopadding-min.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/pbkdf2.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/prng4.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/rng.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/sec.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/sha256.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/dl/codeDL.js"/>
+	    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/blockUI.js" />
+	    <script language="javascript"> history.forward(1); </script>
+	    <!-- Fim JavaScript DL -->
+
+	</h:head>
+	
+	<h:body styleClass="bodyModalGray"> 
+		<p:outputPanel styleClass="container-fluid">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel id="idFormGeral" styleClass="col-lg-12">
+					<form jsfc="h:form" id="formGeral" class="form-horizontal">
+						<ui:include src="/commons/topoLoginGray.xhtml" />
+						<ui:insert name="content"/>
+						<ui:include src="/commons/tagueamento.xhtml" />
+					 </form>
+				 </p:outputPanel>
+			 </p:outputPanel>	
+		 </p:outputPanel>
+		 
+		<p:dialog widgetVar="widDlgConfirmation" position="center" modal="true" dynamic="true" resizable="false">	    
+	 		<ui:include src="../pages/mensagem/confirmaGenerico.xhtml"/>
+	 	</p:dialog>
+	 	
+	 	<p:dialog widgetVar="widDlgConfirmationLogout" position="center" modal="true" dynamic="true" resizable="false">	    
+	 		<ui:include src="../pages/mensagem/confirmaLogout.xhtml"/>
+	 	</p:dialog>
+			
+	 	<p:dialog widgetVar="widDlgMessagem" position="center" modal="true" dynamic="true" resizable="false" >	 		
+	 		<ui:include src="../pages/mensagem/mensagemGenerica.xhtml"/>
+	 	</p:dialog>
+	
+	</h:body>
+</f:view>
+</html>

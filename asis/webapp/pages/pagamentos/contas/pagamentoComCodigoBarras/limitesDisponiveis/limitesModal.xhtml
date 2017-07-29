@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	
+	<p:outputPanel styleClass="contentModal">
+		
+		<p:dialog id="limites" widgetVar="wlimites" draggable="false" 
+			showHeader="true" width="60%" height="80%" modal="true"
+			styleClass="modalGray modal-box modalTituloCustom"
+			header="Limites Diários">
+		
+		<p:ajax event="close" update="@form" />
+			<p:outputPanel>
+				<h:outputText
+					value="#{msg['page.pagamentos.codigoBarras.limitesModal.confiraLimitesPagamento']}" />
+			</p:outputPanel>
+			<p:separator />
+			<p:scrollPanel mode="native" style="height:600px;" id="limitesScroll">
+				<h:body>
+					<p:accordionPanel styleClass="accordion" activeIndex="-1" id="accordionLimite" >
+						<p:tab title="Contas">
+
+							<p:dataTable var="produtoContasEnum"
+								value="#{limitesDisponiveisBBean.produtosContas}" id="tabela1"
+								styleClass="table tableHeaderInvisible table-accordion noHover">
+
+								<p:ajax event="rowToggle"
+									listener="#{limitesDisponiveisBBean.buscarProdutoContas}" />
+
+								<p:column style="width:16px">
+									<p:rowToggler />
+								</p:column>
+
+								<p:column styleClass="space">
+									<h:outputText value="#{produtoContasEnum.nome}" />
+								</p:column>
+
+								<p:rowExpansion>
+									<ui:include
+										src="/pages/pagamentos/contas/pagamentoComCodigoBarras/limitesDisponiveis/limitesDetalhe.xhtml" />
+								</p:rowExpansion>
+
+							</p:dataTable>
+
+						</p:tab>
+						<p:tab title="Tributos">
+							<p:dataTable var="produtoTributosEnum"
+								value="#{limitesDisponiveisBBean.produtosTributos}"
+								styleClass="table tableHeaderInvisible table-accordion noHover">
+
+								<p:ajax event="rowToggle"
+									listener="#{limitesDisponiveisBBean.buscarProdutoTributos}" />
+
+								<p:column style="width:16px">
+									<p:rowToggler />
+								</p:column>
+
+								<p:column styleClass="space">
+									<h:outputText value="#{produtoTributosEnum.nome}" />
+								</p:column>
+
+								<p:rowExpansion>
+									<ui:include
+										src="/pages/pagamentos/contas/pagamentoComCodigoBarras/limitesDisponiveis/limitesDetalhe.xhtml" />
+								</p:rowExpansion>
+							</p:dataTable>
+						</p:tab>
+
+						<p:tab title="Título">
+							<p:dataTable var="produtoTitulosEnum"
+								value="#{limitesDisponiveisBBean.produtosTitulos}"
+								styleClass="table tableHeaderInvisible table-accordion noHover">
+
+								<p:ajax event="rowToggle"
+									listener="#{limitesDisponiveisBBean.buscarProdutoTitulos}" />
+
+								<p:column style="width:16px">
+									<p:rowToggler />
+								</p:column>
+
+								<p:column styleClass="space">
+									<h:outputText value="#{produtoTitulosEnum.nome}" />
+								</p:column>
+
+								<p:rowExpansion>
+									<ui:include
+										src="/pages/pagamentos/contas/pagamentoComCodigoBarras/limitesDisponiveis/limitesDetalhe.xhtml" />
+								</p:rowExpansion>
+							</p:dataTable>
+						</p:tab>
+					</p:accordionPanel>
+				</h:body>
+			</p:scrollPanel>
+		</p:dialog>
+	</p:outputPanel>
+</ui:composition>

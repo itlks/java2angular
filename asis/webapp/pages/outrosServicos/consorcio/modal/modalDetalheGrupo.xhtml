@@ -1,0 +1,118 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:remoteCommand name="updateDialogDetalheGrupoOnShow" update="@(.js-modal-grupo-detalhe)" />
+	
+	
+	<p:dialog id="dialogDetalheGrupo" widgetVar="dialogDetalheGrupo"
+		header="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.titulo']}" closable="true" resizable="false"
+		draggable="false" showHeader="true" width="60%" height="500"
+		modal="true" styleClass="modalGray modal-box" onShow="updateDialogDetalheGrupoOnShow()">
+		
+		<p:separator/>
+		<p:outputPanel mode="native" styleClass="js-modal-grupo-detalhe" style="height:90%; overflow-x: hidden;">
+		
+			<p:outputPanel styleClass="row no-margin-bottom">
+				<p:outputPanel style="margin-left:4%">
+				
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="form-group col-md-3" >
+							<h:outputLabel value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.cliente']}" for="cNome" />
+							<span><h:outputText id="cNome" value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.nome}"/></span>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="form-group col-md-3" >
+							<h:outputLabel value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.cnpj']}" for="cCnpj" />
+							<span><h:outputText id="cCnpj" value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.cnpj}" converter="converterCpfCnpj"/></span>
+						</p:outputPanel>
+					</p:outputPanel>
+						
+					<p:separator styleClass="hr-Dashed"/>
+					
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="form-group col-md-3" >
+							<h:outputLabel value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.grupo']}" for="gNome" />
+							<span><h:outputText id="gNome" value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.grupo}"/></span>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="form-group col-md-3" >
+							<h:outputLabel value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.cota']}" for="cGrupo" />
+							<h:outputText id="cGrupo" value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.cota}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="form-group col-md-4" >
+							<h:outputLabel value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.bem']}" for="cdBem" />
+							<span><h:outputText id="cdBem" value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.bem}"/></span>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+	
+				<p:separator styleClass="hr-Dashed"/>
+				<p:outputPanel styleClass="col-lg-12 space-b">
+					<p:outputPanel styleClass="col-lg-12">
+						<h:outputText value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.dadosDetalhados']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+	
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="col-md-4">
+						<h:outputLabel for="prazoC" value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.prazo']}" />
+						<span><h:outputText id="prazoC" value=" #{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.prazo}" /></span>
+					</p:outputPanel>
+	
+					<p:outputPanel styleClass="col-md-4">
+						<h:outputLabel for="nPart" value="Número de Participantes:" />
+						<span><h:outputText id="nPart" value=" #{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.numeroParticipantes}" /></span>
+					</p:outputPanel>
+	
+					<p:outputPanel styleClass="form-group col-md-4">
+						<h:outputLabel for="sitG" value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.situacaoGrupo']}" />
+						<span><h:outputText id="sitG" value=" #{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.situGrupo}" /></span>
+					</p:outputPanel>
+				</p:outputPanel>
+	
+				<p:outputPanel styleClass="form-group col-lg-12">
+					<p:outputPanel styleClass="col-md-4">
+						<h:outputLabel for="priAssemb" value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.primeiraAssembleia']}" />
+						<span><h:outputText id="priAssemb" value="#{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.dataPrimeiraAssembleia}" /></span>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-md-4">
+						<h:outputLabel for="enPrev" value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.encerramentoPrevisto']}" />
+						<span><h:outputText id="enPrev" value="#{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.dataEncerramentoPrevisto}"/></span>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-md-4">
+						<h:outputLabel for="mod" value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.modalidade']}" />
+						<span><h:outputText id="mod" value="#{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.tipoSorteio}" /></span>
+					</p:outputPanel>
+				</p:outputPanel>
+	
+				<p:outputPanel styleClass="form-group col-lg-12">
+					<p:outputPanel styleClass="col-md-4">
+						<h:outputLabel for="lanEnb" value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.lanceEmbutido']}" />
+						<span><h:outputText id="lanEnb" value="#{consorcioModalDetalheGrupoBBean.detalheGrupoDTO.flagLanceEmbutido}" converter="snConverter" /></span>
+					</p:outputPanel>
+				</p:outputPanel>
+	
+				<p:outputPanel styleClass="form-group col-lg-12">
+					<p:outputPanel styleClass="col-md-12">
+						<p:separator />
+						<h:outputText
+							value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.valorEmbutido']}" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-md-9">
+						<h:outputText
+							value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.observacao']}"></h:outputText>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-md-3">
+						<p:commandLink action="#">#{msg['page.outrosServicos.consorcio.calendarioAssembleia.modal.consultarGlossario']}</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>			
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:dialog>
+</ui:fragment>

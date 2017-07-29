@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>Confira os dados do pagamento para finalizar sua operação</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="col-md-12 text-center space-b">
+						<h:outputText value="PREFEITURA DO MUNICÍPIO DE SÃO PAULO" styleClass="bold" />
+						<br />
+						<h:outputText value="Documentação de Arrecadação de IPTU - Imposto Predial e Territorial Urbano" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b space-t">
+                        <p:outputPanel styleClass="col-md-12 ">
+							<p:outputPanel rendered="#{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.nomeDoContribuinte != ''}">
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.nome.contribuinte']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.nomeDoContribuinte}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.numero.contribuinte']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.numeroContribuinte}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.ano.exercicio']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.ano}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.numero.notificacao']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.numeroNotificacao}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.numero.parcela']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.numeroParcela}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.vencimento.parcela']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.vencimento}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.data.pagamento']}" styleClass="bold" />  
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.dataPagamento}" />
+                            </p:outputPanel>
+                            
+                            <p:outputPanel>
+                            	<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.valor.parcela']}" styleClass="bold" /> 
+                            	<h:outputText value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamentoWrapperSelecionado.valor}" />
+                            </p:outputPanel> 
+                                                                                               
+                        </p:outputPanel>                                              
+                    </p:outputPanel>
+
+					<p:outputPanel rendered="#{pagamentosTributosMunicipaisIptuSPBBean.existExerciciosEmAberto}">
+						<h4>
+						<h:outputText value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.label.informativo.dividas']}"/>
+
+						<h:outputText
+							value=" #{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OEEXERCABE1}"
+							rendered="#{pagamentosTributosMunicipaisIptuSPBBean.exercicio1}" />
+							
+						<h:outputText
+							value=", #{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OEEXERCABE2}"
+							rendered="#{pagamentosTributosMunicipaisIptuSPBBean.exercicio2}" />
+							
+						<h:outputText
+							value=", #{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OEEXERCABE3}"
+							rendered="#{pagamentosTributosMunicipaisIptuSPBBean.exercicio3}" />
+							
+						<h:outputText
+							value=", #{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OEEXERCABE4}"
+							rendered="#{pagamentosTributosMunicipaisIptuSPBBean.exercicio4}" />
+							
+						<h:outputText
+							value=" e #{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OEEXERCABE5}"
+							rendered="#{pagamentosTributosMunicipaisIptuSPBBean.exercicio5}" />	
+						</h4>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-md-12 ">   
+                        
+                            <p:separator />
+                        
+                        </p:outputPanel>
+                    </p:outputPanel>                                             
+                    
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-md-12 ">    
+                        
+	                        <p:outputPanel rendered="#{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OECODOUTRDIVIDAS eq 37}">
+	                        	#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.dividas.antigos']}
+	                        </p:outputPanel>
+	                        
+	                        <p:outputPanel rendered="#{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OECODOUTRDIVIDAS eq 38}">
+	                        	#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.dividas.depto.fiscal']}
+	                        </p:outputPanel>
+	                        
+	                        <p:outputPanel rendered="#{pagamentosTributosMunicipaisIptuSPBBean.pagamento.OECODOUTRDIVIDAS eq 39}">
+	                        	#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.antigo.depto.fiscal']}
+	                        </p:outputPanel>                       
+                        
+                        </p:outputPanel>                                              
+                    </p:outputPanel>               
+                                                    
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+       <p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+		
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			   <p:commandLink styleClass="btn btn-default btn-cinza" action="#{pagamentosTributosMunicipaisIptuSPBBean.voltar}"  role="button">#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.btn.voltar']}</p:commandLink>
+			   <p:commandLink styleClass="btn btn-default" action="#{pagamentosTributosMunicipaisIptuSPBBean.efetivarPagamento}" role="button" onstart="encryptSecureDL();">#{msg['page.pagamentos.tributos.municipais.iptu.sp.confirmacao.btn.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>        
+	</ui:define>
+</ui:composition>         

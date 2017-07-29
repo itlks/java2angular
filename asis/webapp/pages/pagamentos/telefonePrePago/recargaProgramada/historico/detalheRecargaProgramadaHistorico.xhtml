@@ -1,0 +1,153 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	
+	 <f:event type="preRenderView" listener="#{recargaProgramadaHistoricoBBean.acessoDiretoDetalhe}" />
+	
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					
+					<p:outputPanel styleClass="titulo-bloco">
+			
+						<h4>#{msg['page.pagamentos.telefoneprepago.recargaHistorico.informativo.detalhesMovimento']}</h4>
+						<p:outputPanel styleClass="form-horizontal space-t">
+			
+			
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.transacao']}:" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.transacao}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.dataSolicitacao']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.dataSolicitacao}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+															
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.dataAgendada']}:" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.dataAgendada}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+																	
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.dataExecucao']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.dataExecucao == null ? '-' : recargaProgramadaHistoricoBBean.dtoDetalhe.dataExecucao}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.origem']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.origem}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+									
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.situacao']}:" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.situacao}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.valor']}:" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.valor}" onblur="maskMoney(this, false)" converter="valorDecimalConverter"/>
+									</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.numeroProtocolo']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.numProtocolo}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+																
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:separator />
+					
+					<div class="space-t"></div>
+					
+					<p:outputPanel styleClass="titulo-bloco">
+				
+						<h4>#{msg['page.pagamentos.telefoneprepago.recargaHistorico.label.detalheProgramacao']}</h4>
+						<p:outputPanel styleClass="form-horizontal space-t">
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.tipo']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.tipo}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+						
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.operadora']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.operadora}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+												
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.ddd']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.ddd}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+												
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.telefone']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.numCelular}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+													
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.dataCancelamento']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.dataCancelamento == null ? '-' : recargaProgramadaHistoricoBBean.dtoDetalhe.dataCancelamento}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+						
+							<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-4">
+										<span class="space"><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.motivoCancelamento']}" /></span>
+										 <h:outputText value="#{recargaProgramadaHistoricoBBean.dtoDetalhe.motivoCancelamento}"/>
+									</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:separator />
+					
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					
+				</p:outputPanel>
+				
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />				
+				
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right print no-visible">
+			<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" immediate="true"
+					action="#{recargaProgramadaHistoricoBBean.voltarParaTelaLista()}" />
+			</p:outputPanel>
+		</p:outputPanel>	
+			
+	</ui:define>
+</ui:composition>

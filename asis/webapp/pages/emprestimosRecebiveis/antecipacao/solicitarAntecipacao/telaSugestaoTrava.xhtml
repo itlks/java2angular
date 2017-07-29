@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<i class="fa fa-exclamation-circle"></i>
+					<h4>
+						<h:outputText value="#{msg['page.atencao']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<span>
+								<p>
+									<p:outputLabel escape="false" value="#{msg['pages.emprestimosRecebiveis.adquirencia.lancamentosFuturos.semTrava']}"
+										styleClass="bold" />
+								</p> <h:outputText value="#{mensagemBBean.dataHora}" />
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink value="#{msg['page.txt.nao']}" action="#{antecipacaoDemaisCredenciadorasBBean.redirectHome}" 
+						styleClass="ui-commandlink ui-widget btn btn-default btn-cinza" />
+				<p:commandLink value="#{msg['page.txt.sim']}" action="#{antecipacaoDemaisCredenciadorasBBean.redirectAdesao}"
+						styleClass="ui-commandlink ui-widget btn btn-default" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

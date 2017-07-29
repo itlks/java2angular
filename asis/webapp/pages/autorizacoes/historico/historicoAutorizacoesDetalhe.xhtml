@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.autorizacoes.historico.consulta.consultaHistorico.label']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow" id="painelGeral">
+
+					<p:outputPanel styleClass="space-b">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel for="produto" styleClass="space"
+									value="#{msg['page.autorizacoes.historico.consulta.pesquisa.produto.label']}" />
+								<h:outputText id="produto"
+									value="#{autorizacoesHistoricoDetalheBBean.dto.produto}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel for="dataEfetivacao" styleClass="space"
+									value="#{msg['page.autorizacoes.historico.consulta.dataEfetifacao']}" />
+								<h:outputText id="dataEfetivacao"
+									value="#{autorizacoesHistoricoDetalheBBean.dto.dataEfetivacao}"
+									converter="dateConverter" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+
+					<p:outputPanel>
+						<p:dataTable
+							value="#{autorizacoesHistoricoDetalheBBean.dto.detalhes}"
+							var="detalhe"
+							emptyMessage="#{msg['page.autorizacoes.historico.consulta.semResultado']}"
+							paginator="true" paginatorPosition="bottom" paginatorTemplate="">
+							<p:column styleClass="col-xs-5"
+								headerText="#{msg['page.autorizacoes.historico.consulta.transacao']}">
+								<h:outputText value="#{detalhe.transacao}" />
+							</p:column>
+							<p:column styleClass="col-xs-2"
+								headerText="#{msg['page.autorizacoes.historico.consulta.agcc']}">
+								<h:outputText value="#{detalhe.agenciaConta}"
+									converter="agenciaContaCorrenteConverter" />
+							</p:column>
+							<p:column styleClass="col-xs-2 text-right"
+								headerText="#{msg['page.autorizacoes.historico.consulta.valorRs']}">
+								<h:outputText value="#{detalhe.valor/100}"
+									converter="valorMonetarioConverter" />
+							</p:column>
+							<p:column styleClass="col-xs-2"
+								headerText="#{msg['page.autorizacoes.historico.consulta.statusPendencia']}">
+								<h:outputText value="#{detalhe.statusPendencia}"
+									converter="statusPendenciaConverter" />
+							</p:column>
+							<p:column styleClass="col-xs-1 text-right"
+								headerText="#{msg['page.autorizacoes.historico.consulta.verDetalhe']}"
+								width="5px">
+								<p:commandLink onstart="openLoad()" oncomplete="closeLoad()"
+									action="#{autorizacoesHistoricoDetalheBBean.consultarHistoricoDetalheDescricao(detalhe.timeStamp, detalhe.codigoTransacao)}">
+									<h:graphicImage styleClass="icone-lupa"
+										value="/images/u162.png" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button" id="btnVoltar"
+					action="#{autorizacoesHistoricoDetalheBBean.voltarPreenchimento}"
+					value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

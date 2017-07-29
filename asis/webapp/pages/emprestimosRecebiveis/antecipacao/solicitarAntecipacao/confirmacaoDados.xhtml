@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{antecipacaoDemaisCredenciadorasBBean.acessoDiretoConfirmacao()}" />
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<p><h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.linha1']}" /></p>
+						<p><h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.linha2']}" /></p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4" value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.titulo']}"/>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<!-- =================================================================== -->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelNome']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.nomeCliente}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTipoDocumento']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.tipoDocumento}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelNumeroDocumento']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.numeroDocumento}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- =================================================================== -->
+					<p:separator styleClass="custom-separator" />
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelData']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.dataOperacao}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space" value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.operaCessao']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.numeroOperacao+0}">
+								<f:convertNumber maxIntegerDigits="10" pattern="##########" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelDomicilioBancarioAgencia']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.nomeAgencia}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelContaCorrente']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.numeroContaCorrente+0}">
+								<f:convertNumber maxIntegerDigits="9" pattern="#########" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- =================================================================== -->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelValorTotalCreditos']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.valorTotalBruto}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="R$" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaMensalCessao']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOper}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="R$" />
+							</h:outputText>
+							<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.percentagem']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.valorIOF']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.valorIoc}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="R$" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.tarifaContrat']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.tarifaContratacao}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="R$" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelPrecoTotalCessaoTaxaIOF']}" />
+							<h:outputText
+								value="#{antecipacaoDemaisCredenciadorasBBean.valorTotalLiquido}">
+								<f:convertNumber type="currency" locale="pt_BR"
+									currencySymbol="R$" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space"
+								value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaJuros']}" />
+							<h:outputText styleClass="space"
+								value="#{antecipacaoDemaisCredenciadorasBBean.taxaNominalOper}" />
+							<h:outputText styleClass="space" value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.percentAoMes']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- ==================================== VALOR ==================================================================================================== -->
+					<p:separator styleClass="custom-separator" />
+					<p:outputPanel styleClass="row space-b"
+						rendered="#{antecipacaoDemaisCredenciadorasBBean.exibeValor}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="textAreaImp">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="col-xs-12">
+											<p:outputLabel styleClass="space"
+												value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.vlrDisponivel']}" />
+											<h:outputText
+												value="#{antecipacaoDemaisCredenciadorasBBean.strValorDispWeb}">
+												<f:convertNumber currencySymbol="" type="currency"
+													locale="pt_BR" />
+											</h:outputText>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="dataOperacoes1" var="o"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaOperacoesBandeira}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+									<p:column styleClass="col-md-3" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.band']}">
+										<h:outputText value="#{o.nomeBandeira}" />
+									</p:column>
+									<p:column styleClass="col-md-4" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.credenciadora']}">
+										<h:outputText value="#{o.nomeOperacao}" />
+									</p:column>
+									<p:column styleClass="col-md-4" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.dataFluxo']}">
+										<h:outputText value="#{o.dataFluxoWeb}" />
+									</p:column>
+									<p:column styleClass="col-md-4 text-right"
+										headerText="Valor Selecionado R$">
+										<h:outputText value="#{o.valorFluxoWeb}"
+											styleClass="text-right">
+											<f:convertNumber currencySymbol="" type="currency"
+												locale="pt_BR" />
+										</h:outputText>
+									</p:column>
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" styleClass="text-left">
+												<f:facet name="footer">
+													<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.vlrTotal2']}" />
+												</f:facet>
+											</p:column>
+											<br />
+											<p:column styleClass="text-right">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.strValorSolicWeb}" />
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- ===================================== BANDEIRAS ============================================================================= -->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{antecipacaoDemaisCredenciadorasBBean.exibeLista}">
+							<p:outputPanel styleClass="textAreaImp">
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="col-xs-12">
+											<p:outputLabel styleClass="space"
+												value="#{msg['page.empereb.antecipcielorede.solicantecip.comprovante.vlrDisponivel']}" />
+											<h:outputText
+												value="#{antecipacaoDemaisCredenciadorasBBean.strValorDispWeb}">
+												<f:convertNumber currencySymbol="" type="currency"
+													locale="pt_BR" />
+											</h:outputText>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="dataOperacoes2" var="o"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaOperacoesBandeiraSelecionados}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+									<p:column styleClass="col-md-3" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.band']}">
+										<h:outputText value="#{o.nomeBandeira}" />
+									</p:column>
+									<p:column styleClass="col-md-4" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.credenciadora']}">
+										<h:outputText value="#{o.nomeOperacao}" />
+									</p:column>
+									<p:column styleClass="col-md-4" headerText="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.dataFluxo']}">
+										<h:outputText value="#{o.dataFluxoWeb}" />
+									</p:column>
+									<p:column styleClass="col-md-4 text-right"
+										headerText="Valor Disponível R$">
+										<h:outputText value="#{o.valorFluxoWeb}"
+											styleClass="text-right" />
+									</p:column>
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" styleClass="text-left">
+												<f:facet name="footer">
+													<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.confirmacao.vlrSelec']}" />
+												</f:facet>
+											</p:column>
+											<p:column styleClass="text-right">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.strValorSolicWeb}">
+														<f:convertNumber currencySymbol="" type="currency"
+															locale="pt_BR" />
+													</h:outputText>
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- =================================================================== -->
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<!-- DISPOSITIVOS DE SEGURANÇA INIT -->
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		<!-- DISPOSITIVOS DE SEGURANÇA FIM -->
+		
+		<!-- BOTOES INICIO -->
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+			
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					action="#{antecipacaoDemaisCredenciadorasBBean.voltarEmBandOuValor}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+					
+				<p:commandButton id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{antecipacaoDemaisCredenciadorasBBean.continuarEmComprovante}"
+					role="button" value="#{msg['page.btn.confirmar']}"
+					styleClass="btn btn-default" />
+				<p:defaultCommand target="btnConfirmar" />
+				
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:blockUI block="panelBotoes" trigger="btnConfirmar" />
+		<!-- BOTOES FIM -->
+		
+	</ui:define>
+</ui:composition>

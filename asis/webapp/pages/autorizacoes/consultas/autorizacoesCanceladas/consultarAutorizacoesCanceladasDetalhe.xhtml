@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.ConsultaAutorizacoesCanceladas']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 ">
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.cliente']}</strong>
+								#{autorizacoesConsultarDadosBBean.cliente}
+							</p>
+
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.usuario']}</strong>
+								#{autorizacoesConsultarDadosBBean.usuario}
+							</p>
+							<br />
+
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+
+								<p:dataTable id="tabela1"
+									value="#{autorizacoesConsultarDadosBBean.autorizacaoSelecionada}"
+									var="aut">
+									<p:columnGroup type="header">
+										<p:row>
+											<p:column colspan="4"
+												headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.Pendencias']}" />
+										</p:row>
+										<p:row>
+											<p:column
+												headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.DataCancelamento']}" />
+											<p:column
+												headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.Grupo']}" />
+											<p:column
+												headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.Qtde']}" />
+											<p:column styleClass="text-right"
+												headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.ValorTotal']}" />
+										</p:row>
+									</p:columnGroup>
+									<p:column>
+										<h:outputText value="#{aut.dataCancelamento}">
+											<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+									<p:column>
+										<h:outputText value="#{aut.grupo}" />
+									</p:column>
+									<p:column>
+										<h:outputText value="#{aut.qtdTransAssinadas}" />
+									</p:column>
+									<p:column styleClass="text-right">
+										<h:outputText value="#{aut.valorTotalAssinado}">
+											<f:convertNumber type="currency" currencySymbol="" />
+										</h:outputText>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela2"
+									value="#{autorizacoesConsultarDadosBBean.lAutorizacaoAss}"
+									var="ass">
+									
+									<p:column 	
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.conta.convenio']}" 
+										rendered="#{autorizacoesConsultarDadosBBean.exibirColunasPagtFornecedores}" >
+										<h:outputText value="#{ass.codConvenio}" />
+									</p:column>
+									
+									<p:column 	
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.conta.debito']}" 
+										rendered="#{autorizacoesConsultarDadosBBean.exibirColunasPagtFornecedores}" >
+										<h:outputText value="#{ass.codContaDebito}" />
+									</p:column>
+									
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.TipoTrans']}">
+										<h:outputText value="#{ass.nomeTransacao}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.Favorecido']}">
+										<h:outputText value="#{ass.favorecido}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.DataIncl']}">
+										<h:outputText value="#{ass.dataInclusao}">
+											<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.DataAss']}">
+										<h:outputText value="#{ass.dataAssinatura}">
+											<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+									<p:column styleClass="text-right"
+										headerText="#{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.ValorRs']}">
+										<h:outputText value="#{ass.valor}">
+											<f:convertNumber type="currency" currencySymbol="" />
+										</h:outputText>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12 text-right">
+					<p:commandLink styleClass="btn btn-default btn-cinza"
+						action="#{autorizacoesConsultarDadosBBean.voltar}" role="button">
+                        #{msg['pages.autorizacoes.consultas.autorizacoesCanceladas.consultaDados.BtnVoltar']} 
+                    </p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+			</p:outputPanel>			
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

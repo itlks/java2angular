@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:santander="http://santander.com/ui"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/tree.js" />
+
+		<style>
+input[type="checkbox"] {
+	position: absolute;
+}
+
+input[type="checkbox"]:checked+label:after {
+	content: "";
+	display: inline-block;
+	width: 7px;
+	height: 12px;
+	border: solid #00D15F;
+	border-width: 0 3px 3px 0;
+	-ms-transform: rotate(40deg);
+	-webkit-transform: rotate(40deg);
+	-moz-transform: rotate(40deg);
+	-o-transform: rotate(40deg);
+	transform: rotate(40deg);
+	position: absolute;
+	left: 5px;
+	top: 2px;
+}
+
+table {
+	border-collapse: separate !important;
+	border-spacing: 0;
+}
+
+table>tbody>tr:hover>td {
+	background-color: white;
+}
+
+table>tbody>tr>td[name=level1] {
+	border-style: hidden;
+	padding-top: 20px;
+}
+
+table tr[name=level2] td {
+	border-bottom: 1px solid #DDDDDD !important;
+}
+</style>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.acessoRapido.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p>#{msg['page.acessoRapido.configuracao.informacao1']}</p>
+							<br />
+
+							<h5>
+								<strong>#{msg['page.acessoRapido.configuracao.informacao2']}</strong>
+							</h5>
+							<!-- 							<p:outputPanel styleClass="row"> -->
+							<!-- 								<p:outputPanel styleClass="col-md-4" -->
+							<!-- 									rendered="#{acessoRapidoBBean.expandedRow}"> -->
+							<!-- 									<span style="color: red;">></span> -->
+							<!-- 									<p:commandLink update=":formGeral" process="@this" -->
+							<!-- 										action="#{acessoRapidoBBean.setExpandedRow(false)}"> -->
+							<!-- 										<h:outputText -->
+							<!-- 											value="#{msg['page.acessoRapido.configuracao.retrair']}" /> -->
+							<!-- 									</p:commandLink> -->
+							<!-- 								</p:outputPanel> -->
+
+							<!-- 								<p:outputPanel styleClass="col-md-4" -->
+							<!-- 									rendered="#{!acessoRapidoBBean.expandedRow}"> -->
+							<!-- 									<span style="color: red;">></span> -->
+							<!-- 									<p:commandLink update=":formGeral" process="@this" -->
+							<!-- 										action="#{acessoRapidoBBean.setExpandedRow(true)}" > -->
+							<!-- 										<h:outputText -->
+							<!-- 											value="#{msg['page.acessoRapido.configuracao.expandir']}" /> -->
+							<!-- 									</p:commandLink> -->
+							<!-- 								</p:outputPanel> -->
+							<!-- 							</p:outputPanel> -->
+
+							<!-- 							<br/> -->
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel
+							styleClass="col-md-12 treeview-panel treeview-acessoRapido">
+							<!-- Santander Fluid TreeView -->
+							<santander:treeTableView value="#{acessoRapidoBBean.roots}"
+								binding="#{acessoRapidoBBean.fluidTreeview}" showToolbar="true"
+								eventCheck="validaQtdeSelecao(this.id);" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{acessoRapidoBBean.voltar}" role="button" value="#{msg['page.btn.voltar']}" />
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					onclick="obterSelectedNodes();"
+					action="#{acessoRapidoBBean.continuarConfirmacao}" role="button" value="#{msg['page.btn.continuar']}" />
+					
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:dialog widgetVar="msgDezSelecionados" 
+				  id="msgDezSelecionados"
+				  position="center" 
+				  modal="true" 
+				  dynamic="false" 
+				  resizable="false">
+				  
+				 <p:outputPanel autoUpdate="true">
+					<p:outputPanel styleClass="text-left content-modal-text flex-align-v">
+						<p:graphicImage url="/images/btnExclamation.png?faces-redirect=true" />
+						<p:outputLabel styleClass="modalLine" value="#{msg['page.acessoRapido.configuracao.erro.excessoIten']}" escape="false" />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="content-modal-footer">
+						<p:commandLink 	value="#{msg['page.btn.ok']}"
+										actionListener="#{acessoRapidoBBean.fecharMsgDezSelecionados}"
+										styleClass="btn btn-default" />
+					</p:outputPanel>
+				</p:outputPanel>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

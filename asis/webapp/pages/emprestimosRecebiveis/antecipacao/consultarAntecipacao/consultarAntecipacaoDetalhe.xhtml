@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+    <ui:define name="content">
+		<p:outputPanel styleClass="row no-print no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subtitulo']}"/>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.termo']}"/>
+							<span> </span>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.numeroContratoMae}" /> 
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.termo2']}" /> 
+							<span> </span>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.dataContratoMae}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				    <p:outputLabel value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subtitulo1']}"/>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.endereco']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				  	
+				  	<!-- =================================================================== -->  
+				  	
+				  	<p:separator styleClass="custom-separator" />
+				  	
+				  	<p:outputPanel styleClass="space">
+				  		<p:outputLabel value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subtitulo2']}"/>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelNome']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.nomeCliente}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTipoDocumento']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.tipoDocumento}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelNumeroDocumento']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.numeroDocumento}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<!-- =================================================================== -->  
+					
+					<p:separator styleClass="custom-separator" />
+					
+					<p:outputPanel styleClass="space">
+				  		<p:outputLabel value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subtitulo3']}"/>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelData']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.dataOperacao}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelOperacaoCessao']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.numeroOperacao}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelDomicilioBancarioAgencia']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.nomeAgencia}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelContaCorrente']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.numeroContaCorrente}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelValorTotalCreditos']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.valorTotalCreditos}">
+								<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaMensalCessao']}"/>
+							<h:outputText styleClass="space" value="#{consultaAntecipacoesRecebiveisBBean.taxaMensalCessao}">
+							</h:outputText>
+							<h:outputText value="%" />
+						</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.valorIOF']}"/>
+							<h:outputText styleClass="space" value="#{consultaAntecipacoesRecebiveisBBean.valorIOF}">
+								<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaContratacao']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.tarifaContratacao}">
+								<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelPrecoTotalCessao']}"/>
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.precoTotalCessao}">
+								<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+							</h:outputText>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelTaxaJuros']}"/>
+							<h:outputText styleClass="space" value="#{consultaAntecipacoesRecebiveisBBean.taxaJurosMensal}">
+							</h:outputText>
+							<h:outputText styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelAoMes']}" />
+							<h:outputText styleClass="space" value="#{consultaAntecipacoesRecebiveisBBean.taxaJurosAnual}">
+							</h:outputText>
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelAoAno']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <p:outputLabel value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.jurosAtrasoCasoInadimplencia']}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <h:outputText styleClass="space" value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.jurosRemuneratorios']}"/>
+						    <h:outputText styleClass="space" value="#{consultaAntecipacoesRecebiveisBBean.taxaJurosMensal}">
+							</h:outputText>
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.aoMes']}" />
+							<h:outputText value="#{consultaAntecipacoesRecebiveisBBean.taxaJurosAnual}">
+							</h:outputText>
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.aoAnoAcrescido']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subitem2']}"/>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+						    <h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subitem3']}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<!-- =================================================================== -->          
+        			<p:separator styleClass="custom-separator" />
+        			
+        			<p:outputPanel styleClass="space-b">
+				  		<p:outputLabel value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.subtitulo4']}"/>
+					</p:outputPanel>
+        			
+        			<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:dataTable id="dtOperacaoSel" var="r" emptyMessage="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.naoHaRegistros']}"
+								value="#{consultaAntecipacoesRecebiveisBBean.listaOperacoesVisaDetalhe}" >
+									<p:column styleClass="text-left col-xs-4">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelDataVencimento']}" />
+										</f:facet>
+										<h:outputText value="#{r.dtOperacao}" />
+									</p:column>
+									<p:column styleClass="col-xs-3">
+										<f:facet name="header" styleClass="text-center">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelBandeira']}" />
+										</f:facet>
+										<h:outputText value="#{r.nomeBandeira}"/>
+									</p:column>
+									<p:column styleClass="col-xs-3">
+										<f:facet name="header" styleClass="text-center">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelCredenciadora']}" />
+										</f:facet>
+										<h:outputText value="#{r.nomeCredenciadora}" />
+									</p:column>
+									<p:column styleClass="col-xs-2 text-right">
+										<f:facet name="header" styleClass="text-center">
+											<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelValorSelecionado']}"/>
+										</f:facet>
+										<h:outputText id="idValor" value="#{r.vlOperacao}" styleClass="text-right">
+									    	<f:convertNumber type="currency" locale="pt_BR" currencySymbol="" />
+									    </h:outputText>
+									</p:column>
+									<p:columnGroup type="footer">
+							            <p:row>
+							                <p:column colspan="3" styleClass="text-left"> 
+							                	<f:facet name="footer">
+							                		<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.labelValorTotal']}"/>
+							                	</f:facet>
+							                </p:column>
+											<p:column styleClass="text-right">
+											    <f:facet name="footer" >
+											        <h:outputText value="#{consultaAntecipacoesRecebiveisBBean.somatoriaDetalhe}">
+											            <f:convertNumber currencySymbol="" type="currency" locale="pt_BR"/>
+											        </h:outputText>
+											    </f:facet>
+											</p:column>
+							            </p:row>
+							        </p:columnGroup>
+							</p:dataTable>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<h:outputText value="#{msg['page.emprestimosRecebiveis.antecipacoes.consultarAntecipacoes.detalhe.termoRodape']}"/>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+		
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml">
+					<ui:param name="enviarEmail" value="true" />
+				</ui:include>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 no-print no-visible text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{consultaAntecipacoesRecebiveisBBean.voltarEmPreencher}">#{msg['page.btn.voltar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>			
+	</ui:define>
+</ui:composition>

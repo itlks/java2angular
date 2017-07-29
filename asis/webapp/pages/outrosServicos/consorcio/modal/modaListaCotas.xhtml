@@ -1,0 +1,92 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:remoteCommand name="updateDialogListaCotaModalOnShow" update="@(.js-dialog-listacota-modal)" />
+
+	<p:dialog id="dialogDetalheCota" widgetVar="dialogDetalheCota"
+		closable="true" resizable="false" draggable="false" showHeader="true" header="Escolha uma das cotas"
+		width="60%" height="600" modal="true" styleClass="modalGray modal-box" onShow="updateDialogListaCotaModalOnShow()">
+
+	<p:scrollPanel mode="native" styleClass="js-dialog-listacota-modal space-t col-xs-12" style="height:90%; overflow-x: hidden;">
+		<p:outputPanel styleClass="box-shadow ">
+			
+			<p:outputPanel styleClass="row">
+				
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Cliente:"/>
+					<h:outputLabel for="" value="#{consorcioModalConsultaCotasBBean.dto.cliente}"/>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="CNPJ:"/>
+					<h:outputLabel for="" value="#{consorcioModalConsultaCotasBBean.dto.cnpj}"
+						converter="converterCpfCnpj"/>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Grupo:"/>
+					<h:outputLabel for="" value="#{consorcioModalConsultaCotasBBean.dto.grupo}"/>
+				</p:outputPanel>
+				
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="row">
+			
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Bem:"/>
+					<h:outputLabel for="" value="#{consorcioModalConsultaCotasBBean.dto.bem}"/>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Cota:"/>
+					<h:outputLabel for="" value="#{consorcioModalConsultaCotasBBean.dto.cota}"/>
+				</p:outputPanel>
+				
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="table-responsive table table-striped table-link">
+					<p:dataTable  var="item" 
+						value="#{consorcioModalConsultaCotasBBean.dto.listaDTO}"  
+						selectionMode="single"
+						selection="#{consorcioModalConsultaCotasBBean.dto.itemSelecionado}"
+						rowKey="#{item.cota}">
+					
+						<p:ajax event="rowSelect" listener="#{consorcioDadosGrupoBBean.selecionaCota}" immediate="true" oncomplete="PF('dialogDetalheCota').hide()" update="@(.js-panel-dados-grupo)" />
+					
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Grupo" />
+							</f:facet>
+							<h:outputText value="#{item.grupo}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Cota" />
+							</f:facet>
+							<h:outputText value="#{item.cota}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Bem" />
+							</f:facet>
+							<h:outputText value="#{item.bem}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:scrollPanel>
+	</p:dialog>
+
+</ui:fragment>

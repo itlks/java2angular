@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+<f:event type="preRenderView" listener="#{veiculosBBean.acessoDiretoConfirmacao()}" />
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4" value="#{msg['pages.pagamentos.veiculosSP.primeiroRegistro.confiraDados']}" />
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<h:outputLabel for=""
+								value="#{msg['pages.pagamentos.veiculosSP.primeiroRegistro.cpfcnpj']}" />
+							<h:outputLabel value="#{veiculosBBean.veiculosDTO.cpfMasked}" />
+							<br />
+							<h:outputLabel for=""
+								value="#{msg['pages.pagamentos.veiculosSP.primeiroRegistro.valorTaxa']}&#160;" />
+							 <h:outputLabel 
+									value="#{veiculosBBean.veiculosDTO.taxaRegistro}">
+									<f:convertNumber currencySymbol="R$" type="currency" />
+							</h:outputLabel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel>
+			
+		 <ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			
+				<p:commandButton id="backButton"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{veiculosBBean.voltarPreenchimento}" value="#{msg['pages.pagamentos.veiculosSP.primeiroRegistro.voltar']}" />
+					
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandButton id="btnConfirmar" styleClass="btn btn-default"
+					role="button" action="#{veiculosBBean.goComprovante}"
+					onclick="encryptSecureDL();" value="#{msg['pages.pagamentos.veiculosSP.primeiroRegistro.continuar']}" />
+				<p:defaultCommand target="btnConfirmar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

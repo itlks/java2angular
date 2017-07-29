@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xmlns="http://java.sun.com/xml/ns/javaee" 
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+		 id="WebApp_ID" version="3.0">
+	<display-name>jab-ibeweb</display-name>
+
+	<filter>
+		<filter-name>FiltroEdge</filter-name>
+		<filter-class>com.altec.bsbr.app.ibe.filter.IEEdgeCompatibilityFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroEdge</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- Filtro contra ataques XSS(Cross Site Scripting) -->   
+	<filter>
+	  <filter-name>XSSFilter</filter-name>
+	  <filter-class>com.altec.bsbr.app.ibe.web.filter.XSSFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+	  <filter-name>XSSFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+    <filter>
+        <filter-name>CompressingFilter</filter-name>
+        <filter-class>com.github.ziplet.filter.compression.CompressingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CompressingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>	
+	
+	<!-- Filtro contra ataques XSS(Cross Site Scripting) -->   
+	<filter>
+	  <filter-name>PerfilAcessoFilter</filter-name>
+	  <filter-class>com.altec.bsbr.app.ibe.web.filter.PerfilAcessoFilter</filter-class>
+	</filter>
+	
+	<!-- Init Rest -->
+		<servlet>
+		    <servlet-name>restAPI</servlet-name>
+		    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		    <init-param>
+		        <param-name>jersey.config.server.provider.packages</param-name>
+		        <param-value>com.altec.bsbr.app.ibe.web.rest</param-value>
+		    </init-param>
+			<init-param>
+			    <param-name>jersey.config.disableMoxyJson.server</param-name>
+			    <param-value>true</param-value>
+			</init-param>
+			<init-param>
+		        <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+		        <param-value>true</param-value>
+		    </init-param>			
+		    <load-on-startup>1</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+		    <servlet-name>restAPI</servlet-name>
+		    <url-pattern>/api/*</url-pattern>
+		</servlet-mapping>
+	<!-- End -->
+
+	
+	<!-- Servlet para visualizar a versao e build do jenkins -->
+	<servlet>
+		<servlet-name>VersionServlet</servlet-name>
+		<servlet-class>com.altec.bsbr.app.ibe.web.servlet.VersionServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>VersionServlet</servlet-name>
+		<url-pattern>/version</url-pattern>
+	</servlet-mapping>  
+
+	<filter-mapping>
+	  <filter-name>PerfilAcessoFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	 <context-param>
+		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+		<param-value>/WEB-INF/santander-taglib.xml</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+
+<!-- 	reload pages -->
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.REFRESH_PERIOD</param-name>
+		<param-value>1</param-value>
+	</context-param>
+
+	<context-param>
+		<description>
+            The ServletContext init parameter consulted by the
+            StateManager to tell where the state should be saved. Valid
+            values are given as the values of the constants: client or
+            server.
+
+            If this parameter is not specified, the default value is the
+            value of the constant client.
+        </description>
+    	<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	<context-param>
+		<description>
+            Context initialization parameter name for a comma delimited
+            list of context-relative resource paths (in addition to
+            /WEB-INF/faces-config.xml which is loaded automatically if
+            it exists) containing JavaServer Faces configuration
+            information.
+        </description>
+    	<param-name>javax.faces.CONFIG_FILES</param-name>
+    	<param-value>/WEB-INF/faces-config.xml, /WEB-INF/faces-navigation.xml</param-value>
+	</context-param>
+    <context-param>
+    	<description>
+            Set this flag to true, if you want the JavaServer Faces
+            Reference Implementation to validate the XML in your
+            faces-config.xml resources against the DTD. Default value is
+            false.
+        </description>
+		<param-name>org.apache.myfaces.VALIDATE_XML</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<description>
+            Set this flag to true, if you want the JavaServer Faces
+            Reference Implementation to verify that all of the
+            application objects you have configured (components,
+            converters, renderers, and validators) can be successfully
+            created. Default value is false.
+        </description>
+		<param-name>org.apache.myfaces.VALIDATE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param> 
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name> 
+		<param-value>true</param-value> 
+	</context-param>
+	<context-param>
+		<description>Remover CSS Primefaces</description>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>none</param-value>
+	</context-param>
+  	
+  	<context-param>
+  		<description>Ponto de EHT. Remove informacoes sobre servidor e tecnologias usadas na aplicacao</description>
+    	<param-name>com.sun.faces.sendPoweredByHeader</param-name>
+    	<param-value>false</param-value>
+	</context-param>
+		
+	<listener>
+    	<description>
+            Servlet 2.4+ listener that exposes the request to the
+            current thread, through both LocaleContextHolder and
+            RequestContextHolder. To be registered as listener in
+            web.xml.
+
+            Alternatively, Spring's RequestContextFilter and Spring's
+            DispatcherServlet also expose the same request context to
+            the current thread. In contrast to this listener, advanced
+            options are available there (e.g.
+            &quot;threadContextInheritable&quot;).
+
+            This listener is mainly for use with third-party servlets,
+            e.g. the JSF FacesServlet. Within Spring's own web support,
+            DispatcherServlet's processing is perfectly sufficient.
+        </description>
+    	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  	</listener>
+	<listener>
+    	<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.altec.bsbr.fw.config.ContextLoaderListener</listener-class>
+	</listener>
+<!-- 	BUG 1591 INICIO -->
+	<listener>
+		<listener-class>com.altec.bsbr.app.ibe.util.CamposLimposUtil</listener-class>
+	</listener>
+<!-- 	BUG 1591 FIM -->
+
+	<servlet>
+		<servlet-name>Image Render</servlet-name>
+  		<servlet-class>com.altec.bsbr.fw.web.image.ImageServlet</servlet-class>
+		<init-param>
+			<description>
+	             Configures the cached images to the provided value.
+	              Default value is 5. Use &quot;0&quot; (zero) to disable the cache.
+	        </description>
+			<param-name>com.altec.bsbr.fw.web.image.MaxCachedImages</param-name>
+			<param-value>50</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Pdf Report Servlet</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.PdfServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Rtf Report Servlet</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.RtfServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Odt Report Servlet</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.OdtServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Xsl Report Servlet</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.XlsServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Xml Report Servlet</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.XmlServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Pdf Report Servlet</servlet-name>
+		<url-pattern>*.pdf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Odt Report Servlet</servlet-name>
+		<url-pattern>*.odt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Xsl Report Servlet</servlet-name>
+		<url-pattern>*.xsl</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Xml Report Servlet</servlet-name>
+		<url-pattern>*.xml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Rtf Report Servlet</servlet-name>
+		<url-pattern>*.rtf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Image Render</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+	
+	<!-- 
+	<filter>
+		<filter-name>JAMonFilter</filter-name>
+		<filter-class>com.jamonapi.JAMonFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>JAMonFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	 -->
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>
+	    <error-code>404</error-code>
+	    <location>/commons/erros/404.xhtml</location>
+	</error-page>
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/commons/erros/404.xhtml</location>
+	</error-page>
+</web-app>

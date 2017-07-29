@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	
+	<ui:define name="content">
+		<!-- Linha de Aviso -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span class="site-map">
+						<p>#{msg['pages.investimento.compromissada.Consultar.disponibilizadas']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p>#{msg['pages.investimento.compromissada.Consultar.posicao']} #{compromissadaBBean.dataAtual}</p>
+		
+		<!--  Começo do GRID -->
+		<p:outputPanel styleClass="box-shadow no-margin-bottom">
+			<p:outputPanel
+				styleClass="table-responsive table table-striped">
+				<p:dataTable id="dtGrid" var="linha" value="#{compromissadaBBean.listaCompromissadaEntradaDTO}"
+					
+					emptyMessage="#{msg['pages.investimento.compromissada.consulta.aviso']}"
+					
+					selectionMode="single"
+					
+					rowKey="#{linha.strDataVigencia}"
+					
+					tableStyleClass="table-responsive table table-striped" >
+					<!-- selection="#{compromissadaBBean.compromissadaEntradaDTO}" -->
+					<p:ajax event="rowSelect" listener="#{compromissadaBBean.onRowSelect}" />
+					
+					<p:column styleClass="col-md-2">
+						<f:facet name="header">
+							<h:outputText
+								value="#{msg['pages.investimento.compromissada.consulta.mes.ano']}" />
+						</f:facet>
+						<h:outputText value="#{compromissadaBBean.mes(linha.strDataVigencia)}" />
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row space-b">
+		</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{compromissadaBBean.voltarLista}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+
+</ui:composition>

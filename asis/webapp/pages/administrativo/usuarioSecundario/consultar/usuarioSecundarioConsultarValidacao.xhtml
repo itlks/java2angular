@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							<strong>#{msg['page.usuario.secundario.usuarioConsultaValidacao.avisoLinha1']}</strong>
+						</p>
+						<p>#{msg['page.usuario.secundario.usuarioConsultaValidacao.avisoLinha2']}</p>
+						<p>#{msg['page.usuario.secundario.usuarioConsultaValidacao.avisoLinha3']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{usuarioSecundarioConsultarBBean.exibeAssinatura}">
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<br />
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}"
+					action="#{usuarioSecundarioConsultarBBean.voltarHome}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar"
+					value="#{msg['page.btn.continuar']}"
+					action="#{usuarioSecundarioConsultarBBean.usuarioSecundarioConsultarConfirmacaoContinuar}"
+					onclick="encryptSecureDL();" styleClass="btn btn-default" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

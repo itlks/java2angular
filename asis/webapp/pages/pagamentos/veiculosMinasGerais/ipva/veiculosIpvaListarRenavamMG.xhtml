@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"	
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		
+		<ui:include	src="/pages/pagamentos/veiculosMinasGerais/ipva/ipvaAvisoMG.xhtml" />
+        
+       <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['page.pagamentos.veiculosMG.ipva.listarenavam.renavamcadastrado']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>   
+
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow">    
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <h5 class="space-b">#{msg['page.pagamentos.veiculosMG.ipva.listarenavam.selecionerenavam']}</h5>
+
+                          <p:outputPanel styleClass="table table-striped">
+                             <p:dataTable id="dtGrid" 
+                             		var="linha" 
+									value="#{ipvaMinasGeraisBBean.lRenavam}" 
+									emptyMessage="#{msg['pages.renavam.empty.table']}"
+									selectionMode="single"
+									selection="#{ipvaMinasGeraisBBean.renavamDTO}" 
+									rowKey="#{linha.apelido}" 
+									tableStyleClass="table-responsive table table-striped" >									
+                                
+                                <p:ajax event="rowSelect" listener="#{ipvaMinasGeraisBBean.onRowSelect}" />
+                                
+                                <p:column styleClass="col-xs-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculosMG.ipva.listarenavam.identificacao']}" />
+									</f:facet>
+									<h:outputText value="#{linha.identificacao}"/>																			
+								</p:column>
+                                
+                               	<p:column styleClass="col-xs-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculosMG.ipva.listarenavam.renavam']}" />
+									</f:facet>																									
+									<h:outputText value="#{linha.numero}" converter="converterNumeroRenavam"/>																					
+								</p:column>
+                             	
+                             	<p:column styleClass="col-xs-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculosMG.ipva.listarenavam.placaveiculo']}" />
+									</f:facet>
+									<h:outputText value="#{linha.placaVeiculo}"/>																					
+								</p:column>
+								
+								<p:column styleClass="col-xs-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculosMG.ipva.listarenavam.situacao']}" />
+									</f:facet>								
+									<h:outputText>
+										<h:outputText value="#{linha.situacao.descricao}" style="margin-right:10px"/>
+											<p:outputLabel id="tooltipRenavam"
+												rendered="#{linha.situacao.id eq 'N'}">
+												<i class="fa fa-info-circle" aria-hidden="true" />
+											</p:outputLabel>
+				
+											<p:tooltip for="tooltipRenavam"
+												value="#{msg['pages.renavam.preenchimentoRenavam.column.tooltip']}" />																			
+									</h:outputText>																					
+								</p:column>
+																
+                             </p:dataTable>
+                          </p:outputPanel>
+                                                                                    
+                        </p:outputPanel>               
+                    </p:outputPanel>                                                                     
+
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>      
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{ipvaMinasGeraisBBean.voltarMenu}" />
+				
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

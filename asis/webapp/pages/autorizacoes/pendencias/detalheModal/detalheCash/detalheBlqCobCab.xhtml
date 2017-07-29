@@ -1,0 +1,207 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="item"
+		value="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash}" />
+	<p:outputPanel styleClass="row row form-horizontal space-r space-l">
+		<p:outputPanel styleClass="col-xs-12">
+
+			<p:outputPanel>
+				<h:outputLabel value="Convênio: " />
+				<h:outputText value=" #{item.convenio}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Conta de Débito: " />
+				<h:outputText value=" #{item.contaDebito}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Tipo do Pagamento: " />
+				<h:outputText value=" #{item.tipoDocumento}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Código de Barras: " />
+				<h:outputText value=" #{item.YLW63CODBARRAS}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="No. compromisso banco: " />
+				<h:outputText value=" #{item.YLW63NUMCOMPRO}" />
+			</p:outputPanel>
+			<p:outputPanel>
+				<h:outputLabel value="No. compromisso cliente: " />
+				<h:outputText value=" #{item.YLW63SEUNUMERO}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Instituição Financeira Favorecida: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_INS_FAV -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Nome/Razão Social do Beneficiário Original: " />
+				<h:outputText value=" #{item.YLW63NOMEFAVORECIDO}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="CPF/CNPJ do Beneficiário Original: " />
+				<h:outputText value=" #{item.YLW63CODFORNCONS}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Nome/Razão Social do Pagador Original: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_NOM_PAG_ORI -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="CPF/CNPJ do Pagador Original: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_DOC_PAG_ORI FORMATACAO CPF CNPJ -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Nome/Razão Social do Pagador Efetivo: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_NOM_PAG_EFE -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="CPF/CNPJ do Pagador Efetivo: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_DOC_PAG_EFE -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Nome/Razão Social do Sacador Avalista: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_NOM_SAC_AVA -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="CPF/CNPJ Social do Sacador Avalista: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_DOC_SAC_AVA FORMATANDO CPF -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Valor Nominal: " />
+				<h:outputText value=" #{item.YLW63IMPNOMDOCMONEY}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Valor Pago: " />
+				<!-- CAMPO NOVA COBRANCA TSOE_VAL_PAG_TIT -->
+				<h:outputText value="" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Desc./Abat.: " />
+				<h:outputText value=" #{item.YLW63IMPABATIMENTOMONEY}" />
+			</p:outputPanel>
+			<p:outputPanel>
+				<h:outputLabel value="Juros: " />
+				<h:outputText value=" #{item.YLW63IMPJUROS}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Data de Vencimento: " />
+				<h:outputText value=" #{item.YLW63FECVENC}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Data de Pagamento: " />
+				<h:outputText value=" #{item.YLW63FECVALORCRED}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Situação: " />
+				<h:outputText value=" #{item.YLW63INDESTACOMP}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="No. Lista de Débito: " />
+				<h:outputText value=" #{item.YLW63NUMLISTADEB}" />
+			</p:outputPanel>
+			<p:outputPanel>
+				<h:outputLabel value="No. Protocolo: " />
+				<h:outputText value=" #{item.YLW63NUMPROTOCOLO}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Autenticação: " />
+				<h:outputText value=" #{item.YLW63CODAUT}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Valor a Pagar: " />
+				<h:outputText value=" #{item.valorTotal}" />
+			</p:outputPanel>
+
+			<p:outputPanel rendered="#{item.YLW63INCPRODDA eq 'S'}">
+				<h:outputLabel value="Titulo DDA: " />
+				<h:outputText value="Sim" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Tipo de Serviço: "/>
+				<h:outputText value=" #{item.YLW63TPSERV}"/>
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Complemento do Tipo de Serviço: "
+					styleClass="space-r" />
+				<h:outputText value=" #{item.YLW63DSCOMPSERV}" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<h:outputLabel value="Emitir Aviso:"  />
+				<h:outputText value=" #{item.YLW63INDAVISOPAG}" />
+			</p:outputPanel>
+
+			<p:outputPanel
+				rendered="#{item.YLW63INDAVISOPAG eq 'Favorecido' or item.YLW63INDAVISOPAG eq 'Remetente e Favorecido'}">
+
+				<p:outputPanel>
+					<h:outputLabel value="Endereço: " />
+					<h:outputText value=" #{item.YLW63LOGR}" />
+				</p:outputPanel>
+				<p:outputPanel>
+					<h:outputLabel value="Número: " />
+					<h:outputText value=" #{item.YLW63NUMLOGR}" />
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<h:outputLabel value="Complemento: " />
+					<h:outputText value=" #{item.YLW63NUMLOGR}" />
+				</p:outputPanel>
+				<p:outputPanel>
+					<h:outputLabel value="Bairro: " />
+					<h:outputText value=" #{item.YLW63BAIRRO}" />
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<h:outputLabel value="Cidade: " />
+					<h:outputText value=" #{item.YLW63CIDADE}" />
+				</p:outputPanel>
+				<p:outputPanel>
+					<h:outputLabel value="UF: " />
+					<h:outputText value=" #{item.YLW63UF}" />
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<h:outputLabel value="CEP: " />
+					<h:outputText value=" #{item.YLW63CEP - item.YLW63COMPLCEP}" />
+				</p:outputPanel>
+
+				<!-- FIM Condicional -->
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

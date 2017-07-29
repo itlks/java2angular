@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+	
+	<!-- Dispositivo de seguranca -Inicial- -->
+		<ui:include src="/commons/inicializaDL.xhtml"/>
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+     	<!-- Dispositivo de seguranca -Final- -->    
+	
+	
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.consulta1']}</p>
+						<p>#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.consulta2']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.consulta3']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-8">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.nome.empresa']} " />
+							<span>#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.cnpjSelecionado.nomeEmpresa}
+							</span>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4 text-right">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.cnpj']} " />
+							<span>#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.cnpjSelecionado.doctoFormatado}
+							</span>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+
+								<p:dataTable id="tabelaCnpjConsulta"
+									tableStyleClass="tacle-custom tacle-custom-zebrada"
+									value="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.correspondenciaCanaisEnviadaLista}"
+									var="listaCorrespondencia" rowKey="#{listaCorrespondencia}"
+									selection="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.correspondenciaEnviada}"
+									selectionMode="Single">
+									<p:ajax event="rowSelect"
+										listener="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.chamaTelaConfirmacao}" />
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.contaCorrente.consulta.correspondencias.enviadas.correspondencia']}" />
+										</f:facet>
+										<h:outputText
+											value="#{listaCorrespondencia.descricaoTangivel}"
+											id="penumpe">
+										</h:outputText>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.contaCorrente.consulta.correspondencias.enviadas.data.postagem']}">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</h:outputText>
+										</f:facet>
+										<h:outputText value="#{listaCorrespondencia.dataPostagem}">
+										</h:outputText>
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.contaCorrente.consulta.correspondencias.enviadas.data.entrega']}">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</h:outputText>
+										</f:facet>
+										<h:outputText value="#{listaCorrespondencia.dataDevolucao}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza pull-left"
+					actionListener="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.cancelar}"
+					role="button"
+					value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.cancelar']}" />
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					actionListener="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.voltarInicio}"
+					role="button"
+					value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+

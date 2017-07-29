@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.criteriosBusca']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel
+								value=" #{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.tipoConta']}:" />
+							<h:outputText
+								value=" #{debitoAutomaticoCadastroGenericoBBean.tipoContaSelecionada}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								<strong> 
+								<h:outputText styleClass="no-print no-visible"
+										value="#{msg['pages.pagamentos.incluir.debito.automatico.selecione.consultar']}"
+										rendered="#{debitoAutomaticoCadastroGenericoBBean.consulta}" />
+									<h:outputText styleClass="no-print no-visible"
+										value="#{msg['pages.pagamentos.incluir.debito.automatico.selecione.alterar']}"
+										rendered="#{debitoAutomaticoCadastroGenericoBBean.alteracao}" />
+										
+									<h:outputText styleClass="no-print no-visible"
+										value="#{msg['pages.pagamentos.incluir.debito.automatico.selecione.excluir']}"
+										rendered="#{debitoAutomaticoCadastroGenericoBBean.exclusao}" />
+								</strong>
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel
+								styleClass="table-responsive table table-striped table-click">
+								<p:dataTable id="dtGrid" var="emp"
+									rendered="#{!debitoAutomaticoCadastroGenericoBBean.consulta}"
+									value="#{debitoAutomaticoCadastroGenericoBBean.dto.empresasConveniadas}"
+									selection="#{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid}"
+									selectionMode="single"
+									rowKey="#{emp.identificacaoConsumidor} #{emp.nomeEmpresaConveniada}"
+									emptyMessage="#{msg['pages.pagamentos.incluir.debito.automatico.nenhum.registro']}">
+
+									<p:ajax event="rowSelect"
+										listener="#{debitoAutomaticoCadastroGenericoBBean.selecionarEmpresaConveniada}"
+										update="@form" />
+
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.empresaConveniada']}">
+										<h:outputText value="#{emp.nomeEmpresaConveniada}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.identificacaoConsumidor']}">
+										<h:outputText value="#{emp.identificacaoConsumidor}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.historico']}">
+										<h:outputText value="#{emp.historicoComplementar}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.formaPagamento']}">
+										<h:outputText value="#{emp.formaPagamentoFormatada}" />
+									</p:column>
+								</p:dataTable>
+
+								<p:dataTable id="dtGridConsulta" var="emp"
+									rendered="#{debitoAutomaticoCadastroGenericoBBean.consulta}"
+									value="#{debitoAutomaticoCadastroGenericoBBean.dto.empresasConveniadas}"
+									selection="#{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid}"
+									rowKey="#{emp.identificacaoConsumidor}" selectionMode="single"
+									emptyMessage="#{msg['pages.pagamentos.incluir.debito.automatico.nenhum.registro']}">
+
+									<p:ajax event="rowSelect"
+										listener="#{debitoAutomaticoCadastroGenericoBBean.selecionarEmpresaConveniada}"
+										update="@form" oncomplete="PF('popupDetalheEmpresa').show()" />
+
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.empresaConveniada']}">
+										<h:outputText value="#{emp.nomeEmpresaConveniada}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.identificacaoConsumidor']}">
+										<h:outputText value="#{emp.identificacaoConsumidor}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.historico']}">
+										<h:outputText value="#{emp.historicoComplementar}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.selecionar.grid.formaPagamento']}">
+										<h:outputText value="#{emp.formaPagamentoFormatada}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{debitoAutomaticoCadastroGenericoBBean.voltarParaTelaSelecao}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:dialog widgetVar="popupDetalheEmpresa" id="popupDetalheEmpresa"
+			position="center" width="800" modal="true" dynamic="true"  
+			resizable="false" styleClass="modal-box modalGray no-print no-visible" header="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.titulo']}">
+			<ui:include
+				src="../consultar/debitoAutomaticoPopUpDetalheEmpresaConveniada.xhtml" />
+		</p:dialog>
+	</ui:define>
+</ui:composition>

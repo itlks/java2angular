@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{segundaViaLicenciamentoBBean.verificaExibicaoMensagemErroTelaConfirmacao(false)}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.trasacao.exclusiva']}</strong>
+						</p>
+						<p>#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.ao.efetuar']}</p>
+						<p>#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.nao.efetue']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.para.informacoes']}
+							<p:commandLink>#{msg['pages.pagamentos.veiculosSP.2viaLicenciamento.secretaria.fazenda']}</p:commandLink>
+						</p> <br /></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.InforOsDadosParaSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-4">
+
+							<h:outputLabel
+								value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.RENAV']}"
+								styleClass="bold space" />
+							<h:outputText id="txtRenavam"
+								value="#{segundaViaLicenciamentoBBean.dto.numero}" />
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-8">
+
+							<h:outputLabel
+								value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.CodigDoMunic']}"
+								styleClass="bold space" />
+							<h:outputText id="txtCodMun"
+								value="#{segundaViaLicenciamentoBBean.dto.codMunicipio}" />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel
+								value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.Propr']}"
+								styleClass="bold space" />
+							<h:outputText id="txtProp"
+								value="#{segundaViaLicenciamentoBBean.dto.proprietario}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel
+								value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.CPFC']}		"
+								styleClass="bold space" />
+							<h:outputText id="txtCpf"
+								value="#{segundaViaLicenciamentoBBean.dto.numCpfCnpj}"
+								converter="converterCpfCnpj" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel
+								value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.PlacaDoVeicu']}"
+								styleClass="bold space" />
+							<h:outputText id="txtPlaca"
+								value="#{segundaViaLicenciamentoBBean.dto.placa}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h:outputLabel for=""
+								rendered="#{segundaViaLicenciamentoBBean.opcaoRemessa eq '3'}" value="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SelecUmaOpcaoParaO']}"/>
+	
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="radio label520">
+								<h:selectOneRadio id="_1"
+									rendered="#{segundaViaLicenciamentoBBean.opcaoRemessa eq '3'}"
+									value="#{segundaViaLicenciamentoBBean.opcaoRemessa1}"
+									styleClass="radio-auto-adjust">
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.RemesDoCRLVPeloCorre']} "
+										itemValue="1" selected="true" />
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SolicARemesDoCRLV']} "
+										itemValue="0" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+
+							<h:outputLabel
+								rendered="#{segundaViaLicenciamentoBBean.opcaoRemessa eq '1'}" itemValue="1" >
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.EnvidCRLV']}
+								</strong>
+									#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.RemesDoCRLVPeloCorre']} 
+								</h:outputLabel>
+
+							<h:outputLabel
+								rendered="#{segundaViaLicenciamentoBBean.opcaoRemessa eq '2'}" itemValue="0">
+								<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.EnvidCRLV']}
+								</strong>
+									#{msg['pages.pagamentos.veiculossp.licenciamento.pagamento.SolicARemesDoCRLV']}
+								 </h:outputLabel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					action="#{segundaViaLicenciamentoBBean.voltarPreenchimento}"
+					styleClass="btn btn-default btn-cinza" role="button">#{msg['page.btn.voltar']}</p:commandLink>
+
+				<p:blockUI block="cmdLnkContinuar" trigger="cmdLnkContinuar" />
+				<p:commandLink id="cmdLnkContinuar"
+					action="#{segundaViaLicenciamentoBBean.continuarPreenchimento}"
+					styleClass="btn btn-default" role="button">#{msg['page.btn.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

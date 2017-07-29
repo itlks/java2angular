@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<f:event type="preRenderView"
+			listener="#{contratoImprimirAditivoBBean.acessoDireto()}" />
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+
+					<span>
+						<p>#{msg['page.administrativo.contrato.imprimirAditivo.alert1']}</p>
+						<p>#{msg['page.administrativo.contrato.imprimirAditivo.alert2']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="termos-block">
+
+								<div id="divHtml">
+									<p:outputPanel styleClass="col-xs-12">
+
+										<p:outputPanel styleClass="row space-b">
+											<p:outputPanel styleClass="col-xs-12 text-center">
+												<h5>
+													<strong>#{msg['page.administrativo.contrato.imprimirAditivo.termo.titulo']}</strong>
+												</h5>
+											</p:outputPanel>
+
+										</p:outputPanel>
+										<p:outputPanel styleClass="row space-b">
+											<p:outputPanel styleClass="col-xs-12">
+
+												<p class="space-b">
+													#{msg['page.administrativo.contrato.imprimirAditivo.termo.line1']}
+												</p>
+												<p class="space-b">
+													<strong>#{msg['page.administrativo.contrato.imprimirAditivo.termo.line2nomeBanco']}</strong>
+													#{msg['page.administrativo.contrato.imprimirAditivo.termo.line2']}<strong>"#{msg['page.administrativo.contrato.imprimirAditivo.termo.line2NomeSantander']}"</strong>
+													#{msg['page.administrativo.contrato.imprimirAditivo.termo.line2e']}
+												</p>
+												<p class="space-b">
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.nomePrimeiroTitular}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ComEnd']} " />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.enderecoPrincipal} #{contratoImprimirAditivoBBean.contrato.numeroPrincipal} #{contratoImprimirAditivoBBean.contrato.complementoPrincipal} - #{contratoImprimirAditivoBBean.contrato.bairroPrincipal}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Municipio']}" />
+													<h:outputText
+														value=" #{contratoImprimirAditivoBBean.contrato.cidadePrincipal}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3siglaEstado']}" />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.ufPrincipal}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cep']}" />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.cepPrincipal}-" />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.complCepPrincipal}"></h:outputText>
+													<h:outputFormat
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cnpj']} ">
+														<f:param
+															value="#{contratoImprimirAditivoBBean.contrato.validaCnpjPrincipal}" />
+													</h:outputFormat>
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.cpfCnpjPrincipal}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ContaCorrente']}" />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.contaPrincipal}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3AgenciaNumero']} " />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.agenciaPrincipal}" />
+													<h:outputText
+														value=" #{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Designado']}" />
+													"
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.titularidadePrincipal}" />
+													".
+
+													<ui:repeat var="endereco"
+														value="#{contratoImprimirAditivoBBean.contrato.listaEnderecos}">
+														<p class="space-b">
+															<h:outputText value="#{endereco.nome}" />
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ComEnd']} " />
+															<h:outputText
+																value="#{endereco.endereco} #{endereco.numero} #{endereco.complemento} - #{endereco.bairro}" />
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Municipio']}" />
+															<h:outputText value=" #{endereco.cidade}" />
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3siglaEstado']}" />
+															<h:outputText value="#{endereco.uf}" />
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cep']}" />
+															<h:outputText value="#{endereco.cep}-" />
+															<h:outputText value="#{endereco.comp_cep}" />
+															<h:outputFormat
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cnpj']} ">
+																<f:param value="#{endereco.validaCpfCnjpj}" />
+															</h:outputFormat>
+
+															<h:outputText value="#{endereco.cpfCnpj}" />
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ContaCorrente']}" />
+															<h:outputText value="#{endereco.conta} " />
+															<h:outputText
+																value=" #{msg['page.administrativo.contrato.imprimirAditivo.termo.line3AgenciaNumero']} " />
+															<h:outputText value="#{endereco.agencia}" />
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Designado']}" />
+															"
+															<h:outputLabel value="#{endereco.titularidade}"
+																styleClass="bold" />
+															".
+														</p>
+													</ui:repeat>
+												</p>
+												<p:outputLabel
+													value="#{msg['page.administrativo.contrato.imprimirAditivo.alteracao.adm.banco']}"
+													rendered="#{contratoImprimirAditivoBBean.contrato.exibeTextoAlteracao}" />
+
+												<br />
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.termo.line4']}
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.dataInclusao}" />
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.data']}" />
+												</p>
+
+												<br />
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaUsuariosIncluidos}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.checked}"
+														name="tabincluidos" id="tabincluidos" disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_3">
+														<!-- inclusao -->
+														<p:outputLabel
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.check.usuarioInclusao']}" 
+															styleClass="bold" />
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<!--inicio dataTable 1 -->
+												<p:outputPanel
+													styleClass="table-responsive table table-striped"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaUsuariosIncluidos}"> 
+													<p:dataTable id="tabelaInclusaoMaster"
+														var="usuariosIncluidos"
+														value="#{contratoImprimirAditivoBBean.contrato.listaUsuariosIncluidos}">
+
+														<p:column style="width:30%"
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.table.header.nome']}">
+															<h:outputText value="#{usuariosIncluidos.nomeUsuario}" />
+														</p:column>
+														<p:column style="width:30%"
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.table.header.CPF/MF']}">
+															<h:outputText value="#{usuariosIncluidos.cpfUsuario}"
+																converter="converterCpfCnpj" />
+														</p:column>
+														<p:column style="width:40%"
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.table.header.DDD/Telefone/Ramal']}">
+															<h:outputText value="(#{usuariosIncluidos.ddd}) " />
+															<h:outputText value="#{usuariosIncluidos.telefone}" />
+															<h:outputText value="/"
+																rendered="#{usuariosIncluidos.ramal != null}" />
+															<h:outputText value="#{usuariosIncluidos.ramal}"
+																rendered="#{usuariosIncluidos.ramal != null}" />
+														</p:column>
+													</p:dataTable>
+												</p:outputPanel>
+												<!--fim dataTable1 -->
+
+												<!--exclusao-->
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaUsuariosExcluidos}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.checked}"
+														name="tabExcluidos" id="tabExcluidos" disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_34">
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.usuarioExclusao']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+												<p:outputPanel
+													styleClass="table-responsive table table-striped"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaUsuariosExcluidos}">
+													<p:dataTable id="tabelaExclusaoMaster"
+														var="usuariosExcluidos"
+														value="#{contratoImprimirAditivoBBean.contrato.listaUsuariosExcluidos}">
+
+														<p:column style="width:30%"
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.table.header.nome']}">
+															<h:outputText value="#{usuariosExcluidos.nomeUsuario}" />
+														</p:column>
+														<p:column style="width:30%"
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.table.header.CPF/MF']}">
+															<h:outputText value="#{usuariosExcluidos.cpfUsuario}"
+																converter="converterCpfCnpj" />
+														</p:column>
+														<p:column style="width:40%"
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.table.header.DDD/Telefone/Ramal']}">
+															<h:outputText value="(#{usuariosExcluidos.ddd}) " />
+															<h:outputText value="#{usuariosExcluidos.telefone}" />
+															<h:outputText value="/"
+																rendered="#{usuariosExcluidos.ramal != null}" />
+															<h:outputText value="#{usuariosExcluidos.ramal}"
+																rendered="#{usuariosExcluidos.ramal != null}" />
+														</p:column>
+													</p:dataTable>
+												</p:outputPanel>
+												<!--fim dataTable2 -->
+
+												<!-- Inicio inclusao de contas autorizadas -->
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaInclusaoAutorizadas}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.autorizadasChecked}"
+														name="AutorizadasInclusao" id="autorizadasInclusao"
+														disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_5">
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.inclusaoAutorizadas']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+												<ui:repeat var="autorizadasInclusao"
+													value="#{contratoImprimirAditivoBBean.contrato.listaInclusaoAutorizadas}">
+													<p class="space-b">
+														<h:outputText value="#{autorizadasInclusao.nome}" />
+														#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ComEnd']}
+														<h:outputText
+															value=" #{autorizadasInclusao.endereco} #{autorizadasInclusao.numero} #{autorizadasInclusao.complemento} - #{autorizadasInclusao.bairro}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Municipio']}" />
+														<h:outputText value=" #{autorizadasInclusao.cidade}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3siglaEstado']}" />
+														<h:outputText value="#{autorizadasInclusao.uf}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cep']}" />
+														<h:outputText value="#{autorizadasInclusao.cep}-" />
+														<h:outputText value="#{autorizadasInclusao.comp_cep}" />
+														<h:outputFormat
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cnpj']} ">
+															<f:param value="#{autorizadasInclusao.validaCpfCnjpj}" />
+														</h:outputFormat>
+														<h:outputText value="#{autorizadasInclusao.cpfCnpj}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ContaCorrente']}" />
+														<h:outputText value="#{autorizadasInclusao.conta}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3AgenciaNumero']} " />
+														<h:outputText value="#{autorizadasInclusao.agencia}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Designado']}" />
+														"
+														<h:outputLabel value="#{autorizadasInclusao.titularidade}" />
+														".
+													</p>
+												</ui:repeat>
+
+												<!-- Fim inclusao de contas autorizadas -->
+
+												<!-- Inicio exclusao de contas autorizadas -->
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaExclusaoAutorizadas}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.autorizadasChecked}"
+														name="AutorizadasExclusao" id="autorizadasExclusao"
+														disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_5">
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.exclusaoAutorizadas']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<ui:repeat var="autorizadasExclusao"
+													value="#{contratoImprimirAditivoBBean.contrato.listaExclusaoAutorizadas}">
+													<p class="space-b">
+														<h:outputText value="#{autorizadasExclusao.nome}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ComEnd']}" />
+														<h:outputText
+															value=" #{autorizadasExclusao.endereco} #{autorizadasExclusao.numero} #{autorizadasExclusao.complemento} - #{autorizadasExclusao.bairro}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Municipio']} " />
+														<h:outputText value=" #{autorizadasExclusao.cidade}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3siglaEstado']}" />
+														<h:outputText value="#{autorizadasExclusao.uf}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cep']}" />
+														<h:outputText value="#{autorizadasExclusao.cep}-" />
+														<h:outputText value="#{autorizadasExclusao.comp_cep}" />
+														<h:outputFormat
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Cnpj']} ">
+															<f:param value="#{autorizadasExclusao.validaCpfCnjpj}" />
+														</h:outputFormat>
+														<h:outputText value="#{autorizadasExclusao.cpfCnpj}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3ContaCorrente']}" />
+														<h:outputText value="#{autorizadasExclusao.conta}" />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3AgenciaNumero']} " />
+														<h:outputText value="#{autorizadasExclusao.agencia} " />
+														<h:outputText
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.termo.line3Designado']}" />
+														"
+														<h:outputLabel value="#{autorizadasExclusao.titularidade}" />
+														".
+													</p>
+												</ui:repeat>
+												<!-- Fim exclusao de contas autorizadas -->
+												<!--incluir contas -->
+
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaIncluirContas}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.contasChecked}"
+														name="contasInclusao" id="contasInclusao" disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_5">
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.titularidade.cliente.inclusao']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<p:outputPanel
+													styleClass="table-responsive table table-striped">
+													<p:dataTable id="tabelaInclusaoContas" var="inclusaoContas"
+														value="#{contratoImprimirAditivoBBean.contrato.listaIncluirContas}"
+														rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaIncluirContas}">
+														<f:facet name="header">
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.check.inclusaoContas']}"
+																styleClass="text-center" style="display:block;" />
+														</f:facet>
+
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.agencia']}">
+															<h:outputText value="#{inclusaoContas.codigoAgencia}" />
+														</p:column>
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.conta.corrente']}">
+															<h:outputText value="#{inclusaoContas.nroConta}" />
+														</p:column>
+
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.titularidade']}">
+															<h:outputText value="#{inclusaoContas.titularidade}" />
+														</p:column>
+
+													</p:dataTable>
+												</p:outputPanel>
+												<!--fim dataTable2 -->
+
+
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaExcluirContas}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.contasChecked}"
+														name="contasExclusao" id="contasExclusao" disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_5">
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.exclusaoContas']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<!--excluir contas -->
+
+
+												<p:outputPanel
+													styleClass="table-responsive table table-striped"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaExcluirContas}">
+													<p:dataTable id="tabelaExclusaoContas" var="exclusaoContas"
+														value="#{contratoImprimirAditivoBBean.contrato.listaExcluirContas}">
+														<f:facet name="header">
+															<h:outputText
+																value="#{msg['page.administrativo.contrato.imprimirAditivo.check.inclusaoContas']}"
+																styleClass="text-center" style="display:block;" />
+														</f:facet>
+
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.agencia']}">
+															<h:outputText value="#{exclusaoContas.codigoAgencia}" />
+														</p:column>
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.conta.corrente']}">
+															<h:outputText value="#{exclusaoContas.nroConta}" />
+														</p:column>
+
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.titularidade']}">
+															<h:outputText value="#{exclusaoContas.titularidade}" />
+														</p:column>
+
+													</p:dataTable>
+												</p:outputPanel>
+												<!--fim dataTable2 -->
+
+												<!-- incluir convenios -->
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaConvenios}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.checkConvenio}"
+														name="inclusaoConvenios" id="inclusaoConvenios"
+														disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel for="cb2_6">
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.restritivo.convenio']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<!--inicio dataTable incluir Convenios -->
+												<p:outputPanel
+													styleClass="table-responsive table table-striped">
+													<p:dataTable id="tabelaInclusaoConvenios" var="convenios"
+														value="#{contratoImprimirAditivoBBean.contrato.listaConvenios}"
+														rendered="#{not empty contratoImprimirAditivoBBean.contrato.listaConvenios}">
+
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.convenio']}">
+															<h:outputText value="#{convenios.nu_conv}" />
+														</p:column>
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.numero.instrumento']}">
+															<h:outputText value="" />
+														</p:column>
+
+														<p:column
+															headerText="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.data.assinatura']}">
+															<h:outputText value="" />
+														</p:column>
+
+													</p:dataTable>
+												</p:outputPanel>
+												<!--fim incluir convenios -->
+
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{empty contratoImprimirAditivoBBean.contrato.listaConvenios}">
+													<h:outputText>
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.restritivo.sem.convenio']}</strong>
+													</h:outputText>
+												</p:outputPanel>
+
+
+												<!-- alterar quantidade assinaturas -->
+
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{contratoImprimirAditivoBBean.contrato.checkAlteracaoQtdeAssinatura}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.checkAlteracaoQtdeAssinatura}"
+														name="quantidadeAssinatura" id="quantidadeAssinatura"
+														disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel>
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.master']}</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<p:outputPanel styleClass="space-b"
+													rendered="#{contratoImprimirAditivoBBean.contrato.checkAlteracaoQtdeAssinatura}">
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.master.assinatura']}
+	                                                                             #{contratoImprimirAditivoBBean.contrato.quantidadeAssinaturas}
+	                                                                             (#{contratoImprimirAditivoBBean.contrato.quantidadeAssinaturasExtenso})
+	                                                                             #{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.master.assinatura.master']}" />
+
+												</p:outputPanel>
+												<p class="space-b">
+													<h:outputText
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.responsabilidade']}" />
+												</p>
+
+												<!-- geracao de pendencias -->
+
+
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{contratoImprimirAditivoBBean.contrato.checkedPendencia}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.checkedPendencia}"
+														name="geracaoPendencia" id="geracaoPendencia"
+														disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel>
+														<p:outputLabel
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.geracao.pendencia']}"
+															styleClass="bold" />
+													</h:outputLabel>
+													<p>
+														<p:outputLabel
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.contratacoes']}" />
+														<p:outputLabel
+															value="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.cadastradas']}" />
+
+													</p>
+
+												</p:outputPanel>
+
+												<!-- alteracao de assinatura  -->
+
+												<p:outputPanel
+													rendered="#{contratoImprimirAditivoBBean.contrato.checkDispositivosSeguranca}">
+													<p:outputLabel
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.servicos.contratados']}"
+														styleClass="bold"></p:outputLabel>
+												</p:outputPanel>
+
+												<p:outputPanel styleClass="checkbox space-b"
+													rendered="#{contratoImprimirAditivoBBean.contrato.checkDispositivosSeguranca}">
+													<p:selectBooleanCheckbox
+														value="#{contratoImprimirAditivoBBean.contrato.checkDispositivosSeguranca}"
+														name="autorizadas" id="autorizadas" disabled="true">
+													</p:selectBooleanCheckbox>
+													<h:outputLabel>
+														<strong>#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.alteracao.servicos.especiais']}
+															<h:outputText
+																value="#{contratoImprimirAditivoBBean.contrato.quantidadeTokens}"></h:outputText>
+															<h:outputText
+																value=" (#{contratoImprimirAditivoBBean.contrato.quantidadeTokensExtenso})"></h:outputText>
+															#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.dispositivos.seguranca']}
+														</strong>
+													</h:outputLabel>
+												</p:outputPanel>
+
+												<P>
+													#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.consideracoes.termo']}
+												</P>
+												<br />
+												<P>#{msg['page.administrativo.contrato.imprimirAditivo.check.cadastro.consideracoes.vias']}</P>
+
+												<br />
+												<br />
+
+												<h5 class="text-center">
+													<h:outputText
+														value=" #{contratoImprimirAditivoBBean.contrato.cidadePrincipal}, " />
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.dataAtual}." />
+												</h5>
+												<br />
+												<br />
+
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="row space-b">
+
+											<p:outputPanel styleClass="col-xs-offset-2 col-xs-4 space-b">
+												<p:separator styleClass="sign-line" />
+												<p class="text-center">
+													<h:outputText styleClass="bold"
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.santander']}" />
+												</p>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-4 space-b">
+												<p:separator styleClass="sign-line" />
+												<p class="text-center space-b">
+													<h:outputText styleClass="bold"
+														value="#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.santander']}" />
+												</p>
+											</p:outputPanel>
+
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="row">
+
+											<p:outputPanel styleClass="col-xs-4 col-xs-offset-2">
+												<p:separator styleClass="sign-line" />
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-4">
+												<p:separator styleClass="sign-line" />
+											</p:outputPanel>
+
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-12 space-b">
+												<p class="text-center">
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.cliente']}
+													#{contratoImprimirAditivoBBean.contrato.cliente} :
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.nomePrimeiroTitular}" />
+												</p>
+												<p class="text-center space-b">
+
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.validaCnpjPrincipal}: " />
+
+													<h:outputText
+														value="#{contratoImprimirAditivoBBean.contrato.cpfCnpjPrincipal}" />
+												</p>
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<ui:repeat var="assinantes"
+											value="#{contratoImprimirAditivoBBean.assinaturasList}">
+
+
+											<p:outputPanel styleClass="row">
+
+												<p:outputPanel styleClass="col-xs-4 col-xs-offset-2">
+													<p:separator styleClass="sign-line" />
+												</p:outputPanel>
+
+												<p:outputPanel styleClass="col-xs-4">
+													<p:separator styleClass="sign-line" />
+												</p:outputPanel>
+
+											</p:outputPanel>
+
+
+
+											<p:outputPanel styleClass="row">
+												<p:outputPanel styleClass="col-xs-12 space-b">
+													<p class="text-center">
+														#{msg['page.administrativo.contrato.imprimirAditivo.termo.autorizada']}
+														#{contratoImprimirAditivoBBean.contrato.cliente}
+														<h:outputText value="#{assinantes.nome}" />
+													</p>
+													<p class="text-center space-b">
+
+														<h:outputText value="#{assinantes.validaCpfCnjpj}: " />
+
+														<h:outputText value="#{assinantes.cpfCnpj}" />
+													</p>
+												</p:outputPanel>
+											</p:outputPanel>
+										</ui:repeat>
+
+
+										<p:outputPanel styleClass="row space-b">
+											<p:outputPanel styleClass="col-xs-10 col-xs-offset-2 space-b">
+												<p>#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.testemunhas']}:</p>
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel styleClass="row space-b">
+
+											<p:outputPanel styleClass="col-xs-offset-2 col-xs-2 space-b">
+												<p:separator styleClass="sign-line" />
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.nome']}
+												</p>
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.rg']}
+												</p>
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.cpf']}
+												</p>
+											</p:outputPanel>
+
+											<p:outputPanel styleClass="col-xs-2 space-b">
+												<p:separator styleClass="sign-line" />
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.nome']}</p>
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.rg']}</p>
+												<p>
+													#{msg['page.administrativo.contrato.imprimirAditivo.assinatura.cpf']}</p>
+											</p:outputPanel>
+
+										</p:outputPanel>
+
+										<br />
+										<br />
+										<p:separator />
+
+										<p:outputPanel styleClass="row" >
+											<p:outputPanel styleClass="col-xs-8">
+												<p><h:outputText
+													value="#{msg['page.componente.rodape.informacoes.contato.dialog.central.atendimento']}"
+													styleClass="bold" /></p>
+			
+													<p><h:outputText
+														value="#{msg['page.componente.centralAtendimento.linha2']}" /></p>
+								
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-2">
+												<p><h:outputText
+													value="#{msg['page.componente.rodape.informacoes.sac']}"
+													styleClass="bold" />
+												</p><p>
+												<h:outputText
+													value="#{msg['page.componente.rodape.informacoes.sac.numero']}" /></p>
+											</p:outputPanel>
+											<p:outputPanel styleClass="col-xs-2">
+												<p><h:outputText
+													value="#{msg['page.componente.rodape.informacoes.ouvidoria']}"
+													styleClass="bold" />
+												</p><p>
+												<h:outputText
+													value="#{msg['page.componente.rodape.informacoes.ouvidoria.numero']}" /></p>
+
+											</p:outputPanel>
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</div>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml">
+					<ui:param name="divHtml" value="true" />
+					<ui:param name="enviarEmail" value="false" />
+				</ui:include>
+
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-secundario"
+					role="button"
+					value="#{msg['pages.apelidos.gpsApelidosConfirma.voltar']}"
+					style="margin-right:10px;"
+					action="#{contratoImprimirAditivoBBean.voltarParaMenu()}"
+					id="voltar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

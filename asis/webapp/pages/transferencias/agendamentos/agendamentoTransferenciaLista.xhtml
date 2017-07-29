@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle" />
+					<p>
+						<h:outputText value="#{msg['pages.agendamento.lista.paragrafo1']}" />
+					</p>
+					<p>
+						<h:outputText value="#{msg['pages.agendamento.lista.paragrafo2']}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['pages.agendamento.lista.title']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel
+							styleClass="form-group col-xs-9 no-print no-visible">
+							<h:outputText styleClass="h5"
+								value="#{msg['pages.agendamento.lista.subtitle']}" />
+						</p:outputPanel>
+						<p:outputPanel
+							styleClass="form-group col-xs-3 no-print no-visible">
+							<h:commandLink styleClass="pull-right link-termos"
+								update="dtGrid">
+								<i class="fa fa-save" />
+								<h:outputText
+									value="#{msg['pages.agendamento.lista.confirmacao.salvar.excel']}" />
+								<p:dataExporter type="xls" target="dtGrid"
+									fileName="lista_agendamentos"
+									postProcessor="#{agendamentoBBean.postProcessXLS}" />
+							</h:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+
+								<p:dataTable id="dtGrid" var="agendamento"
+									rowKey="#{agendamento}"
+									value="#{agendamentoBBean.gerenciadorPag.lista}"
+									selection="#{agendamentoBBean.gerenciadorPag.listaSelecionados}">
+
+									<p:ajax event="rowSelectCheckbox" process="checkbox" />
+									<p:ajax event="rowUnselectCheckbox" process="checkbox" />
+									<p:ajax event="toggleSelect" process="checkbox" />
+									<p:ajax event="rowSelect"
+										listener="#{agendamentoBBean.obterAgendamentoSelecionado}" />
+
+									<p:column id="checkbox" selectionMode="multiple"
+										styleClass="no-print no-visible" />
+
+									<p:column styleClass="col-xs-3">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.agendamento.lista.transacao']}" />
+										</f:facet>
+										<h:outputText value="#{agendamento.transacao}" />
+									</p:column>
+
+									<p:column styleClass="col-xs-1">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.agendamento.lista.dataAgendada']}" />
+										</f:facet>
+										<h:outputText value="#{agendamento.dataAgendadaFormatada}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+
+									<p:column styleClass="col-xs-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.agendamento.lista.solicitadoEm']}" />
+										</f:facet>
+										<h:outputText value="#{agendamento.dataHoraSolicitacao}">
+											<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+										</h:outputText>
+									</p:column>
+
+									<p:column styleClass="col-xs-2 text-right">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.agendamento.lista.valor']}" />
+										</f:facet>
+
+										<h:outputText value="#{agendamento.valor}">
+											<f:convertNumber type="currency" locale="pt_br"
+												currencySymbol="" />
+										</h:outputText>
+
+									</p:column>
+
+									<p:column styleClass="col-xs-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.agendamento.lista.situacao']}" />
+										</f:facet>
+										<h:outputText value="#{agendamento.situacao}" />
+									</p:column>
+
+									<p:column styleClass="col-xs-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.agendamento.lista.motivo']}" />
+										</f:facet>
+										<h:outputText value="#{agendamento.motivo}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+							<p:outputPanel id="panelBotaoTabela" styleClass="no-visible">
+								<p:commandLink role="dtGrid" styleClass="pull-right fimPag"
+									id="proximo"
+									value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.proximaPagina']}"
+									rendered="#{agendamentoBBean.gerenciadorPag.exibeAvancar}">
+									<p:ajax update="formGeral:panelBotaoTabela,dtGrid"
+										listener="#{agendamentoBBean.avancarPagina()}" />
+								</p:commandLink>
+								<h:outputText styleClass="pull-right fimPag space-r space-l"
+									value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.barra']}"
+									rendered="#{agendamentoBBean.gerenciadorPag.exibeAvancar and agendamentoBBean.gerenciadorPag.exibeVoltar}" />
+								<p:commandLink role="dtGrid" styleClass="pull-right fimPag"
+									id="anterior"
+									value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.paginaAnterior']}"
+									rendered="#{agendamentoBBean.gerenciadorPag.exibeVoltar}">
+									<p:ajax update="formGeral:panelBotaoTabela,dtGrid"
+										listener="#{agendamentoBBean.voltarPagina()}" />
+								</p:commandLink>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="no-print no-visible">
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel id="panelBotao" styleClass="col-xs-12 text-right">
+					<p:commandButton id="btnVoltar"
+						styleClass="btn btn-default btn-cinza" role="button"
+						action="#{agendamentoBBean.voltarEmConsulta}"
+						value="#{msg['page.btn.voltar']}" />
+					<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel>
+			<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

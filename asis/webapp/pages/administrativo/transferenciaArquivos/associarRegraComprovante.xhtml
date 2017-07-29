@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="placeholders" id="conteudo">
+
+			<p:outputPanel styleClass="header-page">
+				<span>#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.nav1']}</span>
+				<span>#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.separador']}</span>
+				<span>#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.nav2']}</span>
+
+				<h2>#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.associar.regra']}</h2>
+			</p:outputPanel>
+
+
+			<h4>#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.comprovante']}</h4>
+			<p:outputPanel styleClass="conteudo-painel">
+				<h5>
+					#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.secundario']}
+					<h:outputText style="margin-left: 5px;"
+						value="#{transferenciaArquivosAssociarRegrasBBean.usuarioSelecionado}" />
+				</h5>
+
+				<br />
+
+				<p:outputPanel
+					rendered="#{transferenciaArquivosAssociarRegrasBBean.exibirRemessas()}">
+					<h5>
+						#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.remessas.cadastradas']}
+					</h5>
+					<p:dataTable
+						value="#{transferenciaArquivosAssociarRegrasBBean.remessas}"
+						var="produto" styleClass="tacle-custom-header-left"
+						tableStyleClass="table-layout">
+						<p:column
+							headerText="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.produto']}">
+							<h:outputText value="#{produto.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.layout']}">
+							<h:outputText value="#{produto.layout}" />
+						</p:column>
+					</p:dataTable>
+					<br />
+				</p:outputPanel>
+
+
+				<p:outputPanel
+					rendered="#{transferenciaArquivosAssociarRegrasBBean.exibirRetornos()}">
+					<h5>
+						#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.retornos.cadastrados']}
+					</h5>
+
+					<p:dataTable
+						value="#{transferenciaArquivosAssociarRegrasBBean.retornos}"
+						var="produto" styleClass="tacle-custom-header-left"
+						tableStyleClass="table-layout">
+						<p:column
+							headerText="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.produto']}">
+							<h:outputText value="#{produto.nome}" />
+						</p:column>
+						<p:column
+							headerText="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.layout']}">
+							<h:outputText value="#{produto.layout}" />
+						</p:column>
+					</p:dataTable>
+
+				</p:outputPanel>
+				<p:separator />
+				<p:outputPanel style="margin: 20px 0;">
+					<p:panelGrid styleClass="label-custom table-autenticacao"
+						columns="2">
+
+						<p:outputLabel
+							value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.autenticacao']}" />
+						<p:outputLabel
+							value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.data.hora']}" />
+
+						<h:outputText
+							value="#{transferenciaArquivosAssociarRegrasBBean.autenticacaoBancaria}" />
+						<h:outputText
+							value="#{transferenciaArquivosAssociarRegrasBBean.dataHoraTransacao}" />
+					</p:panelGrid>
+				</p:outputPanel>
+
+				<p:separator />
+
+				<p:outputPanel style="margin: 10px auto; line-height: 16px;">
+					<h:outputText
+						value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.caso.duvida']}" />
+					<br />
+					<h:outputText
+						value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.capitais.regioes']}" />
+					<br />
+				</p:outputPanel>
+				<p:outputPanel
+					styleClass="rodape-painel text-right comprovante-buttons">
+					<h:panelGroup>
+						<h:graphicImage style="width:20px; margin:0px 5px 10px 10px;"
+							value="/images/pdf.png" />
+						<p:commandLink href="#"
+							value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.pdf']}" />
+						<h:graphicImage style="width:20px; margin:0px 5px 10px 10px;"
+							value="/images/email.png" />
+						<p:commandLink href="#"
+							value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.email']}" />
+
+						<h:graphicImage style="width:20px; margin:0px 5px 10px 10px;"
+							value="/images/imprimir.png" />
+						<p:commandLink href="#"
+							value="#{msg['page.administrativo.transferenciaArquivos.associarRegrasCoomprovante.imprimir']}" />
+					</h:panelGroup>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

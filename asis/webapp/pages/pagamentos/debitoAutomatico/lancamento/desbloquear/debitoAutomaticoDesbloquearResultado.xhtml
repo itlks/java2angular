@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.alert1']}<br />
+					#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.alert2']}<br />
+					#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.alert3']}<br />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.criterioBusca']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="tipoConta" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.tipoConta']}" />
+							<h:outputText id="tipoConta" value="#{debitoAutomaticoDesbloquearBBean.tipoContaSelecionada.descricao}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="dataInicial" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.dataInicial']}" />
+							<h:outputText id="dataInicial" value="#{debitoAutomaticoDesbloquearBBean.dataInicialFormat}" />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="dataFinal" styleClass="space"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.dataFinal']}" />
+							<h:outputText id="dataFinal" value="#{debitoAutomaticoDesbloquearBBean.dataFinalFormat}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				
+				</p:outputPanel>
+			</p:outputPanel>
+	
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.resultadoBusca']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+	
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:dataTable id="tabela" var="d"
+										value="#{debitoAutomaticoDesbloquearBBean.listaConsulta}"
+										emptyMessage="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.mensagem.sem.dados.consulta']}"
+										selection="#{debitoAutomaticoDesbloquearBBean.dto}"
+										selectionMode="single" rowKey="#{d}">
+	
+										<p:ajax event="rowSelect" process="@this" update=""
+											listener="#{debitoAutomaticoDesbloquearBBean.selecionarDebitoAutomaticoBloqueado}" />
+	
+										<p:column
+											headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.dataDebitoTabela']}">
+											<h:outputText value="#{d.dataDebito}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.identificadorTabela']}">
+											<h:outputText value="#{d.identificacaoConsumidor}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.bloqTabela']}">
+											<h:outputText value="#{d.bloqueadoPor}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.formaPagamentoTabela']}">
+											<h:outputText value="#{d.formaPagamento}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.empresaConveniadaTabela']}">
+											<h:outputText value="#{d.nomeEmpresaConveniada}" />
+										</p:column>
+										<p:column
+											headerText="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.valorTabela']}">
+											<h:outputText value="R$ #{d.valor}" />
+										</p:column>
+									</p:dataTable>
+								</p:outputPanel>
+							</p:outputPanel>
+	
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel id="panelBotao" styleClass="col-md-12 text-right"
+				rendered="#{debitoAutomaticoDesbloquearBBean.tipoContaSelecionada != null}">
+				<p:commandLink id="voltar" styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{debitoAutomaticoDesbloquearBBean.voltarEmConsulta}">
+					#{msg['page.btn.voltar']}
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+		<br />
+		<br />
+	</ui:define>
+</ui:composition>

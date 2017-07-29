@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Selecione um dos Cartões</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputLabel>
+								<span>Para realizar esta operação, você deve escolher um
+									dos cartões listados.</span>
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel for="" value="CNPJ: "></h:outputLabel>
+							<span>05.454.471/0001-93</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel for="" value="Empresa: "></h:outputLabel>
+							<span>TESTES PARCELADO PJ</span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel for="" value="Área: "></h:outputLabel>
+							<span></span>
+						</p:outputPanel>
+
+
+					</p:outputPanel>
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-2">
+							<h:outputLabel for="" value="Produto Selecionado "></h:outputLabel>
+							<span></span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-2">
+
+
+							<p:graphicImage value="/images/visa.png" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel for="" value="NEGOCIOS EMPRESAS PLATINUM"></h:outputLabel>
+							<span></span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel for="" value="Número do Cartão:"></h:outputLabel>
+							<span> XXXX.XXXX.XXXX.7658 </span>
+						</p:outputPanel>
+
+
+					</p:outputPanel>
+					<p:separator />
+					<h:outputLabel for="" value="Selecione o Cartão:"></h:outputLabel>
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:dataTable id="tabela1">
+							<p:column styleClass="col-md-4" headerText="Cartão">
+								<h:outputText value="teste" />
+							</p:column>
+							<p:column styleClass="col-md-4" headerText="Número do Cartão">
+								<h:outputText value="teste2" />
+							</p:column>
+							<p:column styleClass="col-md-4"
+								headerText="Nome gravado no Cartão">
+								<h:outputText value="teste3" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza no-margin"	actionListener="#" role="button">
+					Voltar 
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>                  
+	</ui:define>
+</ui:composition>         

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.conta.corrente.consulta.copiaDeCheques.label.dados.cheque.selecionado']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="titulo-painel">
+
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.cheque.nome']} "
+									styleClass="bold" />
+								<h:outputText
+									value="#{contaCorrenteConsultaChequesBBean.session.nomeTitularConta}" />
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="titulo-painel">
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.cheque.numero.do.cheque']} "
+									styleClass="bold" />
+								<h:outputText
+									value="#{contaCorrenteConsultaChequesBBean.chequeEmitido.numcheqFormatado}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="titulo-painel">
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.cheque.valor']} "
+									styleClass="bold" />
+								<h:outputText>#{msg['pages.moeda']} </h:outputText>
+								<h:outputText
+									value="#{contaCorrenteConsultaChequesBBean.chequeEmitido.importe}" converter="valorMonetarioConverter">
+								</h:outputText>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="titulo-painel">
+
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.agencia']}: "
+									styleClass="bold" />
+								<h:outputText
+									value="#{contaCorrenteConsultaChequesBBean.session.agencia}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="titulo-painel">
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.data.compensacao']} "
+									styleClass="bold" />
+								<h:outputText
+									value="#{contaCorrenteConsultaChequesBBean.chequeEmitido.fhcpago}" converter="dateConverterFormat"/>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="titulo-painel">
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.tarifa.servico']} " 
+									styleClass="bold" />
+								<h:outputText
+									value="#{msg['pages.moeda']} #{contaCorrenteConsultaChequesBBean.dadosTelaConsulta.tarifa}" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="titulo-painel">
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.conta.corrente']} "
+									styleClass="bold" />
+								<h:outputText
+									value="#{contaCorrenteConsultaChequesBBean.session.conta}" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="titulo-painel">
+								<h:outputText
+									value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.descritivo.copia.cheque']} " />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{contaCorrenteConsultaChequesBBean.voltarTelaListarCheques}">#{msg['page.conta.corrente.consulta.copiaDeCheques.label.voltar']}</p:commandLink>
+				
+			<p:commandLink styleClass="btn btn-default" onclick="encryptSecureDL();" 
+						value="#{msg['page.conta.corrente.consulta.copiaDeCheques.label.continuar']}"
+						 id="btnConfirmar"  
+						action="#{contaCorrenteConsultaChequesBBean.chamaTelaComprovante}"/>
+			
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="rodape" rendered="#{loginBBean.rodapeLogin}">
+			<p:outputLabel value="#{ msg['page.home.label.rodape.linha1'] }" /><br/>
+			<p:outputLabel value="#{ msg['page.home.label.rodape.linha2'] }" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="rodape" rendered="#{!loginBBean.rodapeLogin}">
+			<p:outputLabel value="#{ msg['page.home.label.rodape.linha1'] }" /> <br/>
+			<p:outputLabel value="#{ msg['page.home.label.rodape.linha2'] }" />
+	</p:outputPanel>
+
+</ui:composition>

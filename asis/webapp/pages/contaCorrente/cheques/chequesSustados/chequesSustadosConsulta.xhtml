@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:jsp="http://java.sun.com/JSP/Page"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:c="http://java.sun.com/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.cheques.chequesSustados.consulta.titleConsulta']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+			
+				<p:outputPanel styleClass="box-shadow no-margin-bottom ">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+						
+							<p:outputPanel styleClass="row">
+	                        	<p:outputPanel styleClass="col-xs-12">
+	
+									<p:outputPanel styleClass="table-responsive table table-striped">
+		
+											<p:dataTable 	id="dtCheqSust"
+															rendered="#{not empty chequesSustadosBBean.listaChequesSustados.listaConsCheq}"
+															value="#{chequesSustadosBBean.listaChequesSustados.listaConsCheq}"
+															var="sust" >
+												<p:column 	headerText="#{msg['pages.contacorrente.cheques.chequesSustados.consulta.numero']}">
+													<h:outputText value="#{sust.numcheq}" >
+														<f:convertNumber pattern="000000" />
+													</h:outputText>
+												</p:column>
+												<p:column 	headerText="#{msg['pages.contacorrente.cheques.chequesSustados.consulta.dataDaSustacao']}">
+													<h:outputText 	value="#{sust.fhcalta}" 
+																	pattern="dd/MM/yyyy"
+																	converter="dateConverterFormat" />
+												</p:column>
+												<p:column 	headerText="#{msg['pages.contacorrente.cheques.chequesSustados.consulta.motivo']}">
+													<h:outputText value="#{sust.motivo}" />
+												</p:column>
+											</p:dataTable>
+		
+									</p:outputPanel>
+								
+								</p:outputPanel>
+								
+							</p:outputPanel>
+							
+						</p:outputPanel>
+						
+					</p:outputPanel> 
+
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+			
+		</p:outputPanel>
+
+	</ui:define>
+	
+</ui:composition>

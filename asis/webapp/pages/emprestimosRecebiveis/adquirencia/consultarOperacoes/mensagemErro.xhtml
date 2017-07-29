@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<p:outputPanel
+						styleClass="mensagem-conteudo text-left content-modal-text">
+						<p:graphicImage style="width: 35px; height: 35px;"
+							url="/images/btnExclamation.png" />
+						<p:spacer height="10" />
+						<p:outputLabel value="Mensagem" />
+					</p:outputPanel>
+					<span> <p:outputPanel styleClass="quebra" /> <p:outputLabel
+							escape="false"
+							value="#{consultarAntecipacaoBBean.dto.msgSemDetalhe}"
+							style="font-weight: 400; margin-top: 15px;" /> <p:outputPanel
+							styleClass="quebra" /> <h:outputText
+							value="#{consultarAntecipacaoBBean.dataHora}" />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-secundario"
+					role="button" value="Voltar" style="margin-right:10px;"
+					action="#{consultarAntecipacaoBBean.voltarTelaConsulta()}"
+					id="voltar" />
+
+				<p:commandLink styleClass="btn btn-default btn-secundario"
+					role="button" value="Home" style="margin-right:10px;"
+					action="#{consultarAntecipacaoBBean.IrParaHome()}" id="Home" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

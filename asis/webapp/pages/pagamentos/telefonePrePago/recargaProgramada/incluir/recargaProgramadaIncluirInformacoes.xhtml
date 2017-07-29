@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel styleClass="space" for="operadoraComDdd"
+			value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.empresa']}" />
+		<h:outputText id="operadoraComDdd"
+			value="#{recargaProgramadaIncluirBBean.operadoraComDdd}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel for="" styleClass="space"
+			value="#{msg['pages.pagamentos.telefoneprepago.recarga.codigodearea']}" />
+		<h:outputText for="" value="#{recargaProgramadaIncluirBBean.ddd}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel styleClass="space" for="telefoneFormatado"
+			value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.ntelefone']}" />
+		<h:outputText id="telefoneFormatado"
+			value="#{recargaProgramadaIncluirBBean.telefoneFormatado}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel styleClass="space" for="nome"
+			value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.periodicidade']}" />
+		<h:outputText id="nome"
+			value="#{recargaProgramadaIncluirBBean.periodicidade.nome}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel styleClass="space" for="dataInicio"
+			value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.dtinicio']}" />
+		<h:outputText id="dataInicio"
+			value="#{recargaProgramadaIncluirBBean.dataInicio}" />
+	</p:outputPanel>
+
+	<p:outputPanel
+		rendered="#{recargaProgramadaIncluirBBean.dataFimIndeterminada}">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="space" for="Indeterminado"
+				value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.dtfim']}" />
+			<h:outputText id="Indeterminado" value="Indeterminado" />
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel
+		rendered="#{!recargaProgramadaIncluirBBean.dataFimIndeterminada}">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel styleClass="space" for="dataFim"
+				value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.dtfim']}" />
+			<h:outputText id="dataFim" value="#{recargaProgramadaIncluirBBean.dataFim}" />
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel styleClass="space" for="valorRecarga"
+			value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.valor']}" />
+		<h:outputText id="valorRecarga" value="#{recargaProgramadaIncluirBBean.valorRecarga}">
+			<f:convertNumber type="currency" locale="pt_br"
+				currencySymbol="R$" />
+		</h:outputText>
+	</p:outputPanel>
+
+</ui:composition>

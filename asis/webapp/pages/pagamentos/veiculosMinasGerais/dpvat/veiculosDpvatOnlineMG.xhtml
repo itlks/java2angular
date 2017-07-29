@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:include	src="/pages/pagamentos/veiculosMinasGerais/dpvat/dpvatDadosComunsMG.xhtml" />
+
+	<p:separator />
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-4"  rendered="#{!dpvatMinasGeraisBBean.veiculoDTO.habilitaAgendamento}">
+			<h5 class="space-b">
+				<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Exercicio']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatMinasGeraisBBean.cotaSelecionada.anoExercio}" />
+			</h5>
+			<h5>
+				<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Vencimento']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatMinasGeraisBBean.cotaSelecionada.dataVencimento}" />					
+			</h5>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-4"  rendered="#{dpvatMinasGeraisBBean.veiculoDTO.habilitaAgendamento}">
+			<h5 class="space-b">
+				<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Exercicio']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatMinasGeraisBBean.cotaSelecionada.anoExercio}" />
+			</h5>
+			<h5>
+				<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Agendamento']}: "  styleClass="bold" />					
+				<h:outputText value="#{dpvatMinasGeraisBBean.veiculoDTO.dataAgendamento}" />
+			</h5>
+		</p:outputPanel>	
+		
+		<p:outputPanel styleClass="col-xs-4">
+			<h5 class="space-b">
+				<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.CotaParcela']}: " styleClass="bold" />
+				<h:outputText value="#{dpvatMinasGeraisBBean.cotaSelecionada.descricao}" />					
+			</h5>
+			<h5>
+				<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.SubValor']}: " styleClass="bold" />
+				<h:outputText id="txtValorTotal1" value="#{dpvatMinasGeraisBBean.cotaSelecionada.valor}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>				
+			</h5>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-4">		
+		</p:outputPanel>						
+	</p:outputPanel>	
+</ui:composition>

@@ -12,11 +12,11 @@
                 
                 <div class="col-xs-3">
                     <label>Nome do Componente</label>
-                    <input type="text" [(value)]="componente">
+                    <input type="text" [(ngModel)]="componente">
                 </div>
                 <div class="col-xs-3">
                     <label>Nome da tag</label>
-                    <input type="text" [(value)]="tag">
+                    <input type="text" [(ngModel)]="tag">
                 </div>
                 
             </div>
@@ -47,9 +47,9 @@
 
                             <button type="button" class="btn btn-default" (click)="downloadComponent()">Download do Component <span class="glyphicon glyphicon-download-alt"></span></button>
 
-                            <button type="button" class="btn btn-default" (click)="downloadContent()">Download do lees <span class="glyphicon glyphicon-download-alt"></span></button>
+                            <button type="button" class="btn btn-default" (click)="downloadLess()">Download do lees <span class="glyphicon glyphicon-download-alt"></span></button>
 
-                            <button type="button" class="btn btn-default" (click)="downloadContent()">Download do spec <span class="glyphicon glyphicon-download-alt"></span></button>
+                            <button type="button" class="btn btn-default" (click)="downloadSpec()">Download do spec <span class="glyphicon glyphicon-download-alt"></span></button>
                         </div>
                          <div class="input-group-btn">
                             <button type="button" class="btn btn-default" (click)="displayFile()">Exibir <span class="glyphicon glyphicon glyphicon-list-alt"></span></button>

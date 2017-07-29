@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentComprovante">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<h:outputLabel for="pacote" styleClass="space"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.telaToken.descricaoPacote']}" />
+							<h:outputText id="pacote"
+								value="#{pacoteServicoContratarAlterarBBean.selecionado.pacote}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="diaDebito" styleClass="space"
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.diaDebito']}" />
+							<h:outputText id="diaDebito"
+								value="#{pacoteServicoContratarAlterarBBean.pacoteAtualDTO.diaDebito}">
+								<f:convertNumber pattern="00" />
+							</h:outputText>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.comprovante.contratar']}"
+								rendered="#{!pacoteServicoContratarAlterarBBean.isAlterado}" />
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.comprovante.alterar']}"
+								rendered="#{pacoteServicoContratarAlterarBBean.isAlterado}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel
+								value="#{msg['page.contaCorrente.pacoteservico.contratar.comprovante.1.1']} 
+                            						 #{msg['page.contaCorrente.pacoteservico.contratar.comprovante.1.2']}" />
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+
+	</ui:define>
+</ui:composition>

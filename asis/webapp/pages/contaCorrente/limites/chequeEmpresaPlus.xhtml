@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h5>
+						<h:outputText value="#{msg['page.contacorrente.cheques.limites.empresaplus.tituloTela']}" />
+					</h5>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel id="PanelPreenchimento" styleClass="row">
+
+						<p:outputPanel styleClass="form-group col-xs-4">
+							<h:outputLabel for="dataInicial"
+								value="#{msg['page.contacorrente.cheques.limites.empresaplus.dataInicial']}" />
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="dataInicial"
+									value="#{chequeEmpresaPlusBBean.chequeEmpresaPlusDTO.dataInicial}"
+									onkeyup="mascaraData(this, event)"
+									converter="dateStringConverter" pattern="dd/MM/yyyy"
+									maxlength="10">
+									<p:ajax event="dateSelect" update="periodoApuracao detalhes"
+										listener="#{chequeEmpresaPlusBBean.resetExibePeriodosApuracao}" />
+								</p:calendar>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="form-group col-xs-4">
+							<h:outputLabel for="dataFinal"
+								value="#{msg['page.contacorrente.cheques.limites.empresaplus.dataFinal']}" />
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="dataFinal"
+									value="#{chequeEmpresaPlusBBean.chequeEmpresaPlusDTO.dataFinal}"
+									onkeyup="mascaraData(this, event)"
+									converter="dateStringConverter" pattern="dd/MM/yyyy"
+									maxlength="10">
+									<p:ajax event="dateSelect" update="periodoApuracao detalhes"
+										listener="#{chequeEmpresaPlusBBean.resetExibePeriodosApuracao}"/>
+								</p:calendar>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="form-group col-xs-4 row no-visible">
+							<p:outputPanel styleClass="input-no-label">
+								<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+								<p:commandLink id="btnContinuar" onstart="openLoad();"
+									oncomplete="closeLoad();" styleClass="btn btn-default"
+									action="#{chequeEmpresaPlusBBean.enviar}" role="button"
+									value="#{msg['page.contacorrente.cheques.limites.empresaplus.enviar']}"
+									update="periodoApuracao detalhes" />
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel id="periodoApuracao" styleClass="row">
+						<p:outputPanel styleClass="col-xs-4"
+							rendered="#{chequeEmpresaPlusBBean.exibePeriodosApuracao}">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="tipoOrigemApreensao"
+									value="#{msg['page.contacorrente.cheques.limites.empresaplus.periodoApuracao']}" />
+								<h:selectOneMenu name="tipoOrigemApreensao"
+									value="#{chequeEmpresaPlusBBean.chequeEmpresaPlusDTO.dataProcessamento}">
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+									<f:selectItems
+										value="#{chequeEmpresaPlusBBean.chequeEmpresaPlusDTO.listaPeriodos}" />
+									<p:ajax update="detalhes" onstart="openLoad();"
+										oncomplete="closeLoad();"
+										listener="#{chequeEmpresaPlusBBean.consultaEncargos}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="detalhes">
+			<p:outputPanel rendered="#{chequeEmpresaPlusBBean.exibeDetalhes}">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<h5>
+								<h:outputText value="#{msg['page.contacorrente.cheques.limites.empresaplus.encargosperiodo']}" />
+								<h:outputText value=" " />
+								<h:outputText value="#{chequeEmpresaPlusBBean.chequeEmpresaPlusDTO.encargosPeriodo}" />
+							</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1" var="tabela"
+									styleClass="tableHeaderInvisible"
+									value="#{chequeEmpresaPlusBBean.listaCamposTabela}">
+									<f:facet name="header">
+										<h:outputText styleClass="text-center"
+											value="#{chequeEmpresaPlusBBean.chequeEmpresaPlusDTO.titulo}" />
+									</f:facet>
+									<p:column styleClass="col-xs-6">
+										<h:outputText value="#{tabela.descricaoCampo}" />
+										<p:graphicImage id="imgTooltipDescricaoCampo"
+											value="/images/icon-i.png"
+											styleClass="imgInfoApuracao separator-no-top no-visible"
+											rendered="#{tabela.tooltip != null}" />
+										<p:tooltip id="toolTipDescricaoCampo"
+											for="imgTooltipDescricaoCampo" value="#{tabela.tooltip}" />
+									</p:column>
+									<p:column styleClass="col-xs-6 text-right">
+										<h:outputText value="#{tabela.valorCampo}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+							<p:outputPanel width="100%">
+								<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{chequeEmpresaPlusBBean.voltarMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							<p:outputLabel
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.confirmacao1']}" />
+						</p>
+						<p>
+							<p:outputLabel
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.confirmacao2']}" />
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.confirmacao3']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-8">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.nome.empresa']}" />
+							<span>
+								#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.cnpjSelecionado.nomeEmpresa}</span>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4 text-right">
+							<h:outputLabel styleClass="bold" for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.cnpj']}  " />
+							<span>
+								#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.cnpjSelecionado.doctoFormatado}</span>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p:separator />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h:outputLabel for=""
+								value="#{msg['page.contaCorrente.consulta.correspondencias.correspondencia']} "
+								styleClass="bold" />
+							<h:outputText
+								value=" #{contaCorrenteConsultaCorrespondenciasEnviadasBBean.correspondenciaEnviada.segmentoPrincipal}" />
+							<br />
+							<h:outputLabel for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.identificacao']}"
+								styleClass="bold" />
+							<h:outputText
+								value=" #{contaCorrenteConsultaCorrespondenciasEnviadasBBean.correspondenciaEnviada.descricaoTangivel}" />
+							<br />
+							<h:outputLabel for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.data.postagem']} "
+								styleClass="bold" />
+							<p:spacer width="3px" />
+							<h:outputText
+								value="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.correspondenciaEnviada.dataPostagem}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+							<br />
+							<h:outputLabel for=""
+								value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.data.entrega']}  "
+								styleClass="bold" />
+							<p:spacer width="3px" />
+							<h:outputText
+								value="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.correspondenciaEnviada.dataDevolucao}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					actionListener="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.voltarTelaConsulta}"
+					role="button"
+					value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.voltar']}" />
+			
+				<p:commandLink styleClass="btn btn-default"
+					onclick="encryptSecureDL();"
+					actionListener="#{contaCorrenteConsultaCorrespondenciasEnviadasBBean.chamaTelaComprovante}"
+					role="button"
+					value="#{msg['pages.contacorrente.consultaCorrespondenciaEnviadas.continuar']}" />
+					
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>
+

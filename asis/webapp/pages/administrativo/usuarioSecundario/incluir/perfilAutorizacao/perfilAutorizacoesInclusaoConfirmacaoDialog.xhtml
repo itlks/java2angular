@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateDialog.xhtml">
+
+	<ui:define name="contentDialog">
+		<p:outputPanel id="perfilAcessoAutorizacaoDialog">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.perfilAutorizacao.autorizacoesInclusaoConfirmacao.confirma.dados']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+	
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="box-shadow">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-12">
+								<p>
+									<strong>#{msg['page.administrativo.perfilAutorizacao.alterarConfirmacao.nomePerfil']}</strong>
+									#{perfilAutorizacaoIncluirBBean.novoPerfil.nomePerfilAutorizacao}
+								</p>
+								<p>
+									<strong>#{msg['page.administrativo.perfilAutorizacao.alterarConfirmacao.descricao']}</strong>
+									#{perfilAutorizacaoIncluirBBean.novoPerfil.descricaoPerfilAutorizacao}
+								</p>
+								<br />
+							</p:outputPanel>
+						</p:outputPanel>
+	
+						<p:outputPanel>
+
+							<ui:repeat var="servico" value="#{perfilAutorizacaoIncluirBBean.grupos}">
+					
+								<h5><p:outputLabel value="#{servico.nomeServico}"/></h5>
+							
+								<p:outputPanel styleClass="table-responsive table table-striped">
+									<p:outputPanel>
+										<p:dataTable var="trans" value="#{servico.transacoes}"
+											tableStyleClass="first-td-40">
+					
+											<p:column style="width:40%;"
+												headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.transacao']}">
+												<h:outputText value="#{trans.nomeTransacao}" />
+											</p:column>
+					
+											<p:column styleClass="text-left" style="width:20%;"
+												headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.qtd.ass']}">
+												<h:outputText value="#{trans.qtdAssinaturas}" />
+											</p:column>
+					
+											<p:column styleClass="text-right" style="width:20%;"
+												headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.valor']}">
+												<h:outputText value="--" rendered="#{!servico.renderizaInputValorAlcada}" />
+												<h:outputText value="#{trans.valorAlcada}" rendered="#{servico.renderizaInputValorAlcada}" >
+													<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+												</h:outputText>
+											</p:column>
+					
+											<p:column styleClass="text-right width22" style="width:20%;"
+												headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.limite.diario']}">
+												<h:outputText value="--" rendered="#{!servico.renderizaInputValorDiario}" />
+												<h:outputText value="#{trans.valorDiario}" rendered="#{servico.renderizaInputValorDiario}" >
+													<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+												</h:outputText>
+											</p:column>
+					
+										</p:dataTable>
+									</p:outputPanel>
+								</p:outputPanel>
+							</ui:repeat>
+					
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+	
+			<p:outputPanel>
+				<ui:include src="/commons/dispositivoSegurancaNovo.xhtml"/>
+			</p:outputPanel>
+	
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12 text-right">
+					
+					<p:commandLink styleClass="btn btn-default btn-cinza"
+						value="#{msg['pages.perfilAutorizacao.autorizacoesInclusaoConfirmacao.voltar']}"
+						action="#{perfilAutorizacaoIncluirBBean.voltarPreenchimento2Dialog}"
+						role="button" />
+						
+					<p:blockUI block="btnContinuarDialog" trigger="btnContinuarDialog" />	
+					<p:commandLink id="btnContinuarDialog" onclick="encryptSecureDL();" 
+						value="#{msg['pages.perfilAutorizacao.autorizacoesInclusaoConfirmacao.continuar']}"
+						role="button" onstart="dialog_block();" oncomplete="dialog_unblock();"
+						ajax="true" update="formGeral:perfilAcessoAutorizacaoDialog" process="formGeral:perfilAcessoAutorizacaoDialog"
+						action="#{perfilAutorizacaoIncluirBBean.continuarTelaConfirmacaoDialog}"
+						styleClass="btn btn-default">
+					</p:commandLink>
+					<p:defaultCommand target="btnContinuarDialog"/>	
+					<p:blockUI block="btnContinuarDialog" trigger="btnContinuarDialog" />
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p>#{msg['page.administrativo.mobileToken.servico.confirmacao.label.caso.duvida']}</p>
+	
+			<p>#{msg['page.administrativo.mobileToken.servico.confirmacao.label.capitais.regioes']}</p>
+			<br /> 
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

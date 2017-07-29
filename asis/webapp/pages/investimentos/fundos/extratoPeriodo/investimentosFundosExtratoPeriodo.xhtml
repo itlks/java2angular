@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>Acompanhe em um único lugar todas as movimentações e saldos
+							dos seus Fundos de Investimento. Através do Extrato por Período,
+							você tem acesso às informações detalhadas e resumidas no período
+							que desejar.</p> <br />
+						<p>Para visualizar seus movimentos separados por conta fundo,
+							basta acessar a opção "Visualização por" e selecionar "Conta
+							Fundo"</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<h:outputLabel for="" styleClass="bold"
+								value="Selecione o Fundo desejado para Consultar o Extrato (Período máximo de 60 dias)" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-3">
+							<h:outputLabel for="" value="Tipo Sub-Serviço:" />
+							<h:selectOneMenu name="tipoOrigemApreensao " styleClass="opc">
+								<f:selectItem itemValue="Selecione" itemLabel="Selecione"
+									noSelectionOption="true" />
+								<f:selectItem itemValue="1" itemLabel="15 últimos dias" />
+								<f:selectItem itemValue="2" itemLabel="30 últimos dias" />
+								<f:selectItem itemValue="3" itemLabel="45 últimos dias" />
+								<f:selectItem itemValue="4" itemLabel="60 últimos dias" />
+								<f:selectItem itemValue="5" itemLabel="Outros períodos" />
+								<f:selectItem itemValue="6" itemLabel="Mês atual" />
+								<f:selectItem itemValue="7" itemLabel="Mês anterior" />
+
+							</h:selectOneMenu>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<h:outputLabel for="" value="De:" />
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="popup" value="#{calendarView.date2}">
+								</p:calendar>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass=" col-md-4">
+							<h:outputLabel for="" value="Até:" />
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="popup1" value="#{calendarView.date2}">
+								</p:calendar>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass=" col-md-1 margin-top-22">
+							<p:commandLink styleClass="btn btn-default" actionListener="#"
+								role="button">OK</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-3">
+							<h:outputLabel for="" value="Visualização por:" />
+							<h:selectOneMenu name="tipoOrigemApreensao">
+								<f:selectItem itemValue="Selecione" itemLabel="Selecione"
+									noSelectionOption="true" />
+								<f:selectItem itemValue="_1" itemLabel="Fundo" />
+								<f:selectItem itemValue="_2" itemLabel="Conta Fundo" />
+
+							</h:selectOneMenu>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4 col-md-offset-1">
+							<br />
+							<br />
+							<h:outputLabel styleClass="pull-right" for=""
+								value="10/04/2016 a 08/06/2016" />
+							<h:outputLabel styleClass="pull-right bold" for=""
+								value="Período:" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<br />
+							<br />
+							<h:outputLabel styleClass="pull-right" for=""
+								value="09/06/2016 às 10:34h" />
+							<h:outputLabel styleClass="pull-right bold" for=""
+								value="Data/Hora:" />
+						</p:outputPanel>
+
+
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1">
+									<p:column styleClass="col-md-6" headerText="Fundo">
+										<h:outputText value="teste" />
+									</p:column>
+									<p:column styleClass="col-md-3" headerText="Horário">
+										<h:outputText value="teste1" />
+									</p:column>
+									<p:column styleClass="col-md-3"
+										headerText="Valor da aplicação (R$)">
+										<h:outputText value="teste2" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:separator styleClass="space-b" />
+					<p:outputPanel styleClass="familia-fundos">
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+								<p:outputPanel styleClass="bold">Famílias de Fundos</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-6">
+								<p>
+									<i class="fa fa-circle curto-prazo" aria-hidden="true"></i>
+									CURTO PRAZO
+								</p>
+								<p>
+									<i class="fa fa-circle di" aria-hidden="true"></i> DI
+								</p>
+								<p>
+									<i class="fa fa-circle renda-fixa" aria-hidden="true"></i>
+									RENDA FIXA
+								</p>
+								<p>
+									<i class="fa fa-circle multimercado" aria-hidden="true"></i>
+									MULTIMERCADO
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-6">
+								<p>
+									<i class="fa fa-circle cambial" aria-hidden="true"></i> CAMBIAL
+								</p>
+								<p>
+									<i class="fa fa-circle acoes" aria-hidden="true"></i> AÇÕES
+								</p>
+								<p>
+									<i class="fa fa-circle outros" aria-hidden="true"></i> OUTROS
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,309 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="item" value="#{autorizacoesPendenciaDetalheBBean.dadosDetalheCash}" />
+	<p:outputPanel styleClass="row form-horizontal">
+		<p:outputPanel styleClass="row space-r space-ll">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Convênio: " />
+				<h:outputText value=" #{item.convenio}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Conta de Débito: " />
+				<h:outputText value=" #{item.contaDebito}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="No. compromisso cliente: " />
+				<h:outputText value=" #{item.YLW63SEUNUMERO}" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="No. compromisso banco: " />
+				<h:outputText value=" #{item.YLW63NUMCOMPRO}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Data de Pagamento: " />
+				<h:outputText value=" #{item.YLW63FECVALORCRED}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Situação: " />
+				<h:outputText value=" #{item.YLW63INDESTACOMPMOTBLOQREQ} " />
+
+			</p:outputPanel>
+
+		</p:outputPanel>
+		<p:outputPanel styleClass="space-t col-xs-12">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:separator />
+			</p:outputPanel>
+		</p:outputPanel>
+		<h5 class="bold space-b space-ll">Dados do pagamento</h5>
+
+		<p:outputPanel styleClass="space-b space-ll">
+			<p:outputPanel styleClass="col-xs-6 ">
+				<p:outputPanel styleClass="col-xs-4 space-t no-padding">
+					<p:outputPanel styleClass="text-center">
+						<p:graphicImage id="republicaFBrasil"
+							styleClass="republicaFb-darfSimples" value="/images/u132.gif" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-8">
+					<p:outputPanel rendered="#{item.YLW63FORMPAG eq 'DARFN'}"
+						styleClass="text-center">
+						<h:outputText value="MINISTÉRIO DA FAZENDA" styleClass="col-xs-12" />
+						<h:outputText value="SECRETARIA DA RECEITA FEDERAL"
+							styleClass="col-xs-12" />
+						<h:outputText
+							value="Documento de Arrecadação de Receiras Federais"
+							styleClass="col-xs-12 no-padding" />
+						<h:outputLabel value="DARF" styleClass="col-xs-12 bold" />
+					</p:outputPanel>
+					<p:outputPanel rendered="#{!item.YLW63FORMPAG eq 'DARFN'}"
+						styleClass="text-center">
+						<h:outputText value="MINISTÉRIO DA FAZENDA" styleClass="col-xs-12" />
+						<h:outputText value="SECRETARIA DA RECEITA" styleClass="col-xs-12" />
+						<h:outputText value="FEDERAL" styleClass="col-xs-12" />
+						<h:outputText
+							value="Documento de Arrecadação do Sistema Integrado do Pagamento de "
+							styleClass="col-xs-12" />
+						<h:outputText
+							value="Impostos e Contribuiçõesdas Microempresas e Empresas de Pequeno Porte"
+							styleClass="col-xs-12" />
+						<h:outputText value="DARF SIMPLES" styleClass="col-xs-12 bold" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="no-border no-padding"
+						rendered="#{item.YLW63INDAVISOPAG eq 'Favorecido' or item.YLW63INDAVISOPAG eq 'Remetente e Favorecido'}">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Endereço: " />
+							<h:outputText value=" #{item.YLW63LOGR}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Número: " />
+							<h:outputText value=" #{item.YLW63NUMLOGR}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Complemento: " />
+							<h:outputText value=" #{item.YLW63COMPLLOGR}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Bairro: " />
+							<h:outputText value=" #{item.YLW63BAIRRO}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Cidade: " />
+							<h:outputText value=" #{item.YLW63CIDADE}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="UF: " />
+							<h:outputText value=" #{item.YLW63UF}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="CEP: " />
+							<h:outputText value=" #{item.YLW63CEP}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row col-xs-12">
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="01" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Nome da Empresa / Telefone" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row col-xs-12">
+					<p:outputPanel styleClass="space-t no-padding col-xs-6" />
+					<p:outputPanel styleClass="space-t space-b col-xs-6">
+						<h:outputText value="#{item.YLW63NOMEFAVORECIDO}" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+			<p:outputPanel styleClass="col-xs-6 border-left-col">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="02" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Periodo de Apuração:" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<h:outputText value="#{item.YLW63PERIODAPURTRIB}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="03" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6 ">
+						<h:outputLabel value="N° do CPF ou CNPJ: "
+							rendered="#{item.YLW63FORMPAG eq 'DARFN'}" />
+						<h:outputLabel value="N° do CNPJ: "
+							rendered="#{!item.YLW63FORMPAG eq 'DARFN'}" />
+					</p:outputPanel>
+					<h:outputText value="#{item.YLW63CODFORNCONS}"
+						styleClass="col-xs-4" />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="04" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Código da Receita: " />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<h:outputText value=" #{item.YLW63CODRECPAG}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="05" />
+					</p:outputPanel>
+					<p:outputPanel rendered="#{item.YLW63FORMPAG eq 'DARFN'}">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Número de Referência: " />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputText value="#{item.YLW63NUMREFTRIB}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel rendered="#{!item.YLW63FORMPAG eq 'DARFN'}">
+						<p:outputPanel styleClass="col-xs-6">
+							<h:outputLabel value="Valor da Receita Bruta Acumulada: " />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputText value="#{item.YLW63IMPRECBRUTA}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1 ">
+						<h:outputLabel value="06" />
+					</p:outputPanel>
+					<p:outputPanel rendered="#{item.YLW63FORMPAG eq 'DARFN'}">
+						<p:outputPanel styleClass="col-xs-6 ">
+							<h:outputLabel value="Data de Vencimento: " />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4 ">
+							<h:outputText value="#{item.YLW63FECVENC}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel rendered="#{!item.YLW63FORMPAG eq 'DARFN'}">
+						<p:outputPanel styleClass="col-xs-5 ">
+							<h:outputLabel value="Percentual: " />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-6 ">
+							<h:outputText value=" #{item.YLW63PORCRECBRUTA}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="07" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Valor do Principal:" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<h:outputText value="R$ #{item.YLW63IMPNOMDOC}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1 ">
+						<h:outputLabel value="08" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Valor do Multa:" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<h:outputText value="#{item.YLW63IMPMULTA}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="09" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Valor dos Juros e/ou Encargos DL-1.025/69:" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4 space-t">
+						<h:outputText value="#{item.YLW63IMPJUROS}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-1">
+						<h:outputLabel value="10" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-6">
+						<h:outputLabel value="Total:" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-4">
+						<h:outputText value="#{item.valorTotal}" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12 space-t row">
+				<p:separator />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Confirming: " />
+				<h:outputText value=" #{item.YLW63INDCONF}" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12 ">
+				<h:outputLabel value="Tipo de Serviço:" />
+				<h:outputText value=" #{item.YLW63TPSERV}" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12 ">
+				<h:outputLabel value="Complemento do tipo de Serviço:" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12 ">
+				<h:outputLabel value="Emitir Aviso:" />
+				<h:outputText value=" #{item.YLW63INDAVISOPAG}" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12 ">
+				<h:outputLabel value="Autenticação:" />
+				<h:outputText value=" #{item.YLW63CODAUT}" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12 space-t row">
+				<p:separator />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12 text-center space-t row">
+				<h:outputLabel value="ATENÇÃO" styleClass="col-xs-12" />
+				<h:outputLabel
+					value="Transação exclusiva para o pagamento do Documento de Arrecadação de Receitas Federais."
+					styleClass="col-xs-12" />
+				<h:outputText
+					value="É vedado o recolhimento de tributos administrados pela Secretaria da Receita Federal cujo valor seja inferior a R$ 10,00. Ocorrendo tal situação, adicione esse valor a contribuição de mesmo código de período subsequentes, até que o final seja igual ou superior a R$ 10,00."
+					styleClass="col-xs-12" />
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputText
+						value="Preencha cuidadosamente, pois os dados informados são de sua responsabilidade." />
+					<h:outputText value="Para mais informações, acesse o site da " />
+					<a class="space"
+						href="http://www.fazenda.sp.gov.br/Pagamentos/darf/default.htm"
+						target="_blank">Receita Federal.</a>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

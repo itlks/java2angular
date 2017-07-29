@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+                
+				<h:inputHidden id="PBE_RANDOMPR" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.hsRandom}"/>
+				<h:inputHidden id="HS_Question" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.hsQuestion}"/>
+				<h:inputHidden id="Rabin_N" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.hsRabinN}"/>
+				<h:inputHidden id="idPergunta" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.pergunta}"/>
+				<h:inputHidden id="criptResposta" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.criptResposta}"/>
+				<h:inputHidden id="perguntaHash" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.perguntaHash}" />
+				<h:inputHidden id="respostaHash" partialSubmit="true" value="#{atributosDaSessao.perguntaRespostaDTO.respostaHash}" />
+					
+				<script language="JavaScript">
+					jQuery(document).ready(function() {
+						pergunta();
+					});
+				</script>
+	
+</ui:composition>

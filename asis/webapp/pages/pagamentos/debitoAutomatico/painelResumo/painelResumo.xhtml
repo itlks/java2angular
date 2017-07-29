@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsp="http://java.sun.com/JSP/Page"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="/templates/templateConsultaNovo.xhtml">
+
+      <ui:define name="content">
+            
+            <p:outputPanel styleClass="row">
+                  <p:outputPanel styleClass="col-lg-12 no-print no-visible">
+                        <p:outputPanel
+                             styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+                             <i class="fa fa-exclamation-circle"></i>
+                             <span>
+                                   <p>#{msg['pages.pagamentos.dda.painelresumo.porEstaOpcao']}</p>
+                                   <p>#{msg['pages.pagamentos.dda.painelresumo.noDiaAnterior']}</p>
+                             </span>
+                        </p:outputPanel>
+                  </p:outputPanel>
+            </p:outputPanel>
+      
+            <p:outputPanel styleClass="row">
+                  <p:outputPanel styleClass="col-lg-12">
+                        <p:outputPanel styleClass="titulo-painel">
+                              <h4>#{msg['pages.pagamentos.dda.painelresumo.posicaoConsolidada']}</h4>
+                        </p:outputPanel>
+                  </p:outputPanel>
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="row">
+                  <p:outputPanel styleClass="col-lg-12">
+                        <p:outputPanel styleClass="box-shadow no-margin-bottom">
+                        
+                             <p:outputPanel styleClass="row">   
+                                   <p:outputPanel styleClass="col-xs-5">
+                                         <h5 class="space-b">
+                                               <h:outputText value="#{msg['pages.pagamentos.dda.painelresumo.pagadorEletronico']} " styleClass="bold" />
+                                               <h:outputText value="#{debitoDiretoAutorizadoPainelResumoBBean.ddaPainelResumoDTO.pagadorEletronico}" />
+                                         </h5>       
+                                   </p:outputPanel>
+                        
+                                   <p:outputPanel styleClass="col-xs-7">
+                                         <h5 class="space-b">
+                                               <h:outputText value="#{msg['pages.pagamentos.dda.painelresumo.cpfcnpj']} " styleClass="bold" />
+                                               <h:outputText value="#{debitoDiretoAutorizadoPainelResumoBBean.ddaPainelResumoDTO.numDocumento}" converter="converterCpfCnpj" />
+                                         </h5>       
+                                   </p:outputPanel>
+                             </p:outputPanel>
+
+                             <p:separator />
+                                               
+                             <p:outputPanel styleClass="row space-b" />     
+                                                           
+                             <p:outputPanel styleClass="row">
+                                   <p:outputPanel styleClass="col-lg-12">
+                                         <h:outputLabel for="" value="#{msg['pages.pagamentos.dda.painelresumo.posicaoDiaAnterior']}" class="bold" />
+                                   </p:outputPanel>
+                             </p:outputPanel>
+
+                             <p:outputPanel styleClass="table-responsive table table-striped">
+                                   <p:dataTable id="diaAnteriorTable" value="#{debitoDiretoAutorizadoPainelResumoBBean.ddaPainelResumoDTO.listaEventosPosicaoDiaAnterior}" var="posicaoDiaAnterior">
+                                         <p:column headerText="#{msg['pages.pagamentos.dda.painelresumo.situacaoTitulo']}" styleClass="col-xs-5">
+                                               <h:outputText value="#{posicaoDiaAnterior.descricao}" rendered="#{not (atributosDaSessao.nivelUsuario eq 'P')}" styleClass="space-r" />
+                                               <h:commandLink value="#{posicaoDiaAnterior.descricao}" action="#{debitoDiretoAutorizadoPainelResumoBBean.redirectEvento}" 
+                                                     rendered="#{atributosDaSessao.nivelUsuario eq 'P'}" 
+                                                     styleClass="link-termos space-r"/>                                                                             
+                                               
+                                               <p:graphicImage id="tooltip" value="/images/icon-i.png"
+                                                                 style="width: 15px;" />
+                                               <p:tooltip for="tooltip" style="top: 110.583px">
+                                                     <h:outputText>
+                                                           <p>#{posicaoDiaAnterior.mensagemToolTip}</p>
+                                                     </h:outputText>
+                                               </p:tooltip>
+                                         </p:column>
+                                         
+                                         <p:column headerText="#{msg['pages.pagamentos.dda.painelresumo.quantidade']}" styleClass="col-xs-3 text-center">
+                                               <h:outputText value="#{posicaoDiaAnterior.quantidade}" rendered="#{not (atributosDaSessao.nivelUsuario eq 'P')}" styleClass="space-r" />
+                                               <h:commandLink value="#{posicaoDiaAnterior.quantidade}" action="#{debitoDiretoAutorizadoPainelResumoBBean.redirectEvento}" 
+                                                     rendered="#{atributosDaSessao.nivelUsuario eq 'P'}" />
+                                         </p:column>
+                                         
+                                         <p:column headerText="#{msg['pages.pagamentos.dda.painelresumo.valorTotal']}" styleClass="col-xs-4 text-right">
+                                               <h:outputText value="#{posicaoDiaAnterior.valorTotal}" rendered="#{not (atributosDaSessao.nivelUsuario eq 'P')}" styleClass="space-r">
+                                                     <f:convertNumber type="currency" currencySymbol="" />
+                                               </h:outputText>
+                                               <h:commandLink action="#{debitoDiretoAutorizadoPainelResumoBBean.redirectEvento}" rendered="#{atributosDaSessao.nivelUsuario eq 'P'}">
+                                                     <h:outputText value="#{posicaoDiaAnterior.valorTotal}">
+                                                           <f:convertNumber type="currency" currencySymbol="" />
+                                                     </h:outputText>
+                                               </h:commandLink>
+                                         </p:column>
+                                   </p:dataTable>
+                             </p:outputPanel>
+
+                             <p:outputPanel styleClass="row">
+                                   <p:outputPanel styleClass="col-lg-12">
+                                         <h:outputLabel for="" value="#{msg['pages.pagamentos.dda.painelresumo.posicaoDia']}" class="bold" />
+                                   </p:outputPanel>
+                             </p:outputPanel>
+
+                                               
+                             <p:outputPanel styleClass="table-responsive table table-striped">
+                                   <p:dataTable id="diaTable" value="#{debitoDiretoAutorizadoPainelResumoBBean.ddaPainelResumoDTO.listaEventosPosicaoDia}" var="posicaoDia">
+                                         <p:column headerText="#{msg['pages.pagamentos.dda.painelresumo.situacaoTitulo']}" styleClass="col-xs-5">
+                                               <h:outputText value="#{posicaoDia.descricao}"  rendered="#{not (atributosDaSessao.nivelUsuario eq 'P')}" styleClass="space-r" />
+                                               <h:commandLink value="#{posicaoDia.descricao}"  action="#{debitoDiretoAutorizadoPainelResumoBBean.redirectEvento}" 
+                                                     rendered="#{atributosDaSessao.nivelUsuario eq 'P'}" 
+                                                     styleClass="link-termos space-r"/>
+                                                                                              
+                                               <p:graphicImage id="tooltip" value="/images/icon-i.png"
+                                                                 style="width: 15px;" />
+                                               <p:tooltip for="tooltip" style="top: 110.583px">
+                                                     <h:outputText>
+                                                           <p>#{posicaoDia.mensagemToolTip}</p>
+                                                     </h:outputText>
+                                               </p:tooltip>
+                                         </p:column>
+                                         
+                                         <p:column headerText="#{msg['pages.pagamentos.dda.painelresumo.quantidade']}" styleClass="col-xs-3 text-center">
+                                               <h:outputText value="#{posicaoDia.quantidade}" rendered="#{not (atributosDaSessao.nivelUsuario eq 'P')}" styleClass="space-r" />
+                                               <h:commandLink value="#{posicaoDia.quantidade}" action="#{debitoDiretoAutorizadoPainelResumoBBean.redirectEvento}" rendered="#{atributosDaSessao.nivelUsuario eq 'P'}" />
+                                         </p:column>
+                                         
+                                         <p:column headerText="#{msg['pages.pagamentos.dda.painelresumo.valorTotal']}" styleClass="col-xs-4 text-right">
+                                               <h:outputText value="#{posicaoDia.valorTotal}" rendered="#{not (atributosDaSessao.nivelUsuario eq 'P')}" styleClass="space-r">
+                                                     <f:convertNumber type="currency" currencySymbol="" />
+                                               </h:outputText>
+                                               <h:commandLink action="#{debitoDiretoAutorizadoPainelResumoBBean.redirectEvento}" rendered="#{atributosDaSessao.nivelUsuario eq 'P'}">
+                                                     <h:outputText value="#{posicaoDia.valorTotal}">
+                                                           <f:convertNumber type="currency" currencySymbol="" />
+                                                     </h:outputText>
+                                               </h:commandLink>
+                                         </p:column>
+                                   </p:dataTable>
+                             </p:outputPanel>
+
+                        </p:outputPanel>
+                                                                 
+                   <ui:include src="/commons/pdf/pdfButtons.xhtml" />
+                                         
+                  </p:outputPanel>                   
+            </p:outputPanel>
+            
+            <p:outputPanel styleClass="row space-b">
+                  <p:outputPanel styleClass="col-xs-12 text-right">                      
+                        <p:commandLink id="cmdLnkVoltar"
+                             value="#{msg['page.btn.voltar']}"
+                             styleClass="btn btn-default btn-cinza no-print no-visible"
+                             role="button"
+                              action="#{debitoDiretoAutorizadoPainelResumoBBean.voltarMenu}" />
+                        
+                  </p:outputPanel>
+            </p:outputPanel>
+                        
+      </ui:define>
+</ui:composition>

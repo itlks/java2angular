@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+                
+	<script type="text/javascript" language="javascript">
+		jQuery(window).load(function() {
+  			initDL();
+	  		gerarChave();
+		});
+	</script>
+
+	<h:inputHidden id="chaveClient" partialSubmit="true" value="#{atributosDaSessao.browserPublicKey}"/>
+	<h:inputHidden id="chaveServer" partialSubmit="true" value="#{atributosDaSessao.serverPublicKey}"/>
+	<p:remoteCommand name="gerarChave" action="#{dispositivoSecureBBean.gerarChave}" process=":formGeral" update=":formGeral" async="false" />		
+</ui:composition>

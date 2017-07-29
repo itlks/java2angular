@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+     
+<ui:define name="content">
+
+		<div class="row space-b">
+			<div class="col-md-6 col-xs-6 site-map">
+				<span>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.autorizacoes']}
+					<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.separador']}</strong>
+					#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.consultas']}
+				</span>
+				<h1>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.titulo']}</h1>
+			</div>
+		</div>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.subtitulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<h:outputText value="#{msg['msg.alert.limitesUtilizados.nao.existem.dados.consulta']}" rendered="#{!(limitesUtilizadosBBean.limitesUtilizados.size() > 0)}" />
+					<p:outputPanel rendered="#{limitesUtilizadosBBean.limitesUtilizados.size() > 0}" styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-4 ">
+						
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.nomeCompleto']}
+								</strong>
+								<p:outputLabel value=" #{limitesUtilizadosBBean.limitesUtilizados.nomeUsuario}" />
+							</p>
+
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.area']}
+								</strong>
+								<p:outputLabel value=" #{limitesUtilizadosBBean.limitesUtilizados.area}" />
+							</p>
+
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.nomeDeAcesso']}
+								</strong>
+								<p:outputLabel value=" #{limitesUtilizadosBBean.limitesUtilizados.nomeAcesso}" />
+							</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4 ">
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.cpf']}
+								</strong>
+								<p:outputLabel value=" #{limitesUtilizadosBBean.limitesUtilizados.cpfFormatado}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable 	id="tabela1" 
+												var="perfil"
+												rendered="#{limitesUtilizadosBBean.limitesUtilizados.size() > 0}"
+												value="#{limitesUtilizadosBBean.limitesUtilizados}">
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.agenciaContaCorrente']}">
+										<h:outputText value="#{perfil.agenciaContaFormatada}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.perfilAutorizacoes']}">
+										<h:outputText value="#{perfil.nomePerfilAutorizacao}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.descricaoPerfilAutorizacoes']}">
+										<h:outputText value="#{perfil.descPerfilAutorizacao}" />
+									</p:column>
+								</p:dataTable>
+								<h:outputText value="#{msg['msg.alert.limitesUtilizados.nao.existem.dados.consulta']}" rendered="#{limitesUtilizadosBBean.limitesUtilizados.retCode == 50402 || limitesUtilizadosBBean.limitesUtilizados.size() == 0}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4 space-b">
+							<p>#{limitesUtilizadosBBean.limitesUtilizados.nomeProduto}</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4 space-b" rendered="#{limitesUtilizadosBBean.renderTpTran2}">
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.convenio']}
+								</strong>
+								<p:outputLabel value="#{limitesUtilizadosBBean.limitesUtilizados.convenio}" />
+							</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4 space-b" rendered="#{limitesUtilizadosBBean.renderTpTran2}">
+							<p>
+								<strong>#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.contaDebito']}
+								</strong>
+								<p:outputLabel value="#{limitesUtilizadosBBean.limitesUtilizados.contaDebito}" />
+							</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela3" var="pagamento"
+								rendered="#{limitesUtilizadosBBean.limitesUtilizados.size() > 0}"
+									value="#{limitesUtilizadosBBean.limitesUtilizados}">
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.transacao']}">
+										<h:outputText value="#{pagamento.tipoTransacao}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.quantidadeAssinaturas']}">
+										<h:outputText value="#{pagamento.qtdAssinaturas}" />
+									</p:column>
+									<p:column rendered="#{limitesUtilizadosBBean.renderTpTran1e2}"
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.limiteUtilizado']}">
+										<h:outputText value="#{limitesUtilizadosBBean.limiteUtilizadoValor}" />
+									</p:column>
+									<p:column rendered="#{limitesUtilizadosBBean.renderTpTran1e2}"
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.valorAlcada']}">
+										<h:outputText value="#{pagamento.valorAlcadaFormatado}" />
+									</p:column>
+									<p:column rendered="#{limitesUtilizadosBBean.renderTpTran1}"
+										headerText="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.limiteDiario']}">
+										<h:outputText value="#{pagamento.limiteDiarioFormatado}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+		   <p:outputPanel styleClass="col-md-12 text-right">
+		   
+		      <p:commandLink styleClass="btn btn-default btn-cinza"  action="#{limitesUtilizadosBBean.voltar}">
+		         #{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.botaoVoltar']} 
+		      </p:commandLink>
+		   </p:outputPanel>
+		</p:outputPanel>     
+     
+</ui:define>
+</ui:composition>

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content"> 
+		<p:outputPanel styleClass="row space-b no-visible" >
+			<p:outputPanel styleClass="col-lg-12 ">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.investimentos.fundos.resgatar.atencao.text1']}</p>
+						<p>#{msg['pages.investimentos.fundos.resgatar.atencao.text2']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible" >
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.investimentos.fundos.resgatar.informe.dados.resgate']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		 
+		
+		<p:tabView id="tabFundos" activeIndex="#{investimentosFundosResgatarBBean.tabIndex}" >
+			<p:ajax event="tabChange" listener="#{investimentosFundosResgatarBBean.atualizarInformacoesPorAba}" oncomplete="atualizarBotoes();tratarPaginaParaImpressaoPDF();"/>
+			<p:tab id = "tabMeusFundos" title="#{msg['pages.investimentos.fundos.resgatar.meus.fundos']}" styleClass="no-visible" titleStyleClass="no-print no-visible">
+				<p:outputPanel styleClass="no-visible">
+					<p:outputPanel rendered="#{!investimentosFundosResgatarBBean.listaInvestimentos.isEmpty()}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-12">
+								<h5 class="space-b">
+									<strong>#{msg['pages.investimentos.fundos.resgatar.selecione.fundo.resgatar']}</strong>
+								</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-4">
+								<p:outputPanel>
+									<h:outputLabel for="" value="#{msg['pages.investimentos.fundos.resgatar.ordenar.por']}" />
+									<br/>
+									<h:selectOneMenu name="tipoOrigemApreensao" value="#{investimentosFundosResgatarBBean.ordenacaoSelecionada}">
+										<f:selectItems value="#{investimentosFundosResgatarBBean.listaTiposOrdenacao}" />
+										<p:ajax update="@form:tabFundos:tabMeusFundos:dataTableInvestimentos" event="change"										
+												listener="#{investimentosFundosResgatarBBean.ordenarFundosInvestimentos()}" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:remoteCommand update="@form:tabFundos:tabMeusFundos:tabelaFundosDetalhes" name="atualizarDetalhe">
+						</p:remoteCommand>
+		
+	
+		
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+								<p:outputPanel styleClass="table-responsive table table-striped">
+								
+									<p:dataTable 	id="dataTableInvestimentos"
+									 				tableStyleClass="table-responsive table table-striped table-click"
+													rowKey="#{investimentos.codigoFundoContaFundo}"
+													value="#{investimentosFundosResgatarBBean.listaInvestimentos}"
+													var="investimentos"
+													selection="#{investimentosFundosResgatarBBean.detalheWrapper}"
+													selectionMode="single">
+		
+										<p:ajax event="rowSelect" oncomplete="atualizarDetalhe(); atualizarBotoes();"
+												listener="#{investimentosFundosResgatarBBean.selecionarInvestimento}" />
+		
+										<p:column headerText="#{msg['pages.investimentos.fundos.resgatar.fundo']}" >
+											<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgatarBBean.obterCorTipoFamilia(investimentos.tipoFamilia)}" aria-hidden="true"></i>
+											<h:outputText value="#{investimentos.nomeReduzidoIb}" />
+										</p:column>
+										<p:column headerText="#{msg['pages.investimentos.fundos.resgatar.conta.fundo']}">
+											<h:outputText value="#{investimentos.contaFundo}" />
+										</p:column>
+										<p:column styleClass="text-right space-rr" >	
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.saldo.liquido.disponivel']}" styleClass="space-rr" />
+											</f:facet>								
+											<h:outputText value="#{investimentos.valorDispResgatNumber}" converter="valorDecimalConverter" styleClass="space-rr" />
+										</p:column>
+										<p:column >
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.horario']}" styleClass="space-ll" />
+											</f:facet>
+											<h:outputText value="#{investimentos.horarioLimite}" styleClass="space-ll" />
+										</p:column>
+										
+										<f:facet name="footer">
+											<p:column>
+												<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.total.liquido.disponivel']}: " />
+											</p:column>
+											<p:column>
+												<h:outputText value="#{investimentosFundosResgatarBBean.totalLiquidoDisponivel}"/>
+											</p:column>
+										</f:facet>
+									</p:dataTable>
+									
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="familia-fundos">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h5>
+										<strong>#{msg['pages.investimentos.fundos.resgatar.familias.fundos']}</strong>
+									</h5>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">							
+										
+										<ui:repeat var="legenda" value="#{investimentosFundosResgatarBBean.legendas.datos.familia}" varStatus="status">
+											
+											<h:panelGroup rendered="#{status.index % 2 eq 0}" styleClass="col-xs-6 space-b">
+												<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgatarBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+												<h:outputText value="#{legenda.nomeRedFundo}" />
+											</h:panelGroup>
+											
+											<h:panelGroup rendered="#{status.index % 2 eq 1}" styleClass="col-xs-6 space-b">
+												<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgatarBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+												<h:outputText value="#{legenda.nomeRedFundo}" />
+												<br/>
+											</h:panelGroup>									
+											
+										</ui:repeat>
+		
+								</p:outputPanel> 
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+		
+		
+						<p:outputPanel styleClass="row space-b" id="tabelaFundosDetalhes" >
+							<p:outputPanel styleClass="col-md-12">
+		
+								<p:outputPanel styleClass="table-responsive table table-striped">
+									<p:dataTable 									
+											rendered="#{investimentosFundosResgatarBBean.renderizaDetalhe}"
+											value="#{investimentosFundosResgatarBBean.detalheWrapper}"
+											var="fundo">
+											
+										<p:columnGroup type="header">
+											<p:row>
+												<p:column colspan="7">
+													<f:facet name="header">
+														<h:outputText value="#{investimentosFundosResgatarBBean.detalheWrapper.nomeReduzidoIb}"/>
+													</f:facet>
+												</p:column>
+											</p:row>
+											
+											<p:row>
+												<p:column >
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.saldo.cotas']}"/>
+													</f:facet>
+												</p:column>
+												
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.saldo.bruto']}"/>
+													</f:facet>
+												</p:column>
+												
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.ir']}"/>
+													</f:facet>
+												</p:column>
+												
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.iof']}"/>
+													</f:facet>
+												</p:column>
+												
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.taxa.saida']}"/>
+													</f:facet>
+												</p:column>
+												
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.saldo.bloqueado']}"/>
+													</f:facet>
+												</p:column>
+												
+												<p:column styleClass="text-right">
+													<f:facet name="header">
+														<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.saldo.liquido.disponivel']}"/>
+													</f:facet>
+												</p:column>
+												
+											</p:row>								
+										</p:columnGroup>
+											
+										<p:column >
+											<h:outputText value="#{fundo.quantCotas}"/>
+										</p:column>
+										
+										<p:column styleClass="text-right">
+											<h:outputText value="#{fundo.valorBruto}"/>
+										</p:column>
+										
+										<p:column styleClass="text-right">
+											<h:outputText value="#{fundo.valorIr}"/>
+										</p:column>
+										
+										<p:column styleClass="text-right">
+											<h:outputText value="#{fundo.valorCota}"/>
+										</p:column>
+										
+										<p:column styleClass="text-right">
+											<h:outputText value="#{fundo.valorTaxaSaida}"/>
+										</p:column>
+										
+										<p:column styleClass="text-right">
+											<h:outputText value="#{fundo.valorLiqBloq}" styleClass="text-right"/>
+										</p:column>
+										
+										<p:column styleClass="text-right">
+											<h:outputText value="#{fundo.valorDispResgat}"/>
+										</p:column>
+		
+									</p:dataTable>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row" rendered="#{investimentosFundosResgatarBBean.listaInvestimentos.isEmpty()}">
+						<p:outputPanel styleClass="col-md-12 space-b">
+						
+						<p>#{msg['pages.investimentos.fundos.resgatar.sem.fundo.msg1']}</p>
+						<br/>
+						<p>#{msg['pages.investimentos.fundos.resgatar.sem.fundo.msg2']}</p>
+						<p>#{msg['pages.investimentos.fundos.resgatar.sem.fundo.msg3']}</p>					
+						<br/>
+						
+						<p><h:link styleClass="link-termos"> #{msg['pages.investimentos.fundos.resgatar.aplicar']} </h:link></p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row no-print no-visible">
+							<p:outputPanel styleClass="col-md-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>	
+				
+				<p:outputPanel styleClass="row space-b no-visible">
+					<p:outputPanel styleClass="col-md-12">
+						<p:separator />
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="space-t no-visible pleft8">
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+			</p:tab>
+			
+			<p:tab id="tabCompararFundos" title="Comparar Fundos" titleStyleClass="no-print no-visible">
+				<p:outputPanel id="panelLista" rendered="#{!investimentosFundosResgatarBBean.renderizaTabelaComparacao}">
+					<p:outputPanel rendered="#{!investimentosFundosResgatarBBean.listaInvestimentosAbaComparacao.isEmpty()}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-12">
+								<h5 class="space-b">
+									<strong>#{msg['pages.investimentos.fundos.resgatar.selecione.dois.fundos']}</strong>
+								</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-4">
+								<p:outputPanel>
+									<h:outputLabel for="" value="Ordenar Por:" />
+									<br/>
+									<h:selectOneMenu name="tipoOrigemApreensao" value="#{investimentosFundosResgatarBBean.ordenacaoSelecionadaAbaComparar}">
+										<f:selectItems value="#{investimentosFundosResgatarBBean.listaTiposOrdenacao}" />
+										<p:ajax update="@form:tabFundos:tabMeusFundos:dataTableCompInvestimentos" event="change"									
+												listener="#{investimentosFundosResgatarBBean.ordenarFundosComparacao()}" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+		
+								<p:outputPanel styleClass="table-responsive table table-striped">
+								
+									<p:dataTable id="dataTableCompInvestimentos" 
+												tableStyleClass="table-responsive table table-striped table-chk-click"
+												rowKey="#{fundo.codigoFundoContaFundo}"
+												value="#{investimentosFundosResgatarBBean.listaInvestimentosAbaComparacao}"
+												var="fundo">
+												
+										<p:column headerText="" >
+											<p:column>
+												<p:selectBooleanCheckbox value="#{fundo.selecionadoComparar}">
+													<p:ajax listener="#{investimentosFundosResgatarBBean.addFundo(fundo)}" update="dataTableCompInvestimentos"/>
+												</p:selectBooleanCheckbox>
+											</p:column>
+										</p:column>
+		
+										<p:column headerText="Fundo" >
+											<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgatarBBean.obterCorTipoFamilia(fundo.tipoFamilia)}" aria-hidden="true"></i>
+											<h:outputText value="#{fundo.nomeReduzidoIb}" />
+										</p:column>
+										
+										<p:column styleClass="text-right space-rr" >	
+											<f:facet name="header">
+												<h:outputText value="Saldo Líquido Disponível" styleClass="space-rr" />
+											</f:facet>								
+											<h:outputText value="#{fundo.valorDispResgatNumber}" converter="valorDecimalConverter" styleClass="space-rr" />
+										</p:column>
+										
+										<p:column >
+											<f:facet name="header">
+												<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.horario']}" styleClass="space-ll" />
+											</f:facet>
+											<h:outputText value="#{fundo.horarioLimite}" styleClass="space-ll" />
+										</p:column>
+									</p:dataTable>
+								</p:outputPanel>
+		
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+		
+								<p:separator />
+		
+							</p:outputPanel>
+						</p:outputPanel>
+		
+						<p:outputPanel styleClass="familia-fundos">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h5>
+										<strong>#{msg['pages.investimentos.fundos.resgatar.familias.fundos']}</strong>
+									</h5>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">							
+										
+										<ui:repeat var="legenda" value="#{investimentosFundosResgatarBBean.legendas.datos.familia}" varStatus="status">
+											
+											<h:panelGroup rendered="#{status.index % 2 eq 0}" styleClass="col-xs-6 space-b">
+												<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgatarBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+												<h:outputText value="#{legenda.nomeRedFundo}" />
+											</h:panelGroup>
+											
+											<h:panelGroup rendered="#{status.index % 2 eq 1}" styleClass="col-xs-6 space-b">
+												<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgatarBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+												<h:outputText value="#{legenda.nomeRedFundo}" />
+												<br/>
+											</h:panelGroup>									
+											
+										</ui:repeat>
+		
+								</p:outputPanel> 
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row" rendered="#{investimentosFundosResgatarBBean.listaInvestimentosAbaComparacao.isEmpty()}">
+						<p:outputPanel styleClass="col-md-12 space-b">
+						
+						<p>#{msg['pages.investimentos.fundos.resgatar.sem.fundo.msg1']}</p>
+						<br/>
+						<p>#{msg['pages.investimentos.fundos.resgatar.sem.fundo.msg2']}</p>
+						<p>#{msg['pages.investimentos.fundos.resgatar.sem.fundo.msg3']}</p>					
+						<br/>
+						
+						<p><h:link styleClass="link-termos"> #{msg['pages.investimentos.fundos.resgatar.aplicar']} </h:link></p>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="row no-print no-visible">
+							<p:outputPanel styleClass="col-md-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>	
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel id="panelComparacao" rendered="#{investimentosFundosResgatarBBean.renderizaTabelaComparacao}">
+					<p:outputPanel styleClass="space-b space-t">
+						<h5>
+							<strong><h:outputText value="#{msg['pages.investimentos.fundos.resgatar.comparacao.entre.fundos']} #{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.nmCompleto} e #{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.nmCompleto}" /></strong>
+						</h5>																	
+					</p:outputPanel>
+					
+					<p:outputPanel >
+						<p:panelGrid styleClass="table-striped text-left"  columnClasses="space-t"> 
+							 <f:facet name="header">
+							 	<p:row>
+							 		<p:column colspan="1">#{msg['pages.investimentos.fundos.resgatar.caracteristicas']}</p:column>
+							 		<p:column colspan="1"> <h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.nmReduzido}" /> </p:column>
+							 		<p:column colspan="1"> <h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.nmReduzido}" /> </p:column>
+							 	</p:row>						 	
+							 </f:facet>
+							 
+							 <p:row>
+							 	<p:column colspan="1">#{msg['pages.investimentos.fundos.resgatar.resgate.minimo']}</p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.resgateMin}" >
+							 		<f:convertNumber type="currency" locale="pt-br" currencyCode="BRL" /></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.resgateMin}" >
+							 		<f:convertNumber type="currency" locale="pt-br" currencyCode="BRL" /></h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1">#{msg['pages.investimentos.fundos.resgatar.saldo.minimo.permanencia']}</p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.saldoCto}" >
+									<f:convertNumber type="currency" locale="pt-br" currencyCode="BRL" /></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.saldoCto}" >
+									<f:convertNumber type="currency" locale="pt-br" currencyCode="BRL" /></h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1">#{msg['pages.investimentos.fundos.resgatar.movimentacao.resgate.conversao.cotas']}</p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.convResgate}" >
+							 		<f:convertNumber minIntegerDigits="3" /></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.convResgate}" >
+							 		<f:convertNumber minIntegerDigits="3" /></h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1">
+							 		<a href="javascript:abrePopIR()" id="lnkIR" onFocus="this.blur();" class="link-termos">#{msg['pages.investimentos.fundos.resgatar.imposto.renda']}</a>
+							 	</p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.impostoRenda eq 'S' ? msg['pages.investimentos.fundos.resgatar.sim'] : msg['pages.investimentos.fundos.resgatar.nao']}" /></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.impostoRenda eq 'S' ? msg['pages.investimentos.fundos.resgatar.sim'] : msg['pages.investimentos.fundos.resgatar.nao']}" /></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1">
+							 		<a href="javascript:abrePopIOF()" id="lnkIOF" onFocus="this.blur();" class="link-termos">#{msg['pages.investimentos.fundos.resgatar.iof']}</a>
+							 	</p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.IOF eq 'S' ? msg['pages.investimentos.fundos.resgatar.sim'] : msg['pages.investimentos.fundos.resgatar.nao']}" /></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.IOF eq 'S' ? msg['pages.investimentos.fundos.resgatar.sim'] : msg['pages.investimentos.fundos.resgatar.nao']}" /></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1">#{msg['pages.investimentos.fundos.resgatar.taxa.saida']}</p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.txSaida eq 'S' ? msg['pages.investimentos.fundos.resgatar.sim'] : msg['pages.investimentos.fundos.resgatar.nao']}" /></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.txSaida eq 'S' ? msg['pages.investimentos.fundos.resgatar.sim'] : msg['pages.investimentos.fundos.resgatar.nao']}" /></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1">#{msg['pages.investimentos.fundos.resgatar.credito.conta']}</p:column>
+							 	<p:column colspan="1">
+							 		<h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.crCCresgate} #{msg['pages.investimentos.fundos.resgatar.dias.uteis.apos.solicitacao']}" 
+							 			rendered="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.crCCresgate != 0 and investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.crCCresgate != 1}" />
+							 		<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.dia.util.apos.solicitacao']}" 
+							 			rendered="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.crCCresgate == 1}" />
+							 		<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.mesmo.dia']}" rendered="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.crCCresgate == 0}"/>
+							 	</p:column>
+							 	<p:column colspan="1">
+							 		<h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.crCCresgate} #{msg['pages.investimentos.fundos.resgatar.dias.uteis.apos.solicitacao']}" 
+							 			rendered="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.crCCresgate != 0 and investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.crCCresgate != 1 }" />
+							 		<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.dia.util.apos.solicitacao']}" 
+							 			rendered="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.crCCresgate == 1}" />
+							 		<h:outputText value="#{msg['pages.investimentos.fundos.resgatar.mesmo.dia']}" rendered="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.crCCresgate == 0}"/>
+							 	</p:column>
+							 </p:row>
+							 
+							 
+							 <p:row>
+							 	<p:column colspan="3"><b>#{msg['pages.investimentos.fundos.resgatar.horario.movimentacao']}</b></p:column> 
+							 </p:row>						 
+							 <p:row>
+							 	<p:column colspan="1" ><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.atm']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.hrATMStr}"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.hrATMStr}"/></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.ib']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.hrlimHBStr}"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.hrlimHBStr}"/></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.agencia']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.hrTFCStr}"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.hrTFCStr}"/></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.superlinha']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.hrSuperLinhaStr}"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.hrSuperLinhaStr}"/></p:column>
+							 </p:row>
+							 
+							 
+							 
+							 <p:row>
+							 	<p:column colspan="3"><b>#{msg['pages.investimentos.fundos.resgatar.rentabilidade']}</b></p:column> 
+							 </p:row>						 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.ultimo.mes']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.rtUltimoMesStr} %"></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.rtUltimoMesStr} %"> </h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.no.ano']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.rtUltimoAnoStr} %"></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.rtUltimoAnoStr} %"></h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.ultimos.12.meses']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.rtUltimo12Str} %"> </h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.rtUltimo12Str} %"></h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.ultimos.24.meses']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.rtUltimo24Str} %"></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.rtUltimo24Str} %"></h:outputText></p:column>
+							 </p:row>
+							 
+							 <p:row>
+							 	<p:column colspan="1"><h:outputText value="- #{msg['pages.investimentos.fundos.resgatar.ultimos.36.meses']}" styleClass="space-ll"/></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.rtUltimo36Str} %"></h:outputText></p:column>
+							 	<p:column colspan="1"><h:outputText value="#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.rtUltimo36Str} %"></h:outputText></p:column>
+							 </p:row>
+							 
+							 
+							 <p:row>
+							 	<p:column colspan="1"> </p:column>
+							 	<p:column colspan="1"> <h:link value="#{msg['pages.investimentos.fundos.resgatar.caracteristicas']}" onclick="window.open('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=#{investimentosFundosResgatarBBean.primeiroCaracteristicasFundoDTO.cdFundo}','',''); return false" styleClass="link-termos no-visible"/></p:column>
+							 	<p:column colspan="1"> <h:link value="#{msg['pages.investimentos.fundos.resgatar.caracteristicas']}" onclick="window.open('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=#{investimentosFundosResgatarBBean.segundoCaracteristicasFundoDTO.cdFundo}','',''); return false" styleClass="link-termos no-visible"/></p:column>
+							 </p:row> 
+							 
+							  <p:row>
+							 	<p:column colspan="1"> </p:column>
+							 	<p:column colspan="1">
+									<p:commandLink 	styleClass="btn btn-default pull-left no-visible"
+										role="button" action="#{investimentosFundosResgatarBBean.resgatar}" >
+										#{msg['pages.investimentos.fundos.resgatar']}
+									</p:commandLink>								
+								</p:column>
+								<p:column colspan="1">
+							 		<p:commandLink 	styleClass="btn btn-default pull-left no-visible"
+										role="button" action="#{investimentosFundosResgatarBBean.resgatar}" >
+										#{msg['pages.investimentos.fundos.resgatar']}
+									</p:commandLink>	
+								</p:column>
+							 </p:row>
+							 
+						</p:panelGrid>
+						<p:outputPanel styleClass="space-b space-t">
+							<h:link value="#{msg['pages.investimentos.fundos.resgatar.veja.tabela.rentabilidade']}" onclick="window.open('http://www.santander.com.br/portal/gsb/script/bnp/script/rentabilidade/Rentabilidades.do','',''); return false" styleClass="link-termos no-visible"/>
+						</p:outputPanel>					
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-md-12">
+						<p:separator />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="space-t pleft8" >
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+			</p:tab>
+		</p:tabView>
+		<p:outputPanel id="panelPdf" rendered="#{!investimentosFundosResgatarBBean.abaMeusFundos and investimentosFundosResgatarBBean.renderizaTabelaComparacao}">
+			<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b" id="botoes">
+			<p:outputPanel styleClass="col-md-12 text-right">
+					
+				<p:commandLink 	styleClass="btn btn-default btn-cinza no-visible"
+								role="button" rendered="#{!investimentosFundosResgatarBBean.renderizaTabelaComparacao}"
+								action="#{investimentosFundosResgatarBBean.voltarMenu}">
+					#{msg['pages.investimentos.fundos.resgatar.voltar']}
+				</p:commandLink>
+				
+				<p:commandLink 	styleClass="btn btn-default no-visible" 
+								role="button" 
+								actionListener="#{investimentosFundosResgatarBBean.voltarComparacao}"
+								update="@form"
+								rendered="#{!investimentosFundosResgatarBBean.abaMeusFundos and investimentosFundosResgatarBBean.renderizaTabelaComparacao}">
+					#{msg['pages.investimentos.fundos.resgatar.nova.comparacao']}
+				</p:commandLink>
+			
+			
+				<p:commandLink 					
+					rendered="#{investimentosFundosResgatarBBean.abaMeusFundos and investimentosFundosResgatarBBean.renderizaDetalhe}"
+					action="#{investimentosFundosResgatarBBean.resgatar}"
+					styleClass="btn btn-default"
+					role="button">#{msg['pages.investimentos.fundos.resgatar']}</p:commandLink>
+
+				<p:commandLink
+					rendered="#{!investimentosFundosResgatarBBean.abaMeusFundos and !investimentosFundosResgatarBBean.renderizaTabelaComparacao
+					and !investimentosFundosResgatarBBean.listaInvestimentosAbaComparacao.isEmpty()}"
+					styleClass="btn btn-default no-visible" role="button" oncomplete="tratarPaginaParaImpressaoPDF();">
+						#{msg['pages.investimentos.fundos.resgatar.comparar']}
+						<p:ajax update="@form" process="@all"
+						listener="#{investimentosFundosResgatarBBean.comparar}" />
+				</p:commandLink>
+
+			</p:outputPanel>
+		</p:outputPanel>
+				
+		<p:remoteCommand update="@form" name="atualizarBotoes"/>
+		<p:remoteCommand name="verificaTabAnterior" action="#{investimentosFundosResgatarBBean.verificaTabAnterior}" />  
+		<p:remoteCommand autoRun="true" oncomplete="tratarPaginaParaImpressaoPDF();"/>
+		
+		<script>
+			$(".table-click tbody tr").click(function() {
+				$(".table-click tbody tr").removeClass("yellow");
+				$(this).toggleClass("yellow");
+				$('html, body').animate({scrollTop:$(".btn-cinza").offset().top}, 1000);
+			});
+			
+			function abrePop(pagina,largura,altura,rolagem,nome){
+				centroLeft = (screen.width / 2) - (largura / 2);
+				centroTop = (screen.height / 2) - (altura / 2);
+				window.open(pagina, nome, "width=" + largura + " ,height=" + altura + " ,top=" + centroTop + " ,left=" + centroLeft + ",scrollbars=" + rolagem +",status=yes");
+			}
+			function abrePopIR(){
+				abrePop('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=1959',714,521,'no','IR');
+			}	
+			function abrePopIOF(){
+				abrePop('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=1958',714,560,'no','IOF');
+			}
+			function tratarPaginaParaImpressaoPDF(){
+				$(".ui-tabs-nav").addClass("no-visible");
+			}
+		</script>
+	</ui:define>
+</ui:composition>

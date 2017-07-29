@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<!-- Dispositivo de seguranca -Inicial- -->
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!-- Dispositivo de seguranca -Final- -->
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.texto.paragrafo1']}</p>
+						<p>#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.texto.paragrafo2']}</p>
+						<p>#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.texto.paragrafo3']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.alcadasAssinaturas']}
+						<p:outputLabel id="tooltipAlcadasAssinatura">
+							<i class="fa fa-info-circle"></i>
+						</p:outputLabel>
+					</h4>
+					<pe:tooltip for="tooltipAlcadasAssinatura"
+						styleClass="col-xs-6 associar-tooltip"
+						value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.texto.info.assinaturas']}"
+						myPosition="Right center" atPosition="left center" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3 inline-form">
+					
+									<h:outputLabel for="idInputTextQtdadeAssinaturas"
+													value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.qtdadesAssinaturas']}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-3" style="width:70px!important;">
+									<p:inputText id="idInputTextQtdadeAssinaturas"
+												styleClass="form-control"
+												value="#{contratoManutencaoBBean.contratoManutencaoDTO.qtAssinaturaUsuarioMaster}"
+												onkeypress="return SomenteNumeros(event)" maxlength="1">
+										<p:ajax event="blur"
+												listener="#{contratoManutencaoBBean.alterarQuantidadeAssinaturaMaster}"></p:ajax>
+									</p:inputText>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.alteracaoUsuariosMaster']}
+						<p:outputLabel id="tooltipAlteracaoUsuarioMaster">
+							<i class="fa fa-info-circle"></i>
+						</p:outputLabel>
+					</h4>
+					
+					<pe:tooltip for="tooltipAlteracaoUsuarioMaster"	value="#{msg['pages.administrativo.contrato.manutencao.comprovanteContratoManutencao.texto.info.usuarioMaster']} #{msg['pages.administrativo.contrato.manutencao.comprovanteContratoManutencao.texto.info.usuarioMaster2']} #{msg['pages.administrativo.contrato.manutencao.comprovanteContratoManutencao.texto.info.usuarioMaster3']}"
+						myPosition="Right center" atPosition="left center" />
+						
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12" id="panelUsuarioMaster">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabelaUsuarioMaster"
+									value="#{contratoManutencaoBBean.contratoManutencaoDTO.usuarioMasterDTOList}"
+									var="usuarioMaster" rowKey="#{usuarioMaster}"
+									selectionMode="single"
+									selection="#{contratoManutencaoBBean.usuarioMasterSelecionado}">
+
+									<p:column styleClass="table-link"
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.nomeCompleto']}"
+										width="25%">
+										<p:commandLink value="#{usuarioMaster.nomeCompleto}">
+											<p:ajax event="click"
+												listener="#{contratoManutencaoBBean.abrirDetalheUsuarioMaster(usuarioMaster)}"
+												oncomplete="PF('detalheUsuarioMasterdlg').show();"
+												update="@form" />
+										</p:commandLink>
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.cpf']}"
+										width="20%">
+										<h:outputText value="#{usuarioMaster.cpf}"
+											converter="converterCpfCnpj" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.nomeAcesso']}"
+										width="20%">
+										<h:outputText value="#{usuarioMaster.nomeAcesso}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.situacao']}"
+										width="20%">
+										<h:outputText value="#{usuarioMaster.inStatusUsuario}" />
+									</p:column>
+									<p:column headerText="" width="15%">
+										<p:commandLink>
+											<p:ajax event="click"
+												listener="#{contratoManutencaoBBean.excluirUsuarioMaster(usuarioMaster)}"
+												update="@form" />
+											<p:outputLabel rendered="#{!usuarioMaster.excluir}">
+												<i class="fa fa-trash-o"></i>
+												<h:outputText value="#{msg['page.btn.excluir']}" />
+											</p:outputLabel>
+											<p:outputLabel rendered="#{usuarioMaster.excluir}">
+												<i class="fa fa-check"></i>
+												<h:outputText value="#{msg['page.btn.desfazer']}" />
+											</p:outputLabel>
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+							<p:commandLink styleClass="btn btn-default pull-right"
+								role="button" onclick="PF('incluirMasterdlg').show();"
+								rendered="#{contratoManutencaoBBean.exibirBotaoIncluirMaster}">
+                            	#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster']}
+                            </p:commandLink>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.alteracaoContasCorrentes']}
+						<p:outputLabel id="tooltipAlteracaoContaCorrentes">
+							<i class="fa fa-info-circle"></i>
+						</p:outputLabel>
+					</h4>
+					<pe:tooltip for="tooltipAlteracaoContaCorrentes"
+						styleClass="col-xs-6 associar-tooltip" 
+						value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.texto.info.contas.correntes']} #{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.texto.info.contas.correntes2']}"
+						myPosition="Right center" atPosition="left center" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabelaContaCorrente"
+									value="#{contratoManutencaoBBean.contratoManutencaoDTO.contaCorrenteList}"
+									var="contaCorrente">
+
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.cnpjCpf']}"
+										width="25%">
+										<h:outputText value="#{contaCorrente.cpfCnpj}"
+											converter="converterCpfCnpj" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.agencia']}"
+										width="20%">
+										<h:outputText value="#{contaCorrente.agencia}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.conta']}"
+										width="20%">
+										<h:outputText value="#{contaCorrente.conta}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.situacao']}"
+										width="20%">
+										<h:outputText value="#{contaCorrente.situacao}" />
+									</p:column>
+									<p:column headerText="" width="15%">
+										<p:commandLink>
+											<p:ajax event="click"
+												listener="#{contratoManutencaoBBean.excluirContaCorrente(contaCorrente)}"
+												update="@form" />
+											<p:outputLabel rendered="#{!contaCorrente.excluir}">
+												<i class="fa fa-trash-o"></i> #{msg['page.btn.excluir']}
+	                                     </p:outputLabel>
+											<p:outputLabel rendered="#{contaCorrente.excluir}">
+												<i class="fa fa-check"></i> #{msg['page.btn.desfazer']}
+	                                     </p:outputLabel>
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+							<p:commandLink styleClass="btn btn-default pull-right"
+								role="button" onclick="PF('incluirContaCorrenteDlg').show();">#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirConta']}</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{contratoManutencaoBBean.voltarParaMenu()}">#{msg['page.btn.voltar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" role="button"
+					action="#{contratoManutencaoBBean.confirmacao}">#{msg['page.btn.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:dialog id="idIncluirContaCorrenteDlg"
+			header="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirConta']}"
+			widgetVar="incluirContaCorrenteDlg" resizable="false" width="45%"
+			modal="true" closable="false" styleClass="modal-box no-visible">
+			<p:outputPanel id="idPanelIncluirContaCorrente"
+				styleClass="col-xs-12">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-3">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="agenciaInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirConta.agencia']} "
+								styleClass="font-normal" />
+							<p:inputText id="agenciaInputText"
+								onkeypress="return SomenteNumeros(event)"
+								styleClass="form-control"
+								value="#{contratoManutencaoBBean.contaCorrente.agencia}"
+								maxlength="4" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="contaInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirConta.conta']} "
+								styleClass="font-normal" />
+							<p:inputText id="contaInputText"
+								onkeypress="return SomenteNumeros(event)"
+								styleClass="form-control"
+								value="#{contratoManutencaoBBean.contaCorrente.conta}"
+								maxlength="9" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<f:facet name="footer">
+				<p:outputPanel styleClass="row space-b no-visible">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:commandLink styleClass="btn btn-default pull-left"
+							value="#{msg['page.btn.cancelar']}" role="button"
+							action="#{contratoManutencaoBBean.cancelarInclusao}"
+							oncomplete="PF('incluirContaCorrenteDlg').hide();" update="@form" />
+						<p:commandLink styleClass="btn btn-default pull-right"
+							value="#{msg['page.btn.incluir']}" role="button"
+							actionListener="#{contratoManutencaoBBean.incluirContaCorrente}"
+							oncomplete="fecharModalContaCorrente(xhr, status, args)"
+							update="tabelaContaCorrente, idPanelIncluirContaCorrente" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</f:facet>
+		</p:dialog>
+
+		<p:dialog id="idIncluirMasterdlg"
+			header="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster']}"
+			widgetVar="incluirMasterdlg" resizable="false" closable="false"
+			width="60%" modal="true" styleClass="modal-box no-visible">
+			<p:outputPanel id="idPanelIncluirMaster" styleClass="col-xs-12">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="nomecompletoInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.nomeCompleto']} "
+								styleClass="font-normal">
+							</h:outputLabel>
+							<p:outputLabel id="tooltipNomeCompleto">
+								<i class="fa fa-info-circle"></i>
+							</p:outputLabel>
+							<pe:tooltip for="tooltipNomeCompleto"
+								styleClass="col-xs-6 associar-tooltip"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.preenchaSomenteLetrasNumeros']}"
+								myPosition="Right center" atPosition="left center" />
+							<p:inputText id="nomecompletoInputText" styleClass="form-control"
+								value="#{contratoManutencaoBBean.usuarioMaster.nomeCompleto}"
+								maxlength="64" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-6">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="cpfInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.cpf']}"
+								styleClass="font-normal" />
+
+							<p:inputMask id="cpfInputText"
+								onkeypress="return SomenteNumeros(event)"
+								styleClass="form-control" mask="999.999.999-99"
+								value="#{contratoManutencaoBBean.usuarioMaster.cpf}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="emailInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.email']}"
+								styleClass="font-normal" />
+							<p:inputText id="emailInputText" styleClass="form-control"
+								value="#{contratoManutencaoBBean.usuarioMaster.email}"
+								maxlength="54" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-2">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="dddInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.ddd']} "
+								styleClass="font-normal">
+							</h:outputLabel>
+							<p:outputLabel id="tooltipDDD">
+								<i class="fa fa-info-circle"></i>
+							</p:outputLabel>
+							<pe:tooltip for="tooltipDDD"
+								styleClass="col-xs-6 associar-tooltip"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.preenchaSomenteNumeros']}"
+								myPosition="Right center" atPosition="left center" />
+							<p:inputText id="dddInputText"
+								onkeypress="return SomenteNumeros(event)"
+								styleClass="form-control"
+								value="#{contratoManutencaoBBean.usuarioMaster.telefoneDdd}"
+								maxlength="2" />
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="telefoneInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.telefone']} "
+								styleClass="font-normal">
+							</h:outputLabel>
+							<p:outputLabel id="tooltipTelefone">
+								<i class="fa fa-info-circle"></i>
+							</p:outputLabel>
+							<pe:tooltip for="tooltipTelefone"
+								styleClass="col-xs-6 associar-tooltip"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.preenchaSomenteNumeros']}"
+								myPosition="Right center" atPosition="left center" />
+							<p:inputMask id="telefoneInputText" styleClass="form-control"
+								mask="99999-9999" onkeypress="return SomenteNumeros(event)"
+								value="#{contratoManutencaoBBean.usuarioMaster.telefoneNumero}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-4">
+						<p:outputPanel styleClass="form-group">
+							<h:outputLabel for="ramalInputText"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.ramal']} "
+								styleClass="font-normal">
+							</h:outputLabel>
+							<p:outputLabel id="tooltipRamal">
+								<i class="fa fa-info-circle"></i>
+							</p:outputLabel>
+							<pe:tooltip for="tooltipRamal"
+								styleClass="col-xs-6 associar-tooltip"
+								value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.preenchaSomenteNumeros']}"
+								myPosition="Right center" atPosition="left center" />
+							<p:inputText id="ramalInputText" styleClass="form-control"
+								onkeypress="return SomenteNumeros(event)"
+								value="#{contratoManutencaoBBean.usuarioMaster.telefoneRamal}"
+								maxlength="5" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<f:facet name="footer">
+				<p:outputPanel styleClass="row space-b no-visible">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:commandLink styleClass="btn btn-default pull-left"
+							value="#{msg['page.btn.cancelar']}" role="button"
+							action="#{contratoManutencaoBBean.cancelarInclusao}"
+							oncomplete="PF('incluirMasterdlg').hide();" update="@form" />
+						<p:commandLink styleClass="btn btn-default pull-right"
+							role="button"
+							actionListener="#{contratoManutencaoBBean.incluirUsuarioMaster}"
+							value="#{msg['page.btn.incluir']}"
+							oncomplete="fecharModalIncluirMaster(xhr, status, args)"
+							update="panelUsuarioMaster, idPanelIncluirMaster" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</f:facet>
+		</p:dialog>
+
+		<ui:include src="modalDetalheUsuarioMaster.xhtml" />
+
+		<script type="text/javascript">
+			function fecharModalIncluirMaster(xhr, status, args) {
+				if (args.fecharModal) {
+					PF('incluirMasterdlg').hide();
+				}
+			}
+
+			function fecharModalContaCorrente(xhr, status, args) {
+				if (args.fecharModal) {
+					PF('incluirContaCorrenteDlg').hide();
+				}
+			}
+		</script>
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	  
+<f:event type="preRenderView" listener="#{adesaoMobileTokenBBean.acessoDiretoConfirmacao}" />
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos block-aviso flex-align-v alert-information box-shadow min-lines ">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							#{msg['page.administrativo.mobileToken.servico.preenchimento.para.conhecer']}
+							<p:commandLink oncomplete="window.open('http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=8987', 'popup', 'toolbar=no,menubar=no,scrollbars=yes,location=no,left=350,top=50,width=650, height=600')">#{msg['page.administrativo.mobileToken.servico.preenchimento.aqui']}</p:commandLink>
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.mobileToken.servico.confirmacao.titulo.confirme.escolha']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12  ">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos block-aviso flex-align-v alert-information box-shadow min-lines-check no-space-t " >
+					<i class="fa fa-check-circle exclam-point"></i>
+					<span>#{msg['page.administrativo.mobileToken.servico.confirmacao.titulo.desejo']}</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					value="#{msg['page.administrativo.mobileToken.servico.confirmacao.btn.voltar']}"
+					action="#{adesaoMobileTokenBBean.voltarPreenchimento}" role="button" />
+
+				<p:commandLink styleClass="btn btn-default" id="btnContinuar"
+					onstart="encryptSecureDL();"
+					value="#{msg['page.administrativo.mobileToken.servico.confirmacao.btn.continuar']}"
+					action="#{adesaoMobileTokenBBean.confirmarTelaConfirmacao}"
+					role="button">
+				</p:commandLink>
+				
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p>#{msg['page.administrativo.mobileToken.servico.confirmacao.label.caso.duvida']}</p>
+
+		<p>#{msg['page.administrativo.mobileToken.servico.confirmacao.label.capitais.regioes']}</p>
+		<br />
+
+	</ui:define>
+</ui:composition>

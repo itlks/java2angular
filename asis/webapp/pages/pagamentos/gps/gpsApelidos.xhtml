@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/pages/pagamentos/gps/gpsAviso.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.apelidos.listaApelidos.informe.dados']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								<h:outputText
+									value="#{msg['pages.apelidos.listaApelidos.novo.pagamento']}" />
+							</h5>
+
+							<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+							<p:commandLink
+								value="#{msg['page.gare.apelidos.botao.preencher']}"
+								action="#{tributosFederaisGPSBBean.preencherDados}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator styleClass="space-b" />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								<h:outputText
+									value="#{msg['pages.apelidos.listaApelidos.pagamentos.cadastrados']}" />
+							</h5>
+							<p:dataTable id="dtApelidos" emptyMessage=""
+								value="#{tributosFederaisGPSBBean.listaApelidos}" var="apelido"
+								selection="#{tributosFederaisGPSBBean.dtoSelecionado}"
+								selectionMode="single" rowKey="#{apelido.apelido}">
+
+								<p:ajax event="rowSelect" onstart="openLoad" oncomplete="closeLoad()"
+									listener="#{tributosFederaisGPSBBean.onRowSelect}" />
+
+								<p:column headerText="#{msg['page.gare.apelidos.header.id']}">
+									<h:outputText value="#{apelido.apelido}" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['pages.apelidos.gpsApelidos.nome.razao']}">
+									<h:outputText value="#{apelido.nomeFavorecido}" />
+								</p:column>
+								<p:column>
+									<h:graphicImage styleClass="custom-icons"
+										value="/images/u1239.png" />
+									<p:commandLink id="cmdLnkAlterar" role="button" onstart="openLoad()" oncomplete="closeLoad()" 
+										action="#{tributosFederaisGPSBBean.alterarApelido(apelido)}"
+										value="#{msg['page.gare.apelidos.botoes.alterar']}" />
+								</p:column>
+								<p:column>
+									<h:graphicImage styleClass="custom-icons"
+										value="/images/u1241.png" />
+									<p:commandLink id="cmdLnkExcluir" role="button" onstart="openLoad()" oncomplete="closeLoad()"
+										action="#{tributosFederaisGPSBBean.excluirApelido(apelido)}"
+										value="#{msg['page.gare.apelidos.botoes.excluir']}" />
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton styleClass="btn btn-default btn-secundario"
+					role="button" onstart="openLoad()" oncomplete="closeLoad()"
+					value="#{msg['pages.apelidos.gpsApelidosConfirma.voltar']}"
+					action="#{tributosFederaisGPSBBean.redirectMenu}" id="voltar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

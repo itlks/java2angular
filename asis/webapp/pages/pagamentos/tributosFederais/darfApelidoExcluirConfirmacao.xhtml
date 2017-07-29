@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<!-- 	TÍTULO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.confiraDadosExclusao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- 	FIM TÍTULO -->
+		<!-- 	DADOS EXCLUSÃO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12 box-shadow">
+				<!-- 			PRIMEIRA LINHA -->
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-lg-12 form-group">
+						<span> <h:outputLabel for="" styleClass="bold"
+								value="#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.identificacao']}" />
+							#{apelidoBBean.configuracaoApelido.apelidoEscolhido.identificacao}
+						</span>
+					</p:outputPanel>
+				</p:outputPanel>
+				<!-- 			FIM PRIMEIRA LINHA -->
+				<!-- 			SEGUNDA LINHA -->
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-lg-4 form-group">
+						<span> <h:outputLabel for="" styleClass="bold"
+								value="#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.cpfCnpj']}" />
+							#{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnpjCpf}
+						</span>
+					</p:outputPanel>
+					<!-- 			COLUNA CENTRAL -->
+					<p:outputPanel styleClass="col-lg-4 form-group">
+						<h:outputLabel for="" styleClass="bold"
+							value="#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.receita']}" /> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.codigoReceita}
+					</p:outputPanel>
+					<!-- 			FIM COLUNA CENTRAL -->
+					<!-- 			COLUNA DIREITA -->
+					<p:outputPanel styleClass="col-lg-4 form-group">
+						<h:outputLabel for="" styleClass="bold" 
+							value="#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.numeroReferencia']}" />  #{apelidoBBean.configuracaoApelido.apelidoEscolhido.numeroReferencia}
+					</p:outputPanel>
+					<!-- 			FIM COLUNA DIREITA -->
+				</p:outputPanel>
+				<!-- 			FIM SEGUNDA LINHA -->
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- 	FIM DADOS EXCLUSÃO -->
+		<!-- 		BOTÕES -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-secundario"
+					role="button"
+					value="#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.voltar']}"
+					style="margin-right:10px;" action="#{apelidoBBean.goApelido()}" />
+
+				<p:commandLink styleClass="btn btn-default"
+					value="#{msg['page.pagamentos.tributos.federais.apelidosExcluirConfirmacao.continuar']}"
+					action="#{darfBBean.continuarApelidoExcluirConfirmacao}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- 		FIM BOTÕES -->
+
+
+	</ui:define>
+</ui:composition>

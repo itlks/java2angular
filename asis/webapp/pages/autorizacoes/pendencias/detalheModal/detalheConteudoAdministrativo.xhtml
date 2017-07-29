@@ -1,0 +1,223 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<p:outputPanel styleClass="row space-t space-r space-l"
+		rendered="#{autorizacoesPendenciaDetalheBBean.produtoIncluirAlterarPerfil}">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.nomeCompleto']}</h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.nomeUsuario}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.cpf']}:</h:outputLabel>
+			<h:outputText value=" "/>
+			<h:outputText value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.numeroCPF}"
+				styleClass="control-label" converter="converterCpfCnpj" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.area']}</h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.nomeArea}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.nomeAcesso']}</h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.nomeLogin}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12 ">
+			<h:outputLabel styleClass="space">#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.telefoneFixo']} </h:outputLabel>
+			<h:outputText value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.numeroTelefoneFixo}" styleClass="control-label" converter="converterCelularTelefone" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.telefoneCelular']}</h:outputLabel>
+			<h:outputText
+				value=" #{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.numeroTelefoneCelular}"
+				styleClass="space control-label" converter="converterCelularTelefone" />
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="space-t space-r space-l"
+		rendered="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.flagAcessoMobile eq 'N'}">
+		<h:outputText
+			value="Usuário não habilitado para acessar o canal Mobile Banking Empresarial" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="space-t space-r space-l"
+		rendered="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.flagAcessoMobile eq 'S'}">
+		<h:outputText
+			value="Usuário habilitado para acessar o canal Mobile Banking Empresarial" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row form-horizontal space-t space-r space-l"
+		rendered="#{autorizacoesPendenciaDetalheBBean.produtoAcessoAutorizacao}">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.nomePerfil']}</h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.nomePerfil}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel>#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.descricao']}</h:outputLabel>
+			<h:outputText> #{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.descricaoPefil}</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<ui:repeat var="menu"
+				value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.menuAcesso}">
+				<p:outputPanel styleClass="col-xs-12 margin-top-10">
+					<p:outputPanel styleClass="space-b">
+						<strong style="color: #EE1D23;">#{menu.descricao}</strong>
+					</p:outputPanel>
+					<ul class="links-submenu">
+						<ui:repeat var="subMenu" value="#{menu.subMenu}">
+							<p:outputPanel styleClass="col-xs-4">
+								<li><strong>#{subMenu.descricao}</strong>
+									<ul class="links-submenu"
+										style="margin-left: 10px; margin-top: 5px;">
+										<ui:repeat var="subMenuItem" value="#{subMenu.subMenu}">
+											<li><span>&gt;</span>#{subMenuItem.descricao}</li>
+										</ui:repeat>
+									</ul></li>
+								<p:separator />
+							</p:outputPanel>
+						</ui:repeat>
+					</ul>
+				</p:outputPanel>
+			</ui:repeat>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="space-t space-r space-l"
+		rendered="#{autorizacoesPendenciaDetalheBBean.produtoAlterarPerfilAutorizacao}">
+		<ui:repeat var="transacao"
+			value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.detalhesAutorizacao.entrySet()}">
+
+			<h5 class="space-t space-b bold capitalize">#{transacao.key}</h5>
+			<p:outputPanel styleClass="col-xs-12">
+				<p:dataTable value="#{transacao.value}" var="autorizacao">
+					<p:column
+						headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.transacao']}">
+						#{autorizacao.nomeTransacao}
+					</p:column>
+					<p:column
+						headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.qtdAssinada']}">
+						#{autorizacao.quantidadeAssinatura}
+					</p:column>
+					<p:column
+						headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.valorAlcada']}">
+						#{autorizacao.valorAlcada}
+					</p:column>
+					<p:column
+						headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.valorDiario']}">
+						#{autorizacao.valorAlcada}
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</ui:repeat>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<p:outputPanel styleClass="space-t space-r col-xs-12"
+			rendered="#{autorizacoesPendenciaDetalheBBean.produtoIncluirAlterarPerfil}">
+			<p:dataTable
+				value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.dadosAcessoAutorizacao}"
+				var="acessoAutorizacao">
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.agenciaConta']}">
+					#{acessoAutorizacao.agenciaConta}				
+				</p:column>
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.perfilAcesso']}"
+					rendered="#{not autorizacoesPendenciaDetalheBBean.produtoAlterarPerfilAutorizacaoUsuarioSecundario}">F
+					<h:outputText styleClass="bold" value="#{acessoAutorizacao.perfilAcesso}" />
+					
+				</p:column>
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.perfilAutorizacao']}"
+					rendered="#{autorizacoesPendenciaDetalheBBean.produtoAlterarPerfilAutorizacaoUsuarioSecundario}">
+					<h:outputText styleClass="bold" value="#{acessoAutorizacao.perfilAutorizacao}" />
+				</p:column>
+			</p:dataTable>
+			
+		<p:outputPanel 
+			rendered="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.detalheUsuarioConvenios.size() > 0}" >
+			<p:outputPanel rendered="#{autorizacoesPendenciaDetalheBBean.produtoAlterarPerfilAutorizacaoUsuarioSecundario}">
+				<h5 class="space-t space-b bold capitalize">Convênios</h5>
+			</p:outputPanel>
+			<p:outputPanel rendered="#{not autorizacoesPendenciaDetalheBBean.produtoAlterarPerfilAutorizacaoUsuarioSecundario}">
+				<h5 class="space-t space-b bold capitalize">Acesso aos convênios</h5>
+			</p:outputPanel>
+		</p:outputPanel>
+		<ui:repeat var="opera"
+			value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.detalheUsuarioConvenios.entrySet()}">
+
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="col-xs-12">
+					<h5 class="space-t space-b bold capitalize">#{opera.key}</h5>
+				</p:outputPanel>
+				<p:dataTable value="#{opera.value.detalheListaConvenios}" 
+							var="admin"
+							emptyMessage="Usuário secundário não possui convênios associados"
+							rowKey="#{admin.codigoConvenio}">
+					<p:column 	headerText="Convênio">
+						#{admin.codigoConvenio}
+					</p:column>
+					<p:column headerText="Permitir Acesso">
+						#{admin.flagPermiteAcesso}
+					</p:column>
+					
+					<p:column headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.administrativo.perfilAutorizacao']}">
+						#{admin.nomePerfilAutorizacao}
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</ui:repeat>
+		</p:outputPanel>
+		
+			
+		
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="space-t space-r space-l"
+		rendered="#{autorizacoesPendenciaDetalheBBean.produtoRelacaoConveniosUsuarios}">
+		
+		<p:outputPanel styleClass="space-t space-r space-l"
+			rendered="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.detalheUsuarioConvenios.size() > 0}">
+			<h5 class="space-t space-b bold capitalize">Acesso aos convênios</h5>
+		</p:outputPanel>
+		<ui:repeat var="opera"
+			value="#{autorizacoesPendenciaDetalheBBean.detalheUsuarioAdministrativo.detalheUsuarioConvenios.entrySet()}">
+
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="col-xs-12">
+					<h5 class="space-t space-b bold capitalize">#{opera.key}</h5>
+				</p:outputPanel>
+				<p:dataTable value="#{opera.value.detalheListaConvenios}" 
+							var="admin"
+							emptyMessage="Usuário secundário não possui convênios associados"
+							rowKey="#{admin.codigoConvenio}">
+					<p:column 	headerText="Convênio">
+						#{admin.codigoConvenio}
+					</p:column>
+					<p:column headerText="Permitir Acesso">
+						#{admin.flagPermiteAcesso}
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
+		</ui:repeat>
+	</p:outputPanel>
+	
+</ui:composition>

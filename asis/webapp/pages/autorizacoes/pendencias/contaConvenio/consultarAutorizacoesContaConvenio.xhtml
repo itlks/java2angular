@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+	<p:outputPanel styleClass="space-l">
+		<p:outputPanel id="panelBotoesPeriodosConvenio"
+			styleClass="row space-b">
+
+
+
+
+			<p:outputPanel>
+				<h:outputLabel for="periodoDeConsulta"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.periodoDeConsulta']}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row col-xs-11">
+				<f:verbatim>
+					<input type="button" id="btnConsultaPeriodoHojeConvenio"
+						class="btn btn-default btn-period"
+						onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"
+						onclick="PF('dlgConvenio').hide();consultarPorPeriodoSelecionado('0','porContaConvenio');"
+						value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.hoje']}" />
+
+					<input type="button" id="btnConsultaPeriodoTresDiasConvenio"
+						class="btn btn-default btn-cinza btn-period"
+						onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"
+						onclick="PF('dlgConvenio').hide();consultarPorPeriodoSelecionado('1','porContaConvenio');"
+						value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.tresDias']}" />
+
+					<input type="button" id="btnConsultaPeriodoCincoDiasConvenio"
+						class="btn btn-default btn-cinza btn-period"
+						onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"
+						onclick="PF('dlgConvenio').hide();consultarPorPeriodoSelecionado('2','porContaConvenio');"
+						value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.cincoDias']}" />
+
+					<input type="button" id="btnConsultaPeriodoSeteDiasConvenio"
+						class="btn btn-default btn-cinza btn-period"
+						onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"
+						onclick="PF('dlgConvenio').hide();consultarPorPeriodoSelecionado('3','porContaConvenio');"
+						value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.seteDias']}" />
+				</f:verbatim>
+				<p:commandButton id="btnOutrosPeriodosConvenio"
+					styleClass="btn btn-default btn-cinza btn-period" style="padding:8.2px 44px !important;font-size: 14px !important;"
+					value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.painel.datasFixas.outrosPeriodos']}" />
+
+			</p:outputPanel>
+
+			<p:overlayPanel id="overlayPanelConvenio" dismissable="false" styleClass="painelCalendario"
+				for="btnOutrosPeriodosConvenio" widgetVar="dlgConvenio"
+				onShow="adjustPositionningRight($('#formGeral\\:panelTokens\\:btnOutrosPeriodosConvenio'), $('#formGeral\\:panelTokens\\:overlayPanelConvenio'), 0)">
+
+				<p:outputPanel styleClass="arrow">
+					<p:graphicImage value="../../../images/arrow-popover.png" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="row space-b font-14">
+					<h:outputText
+						value="#{msg['pages.consulta.agendamento.label.DataInicial']}" />
+					<p:outputPanel styleClass="icon-data-input">
+						<i class="fa fa-calendar" />
+						<p:calendar id="deDtresultadosAutorizacoesConvenio"
+							value="#{autorizacoesPendenciaConvenioBBean.dto.dataInicioOutrosPeriodos}"
+							pattern="dd/MM/yyyy" converter="dateConverterFormat"
+							maxlength="10"
+							onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+							readonlyInput="false">
+							<p:ajax event="change" />
+						</p:calendar>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b font-14">
+					<h:outputText
+						value="#{msg['pages.consulta.agendamento.label.DataFinal']}" />
+					<p:outputPanel styleClass="icon-data-input">
+						<i class="fa fa-calendar" />
+						<p:calendar id="ateDtresultadosAutorizacoesConvenio"
+							value="#{autorizacoesPendenciaConvenioBBean.dto.dataFimOutrosPeriodos}"
+							pattern="dd/MM/yyyy" converter="dateConverterFormat"
+							maxlength="10" 
+							onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+							readonlyInput="false">
+							<p:ajax event="change" />
+						</p:calendar>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b font-14">
+					<f:verbatim escape="true">
+						<input type="button" class="btn btn-default pull-right"
+							onclick="consultarPorPeriodoSelecionado('4','porContaConvenio');fecharOutrasDatasConvenio();"
+							onstart="showCarregando();" onsuccess="fecharCarregando();"
+							value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.button.ok']}" />
+					</f:verbatim>
+				</p:outputPanel>
+			</p:overlayPanel>
+		</p:outputPanel>
+		<p:remoteCommand name="fecharOutrasDatasConvenio"
+			onstart="PF('dlgConvenio').hide();" />
+
+		<p:outputPanel id="panelPendenciasPorConvenio"
+			styleClass="row remessa">
+			<p:outputPanel styleClass="col-xs-12">
+				<div id="resultadosAutorizacoesConvenio"></div>
+			</p:outputPanel>
+
+			<!-- 			<h:panelGroup -->
+			<!-- 				rendered="#{empty autorizacoesPendenciaConvenioBBean.pendenciasAgrupadas}"> -->
+			<!-- 				<center> -->
+			<!-- 					<p:outputLabel styleClass="space-a" -->
+			<!-- 						value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.datatable.emptyMessage']}" /> -->
+			<!-- 				</center> -->
+			<!-- 			</h:panelGroup> -->
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

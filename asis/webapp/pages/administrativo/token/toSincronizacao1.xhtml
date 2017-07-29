@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<p>
+						<h:outputText
+							value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.alerta1']}" />
+					</p>
+					<p>
+						<h:outputText
+							value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.alerta2']}" />
+					</p>
+					<p>
+						<h:outputText
+							value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.alerta3']}" />
+					</p>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="titulo-painel">
+			<h:outputText styleClass="h4"
+				value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.sincToken']}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="box-shadow">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for=""
+							value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.numSerie']}" />
+						<p:inputText styleClass="form-control" style="width: 90%"
+							onkeypress="return onlyNumbers(event)" maxlength="10"
+							id="numSerie" value="#{sincronizarTokenBBean.numeroSerie}" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for=""
+							value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.senha1']}" />
+						<p:password onkeypress="return onlyNumbers(event)" maxlength="6"
+							id="pass1" styleClass="form-control" style="width: 90%"
+							value="#{sincronizarTokenBBean.senha1}" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for=""
+							value="#{msg['page.administrativo.dispositivoSeguranca.toSincronizacao1.senha2']}" />
+						<p:password id="pass2" styleClass="form-control"
+							style="width: 90%" maxlength="6"
+							value="#{sincronizarTokenBBean.senha2}"
+							onkeypress="return onlyNumbers(event)" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-secundario"
+					action="#{sincronizarTokenBBean.voltarMenuPrincipal()}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton styleClass="btn btn-default" id="btnContinuar"
+					action="#{sincronizarTokenBBean.confirmar()}" role="button"
+					value="#{msg['page.btn.continuar']}" update=":formGeral" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

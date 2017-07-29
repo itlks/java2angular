@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.TransExcluParaLicenDe']}</strong>
+						</p> <br />
+						<p>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.SeVoceDesejLicenO']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.OsPagamEfetuAposAs']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.ParaMaisInforAcessO']}
+							<a href="http://www3.fazenda.sp.gov.br/ipvanet/">#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.SecreDaFazenDoEstad']}</a>
+						</p> <br />
+
+						<p>
+	                		<ui:include src="/pages/generico/limites2.xhtml">#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.9']} </ui:include>															
+						</p>
+						<p><strong>						
+							<p:commandLink style="text-decoration: underline;"
+								actionListener="#{ipvaBBean.initLimites}"
+								value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.9']}">
+							</p:commandLink>
+							</strong>
+						</p>
+
+						<p>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.AquiVocePodeInclu']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.OBSAposOCadas']}</p>
+						<br />
+						<p>
+							<p:commandLink id="cmdLnkIncluir"
+								action="/pages/pagamentos/renavam/renavamLista.xhtml"
+								role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.IncluNovoRENAV']}</p:commandLink>
+						</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.Sele']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5 class="space-b">
+								#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.RenavCadas']}
+							</h5>
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+                             <p:dataTable id="dtGrid" var="linha" 
+									value="#{veiculoSPMultaInterestadualBBean.lRenavam}" 
+									emptyMessage="#{msg['pages.renavam.empty.table']}"
+									selection="#{veiculoSPMultaInterestadualBBean.renavamDTO}" rowKey="#{linha.apelido}" 
+									tableStyleClass="table-responsive table table-striped" >									
+                                
+                                <p:ajax event="rowSelect"
+										listener="#{veiculoSPMultaInterestadualBBean.onRowSelect}" />
+										
+                                <p:column styleClass="col-md-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.identificacao']}" />
+									</f:facet>
+									<h:outputText value="#{linha.identificacao}" />																			
+								</p:column>
+                                
+                               	<p:column styleClass="col-md-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.renavam']}" />
+									</f:facet>																									
+									<h:outputText value="#{linha.numero}" converter="converterNumeroRenavam"/>					
+								</p:column>
+                             	
+                             	<p:column styleClass="col-md-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.placaveiculo']}" />
+									</f:facet>
+									<h:outputText value="#{linha.placaVeiculo}" />																					
+								</p:column>
+								
+								<p:column styleClass="col-md-3">
+									<f:facet name="header">
+										<h:outputText value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.situacao']}" />
+									</f:facet>								
+									<h:outputText>
+										<h:outputText value="#{linha.situacao.descricao}" style="margin-right:10px"/>
+											<p:outputLabel id="tooltipRenavam"
+												rendered="#{linha.situacao.id eq 'N'}">
+												<i class="fa fa-info-circle" aria-hidden="true" />
+											</p:outputLabel>
+				
+											<p:tooltip for="tooltipRenavam"
+												value="#{msg['pages.renavam.preenchimentoRenavam.column.tooltip']}" />																			
+									</h:outputText>																					
+								</p:column>
+																
+                             </p:dataTable>
+                          </p:outputPanel>
+
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1"
+									value="#{licenciamentoRenavamBBean.lRenavam}" var="ren"
+									rowKey="#{ren.apelido}"
+									selection="#{licenciamentoRenavamBBean.renavamDTO}"
+									selectionMode="single">
+
+									<p:ajax event="rowSelect"
+										listener="#{licenciamentoRenavamBBean.onRowSelect}" />
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.Perfi']}">
+										<h:outputText value="#{ren.apelido}" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.Descr']}">
+										<h:outputText value="#{ren.numero}" />
+									</p:column>
+
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.placaVeiculo']}">
+										<h:outputText value="#{ren.placa}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					styleClass="btn btn-default btn-cinza" role="button">#{msg['pages.pagamentos.veiculossp.licenciamento.inicial.Volta']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

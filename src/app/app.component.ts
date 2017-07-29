@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { jqxBarGaugeComponent } from 'jqwidgets-framework/jqwidgets-ts/angular_jqxbargauge';
+import JSZip from 'jszip';
+
+
 
 declare var jQuery: any;
 @Component({
@@ -12,8 +15,8 @@ export class AppComponent implements OnInit {
   title = 'app';
   public fileString;
   private content;
-  private componente: string= "caleb.component";
-  private tag: string = "caleb-tag";
+  private componente: string= "";
+  private tag: string = "";
    
   values: number[] = [102, 115, 130, 137];
 
@@ -73,7 +76,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  downloadComponent(){ // 
+  private downloadComponent(){ // 
 
     var uriContent = 
     `
@@ -103,6 +106,34 @@ export class AppComponent implements OnInit {
 
     var link = document.createElement('a');
     link.download = filename + '.ts'; // nome do arquivo gerado 
+    link.href = 'data:,' + uriContent;
+    link.click(); // ação do botão
+
+  }
+
+  private downloadLess(){ // 
+
+    var uriContent = "";
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.less'; // nome do arquivo gerado 
+    link.href = 'data:,' + uriContent;
+    link.click(); // ação do botão
+
+  }
+
+  private downloadSpec(){ // 
+
+    var uriContent = "";
+
+    let filename: string = this.componente.toLowerCase();
+    //filename = filename.slice(0, filename.length-5); 
+
+    var link = document.createElement('a');
+    link.download = filename + '.spec'; // nome do arquivo gerado 
     link.href = 'data:,' + uriContent;
     link.click(); // ação do botão
 

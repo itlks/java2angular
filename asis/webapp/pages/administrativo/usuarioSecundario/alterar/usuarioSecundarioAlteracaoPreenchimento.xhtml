@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle" />
+					<span> <h:outputText
+							value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.paragrafo1']}" />
+					</span>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.alteracao.dados']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.nome.completo']}" />
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.cpf']}">
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4 form-group">
+							<p:inputText styleClass="form-control" id="inputNomeUsuario"
+								maxlength="64"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeUsuario}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4 form-group">
+							<p:inputMask styleClass="form-control" id="inputCpf"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrCpf}"
+								mask="999.999.999-99" onkeypress="return onlyNumbers(event)" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.area']}">
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4 form-group">
+							<p:inputText styleClass="form-control" id="inputNomeArea"
+								maxlength="50"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeArea}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.telefone.fixo']}">
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4 form-group">
+
+							<p:inputMask styleClass="form-control" id="inputTelefone"
+								onkeypress="return onlyNumbers(event)"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrTelefone}"
+								mask="(99) 9999-9999" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4 flex-align-v">
+							<p:outputLabel
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.formato.telefone']}">
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel
+						rendered="#{usuarioSecundarioAlterarBBean.exibirCelular}">
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputLabel
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.celular']}">
+								</p:outputLabel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4 form-group">
+
+								<p:inputMask styleClass="form-control" id="inputCelular"
+									onkeypress="return onlyNumbers(event)"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrCelular}"
+									mask="(99) 99999-9999" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 flex-align-v">
+								<p:outputLabel
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.formato.celular']}">
+								</p:outputLabel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.nome.acesso']}">
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4 form-group">
+							<p:inputText styleClass="form-control" id="inputLogon"
+								readonly="true"
+								value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeLogon}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass="label-custom"
+								value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.voce.pode.habilitar']}">
+							</p:outputLabel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:selectBooleanCheckbox
+								value="#{usuarioSecundarioAlterarBBean.acessoMobile}">
+								<p:ajax
+									listener="#{usuarioSecundarioAlterarBBean.chkAcessoMobile}" />
+							</p:selectBooleanCheckbox>
+							<span> <h:outputText styleClass="text"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.habilitar.mobile']}" />
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br></br>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 bold link-termos pointer">
+							<a href=""
+								onclick="window.open('http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=9193','', 'width=1000, height=1000')">
+								#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.termos.de.uso']}
+							</a>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel
+			rendered="#{usuarioSecundarioAlterarBBean.exibirAssinatura}">
+			<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button" value="#{msg['page.btn.voltar']}"
+					action="#{usuarioSecundarioAlterarBBean.voltarSelecao}" />
+
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					value="#{msg['page.btn.continuar']}" onstart="openLoad()"
+					oncomplete="closeLoad()"
+					action="#{usuarioSecundarioAlterarBBean.prosseguirCadastroConfirmacao}"
+					role="button" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

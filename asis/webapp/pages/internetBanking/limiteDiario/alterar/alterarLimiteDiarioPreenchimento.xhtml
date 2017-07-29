@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.segurancaoServicoDisponivel']}</p>
+						<p>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.escolhaTransacoes']}</p>
+						<p>
+					     	<strong>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.solicitacaoSujeita']}</strong> 
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.dadosAlterar']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p:selectOneRadio id="radioGrupo"
+								value="#{limiteDiarioAlterarBBean.dto.nrContaSelecionada }"
+								layout="custom">
+								<f:selectItems value="#{limiteDiarioAlterarBBean.listaEmpresas}" var="empresa" itemValue="#{empresa.contaCorrente}"/>
+							</p:selectOneRadio>
+
+							<ui:repeat var="empresa"
+								value="#{limiteDiarioAlterarBBean.listaEmpresas}">
+
+								<p:outputPanel styleClass="row radioGrid">
+									<p:outputPanel styleClass="col-md-6">
+										<p:radioButton for=":formGeral:radioGrupo"
+											itemIndex="#{empresa.index}" />
+										<h:outputLabel> #{empresa.nome}</h:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-md-6 text-right">
+										<h:outputText styleClass="margin-right-15">#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.agencia']} #{empresa.agencia}</h:outputText>
+										<h:outputText>&#160;&#160;&#160;&#160;&#160;</h:outputText>
+										<h:outputText>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.contaCorrente']} #{empresa.contaCorrente}</h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-md-12 space-b">
+										<p:separator />
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</ui:repeat>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12 space-b">
+									<h5>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.transacoes']}</h5>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputPanel
+										styleClass="table-responsive table table-striped table-alterarlimite">
+										<p:dataTable var="grupo" tableStyleClass="table-limite-alterar" id="tabelaServicos"
+											value="#{limiteDiarioAlterarBBean.transacoes}">
+											<p:columnGroup type="header">
+												<p:row>
+													<p:column colspan="2"
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.transacao']}"
+														style="background-color:#eee; text-align: center" />
+													<p:column colspan="2"
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.limitePadrao']}"
+														style="background-color:#eee; text-align: center" />
+														<p:column 
+														headerText=""
+														 />
+													<p:column colspan="2"
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.novoLimite']}"
+														style="background-color:#eee; text-align: center " />
+												</p:row>
+												<p:row>
+													<p:column />
+													<p:column />
+													<p:column 
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.qtde']}" />
+													<p:column
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.valor']}" styleClass="text-right"/>
+														<p:column 
+														headerText=""
+														 />
+														
+													<p:column 
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.qtde2']}" />
+													<p:column styleClass="text-right"
+														headerText="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.valor2']}" />
+												</p:row>
+											</p:columnGroup>
+
+											<p:subTable var="transacao" value="#{grupo.listaTransacoes}">
+												<f:facet name="header">
+													<h:outputText value="#{grupo.grupoTransacao}" />
+												</f:facet>
+												<p:column style="width:30%">
+													<p:selectBooleanCheckbox value="#{transacao.checked}">
+														<p:ajax process="@form" update=":formGeral:tabelaServicos" />
+													</p:selectBooleanCheckbox>
+													<h:outputText> #{transacao.nomeTransacao}</h:outputText>
+												</p:column>
+												<p:column />
+												<p:column style="width:15%">
+													<h:outputText value="#{transacao.quantidade}"/>
+												</p:column>
+												<p:column style="width:15%" styleClass="text-right">
+													<h:outputText value="#{transacao.valor}">
+														<f:convertNumber type="currency" currencySymbol="" />
+													</h:outputText>
+												</p:column>
+												<p:column  style="width:10%">
+													<h:outputText value="" />  		
+											  	</p:column> 
+													
+												<p:column style="width:15%">
+													<p:inputText value="#{transacao.novaQuantidade}"
+														maxlength="4"
+														rendered="#{(transacao.checked and (transacao.nomeTransacao ne 'DOC') and (transacao.nomeTransacao ne 'TED') and (transacao.nomeTransacao ne 'Entre Contas'))}"
+														styleClass="form-control" onblur="somenteNumeros(this);" />
+													<h:outputText value="-"
+																		rendered="#{(transacao.nomeTransacao eq 'DOC') or (transacao.nomeTransacao eq 'TED') or (transacao.nomeTransacao eq 'Entre Contas')}" />
+												</p:column>
+												<p:column style="width:15%" styleClass="text-right">
+													<p:inputText value="#{transacao.novoValor}"
+														maxlength="12"
+														rendered="#{transacao.checked}" onblur="onlyNumbersGare(this); maskMoneyWithoutZero(this); "
+														styleClass="form-control text-right" />
+												</p:column>
+											</p:subTable>
+
+
+										</p:dataTable>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-md-12">
+									<h5 class="space-b">
+										<p>#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.recomendacoesSeguranca']}</p>
+									</h5>
+									
+									<p:outputPanel styleClass="form-group">
+										<p:inputTextarea readonly="true" autoResize="false" rows="5" styleClass="form-control" value="#{limiteDiarioAlterarBBean.dto.recomendacaoSeguranca}">
+										</p:inputTextarea>
+									</p:outputPanel>
+								
+								</p:outputPanel>
+							</p:outputPanel>
+									
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputPanel styleClass="table-responsive radio label520">
+										<h:selectOneRadio id="termoAceite" layout="pageDirection"
+											value="#{limiteDiarioAlterarBBean.dto.termoAceite}">
+											<f:selectItems
+												value="#{limiteDiarioAlterarBBean.dto.lTermoAceite}" var="c"
+												itemLabel="#{termoAceite}" itemValue="#{termoAceite}" />
+										</h:selectOneRadio>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza" id="btnVoltar"
+					role="button" value="#{msg['page.btn.voltar']}"
+					action="#{limiteDiarioAlterarBBean.voltar}" />
+
+				<p:commandLink styleClass="btn btn-default" id="btnContinuar"
+					role="button" value="#{msg['page.btn.continuar']}"
+					action="#{limiteDiarioAlterarBBean.continuar}" />
+					
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<div class="row space-b">
+			<div class="col-md-6 col-xs-6 site-map">
+				<span>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.administrativo']}
+					<strong>&gt;</strong>
+					#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.usuario.secundario']}
+				</span>
+				<h1>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.consultar']}</h1>
+			</div>
+		</div>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.questao.de.seguranca']}</strong>
+						</p>
+						<p>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.assinatura.e.sua.senha']}
+						</p>
+						<p>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.ela.sera.solicitada']}
+						</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.assinatura.eletronica']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-3">
+							<p>
+								<strong>#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.conta.corrente']}</strong>
+							</p>
+							<p>#{usuarioSecundarioConsultarValidacaoBBean.usuario.agencia}
+								#{usuarioSecundarioConsultarValidacaoBBean.usuario.conta}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-5">
+							<p:outputPanel styleClass="form-group assinatura">
+								<h:outputLabel for="">#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.assinatura.eletronica']}</h:outputLabel>
+								<p:password styleClass="form-control text-center" maxlength="8"
+									value="#{usuarioSecundarioConsultarValidacaoBBean.assinaturaTela}"></p:password>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza pull-left"
+					action="#{usuarioSecundarioConsultarValidacaoBBean.cancelar}"
+					role="button">#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.cancelar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{usuarioSecundarioConsultarValidacaoBBean.voltarConsultarValidacao}"
+					role="button">#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.voltar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" update="@(.assinatura)"
+					action="#{usuarioSecundarioConsultarValidacaoBBean.prosseguirConsultarValidacao}"
+					role="button">#{msg['pages.usuarioSecundario.usuarioConsultaValidacao.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

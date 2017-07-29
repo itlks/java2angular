@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.assinatura.eletronica.assinaturaEletronicaComprovanteSolicitacao.cadastramentoFinalizado']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	
+	
+	
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							
+							<p:outputPanel>
+								<h5>
+									<strong>#{msg['pages.assinaturaEletronica.assinaturaEletronicaSolicitar.SuaAssinEletrFoiCadas']}</strong>
+								</h5>
+								<p>#{msg['pages.assinaturaEletronica.assinaturaEletronicaSolicitar.MemorEManteEmSigil']}</p>
+								<p>#{msg['pages.assinaturaEletronica.assinaturaEletronicaSolicitar.ParaSuaMaiorProte']}</p>
+							</p:outputPanel>
+							
+							
+							<p:separator/>
+							
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4">
+									<p>
+										<strong>#{msg['page.administrativo.assinatura.eletronica.assinaturaEletronicaAlterarComprovante.autenticacao.bancaria']}</strong>
+									</p>
+									<h:outputText style="margin-right: 70px;"
+										value="#{assinaturaEletronicaSolicitarBBean.autenticacaoBancaria}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-8">
+									<p>
+										<strong>#{msg['page.administrativo.assinatura.eletronica.assinaturaEletronicaAlterarComprovante.data.hora.transacao']}</strong>
+									</p>
+									<h:outputText style="margin-right: 70px;"
+										value="#{assinaturaEletronicaSolicitarBBean.dataHoraTransacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:separator/>
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

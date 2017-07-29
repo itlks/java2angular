@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+
+		<p:outputPanel>
+
+			<p:panelGrid styleClass="table space-b">
+				<p:row>
+					<p:column styleClass="col-xs-6" style="background-color:#EEE;">
+						<h:outputText
+							value="#{msg['pages.generico.limitesPagamento.table.transacao.header.informacao']}" />
+					</p:column>
+					<p:column  styleClass="col-xs-6" style="background-color:#EEE;">
+						<h:outputText
+							value="#{msg['page.pagamentos.codigoBarras.limitesDetalhes.autorizadosAgenciaCaixa']}" />
+					</p:column>
+
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{msg['pages.generico.limitesPagamento.table.transacao.quantidade.maxima.diaria']}" />
+					</p:column>
+					<p:column>
+						<h:outputText
+							value="#{limitesDisponiveisBBean.dto.qtdeMaximaDiariaAutorizados}" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{msg['pages.generico.limitesPagamento.table.transacao.valor.maximo.transacao']}" />
+					</p:column>
+					<p:column>
+						<h:outputText
+							value="#{limitesDisponiveisBBean.dto.valorMaximoDiarioAutorizado}">
+							<f:convertNumber type="currency" locale="pt-br"
+								currencyCode="BRL" />
+						</h:outputText>
+					</p:column>
+
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{msg['pages.generico.limitesPagamento.table.transacao.limiteGlobal']}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{limitesDisponiveisBBean.dto.limiteGlobal}">
+							<f:convertNumber type="currency" locale="pt-br"
+								currencyCode="BRL" />
+						</h:outputText>
+					</p:column>
+				</p:row>
+
+			</p:panelGrid>
+
+			<p:panelGrid styleClass="table space-tt">
+				<p:row>
+					<p:column  styleClass="col-xs-6" style=";background-color:#EEE;">
+						<p:row>
+							<p:column>
+								<h:outputText
+									value="#{msg['pages.generico.limitesPagamento.table.limites.header']}" />
+							</p:column>
+						</p:row>
+					</p:column>
+					<p:column  styleClass="col-xs-6" style="background-color:#EEE;">
+						<p:row>
+							<p:column>
+								<h:outputText value=" " />
+							</p:column>
+						</p:row>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{msg['pages.generico.limitesPagamento.table.limites.quantidade']}" />
+					</p:column>
+					<p:column>
+						<h:outputText
+							value="#{limitesDisponiveisBBean.dto.qtdeDisponivelAutorizado}" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{msg['pages.generico.limitesPagamento.table.limites.valor']}" />
+					</p:column>
+					<p:column>
+						<h:outputText
+							value="#{limitesDisponiveisBBean.dto.valorDisponivelAutorizado}">
+							<f:convertNumber type="currency" locale="pt-br"
+								currencyCode="BRL" />
+						</h:outputText>
+					</p:column>
+
+				</p:row>
+
+			</p:panelGrid>
+		</p:outputPanel>
+		<h:outputText styleClass="space-b"
+			value="#{msg['page.pagamentos.codigoBarras.limitesDetalhes.paraAutorizarFavorecidos']}" />
+	</h:body>
+
+</ui:fragment>

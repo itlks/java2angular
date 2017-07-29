@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+<!-- ############################################################### DADOS RENAVAM INICIO ####################################################################### -->   
+
+        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeBancoCliente.xhtml"/>
+        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeRenavam.xhtml"/>
+
+		<p:outputPanel styleClass="row">
+              <p:outputPanel styleClass="col-xs-4">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.proprietario']}"/>
+                <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nomProp}"/>
+              </p:outputPanel>
+
+              <p:outputPanel styleClass="col-xs-4">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.cpfcnpj']}"/>
+                <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.cpfcNPJ2Formatado}"/>
+              </p:outputPanel>
+
+              <p:outputPanel styleClass="col-xs-4">
+                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.placadoveiculo']}"/>
+                <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.placa}"/>
+              </p:outputPanel>
+        </p:outputPanel>
+        
+    
+        <!-- IPVA -->
+        <ui:repeat 
+            var="ipva" 
+            varStatus="status" 
+            value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.listaIpva}" 
+            size="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nroOcorrIpva}">
+
+            <p:outputPanel rendered="#{status.index == 0}">
+                <p:outputPanel styleClass="row">
+                    <p:outputPanel styleClass="col-xs-12">
+                        <p:separator styleClass="space-b" />
+                    </p:outputPanel>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="row">
+                <p:outputPanel styleClass="col-xs-2">
+                    <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.exercicio']} " />
+                    <h:outputText value="#{ipva.exIpva}" />
+                </p:outputPanel>
+
+                <p:outputPanel styleClass="col-xs-4">
+                    <p:outputPanel rendered="#{!segundaViaComprovanteVeiculosBBean.detalheDetran.dtVenc1Inicial}">
+                        <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.cotaparcela']} " />
+                        <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.desCota}" />
+                    </p:outputPanel>
+
+                    <p:outputPanel rendered="#{segundaViaComprovanteVeiculosBBean.detalheDetran.dtVenc1Inicial}">
+                        <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.cotaparcela']} " />
+                        <h:outputText value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.cotaParcelaUnica']}" />
+                    </p:outputPanel>
+                </p:outputPanel>
+
+                <p:outputPanel styleClass="col-xs-3">
+                     <p:outputPanel rendered="#{!segundaViaComprovanteVeiculosBBean.detalheDetran.dtVenc1Inicial}">
+                       <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.datadevencimento']}" />
+                       <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.dtVenc1}" />
+                     </p:outputPanel>
+
+                    <p:outputPanel rendered="#{segundaViaComprovanteVeiculosBBean.detalheDetran.dtVenc1Inicial}">
+                        <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.datadevencimento']}" />
+                        <h:outputText value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.dataVencida']}" />
+                    </p:outputPanel>
+                </p:outputPanel>
+
+                 <p:outputPanel styleClass="col-xs-3">
+                    <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.valor']}" />
+                    <h:outputText value="#{ipva.vlIpva}">
+                        <f:convertNumber type="currency" locale="pt_br" currencySymbol="(R$)" />
+                    </h:outputText>
+                 </p:outputPanel>
+             </p:outputPanel>
+        </ui:repeat>
+    
+         <!-- VALOR TOTAL -->
+	     <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeValorTotal.xhtml"/>
+
+         <p:outputPanel styleClass="row">
+             <p:outputPanel styleClass="col-xs-12">
+                 <p:separator styleClass="space-b" />
+             </p:outputPanel>
+         </p:outputPanel>
+
+         <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+              <p>
+                <span>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.ipva.aviso1']} </span>
+                <span>#{msg['pages.pagamentos.segundaviacomprovante.veiculos.comprovante.ipva.aviso2']}</span>
+              </p>
+             </p:outputPanel>
+         </p:outputPanel>
+
+         <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:separator styleClass="space-b" />
+            </p:outputPanel>
+         </p:outputPanel>
+
+	     <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeRodape1.xhtml"/>
+    
+  <!-- ####################################################################### DADOS RENAVAM FIM ######################################################################### -->
+</ui:composition>

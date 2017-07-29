@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+							
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.RENAV']} " styleClass="bold" />										
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.renavamDTO.numero}" converter="converterNumeroRenavam" />																			
+        </p:outputPanel>
+    </p:outputPanel> 
+	
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.CodigDoMunic']} " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.veiculoDTO.codMun}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+    
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.CPFCNPJ']} " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.veiculoDTO.cpfCnpj}" converter="converterCpfCnpj" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+    
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.PlacaDoVeicu']} " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.renavamDTO.placaVeiculo}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.Exercicio']} " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.cotaSelecionada.anoExercio}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+	
+	<p:outputPanel styleClass="row" rendered="#{!licenciamentoVeiculosMinasGeraisBBean.veiculoDTO.habilitaAgendamento}">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.DataPagamento']} " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.veiculoDTO.dataPagamento}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row" rendered="#{licenciamentoVeiculosMinasGeraisBBean.veiculoDTO.habilitaAgendamento}">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.DataAgendamento']} "  styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText value="#{licenciamentoVeiculosMinasGeraisBBean.veiculoDTO.dataAgendamento}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+	
+    <p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.licenciamento.comprovante.Valor']} " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-9">							            
+			<h:outputText id="txtValorTotal1" value="#{licenciamentoVeiculosMinasGeraisBBean.cotaSelecionada.valor}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>																				
+        </p:outputPanel>
+    </p:outputPanel> 
+    		
+		
+</ui:composition>

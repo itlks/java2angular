@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{darfBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="contentHeader">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.pagamentos.tributos.federais.darfComprovante.pagamento.finalizado.pendente']}"
+							rendered="#{darfBBean.darfDTO.pendente}" />
+						<h:outputText
+							value="#{msg['page.pagamentos.tributos.federais.darfComprovante.pagamento.finalizado']}"
+							rendered="#{!darfBBean.darfDTO.pendente}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+	<ui:define name="contentComprovante">
+
+		<p:outputPanel styleClass="col-xs-6 border-right-col">
+			<p:outputPanel styleClass="titulo-destaque">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-3">
+
+						<p:graphicImage id="republicaFBrasil"
+							styleClass="republicaFb-darfSimples" value="/images/u132.gif" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="col-xs-9">
+
+						<h5>
+							<p>
+								<h:outputText value="#{darfBBean.tituloDocumento1}" />
+								<br />
+								<h:outputText value="#{darfBBean.tituloDocumento2}" />
+								<br />
+								<h:outputText styleClass="bold"
+									value="#{darfBBean.tituloDocumento3}" />
+								<br />
+							</p>
+						</h5>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+
+			<p>
+				<strong><h:outputText
+						value="#{msg['page.pagamentos.tributos.federais.darfComprovante.nomeEmpresaTelefone']}" /></strong>
+			</p>
+			<p>
+				<h:outputText id="nomeEmpresaTelefone"
+					value="#{darfBBean.darfDTO.nomeEmpresaTelefone}" />
+			</p>
+
+			<p:separator />
+			<br />
+
+			<h5>
+				<strong><h:outputText
+						value="#{msg['page.pagamentos.tributos.federais.darfComprovante.atencao']}" /></strong>
+			</h5>
+			<br />
+
+			<p>
+				<h:outputText
+					value="#{msg['page.pagamentos.tributos.federais.darfComprovante.msg.atencao']}" />
+			</p>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-6">
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.periodoApuracao']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="periodoApuracao"
+							value="#{darfBBean.darfDTO.periodoApuracao}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b gray-row">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.cpfCnpj']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="cpfCnpj" value="#{darfBBean.darfDTO.cpfCnpj}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.codigoReceita']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="codigoReceita"
+							value="#{darfBBean.darfDTO.codigoReceita}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b gray-row">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.numeroReferencia']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="numeroReferencia"
+							value="#{darfBBean.darfDTO.numeroReferencia}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.dataVencimento']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="dataVencimento"
+							value="#{darfBBean.darfDTO.dataVencimento}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b gray-row">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.valorPrincipal']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="valorPrincipal"
+							value="#{darfBBean.darfDTO.valorPrincipal}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.valorMulta']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="valorMulta"
+							value="#{darfBBean.darfDTO.valorMulta}" />
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b gray-row">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.valorJurosEncargos']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<h:outputText id="valorJurosEncargos"
+							value="#{darfBBean.darfDTO.valorJurosEncargos}" />
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b total-label"
+				style="padding: 10px 0px;">
+				<p:outputPanel styleClass="col-xs-6">
+					<p>
+						<strong><h:outputText
+								value="#{msg['page.pagamentos.tributos.federais.darfComprovante.valorTotal']}" /></strong>
+					</p>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p>
+						<strong><h:outputText id="valorTotal"
+								value="#{darfBBean.darfDTO.valorTotal}" /></strong>
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-center destaque-text">
+				<p>
+					<strong> <h:outputText
+							value="#{msg['page.pagamentos.tributos.federais.darfComprovante.darfRecolhido']}" />
+						<h:outputText
+							value="&nbsp; #{darfBBean.darfDTO.dataQuitacao} &nbsp;" /> <h:outputText
+							value="#{msg['page.pagamentos.tributos.federais.darfComprovante.darf.agencia.conta']} &nbsp;" />
+						<h:outputText value="#{darfBBean.session.agencia}" /> <h:outputText
+							value="#{msg['page.pagamentos.tributos.federais.darfComprovante.estedocumento']} " />
+					</strong>
+				</p>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel rendered="#{darfBBean.darfDTO.pendente}" >
+			<p:separator />
+			<p:outputPanel styleClass="row" >
+				<p:outputPanel styleClass="col-xs-12 text-center destaque-text">
+					<p>
+						<strong><h:outputText value="#{msg['page.pagamentos.tributos.federais.darfComprovante.pendente']}" /></strong>
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

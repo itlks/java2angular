@@ -1,0 +1,64 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="compHis"
+		value="#{detalheParam.compHis}" />
+	<ui:param name="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<p:outputPanel
+		stylestyleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+		<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.razaosocial']}" styleClass="space" />
+		<h:outputText value="${compHisParts[3]}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfCnpj']}" styleClass="space" />
+			<h:outputText value="${compHisParts[4]}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contadbitocredito']}" styleClass="space" />
+			<h:outputText value="${compHisParts[0]}" />
+			<h:outputText value="/" />
+			<h:outputText value="${compHisParts[1]}" />
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoBeneficiario']}" styleClass="space" />
+			<h:outputText value="${compHisParts[5]}" />
+	</p:outputPanel>
+
+	<!-- 			<p:outputPanel styleClass="col-xs-12"> -->
+	<!-- 				<h:outputLabel styleClass="col-xs-8 pull-left bold"><h:outputText value="Código do Beneficiário"/></h:outputLabel> -->
+	<!-- 				<p:outputPanel styleClass="col-sm-9"> -->
+	<!-- 					<h:outputLabel value="${compHisParts[7]}" /> -->
+	<!-- 				</p:outputPanel> -->
+	<!-- 			</p:outputPanel> -->
+
+	<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.float']}" styleClass="space" />
+			<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.d']}"  />
+			<h:outputText value="${compHisParts[6]}" />
+	</p:outputPanel>
+	<p:outputPanel styleClass="col-xs-12">
+			<h:outputText value="${compHis}" />
+	</p:outputPanel>
+
+	<p:outputPanel stylestyleClass="row space-b">
+		<p:outputPanel stylestyleClass="col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

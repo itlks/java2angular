@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+
+	<ui:define name="content">
+
+		<p:remoteCommand autoRun="true"
+			action="#{dpvatSpBBean.exibirMensagemPreencher()}"></p:remoteCommand>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<strong>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.TransExcluParaPagamDo']}</strong>
+						</p> <br />
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.SeVoceOptarPeloLicen']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.dpvat.preencher.OVenciDaTaxaDe']}
+							<a href="http://www.detran.sp.gov.br" target="_blank">#{msg['pages.pagamentos.veiculossp.dpvat.preencher.WwwDetraSpGovBr']}</a>
+						</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.dpvat.preencher.EmCasoDeDuvidSobre']}
+							<a href="http://www.dpvatseguro.com.br" target="_blank">#{msg['pages.pagamentos.veiculossp.dpvat.preencher.WwwDpvatComBr']}</a>
+						</p>
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.OsPagamEfetuAposAs']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.TransNaoDispoParaAgend']}</p>
+						<p>
+							#{msg['pages.pagamentos.veiculossp.dpvat.preencher.ParaMaisInforAcessO']}
+							<a href="http://www3.fazenda.sp.gov.br/ipvanet/" target="_blank">#{msg['pages.pagamentos.veiculossp.dpvat.preencher.SecreDaFazenDoEstad']}</a>
+						</p> <br />
+						<p>
+							<p style="padding-top: 15px; margin-top: 15px;">
+								<ui:include src="/pages/generico/limites2.xhtml"></ui:include>
+							</p>
+						</p> <p:separator />
+
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.AquiVocePodeInclu']}</p>
+						<p>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.OBSAposOCadas']}</p>
+						<br />
+						<p>
+							<p:commandLink id="cmdlnkListaRenavam"
+								action="/pages/pagamentos/renavam/renavamLista.xhtml">
+							#{msg['pages.pagamentos.veiculossp.dpvat.preencher.IncluNovoRENAV']}</p:commandLink>
+						</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.dpvat.preencher.InforOsDadosParaSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<h5 class="space-b">#{msg['pages.pagamentos.veiculossp.dpvat.preencher.DigitCorreONumerDo']}</h5>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.RENAV']}" />
+								<p:inputText id="txtRenavam" styleClass="form-control"
+									readonly="true" value="#{dpvatSpBBean.renavamDTO.numero}" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{dpvatSpBBean.voltarPreenchimento}" role="button">#{msg['pages.pagamentos.veiculossp.dpvat.preencher.Volta']}</p:commandLink>
+				<p:commandLink id="btnContinuar" styleClass="btn btn-default"
+					action="#{dpvatSpBBean.continuarPreenchimento}" role="button">#{msg['pages.pagamentos.veiculossp.dpvat.preencher.Conti']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

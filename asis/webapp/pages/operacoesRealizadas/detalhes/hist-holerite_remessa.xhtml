@@ -1,0 +1,45 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set var="compPeriodoMes" value="${fn:substring(compHisParts[3],0,2)}" />
+	<c:set var="compPeriodoAno" value="${fn:substring(compHisParts[3],2,6)}" />
+	
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.atualizadaPara']}" styleClass="space"/>
+				<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.aprovada']}" rendered="${compHisParts[5] eq 'A'}"/>
+				<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cancelada']}" rendered="${compHisParts[5] eq 'X'}"/>
+				<h:outputText value="#{msg['page.operacoes.realizadas.detalhe.dados.label.excluida']}" rendered="${compHisParts[5] ne 'A' and compHisParts[5] ne 'X'}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroremessa']}" styleClass="space"/>
+			<h:outputText value="${compHisParts[6]}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.mesreferencia']}" styleClass="space"/>
+			<h:outputText value="${compPeriodoMes.concat('/').concat(compPeriodoAno)}" />
+		</p:outputPanel>
+	
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+	
+</ui:fragment>

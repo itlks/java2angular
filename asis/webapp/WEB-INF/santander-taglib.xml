@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+    version="2.0">
+
+    <namespace>http://santander.com/ui</namespace>
+
+    <tag>
+        <tag-name>fluidTreeView</tag-name>
+        <component>
+            <component-type>com.santander.component.fluidtreeview.UIFluidTreeView</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>dataTreeView</tag-name>
+        <component>
+            <component-type>com.santander.component.datatreeview.UIDataTreeView</component-type>
+        </component>
+    </tag>
+    
+     <tag>
+        <tag-name>treeTableView</tag-name>
+        <component>
+            <component-type>com.santander.component.treetableview.UITreeTableView</component-type>
+        </component>
+    </tag>
+</facelet-taglib>

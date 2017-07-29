@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.pacoteservico.pacotesdisponiveis.comparativo']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:dataTable
+								id="pacotesDisponiveisComparacaoLinhas"
+								tableStyleClass="table table-striped foot-correction"
+								var="linha"
+								value="#{pacotesDisponiveisBBean.pacoteServicoDetalheDTO.lstDetalhe}"
+								rowIndexVar="index">
+
+								<p:column styleClass="text-left"
+									headerText="#{msg['page.pacoteservico.pacotesdisponiveis.comparar.produtoservico']}"
+									footerText="#{msg['page.pacoteservico.pacotesdisponiveis.comparar.valorPacote']}">
+									<h:outputText value="#{linha.descricao}" />
+								</p:column>
+
+								<p:column styleClass="text-left"
+									headerText="#{pacotesDisponiveisBBean.nomePacoteServicoHeader1}"
+									footerText="#{pacotesDisponiveisBBean.valorPacoteServicoFooter1}"
+									rendered="#{pacotesDisponiveisBBean.pacoteServicoComparacao1!=null}">
+									<h:outputText value="#{linha.quantidade}"
+										rendered="#{index!=0}" />
+									<h:commandLink value="#{linha.quantidade}"
+										action="#{pacotesDisponiveisBBean.contratarPacoteRedirect(pacotesDisponiveisBBean.pacoteServicoComparacao1)}"
+										rendered="#{index==0 and pacotesDisponiveisBBean.pacoteServicoComparacao1.diaDebitoEditavel and pacotesDisponiveisBBean.atributosDaSessao.nivelUsuario eq 'P'
+										and !pacotesDisponiveisBBean.pacoteServicoComparacao1.pacoteAtual}" />
+								</p:column>
+
+								<p:column styleClass="text-left"
+									headerText="#{pacotesDisponiveisBBean.nomePacoteServicoHeader2}"
+									footerText="#{pacotesDisponiveisBBean.valorPacoteServicoFooter2}"
+									rendered="#{pacotesDisponiveisBBean.pacoteServicoComparacao2!=null}">
+									<h:outputText value="#{linha.quantidade2}"
+										rendered="#{index!=0}" />
+									<h:commandLink value="#{linha.quantidade2}"
+										action="#{pacotesDisponiveisBBean.contratarPacoteRedirect(pacotesDisponiveisBBean.pacoteServicoComparacao2)}"
+										rendered="#{index==0 and pacotesDisponiveisBBean.pacoteServicoComparacao2.diaDebitoEditavel and pacotesDisponiveisBBean.atributosDaSessao.nivelUsuario eq 'P'
+										and !pacotesDisponiveisBBean.pacoteServicoComparacao2.pacoteAtual}" />
+								</p:column>
+
+								<p:column styleClass="text-left"
+									headerText="#{pacotesDisponiveisBBean.nomePacoteServicoHeader3}"
+									footerText="#{pacotesDisponiveisBBean.valorPacoteServicoFooter3}"
+									rendered="#{pacotesDisponiveisBBean.pacoteServicoComparacao3!=null}">
+									<h:outputText value="#{linha.quantidade3}"
+										rendered="#{index!=0}" />
+									<h:commandLink value="#{linha.quantidade3}"
+										action="#{pacotesDisponiveisBBean.contratarPacoteRedirect(pacotesDisponiveisBBean.pacoteServicoComparacao3)}"
+										rendered="#{index==0 and pacotesDisponiveisBBean.pacoteServicoComparacao3.diaDebitoEditavel and pacotesDisponiveisBBean.atributosDaSessao.nivelUsuario eq 'P'
+										and !pacotesDisponiveisBBean.pacoteServicoComparacao3.pacoteAtual}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel>
+						<p>
+							<h:outputText
+								value="#{msg['page.pacoteservico.pacotesdisponiveis.comparar.observacao']}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel>
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" action="goPacotesDisponiveis" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

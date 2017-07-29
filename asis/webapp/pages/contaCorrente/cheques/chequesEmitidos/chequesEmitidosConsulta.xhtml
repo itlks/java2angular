@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.cheques.chequesEmitidos.tituloTela']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="" value="Data inicial: " />
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">		
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="calendarario"
+										value="#{chequesConsultaEmitidosBBean.dataPesquisa}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10" 
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event)" >
+										
+										<p:ajax event="change" update="calendarario"></p:ajax>
+										
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>	
+									
+						<p:outputPanel styleClass="col-xs-4">
+							<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+							<p:commandLink id="btnContinuar" styleClass="btn btn-default" role="button">
+									 #{msg['page.contaCorrente.cheques.consultaChequesEmitidos.botao.enviar']}
+		          					<p:ajax update="dadosListaCheques" listener="#{chequesConsultaEmitidosBBean.consultarChequesDataPersonalizada}" process="@all" />
+							</p:commandLink>
+						</p:outputPanel>
+															
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="dadosListaCheques" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom" >
+					<p:outputPanel style="margin-bottom:10px;" >
+						<h:outputText value="#{msg['page.contaCorrente.cheques.consultaChequesEmitidos.periodo']} " style="font-weight: bold;"/>
+						<h:outputText
+							value="#{chequesConsultaEmitidosBBean.dataInicial}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+						</h:outputText>
+						<h:outputText value=" a " />
+						<h:outputText value="#{chequesConsultaEmitidosBBean.dataFinal}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:outputPanel>
+					<p:dataTable id="dataTableCheques"
+						tableStyleClass="table-responsive table table-striped"						
+						value="#{chequesConsultaEmitidosBBean.listaChequesResponse}"
+						var="cheque">
+
+						<p:column
+							headerText="#{msg['page.contaCorrente.cheques.consultaChequesEmitidos.data']}" styleClass="text-left">
+								#{chequesConsultaEmitidosBBean.formatStringData(cheque.fhcpago)}
+							</p:column>
+
+						<p:column
+							headerText="#{msg['page.contaCorrente.cheques.consultaChequesEmitidos.historico']}" styleClass="text-left">
+								#{cheque.hislanc}
+							</p:column>
+
+						<p:column
+							headerText="#{msg['page.contaCorrente.cheques.consultaChequesEmitidos.documento']}" styleClass="text-left">
+								#{cheque.numcheqFormatado} 
+							</p:column>
+						<p:column
+							headerText="#{msg['page.contaCorrente.cheques.consultaChequesEmitidos.valor']}" styleClass="text-right">
+								<h:outputText value="#{cheque.importe}" converter="valorMonetarioConverter" />
+						</p:column>
+
+					</p:dataTable>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12" style="margin-top:10px" >
+								#{msg['page.contaCorrente.cheques.consultaChequesEmitidos.periodoDias']}
+							</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis"
+		value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row form-horizontal space-t space-r" id="idExternoInclSacado_Dda_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12 bold space-b" id="idDadosInclSacado_Dda_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDaDosInclSacado_DdaLbl_#{posicaoLista}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idClientPagInclSacado_Dda_#{posicaoLista}">
+			<h:outputLabel value="Cliente/Pagador:" styleClass="space" id="idClientPagLblInclSacado_Dda_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[8]}" styleClass="control-label" id="idClientPagTxtInclSacado_Dda_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12 " id="idCpfCnpjInclSacado_Dda_#{posicaoLista}">
+			<h:outputLabel value="CPF/CNPJ:" styleClass="space" id="idCpfCnpjLblInclSacado_Dda_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[4]}" converter="converterCpfCnpj"
+				styleClass="control-label" id="idCpfCnpjTxtInclSacado_Dda_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12 " id="idAgCCadastroInclSacado_Dda_#{posicaoLista}">
+			<h:outputLabel value="Ag. Conta de Cadastro:" styleClass="space" id="idAgCCadastroLblInclSacado_Dda_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[5]}" styleClass="control-label" id="idAgTxtInclSacado_Dda_#{posicaoLista}"/>
+			<h:outputText value="/" styleClass="control-label" id="idBarraTxtInclSacado_Dda_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[6]}" styleClass="control-label" id="idCCadastroTxtInclSacado_Dda_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idDtSolicitacaoInclSacado_Dda_#{posicaoLista}">
+			<h:outputLabel value="Data da Solicitação" styleClass="space" id="idDtSolicitacaoLblInclSacado_Dda_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[7]}" styleClass="control-label" id="idDtSolicitacaoTxtInclSacado_Dda_#{posicaoLista}"/>/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b" id="idSepaExtInclSacado_Dda_#{posicaoLista}">
+			<p:outputPanel styleClass="col-xs-12" id="idSepaIntInclSacado_Dda_#{posicaoLista}">
+				<p:separator id="idSepaLineInclSacado_Dda_#{posicaoLista}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

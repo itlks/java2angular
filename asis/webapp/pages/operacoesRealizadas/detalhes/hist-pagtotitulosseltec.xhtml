@@ -1,0 +1,49 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoTitulosSelTec_#{posicaoLista}">	
+		<p:outputPanel styleClass="col-xs-12" id="idDadosTitulosSelTec_#{posicaoLista}">
+			<h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosTitulosSelTecLbl_#{posicaoLista}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idChaveTitulosSelTec_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.segunda.via.comprovantes.titulo.chave']}" styleClass="space" id="idChaveLblTitulosSelTec_#{posicaoLista}" />			  
+			     <h:outputText value="${compHisParts[0]}" id="idChaveTxt1TitulosSelTec_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idDiaVencimentoTitulosSelTec_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.diaVencimento']}" styleClass="space" id="idDiaVencimentoLblTitulosSelTec_#{posicaoLista}" />			  
+			     <h:outputText value="${compHisParts[1]}" id="idDiaVencimentoTxt1TitulosSelTec_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNomeBeneficiarioTitulosSelTec_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.nomeBeneficiario']}" styleClass="space" id="idNomeBeneficiarioLblTitulosSelTec_#{posicaoLista}" />			  
+			     <h:outputText value="${compHisParts[2]}" id="idNomeBeneficiarioTxt1TitulosSelTec_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNomePagadorTitulosSelTec_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nomePagador']}" styleClass="space" id="idNomePagadorLblTitulosSelTec_#{posicaoLista}" />			  
+			     <h:outputText value="${compHisParts[3]}" id="idNomePagadorTxt1TitulosSelTec_#{posicaoLista}" />			  
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idValorTitulosSelTec_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" />			
+				<h:outputLabel value="#{detalheParam.valor}" />			
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idRowSpaceTitulosSelTec_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idColXSTitulosSelTec_#{posicaoLista}">
+			<p:separator id="idSeparatorTitulosSelTec_#{posicaoLista}" />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

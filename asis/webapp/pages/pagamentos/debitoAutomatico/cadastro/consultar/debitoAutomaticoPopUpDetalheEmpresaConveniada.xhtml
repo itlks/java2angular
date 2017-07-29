@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="text-left content-modal-text">
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.empresa']}: " />
+			<span id="nmEmpresaConv" styleClass="modalSpan"> #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.nomeEmpresaConveniada}</span>
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row media-middle">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.identConsumidor']}: " />
+			<h:outputText id="identConsu" value="#{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.identificacaoConsumidor}"/>
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			
+			<p:commandLink for="limiteMaxDebit"  styleClass="bold link-termos"
+				   onclick="PF('popupDetalheLimiteMaximo').show()"
+					value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}:">
+					
+				</p:commandLink>
+				
+				
+			<h:outputText id="limiteMaxDebit"
+				value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.possuiLimiteDebitoFormatada}"
+				style="text-transform: uppercase;" />
+			
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.autorizoDebito']}: " />
+			<h:outputText id="valMaxDebito"
+				value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.valorMaximoDebito}">
+				<f:convertNumber currencySymbol="" type="currency" />
+			</h:outputText>
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.emitirAvisoCorreio']}: " />
+			<h:outputText id="emitAvisoCorreio"
+				value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.emitirAvisoCorreios == true ? msg['page.txt.simMaiusculo'] : msg['page.txt.naoMaiusculo']}" />
+			<h:outputText id="emitAvisoCorreioObs"
+				value=" (#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.servicoSujeitoCobranca']}.)" />
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.dataCadastramento']}: " />
+			<h:outputText id="dtCadastr"
+				value="#{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.dataCadastramentoFormatada}" />
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.dataUltimoCadastramento']}: " />
+			<h:outputText id="dtUltCadast"
+				value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.dataUltimoLancamentoFormatada}" />
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.formaPagamento']}: " />
+			<h:outputText id="formaPgto"
+				value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.formaPagamentoFormatada}" />
+			<br />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<h:outputText styleClass="bold"
+				value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.historico']}: " />
+			<h:outputText id="histDesc"
+				value=" #{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionadaGrid.historicoComplementar}" />
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:dialog widgetVar="popupDetalheLimiteMaximo" id="popupDetalheLimiteMaximo"
+			header="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}"
+			position="center" width="800" height="190" modal="false" dynamic="true" 
+			resizable="false" styleClass="modal-box modalGray no-print no-visible">
+			<ui:include
+				src="../consultar/debitoAutomaticoPopUpDetalheLimiteMaximo.xhtml" />
+	</p:dialog>		
+</ui:composition>

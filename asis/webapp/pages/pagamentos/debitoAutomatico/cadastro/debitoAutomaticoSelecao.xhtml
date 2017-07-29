@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="//commons/inicializaDL.xhtml"></ui:include>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{debitoAutomaticoCadastroGenericoBBean.alteracao}">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.subtituloAlterar']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{debitoAutomaticoCadastroGenericoBBean.consulta}">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.subtituloConsultar']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{debitoAutomaticoCadastroGenericoBBean.inclusao}">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.subtituloIncluir']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{debitoAutomaticoCadastroGenericoBBean.exclusao}">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.subtituloExcluir']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row" id="debitoAutomatico">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-3">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.tipoConta']}" />
+								<h:selectOneMenu id="selTipoConta"
+									value="#{debitoAutomaticoCadastroGenericoBBean.tipoContaSelecionada}">
+									<p:ajax event="change" 
+										update="debitoAutomatico"
+										listener="#{debitoAutomaticoCadastroGenericoBBean.consultarConvenios}" />
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.selecione']}"
+										itemValue="-1" noSelectionOption="true" />
+									<f:selectItems
+										value="#{debitoAutomaticoCadastroGenericoBBean.listaTiposContas}"
+										var="tp" itemLabel="#{tp.descricao}"
+										itemValue="#{tp.descricao}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<h:inputHidden value="#{debitoAutomaticoCadastroGenericoBBean.clientHash}"
+								id="clientHash" partialSubmit="true"/>
+					<p:outputPanel styleClass="row" id="panelEmpresaConveniada"
+						rendered="#{debitoAutomaticoCadastroGenericoBBean.exibePanelEmpresaConveniada}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3 space-r">
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel
+											value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.empresa']}:" />
+										<h:selectOneMenu id="selEmpresaConveniada"
+											value="#{debitoAutomaticoCadastroGenericoBBean.idEmpresaConveniadaSelecionada}">
+											<p:ajax event="change"
+												update="debitoAutomatico"
+												listener="#{debitoAutomaticoCadastroGenericoBBean.renderizarPanelIdentificacaoConsumidor}" />
+											<f:selectItem
+												itemLabel="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.selecione']}"
+												itemValue="-1" noSelectionOption="true" />
+											<f:selectItems
+												value="#{debitoAutomaticoCadastroGenericoBBean.listaEmpresasConveniadas}"
+												var="ec" itemLabel="#{ec.nomeEmpresaConveniada}"
+												itemValue="#{ec.nomeEmpresaConveniada}" />
+										</h:selectOneMenu>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="row"
+									id="panelIdentificacaoConsumidor"
+									rendered="#{debitoAutomaticoCadastroGenericoBBean.exibePanelIdentificacaoConsumidor}">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="form-group">
+											<h:outputLabel id="lblConsumidor"
+												value="#{debitoAutomaticoCadastroGenericoBBean.labelConsumidor}:" />
+											<p:inputText id="identificacaoConsumidor_hash_1"
+												value="#{debitoAutomaticoCadastroGenericoBBean.identificacaoConsumidor}"
+												onblur="stringToUpperCase(this)" styleClass="form-control"
+												maxlength="#{debitoAutomaticoCadastroGenericoBBean.empresaConveniadaSelecionada.tamanhoDesc}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="botaoPanel" styleClass="row space-b" autoUpdate="true">
+			<p:outputPanel styleClass="col-xs-12 text-right" id="panelBotao"
+				rendered="#{debitoAutomaticoCadastroGenericoBBean.exibePanelIdentificacaoConsumidor or (debitoAutomaticoCadastroGenericoBBean.tipoContaSelecionada eq 'Todos')}">
+				<p:commandLink id="cmdLnkVoltar"
+					styleClass="btn btn-default btn-cinza"
+					action="#{debitoAutomaticoCadastroGenericoBBean.voltarParaMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+				<p:blockUI block="cmdLnkContinuar" trigger="cmdLnkContinuar" />
+				<p:commandLink id="cmdLnkContinuar" styleClass="btn btn-default" onclick="enviarHash()"
+					action="#{debitoAutomaticoCadastroGenericoBBean.initTelaConsultaConta(true)}"
+					role="button" value="#{msg['page.btn.continuar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,223 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:inputHidden id="hashSenhaEletronica" partialSubmit="true"
+		value="#{dispositivoSecureBBean.session.hashSenhaEletronica}" />
+
+	<h:inputHidden id="usuario" partialSubmit="true"
+		value="#{dispositivoSecureBBean.session.nomeUsuarioLogado}" />
+
+	<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+		value="#{dispositivoSecureBBean.msgErroJavaStript}" />
+
+	<h:inputHidden id="assinaturaEletronica" partialSubmit="true"
+		value="#{dispositivoSecureBBean.senhaEletronica}" />
+
+	<h:inputHidden id="qrCode" partialSubmit="true"
+		value="#{dispositivoSecureBBean.qrCode}" />
+
+	<h:inputHidden id="mobileToken" partialSubmit="true"
+		value="#{dispositivoSecureBBean.mobileToken}" />
+
+	<h:inputHidden id="tokenFisico" partialSubmit="true"
+		value="#{dispositivoSecureBBean.tokenFisico}" />
+
+	<p:outputPanel id="panelDispositivos"
+		styleClass="row assinatura-abas space-t">
+
+		<p:outputPanel styleClass="col-xs-12">
+
+			<p:outputPanel styleClass="titulo-painel">
+				<h4>#{msg['pages.titulo.assinatura']}</h4>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="box-shadow">
+
+				<p:outputPanel styleClass="row space-t">
+					<p:outputPanel styleClass="col-xs-2" style="width:140px;">
+						<p:outputLabel
+							value="#{msg['page.dispositivos.label.contaCorrente']}" />
+						<h:outputText styleClass="space"
+							value="#{dispositivoSecureBBean.session.agencia }" />
+						<h:outputText value="#{dispositivoSecureBBean.session.conta}" />
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="col-xs-4 space-b">
+						<p:outputLabel
+							value="#{msg['page.dispositivos.label.assinaturaEletronica']}:" />
+						<p:password id="idAssinatura" maxlength="8" placeholder=""
+							styleClass="form-control largura-menor" />
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12 space-b"
+			rendered="#{dispositivoSecureBBean.qrCodeVisivel or dispositivoSecureBBean.mobileTokenVisivel or dispositivoSecureBBean.tokenFisicoVisivel}">
+
+			<p:outputPanel styleClass="titulo-painel"
+				rendered="#{dispositivoSecureBBean.qrCodeVisivel or dispositivoSecureBBean.mobileTokenVisivel or dispositivoSecureBBean.tokenFisicoVisivel}">
+				<h4>#{msg['pages.titulo.dispositivos']}</h4>
+			</p:outputPanel>
+
+			<p:tabView id="panelTokens"
+				activeIndex="#{dispositivoSecureBBean.tabAtiva}"
+				styleClass="shadow-block">
+
+				<p:tab title="#{msg['page.dispositivos.label.QRToken']}"
+					rendered="#{dispositivoSecureBBean.qrCodeVisivel}"
+					titleStyle="border-bottom: none !important;">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel
+								styleClass="aviso-interno-blocos alert-information min-lines"
+								style="margin-left: -8px;">
+								<i class="fa fa-exclamation-circle"></i>
+								<span><p>#{msg['pages.titulo.dispositivos.qrcode']}</p></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-2 width270">
+							<p:outputPanel
+								rendered="#{dispositivoSecureBBean.imagemQR ne null and dispositivoSecureBBean.imagemQR ne ''}">
+								<img style="width: 240px; height: 240px;"
+									src="#{dispositivoSecureBBean.imagemQR}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputLabel
+								value="#{msg['page.dispositivos.label.senhaQRToken']}" />
+							<p:password id="idQrCode" maxlength="8"
+								styleClass="form-control largura-menor" placeholder=""
+								onkeypress="if(!isNumber(event)){return false;}" />
+							<h:outputLink styleClass="btn-veja"
+								onclick="window.open('http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=8987','ajudaHome','width=640, height=480, left=100, top=125, scrollbars=no'); return false">
+									 #{msg['pages.titulo.dispositivos.funciona']} 
+								</h:outputLink>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:tab>
+
+				<p:tab title="#{msg['page.dispositivos.label.mobileToken']}"
+					rendered="#{dispositivoSecureBBean.mobileTokenVisivel}"
+					titleStyle="border-bottom: none !important;">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel
+								styleClass="aviso-interno-blocos alert-information min-lines"
+								style="margin-left: -8px;">
+								<i class="fa fa-exclamation-circle"></i>
+								<span><p>#{msg['pages.titulo.dispositivos.mobile.tokem']}</p></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-3">
+
+									<p:outputLabel
+										value="#{msg['page.dispositivos.label.chaveMobile']}" />
+
+
+
+									<h:selectOneMenu value="#{dispositivoSecureBBean.serieMobile}" disabled="#{dispositivoSecureBBean.listaCodeSerieMobile.size() == 2}">
+										<f:selectItems
+											value="#{dispositivoSecureBBean.listaCodeSerieMobile}" />
+									</h:selectOneMenu>
+
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-4">
+
+									<p:outputLabel
+										value="#{msg['page.dispositivos.label.senhaMobile']}" />
+									<p:password id="idMobileToken" placeholder="" maxlength="6"
+										styleClass="form-control largura-menor"
+										onkeypress="if(!isNumber(event)){return false;}" />
+									<h:outputLink styleClass="btn-veja"
+										onclick="window.open('http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=8987','ajudaHome','width=640, height=480, left=100, top=125, scrollbars=no'); return false">
+										#{msg['pages.titulo.dispositivos.funciona']}
+									</h:outputLink>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:tab>
+
+				<p:tab title="#{msg['page.dispositivos.label.tokenFisico']}"
+					rendered="#{dispositivoSecureBBean.tokenFisicoVisivel}"
+					titleStyle="border-bottom: none !important;">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel
+									styleClass="aviso-interno-blocos alert-information min-lines"
+									rendered="#{dispositivoSecureBBean.numeroSerieTokenFisicoVisivel}"
+									style="margin-left: 6px;">
+									<i class="fa fa-exclamation-circle"></i>
+									<span><p>#{msg['pages.titulo.dispositivos.tokem.fisico1']}</p></span>
+								</p:outputPanel>
+								<p:outputPanel
+									styleClass="aviso-interno-blocos alert-information min-lines"
+									rendered="#{not (dispositivoSecureBBean.numeroSerieTokenFisicoVisivel)}"
+									style="margin-left: 6px;">
+									<i class="fa fa-exclamation-circle"></i>
+									<span><p>#{msg['pages.titulo.dispositivos.tokem.fisico2']}</p></span>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4 space-b"
+							rendered="#{not (dispositivoSecureBBean.numeroSerieTokenFisicoVisivel)}">
+							<p:outputLabel value="Número de Série" />
+							<p:inputText id="numeroSerie" maxlength="10"
+								styleClass="form-control"
+								value="#{dispositivoSecureBBean.numeroSerie}" placeholder="" />
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4 space-b">
+
+							<p:outputLabel
+								value="#{msg['pages.dispositivos.label.senha.token']}" />
+							<p:password id="idTokenFisico" placeholder="" maxlength="6"
+								styleClass="form-control largura-menor"
+								onkeypress="if(!isNumber(event)){return false;}" />
+							<h:outputLink
+								onclick="window.open('http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=8488','ajudaHome','width=640, height=480, left=100, top=125, scrollbars=no'); return false">
+											#{msg['pages.titulo.dispositivos.funciona']}
+										</h:outputLink>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:tab>
+
+			</p:tabView>
+
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="quebra" />
+</ui:composition>

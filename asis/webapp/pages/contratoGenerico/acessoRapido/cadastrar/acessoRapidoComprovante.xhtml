@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:santander="http://santander.com/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<script language="JavaScript" type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/js/tree.js" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.acessoRapido.titulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>#{msg['page.acessoRapido.confirmacao.menssagemSucesso']}</h5>
+
+							<p:separator />
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<ui:repeat var="menuPai"
+										value="#{acessoRapidoBBean.menusSelecionados}">
+										<p:outputPanel styleClass="row space-b">
+											<p:outputPanel styleClass="col-md-12">
+												<h5 class="menu-title" style="margin-bottom: 5px;"><strong>#{menuPai.categoriaName}</strong></h5>
+												<ui:repeat var="menuFilho" value="#{menuPai.listaFilhos}">	
+																							
+													<p style="font-size: 14px; margin-top: 3px; margin-bottom: 5px;">												
+														#{menuFilho.categoriaName}:
+													</p>
+												
+													<ui:repeat var="menuNeto" value="#{menuFilho.listaFilhos}">
+														<p style="margin-bottom:10px">
+															<strong style="color: red;">&gt;</strong>
+															#{menuNeto.categoriaName}
+														</p>
+													</ui:repeat>
+												</ui:repeat>
+											</p:outputPanel>
+										</p:outputPanel>
+									</ui:repeat>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+			<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-azul"
+					action="#{acessoRapidoBBean.voltar}" role="button">#{msg['menu.item.home']}</p:commandLink>
+			</p:outputPanel>
+			
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/templateSemMenu.xhtml">
+        
+   <ui:define name="content">
+   <p:outputPanel styleClass="ui-outputpanel ui-widget container-fluid">			
+		<p:outputPanel styleClass="miolo">
+		   <p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12">
+					<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+						<p:outputPanel styleClass="mensagem-conteudo text-left content-modal-text">
+							<p:graphicImage style="width: 35px; height: 35px;" url="/images/#{mensagemBBean.imagem}?faces-redirect=true" />
+							<p:spacer height="10" />
+							<p:outputLabel value="#{mensagemBBean.titulo}"/>
+						</p:outputPanel>
+						<span>
+							<p:outputPanel styleClass="quebra"/>
+				            <span style="font-weight: 400; margin-top: 15px;">#{mensagemBBean.mensagem}</span>
+						</span>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel>											
+					<h:outputLink value="https://www.santander.com.br/br/pessoa-juridica" rendered="#{mensagemBBean.sair}"  styleClass="btn btn-default pull-right">#{msg['pages.aviso.label.sair']}
+						<p:ajax event="click" listener="#{mensagemBBean.sair}"></p:ajax>
+					</h:outputLink>	
+					<p:commandLink value="Home" action="goHome" rendered="#{!mensagemBBean.sair}" styleClass="btn btn-default pull-right"/>	
+		    </p:outputPanel>
+    
+    	</p:outputPanel>
+	</p:outputPanel>
+
+	</ui:define>
+</ui:composition> 

@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:outputPanel styleClass="row">
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.confirmacao.empresaConveniada']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.suspensao.convenio}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.confirmacao.identificacaoConsumidor']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.suspensao.identificacaoConsumidor}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.confirmacao.historicoComplementar']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.suspensao.complemento}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.confirmacao.inicioSuspensao']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.suspensao.dtInicioSuspensao}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.confirmacao.terminoSuspensao']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.suspensao.dtFimSuspensao}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.confirmacao.formaPagamento']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.suspensao.formaPagamento}" />
+		</p:outputPanel>
+
+	</p:outputPanel>
+						  
+</ui:composition>

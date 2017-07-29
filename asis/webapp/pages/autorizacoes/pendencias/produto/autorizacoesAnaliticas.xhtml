@@ -1,0 +1,61 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false"
+		styleClass="loading">
+		<p:graphicImage value="/images/aguarde.gif" />
+	</p:dialog>
+
+	<p:dataTable id="tabelaAnalitica"
+		value="#{sintetica.listaAnaliticaDTO}" var="analitica"
+		rowKey="#{analitica}" emptyMessage="#{msg['pages.autorizacoes.pendencias.remessa.emptyMessage']}"
+		styleClass="headerShow fakeFooter no-margin-bottom space-ll">
+
+		<p:column styleClass="col-xs-4 padding"
+			headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.agenciaConta']}">
+			<p:selectBooleanCheckbox id="checkBoxAnalitica"
+				value="#{analitica.itemSelecionado}"
+				rendered="#{analitica.flagPermiteAutorizar eq 'S'}"
+				styleClass="js-checkbox-analitica">
+				<p:ajax event="change"
+					listener="#{autorizacoesPendenciaBBean.onChangeCheckboxItemTabelaPendenciaAnalitica(item, sintetica, analitica)}"
+					update="@(.js-checkbox-produto, .js-checkbox-sintetica, .js-checkbox-analitica, .js-painel-selecionadas)"
+					onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+			</p:selectBooleanCheckbox>
+			<h:outputText styleClass="fa fa-check space-l"
+				rendered="#{analitica.flagPermiteAutorizar eq 'N'}" />
+
+			<c:set var="agenciaContaComTraco" value="#{analitica.contaConvenio}" />
+			<c:set var="agenciaContaSemTraco"
+				value="${fn:replace(agenciaContaComTraco, '-','  ')}" />
+			<h:outputText styleClass="space-l" value="${agenciaContaSemTraco}" />
+		</p:column>
+
+		<p:column styleClass="col-xs-4 padding"
+			headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.transacao']}">
+			<h:outputText value="#{analitica.descricaoOperacao}" />
+		</p:column>
+
+		<p:column styleClass="col-xs-2 padding"
+			headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.assinaturaPendente']}">
+			<h:outputText value="#{analitica.qtAssPendente}" />
+		</p:column>
+
+		<p:column styleClass="col-xs-2 padding text-right"
+			headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.valor']}">
+			<h:outputText value="#{analitica.valorUsuarioPendencia}"
+				converter="valorDecimalConverter" />
+			<ui:include
+				src="/pages/autorizacoes/pendencias/detalheModal/detalhePesquisa.xhtml" />
+		</p:column>
+
+	</p:dataTable>
+</ui:fragment>

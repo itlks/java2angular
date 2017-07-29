@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span class="site-map">
+						<p>#{msg['pages.pagamento.emprestimosRecebiveis.informacao']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-md-12">
+                <p:outputPanel styleClass="box-shadow">    
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-md-12">
+							<h5 class="space-b">#{msg['pages.pagamento.emprestimosRecebiveis.selecione.contrato']}</h5>
+
+							<p:outputPanel
+								styleClass="table-responsive table table-striped">
+								<p:dataTable id="dtGrid" var="linha"
+									value="#{emprestimoRecebiveisBBean.listaContratoEmprestimos}"
+									emptyMessage="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.empty']}"									
+									selectionMode="single"
+									selection="#{emprestimoRecebiveisBBean.contratosEmprestimosConsultarDTO}"
+									rowKey="#{linha.numeroContrato}"
+									tableStyleClass="table-responsive table table-striped">
+									
+								 <p:ajax event="rowSelect" listener="#{emprestimoRecebiveisBBean.onRowSelect}" />
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.numeroContrato']}" />
+										</f:facet>
+										<h:outputText value="#{linha.numeroContrato}" />
+									</p:column>
+
+
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.produto']}" />
+										</f:facet>
+										<h:outputText value="#{linha.nome}" />
+									</p:column>
+
+									<p:column styleClass="text-right" width="15%">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.valorEmprestimo']}" />
+										</f:facet>
+										<h:outputText value="#{linha.valorEmprestimo}" />
+									</p:column>
+									
+									<p:column styleClass="col-md-1">
+									</p:column>
+
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.numeroParcelas']}" />
+										</f:facet>
+										<h:outputText value="#{linha.numeroParcelas}" />
+									</p:column>
+
+
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.inicio']}" />
+										</f:facet>
+										<h:outputText value="#{linha.inicio}" />
+									</p:column>
+
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['page.emprestimosRecebiveis.contratosEmprestimos.consultar.venciomentoFinal']}" />
+										</f:facet>
+										<h:outputText value="#{linha.venciomentoFinal}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar" value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{emprestimoRecebiveisBBean.voltarMenu}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

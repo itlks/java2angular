@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>Aqui, você pode acompanhar todas as informações atualizadas sobre o seu Plano de Consórcio</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-md-12">
+			<h:outputLabel value="Confira os dados do seu Plano de Consórcio"></h:outputLabel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Cliente:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="#{ConsorcioDadosCotaBBean.dtoDadosConsorcio.cliente}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Grupo:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="#{ConsorcioDadosCotaBBean.dtoDadosConsorcio.grupo}" />
+								<strong style="color: #EE1D23; padding: 5px;">&gt;</strong>
+								<p:commandLink value="Detalhes do grupo" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Bem:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="#{ConsorcioDadosCotaBBean.dtoDadosConsorcio.bem}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="CPF:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="#{ConsorcioDadosCotaBBean.dtoDadosConsorcio.cnpj}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Cota:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="#{ConsorcioDadosCotaBBean.dtoDadosConsorcio.cota}" />
+								<strong style="color: #EE1D23; padding: 5px;">&gt;</strong>
+								<p:commandLink value="Consultar outra cota" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="form-horizontal">
+								<p:outputLabel value="Dados Detalhados" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Contrato:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="189373" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Ponto de Venda:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="013152-IPATININGA-C" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Valor do Bem:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="R$ 334.511,19" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Atraso(s):" />
+								<p:spacer width="5" />
+								<p:outputLabel value="R$ 33.360,88(5,9168%)" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Prestações Pagas:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="00 (94,0931%)" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Taxa de Administração:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="17,0000%" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Vencimento:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="10/07/2016" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Saldo Devedor:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="R$ 36.666,22" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Assembléia Atual:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="108 - 15/07/2016" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Entrega do bem:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="-" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Data da Venda:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="23/01/2008" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Prazo do Plano:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="114 meses" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Valores Pagos:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="R$ 357.705,55 (94,0931%)" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Diferença da Prestação:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="R$-39,81 (-0,0099%)" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Valor da Prestação:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="R$ 3.320,69" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Fundo de Reserva:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="3,5000%" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Prestações a Vencer:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="008" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="1ª  Assembléia:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="15/02/2008" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Contemplação:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="15/02/2013" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-horizontal">
+								<h:outputLabel value="Débito Automático:" />
+								<p:spacer width="5" />
+								<p:outputLabel value="-" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<br />
+							<p:separator />
+							<h:outputLabel
+								value="* Valores sujeitos a alteração até o final do dia." />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b space-t">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					value="#{msg['page.outrosServicos.alterarLimiteDiario.informarValores.voltar']}"
+					styleClass="btn btn-default btn-cinza" immediate="true"
+					action="#{consorcioDadosGrupoBBean.voltar}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

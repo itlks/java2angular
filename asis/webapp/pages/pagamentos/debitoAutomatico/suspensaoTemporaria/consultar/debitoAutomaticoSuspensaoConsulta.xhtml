@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+	
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.aviso1']}</p>
+						<br />
+						<p>#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.aviso2']}</p>
+						<br />
+						<p>#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.aviso3']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.empresas']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5>#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.tituloArea']}</h5>
+							<br />
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:blockUI block="dtGrid" trigger="dtGrid" />
+
+								    <p:dataTable id="dtGrid" var="s" selectionMode="single" rowKey="#{s}"
+									emptyMessage="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.empty']}"
+									value="#{debitoAutomaticoSuspensaoConsultaBBean.listaSuspensoes}">
+		
+									<p:ajax event="rowSelect" process="@this" listener="#{debitoAutomaticoSuspensaoExcluirBBean.obterSuspensaoSelecionada}" />
+
+									<p:column headerText="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaEmpresaConveniada']}">
+                                        <h:outputText value="#{s.convenio}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaIdentificacaoDoConsumidor']}">
+										<h:outputText value="#{s.identificacaoConsumidor}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaHistoricoComplementar']}">
+										<h:outputText value="#{s.complemento}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaInicioDaSuspensao']}">
+										<h:outputText value="#{s.dtInicioSuspensao}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaTeminnoDaSuspensao']}">
+										<h:outputText value="#{s.dtFimSuspensao}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.colunaFormaDePagamento']}">
+										<h:outputText value="#{s.formaPagamento}" />
+									</p:column>
+								</p:dataTable>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+						<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+				</p:outputPanel>
+				
+			</p:outputPanel>
+			
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{debitoAutomaticoSuspensaoConsultaBBean.voltarEmMenu}"
+					role="button">#{msg['page.btn.voltar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default"
+					action="#{debitoAutomaticoSuspensaoIncluirBBean.redirect}"
+					role="button">#{msg['pages.pagamentos.debito.automatico.consultar.suspensao.botaoIncluir']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

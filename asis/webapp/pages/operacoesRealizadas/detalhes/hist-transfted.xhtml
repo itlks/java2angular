@@ -1,0 +1,154 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}" />
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set var="compQtdeItens" value="${fn:length(compHisParts) - 1}" />
+	
+	<c:set var="compBancoDestino" value="${compHisParts[0]}" />
+	<c:set var="compBancoDestinoParts" value="${fn:split(compBancoDestino, '/')}" />
+	<c:set var="compQtdeBancoDestino" value="${fn:length(compBancoDestinoParts) - 1}" />
+	<c:set var="compTipoDoc" value="${compHisParts[1]}" />
+	<c:set var="compCodFinalidade" value="${fn:trim(compHisParts[2])}" />
+	<c:set var="compCodTipoAdesao" value="${fn:trim(compHisParts[3])}" />
+	<c:set var="compTipoAdesao" value="${compCodTipoAdesao eq '1'  ? 'Livre Movimentação' : 'Contas Pré Cadastradas'}" />
+	<c:set var="compTarifa" value="${fn:trim(compHisParts[4]) / 100}" />
+	<c:set var="compHistorico" value="${compQtdeItens > 5 ? compHisParts[5] : ' '}" />
+	<c:set var="compTipoContaOrigem" value="#{operacoesRealizadasBBean.buscaTipoTransferencia(compHisParts[8])}" />
+	<c:set var="compTipoContaDestino" value="#{operacoesRealizadasBBean.buscaTipoTransferencia(compHisParts[9])}" />
+	<c:set var="compContaDebito" value="${compHisParts[10]} ${compHisParts[11]}" />
+	<c:set var="msg1" value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.de']}" />
+	<c:set var="msg2" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.ParaMaiusculo']}" />
+		
+	<c:choose>
+		<c:when test="${compQtdeItens > 8}">
+			<c:set var="compTipoTed" value=" ${msg1} ${compTipoContaOrigem} ${msg2} ${compTipoContaDestino}" />
+		</c:when>
+	</c:choose>
+	
+	<c:choose>
+ 	 <c:when test="${compCodFinalidade eq '00001' or compCodFinalidade == 1}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoImpostoTaxas']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00002' or compCodFinalidade == 2}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoServicoPublico']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00003' or compCodFinalidade == 3}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoDeDividendos']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00004' or compCodFinalidade == 4}"><c:set var="compFinalidade" value="#{msg['pages.administrativo.usuarioSecundarioAlterar.subtable.pgtoSalario']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00005' or compCodFinalidade == 5}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoFornecedores']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00006' or compCodFinalidade == 6}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentosHonorarios']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00007' or compCodFinalidade == 7}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoAlugueisCondominio']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00008' or compCodFinalidade == 8}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoDuplicatasTitulos']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00009' or compCodFinalidade == 9}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pagamentoMensalidadeEscolar']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00010' or compCodFinalidade == 10}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.creditoContaCorrente']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00011' or compCodFinalidade == 11}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.creditoContaPoupanca']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00016' or compCodFinalidade == 16}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.creditoContaInvestimento']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00032' or compCodFinalidade == 32}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.RetiradaContaInvestimento']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00100' or compCodFinalidade == 100}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.depositoJudicial']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00101' or compCodFinalidade == 101}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.pensaoAlimenticia']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00110' or compCodFinalidade == 110}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.transferenciaMesmaTitularidade']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00114' or compCodFinalidade == 114}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.resgateAplicacaoMesmaTitularidade']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00117' or compCodFinalidade == 117}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.aplicacaoNomeRemetente']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00201' or compCodFinalidade == 201}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.ajusteMercadoFuturo']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00204' or compCodFinalidade == 204}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.operacoesCompraBmb']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00205' or compCodFinalidade == 205}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contratosReferenciadosBmf']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00207' or compCodFinalidade == 207}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.intermediacaoRendaFixa']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '00300' or compCodFinalidade == 300}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.retituicaoImpostoRenda']}" /></c:when>
+ 	 <c:when test="${compCodFinalidade eq '99999' or compCodFinalidade == 99999}"><c:set var="compFinalidade" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.outros']}" /></c:when>
+	</c:choose>
+	
+	 <p:outputPanel styleClass="row form-horizontal space-t space-r" id="idExternoTransfTed_#{posicaoLista}">	 
+        <p:outputPanel styleClass="col-xs-12" id="idDadosTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosTransfTedLbl_#{posicaoLista}"/>
+        </p:outputPanel>
+	 
+        <p:outputPanel styleClass="col-xs-12" id="idFavorecidoTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.favorecido']}" id="idFavorecidoLblTransfTed_#{posicaoLista}" />
+          <h:outputText value="#{detalheParam.clienteDestino}" id="idFavorecidoTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+	 
+		<p:outputPanel styleClass="col-xs-12" rendered="#{compQtdeBancoDestino > 0}" id="idBancoDestinoIspbTransfTed_#{posicaoLista}">
+	      <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancoDestinoIspb']}" id="idBancoDestinoIspbLblTransfTed_#{posicaoLista}" />
+	      <h:outputText value="#{detalheParam.bancoDestino} #{fn:trim(detalheParam.bancoDestino) != '' ? '/' : ''} #{compBancoDestinoParts[1]} - #{compBancoDestinoParts[0]}" id="idBancoDestinoIspbTxt1TransfTed_#{posicaoLista}"/>
+	    </p:outputPanel>
+	    
+		<p:outputPanel styleClass="col-xs-12" rendered="#{compQtdeBancoDestino == 0}" id="idBancoDestinoTransfTed_#{posicaoLista}">
+	      <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancoDestino']}" id="idBancoDestinoLblTransfTed_#{posicaoLista}" />
+	      <h:outputText value="#{detalheParam.bancoDestino} #{fn:trim(detalheParam.bancoDestino) != '' ? '-' : ''} #{compBancoDestino}" id="idBancoDestinoTxt1TransfTed_#{posicaoLista}"/>
+	    </p:outputPanel>
+	 
+       <p:outputPanel styleClass="col-xs-12" id="idAgenciaTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.administrativo.solicitar.token.agencia']}" id="idAgenciaLblTransfTed_#{posicaoLista}" />
+          <h:outputText value="#{detalheParam.agenciaDestino}" id="idAgenciaTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="col-xs-12" id="idContaTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.adquirencia.detalhe.conta']}" id="idContaLblTransfTed_#{posicaoLista}" />
+          <h:outputText value="#{fn:substring(detalheParam.contaDestino,0,13)}" id="idContaTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="col-xs-12" id="idTipoTedTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoTed']}" id="idTipoTedLblTransfTed_#{posicaoLista}"/>
+          <h:outputText value="#{compTipoTed}" id="idTipoTedTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="col-xs-12" id="idFinalidadeTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.finalidade']}" id="idFinalidadeLblTransfTed_#{posicaoLista}" />
+          <h:outputText value="#{compFinalidade}" id="idFinalidadeTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="col-xs-12" id="idHistoricoTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.transferencias.transferir.historico']}" id="idHistoricoLblTransfTed_#{posicaoLista}" />
+          <h:outputText value="#{compHistorico}" id="idHistoricoTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="col-xs-12" id="idTipoAdesaoTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoAdesao']}" id="idTipoAdesaoLblTransfTed_#{posicaoLista}"/>
+          <h:outputText value="#{compTipoAdesao}" id="idTipoAdesaoTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>
+        
+        <p:outputPanel styleClass="col-xs-12" id="idValorTarifaTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorTarifa']}" id="idValorTarifaLblTransfTed_#{posicaoLista}"/>
+          <h:outputText value="#{compTarifa}" id="idValorTarifaTxt1TransfTed_#{posicaoLista}">
+          	<f:convertNumber type="currency" locale="pt_br" currencySymbol="" ></f:convertNumber>
+          </h:outputText>
+        </p:outputPanel>
+
+        <p:outputPanel styleClass="col-xs-12" id="idValorTransfTed_#{posicaoLista}">
+          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" id="idValorLblTransfTed_#{posicaoLista}" />
+          <h:outputText value="#{detalheParam.valor}" id="idValorTxt1TransfTed_#{posicaoLista}"/>
+        </p:outputPanel>        
+        
+        <p:outputPanel rendered="#{compQtdeItens > 8}" id="idQtdeItensTransfTed_#{posicaoLista}">        
+	        <p:outputPanel styleClass="col-xs-12" id="idInformacoesAdicionaisTransfTed_#{posicaoLista}">
+	          <h:outputLabel styleClass="space" value="#{msg['pages.transferencia.consultar.detalhe.informacoesadicionais']}" id="idInformacoesAdicionaisLblTransfTed_#{posicaoLista}" />
+	        </p:outputPanel>
+	        
+	        <p:outputPanel styleClass="col-xs-12" id="idTipo1ContaOrigemTransfTed_#{posicaoLista}">
+	          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoContaOrigem']}" id="idTipoContaOrigemLblTransfTed_#{posicaoLista}" />
+	          <h:outputText value="#{compTipoContaOrigem}" id="idTipoContaOrigemTxt1TransfTed_#{posicaoLista}"/>
+	        </p:outputPanel>
+	        
+	        <p:outputPanel rendered="#{compTipoContaOrigem eq '2'}" id="idTipo2ContaOrigemTransfTed_#{posicaoLista}">
+		        <p:outputPanel styleClass="col-xs-12" id="idContaInvestimentoDebitoTransfTed_#{posicaoLista}">
+		          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contaInvestimentoDebito']}" id="idContaInvestimentoDebitoLblTransfTed_#{posicaoLista}" />
+		          <h:outputText value="#{compContaDebito}" id="idContaInvestimentoDebitoTxt1TransfTed_#{posicaoLista}"/>
+		        </p:outputPanel>
+	        </p:outputPanel>
+	        
+	        <p:outputPanel styleClass="col-xs-12" id="idtipoContaDestinoTransfTed_#{posicaoLista}">
+	          <h:outputLabel styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoContaDestino']}" id="idtipoContaDestinoLblTransfTed_#{posicaoLista}" />
+	          <h:outputText value="#{compTipoContaDestino}" id="idtipoContaDestinoTxt1TransfTed_#{posicaoLista}"/>
+	        </p:outputPanel>        
+        </p:outputPanel>        		
+	</p:outputPanel>
+	
+
+	<p:outputPanel styleClass="row space-b" id="idtipoSep1TransfTed_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idtipoSep2TransfTed_#{posicaoLista}">
+			<p:separator id="idtipoSeparatorTransfTed_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>	
+</ui:fragment>

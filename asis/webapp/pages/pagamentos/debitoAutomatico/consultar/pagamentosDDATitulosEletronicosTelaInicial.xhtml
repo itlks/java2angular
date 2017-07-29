@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalha.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>Por esta opção, além de consultar os títulos eletrônicos
+							DDA que se encontram em aberto, você também poderá consultar os
+							títulos pagos, agendados e baixados pelo beneficiário.</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Informe os dados para selecionar os títulos eletrônicos
+						DDA</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Pagador  eletrônico:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for=""
+									value="COB MSOFGHI LAQWOTA ZOUVEN U EGOJK Z CVB" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="CPF/CNPJ:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="04.549.833/0001-67" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator styleClass="space-b" />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>Argumentos de busca</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<span>Se nenhum dado for informado, serão selecionados
+								todos os títulos em aberto, disponíveis para pagamento e
+								consulta. Para títulos vencidos, a seleção considerará os
+								últimos 65 dias corridos</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+
+					<h:outputLabel for="" value="Vencimento de:"></h:outputLabel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<p:outputPanel styleClass="form-group">
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar id="popup1" value="#{calendarView.date2}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-1 text-center link-marker">
+								<h:outputLabel for="" value="a" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<p:outputPanel styleClass="form-group">
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar id="popup2" value="#{calendarView.date2}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="" value="Situação do título" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-3 no-padding">
+							<h:outputLabel for="" value="Origem" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<p:outputPanel styleClass="form-group">
+									<h:selectOneMenu name="tipoOrigemApreensao">
+										<f:selectItem itemValue="Selecione" itemLabel="Selecione"
+											noSelectionOption="true" />
+										<f:selectItem itemValue="Todos em aberto"
+											itemLabel="Todos em aberto" />
+										<f:selectItem itemValue="Em aberto a vencer"
+											itemLabel="Em aberto a vencer" />
+										<f:selectItem itemValue="Em aberto vencidos"
+											itemLabel="Em aberto vencidos" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-1 text-center link-marker" />
+
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<p:outputPanel styleClass="form-group">
+									<h:selectOneMenu name="tipoOrigemApreensao">
+										<f:selectItem itemValue="Selecione" itemLabel="Selecione"
+											noSelectionOption="true" />
+										<f:selectItem itemValue="Próprios" itemLabel="Próprios" />
+										<f:selectItem itemValue="Agregados" itemLabel="Agregados" />
+										<f:selectItem itemValue="Todos" itemLabel="Todos" />
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel styleClass="bold boxTitulo floppy-excel" for=""
+								value="Beneficiário" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="table-responsive radio label70">
+						<h:selectOneRadio value="_1" layout="custom"
+							onchange="desableInput()" id="radioGiroEletronico">
+							<f:selectItem itemLabel="CNPJ" itemValue="1" />
+							<f:selectItem itemLabel="CPF" itemValue="2" />
+						</h:selectOneRadio>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row inputCpf">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="form-group col-xs-3 no-padding">
+								<p:inputMask id="xpto" maxlenght="14" mask="999.999.999-99"
+									onkeypress="return onlyNumbers(event)"
+									styleClass="form-control" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row inputCnpj">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="form-group col-xs-3 no-padding">
+
+								<p:inputMask id="xpto1" maxlenght="18" mask="99.999.999/9999-99"
+									onkeypress="return onlyNumbers(event)"
+									styleClass="form-control" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+						<p:commandLink styleClass="btn btn-default btn-cinza pull-left"
+							actionListener="#" role="button">
+					         Cancelar 
+					      </p:commandLink>
+						<p:commandLink styleClass="btn btn-default btn-cinza"
+							actionListener="#" role="button">
+					         Voltar 
+					      </p:commandLink>
+
+						<p:commandLink styleClass="btn btn-default" actionListener="#"
+							role="button">
+					         Continuar
+					      </p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

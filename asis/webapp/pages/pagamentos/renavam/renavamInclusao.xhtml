@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{renavamListaBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{renavamListaBBean.acessoDireto()}" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+
+					<i class="fa fa-exclamation-circle" />
+
+					<span><p>#{msg['pages.renavam.incluirConfirmacao.cadastrar.renavam']}</p>
+						<p>
+							<strong>#{msg['pages.renavam.incluirConfirmacao.obs']}</strong>
+						</p></span>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+
+					<h4>#{msg['pages.renavam.incluirConfirmacao.inserir.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" id="panelGeral">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel for="txtNumero"
+										value="#{msg['pages.renavam.incluirConfirmacao.renavam']}" />
+
+									<p:inputText id="txtNumero"
+										value="#{renavamListaBBean.dto.numero}" maxlength="12"
+										onkeyup='return validateQty(event)'
+										onkeypress='return validateQty(event)'
+										styleClass="form-control" />
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel for="txtApelido"
+										value="#{msg['pages.renavam.incluirConfirmacao.apelido']}" />
+
+									<p:inputText id="txtApelido"
+										value="#{renavamListaBBean.dto.apelido}" maxlength="20"
+										styleClass="form-control" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-1 no-padding tooltip-col">
+								<h:graphicImage id="idTooltip" value="/images/icon-i.png"
+									alt="#{msg['pages.renavam.alterarRenavam.alt.tooltip']}" />
+
+								<pe:tooltip for="idTooltip"
+									value="#{msg['pages.renavam.incluirConfirmacao.tooltip']}"
+									myPosition="left center" atPosition="right center" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p:outputLabel id="lblEstado"
+										value="#{msg['pages.renavam.incluirConfirmacao.estado']}" />
+
+									<h:selectOneMenu id="select"
+										value="#{renavamListaBBean.dto.estadoSelecionado}">
+
+										<f:selectItem
+											itemLabel="#{msg['pages.transferenciaArquivos.associarRegraSelecao.selecione']}"
+											itemValue="#{msg['pages.transferenciaArquivos.associarRegraSelecao.selecione']}"
+											noSelectionOption="true" />
+
+										<f:selectItems value="#{renavamListaBBean.lEstados}" var="est"
+											itemLabel="#{est.descricao}" itemValue="#{est.descricao}" />
+
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar" rendered="#{renavamListaBBean.mostrarVoltar}"
+					value="#{msg['pages.renavam.incluirConfirmacao.voltar']}"
+					styleClass="btn btn-default btn-cinza"
+					action="#{renavamListaBBean.voltarParaLista}" />
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" rendered="#{renavamListaBBean.mostrarVoltar}"/>
+
+				<p:commandButton id="btnContinuar"
+					value="#{msg['pages.renavam.incluirConfirmacao.continuar']}"
+					styleClass="btn btn-default"
+					action="#{renavamListaBBean.incluirApelido}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

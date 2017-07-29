@@ -1,0 +1,50 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExternoSExlusao_#{posicaoLista}">	
+		<p:outputPanel styleClass="col-xs-12" id="idDadosSExlusao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosSExlusaoLbl_#{posicaoLista}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idConvenioSExlusao_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['pages.autorizacoes.consultas.limitesUtilizados.listaDados.convenio']}" styleClass="space" id="idConvenioLblSExlusao_#{posicaoLista}" />
+			     <h:outputText value="${compHisParts[0].concat('-').concat(compHisParts[1]).concat('-').concat(compHisParts[2])}" rendered="#{detalheParam.nomeServico eq '0006'}" id="idConvenioTxt1SExlusao_#{posicaoLista}" />
+			     <h:outputText value="${compHisParts[1].concat('-').concat(compHisParts[2]).concat('-').concat(compHisParts[3])}" rendered="#{detalheParam.nomeServico ne '0006'}" id="idConvenioTxt2SExlusao_#{posicaoLista}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idQuantidadeRegistrosSExlusao_#{posicaoLista}">
+			  	<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.quantidadeRegistros']}" rendered="#{detalheParam.nomeServico eq '0006'}" styleClass="space" id="idQuantidadeRegistrosblSExlusao_#{posicaoLista}" />
+			 	<h:outputText value="${compHisParts[3]}" rendered="#{detalheParam.nomeServico eq '0006'}" id="idQuantidadeRegistroTxt1SExlusao_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroDaRemessaSExlusao_#{posicaoLista}">
+			  	<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroDaRemessa']}" rendered="#{detalheParam.nomeServico ne '0006'}" styleClass="space" id="idNumeroDaRemessaLblSExlusao_#{posicaoLista}" />
+			 	<h:outputText value="${compHisParts[20]}" rendered="#{detalheParam.nomeServico ne '0006'}" id="idNumeroDaRemessaTxt1SExlusao_#{posicaoLista}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idDataCreditoSExlusao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dataCredito']}" styleClass="space" id="idDataCreditoLblSExlusao_#{posicaoLista}" />
+			 	<h:outputText value="${compHisParts[19]}" id="idDataCreditoTxt1SExlusao_#{posicaoLista}" />
+		</p:outputPanel>
+	
+		<p:outputPanel styleClass="col-xs-12" id="idValorSExlusao_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}"  styleClass="space" id="idValorLblSExlusao_#{posicaoLista}" />			
+				<h:outputLabel value="#{detalheParam.valor}" id="idValorTxt1SExlusao_#{posicaoLista}" />			
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idRowSpaceSExlusao_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idColXSSExlusao_#{posicaoLista}">
+			<p:separator id="idSeparatorSExlusao_#{posicaoLista}" />
+		</p:outputPanel>
+	</p:outputPanel>	
+</ui:fragment>

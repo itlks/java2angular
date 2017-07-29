@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:remoteCommand autoRun="true" action="#{multasVeiculosBBean.init}"
+			update="painelGeral" />
+
+		<p:outputPanel id="painelGeral">
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12">
+					<p:outputPanel
+						styleClass="aviso-interno-blocos alert-information box-shadow">
+						<i class="fa fa-exclamation-circle"></i>
+						<span>
+							<p>
+								<strong>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.transacaoExclusiva']}</strong>
+							</p> <br />
+							<p>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.pagamentosEfetuados']}</p>
+							<p>
+								#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.paraInformacoes']}
+								<p:commandLink
+									oncomplete="window.open('http://www3.fazenda.sp.gov.br/ipvanet/')">#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.secretariaFazenda']}</p:commandLink>
+							</p> <br />
+							<p>
+							<ui:include src="/pages/generico/limites2.xhtml">#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.confiraLimites']}</ui:include>							
+								
+							</p> <br /> <p:separator /> <br />
+							<p>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.aquiVocePode']}</p>
+							<p>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.aposCadastramento']}</p> <br />
+							<p>
+								<p:commandLink action="/pages/pagamentos/renavam/renavamLista.xhtml">
+									<h:outputText value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.incluirNovoRenavam']}" />
+								</p:commandLink>
+							</p>
+						</span>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.selecioneRenavam']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-lg-12">
+					<p:outputPanel styleClass="box-shadow">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-md-12">
+								<p>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.renavamCadastrados']}</p>
+								<br />
+								<p:outputPanel styleClass="table-responsive table table-striped">
+									<p:dataTable id="apelidos" selectionMode="single"
+										value="#{multasVeiculosBBean.listaMultas}" var="mul"
+										selection="#{multasVeiculosBBean.multas}"
+										rowKey="#{mul.identificacao}">
+
+										<p:ajax event="rowSelect"
+											listener="#{multasVeiculosBBean.onRowSelect}" />
+
+										<p:column headerText="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.identificacao']}">
+											<h:outputText value="#{mul.identificacao}" />
+										</p:column>
+										<p:column headerText="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.ranavam']}">
+											<h:outputText value="#{mul.renavam}" />
+										</p:column>
+										<p:column headerText="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.placaVeiculo']}">
+											<h:outputText value="#{mul.placaVeiculo}" />
+										</p:column>
+									</p:dataTable>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button" action="#{multasVeiculosBBean.voltarMultasVeiculosRenavamOnlineApelidos}"
+					value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.voltar']}" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

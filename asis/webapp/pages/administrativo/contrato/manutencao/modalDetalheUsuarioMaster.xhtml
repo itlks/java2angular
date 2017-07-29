@@ -1,0 +1,310 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="idDetalheUsuarioMasterdlg"
+		header="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.infomacoesUsuarioMaster']}"
+		widgetVar="detalheUsuarioMasterdlg" resizable="false" closable="false"
+		 modal="true" styleClass="modal-box no-visible modal-scroll" width="60%" height="70%">
+		<p:outputPanel styleClass="col-xs-12" >
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.nomeAcesso']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.nomeAcesso}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.nomeCompleto']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+					
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.nomeCompleto}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.cpf']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.cpf}"
+							styleClass="bold" converter="converterCpfCnpj">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>				
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.email']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel 
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.email}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>					
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.telefone']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="(#{contratoManutencaoBBean.usuarioMasterSelecionado.telefoneDdd}) #{contratoManutencaoBBean.usuarioMasterSelecionado.telefoneNumero}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-1">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.preenchimentoContratoManutencao.incluirMaster.ramal']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.telefoneRamal}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<br />
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.situacaoUsuario']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.inStatusUsuario}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.dataInclusaoUsuario']}"
+							styleClass="font-normal">
+							<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.dtInclusaoUsuario}"
+							styleClass="bold">
+							<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.dataUltimoAcessoUsuario']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.dtUltimoAcessoUsuario}"
+							styleClass="bold">
+							<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.dataUltimaAlteracaoSenha']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">		
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.dtUltimaAlteracaoSenha}"
+							styleClass="bold">
+							<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.perguntaResposta']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.pergutaResposta}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<br />
+
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.statusSenhaAcesso']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+						
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.statusSenhaAcesso}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.statusAssinaturaEletronica']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">	
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.statusAssinaturaEletronica}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+	
+			<p:outputPanel styleClass="row" rendered="#{!contratoManutencaoBBean.usuarioMasterSelecionado.novoUsuarioMaster}">
+				<p:outputPanel styleClass="col-xs-3">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel
+							value="#{msg['pages.administrativo.contrato.manutencao.modalDetalheUsuarioMaster.statusMobileToken']}"
+							styleClass="font-normal">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+									
+				<p:outputPanel styleClass="col-xs-9">
+					<p:outputPanel styleClass="form-group">	
+						<h:outputLabel
+							value="#{contratoManutencaoBBean.usuarioMasterSelecionado.statusMobileToken}"
+							styleClass="bold">
+						</h:outputLabel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="row space-b no-visible">
+				<p:outputPanel styleClass="col-md-12">
+					<p:commandLink styleClass="btn btn-default pull-right"
+						value="#{msg['page.btn.fechar']}" role="button"
+						onclick="PF('detalheUsuarioMasterdlg').hide();" />
+				</p:outputPanel>
+			</p:outputPanel>			
+		</p:outputPanel>
+
+
+	</p:dialog>
+</ui:composition>

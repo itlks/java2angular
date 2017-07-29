@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/templateBlank.xhtml">
+                          
+			<ui:define name="content">  	   		
+			   	<c:if test="#{not (loginBBean.redirectTOPF)}">
+				   		<p:outputPanel rendered="#{not (loginBBean.fluxoLoginTeclado) and not (loginBBean.fluxoHome)}">
+					   		<script language="JavaScript">
+								$(function() {
+									window.location = "#{facesContext.externalContext.requestContextPath}/pages/login/login.xhtml";
+								});
+							</script>
+						</p:outputPanel>
+					   	<p:outputPanel rendered="#{loginBBean.fluxoLoginTeclado  and not (loginBBean.fluxoHome)}">
+						   	<script language="JavaScript">
+								$(function() {
+									window.location = "#{facesContext.externalContext.requestContextPath}/pages/login/loginTeclado.xhtml";
+								});
+							</script>
+					   	</p:outputPanel>
+					    <p:outputPanel rendered="#{loginBBean.session.redirectEncapsulado and not (loginBBean.reloadEncapsulado) and loginBBean.fluxoHome and not (loginBBean.redirectTOPF)}">
+                             <script language="JavaScript">
+	                              $(function() {
+	                              	window.location = "#{facesContext.externalContext.requestContextPath}/pages/home/homeNovo.xhtml";
+	                              });
+                             </script>
+                       	</p:outputPanel>
+					   	<p:outputPanel rendered="#{loginBBean.session.redirectEncapsulado and loginBBean.reloadEncapsulado and loginBBean.fluxoHome and not (loginBBean.redirectTOPF)}">
+						   	<script language="JavaScript">
+								 $(function() {
+	                                   redirect();
+	                              });
+							</script>
+					   </p:outputPanel>
+				  </c:if>
+				  <script language="JavaScript">		
+					 	function acionarRedirectHome () {
+	                    	document.getElementById("formGeral:acionarRedirectHome").click();
+	               		}
+					 	function acionarRedirectLogin () {
+					 		window.location = "#{facesContext.externalContext.requestContextPath}/pages/login/login.xhtml";
+		               	}
+				  </script>
+				  <p:panel  visible="false">
+	                  <h:commandLink id="acionarRedirectHome" actionListener="#{loginBBean.init()}" action="#{loginBBean.goRedirectPageEncapsulado}" >
+	                  		<f:param name="Ticket" value="#{request.getParameter('Ticket')}" />
+	                  </h:commandLink>
+                  </p:panel>
+                  
+				  <p:remoteCommand name="redirect" action="#{loginBBean.acionarRedirectHome()}" async="false" />
+				  
+				  <c:if test="#{loginBBean.redirectTOPF}">
+				  		<p:panel  visible="false"> 
+        					<h:outputLink id="btnRedirectToPF" styleClass="no-visible no-print" value="#{loginBBean.urlPF}" />            
+	   					</p:panel>
+	   					<h:inputHidden id="redirectTOPF" partialSubmit="true" value="#{loginBBean.redirectTOPF}"/>
+			   			<script language="JavaScript">
+							$(function() {
+								document.getElementById("formGeral:redirectTOPF").value = false;
+								document.getElementById("formGeral:btnRedirectToPF").click();
+								encerrarSessao();
+							});
+						</script>
+						<p:remoteCommand name="encerrarSessao" action="#{loginBBean.encerrarSessao}" async="false" />
+			   	  </c:if>
+			</ui:define>
+</ui:composition> 

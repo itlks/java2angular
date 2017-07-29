@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+  <!-- ############################################################### DADOS RECARGA INICIO ####################################################################### -->   
+
+	   <p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-md-12">
+					
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.empresa']}">
+          	</h:outputLabel> <span> <h:outputText value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.prefixoDddEmpresa}"/></span></p>
+          	
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.codigoArea']}">
+          	</h:outputLabel> <span> <h:outputText value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.numeroDdd}"/></span></p>
+          	
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.numeroTelefone']}">
+          	</h:outputLabel> <span> <h:outputText value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.telefoneFormatado}"/></span></p>
+          	
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.valor']}">
+          	</h:outputLabel> <span> <h:outputText value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.valor}">
+          	<f:convertNumber type="currency" locale="pt_br" currencySymbol="R$ " /></h:outputText></span></p>
+          	
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.Periodicidade']}">
+          	</h:outputLabel> <span> <h:outputText value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.descricaoPeriodicidade}"/></span></p>
+          	
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.datainicio']}">
+          	</h:outputLabel> <span> <h:outputText value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataInicial}"/></span></p>
+          	
+          	<p><h:outputLabel value="#{msg['pages.pagamentos.recargaProgramada.consultar.confirmar.datafim']}">
+          	</h:outputLabel> <span> <h:outputText  rendered="#{empty recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataformatada}" value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.prazo}" />
+          							<h:outputText rendered="#{not empty recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataformatada}" value="#{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataformatada}" /></span></p>
+					
+	   </p:outputPanel>
+	  </p:outputPanel>
+					
+  <!-- ####################################################################### FIM ######################################################################### -->
+</ui:composition>

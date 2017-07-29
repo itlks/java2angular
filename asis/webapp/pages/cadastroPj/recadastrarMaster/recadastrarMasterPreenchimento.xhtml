@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/templateConsultaNovoSemMenuSair.xhtml">
+
+	<ui:define name="content">
+	<ui:include src="/commons/inicializaDL.xhtml" />
+	<ui:include src="/commons/invalidTeclado.xhtml" />
+	
+	<ui:include src="/commons/perguntaRespostaClassico.xhtml" />
+	<script type="text/javascript" language="javascript">
+		jQuery(window).load(function() {
+			preencherPergunta();
+		});
+	</script>
+	
+	<p:remoteCommand name="preencherPergunta" action="#{recadastramentoMasterBBean.preencherPergunta}"/>	
+	
+	<h:inputHidden id="usuario" partialSubmit="true"
+		value="#{recadastramentoMasterBBean.session.nomeUsuarioLogado}" />
+			
+	<h:inputHidden id="hashAcessoNovo" partialSubmit="true"
+		value="#{recadastramentoMasterBBean.session.hashAcessoNovo}" />	
+		
+	<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+		value="#{recadastramentoMasterBBean.dto.msgErroJavaStript}" />	
+		
+		<h:inputHidden id="hashResposta" partialSubmit="true"
+		value="#{recadastramentoMasterBBean.dto.resposta}" />	
+		
+		<p:outputPanel styleClass="ui-outputpanel ui-widget container-fluid">
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel>
+							<h1>#{msg['pages.recadastro.master.titulo']}</h1>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+	
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<h4>#{msg['pages.cadastroPj.recadastramento.titulo']}</h4>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow">
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong>#{msg['pages.cadastroPj.ativacao.label.nomeTitular']}</strong>
+									#{recadastramentoMasterBBean.session.nomeTitularConta}
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-2">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.recadastramento.label.agencia']}</strong>
+									#{recadastramentoMasterBBean.dto.agencia}
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.recadastramento.label.conta']}</strong>
+									#{recadastramentoMasterBBean.dto.conta}
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h5 class="space-b">#{msg['pages.cadastroPj.recadastramento.preencha.campos']}</h5>
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.recadastramento.identificacao']}</strong>
+								</h5>
+
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="cnpj"
+										value="#{msg['pages.cadastroPj.recadastramento.label.cnpj']}" />
+									<p:inputMask size="25" id="cnpj" styleClass="form-control"
+										value="#{recadastramentoMasterBBean.dto.cnpj}"
+										mask="99.999.999/9999-99" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="cpf"
+										value="#{msg['pages.cadastroPj.recadastramento.label.cpf']}" />
+									<p:inputMask size="25" id="cpf" styleClass="form-control"
+										value="#{recadastramentoMasterBBean.dto.cpf}"
+										mask="999.999.999-99" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+
+								<h5 class="space-b">
+									<strong>#{msg['pages.cadastroPj.recadastramento.valida']}</strong>
+								</h5>
+
+								<p>#{msg['pages.cadastroPj.recadastramento.responda.pergunta']}</p>
+								<br />
+
+								<p:outputPanel styleClass="form-group">
+								<p:outputPanel autoUpdate="true">
+									<h:outputLabel for="txtResposta" id="txtPergunta"
+										value="#{recadastramentoMasterBBean.dto.pergunta}" />
+								</p:outputPanel>		
+									<p:inputText id="txtResposta" styleClass="form-control"
+										value="#{recadastramentoMasterBBean.dto.txtResposta}" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<h5 class="space-b">
+							<strong>#{msg['pages.cadastroPj.recadastramento.dados.acesso']}</strong>
+						</h5>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="senhaAcessoNova"
+										value="#{msg['pages.cadastroPj.recadastramento.label.nova.senha']}" />
+									<p:password id="senhaAcessoNova" styleClass="form-control"
+										value="#{recadastramentoMasterBBean.dto.senhaNova}"
+										maxlength="8" />
+
+								</p:outputPanel>
+
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 input-help">
+								<h:outputLabel
+									value="#{msg['pages.cadastroPj.ativacao.senha.length']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="senhaAcessoConfirmacao"
+										value="#{msg['pages.cadastroPj.recadastramento.label.confirme.senha']}" />
+									<p:password id="senhaAcessoConfirmacao"
+										styleClass="form-control"
+										value="#{recadastramentoMasterBBean.dto.senhaConfirmacao}"
+										maxlength="8" />
+
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 input-help">
+								<h:outputLabel
+									value="#{msg['pages.cadastroPj.ativacao.senha.length']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+	
+						<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+						<p:commandLink id="btnContinuar" styleClass="btn btn-default"
+							onclick="resposta();capturarPerguntaResposta();gerarEncryptHashSenhaNova();"
+							action="#{recadastramentoMasterBBean.recadastrarSenha}"
+							role="button">#{msg['page.btn.continuar']}</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+				
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

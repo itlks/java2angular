@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<f:event type="preRenderView" listener="#{termoAdesaoRecebiveisBBean.acessoDiretoComprovante}" />
+	
+	<f:event type="preRenderView" listener="#{termoAdesaoRecebiveisBBean.acessoDiretoComprovante}" />
+	
+		<!-- TERMO DE ADESÃO COMRPOVANTE INICIO -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.detalhes']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+                  <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-md-12">
+                            <p:dataTable id="dataMaster" var="t"
+                                         value="#{termoAdesaoRecebiveisBBean.opcoesBandeiraSelecionados}"
+                                         rowKey="#{t}" emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+                                         tableStyleClass="table table-striped">
+                                        <p:column headerText="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.bandeirasSelecionadas']}">
+                                           <h:outputText value="#{t.label}" />
+                                         </p:column>
+                             </p:dataTable>
+                       </p:outputPanel>
+				    </p:outputPanel>
+					 <br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel
+								styleClass="aviso-interno-blocos alert-information min-lines">
+								<i class="fa fa-exclamation-circle"></i>
+								<span><p>#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.aviso']}
+										#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.aviso2']}</p></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3">
+									<h:outputLabel value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.auth']}" />
+									<p><h:outputText value="#{termoAdesaoRecebiveisBBean.autenticacao}" /></p>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-3">
+									<h:outputLabel value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.comprovante.dthora']}" />
+									<p><h:outputText value="#{termoAdesaoRecebiveisBBean.dtHora}" >
+	                   					<f:convertDateTime pattern="dd/MM/yyyy - HH:mm" />
+                    				</h:outputText> h</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+						     <p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+								
+				    <p:outputPanel styleClass="row">
+                       	<p:outputPanel styleClass="col-md-12">
+					      <ui:include src="/commons/rodapeCentralAtendimento.xhtml" />						
+				       </p:outputPanel>
+                    </p:outputPanel>
+                    
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- TERMO DE ADESÃO COMPROVANTE FIM -->
+	</ui:define>
+</ui:composition>

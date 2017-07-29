@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<h:inputHidden value="#{recargaPrePagoBBean.clientHash}"
+			id="clientHash" partialSubmit="true" />
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <p:outputLabel> #{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto1']}</p:outputLabel>
+						<p>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto2']}</p>
+						<p>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto3']}</p>
+						<p>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.texto4']}</p>
+						<p:commandLink action="#{recargaPrePagoBBean.initLimites}">
+							<h:outputText
+								value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.limites']}" />
+						</p:commandLink>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<ui:include src="/pages/limites/limites.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.informe']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<!-- OPERADORA -->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="form-group col-xs-3">
+							<h:outputLabel
+								value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.tituloOperadoras']}" />
+
+							<h:selectOneMenu id="operadoras"
+								value="#{recargaPrePagoBBean.operadoraSelecionada}">
+
+								<p:ajax event="change" process="@this"
+									update="formGeral:panelPreenchimento"
+									listener="#{recargaPrePagoBBean.onChangeOperadora}" />
+
+								<f:selectItem
+									itemLabel="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.inicial.selecione']}"
+									itemValue="-1" noSelectionOption="true" />
+
+								<f:selectItems value="#{recargaPrePagoBBean.listaOperadoras}"
+									var="o" itemLabel="#{o.nomeOperadora}"
+									itemValue="#{o.nomeOperadora}" />
+							</h:selectOneMenu>
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- OPERADORA FIM -->
+
+
+					<!-- RENDERIZA QUANDO SELECIONADO A OPERADORA -->
+					<p:outputPanel id="panelPreenchimento">
+						<p:outputPanel
+							rendered="#{recargaPrePagoBBean.exibePreenchimento}">
+
+							<!-- TELEFONE -->
+							<p:outputPanel styleClass="form-group row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel
+										for="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.ntelefone']}"
+										value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.ntelefone']}" />
+									<span>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.ddd']}</span>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-1 col-xs-4 input-telefone">
+									<p:inputText id="ddd_hash_1" value="#{recargaPrePagoBBean.ddd}"
+										size="2" maxlength="2" styleClass="form-control numberOnly"
+										disabled="#{recargaPrePagoBBean.recargaComApelido}" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-2 col-xs-8">
+									<p:inputText id="telefone_hash_2"
+										value="#{recargaPrePagoBBean.telefone}" size="9" maxlength="9"
+										styleClass="form-control numberOnly"
+										disabled="#{recargaPrePagoBBean.recargaComApelido}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:separator />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel
+										for="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.seguranca']}"
+										value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.seguranca']}"></h:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel
+										for="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.ntelefone']}"
+										value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.ntelefone']}" />
+									<span>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.ddd']}</span>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-1 col-xs-4 input-telefone">
+									<p:inputText id="dddConfirmacao_hash_3"
+										value="#{recargaPrePagoBBean.dddConfirmacao}" size="2"
+										maxlength="2" styleClass="form-control numberOnly"
+										disabled="#{recargaPrePagoBBean.recargaComApelido}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-2 col-xs-8">
+									<p:inputText id="telefoneConfirmacao_hash_4"
+										value="#{recargaPrePagoBBean.telefoneConfirmacao}" size="9"
+										maxlength="9" styleClass="form-control numberOnly"
+										disabled="#{recargaPrePagoBBean.recargaComApelido}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<!-- TELEFONE FIM -->
+
+
+							<!-- RECARGA -->
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="form-group col-xs-3">
+									<h:outputLabel
+										for="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.selecione']}"
+										value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.selecione']}" />
+
+									<h:selectOneMenu id="recargas"
+										value="#{recargaPrePagoBBean.recargaSelecionada}">
+
+										<f:selectItem
+											itemLabel="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.combo.selecione']}"
+											itemValue="-1" noSelectionOption="true" />
+
+										<f:selectItems
+											value="#{recargaPrePagoBBean.operadoraDTO.listaRecargas}"
+											var="r"
+											itemLabel="#{recargaPrePagoBBean.formataRecarga(r.valorRecarga)}"
+											itemValue="#{r.valorRecarga}" />
+									</h:selectOneMenu>
+
+								</p:outputPanel>
+							</p:outputPanel>
+							<!-- RECARGA FIM -->
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:separator />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<!-- DATA DO PAGAMENTO -->
+							<p:outputPanel id="panelDataPagamento" styleClass="space-b">
+								<p:outputPanel
+									rendered="#{recargaPrePagoBBean.exibePainelDataPagamento}">
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputText
+												value="#{msg['pages.pagamentos.telefonePrePago.recarga.datapagamento']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row form-group">
+										<p:outputPanel styleClass="col-xs-12">
+											<p:outputPanel>
+												<p:selectOneRadio id="pagarAgoraOuAgendar"
+													value="#{recargaPrePagoBBean.pagarAgora}" layout="custom">
+													<p:ajax event="change" process="@this"
+														update="formGeral:panelDataAgendada"
+														listener="#{recargaPrePagoBBean.onChangePagarAgoraOuAgendar}" />
+													<f:selectItem
+														itemLabel="#{msg['pages.pagamentos.telefonePrePago.recarga.pagaragora']}"
+														itemValue="true" />
+													<f:selectItem
+														itemLabel="#{msg['pages.pagamentos.telefonePrePago.recarga.agendar']}"
+														itemValue="false" />
+												</p:selectOneRadio>
+
+												<p:radioButton id="pagarAgora" for="pagarAgoraOuAgendar"
+													itemIndex="0" />
+												<h:outputText for="pagarAgora"
+													value="#{msg['pages.pagamentos.telefonePrePago.recarga.pagaragora']}"
+													styleClass="space-r" />
+
+												<p:radioButton id="agendar" for="pagarAgoraOuAgendar"
+													itemIndex="1" />
+												<h:outputText for="agendar"
+													value="#{msg['pages.pagamentos.telefonePrePago.recarga.agendar']}" />
+
+												<p:graphicImage id="tooltip" value="/images/icon-i.png"
+													style="width: 15px;" />
+												<p:tooltip for="tooltip" >
+													<h:outputText>
+														<p>#{msg['pages.pagamento.gps.info.agendar1']}</p>
+
+														<p>#{msg['pages.pagamento.gps.info.agendar2']}</p>
+													</h:outputText>
+
+												</p:tooltip>
+
+											</p:outputPanel>
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row">
+
+										<p:outputPanel id="panelDataAgendada">
+											<p:outputPanel
+												rendered="#{recargaPrePagoBBean.exibeDataAgendada}">
+												<p:outputPanel styleClass="icon-data-input col-xs-3">
+													<i class="fa fa-calendar" />
+													<p:calendar id="dataAgendada"
+														value="#{recargaPrePagoBBean.dataAgendada}"
+														showOtherMonths="true" pattern="dd/MM/yyyy" maxlength="10"
+														converter="dateCalendarTelaConverter"
+														document.onkeyup="mascaraData(this, event)"
+														document.onkeypress="mascaraData(this, event)">
+														<p:ajax event="change" process="@this" update="@this" />
+													</p:calendar>
+												</p:outputPanel>
+											</p:outputPanel>
+
+										</p:outputPanel>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+							<!-- DATA DO PAGAMENTO FIM -->
+
+							<!-- APELIDO -->
+							<p:outputPanel id="painelApelido">
+								<p:outputPanel
+									rendered="#{recargaPrePagoBBean.exibePainelApelido}">
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-12">
+											<p:outputPanel styleClass="checkbox-inline">
+												<p:selectBooleanCheckbox
+													value="#{recargaPrePagoBBean.cadastroRecargasFuturas}"
+													id="recargasFuturas">
+													<p:ajax event="change" process="@this"
+														update="formGeral:panelApelido"
+														listener="#{recargaPrePagoBBean.onChangeCadastroRecargasFuturas}" />
+												</p:selectBooleanCheckbox>
+												<h:outputLabel for="recargasFuturas"
+													styleClass="checkbox-inline"
+													value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.cadastrar']}" />
+											</p:outputPanel>
+										</p:outputPanel>
+
+										<p:outputPanel id="panelApelido" styleClass="col-xs-3">
+											<p:outputPanel rendered="#{recargaPrePagoBBean.exibeApelido}"
+												styleClass="space-t">
+												<p:outputPanel>
+													<h:outputText
+														value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.apelido']}"></h:outputText>
+												</p:outputPanel>
+
+												<p:outputPanel>
+													<p:inputText id="apelido"
+														value="#{recargaPrePagoBBean.apelido}"
+														maxlength="#{recargaPrePagoBBean.getTamanhoApelido()}"
+														styleClass="form-control" />
+												</p:outputPanel>
+
+												<p:outputPanel style="margin:5px">
+													<span>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.preencher.limite']}</span>
+												</p:outputPanel>
+											</p:outputPanel>
+										</p:outputPanel>
+
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+							<!-- APELIDO FIM -->
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="col-xs-12">
+										<h:outputText
+											value="#{recargaPrePagoBBean.operadoraDTO.msgPromocional}" />
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- Gerar nova referencia de operação inicio -->
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<!--  Gerar nova referencia de operação  fim -->
+
+		<!-- rederiza quando selecionado a operadora -->
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton action="#{recargaPrePagoBBean.voltarEmConsulta}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" />
+				<p:commandButton id="btnPreencher"
+					action="#{recargaPrePagoBBean.continuarEmConfirmacao}"
+					onstart="openLoad()" oncomplete="closeLoad()"
+					onclick="enviarHash()" styleClass="btn btn-default" role="button"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnPreencher" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:blockUI block="panelBotoes" trigger="btnPreencher" />
+
+	</ui:define>
+</ui:composition>
+

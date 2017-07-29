@@ -1,0 +1,223 @@
+@charset "UTF-8";
+/*backgrounds*/
+/*backgrounds-tabela*/
+/*backgrounds-checks+labels*/
+/*backgrounds-sub-menu*/
+/*backgrounds-btns*/
+/*backgrounds-nav-tabs*/
+/*backgrounds-datepicker*/
+/*backgrounds-popover*/
+/*Cores*/
+/*cores t├¡tulos e links*/
+/* Breadcrumb etapas */
+/*titulos e fontes*/
+/*cor fam├¡lia fundos*/
+/*cursor pointer*/
+/*paddings e margins*/
+/*shadow box*/
+/*botoes*/
+/*media queries*/
+@media print {
+  .no-print {
+    visibility: hidden;
+    display: none; }
+
+  .miolo h1 {
+    color: #41545E !important; }
+
+  body {
+    -webkit-print-color-adjust: exact !important; } }
+.site-map strong {
+  color: darkgrey !important; }
+
+.no-visible {
+  visibility: hidden;
+  display: none; }
+
+.no-visible-list ul {
+  visibility: hidden;
+  display: none; }
+
+body, h1, h2, h3, h4, h5 {
+  background-color: #FFF !important; }
+
+.box-shadow {
+  box-shadow: none; }
+
+.tamanhoMinimoPDF {
+  min-width: 860px !important; }
+
+.ui-menu.ui-tieredmenu, .rodape, .rodape-comprovante {
+  display: none; }
+
+.col-lg-2 {
+  width: 16.66666667% !important;
+  float: left; }
+
+.col-lg-4 {
+  width: 33.33333333% !important;
+  float: left; }
+
+.col-lg-6 {
+  width: 50% !important;
+  float: left; }
+
+.col-lg-8 {
+  width: 66.66666667% !important;
+  float: left; }
+
+.col-md-5 {
+  width: 41.66666667% !important;
+  float: left; }
+
+.col-md-7 {
+  width: 58.33333333% !important;
+  float: left; }
+
+.table-responsive {
+  border: none !important; }
+
+body {
+  margin-top: -20px; }
+
+#container-fluid {
+  margin-left: 0; }
+
+.rodape-painel {
+  margin-bottom: 45px; }
+
+.img-content img {
+  height: 45px;
+  margin-top: 40px; }
+
+.titulo {
+  padding: 32px 5px;
+  padding-top: 32px;
+  padding-right: 5px;
+  padding-bottom: 32px;
+  padding-left: 5px;
+  font-size: 31px;
+  right: 16px; }
+
+.separator {
+  border-width: 2px; }
+  .separator.one {
+    margin-top: 0px; }
+
+.name {
+  text-transform: uppercase; }
+
+.info-account div {
+  display: inline-block; }
+  .info-account div:first-child {
+    margin-right: 15px; }
+
+.miolo {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.print-btn-bottom {
+  position: fixed;
+  bottom: 10px; }
+
+.col-lg-3 {
+  float: left; }
+
+.site-map.col-lg-4 {
+  width: 100% !important; }
+
+.total-label {
+  background-color: #fff; }
+
+.table td, .table th {
+  background-color: inherit !important; }
+
+.col-md-3 {
+  width: 30.66666667% !important;
+  float: left; }
+
+.table-responsive {
+  overflow-x: hidden;
+  min-height: initial; }
+
+.show-print {
+  display: block; }
+
+.aditivoCheck label {
+  line-height: 26px; }
+.aditivoCheck .ui-chkbox {
+  float: left; }
+
+.ui-panelgrid td {
+  padding: 4px 10px; }
+
+.lastTrPrint.table tbody tr:last-of-type {
+  display: none; }
+
+a {
+  pointer-events: none; }
+
+a[href]:after {
+  content: none !important; }
+
+.printFont {
+  font-size: 10px; }
+
+.titulo-painel {
+  box-shadow: none;
+  border-bottom: 1px solid #CACACA !important; }
+
+.ui-chkbox {
+  display: inline-block; }
+
+.table thead tr {
+  background: #e3e3e3 !important; }
+
+table thead tr + tr {
+  background: #d9d9d9 !important; }
+
+.table-striped .ui-datatable tbody tr:nth-of-type(even) {
+  background: #e8e8e8 !important; }
+
+.cancelarModal {
+  overflow-y: initial !important; }
+
+.boxShadowOnPrint {
+  box-shadow: 2px 3px 10px -5px; }
+
+.modal-box {
+  width: 100% !important; }
+
+.modal-box .ui-dialog-titlebar {
+  display: none !important; }
+
+.modalGray .ui-dialog-titlebar {
+  display: none !important; }
+
+.scrollModal {
+  overflow-y: hidden !important;
+  height: 100% !important; }
+
+.autorizacoesModal .ui-dialog-content {
+  height: 100% !important; }
+
+_::-webkit-full-page-media, _:future, :root .body-multiplosPDF {
+  display: block !important; }
+
+.clearfix:before, .clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .btn-toolbar:before, .btn-toolbar:after, .btn-group-vertical > .btn-group:before, .btn-group-vertical > .btn-group:after, .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after, .pager:before, .pager:after, .panel-body:before, .panel-body:after, .modal-header:before, .modal-header:after, .modal-footer:before, .modal-footer:after {
+  content: "";
+  display: block; }
+
+.ajusteColunaExpansivel .PRConsultarColuna1 {
+  width: 25% !important; }
+.ajusteColunaExpansivel .PRConsultarColuna2 {
+  width: 41.6667% !important; }
+.ajusteColunaExpansivel .PRConsultarColuna3 {
+  width: 25% !important; }
+.ajusteColunaExpansivel .PRConsultarColuna4 {
+  width: 25% !important; }
+
+.margin-0-print {
+  margin: 0px !important; }
+
+/*# sourceMappingURL=pdf-style.css.map */

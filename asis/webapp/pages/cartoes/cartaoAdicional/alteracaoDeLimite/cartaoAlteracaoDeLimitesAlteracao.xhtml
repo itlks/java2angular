@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+	    
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>	Gerencie o limite de crédito dos cartões de sua empresa.<br /> 
+							Para isso basta selecionar o cartão e alterar o campo editável de limite de crédito.
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText value="Detalhes do cartão selecionado" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="box-shadow ">
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="CNPJ:"></h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-2">
+					<h:outputLabel for="" value="05.454.471/0001-93"></h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Empresa:"> TESTES PARCELADO PJ</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-4">
+					<h:outputLabel for="" value="Área:"></h:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:separator styleClass="space-b" />
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Tipo de Cartão:"></h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-5">
+					<h:outputLabel for="" value="VISA"></h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-4">
+					<h:outputLabel for="" value="Número do cartão: ">XXXX XXXX XXXX 7658</h:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:separator styleClass="space-b" />
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-4">
+					<h:outputLabel for="" value="Nome gravado no cartão:"> MUDEG UK AX VU ESOF</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-4 col-md-offset-4">
+					<h:outputLabel for="" value="Validade do cartão:"> 06/2022</h:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:separator styleClass="space-b" />
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-3">
+					<h:outputLabel for="" value="Vencimento das faturas:"></h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-md-2">
+					<h:outputLabel for="" value="30 de cada mês"></h:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:separator styleClass="space-b" />
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-md-12">
+					<h:outputLabel for=""
+						value="Faça a alteração de limite do cartão selecionado"></h:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="form-group col-md-4 ">
+					<p:outputPanel styleClass="form-group">
+					   <h:outputLabel for="" value="Novo limite de crédito: R$:"></h:outputLabel>
+					   <p:inputText type="text" value="15.000,00" styleClass="form-control pull-left largura-88" ></p:inputText>
+					   <i class="fa fa-info-circle icone-informacao pull left"></i>
+					   <p:outputPanel styleClass="stop-float"></p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="form-group col-md-4 input-help ">
+					<h:outputLabel for="" value="Limite em contrato: R$ 15.000,00"></h:outputLabel>		
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				
+				<p:commandLink styleClass="btn btn-default btn-cinza" actionListener="#" role="button">
+					Voltar 
+				</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" actionListener="#" role="button">
+					Continuar 
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>         

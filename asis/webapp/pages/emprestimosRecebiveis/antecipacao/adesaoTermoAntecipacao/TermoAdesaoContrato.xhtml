@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+	
+<f:event type="preRenderView" listener="#{termoAdesaoRecebiveisBBean.acessoDiretoContrato}" />
+	
+	
+	<!-- TERMO DE ADESÃO PREENCHER INICIO -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel	styleClass="aviso-interno-blocos alert-information min-lines">
+					<i class="fa fa-exclamation-circle"></i>
+					<p><span>#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.texto1']}</span></p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							
+						          <p:outputPanel styleClass="row">
+                                   <p:outputPanel styleClass="col-md-12">
+                                        <p:outputPanel styleClass="col-md-12">
+                                            <p:dataTable id="dataMaster" var="t"
+                                                value="#{termoAdesaoRecebiveisBBean.opcoesBandeiraSelecionados}"
+                                                rowKey="#{t}" emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+                                                tableStyleClass="table table-striped">
+                                                <p:column headerText="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.bandeirasSelecionadas']}">
+                                                    <h:outputText value="#{t.label}" />
+                                                </p:column>
+                                            </p:dataTable>
+                                            <br />
+                                            <p:dataTable id="dataMasterC" var="t" value="#{termoAdesaoRecebiveisBBean.opcoesBandeiraContratados}"
+                                            emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+                                                tableStyleClass="table table-striped">
+                                                <p:column headerText="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.bandeirasContratadas']}">
+                                                    <h:outputText value="#{t.label}" />
+                                                </p:column>
+                                            </p:dataTable>
+                                            <br />
+                                        </p:outputPanel>
+                                    </p:outputPanel>
+                                    <br />
+                                    <br />
+                                    <p:outputPanel styleClass="col-md-12">
+                                        <p:outputPanel styleClass="col-md-12">
+                                            <p>#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.texto2']}</p>
+
+											<br />
+										    <p><h:outputLabel for="Termo" styleClass="bold" cols="50" value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.termoAutorizacao']}" /></p>
+                                             	<ui:include src="/commons/pdf/pdfButtonsTermo.xhtml">
+									 				<ui:param name="idTermo" value="true"/>
+									 				<ui:param name="divConvenioHtml" value="false" />
+									 			</ui:include>
+									 			
+												<p:outputPanel id="testeTermo" styleClass="termos-block form-control" style="font-size:14px; font-family:'RobotoRegular_0', Arial, Helvetica, sans-serif; color:#555; background-color:#eee;">	
+                                            			
+                                            		<div id="idTermo" >
+                                            			<p:outputPanel styleClass="col-md-12">
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.1']} 
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.2']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.3']}
+														</p>
+														
+														
+														
+														<c:forEach var="band" items="#{termoAdesaoRecebiveisBBean.bandeiras}">
+															<p class="space-b">				
+																<h:outputText  value="#{band}"/>
+															</p>	
+														</c:forEach>
+														
+														
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.4']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.5']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.6']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.7']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.8']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.9']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.10']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.11']}
+														</p>
+														
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.12']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.13']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.14']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.15']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.16']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.17']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.18']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.19']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.20']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.22']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.23']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.24']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.25']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.26']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.27']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.28']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.29']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.30']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.31']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.32']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.33']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.34']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.35']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.36']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.37']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.38']}
+														</p>
+														<p class="space-b">
+														#{termoAdesaoRecebiveisBBean.dataContrato}
+														</p>
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.39']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.40']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.41']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.termo.42']}
+														</p>
+														
+														</p:outputPanel>
+														</div>
+														
+											</p:outputPanel>
+
+                                            <br />
+                                        </p:outputPanel>
+                                    </p:outputPanel>
+                                    
+                                    <br />
+                                    <br />
+                                    <p:outputPanel id="convenio" styleClass="col-md-12">
+                                        <p:outputPanel id="convenio2" styleClass="col-md-12">
+                                            <p><h:outputLabel for="Convenio" styleClass="bold" cols="50" value="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.convenio']}" /></p>
+                                            	
+                                            	<ui:include src="/commons/pdf/pdfButtonsConvenio.xhtml">
+									 				<ui:param name="divConvenioHtml" value="true" />
+									 				<ui:param name="divTermoHtml" value="false" />
+									 				<ui:param name="idTermo" value="false" />
+									 				
+									 				
+									 			</ui:include>
+													
+													<p:outputPanel id="teste" styleClass="termos-block form-control"  style="  font-size:14px; font-family:'RobotoRegular_0', Arial, Helvetica, sans-serif; color:#555; background-color:#eee;">	
+                                            			
+                                            			<div id="divConvenioHtml" >
+                                            			<p:outputPanel styleClass="col-md-12">
+														<p>  <h:outputText escape="false" value="#{msg['page.bloqDesbloq.atm.convenio.1']}"></h:outputText> </p> 
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.2']}#{msg['page.bloqDesbloq.atm.convenio.3']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.4']}#{msg['page.bloqDesbloq.atm.convenio.5']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.6']}#{msg['page.bloqDesbloq.atm.convenio.7']}#{msg['page.bloqDesbloq.atm.convenio.8']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.9']}#{msg['page.bloqDesbloq.atm.convenio.10']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.11']}#{msg['page.bloqDesbloq.atm.convenio.12']}
+														</p>
+
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.13']}#{msg['page.bloqDesbloq.atm.convenio.14']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.15']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.16']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.17']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.18']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.19']}#{msg['page.bloqDesbloq.atm.convenio.20']}#{msg['page.bloqDesbloq.atm.convenio.21']}
+														</p>
+
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.22']}#{msg['page.bloqDesbloq.atm.convenio.23']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.24']}#{msg['page.bloqDesbloq.atm.convenio.25']}#{msg['page.bloqDesbloq.atm.convenio.26']}#{msg['page.bloqDesbloq.atm.convenio.27']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.28']}#{msg['page.bloqDesbloq.atm.convenio.61']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.29']}#{msg['page.bloqDesbloq.atm.convenio.62']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.30']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.31']}
+														</p>
+
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.32']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.33']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.34']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.35']}#{msg['page.bloqDesbloq.atm.convenio.63']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.36']}#{msg['page.bloqDesbloq.atm.convenio.64']}#{msg['page.bloqDesbloq.atm.convenio.65']}#{msg['page.bloqDesbloq.atm.convenio.66']}#{msg['page.bloqDesbloq.atm.convenio.67']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.37']}#{msg['page.bloqDesbloq.atm.convenio.68']}#{msg['page.bloqDesbloq.atm.convenio.69']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.38']}#{msg['page.bloqDesbloq.atm.convenio.70']}#{msg['page.bloqDesbloq.atm.convenio.71']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.39']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.40']}#{msg['page.bloqDesbloq.atm.convenio.72']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.41']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.42']}
+														</p>
+
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.43']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.44']}#{msg['page.bloqDesbloq.atm.convenio.73']}#{msg['page.bloqDesbloq.atm.convenio.74']}#{msg['page.bloqDesbloq.atm.convenio.75']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.45']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.46']}#{msg['page.bloqDesbloq.atm.convenio.47']}#{msg['page.bloqDesbloq.atm.convenio.48']}#{msg['page.bloqDesbloq.atm.convenio.49']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.50']}#{msg['page.bloqDesbloq.atm.convenio.76']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.51']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.52']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.53']}#{msg['page.bloqDesbloq.atm.convenio.54']}#{msg['page.bloqDesbloq.atm.convenio.55']}#{msg['page.bloqDesbloq.atm.convenio.56']}#{msg['page.bloqDesbloq.atm.convenio.57']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.58']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.59']}
+														</p>
+														
+														<p class="space-b">
+															#{msg['page.bloqDesbloq.atm.convenio.60']}
+														</p>
+														</p:outputPanel>
+														</div>
+														
+													</p:outputPanel>
+
+                                            <br />
+                                        </p:outputPanel>
+                                    </p:outputPanel>
+
+                                     <p:outputPanel styleClass="row">
+                                        <p:outputPanel styleClass="col-xs-4"/>
+                                        <p:outputPanel styleClass="col-xs-4">
+                                            <p:outputPanel styleClass="table-responsive radio label300">
+                                                <h:selectOneRadio id="termoAceite" layout="custom"
+                                                    value="#{termoAdesaoRecebiveisBBean.termoAceite}">
+                                                    <f:selectItems
+                                                        value="#{termoAdesaoRecebiveisBBean.listaAceite}" var="c"
+                                                        itemLabel="#{c.label}" itemValue="#{c.value}" />
+                                                </h:selectOneRadio>
+                                                <br/>
+                                            </p:outputPanel>
+                                        </p:outputPanel>
+                                    </p:outputPanel>
+                                    
+                                </p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+            </p:outputPanel>
+
+            <ui:include src="/commons/gerarNovoReferOper.xhtml" />
+            
+	        <!-- Botoes inicio-->
+			<p:outputPanel id="panelBotoes" styleClass="row space-b">
+				<p:outputPanel styleClass="col-md-12 text-right">
+	
+					<p:commandLink
+						action="#{termoAdesaoRecebiveisBBean.voltarEmPreencher}"
+						styleClass="btn btn-default btn-cinza" role="button">
+				      	#{msg['page.btn.voltar']}
+					</p:commandLink>
+	
+					<p:commandLink id="btnContinuar"
+						action="#{termoAdesaoRecebiveisBBean.continuarEmConfirmacao}"
+						role="button" value="#{msg['page.btn.continuar']}"
+						styleClass="btn btn-default" />
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:blockUI block="panelBotoes" trigger="btnContinuar" />
+			<!-- Botoes fim-->
+
+			<!-- TERMO DE ADESÃO PREENCHER FIM -->
+		
+	</ui:define>
+</ui:composition>

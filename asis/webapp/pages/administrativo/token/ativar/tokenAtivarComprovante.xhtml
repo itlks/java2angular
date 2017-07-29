@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentComprovante">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputLabel value="#{msg['page.administrativo.token.ativar.comprovante.usuario.master']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-5">
+				<p:outputLabel  value="#{msg['page.administrativo.token.ativar.comprovante.nome']}" />
+				<h:outputText value="#{tokenAtivarBBean.tokenAtivar.nomeUsuario}" style="margin-left: 5px;"/>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-md-6">
+				<p:outputLabel value="#{msg['page.administrativo.token.ativar.comprovante.numero.token']}"/>
+				<h:outputText value="#{tokenAtivarBBean.tokenAtivar.numeroSerie}" style="margin-left: 5px;" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

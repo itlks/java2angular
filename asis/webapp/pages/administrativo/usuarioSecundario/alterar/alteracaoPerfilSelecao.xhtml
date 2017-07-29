@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information flex-align-v box-shadow">
+					<i class="fa fa-exclamation-circle space-rr" />
+					<span> <h:outputText styleClass="row"
+							value="#{msg['pages.administrativo.usuarioSecundario.usuarioAlteracaoPerfil.alerta.linha1']}" />
+						<h:outputText styleClass="row"
+							value="#{msg['pages.administrativo.usuarioSecundario.usuarioAlteracaoPerfil.alerta.linha2']}" />
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 ">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.administrativo.usuarioSecundarioAlterar.wizard2']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="space-b">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecNomeCompleto" styleClass="space"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.nome.completo']}" />
+								<h:outputText id="usuSecNomeCompleto"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeUsuario}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="cpf" styleClass="space"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.cpf']}" />
+								<h:outputText id="cpf"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrCpf}"
+									converter="converterCpfCnpj" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecArea" styleClass="space"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.area']}" />
+								<h:outputText id="usuSecArea"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeArea}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecAcesso" styleClass="space"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.nome.acesso']}" />
+								<h:outputText id="usuSecAcesso"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nomeLogon}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecTelFixo" styleClass="space"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.telefone.fixo']}" />
+								<h:outputText id="usuSecTelFixo"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrTelefone}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row"
+							rendered="#{usuarioSecundarioAlterarBBean.exibirCelular}">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="usuSecTelCel" styleClass="space"
+									value="#{msg['pages.usuarioSecundario.usuarioAlteracaoDados.celular']}" />
+								<h:outputText id="usuSecTelCel"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.nrCelular}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-4">
+								<h:outputLabel for="acessoMobile" styleClass="space"
+									value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.acessoMobile']}" />
+								<h:outputText id="acessoMobile"
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.habilitado == msg['pages.administrativo.usuarioSecundarioAlterar.table.habilitado'] ?  msg['padrao.sim'] : msg['padrao.nao']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:panelGrid
+								styleClass="table-perfil-autorizacao grid-header no-border">
+								<f:facet name="header">
+									<p:row>
+
+										<p:column styleClass="col-xs-4">
+											<p:outputLabel styleClass="space"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.label.agencia']}" />
+										</p:column>
+
+										<p:column styleClass="col-xs-4">
+											<p:outputLabel styleClass="space"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.label.perfil.acesso']}" />
+
+											<p:graphicImage id="tooltipAcesso" value="/images/icon-i.png"
+												styleClass="tooptip-usuario acesso" />
+
+											<pe:tooltip for="@(.acesso)" styleClass="associar-tooltip"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.tooltip.perfil.acesso']}"
+												myPosition="left center" atPosition="right center" />
+
+										</p:column>
+
+										<p:column styleClass="col-xs-4">
+											<p:outputLabel styleClass="space"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.label.perfil.autorizacao']}" />
+
+											<p:graphicImage id="tooltipAutorizacao"
+												value="/images/icon-i.png"
+												styleClass="tooptip-usuario autorizacao" />
+
+											<pe:tooltip for="@(.autorizacao)"
+												styleClass="associar-tooltip"
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.tooltip.perfil.autorizacao']}"
+												myPosition="left center" atPosition="right center" />
+
+										</p:column>
+									</p:row>
+
+									<p:row>
+										<p:column styleClass="col-xs-4">
+											<p:selectBooleanCheckbox styleClass="space"
+												value="#{usuarioSecundarioAlterarBBean.habilitarTodos}">
+												<p:ajax update="@(.update-class)"
+													listener="#{usuarioSecundarioAlterarBBean.habilitaDesabilitaParaTodasContas}" />
+											</p:selectBooleanCheckbox>
+											<p:outputLabel
+												value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.table.aplicar.todos']}" />
+										</p:column>
+
+										<p:column styleClass="col-xs-4">
+											<h:selectOneMenu
+												value="#{usuarioSecundarioAlterarBBean.todosPerfilAcessoSelecionado}"
+												disabled="#{!usuarioSecundarioAlterarBBean.habilitarTodos}"
+												styleClass="update-class">
+
+												<p:ajax update="@(.update-class)"
+													listener="#{usuarioSecundarioAlterarBBean.definirPerfilAcessoTodos}" />
+
+												<f:selectItem
+													itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+													itemValue="0" noSelectionOption="true" />
+
+												<f:selectItems itemLabel="#{perfil.nomePerfilAcesso}"
+													itemValue="#{perfil.numeroSeqPerfilAcessoSec}" var="perfil"
+													value="#{usuarioSecundarioAlterarBBean.listaPerfisAcessoContrato}" />
+											</h:selectOneMenu>
+										</p:column>
+
+										<p:column styleClass="col-xs-4">
+											<h:selectOneMenu
+												value="#{usuarioSecundarioAlterarBBean.todosPerfilAutorizacaoSelecionado}"
+												disabled="#{!usuarioSecundarioAlterarBBean.habilitarTodos}"
+												styleClass="update-class">
+
+												<p:ajax update="@(.update-class)"
+													listener="#{usuarioSecundarioAlterarBBean.definirPerfilAutorizacaoTodos}" />
+
+												<f:selectItem
+													itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+													itemValue="0" noSelectionOption="true" />
+
+												<f:selectItems itemLabel="#{perfil.numPerfilAcesso}"
+													itemValue="#{perfil.numSequPerfilAutorizacaoSec}"
+													var="perfil"
+													value="#{usuarioSecundarioAlterarBBean.listaPerfisAutorizacaoContrato}" />
+											</h:selectOneMenu>
+										</p:column>
+
+									</p:row>
+								</f:facet>
+							</p:panelGrid>
+
+							<p:outputPanel styleClass="update-class table-no-header">
+								<p:dataTable tableStyleClass="table-td-equals table-striped "
+									value="#{usuarioSecundarioAlterarBBean.usuarioSelecionado.listaPerfilAtribuidos}"
+									var="usuario">
+
+									<p:column styleClass="col-xs-4">
+										<h:outputText value="#{usuario.agencia}" styleClass="space"/>
+										<h:outputText value="#{usuario.conta}" />
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:selectOneMenu value="#{usuario.perfilAcesso}"
+											disabled="#{usuarioSecundarioAlterarBBean.habilitarTodos}">
+
+											<p:ajax event="change"
+												listener="#{usuarioSecundarioAlterarBBean.altAcesso}" />
+
+											<f:selectItem
+												itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+												itemValue="0" noSelectionOption="true" />
+
+											<f:selectItems itemLabel="#{perfil.nomePerfilAcesso}"
+												itemValue="#{perfil.numeroSeqPerfilAcessoSec}" var="perfil"
+												value="#{usuarioSecundarioAlterarBBean.listaPerfisAcessoContrato}" />
+										</h:selectOneMenu>
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:selectOneMenu value="#{usuario.perfilAutorizacao}"
+											disabled="#{usuarioSecundarioAlterarBBean.habilitarTodos}">
+
+											<p:ajax event="change"
+												listener="#{usuarioSecundarioAlterarBBean.altAutorizacao}" />
+
+											<f:selectItem
+												itemLabel="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+												itemValue="0" noSelectionOption="true" />
+
+											<f:selectItems itemLabel="#{perfilAuto.numPerfilAcesso}"
+												itemValue="#{perfilAuto.numSequPerfilAutorizacaoSec}"
+												var="perfilAuto"
+												value="#{usuarioSecundarioAlterarBBean.listaPerfisAutorizacaoContrato}" />
+										</h:selectOneMenu>
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton
+					styleClass="btn btn-default btn-secundario margin-right-15"
+					action="#{usuarioSecundarioAlterarBBean.voltarAtribuirPerfis}"
+					role="button" id="btnVoltar" value="#{msg['page.btn.voltar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					action="#{usuarioSecundarioAlterarBBean.continuarAtribuirPerfis}"
+					role="button" value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>
+

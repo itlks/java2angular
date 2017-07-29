@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<!--ALERTA-->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.p1']}</p>
+						  <p>#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.p2']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!--FIM ALERTA -->
+
+		<!--T�TULO -->
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.informe.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-2 col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.cliente']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-10 col-xs-7 no-padding">
+							    <h:outputText value="#{consorcioOfertarLancesBBean.nomeCliente}" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-3 col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.cnpj.cpf']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-9 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.numeroCpfCnpj}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-2 col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.grupo']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-10 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.codigoGrupo}" />
+									<p:spacer width="10px" />
+									<span style="color: red">></span>
+									<span class="underlineLine"><u>Detalhes do grupo</u></span>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-3 col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.cota']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-9 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.codigoCota}" />
+									<p:spacer width="10px" />
+									<span style="color: red">></span>
+									<span class="underlineLine"><u>Consultar outra cota</u></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-5 col-xs-12">
+							<p:outputPanel styleClass="col-md-2 col-xs-5 no-padding">
+								<h:outputLabel for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.bem']}" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-10 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.codigoBem}" />
+									<p:spacer width="10px" />
+									<span><h:outputText value="#{consorcioOfertarLancesBBean.nomeBem}" /></span>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-7 col-xs-12">
+							<p:outputPanel styleClass="col-md-3 col-xs-5 no-padding">
+								<h:outputLabel for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.data.assembleia']}"/>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-md-9 col-xs-7 no-padding">
+								<h:outputText value="#{consorcioOfertarLancesBBean.dataAssembleia}" />
+									<p:spacer width="10px" />
+									<span style="color: red">></span>
+									<span class="underlineLine"><u>#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.calendario.assembleias']}</u></span>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="table-responsive table table-striped">
+						<p:dataTable id="idConsultaOfertaLance" var="lMin"
+							value="#{consorcioOfertarLancesBBean.listaOfertaDatos}">
+							<p:column styleClass="col-md-3" headerText="">
+								<h:outputText value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.lance.minimo']}" />
+							</p:column>
+							<p:column styleClass="col-md-3" headerText="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.numero.prestacoes']}">
+								<h:outputText value="#{lMin.pcLanceMinimo}" />
+							</p:column>
+							<p:column styleClass="col-md-3" headerText="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.percentual']}">
+								<h:outputText value="#{lMin.peLanceMinimo}" />
+							</p:column>
+							<p:column styleClass="col-md-3" headerText="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.valor']}">
+								<h:outputText value="#{lMin.vlLanceMinimo}" />
+							</p:column>
+						</p:dataTable>
+						<p:dataTable id="idConsultaOfertaLance2" var="lMax"
+							value="#{consorcioOfertarLancesBBean.listaOfertaDatos}">
+							<p:column styleClass="col-md-3" headerText="">
+								<h:outputText value="{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.lance.maximo']}" />
+							</p:column>
+							<p:column styleClass="col-md-3" headerText="">
+								<h:outputText value="#{lMax.pcLanceMaximo}" />
+							</p:column>
+							<p:column styleClass="col-md-3" headerText="">
+								<h:outputText value="#{lMax.peLanceMaximo}" />
+							</p:column>
+							<p:column styleClass="col-md-3" headerText="">
+								<h:outputText value="#{lMax.vlLanceMaximo}" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<h:outputLabel for="" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.oferta.lances.opcao']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="table-responsive radio label150">
+						<p:selectOneRadio id="opcaoEntrega"  value="#{consorcioOfertarLancesBBean.opcaoEnvio}" layout="grid" columns="3">
+							<f:selectItems value="#{consorcioOfertarLancesBBean.opcoesEnvio}" var="o" itemLabel="#{o.descricao}" itemValue="#{o}"/>
+						</p:selectOneRadio>
+					</p:outputPanel>
+
+					<p:separator />
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<h:outputLabel for=""
+								value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.oferta.lances.confira']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+				
+				<!--BOT�O RODAP�-->
+				<!--FIM BOT�ES RODAP� -->
+				
+		<!--FIM PAINEL PRINCIPAL -->
+
+		<!--BOT�ES PADR�O -->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">				
+				<p:commandLink styleClass="btn btn-default btn-cinza" 
+				               actionListener="#{consorcioOfertarLancesBBean.voltar}" 
+				               role="button" value="#{msg['page.btn.voltar']}" />
+				<p:commandLink styleClass="btn btn-default aling-btn" 
+				               actionListener="#{consorcioOfertarLancesBBean.continuarEmNovoCalculo}" 
+				               role="button" value="#{msg['pages.outrosservicos.servicos.consorcio.ofertarlances.btn.continuar.novo.calculo']}"
+				               update=":formGeral" />
+				<p:commandLink styleClass="btn btn-default" actionListener="#{consorcioOfertarLancesBBean.continuarEmOfertaLance}" 
+				               role="button" value="pages.outrosservicos.servicos.consorcio.ofertarlances.btn.continuar.oferta.lance']}"
+				               update=":formGeral" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<!--FIM BOT�ES PADR�O -->
+	</ui:define>
+</ui:composition>

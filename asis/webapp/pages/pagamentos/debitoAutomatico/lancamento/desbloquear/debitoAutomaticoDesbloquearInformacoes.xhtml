@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:outputPanel styleClass="row">
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="empresaConveniada" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.empresaConveniada']}" />
+			<h:outputText id="empresaConveniada" value="#{debitoAutomaticoDesbloquearBBean.dto.nomeEmpresaConveniada}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="identificacaoConsumidor" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.identificador']}" />
+			<h:outputText id="identificacaoConsumidor" value="#{debitoAutomaticoDesbloquearBBean.dto.identificacaoConsumidor}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="formaPagamento" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.formaPagamento']}" />
+			<h:outputText id="formaPagamento" value="#{debitoAutomaticoDesbloquearBBean.dto.formaPagamento}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="dataVencimento" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.vencimento']}" />
+			<h:outputText id="dataVencimento" value="#{debitoAutomaticoDesbloquearBBean.dto.vencimento}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="valor" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.valor']}" />
+			<h:outputText id="valor" value="R$ #{debitoAutomaticoDesbloquearBBean.dto.valor}" />
+		</p:outputPanel>
+
+	</p:outputPanel>
+						  
+</ui:composition>

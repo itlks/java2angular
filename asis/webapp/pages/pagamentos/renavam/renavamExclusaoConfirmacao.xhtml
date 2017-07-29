@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<script type="text/javascript" language="javascript">
+		jQuery(window).load(function() {
+			initDL();
+			gerarChave();
+		});
+	</script>
+
+	<h:inputHidden id="chaveServer" partialSubmit="true"
+		value="#{loginBBean.session.serverPublicKey}" />
+
+	<h:inputHidden id="chaveClient" partialSubmit="true"
+		value="#{loginBBean.session.browserPublicKey}" />
+
+	<h:inputHidden id="usuario" partialSubmit="true"
+		value="#{loginBBean.session.nomeUsuarioLogado}" />
+
+	<p:remoteCommand name="gerarChave"
+		action="#{dispositivoSecureBBean.gerarChave}" process=":formGeral"
+		update=":formGeral" />
+
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{renavamListaBBean.acessoDireto()}" />
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.renavam.excluirRenavamConfirmacao.confira.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="dtGrid" var="ren"
+									tableStyleClass="table-td-equals"
+									value="#{renavamListaBBean.lDtoSelecionado}">
+									<p:column
+										headerText="#{msg['page.pagamentos.renavam.excluirRenavamConfirmacao.renavam']}">
+
+										<h:outputText value="#{ren.numero}"
+											converter="converterNumeroRenavam" />
+
+									</p:column>
+
+									<p:column
+										headerText="#{msg['page.pagamentos.renavam.excluirRenavamConfirmacao.apelido']}">
+										<h:outputText value="#{ren.apelido}" />
+
+
+									</p:column>
+									<p:column
+										headerText="#{msg['page.pagamentos.renavam.excluirRenavamConfirmacao.estado']}">
+										<h:outputText value="#{ren.estado}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnVoltar" value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza"
+					action="#{renavamListaBBean.voltarParaLista}" />
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+
+				<p:commandButton id="btnContinuar" onstart="encryptSecureDL();"
+					value="#{msg['page.pagamentos.renavam.excluirRenavamConfirmacao.continuar']}"
+					styleClass="btn btn-default"
+					action="#{renavamListaBBean.continuarExclusao}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

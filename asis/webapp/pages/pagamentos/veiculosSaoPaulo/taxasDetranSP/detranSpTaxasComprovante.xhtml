@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{taxasDetranSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<!-- INICIO DO COMPROVANTE -->
+				<p:outputPanel
+					rendered="#{taxasDetranSpBBean.gerouPendencia eq 'N'}">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.detranSp.comprovante.finalizado']}</h4>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+								<ui:repeat id="tabela1" var="tabela"
+									value="#{taxasDetranSpBBean.dto.listaDadosComprovante}">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel
+											styleClass="col-xs-12 posicao#{tabela.tipo} break#{tabela.pulaLinha}">
+											<h:outputLabel value="#{tabela.label}" />
+											<h:outputText value=" " />
+											<h:outputText value="#{tabela.valor}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</ui:repeat>
+
+								<br />
+								<p:outputPanel width="100%">
+									<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<!-- FIM DO COMPROVANTE -->
+
+				<!-- INICIO DO DEMONSTRATIVO -->
+				<p:outputPanel
+					rendered="#{taxasDetranSpBBean.gerouPendencia eq 'S'}">
+
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.detranSp.comprovante.pendente']}</h4>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="box-shadow no-margin-bottom">
+								<p:outputPanel styleClass="row space-b">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.confirmacao.subservico']}" />
+										</strong>
+										<h:outputText
+											value="#{taxasDetranSpBBean.dto.subServicoSelecionado.descricaoSubServico}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.confirmacao.tipoSubservico']}" />
+										</strong>
+										<h:outputText
+											value="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.descricaoSubServico}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.descricaoId}:" />
+										</strong>
+										<h:outputText value="#{taxasDetranSpBBean.dto.identificador}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.confirmacao.valor']}" />
+										</strong>
+										<h:outputText
+											value="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.valorString}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b"
+									rendered="#{(taxasDetranSpBBean.dto.tipoEnvio eq '1') and !(taxasDetranSpBBean.dto.getTipoSubServicoSelecionado().getFlagCorreio() eq '2')}">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.preenchimento.tipoenvio']}" />
+										</strong>
+										<h:outputText
+											value="#{msg['pages.detranSp.preenchimento.tipoenvio.remessa']}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b"
+									rendered="#{(taxasDetranSpBBean.dto.tipoEnvio eq '1') and !(taxasDetranSpBBean.dto.getTipoSubServicoSelecionado().getFlagCorreio() eq '2')}">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.preenchimento.valor.correio']}" />
+										</strong>
+										<h:outputText
+											value="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.valorCorreioString}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b"
+									rendered="#{(taxasDetranSpBBean.dto.tipoEnvio eq '0') and !(taxasDetranSpBBean.dto.getTipoSubServicoSelecionado().getFlagCorreio() eq '2')}">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.preenchimento.tipoenvio']}" />
+										</strong>
+										<h:outputText
+											value="#{msg['pages.detranSp.preenchimento.tipoenvio.solicitar']}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row space-b">
+									<p:outputPanel styleClass="col-xs-12">
+										<strong> <h:outputText
+												value="#{msg['pages.detranSp.confirmacao.total']}" />
+										</strong>
+										<h:outputText
+											value="#{taxasDetranSpBBean.dto.tipoSubServicoSelecionado.valorTotalString}"></h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel width="100%" styleClass="text-center">
+									<br />
+									<p:separator />
+									<h:outputText
+										value="#{msg['pages.detranSp.demonstrativo.msg']}" />
+									<p:separator />
+									<br />
+								</p:outputPanel>
+
+								<p:outputPanel width="100%">
+									<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<!-- FIM DO DEMONSTRATIVO -->
+				<p:outputPanel>
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+					<br />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

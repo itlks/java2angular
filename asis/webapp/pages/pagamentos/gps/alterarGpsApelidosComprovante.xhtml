@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['pages.apelidos.gpsApelidosComprovante.alteracao.finalizada']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="apelido" styleClass="space"
+								value="#{msg['pages.apelidos.gpsApelidosConfirma.identificacao']}" />
+							<h:outputText id="apelido"
+								value="#{tributosFederaisGPSBBean.apelidoSelecionadoDTO.apelido}" />
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="nomeFavorecido" styleClass="space"
+								value="#{msg['pages.apelidos.gpsApelidosConfirma.nome.razao']}" />
+							<h:outputText id="nomeFavorecido"
+								value="#{tributosFederaisGPSBBean.apelidoSelecionadoDTO.nomeFavorecido}" />
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="codPagamento" styleClass="space"
+								value="#{msg['pages.apelidos.gpsApelidosConfirma.codigo.pagamento']}" />
+							<h:outputText id="codPagamento"
+								value="#{tributosFederaisGPSBBean.apelidoSelecionadoDTO.codPagamento}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="identPagamento" styleClass="space"
+								value="#{msg['pages.apelidos.gpsApelidosConfirma.identificador']}" />
+							<h:outputText id="identPagamento"
+								value="#{tributosFederaisGPSBBean.apelidoSelecionadoDTO.identPagamento}" />
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

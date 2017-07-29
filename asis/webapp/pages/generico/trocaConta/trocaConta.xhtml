@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row space-b"
+			rendered="#{trocaContaBBean.maisDeCinquentaContas eq true}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<h:outputLabel styleClass="titulo-bloco"
+						value="#{msg['pages.generico.trocaConta.maisCinquenta.aviso.titulo']}" />
+					<p:outputPanel styleClass="row">
+						<h:outputText
+							value="#{msg['pages.generico.trocaConta.maisCinquenta.aviso']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<p:outputPanel
+						rendered="#{trocaContaBBean.maisDeCinquentaContas eq false}">
+						<h4>#{msg['pages.generico.trocaConta.titulo']}</h4>
+					</p:outputPanel>
+					<p:outputPanel
+						rendered="#{trocaContaBBean.maisDeCinquentaContas eq true}">
+						<h4>#{msg['pages.generico.trocaConta.titulo.buscar']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{trocaContaBBean.maisDeCinquentaContas eq false}">
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabelaPerfis"
+									emptyMessage="#{msg['pages.generico.trocaConta.empty.grid']}"
+									rowKey="#{conta.contaCorrente}#{conta.agencia}#{conta.banco}"
+									widgetVar="tabela2"
+									selection="#{trocaContaBBean.contaSelecionada}"
+									value="#{trocaContaBBean.listaContas}"
+									filteredValue="#{trocaContaBBean.listaContasFiltrada}" var="conta"
+									tableStyleClass="first-td-30 table-text-center table-header-center"
+									selectionMode="single">
+									
+									<f:facet name="header">
+										<p:outputPanel styleClass="text-left">
+											<h:outputText value="Busca: " />
+											<p:inputText id="globalFilter"
+												onkeyup="PF('tabela2').filter()" style="width:150px"
+												onclick="PF('tabela2').clearFilters()" />
+										</p:outputPanel>
+									</f:facet>
+
+									<p:ajax event="rowSelect" process="@this"
+										update="@form:tabelaPerfis"
+										listener="#{trocaContaBBean.selecionarConta}"
+										onstart="openLoad()" oncomplete="closeLoad()" />
+
+									<p:column  filterBy="agencia" 
+										filterMatchMode="contains"
+										filterStyle="display:none"
+										headerText="#{msg['page.administrativo.contrato.imprimirAditivo.agencia']}">
+										<h:outputText value="#{conta.agencia}" />
+									</p:column>
+									<p:column
+										filterMatchMode="contains"
+										filterStyle="display:none"
+										filterBy="contaCorrente" 
+										headerText="#{msg['pages.generico.trocaConta.tabela.label.conta']}">
+										<h:outputText value="#{conta.contaCorrente}" />
+									</p:column>
+									<p:column styleClass="td-text-left"
+										filterMatchMode="contains"
+										filterStyle="display:none"
+										filterBy="nomeTitular" 
+										headerText="#{msg['pages.generico.trocaConta.tabela.label.titular']}">
+										<h:outputText value="#{conta.nomeTitular}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12"
+							rendered="#{trocaContaBBean.maisDeCinquentaContas eq true}"
+							id="PanelPreenchimento">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3">
+									<h:outputText for="" value="Agência:" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-3">
+									<h:outputText for="" value="Conta:" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3">
+									<p:outputPanel styleClass="form-group">
+										<p:inputText id="trocaContaAgencia" styleClass="form-control"
+											onkeyup="onTrocaFoco('trocaContaAgencia','trocaContaConta');"
+											maxlength="4"
+											value="#{trocaContaBBean.contaSelecionada.agencia}" />
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-3">
+									<p:outputPanel styleClass="form-group">
+										<p:inputText id="trocaContaConta" styleClass="form-control"
+											value="#{trocaContaBBean.contaSelecionada.contaCorrente}"
+											maxlength="12" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{trocaContaBBean.maisDeCinquentaContas eq false}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row"
+			rendered="#{trocaContaBBean.maisDeCinquentaContas eq true}">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					action="#{trocaContaBBean.contaInformada}" role="button"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

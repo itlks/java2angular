@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- Inicio RSA -->
+    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/rsa/hashtable.js"/>
+    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/rsa/rsa.js"/>
+    <script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/rsa/codeRSA.js"/>
+    <!-- Fim RSA -->
+    
+    <script type="text/javascript" language="javascript">
+		jQuery(window).load(function() {
+			devicePrint();
+		});
+	</script>
+
+	<h:inputHidden id="pm_fp" value="#{atributosDaSessao.devicePrint}" partialSubmit="true"/>
+	<h:inputHidden  id="pm_chars" value="#{atributosDaSessao.pmChars}" partialSubmit="true"/>
+		
+</ui:composition>

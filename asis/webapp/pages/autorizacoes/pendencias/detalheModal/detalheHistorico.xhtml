@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row titulo-bloco space-r space-l">
+
+		<p:outputPanel styleClass="no-padding space-b col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+
+		<h5 class="bold">#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.tituloHistorico']}</h5>
+
+		<p:outputPanel styleClass="col-xs-12 space-t">
+			<p:dataTable
+				value="#{autorizacoesPendenciaDetalheHistoricoBBean.historicoAssinatura}"
+				var="historico"
+				emptyMessage="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.datable.semRegistro']}">
+				
+				
+				<p:column rendered="#{autorizacoesPendenciaDetalheBBean.naoExibeEventoADM}"
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.evento']}">
+					<h:outputText value="#{historico.evento}" />
+				</p:column>
+				
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.autorizador']}">
+					<h:outputText value="#{historico.autorizador}" />
+				</p:column>
+
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.data']}"
+					styleClass="text-center" style="text-align:center">
+					<h:outputText value="#{historico.data}" />
+				</p:column>
+
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.hora']}"
+					styleClass="text-center" style="text-align:center">
+					<h:outputText value="#{historico.hora}" />
+				</p:column>
+
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.situacao']}"
+					styleClass="text-center" style="text-align:center">
+					<h:outputText value="#{historico.situacaoAssinatura}" />
+				</p:column>
+
+				<p:column
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.canal']}"
+					styleClass="text-center" style="text-align:center">
+					<h:outputText value="#{historico.canal}" />
+				</p:column>
+
+				<p:column rendered="#{!autorizacoesPendenciaDetalheBBean.conteudoOnline eq '' or !autorizacoesPendenciaDetalheBBean.conteudoAdministrativo eq ''}"
+					headerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.detalhes.historico.titulo.motivo']}"
+					styleClass="text-center" style="text-align:center">
+					<h:outputText value="#{historico.motivoCancAss}" />
+				</p:column>
+				
+				<p:column rendered="#{!autorizacoesPendenciaDetalheBBean.conteudoCash eq ''}"
+					headerText="Detalhe"
+					styleClass="text-center" style="text-align:center">
+					<h:outputText value="#{historico.motivoCancAss}" />
+				</p:column>
+				
+
+			</p:dataTable>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

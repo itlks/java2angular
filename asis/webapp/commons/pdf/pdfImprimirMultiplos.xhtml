@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" lang="pt-br">
+
+<f:view contentType="text/html" encoding="ISO-8859-1">
+	<f:loadBundle basename="com.altec.bsbr.app.ibe.message.telas" var="msg" />
+
+	<h:head>
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/styleNovo.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/pdf-style.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/css/icones/font-awesome.css" />
+		<title>#{ msg['page.home.label.titulo'] }</title>
+	</h:head>
+	<h:body style="display: table; float: none;" styleClass="body-multiplosPDF teste">
+		<h:outputText value="#{PDFBBean.htmlToPrintMultiplos}" escape="false" />
+			
+		<div class="row space-b">
+			<div class="col-xs-12 text-right print-btn-bottom">
+				<h:commandButton value="Imprimir" onclick="window.print();" styleClass="no-print btn btn-default pull-right" />
+			</div>
+		</div>
+
+		
+	</h:body>
+</f:view>
+</html>
+
+

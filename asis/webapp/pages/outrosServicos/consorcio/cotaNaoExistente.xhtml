@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="titulo-bloco col-xs-12"
+			style="height: 30px">
+			<h4>#{msg['page.outrosServicos.consorcio.cotaNaoExistente']}</h4>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+          <p:outputPanel styleClass="col-lg-12">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">                               
+                <i class="fa fa-exclamation-circle"></i>
+                <span><p>#{msg['page.outrosServicos.consorcio.cotaNaoExistente.alerta']}</p></span>
+            </p:outputPanel>
+          </p:outputPanel>                        
+        </p:outputPanel>
+        
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<h:outputText
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.texto']}" />
+							<p:separator />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-lg-12">
+							<strong>#{msg['page.outrosServicos.consorcio.cotaNaoExistente.aproveite']}</strong>
+							<p:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.planejeCompra']}" />
+							<br />
+							<br />
+							<p:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.adquiraPlano']}" />
+							<stong>#{msg['page.outrosServicos.consorcio.cotaNaoExistente.consorcioSantander']}</stong>
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.confiraBeneficios']}" />
+							<br />
+							<br />
+							<p:graphicImage value="/images/u3851.png" />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.unicoOferecer']}" />
+							<strong>
+								#{msg['page.outrosServicos.consorcio.cotaNaoExistente.seguroVidaDois']}</strong>
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.tranquilidadeComecoFim']}" />
+							<br />
+							<p:graphicImage value="/images/u3851.png" />
+							<strong>#{msg['page.outrosServicos.consorcio.cotaNaoExistente.naoCobra']}</strong>
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.jurosNemIof']}" />
+							<br />
+							<p:graphicImage value="/images/u3851.png" />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.permiteEscolhaVeiulo']}" />
+							<br />
+							<p:graphicImage value="/images/u3851.png" />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.tem']}" />
+							<strong>
+								#{msg['page.outrosServicos.consorcio.cotaNaoExistente.prestacoesMensaisDois']}</strong>
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.virgulaPodendo']}" />
+							<br />
+							<p:graphicImage value="/images/u3851.png" />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.realizaContemplacao']}" />
+							<strong>
+								#{msg['page.outrosServicos.consorcio.cotaNaoExistente.todosOsMeses']}</strong>
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.porSorteioLances']}." />
+							<br />
+							<p:graphicImage value="/images/u3851.png" />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.planosAutosMotos']}." />
+							<br />
+							<br />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.facilPlanejar']}" />
+							<br />
+							<p:separator />
+							<br />
+							<p:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.facaSimulacao']}"
+								styleClass="bold" />
+							<p:commandLink
+								action="#{consorcioCotaNaoExistenteBBean.cliqueAquiRedireciona()}"> #{msg['page.outrosServicos.consorcio.cliqueAqui']}</p:commandLink>
+							<br />
+							<p:separator />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-lg-12">
+							<br />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.UmPessoasFisicas']}" />
+							<br />
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.cotaNaoExistente.DoisPrestacoesRealizadas']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

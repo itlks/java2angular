@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-md-12">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">                               
+                <i class="fa fa-exclamation-circle"></i>
+                 <p:outputPanel >
+                 	#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.aviso']}
+                 </p:outputPanel>
+            </p:outputPanel>  
+          </p:outputPanel>                        
+        </p:outputPanel>   
+		
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.subtitulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.empresa']}: " />
+								<h:outputText
+									value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.nomeEmpresaConveniada}" />
+							</p>
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.identConsumidor']}: " />
+								<h:outputText
+									value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.identificacaoConsumidor}" />
+							</p>
+							<p:outputPanel styleClass="margin-space">
+							<p>
+								<p:commandLink id="lnkLimiteMax" onclick="PF('popupDetalheLimiteMaximo').show();" value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}: " styleClass="bold"/>					
+								<h:outputText
+									value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.possuiLimiteDebitoFormatada}" />
+							</p>
+							</p:outputPanel>
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.autorizoDebito']}: " />
+								<h:outputText
+									value="#{debitoAutomaticoAlterarBBean.dto.empresaConveniada.valorMaximoDebito}">
+									<f:convertNumber currencySymbol="" type="currency" />
+								</h:outputText>
+							</p>
+							<p>
+								<h:outputLabel
+									value=" #{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.emitirAvisoCorreio']}: " />
+								<h:outputText
+									value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.emitirAvisoCorreios == true ? msg['page.txt.simMaiusculo'] : msg['page.txt.naoMaiusculo']}" />
+								<h:outputText
+									value=" (#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.servicoSujeitoCobranca']}.)" />
+							</p>
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.formaPagamento']}: " />
+								<h:outputText
+									value=" #{debitoAutomaticoAlterarBBean.dto.formaPagamentoSelecionadaFormatada}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass=""
+								rendered="#{debitoAutomaticoAlterarBBean.renderizaLabel eq 'N' and debitoAutomaticoAlterarBBean.formaDePagamento eq 'C1'}">
+								<h:outputLabel styleClass="space"
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.avisoCobranca1']}" />
+								<h:commandLink id="tabelaServico" styleClass="space"
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.avisoCobrancaLink']}"
+									onclick="window.open('http://www.santander.com.br/portal/gsb/script/templates/GCMRequest.do?page=254&amp;entryID=440','',''); return false"
+									style="cursor: pointer; font-weight: bold; text-decoration: underline">
+								</h:commandLink>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.confirmacao.avisoCobranca2']}"
+									styleClass="space" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+								<h:outputLabel value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.confirmacao.historico']}: " />
+								<h:outputText value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.historicoComplementar}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="cmdLnkVoltar"
+					styleClass="btn btn-default btn-cinza"
+					action="#{debitoAutomaticoAlterarBBean.initTelaPreenchimento(false)}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+				<p:blockUI block="cmdLnkContinuar" trigger="cmdLnkContinuar" />
+				<p:commandLink id="cmdLnkContinuar" styleClass="btn btn-default"
+					onclick="encryptSecureDL();"
+					action="#{debitoAutomaticoAlterarBBean.initTelaComprovante}"
+					role="button" value="#{msg['page.btn.continuar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:dialog widgetVar="popupDetalheLimiteMaximo" id="popupDetalheLimiteMaximo"
+			header="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}"
+			position="center" width="800" height="190" modal="true" dynamic="true" 
+			resizable="false" styleClass="modal-box modalGray no-print no-visible">
+			<ui:include
+				src="../consultar/debitoAutomaticoPopUpDetalheLimiteMaximo.xhtml" />
+	</p:dialog>		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style type="text/css">
+		.bkimg {
+			background-image: url("#{bannerDTO.strImagemUrl}");
+			min-width: #{bannerDTO.width}; 
+			min-height:#{bannerDTO.height};
+			display: inline-block;
+		}
+	</style>
+
+	<p:outputPanel id="idPanelbannerDTO#{idBanner}" styleClass="no-print no-visible text-center"  style="margin-top:8px; margin-bottom: 8px;" rendered="#{bannerDTO.habilitarBanner}">
+		<p:outputPanel layout="block" styleClass="text-center">
+			<h:panelGroup class="bkimg" id="divArte" layout="block" rendered="#{bannerDTO.isMidia3 != true}" style="margin-bottom:-4px">
+				<h:panelGroup layout="block" styleClass="text-left">
+					
+					<!-- Bloco 1: Tipo de midia 4 -->
+					<p:outputPanel layout="block" styleClass="col-xs-12">	
+						<span class="textCarousell" style="top: #{bannerDTO.strTopDiv1}px; left: #{bannerDTO.strLeftDiv1}px;">
+							<h:outputText escape="false" value="#{bannerDTO.strTextoDiv1}"/>
+						</span>
+						
+						<span class="textCarousell"  style="top: #{bannerDTO.strTopDiv2}px; left: #{bannerDTO.strLeftDiv2}px;">
+							<h:outputText escape="false" value="#{bannerDTO.strTextoDiv2}"/>
+						</span>
+						
+						<span class="textCarousell"  style="top: #{bannerDTO.strTopDiv3}px; left: #{bannerDTO.strLeftDiv3}px;" >
+							<h:outputText escape="false" value="#{bannerDTO.strTextoDiv3}"/>
+						</span>
+						
+						<span class="textCarousell" style="top: #{bannerDTO.strTopLinkUrl}px; left: #{bannerDTO.strLeftLinkUrl}px;">
+							<h:commandLink action="#{campanhasCRMBBean.redirectBanner(bannerDTO)}" target="#{bannerDTO.blank}">
+								<h:outputText escape="false" value="#{bannerDTO.strTextoLinkUrl}"/>
+							</h:commandLink>
+						</span>
+					</p:outputPanel>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			<h:panelGroup id="divArte2" layout="block" style="HEIGHT: #{bannerDTO.height}; WIDTH:#{bannerDTO.width}; display: inline-block; margin-bottom:-4px;" rendered="#{bannerDTO.isMidia3}">
+				<h:commandLink action="#{campanhasCRMBBean.redirectBanner(bannerDTO)}" target="#{bannerDTO.blank}">
+					<p:graphicImage value="#{bannerDTO.strImagemUrl}"/>
+				</h:commandLink>
+			</h:panelGroup>
+		</p:outputPanel>
+			
+		<p:outputPanel 	styleClass="text-center" style="WIDTH: #{bannerDTO.width}; height:19px; background-color: white; text-align: center; display: inline-block;"
+						rendered="#{bannerDTO.isCRM}">
+			<span>
+				<h:outputText value="Para ver uma nova campanha no próximo acesso. "/> 
+				<p:commandLink action="#{campanhasCRMBBean.rejeitarBanner(bannerDTO)}" 
+						   partialSubmit="true" 
+						   update=":formGeral:idPanelbannerDTO#{idBanner}" 
+						   process=":formGeral:idPanelbannerDTO#{idBanner}" 
+						   async="true" 
+						   immediate="true"
+						   style="margin-left:8">
+					<h:outputText value="Clique aqui."/>
+					<f:param name="rejeiteBoId" value="#{bannerDTO.boId}" />
+					<f:param name="rejeiteRaAttribSeg" value="#{bannerDTO.raAttribSeg}" />
+				</p:commandLink>	
+			</span>
+			
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

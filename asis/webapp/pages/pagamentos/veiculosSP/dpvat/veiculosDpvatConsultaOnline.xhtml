@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+	
+		<ui:include	src="/pages/pagamentos/veiculosSP/dpvat/dpvatAvisoDebitos.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.InforOsDadosParaSeu']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<ui:include
+						src="/pages/pagamentos/veiculosSP/dpvat/dpvatDadosComuns.xhtml" />
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h5 class="space-b">
+								<strong>#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.Exerc']}</strong>
+							</h5>
+
+							<p>#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.EscolhaPagamento']}</p>
+							<br />
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabela1" var="exec"
+									value="#{dpvatSpBBean.dpvatDTO.listaExercicio}"
+									selection="#{dpvatSpBBean.exerciciosSelecionados}"
+									rowKey="#{exec}">
+
+									<p:column selectionMode="multiple" styleClass="selection-Mode" style="width: 1%;" />
+									<p:column
+										headerText="#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.Exercicio']}"
+										styleClass="col-md-3">
+										<h:outputText value="#{exec.exercicio}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.pagamentos.veiculossp.dpvat.pagamento.valorTotal']}"
+										styleClass="col-md-2 text-right">
+										<h:outputText value="#{exec.valorTotal}">
+											<f:convertNumber type="currency" currencySymbol="" />
+										</h:outputText>
+									</p:column>
+									
+									<p:column styleClass="col-md-5">
+										<h:outputText value="" />
+									</p:column>
+								</p:dataTable>
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{dpvatSpBBean.voltarListaRenavam}" role="button">#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.Volta']}</p:commandLink>
+				<p:commandLink id="btnContinuar" styleClass="btn btn-default"
+					action="#{dpvatSpBBean.continuarPagamento}" role="button">#{msg['pages.pagamentos.veiculossp.dpvat.pagamento.Conti']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

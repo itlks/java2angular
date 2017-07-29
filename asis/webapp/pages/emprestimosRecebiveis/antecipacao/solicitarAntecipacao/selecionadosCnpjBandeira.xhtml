@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+		<f:event type="preRenderView"
+			listener="#{antecipacaoDemaisCredenciadorasBBean.acessoDiretoSelecionadosBand()}" />
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle" />
+					<p>
+						<h:outputText
+							value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.linha1']}" />
+					</p>
+					<p>
+						<h:outputText
+							value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.linha2']}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.antecipDemaisCreden']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- ======================================================================================================================================== -->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText styleClass="h5 space-b bold"
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec']}" />
+							<br />
+							<br />
+							<p:outputPanel styleClass=" table table-striped">
+								<p:dataTable id="dataCnpjSel" var="e"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaCnpjSelecionados}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+
+
+									<p:column style="height:40px;" styleClass="col-xs-4"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.razaoSocial']}">
+										<h:outputText value="#{e.razaoSocial}" />
+									</p:column>
+									<p:column style="height:40px;" styleClass="col-xs-5"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.cpfCnpj']}">
+										<h:outputText value="#{e.cpfCnpjWeb}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<!-- ======================================================================================================================================== -->
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-12 space-t space-b ">
+								<p:outputLabel styleClass="space"
+									value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.valorTotal']}" />
+								<h:outputText
+									value="#{antecipacaoDemaisCredenciadorasBBean.valorTotalWeb}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+					<!-- ================================VISA============================================================= -->
+					<p:outputPanel styleClass="row"
+						rendered="#{antecipacaoDemaisCredenciadorasBBean.exibeVisa}">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText styleClass="bold h4"
+								value="#{msg['pages.emprereceb.maqsantandergetnet.antecRecebSantanderGetNet.bandeira.visa']}" />
+							<p:outputPanel styleClass=" table table-striped">
+								<p:dataTable id="dataVisa" var="o"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaVisa}"
+									selection="#{antecipacaoDemaisCredenciadorasBBean.listaVisaSelecionados}"
+									rowKey="#{o}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+									<p:column id="selectAll_visa" selectionMode="multiple">
+										<h:outputText value="Todas" />
+									</p:column>
+									<p:column styleClass="col-xs-5"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.credenciadora']}">
+										<h:outputText value="#{o.nomeOperacao}" />
+									</p:column>
+									<p:column styleClass="col-xs-6"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.data']}">
+										<h:outputText value="#{o.dataFluxoWeb}" />
+									</p:column>
+									<p:column headerText="Disponivel R$" styleClass="text-right">
+										<h:outputText value="#{o.valorFluxoWeb}"
+											styleClass="text-right" />
+									</p:column>
+
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" styleClass="text-left">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.vlrTotal2']}" />
+												</f:facet>
+											</p:column>
+											<p:column styleClass="text-right">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.valorVisaWeb}">
+														<f:convertNumber currencySymbol="" type="currency"
+															locale="pt_BR" />
+													</h:outputText>
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+
+					<!-- ================================MASTER============================================================= -->
+					<p:outputPanel styleClass="row"
+						rendered="#{antecipacaoDemaisCredenciadorasBBean.exibeMaster}">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText styleClass="bold h4"
+								value="#{mst['page.empereb.antecipcielorede.solicantecip.master']}" />
+							<p:outputPanel styleClass=" table table-striped">
+								<p:dataTable id="dataMaster" var="o"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaMaster}"
+									selection="#{antecipacaoDemaisCredenciadorasBBean.listaMasterSelecionados}"
+									rowKey="#{o}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+									<p:column id="selectAll_master" selectionMode="multiple">
+										<h:outputText value="Todas" />
+									</p:column>
+									<p:column styleClass="col-xs-5"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.credenciadora']}">
+										<h:outputText value="#{o.nomeOperacao}" />
+									</p:column>
+									<p:column styleClass="col-xs-6"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.data']}">
+										<h:outputText value="#{o.dataFluxoWeb}" />
+									</p:column>
+									<p:column headerText="Disponivel R$" styleClass="text-right">
+										<h:outputText value="#{o.valorFluxoWeb}"
+											styleClass="text-right" />
+									</p:column>
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" styleClass="text-left">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.vlrTotal2']}" />
+												</f:facet>
+											</p:column>
+											<p:column styleClass="text-right">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.valorMasterWeb}">
+														<f:convertNumber currencySymbol="" type="currency"
+															locale="pt_BR" />
+													</h:outputText>
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+
+					<!-- ================================ELO============================================================= -->
+					<p:outputPanel styleClass="row"
+						rendered="#{antecipacaoDemaisCredenciadorasBBean.exibeElo}">
+						<p:outputPanel styleClass="col-xs-12">
+							<h4>
+								<b>Elo</b>
+							</h4>
+							<p:outputPanel styleClass=" table table-striped">
+								<p:dataTable id="dataElo" var="o"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaElo}"
+									selection="#{antecipacaoDemaisCredenciadorasBBean.listaEloSelecionados}"
+									rowKey="#{o}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+									<p:column id="selectAll_elo" selectionMode="multiple">
+										<h:outputText value="Todas" />
+									</p:column>
+									<p:column styleClass="col-xs-5"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.credenciadora']}">
+										<h:outputText value="#{o.nomeOperacao}" />
+									</p:column>
+									<p:column styleClass="col-xs-6"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.data']}">
+										<h:outputText value="#{o.dataFluxoWeb}" />
+									</p:column>
+									<p:column headerText="Disponivel R$" styleClass="text-right">
+										<h:outputText value="#{o.valorFluxoWeb}"
+											styleClass="text-right" />
+									</p:column>
+									<p:columnGroup type="footer">
+										<p:row>
+											<p:column colspan="3" styleClass="text-left">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.bandeira.vlrTotal2']}" />
+												</f:facet>
+											</p:column>
+											<p:column styleClass="text-right">
+												<f:facet name="footer">
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.valorEloWeb}">
+														<f:convertNumber currencySymbol="" type="currency"
+															locale="pt_BR" />
+													</h:outputText>
+												</f:facet>
+											</p:column>
+										</p:row>
+									</p:columnGroup>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- ======================================================================================================================================== -->
+		<br />
+
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<!-- BOTOES INICIO -->
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					action="#{antecipacaoDemaisCredenciadorasBBean.voltarEmSelecionados}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+
+				<p:commandButton id="btnContinuar"
+					action="#{antecipacaoDemaisCredenciadorasBBean.continuarEmConfirmacaoBand}"
+					role="button" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:blockUI block="panelBotoes" trigger="btnContinuar" />
+
+	</ui:define>
+</ui:composition>

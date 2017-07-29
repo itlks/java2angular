@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{contaCorrenteExtratosAdesaoDocOnlineBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+	
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-lg-12">
+
+				<p:outputPanel styleClass="titulo-painel">
+
+					<span> <h:outputText
+							value="#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.atencao']}" /><br /></span>
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<!-- começo box -->
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>
+								<strong>#{msg['page.contaCorrente.docOnline.termo']}</strong>
+							</h5>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+
+							<span> <h:outputText
+									value="#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.linha01']}" /><br /></span>
+
+
+							<br />
+							<span> <h:outputText
+									value="#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.linha02']}" /><br /></span>
+
+							<br />
+							<span> <h:outputText styleClass="space" value="#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.linha03.parte1']}" />
+									
+									<h:outputLink styleClass="link-termos" onclick="window.open('https://www.santander.com.br/br/pessoa-juridica/negocios-empresas/conta-corrente-e-cartoes/tarifas-e-pacotes-de-servicos','Tarifas','width=600, height=480, resizable=yes, scrollbars=yes'); return false">#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.linha03.link']}</h:outputLink>
+									
+									
+								   <h:outputText value="#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.linha03.parte2']}" />
+							<br />
+							</span>
+							
+							<br />
+							<span> 
+								   <h:outputText value="#{msg['page.conta.corrente.extrato.docOnline.adesao.aviso.linha04']}" />
+							<br />
+							</span>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<!-- Fim Box -->
+
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-md-12 text-right">
+
+						<p:commandLink styleClass="btn btn-default btn-cinza"
+							action="#{contaCorrenteExtratosAdesaoDocOnlineBBean.voltarMenu}"
+							role="button" value="#{msg['page.btn.voltar']}" />
+
+						<p:commandLink styleClass="btn btn-default"
+							action="#{contaCorrenteExtratosAdesaoDocOnlineBBean.aderirServico()}"
+							role="button"
+							value="#{msg['page.contaCorrente.docOnline.aderirServico']}">
+							
+						</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

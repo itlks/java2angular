@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:inputText type="hidden" styleClass="textCoachMark" value="Aqui ficará o texto explicativo do painel Fixo"></p:inputText>
+	<p:inputText type="hidden" styleClass="posicaoPainel" value="left"></p:inputText>
+	
+	<p:outputPanel id="painelFixo" styleClass="box-shadow maquinaGetNet"
+		rendered="#{homeBBean.widgetFavorito eq 'imagemPadrao'}">
+		
+		PaiNEL ERRRO
+
+	</p:outputPanel>
+</ui:composition>

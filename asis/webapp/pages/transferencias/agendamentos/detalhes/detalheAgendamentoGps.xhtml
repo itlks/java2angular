@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:outputLabel styleClass="space-b" value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+  
+	<p:outputPanel styleClass="row">
+			 
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="nomeContribuinte" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.nomeContribuinte']}" />
+			<h:outputText id="nomeContribuinte"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomeContribuinteGPS}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="codigoPagamento" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.codigoPagamanto']}" />
+			<h:outputText id="codigoPagamento"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.codigoPagamentoGPS}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="competencia" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.competencia']}" />
+			<h:outputText id="competencia"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.competenciaGPS}">
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="identificador" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.identificador']}" />
+			<h:outputText id="identificador"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.identificadorGPS}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="valorINSS" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.valorINSS']}" />
+			<h:outputText id="valorINSS"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorINSSGPS}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="valorOutrasEntidades" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.valorOutrasEntidades']}" />
+			<h:outputText id="valorOutrasEntidades"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorOutrasEntidadesGPS}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="valorMultasJuros" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.atmMultaJuros']}" />
+			<h:outputText id="valorMultasJuros"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorMultasJurosGPS}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="total" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.total']}" />
+			<h:outputText id="total"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.valorTotalGPS}">
+				<f:convertNumber type="currency" locale="pt_br" currencySymbol="" />
+			</h:outputText>
+		</p:outputPanel>
+			 
+	</p:outputPanel>
+			
+</ui:composition>

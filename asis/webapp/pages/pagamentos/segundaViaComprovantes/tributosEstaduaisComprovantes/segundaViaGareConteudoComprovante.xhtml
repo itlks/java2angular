@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<style>
+.form-group {
+	word-break: break-word !important;
+}
+</style>
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-6">
+			<p:outputPanel styleClass="titulo-destaque">
+				<p>
+					<p:outputLabel styleClass="bold" value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.guiaArrecadacao']}"/>
+				</p>
+				<p>
+					<p:outputLabel styleClass="bold" value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.demaisReceitas']}"/>
+					- <p:outputLabel styleClass="bold" value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.gareDr']}"/>
+				</p>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="form-group">
+				<h:outputLabel for="">#{msg['page.gare.conteudo.nome.razao']}</h:outputLabel>
+				<p>
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.nomeCon}" />
+				</p>
+			</p:outputPanel>
+			<p:outputPanel styleClass="form-group">
+				<h:outputLabel for="">#{msg['page.gare.conteudo.endereco']}</h:outputLabel>
+				<p>
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.endeCon}" />
+				</p>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-6">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for="">#{msg['page.gare.conteudo.municipio']}</h:outputLabel>
+						<p>
+							<h:outputText
+								value="" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-2">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for="">#{msg['page.gare.conteudo.uf']}</h:outputLabel>
+						<p>
+							<h:outputText value="" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for="">#{msg['page.gare.conteudo.telefone']}</h:outputLabel>
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.teleCon}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-8">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for="">#{msg['page.gare.conteudo.tributo.receita']}</h:outputLabel>
+						<p>
+							<p:outputLabel
+								value="">
+
+							</p:outputLabel>
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel styleClass="form-group">
+						<h:outputLabel for="">#{msg['page.gare.conteudo.cnae']}</h:outputLabel>
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.cnae}" />
+						</p>
+						<p>&nbsp;</p>
+						<h:outputLabel for="">#{msg['page.gare.conteudo.placa']}</h:outputLabel>
+						<p>
+							<h:outputText
+								value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.placa}" />
+						</p>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="form-group">
+				<h:outputLabel for="">#{msg['page.gare.conteudo.obs']}</h:outputLabel>
+				<p>
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.obs}" />
+				</p>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="form-group">
+				<h:outputLabel for="">#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.numeroControle']}</h:outputLabel>
+				<p>
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.codigoNSU}" />
+				</p>
+			</p:outputPanel>
+
+		</p:outputPanel>
+		<p:outputPanel styleClass="col-xs-6 border-left">
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-6 text-right pull-right space-b space-t">
+					<h:outputText id="ufFavorecida"
+						value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.viaContribuinte']}"
+						class="bold" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.uf.favorecida']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText value="São Paulo" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.data.vencimento']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.dataVct}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.code.receita']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.codRece}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.inscricao.estadual']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.insEsta}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.cpf.cnpj']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.identif}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.inscricao.divida']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.etiquet}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">07 - Referência:(mmaaaa)</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.refMa}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.num.aiim']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.aiim}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.valor.receita']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText converter="valorMonetarioConverter"
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valPrin}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.juros.mora']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText converter="valorMonetarioConverter"
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valJuro}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.multa.mora']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText converter="valorMonetarioConverter"
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valMult}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.vago.12']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText value="" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.honorarios']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText converter="valorMonetarioConverter"
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valHono}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.conteudo.valor.total']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText converter="valorMonetarioConverter"
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.valTota}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.preenchimento.dataPagamento23']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.dataMov}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="row flex-align-v form-group form-group">
+				<p:outputPanel styleClass="col-xs-6">
+					<h:outputLabel for="">#{msg['page.gare.preenchimento.banco']}</h:outputLabel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<h:outputText
+						value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.entArre}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p>&nbsp;</p>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

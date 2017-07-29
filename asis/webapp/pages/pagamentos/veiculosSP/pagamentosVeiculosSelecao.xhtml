@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<ui:include src="#{pagamentosVeiculosSelecaoBBean.avisoInternoLink}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row"
+			rendered="#{not empty pagamentosVeiculosSelecaoBBean.listaRenavam}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['pages.pagamentos.veiculosSP.selecione.renavam.efetuar.pagamento']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="space-b">
+						<h:outputText styleClass="h5"
+							value="#{msg['pages.pagamentos.veiculosSP.renavamCadastrados']}" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="table-responsive table table-striped">
+
+						<p:blockUI block="dtRenavam" trigger="dtRenavam" />
+						<p:dataTable id="dtRenavam" var="renavam"
+							value="#{pagamentosVeiculosSelecaoBBean.listaRenavam}"
+							selectionMode="single"
+							emptyMessage="NAO EXISTEM REGISTROS PARA A PESQUISA SOLICITADA - PGE0050"
+							selection="#{pagamentosVeiculosSelecaoBBean.renavamSelecionado}"
+							rowKey="#{renavam.nome}">
+
+							<p:ajax event="rowSelect"
+								listener="#{pagamentosVeiculosSelecaoBBean.onRowSelect}" />
+
+							<p:column
+								headerText="#{msg['pages.pagamentos.veiculosSP.identificacao']}">
+								<h:outputText id="identificacao"
+									value="#{renavam.identificacao}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.pagamentos.veiculosSP.renavam']}">
+								<h:outputText id="nome" value="#{renavam.nomeRenavamFormatado}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.pagamentos.veiculosSP.placaVeiculo']}">
+								<h:outputText id="placaVeiculo" value="#{renavam.placaVeiculo}" />
+							</p:column>
+							<p:column headerText="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.situacao']}">
+								<h:outputText value="#{renavam.situacao.descricao}" styleClass="space" />
+								<p:outputLabel id="tooltipRenavam"
+									rendered="#{renavam.situacao.id eq 'N'}">
+									<i class="fa fa-info-circle" aria-hidden="true" />
+									<p:tooltip for="tooltipRenavam"
+										value="#{msg['pages.renavam.preenchimentoRenavam.column.tooltip']}" />
+								</p:outputLabel>
+
+							</p:column>
+							
+						</p:dataTable>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton id="voltar"
+					action="#{pagamentosVeiculosSelecaoBBean.voltar}"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<ui:include src="/pages/limites/limites.xhtml" />
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,50 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row" id="idExternoApiCad_#{posicaoLista}">					
+		<p:outputPanel 	styleClass="col-xs-12" id="idDadosApiCad_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosApiCadLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel 		styleClass="col-xs-12" id="idCpfCnpjApiCad_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfCnpj']}"
+							styleClass="space" id="idCpfCnpjLblApiCad_#{posicaoLista}"/>
+			<h:outputText 	value="${compHisParts[3]}" converter="converterCpfCnpj"
+							id="idCpfCnpjTxtApiCad_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idTipoOperacaoApiCad_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.tipoOperacao']}"
+							styleClass="space" id="idTipoOperacaoLblApiCad_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.inclusao']}"
+							rendered="${compHisParts[4] eq 'IP'}" id="idInclusaoTxtApiCad_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.alteracao']}"
+							rendered="${compHisParts[4] eq 'AG'}" id="idAlteracaoTxtApiCad_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.renovacao']}"
+							rendered="${compHisParts[4] eq 'RQ'}" id="idRenovacaoTxtApiCad_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.efetivacao']}"
+							rendered="${compHisParts[4] ne 'IP' || compHisParts[4] ne 'AG' || compHisParts[4] ne 'RQ'}"
+							id="idEfetivacaoTxtApiCad_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12 space-b" id="idPerfilRiscoApiCad_#{posicaoLista}">
+			<h:outputLabel 	styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.perfilRisco']}"
+							id="idPerfilRiscoLblApiCad_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[5]}" id="idPerfilRiscoTxtApiCad_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorApiCad_#{posicaoLista}">
+		<p:separator id="idSeparatorSepApiCad_#{posicaoLista}" />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

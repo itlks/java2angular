@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovante.xhtml">
+
+	<ui:define name="contentComprovante">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:outputPanel styleClass="space-b">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecNomeCompleto" styleClass="space"
+								value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.nome']}" />
+							<h:outputText id="usuSecNomeCompleto"
+								value="#{usuarioSecundarioIncluirBBean.dto.nomeUsuario}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="cpf" styleClass="space"
+								value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.cpf']}" />
+							<h:outputText id="cpf"
+								value="#{usuarioSecundarioIncluirBBean.dto.nrCpf}"
+								converter="converterCpfCnpj" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecArea" styleClass="space"
+								value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.area']}" />
+							<h:outputText id="usuSecArea"
+								value="#{usuarioSecundarioIncluirBBean.dto.nomeArea}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecAcesso" styleClass="space"
+								value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.acesso']}" />
+							<h:outputText id="usuSecAcesso"
+								value="#{usuarioSecundarioIncluirBBean.dto.nomeLogon}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecTelFixo" styleClass="space"
+								value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.contato']}" />
+							<h:outputText id="usuSecTelFixo"
+								converter="converterCelularTelefone"
+								value="#{usuarioSecundarioIncluirBBean.dto.nrTelefone}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{usuarioSecundarioIncluirBBean.exibeCelular}">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="usuSecTelCel" styleClass="space"
+								value="#{msg['page.administrativo.usuarioSecundario.incluir.telefoneCelular']}" />
+							<h:outputText id="usuSecTelCel"
+								converter="converterCelularTelefone"
+								value="#{usuarioSecundarioIncluirBBean.dto.nrCelular}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel for="acessoMobile" styleClass="space"
+								value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.label.mobile.banking']}" />
+							<h:outputText id="acessoMobile"
+								value="#{usuarioSecundarioIncluirBBean.dto.inAcesMobl == msg['pages.administrativo.usuarioSecundarioAlterar.table.habilitado'] ? msg['padrao.sim'] : msg['padrao.nao']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+
+						<h5>
+							<h:outputText
+								value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.atrubuicao']}" />
+						</h5>
+
+						<p:outputPanel styleClass="table-responsive table table-striped">
+							<p:dataTable id="tabelaPerfis" var="usr"
+								value="#{usuarioSecundarioIncluirBBean.dtoPreenchimentoPerfil}">
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.agenciaConta']}">
+									<h:outputText value="#{usr.agencia}" styleClass="space" />
+									<h:outputText value="#{usr.numeroConta}" />
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.perfilAcesso']}">
+									<h:outputText value="#{usr.descricaoPerfilAcesso}"
+										rendered="#{usr.perfilAcesso != '0'}" />
+									<h:outputText
+										value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+										rendered="#{usr.perfilAcesso == '0'}" />
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.perfilAutorizacao']}">
+									<h:outputText value="#{usr.descricaoPerfilAutorizacao}"
+										rendered="#{usr.perfilAutorizacao != '0'}" />
+									<h:outputText
+										value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+										rendered="#{usr.perfilAutorizacao == '0'}" />
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+
+						<h5>
+							<h:outputText
+								value="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.atribuicaoConvenios']}" />
+						</h5>
+
+						<p:outputPanel styleClass="table-responsive table table-striped">
+							<p:dataTable id="tabela2" var="con"
+								value="#{usuarioSecundarioIncluirBBean.convenios}"
+								tableStyleClass="tacle-custom tacle-custom-header-left"
+								styleClass="data-table-header-custom label-custom tacle-custom-zebrada tacle-custom-border-transparente">
+
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.convenio']}">
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.permitirAcesso']}">
+								</p:column>
+								<p:column styleClass="col-xs-4"
+									headerText="#{msg['page.administrativo.usuario.secundario.usuarioAlteracaoConfirmacao.perfilAutorizacao']}">
+								</p:column>
+
+								<p:subTable var="convenioUsuario" value="#{con.list}"
+									rendered="#{con.list != null &amp;&amp; !con.list.isEmpty()}">
+									<f:facet name="header">
+										<h:outputText value="#{con.header}" />
+									</f:facet>
+									<p:column styleClass="col-xs-4">
+										<h:outputText value="#{convenioUsuario.convenio}"
+											styleClass="space-l" />
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:outputText
+											value="#{convenioUsuario.permitirAcessoBoolean ? msg['padrao.sim'] : msg['padrao.nao']}" />
+									</p:column>
+									<p:column styleClass="col-xs-4">
+										<h:outputText value="#{convenioUsuario.descricao}"
+											rendered="#{convenioUsuario.perfilAutorizacao != '0'}" />
+										<h:outputText
+											value="#{msg['pages.administrativo.usuarioSecundario.usuarioInclusaoPerfil.combobox.selecione']}"
+											rendered="#{convenioUsuario.perfilAutorizacao == '0'}" />
+										<h:outputText value="#{convenioUsuario.perfilAutorizacao}"
+											rendered="#{convenioUsuario.perfilAutorizacao eq '--'}" />
+									</p:column>
+								</p:subTable>
+							</p:dataTable>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row no-print no-visible" rendered="#{pagamentosContasCodigoBarrasBBean.fixedRSBarraDTO.OESCINDFORMPGTO eq 'C1'}">    
+	        <p:outputPanel styleClass="row space-b">
+	            <p:outputPanel styleClass="col-xs-12">
+	              <p:separator />
+	            </p:outputPanel>
+	        </p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row no-print no-visible">	
+		
+			<p:outputPanel styleClass="col-lg-12 teste1" rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento eq null}">
+				<p:outputPanel styleClass="titulo-painel" rendered="#{pagamentosContasCodigoBarrasBBean.consultaPgtoCodBarrasSaidaDTOImperativa.strGerouPendencia=='S'}">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.com.pendencia']}</h4>
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="titulo-painel" rendered="#{pagamentosContasCodigoBarrasBBean.consultaPgtoCodBarrasSaidaDTOImperativa.strGerouPendencia=='N'}">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.sem.pendencia']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-lg-12 teste2" rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento ne null}">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.com.agendamento']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">			
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					
+					<c:forEach items="#{pagamentosContasCodigoBarrasBBean.listaMensagemYARSDTO}" var="dado" varStatus="iteratorDados">
+						<c:set var="tpLinha" value="#{dado.CPIBTPLINHA}" />
+						<c:set var="iteratorLabel" value="#{dado.label}" />
+						
+						<p:outputPanel styleClass="${!fn:contains(tpLinha, '1') ? 'show-print' : ''}">	
+	 						<p:outputPanel styleClass="row" rendered="${fn:startsWith(tpLinha, 'C')}">
+	           					<p:outputPanel styleClass="col-xs-12" style="text-align:center">					                
+		              				<h:outputLabel value="#{dado.CPIBDADOS}" styleClass="space"  />
+	               				</p:outputPanel>              
+	           				</p:outputPanel>						
+							
+				 			<p:outputPanel styleClass="row" rendered="${!fn:startsWith(tpLinha, 'C')}">
+		           				<p:outputPanel styleClass="col-xs-12">
+			           				<h:outputText value="#{dado.label}" styleClass="space"  rendered="${!fn:contains(iteratorLabel, ':')}"/>
+			           				<h:outputLabel value="#{dado.label}" styleClass="space"  rendered="${fn:contains(iteratorLabel, ':')}"/>
+			           				<h:outputText value="#{dado.valor}"  rendered="${fn:contains(iteratorLabel, ':')}"/>
+	              				</p:outputPanel>              
+	          				</p:outputPanel>
+	                				
+	           				<ui:repeat var="qtdLinha" value="#{pagamentosContasCodigoBarrasBBean.getPuloLinhas(dado.CPIBPULALINHA)}" >
+								<p:outputPanel styleClass="row space-b">
+	                        		<p:outputPanel styleClass="col-xs-12" />
+	                        	</p:outputPanel>
+							</ui:repeat>
+						</p:outputPanel>
+					</c:forEach>
+					
+                    <p:outputPanel styleClass="row space-b" rendered="#{pagamentosContasCodigoBarrasBBean.consultaPgtoCodBarrasSaidaDTOImperativa.strGerouPendencia=='S'}">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>                      					
+
+                    <p:outputPanel styleClass="row space-b" rendered="#{pagamentosContasCodigoBarrasBBean.consultaPgtoCodBarrasSaidaDTOImperativa.strGerouPendencia=='S'}">
+         				<p:outputPanel styleClass="col-xs-12">	   							
+	                          <h4 align="center">
+	                          		<strong>#{msg['pages.pagamento.veiculosMG.dpvat.comprovante.Demonstrativo']}</strong>
+	                          </h4>
+	                    </p:outputPanel>
+                    </p:outputPanel>
+
+                    <p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-12">
+                          <p:separator />
+                        </p:outputPanel>
+                    </p:outputPanel>
+                                          					
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="form-group col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default" action="#{pagamentosContasCodigoBarrasBBean.goHome}" role="button">#{msg['menu.item.home']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+

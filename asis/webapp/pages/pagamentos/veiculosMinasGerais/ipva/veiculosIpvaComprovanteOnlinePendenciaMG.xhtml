@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+							
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.RENAV']}: " styleClass="bold" />										
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.renavamDTO.numero}" converter="converterNumeroRenavam" />																			
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Propr']}: " styleClass="bold" />										
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.renavamDTO.nome}" />																			
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.CPFCNPJ']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.ipvaDTO.cpfCnpj}" converter="converterCpfCnpj" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.CodigDoMunic']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.ipvaDTO.codMun}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.PlacaDoVeicu']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.renavamDTO.placaVeiculo}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Exercicio']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.cotaSelecionada.anoExercio}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+	
+	<p:outputPanel styleClass="row" rendered="#{!ipvaMinasGeraisBBean.ipvaDTO.habilitaAgendamento}">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Vencimento']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.cotaSelecionada.dataVencimento}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row" rendered="#{ipvaMinasGeraisBBean.ipvaDTO.habilitaAgendamento}">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.Agendamento']}: "  styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.ipvaDTO.dataAgendamento}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+
+	<p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.CotaParcela']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText value="#{ipvaMinasGeraisBBean.cotaSelecionada.descricao}" />																
+        </p:outputPanel>
+    </p:outputPanel> 
+    
+    <p:outputPanel styleClass="row">
+   		<p:outputPanel styleClass="col-xs-3">					                
+			<h:outputText value="#{msg['pages.pagamento.veiculosMG.ipva.pagamento.SubValor']}: " styleClass="bold" />							
+        </p:outputPanel>
+              
+        <p:outputPanel styleClass="col-xs-8">							            
+			<h:outputText id="txtValorTotal1" value="#{ipvaMinasGeraisBBean.cotaSelecionada.valor}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</h:outputText>																				
+        </p:outputPanel>
+    </p:outputPanel> 
+    		
+		
+</ui:composition>

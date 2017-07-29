@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+			<p:outputPanel id="divFloat" autoUpdate="true" rendered="#{campanhasCRMBBean.floaterDTO.habilitarFloater}" styleClass="floaterHome" >
+			
+				<span class="textCarousell" style="top: #{campanhasCRMBBean.floaterDTO.strTopDiv1}px; left: #{campanhasCRMBBean.floaterDTO.strLeftDiv1}px;">
+					<h:outputText escape="false" value="#{campanhasCRMBBean.floaterDTO.textoDiv1}"/>
+				</span>
+
+				<span class="textCarousell" style="top: #{campanhasCRMBBean.floaterDTO.strTopDiv2}px; left: #{campanhasCRMBBean.floaterDTO.strLeftDiv2}px;">
+					<h:outputText escape="false" value="#{campanhasCRMBBean.floaterDTO.textoDiv2}"/>
+				</span>
+				
+				<span class="textCarousell" style="top: #{campanhasCRMBBean.floaterDTO.strTopDiv3}px; left: #{campanhasCRMBBean.floaterDTO.strLeftDiv3}px;">
+					<h:outputText escape="false" value="#{campanhasCRMBBean.floaterDTO.textoDiv3}"/>
+				</span>
+				
+				<span class="textCarousell" style="top: #{campanhasCRMBBean.floaterDTO.strTopLinkUrl}px; left: #{campanhasCRMBBean.floaterDTO.strLeftLinkUrl}px;">
+					<h:commandLink action="#{campanhasCRMBBean.redrectFloater}" 
+					actionListener="#{campanhasCRMBBean.aceite}" 
+					rendered="#{campanhasCRMBBean.floaterDTO.tpCampanha eq 'C' and campanhasCRMBBean.floaterDTO.isMidia4}" 
+					target="#{campanhasCRMBBean.floaterDTO.blank}">
+						<f:param name="aceiteBoId" value="#{campanhasCRMBBean.floaterDTO.boId}" />
+						<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.floaterDTO.raAttribSeg}" />
+						<h:outputText escape="false" value="#{campanhasCRMBBean.floaterDTO.strTextoLinkUrl}"/>
+					</h:commandLink>
+					
+					<h:commandLink action="#{campanhasCRMBBean.redrectFloater}" 
+					rendered="#{not (campanhasCRMBBean.floaterDTO.tpCampanha eq 'C') and campanhasCRMBBean.floaterDTO.isMidia4}" 
+					target="#{campanhasCRMBBean.floaterDTO.blank}">
+						<h:outputText escape="false" value="#{campanhasCRMBBean.floaterDTO.strTextoLinkUrl}"/>
+					</h:commandLink>
+				</span>
+				
+				<p:outputPanel rendered="#{campanhasCRMBBean.floaterDTO.isMidia4}"  styleClass="divImage"  style="background-image: url('#{campanhasCRMBBean.floaterDTO.imagem}')" />
+			
+				<p:commandLink styleClass="sair" partialSubmit="true" actionListener="#{campanhasCRMBBean.desabilitarFloater}"
+						action="#{campanhasCRMBBean.hideDialog('dialogTelaInterna')}">
+						<img src="#{facesContext.externalContext.requestContextPath}/images/fecharPopup.png" border="0" vspace="7" hspace="16" align="right" />
+				</p:commandLink>
+				
+				<h:commandLink action="#{campanhasCRMBBean.redrectFloater}" actionListener="#{campanhasCRMBBean.aceite}" rendered="#{campanhasCRMBBean.floaterDTO.tpCampanha eq 'C' and campanhasCRMBBean.floaterDTO.isMidia4 != true}" target="#{campanhasCRMBBean.floaterDTO.blank}">
+						<f:param name="aceiteBoId" value="#{campanhasCRMBBean.floaterDTO.boId}" />
+						<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.floaterDTO.raAttribSeg}" />
+						<p:outputPanel styleClass="divImage"  style="background-image: url('#{campanhasCRMBBean.floaterDTO.imagem}')" />
+				</h:commandLink>
+				
+				<h:commandLink action="#{campanhasCRMBBean.redrectFloater}" target="#{campanhasCRMBBean.floaterDTO.blank}" rendered="#{not (campanhasCRMBBean.floaterDTO.tpCampanha eq 'C') and campanhasCRMBBean.floaterDTO.isMidia4 != true}">
+					<p:outputPanel styleClass="divImage" style="background-image: url('#{campanhasCRMBBean.floaterDTO.imagem}')" />
+				</h:commandLink>
+				
+				<p:outputPanel rendered="#{campanhasCRMBBean.floaterDTO.tpCampanha eq 'C'}">
+					<span class="fraseFloater">
+						Para ver uma nova campanha no próximo acesso.								
+						<p:commandLink  action="#{campanhasCRMBBean.rejeite}"  value="Clique aqui." >
+							<f:param name="rejeiteBoId" value="#{campanhasCRMBBean.floaterDTO.boId}" />
+							<f:param name="rejeiteRaAttribSeg" value="#{campanhasCRMBBean.floaterDTO.raAttribSeg}" />
+						</p:commandLink>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+</ui:composition>

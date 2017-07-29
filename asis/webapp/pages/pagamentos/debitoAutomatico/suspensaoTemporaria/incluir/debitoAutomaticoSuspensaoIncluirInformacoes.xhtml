@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:outputPanel styleClass="row">
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.tipoConta']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.tipoConta.descricao}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.empresaConveniada']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.empresaConveniada.descEmpresaConveniada}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.formaPagamento']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.debito.inpgpccs}" />
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{debitoAutomaticoSuspensaoIncluirBBean.exibeIdentificacaoConsumidor}">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.identificacaoConsumidor']}" />
+				<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.debito.refer}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{debitoAutomaticoSuspensaoIncluirBBean.exibeHistoricoComplementar}">		
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.historicoComplementar']}" />
+				<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.debito.txestr}" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.inicioSuspensao']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.inicioSuspensao}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['pages.pagamentos.debito.automatico.incluir.suspensao.confirmacao.terminoSuspensao']}" />
+			<h:outputText for="" value="#{debitoAutomaticoSuspensaoIncluirBBean.dto.terminoSuspensao}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:outputPanel>
+		
+	</p:outputPanel>
+	
+</ui:composition>

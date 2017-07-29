@@ -1,0 +1,40 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idExtPgoForComBlo_#{posicaoLista}">	
+		<p:outputPanel styleClass="col-xs-12" id="idDadosPgoForComBlo_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" styleClass="space" id="idDadosPgoForComBloLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idConvenioPgoForComBlo_#{posicaoLista}">
+			  <h:outputLabel value="#{msg['page.autorizacoes.historico.consulta.pesquisa.convenio.label']}" styleClass="space" 
+			  		id="idConvenioLblPgoForComBlo_#{posicaoLista}"/>			 
+			     <h:outputText value="${compHisParts[0]}" id="idConvenioTxtPgoForComBlo_#{posicaoLista}"/>
+			     <h:outputText value="-" id="idConvenioTraco1PgoForComBlo_#{posicaoLista}"/>
+			     <h:outputText value="${compHisParts[1]}" id="idConvenioTxt1PgoForComBlo_#{posicaoLista}"/>
+			     <h:outputText value="-" id="idConvenioTraco2PgoForComBlo_#{posicaoLista}"/>
+			     <h:outputText value="${compHisParts[2]}" id="idConvenioTxt2PgoForComBlo_#{posicaoLista}"/>			     
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" id="idQatRegPgoForComBlo_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.quantidadeRegistros']}" styleClass="space" 
+				id="idQatRegLblPgoForComBlo_#{posicaoLista}"/>
+			 	<h:outputText value="${compHisParts[3]}" id="idQatRegTxtPgoForComBlo_#{posicaoLista}"/>
+		</p:outputPanel>	
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPgoForComBlo_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPgoForComBlo_#{posicaoLista}">
+			<p:separator id="idSepaLinePgoForComBlo_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+       
+    <h:inputHidden id="drunningMode" partialSubmit="true" value="#{atributosDaSessao.ambiente}"/>            
+    <h:inputHidden id="nivelUsuario" partialSubmit="true" value="#{atributosDaSessao.nivelUsuario}"/>  
+    <h:inputHidden id="segmento" partialSubmit="true" value="#{atributosDaSessao.segmentoContaPrincipal}"/>  
+    <h:inputHidden id="autenticacao" partialSubmit="true" value="#{atributosDaSessao.tipoDispositivoAutenticacao}"/> 
+    <h:inputHidden id="oferta" partialSubmit="true" value="#{atributosDaSessao.ofertasComerciais}"/> 
+
+	<script type="text/javascript">
+		var utag_data = {
+		}
+	</script>
+	<!-- Loading script asynchronously -->
+	<script type="text/javascript">
+		(function(a,b,c,d){
+			var drunningMode = document.getElementById("formGeral:drunningMode").value;
+			if(drunningMode != 'local-tomcat' &amp;&amp; drunningMode != 'local' &amp;&amp; drunningMode != 'tomcat'){
+				if(drunningMode == 'pi'){
+					drunningMode = 'dev';
+				}
+				else if(drunningMode == 'ocu'){
+					drunningMode = 'prod';
+				}
+				else if(drunningMode == 'hml' &#124;&#124; drunningMode == 'sus'){
+					drunningMode = 'qa';
+				}
+			    a='//tags.tiqcdn.com/utag/santander/br-internet-banking-pj/'+drunningMode+'/utag.js';
+			    b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+			    try{
+			    	a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+			    }catch(e){
+			    	console.log(e);
+			    }
+			}
+	    })();
+	</script>
+</ui:composition>

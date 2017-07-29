@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+	
+	<p:dialog id="popupRecebe" closable="true" header="#{msg['pages.pagamentos.recargaProgramada.consultar.dialog.exclusao']}" visible="#{posicaoRecebimentoManageBBean.popupVisivel}"
+	styleClass="modal-box box-shadow" modal="true" widgetVar="painelPopupRecebiveisVar">
+			
+			<div class="popover-content">
+		
+				<div class="row space-b">
+					<div class="col-md-12">
+						<p:outputPanel styleClass="label520" >
+							#{msg['pages.emprestimos.recebiveis.popup.lancamento']} <h:outputLabel value="#{posicaoDeRecebimentosBBean.dataDia}">
+										<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+							</h:outputLabel>
+							 #{msg['pages.emprestimos.recebiveis.popup.detalhe']}
+							  #{recargaProgramadaConsultarBBean.recargaProgramadaSelecionada.dataInclusaoProgramacao}
+						</p:outputPanel>
+					</div>
+				</div>
+				
+				<div class="row space-b">
+					<div class="col-md-12">
+						<p:outputPanel styleClass="label520">
+							#{msg['pages.emprestimos.recebiveis.popup.cartao']}
+						</p:outputPanel>	
+					</div>
+				</div>
+				
+				<p:dataTable id="dtGrid" var="s" selectionMode="single" rowKey="#{recebiveis}"
+				emptyMessage="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.lista.empty']}"
+				value="#{}">
+		
+									<p:column headerText="#{msg['pages.emprestimos.recebiveis.popup.credenciadora']}">
+                                        <h:outputText value="#{recebiveis.convenio}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.emprestimos.recebiveis.popup.valor.total']}">
+										<h:outputText value="#{recebiveis.identificacaoConsumidor}" />
+									</p:column>
+									
+									<p:column headerText="#{msg['pages.emprestimos.recebiveis.total2']}">
+										<h:outputText value="#{recebiveis.complemento}" />
+									</p:column>
+				</p:dataTable>					
+	    
+	          
+			
+			</div>
+			<div class="popover-footer">
+				<p:outputPanel styleClass="text-right"> 
+					<p:commandLink id="continuar" styleClass="btn btn-default btn-cinza" role="button" action="#{recargaProgramadaConsultarBBean.continuarEmExclusaoConfirmacao()}">#{msg['page.btn.continuar']}</p:commandLink>
+				</p:outputPanel>
+			</div>
+	     </p:dialog>
+    
+</ui:composition>

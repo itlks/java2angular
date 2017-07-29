@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow" id="painelGeral">
+
+					<h4>
+						<strong>#{msg['page.outrosServicos.consorcio.calendarioAssembleia.titulo']}</strong>
+					</h4>
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="form-group col-md-3">
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.cliente']}"
+								for="clienteNome" />
+							<span><h:outputText id="clienteNome"
+									value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.nome}" /></span>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="form-group col-md-3">
+							<h:outputLabel
+								value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.cnpj']}"
+								for="clienteCnpj" />
+							<span><h:outputText id="clienteCnpj"
+									value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.cnpj}"
+									converter="converterCpfCnpj" /></span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator styleClass="hr-Dashed" />
+
+					<p:outputPanel styleClass="js-panel-calendario-assembleia">
+
+						<p:outputPanel styleClass="row space-t">
+
+							<p:outputPanel styleClass="form-group col-md-3">
+								<div class="form-group no-margin-bottom" style="padding-left: 0%;">
+									<div class="col-md-4">
+										<h:outputLabel
+											value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.grupo']}" />
+										<h:outputText
+											value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.grupo}" />
+									</div>
+									<div class="col-md-8">
+										<strong style="color: #EE1D23; padding: 5px;">&gt;</strong>
+										<p:commandLink
+											actionListener="#{consorcioConsultarCalendarioAssembleiaBBean.preencheModalDetalheGrupo()}"
+											immediate="true"
+											oncomplete="PF('dialogDetalheGrupo').show();"
+											rendered="#{consorcioListaCotasAtivasBBean.mostrarLink}">
+										Detalhes do grupo
+									</p:commandLink>
+									</div>
+								</div>
+							</p:outputPanel>
+
+							<p:outputPanel 	styleClass="form-group col-md-3 js-panel-calendario-assembleia">
+								<div class="form-group no-margin-bottom">
+									<div class="col-md-3">
+										<h:outputLabel
+											value="#{msg['page.outrosServicos.consorcio.dadosDoGrupo.cota']}" />
+										<h:outputText
+											value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.cota}" />
+									</div>
+									<div class="col-md-9">
+										<strong style="color: #EE1D23; padding: 5px;">&gt;</strong>
+										<p:commandLink
+											actionListener="#{consorcioConsultarCalendarioAssembleiaBBean.preencheModalCota()}"
+											immediate="true" oncomplete="PF('dialogDetalheCotaCalendarioAssembleia').show();"
+											rendered="#{consorcioListaCotasAtivasBBean.mostrarLink}">
+										#{msg['page.outrosServicos.consorcio.dadosDoGrupo.outraCota']}
+									</p:commandLink>
+									</div>
+								</div>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-t">
+							<div class="form-group no-margin-bottom">
+								<div class="col-md-4">
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.bem']}" />
+									<h:outputText
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.dto.bem}" />
+								</div>
+							</div>
+						</p:outputPanel>
+
+						<p:separator styleClass="hr-Dashed" />
+
+						<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="form-group col-md-3">
+								<h:outputText
+									value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.lista.titulo']}"
+									style="font-size:14px;" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:dataTable
+							value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.listaDeAssembleias}"
+							var="proxima" scrollable="true" scrollHeight="170">
+							<p:column
+								headerText="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.tabela.titulo.numero']}"
+								style="text-align: center">
+								<h:outputText value="#{proxima.numeroAssembleia}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.tabela.titulo.assembleia']}"
+								style="text-align: center">
+								<h:outputText value="#{proxima.dtAssembleia}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.tabela.titulo.horario']}"
+								style="text-align: center">
+								<h:outputText value="#{proxima.hrAssembleia}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.tabela.titulo.vencimentoPrestacao']}"
+								style="text-align: center">
+								<h:outputText value="#{proxima.dtVencimento}" />
+							</p:column>
+						</p:dataTable>
+
+						<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="form-group col-md-3">
+								<h:outputText
+									value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.proxima.titulo']}"
+									style="font-size:14px;" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="form-group col-md-3">
+								<h:panelGrid columns="2" style="border-collapse: inherit; ">
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.local']}"
+										for="localAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="localAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.nomeLocalAssembleia}"
+										style="margin-left:20px;" />
+
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.endereco']}"
+										for="enderecoAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="enderecoAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.nomeEnderecoAssembleia}"
+										style="margin-left:20px" />
+
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.complemento']}"
+										for="complementoAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="complementoAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.complementoAssembleia}"
+										style="margin-left:20px" />
+
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.bairro']}"
+										for="bairroAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="bairroAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.bairroAssembleia}"
+										style="margin-left:20px" />
+
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.cidade']}"
+										for="cidadeAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="cidadeAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.cidadeAssembleia}"
+										style="margin-left:20px" />
+
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.estado']}"
+										for="estadoAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="estadoAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.estadoAssembleia}"
+										style="margin-left:20px" />
+
+									<h:outputLabel
+										value="#{msg['page.outrosServicos.consorcio.calendarioAssembleia.detalhe.cep']}"
+										for="cepAssembleia" style="margin-bottom: 0px" />
+									<h:outputText id="cepAssembleia"
+										value="#{consorcioConsultarCalendarioAssembleiaBBean.proximaAssembleia.cepAssembleia}"
+										style="margin-left:20px" />
+								</h:panelGrid>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<ui:include
+			src="/pages/outrosServicos/consorcio/modal/modaListaCotasAssembleia.xhtml" />
+		<ui:include
+			src="/pages/outrosServicos/consorcio/modal/modalDetalheGrupo.xhtml" />
+	</ui:define>
+</ui:composition>

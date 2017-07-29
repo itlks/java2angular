@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.autorizacoes.historico.consulta.mensagem']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow" id="painelGeral">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="form-group col-xs-3">
+							<p:outputLabel for="codigoGrupo"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.produto.label']}" />
+							<h:selectOneMenu id="codigoGrupo"
+								value="#{autorizacoesHistoricoConsultaBBean.dto.codigoGrupo}">
+								<f:selectItem itemValue="" itemLabel="Selecione o produto"
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{autorizacoesHistoricoConsultaBBean.produtos}"
+									var="produto" itemValue="#{produto.numeroGrupo}"
+									itemLabel="#{produto.nomeGrupoServico}" />
+								<p:ajax
+									listener="#{autorizacoesHistoricoConsultaBBean.onSelectContaConvenioDedito}"
+									update="conta-convenio-debito" onstart="openLoad()" oncomplete="closeLoad()" />
+							</h:selectOneMenu>
+						</p:outputPanel>
+
+						<h:panelGroup id="conta-convenio-debito">
+						<p:outputPanel
+							styleClass="form-group col-xs-3"
+							rendered="#{autorizacoesHistoricoConsultaBBean.renderComboContaDebitoConvenio}">
+							<h:outputLabel for="convenioEDebit"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.convenio.label']}" />
+							<h:selectOneMenu id="convenioEDebit"
+								value="#{autorizacoesHistoricoConsultaBBean.convenioEDebito}">
+								<f:selectItem itemValue="" itemLabel="Selecione o convenio"
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{autorizacoesHistoricoConsultaBBean.listaConveniosContasDebito}"
+									var="convenio"
+									itemValue="#{convenio.contaConvenio.numero}#{convenio.contaConvenio.agencia}#{convenio.contaConvenio.conta}|#{convenio.contaDebito.numero}@#{convenio.contaDebito.agencia}@#{convenio.contaDebito.conta}"
+									itemLabel="#{convenio.contaConvenio.numero}-#{convenio.contaConvenio.agencia}-#{convenio.contaConvenio.conta}" />
+								<p:ajax
+									listener="#{autorizacoesHistoricoConsultaBBean.onSelectContaDebito}"
+									update="combo-conta-contadebito" onstart="openLoad()" oncomplete="closeLoad()" />
+							</h:selectOneMenu>
+						</p:outputPanel>
+
+						<p:outputPanel id="combo-conta-contadebito"
+							styleClass="form-group col-xs-3"
+							rendered="#{autorizacoesHistoricoConsultaBBean.renderComboContaDebitoConvenio}">
+							<h:outputLabel for="contaDebito"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.contaDebito.label']}" />
+							<h:selectOneMenu id="contaDebito"
+								value="#{autorizacoesHistoricoConsultaBBean.dto.contaDebito}">
+								<f:selectItem itemValue="" itemLabel="Selecione a conta débito"
+									noSelectionOption="true" />
+								<f:selectItems
+									value="#{autorizacoesHistoricoConsultaBBean.selectContaDebito}"
+									var="contaDebito" itemValue="#{contaDebito.contaDebitoValor}"
+									itemLabel="#{contaDebito.contaDebitoLabel}" />
+							</h:selectOneMenu>
+						</p:outputPanel>
+						</h:panelGroup>
+
+					</p:outputPanel>
+
+					<p:separator />
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel for="" styleClass="h5"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.label']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="form-group col-xs-3">
+							<p:outputLabel for="de"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.dataInicial.label']}" />
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="de" pattern="dd/MM/yyyy" maxlength="10"
+									onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+									value="#{autorizacoesHistoricoConsultaBBean.dto.dataInicio}"
+									placeholder="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.dataInicial.placeholder']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="form-group col-xs-3">
+							<p:outputLabel for="ate"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.dataFinal.label']}" />
+							<p:outputPanel styleClass="icon-data-input">
+								<i class="fa fa-calendar"></i>
+								<p:calendar id="ate" pattern="dd/MM/yyyy" maxlength="10"
+									onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+									value="#{autorizacoesHistoricoConsultaBBean.dto.dataFim}"
+									placeholder="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.dataFinal.placeholder']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="form-group col-xs-3">
+							<p:outputLabel for="status"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.status']}" />
+							<h:selectOneMenu id="status"
+								value="#{autorizacoesHistoricoConsultaBBean.dto.status}"
+								styleClass="js-combo-conta-convenio-debito">
+								<f:selectItems
+									value="#{autorizacoesHistoricoConsultaBBean.selectStatus}"
+									var="selectStatus" itemValue="#{selectStatus.valTipo}"
+									itemLabel="#{selectStatus.descricao}" />
+							</h:selectOneMenu>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="form-group col-xs-3 ">
+							<p:outputLabel for="canal"
+								value="#{msg['page.autorizacoes.historico.consulta.pesquisa.informePeriodo.canal']}" />
+							<h:selectOneMenu id="canal"
+								value="#{autorizacoesHistoricoConsultaBBean.dto.canal}"
+								styleClass="js-combo-conta-convenio-debito">
+								<f:selectItems
+									value="#{autorizacoesHistoricoConsultaBBean.selectCanal}"
+									var="selectCanal" itemValue="#{selectCanal.codCanal}"
+									itemLabel="#{selectCanal.descricao}" />
+							</h:selectOneMenu>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel
+							styleClass="col-xs-12 text-right no-print no-visible">
+							<p:commandButton styleClass="btn btn-default no-print no-visible"
+								role="button" id="btnContinuar"
+								actionListener="#{autorizacoesHistoricoConsultaBBean.consultarHistorico}"
+								value="#{msg['page.btn.exibir']}" onstart="openLoad()"
+								oncomplete="closeLoad()"
+								update="@(.js-tabela-historico, .js-menssagem-resultado)" />
+							<p:defaultCommand target="btnContinuar" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-xs-12 js-tabela-historico">
+							<p:separator
+								rendered="#{!autorizacoesHistoricoConsultaBBean.historicos.isEmpty()}" />
+							<ui:repeat var="historico"
+								value="#{autorizacoesHistoricoConsultaBBean.historicos.entrySet()}">
+								<p:outputPanel styleClass="h5">
+									<p:outputLabel for="key" styleClass="space bold h5"
+										value="#{msg['page.autorizacoes.historico.consulta.dataEfetifacao']}" />
+									<h:outputText id="key" value="#{historico.key}" converter="dateConverter" />
+								</p:outputPanel>
+								<p:dataTable value="#{historico.value}" var="dados">
+									<p:column
+										headerText="#{msg['page.autorizacoes.historico.consulta.pesquisa.produto.label']}"
+										styleClass="col-xs-7">
+										<h:outputText value="#{dados.produto} - #{dados.servico}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.autorizacoes.historico.consulta.transacao']}"
+										styleClass="col-xs-2 text-center">
+										<h:outputText value="#{dados.quantidadeTrasacoes}" />
+									</p:column>
+									<p:column headerText="Valor Total"
+										styleClass="col-xs-2 text-right">
+										<h:outputText value="#{dados.valorTotal / 100}"
+											converter="valorMonetarioConverter" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.autorizacoes.historico.consulta.verDetalhe']}"
+										styleClass="col-xs-1 text-right">
+										<p:commandLink onstart="openLoad()" oncomplete="closeLoad()"
+											action="#{autorizacoesHistoricoConsultaBBean.consultarHistoricoDetalhe(historico.key, dados)}">
+											<h:graphicImage styleClass="icone-lupa"
+												value="/images/u162.png" />
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</ui:repeat>
+							<p:outputPanel styleClass="js-menssagem-resultado">
+								<h:outputText
+									value="#{msg['page.autorizacoes.historico.consulta.semDadosResultado']}"
+									rendered="#{autorizacoesHistoricoConsultaBBean.renderMenssagemRetorno}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{autorizacoesHistoricoConsultaBBean.voltarMenu}"
+					value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+	<p:dialog closable="true" widgetVar="dialogPagamentos"
+		style="width: 40%"
+		resizable="false" draggable="false" id="popupLimites"
+		header="#{msg['pages.generico.limitesPagamento.header']}"
+		showHeader="true" width="960" modal="true" styleClass="modal-box">
+
+		<p:outputPanel rendered="#{limitesPagamentoBBean.retornoValidoServico}">
+			<p:scrollPanel mode="native" style="height:350px">
+				<p:outputPanel
+					style="margin: auto 35px auto 20px;">
+					
+					  <ui:repeat             
+						  	var="limites" 
+				            varStatus="status" 
+				            value="#{limitesPagamentoBBean.listaLimitesDTO}">
+			
+						<p:panelGrid 
+							styleClass="tacle-custom-solid table-genericas table-responsive table table-striped"
+							style="width: 100%; margin-top: 35px;">
+			
+							<f:facet name="header">
+								<p:row>
+									<p:column rendered="#{not empty limites.subTitulo}" styleClass="text-left column33">
+										<font color="#41555e"> #{limites.subTitulo} </font>
+									</p:column>
+									<p:column rendered="#{empty limites.subTitulo}" styleClass="text-left column33">
+										<font color="#41555e"> #{msg['pages.generico.limitesPagamento.table.transacao.header.informacao']} </font>
+									</p:column>
+									<p:column styleClass="text-right column33">
+											<font color="#41555e"> #{msg['pages.generico.limitesPagamento.table.transacao.header.autorizados']} </font>
+									</p:column>
+									<p:column styleClass="text-right column33">
+											<font color="#41555e">#{msg['pages.generico.limitesPagamento.table.transacao.header.nao.autorizados']} </font>
+									</p:column>
+								</p:row>
+							</f:facet>
+			
+							<p:row rendered="#{limites.qtdeMaximaDiariaRender}">
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.transacao.quantidade.maxima.diaria']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.qtdeMaximaDiariaAutorizados}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.qtdeMaximaDiariaNaoAutorizados}" />
+								</p:column>
+							</p:row>
+			
+							<p:row>
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.transacao.valor.maximo.diario']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.valorMaximoDiarioAutorizado}"
+										rendered="#{limites.valorMaximoDiarioRender}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+									<h:outputText
+										rendered="#{!limites.valorMaximoDiarioRender}"
+										value="#{msg['pages.generico.limitesPagamento.mensagem.campo.nao.renderizado']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.valorMaximoDiarioNaoAutorizado}"
+										rendered="#{limites.valorMaximoDiarioRender}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+			
+							<p:row
+								rendered="#{limites.valorMaximoTransacaoRender}">
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.transacao.valor.maximo.transacao']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.valorMaximoTransacao}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+			
+							<p:row
+								rendered="#{limites.valorMinimoTransacaoRender}">
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.transacao.valor.minimo.transacao']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.valorMinimoTransacao}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+			
+							<p:row rendered="#{limites.limiteGlobalRender}">
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.transacao.limites.global']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.limiteGlobal}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+								</p:column>
+								<p:column></p:column>
+							</p:row>
+			
+						</p:panelGrid>
+			
+						<p:panelGrid
+							styleClass="tacle-custom-solid table-genericas table-responsive table table-striped table-no-border-bottom"
+							style="width: 100%; margin-top: 35px;">
+							<f:facet name="header">
+								<p:row>
+									<p:column styleClass="text-left column33" >
+											<font color="#41555e"> #{msg['pages.generico.limitesPagamento.table.limites.header']} </font>
+									</p:column>
+									<p:column styleClass="text-right column33"  ></p:column>
+									<p:column styleClass="text-right column33"  ></p:column>
+								</p:row>
+							</f:facet>
+			
+							<p:row rendered="#{limites.qtdeDisponivelRender}">
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.limites.quantidade']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.qtdeDisponivelAutorizado}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.qtdeDisponivelNaoAutorizado}" />
+								</p:column>
+							</p:row>
+			
+							<p:row>
+								<p:column styleClass="text-left">
+									<h:outputText
+										value="#{msg['pages.generico.limitesPagamento.table.limites.valor']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.valorDisponivelAutorizado}"
+										rendered="#{limites.valorDisponivelRender}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+			
+									<h:outputText
+										rendered="#{!limites.valorDisponivelRender}"
+										value="#{msg['pages.generico.limitesPagamento.mensagem.campo.nao.renderizado']}" />
+								</p:column>
+								<p:column styleClass="text-right">
+									<h:outputText
+										value="#{limites.valorDisponivelNaoAutorizado}"
+										rendered="#{limites.valorDisponivelRender}">
+										<f:convertNumber type="currency" locale="pt-br"
+											currencyCode="BRL" />
+									</h:outputText>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+						
+					  </ui:repeat>
+		
+				  
+				</p:outputPanel>
+			</p:scrollPanel>
+			
+			<p:outputPanel style="margin: auto 35px auto 20px;">
+				<p:outputPanel  style="margin: 25px auto;">
+					<h:outputText 
+						value="#{limitesPagamentoBBean.tituloRodape}" />	
+				</p:outputPanel>
+			</p:outputPanel>
+			
+		</p:outputPanel>
+
+
+		<p:outputPanel
+			styleClass="aviso-interno-blocos alert-information box-shadow"
+			rendered="#{!limitesPagamentoBBean.retornoValidoServico}"  style="height:250px;">
+			
+			<div style="margin: 100px auto auto 300px;">
+			<i class="fa fa-exclamation-circle" style="margin-top:-10px;"></i>
+			<span style="font-weight: 400;">
+				#{msg['pages.generico.limitesPagamento.mensagem.erro']}
+			</span>
+			</div>
+		</p:outputPanel>
+
+
+	</p:dialog>
+
+</ui:composition>

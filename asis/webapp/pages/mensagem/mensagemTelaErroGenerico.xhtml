@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<c:if test="#{mensagemBBean.sair}">
+
+			<script type="text/javascript" language="javascript">
+				jQuery(window).load(function() {
+					bloquearMenuEsquerdo();
+					bloquearAcessoRapido();
+				});
+			</script>
+			<p:remoteCommand name="bloquearMenuEsquerdo"
+				action="#{menuBBean.populaMenuEsquedo}" process=":formGeral"
+				update=":formGeral" async="false" />
+			<p:remoteCommand name="bloquearAcessoRapido"
+				action="#{painelSecundarioBBean.atualziarAcessoRapido}"
+				process=":formGeral" update=":formGeral" async="false" />
+		</c:if>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<i class="fa fa-exclamation-circle"></i>
+					<h4>
+						<h:outputText value="#{msg['page.atencao']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="box-shadow no-margin-bottim">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<span>
+								<p>
+									<p:outputLabel escape="false" value="#{mensagemBBean.mensagem}"
+										styleClass="bold" />
+								</p> <h:outputText value="#{mensagemBBean.dataHora}" />
+							</span>
+						</p:outputPanel>
+						
+
+					</p:outputPanel>
+										<p:separator />
+
+					<p:outputPanel styleClass="row space-t">
+						<p:outputPanel styleClass="col-xs-12">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<h:outputLink value="https://www.santander.com.br/br/pessoa-juridica"
+				rendered="#{mensagemBBean.sair}"
+				styleClass="btn btn-default pull-right">#{msg['pages.aviso.label.sair']}
+					<p:ajax event="click" listener="#{mensagemBBean.sair}"></p:ajax>
+			</h:outputLink>
+			<p:commandLink value="Home" action="goHome"
+				rendered="#{!mensagemBBean.sair}"
+				styleClass="btn btn-default pull-right" />
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

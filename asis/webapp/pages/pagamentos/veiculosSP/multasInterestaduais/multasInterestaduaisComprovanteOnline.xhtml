@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<style>
+			.box-shadow .col-xs-4, .box-shadow .row .quebra {
+			margin: 10px 0;
+			}
+		</style>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel" rendered="#{!veiculoSPMultaInterestadualBBean.multas.geraPendencia}">
+					<h4>#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.transacaoFinalizada']}</h4>
+				</p:outputPanel>
+				<p:outputPanel styleClass="titulo-painel" rendered="#{veiculoSPMultaInterestadualBBean.multas.geraPendencia}">
+					<h4>#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.transacaoPendAutoriz']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+        	<p:outputPanel styleClass="col-lg-12">
+           		<p:outputPanel styleClass="box-shadow no-margin-bottom">
+             		<p:outputPanel styleClass="row">
+             		
+						<p:outputPanel styleClass="col-xs-4">	
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.renavam']} " styleClass="bold" />
+							   <h:outputText id="idNrRenavam"  converter="converterNumeroRenavam" value="#{veiculoSPMultaInterestadualBBean.multas.renavam}"  />
+							</p>
+							<p:outputPanel styleClass="quebra"/>		
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.proprietario']} " styleClass="bold" />
+								<h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.proprietario}" />																	
+							</p>			
+						</p:outputPanel>
+				
+						<p:outputPanel styleClass="col-xs-4">
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.codigoMunicipio']} " styleClass="bold" />
+								<h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.codigoMunicipio}" />
+							</p>
+							<p:outputPanel styleClass="quebra"/>		
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.cpfCnpj']} " styleClass="bold" />
+								<h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.cpfCnpj}" />
+							</p>										
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">				
+							<br />							
+							<p:outputPanel styleClass="quebra"/>		
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.placaVeiculo']} " styleClass="bold" />
+								<h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.placaVeiculo}" />
+							</p>
+						</p:outputPanel>
+				
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row">
+				
+						<p:outputPanel styleClass="col-xs-12 space-b">						
+		                   <p:separator />		                
+		                </p:outputPanel>
+		                
+						<p:outputPanel styleClass="col-xs-12">		                   
+		                   <p><strong>#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.multasPagas']}</strong></p>
+		                   <p:outputPanel styleClass="quebra"/>
+		                </p:outputPanel>
+		              
+						<ui:repeat value="#{veiculoSPMultaInterestadualBBean.selecionadoListaGuias}" var="gui">			               
+			               <p:outputPanel styleClass="col-xs-4">              
+			                   <p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.guia']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.guia}" />
+			                    </p>
+			                    <p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.dataInfracao']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.dataInfracao}" />
+			                    </p>
+			                  	<p>			                      
+			                    </p>              
+			               </p:outputPanel>
+			               <p:outputPanel styleClass="col-xs-4">
+			                    <p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.autoInfracao']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.autoInfracao}" />
+			                    </p>
+			                    <p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.datavencimento']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.dataVencimento}" />
+			                    </p>
+			                    <p>			                      
+			                    </p>				                  
+			               </p:outputPanel>
+			               <p:outputPanel styleClass="col-xs-4">
+			               		<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.orgaoAutuador']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.orgaoAutuador}" />
+			                    </p>
+			               		<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.unidadeFederacao']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.ufInfracao}" />
+			                    </p>					               		
+			                    <p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.valor']} " styleClass="bold"/>
+			                      <h:outputText value="#{gui.valor}">
+			                      	<f:convertNumber type="currency" currencySymbol="R$" />
+								  </h:outputText>
+			                    </p>			               	 		
+			               </p:outputPanel>                			               
+		               </ui:repeat>
+		               
+		                <p:outputPanel styleClass="quebra"/>
+	                	<p:outputPanel styleClass="col-xs-4">
+							<br />
+						</p:outputPanel>
+	                	<p:outputPanel styleClass="col-xs-4">
+							<br />
+						</p:outputPanel>
+	                	<p:outputPanel styleClass="col-xs-4">
+							<strong>#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.valorTotal']} </strong>R$ #{veiculoSPMultaInterestadualBBean.calcularValorTotalConfirmacao()}
+						</p:outputPanel>
+	             	
+	             		<p:outputPanel styleClass="col-xs-12 space-b">
+		                   <p:separator />		                   		                   
+		                </p:outputPanel>                    	                   	
+                    	
+	             	</p:outputPanel>
+	             	
+	             	<p:outputPanel styleClass="row" rendered="#{!veiculoSPMultaInterestadualBBean.multas.geraPendencia}">
+	             			             		
+	             		<p:outputPanel styleClass="col-xs-12 space-b">
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.pagamentoEfetuadoMeio']}" /></p>
+							<p><h:outputText value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.emCasoDeDuvidas']}" /></p>                		                          	
+						</p:outputPanel>							             		
+	             		
+	             		<p:outputPanel styleClass="col-xs-12">
+		                   <p:separator />		                   		                   
+		                </p:outputPanel>  
+		                
+						<p:outputPanel styleClass="col-xs-4">
+							<p><h:outputLabel value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.autenticacaoBancaria']}" styleClass="bold" /></p>
+							<p><h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.autBancaria}"/></p>
+                         		<br />                                                 
+							<p><h:outputLabel value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.dataContabil']}" styleClass="bold" /></p>
+							<p><h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.dataContabil}"/></p>                          	
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p><h:outputLabel value="#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.dataHoraPagamento']}" styleClass="bold" /></p>
+							<p><h:outputText value="#{veiculoSPMultaInterestadualBBean.multas.dataPagamento}"/></p>                          	
+						</p:outputPanel>						
+					
+					</p:outputPanel>
+	             	
+	             	<p:outputPanel styleClass="row" rendered="#{veiculoSPMultaInterestadualBBean.multas.geraPendencia}">
+	             				                            					    
+         				<p:outputPanel styleClass="col-xs-12">	   							
+	                          <h4 align="center">
+	                          	<strong>#{msg['pages.pagamentos.veiculos.multas.interestaduais.multasInterestaduaisComprovante.Demonstrativo']}</strong>
+	                          </h4>
+	                    </p:outputPanel>
+	                    	        
+	                </p:outputPanel>
+	                            
+               		<p:outputPanel styleClass="col-xs-12 space-b">
+	                   <p:separator />			                   	                   		                   
+	                </p:outputPanel>
+	              	
+	                    	                   
+                   	<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="form-group col-xs-12">
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />						
+							</p:outputPanel> 										
+					</p:outputPanel> 	                   
+             											
+					
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="no-print no-visible">
+	            	 <ui:include src="/commons/pdf/pdfButtons.xhtml" />
+	           	</p:outputPanel>
+	           	
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

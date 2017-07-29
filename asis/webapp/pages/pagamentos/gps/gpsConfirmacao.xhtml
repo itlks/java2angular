@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText value="#{msg['pages.pagamento.gps.confira.dados']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-6">
+
+							<p:outputPanel styleClass="row text-center space-tt space-bb">
+
+								<p:outputPanel styleClass="col-xs-3">
+									<h:graphicImage value="/images/u127.png"
+										style="width: 90px;height: 68px;" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-9">
+
+									<p:outputPanel styleClass="row">
+										<h:outputText
+											value="#{msg['pages.pagamento.gps.ministerio.previdencia']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row space-b">
+										<h:outputText value="#{msg['pages.pagamento.gps.inss']}" />
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row">
+										<h:outputText value="#{msg['pages.pagamento.gps.guia']}" />
+									</p:outputPanel>
+									<p:outputPanel styleClass="row">
+										<h:outputText value="#{msg['pages.pagamento.gps.gps']}" />
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-12">
+											<h:outputLabel for="nome"
+												value="#{msg['pages.pagamento.gps.nome']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-12">
+											<h:outputText
+												value="#{tributosFederaisGPSBBean.dto.nomeRazaoSocial}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-12">
+											<h:outputLabel for="nome"
+												value="#{msg['pages.pagamento.gps.vencimento']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-12">
+											<h:outputText value="#{msg['pages.pagamento.gps.uso.inss']}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="col-xs-6 border-left inline-form">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="codigoPagamento"
+										value="#{msg['pages.pagamento.gps.codigo.pagamento']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText id="codigoPagamento"
+										value="#{tributosFederaisGPSBBean.dto.codigoPagamento}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="competencia"
+										value="#{msg['pages.pagamento.gps.competencia']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText id="competencia"
+										value="#{tributosFederaisGPSBBean.dto.competencia}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="identificado"
+										value="#{msg['pages.pagamento.gps.identificador']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText id="identificado"
+										value="#{tributosFederaisGPSBBean.dto.identificador}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="valorInss"
+										value="#{msg['pages.pagamento.gps.valor.inss']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText id="valorInss"
+										value="#{tributosFederaisGPSBBean.dto.valorInss}">
+										<f:convertNumber type="currency" currencyCode="BRL"
+											maxFractionDigits="2" minFractionDigits="2" />
+									</h:outputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="" value="#{msg['pages.pagamento.gps.07']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="" value="#{msg['pages.pagamento.gps.08']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="valorOutrasEntidades"
+										value="#{msg['pages.pagamento.gps.valor.entidade']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText id="valorOutrasEntidades"
+										value="#{tributosFederaisGPSBBean.dto.valorOutrasEntidades}">
+										<f:convertNumber type="currency" currencyCode="BRL"
+											maxFractionDigits="2" minFractionDigits="2" />
+									</h:outputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="valorMultasJuros"
+										value="#{msg['pages.pagamento.gps.multas.juros']}" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-6 text-right">
+									<h:outputText id="valorMultasJuros"
+										value="#{tributosFederaisGPSBBean.dto.valorMultasJuros}">
+										<f:convertNumber type="currency" currencyCode="BRL"
+											maxFractionDigits="2" minFractionDigits="2" />
+									</h:outputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row no-padding total-label">
+								<p:outputPanel styleClass="col-xs-6">
+									<h:outputLabel for="valorTotal"
+										value="#{msg['pages.pagamento.gps.total']}" />
+								</p:outputPanel>
+								<p:outputPanel id="valorTotal" styleClass="col-xs-6 text-right">
+									<h:outputText
+										value="#{tributosFederaisGPSBBean.dto.valorTotal}">
+										<f:convertNumber type="currency" currencyCode="BRL"
+											maxFractionDigits="2" minFractionDigits="2" />
+									</h:outputText>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="text-center col-xs-12"
+							rendered="#{tributosFederaisGPSBBean.dto.agendar}">
+							<p:separator />
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel for="datAgend"
+										value="#{msg['pages.pagamento.gps.data.agendada']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText id="datAgend"
+										value="#{tributosFederaisGPSBBean.dto.datAgend}" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="text-center col-xs-12">
+							<p:separator />
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputLabel for="utilizacao"
+										value="#{msg['pages.pagamento.gps.atencao']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<h:outputText id="utilizacao"
+										value="#{msg['pages.pagamento.gps.e.vedado.a.utilizacao']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-secundario"
+					id="btnVoltar" role="button"
+					value="#{msg['pages.pagamento.gps.voltar']}"
+					action="#{tributosFederaisGPSBBean.voltarGpsConfirmacao}" />
+
+				<p:commandButton styleClass="btn btn-default"
+					onstart="encryptSecureDL();" onclick="openLoad();"
+					oncomplete="closeLoad();"
+					value="#{msg['pages.pagamento.gps.continuar']}" id="btnConfirmar"
+					role="button"
+					action="#{tributosFederaisGPSBBean.confirmarTelaConfirmacao}" />
+
+				<p:defaultCommand target="btnConfirmar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

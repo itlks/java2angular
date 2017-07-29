@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false"
+			styleClass="loading">
+			<p:graphicImage value="/images/aguarde.gif" />
+		</p:dialog>
+
+		<!-- Inicio painel de selecao de conta -->
+
+		<p:outputPanel styleClass="col-xs-12">
+
+			<h:panelGroup id="painelOpcoes">
+				<p:outputPanel styleClass="row titulo-painel">
+					<p:outputPanel styleClass="col-xs-12 no-padding" rendered="#{debitoAutomaticoSelecaoBBean.bloquear}">
+					
+						<h4>#{msg['pages.pagamentos.debito.automatico.lancamento.desbloquear.selecioneOpcoesParaConsulta']}</h4>							
+							 
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="col-xs-12 no-padding" rendered="#{debitoAutomaticoSelecaoBBean.consulta}"> 
+						<h4>#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.selecioneOpcoesParaConsulta']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row box-shadow">
+					<p:outputPanel styleClass="col-xs-4 no-padding" >
+
+						<p:outputPanel styleClass="form-group">
+
+							<h:outputLabel for="tipoConta"
+								value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.tipoConta']}" />
+
+							<h:selectOneMenu id="tipoConta"
+								value="#{debitoAutomaticoSelecaoBBean.tipoContaSelecionada}">
+
+								<p:ajax event="change" update="painelDados, panelBotao"
+									onstart="PF('statusDialog').show()"
+									onsuccess="PF('statusDialog').hide()"
+									listener="#{debitoAutomaticoSelecaoBBean.consultarConvenios}" />
+
+								<f:selectItem noSelectionOption="true"
+									itemLabel="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.selecione']}" />
+
+								<f:selectItems id="tipo" var="tipo"
+									value="#{debitoAutomaticoSelecaoBBean.tiposContas}"
+									itemValue="#{tipo}" itemLabel="#{tipo.descricao}" />
+
+							</h:selectOneMenu>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</h:panelGroup>
+
+			<!-- Fim painel de selecao de conta -->
+			<h:panelGroup id="painelDados">
+				<p:outputPanel
+					rendered="#{debitoAutomaticoSelecaoBBean.tipoContaSelecionada != null}">
+
+					<p:outputPanel styleClass="row titulo-painel">
+						<p:outputPanel styleClass="col-xs-12 no-padding" >
+							<h4>#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dadosConsulta']}</h4>
+								
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row box-shadow">
+						<p:outputPanel styleClass="col-xs-12 no-padding" >
+
+							<p:outputPanel styleClass="row space-b">
+								<p:outputPanel styleClass="col-xs-5">
+									<h:outputText class="bold"
+										value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.intervalo']}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row"
+								rendered="#{debitoAutomaticoSelecaoBBean.tipoContaSelecionada ne null and debitoAutomaticoSelecaoBBean.tipoContaSelecionada.id ne 0}">
+
+
+								<p:outputPanel styleClass="col-xs-4 form-group" >
+									<h:outputLabel for="dadosEmpresa"
+										value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.empresaConveniada']}" />
+									<h:selectOneMenu id="dadosEmpresa"
+										value="#{debitoAutomaticoSelecaoBBean.empresaConveniadaSelecionada}">
+
+										<f:selectItem id="selecioneEmpresa"
+											itemLabel="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.selecione']}"
+											noSelectionOption="true" />
+
+										<f:selectItems id="itemConvenio" var="item"
+											value="#{debitoAutomaticoSelecaoBBean.listaItensConvenios}"
+											itemValue="#{item.banco.nroCuentaBr}"
+											itemLabel="#{item.nomeEmpresaConveniada}" />
+									</h:selectOneMenu>
+
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-4 form-group">
+
+									<p:outputLabel for="dataInicialDE"
+										value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dataInicial']}" />
+
+									<p:outputPanel styleClass="icon-data-input space-b">
+										<i class="fa fa-calendar" />
+										<p:calendar id="dataInicialDE" 
+											pattern="dd/MM/yyyy"
+											converter="dateConverterFormat"
+											onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+											value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.dataInicial}"
+											maxlength="10" onchange="mascaraData(this, event);">
+											<p:ajax event="change" update="dataInicialDE"></p:ajax>
+										</p:calendar>
+									</p:outputPanel>
+
+									<p:outputLabel for="dataFinalATE"
+										value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.dataFinal']}" />
+									<p:outputPanel styleClass="icon-data-input space-b">
+										<i class="fa fa-calendar" />
+										<p:calendar id="dataFinalATE" 
+											pattern="dd/MM/yyyy" 
+											converter="dateConverterFormat"
+											onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+											value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.dataFinal}"
+											maxlength="10" onchange="mascaraData(this, event);">
+											<p:ajax event="change" update="dataFinalATE"></p:ajax>
+										</p:calendar>
+									</p:outputPanel>
+
+									<h:outputLabel for="dadosSituacao"
+										value="#{msg['pages.pagamentos.debito.automatico.lancamento.consultar.debautomatico.situacao']}"
+										rendered="#{debitoAutomaticoSelecaoBBean.exibeCampoSituacao}" />
+									<h:selectOneMenu id="dadosSituacao"
+										value="#{debitoAutomaticoSelecaoBBean.debitoAutomatico.situacao}"
+										rendered="#{debitoAutomaticoSelecaoBBean.exibeCampoSituacao}">
+
+										<f:selectItems id="situacao" var="situacao"
+											value="#{debitoAutomaticoSelecaoBBean.situacoes}"
+											itemValue="#{situacao}" itemLabel="#{situacao.descricao}" />
+
+									</h:selectOneMenu>
+
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</h:panelGroup>
+
+			<h:panelGroup id="panelBotao">
+				<p:outputPanel
+					rendered="#{debitoAutomaticoSelecaoBBean.tipoContaSelecionada != null}">
+					<p:outputPanel styleClass="row text-right">
+
+						<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+						<p:commandButton id="btnVoltar"
+							styleClass="btn btn-default btn-cinza" role="button"
+							action="#{debitoAutomaticoSelecaoBBean.voltarEmSelecao}"
+							value="#{msg['page.btn.voltar']}" />
+
+						<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+						<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+							role="button"
+							action="#{debitoAutomaticoSelecaoBBean.continuarEmSelecao}"
+							onclick="this.focus();" value="#{msg['page.btn.continuar']}" />
+
+						<p:defaultCommand target="btnContinuar" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</h:panelGroup>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

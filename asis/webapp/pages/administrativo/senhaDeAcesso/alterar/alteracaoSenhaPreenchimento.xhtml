@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/inicializaDL.xhtml" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{senhaAcessoDeAlterarBBean.session.nomeUsuarioLogado}" />
+
+		<h:inputHidden id="hashAcesso" partialSubmit="true"
+			value="#{senhaAcessoDeAlterarBBean.session.hashAcesso}" />
+
+		<h:inputHidden id="hashAcessoNovo" partialSubmit="true"
+			value="#{senhaAcessoDeAlterarBBean.session.hashAcessoNovo}" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{senhaAcessoDeAlterarBBean.senhaAcesso.msgErroJavaStript}" />
+
+
+		<p:outputPanel styleClass="titulo-painel">
+			<h4>#{msg['page.administrativo.senhaAcesso.alterar.subtitulo']}</h4>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="box-shadow form-group"
+			style="height:250px;">
+
+			<p:outputPanel styleClass="col-xs-3 col-sm-6 col-xs-3">
+
+				<p:outputPanel styleClass="form-group">
+					<p style="margin-left: -20px;">
+						<h:outputText for="senhaAcesso"
+							value="#{msg['page.administrativo.senhaAcesso.alterar.senha.atual']}" />
+						<p:password id="senhaAcesso" styleClass="form-control"
+							maxlength="8"
+							value="#{senhaAcessoDeAlterarBBean.senhaAcesso.senhaAtual}" />
+					</p>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="form-group">
+					<p style="margin-left: -20px;">
+						<h:outputText for="senhaAcessoNova"
+							value="#{msg['page.administrativo.senhaAcesso.alterar.nova.senha']}" />
+						<p:password id="senhaAcessoNova" styleClass="form-control"
+							maxlength="8"
+							value="#{senhaAcessoDeAlterarBBean.senhaAcesso.senhaNova}" />
+					</p>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="form-group">
+					<p style="margin-left: -20px;">
+						<h:outputText for="senhaAcessoConfirmacao"
+							value="#{msg['page.administrativo.senhaAcesso.alterar.nova.senha.confirmar']}" />
+						<p:password id="senhaAcessoConfirmacao" styleClass="form-control"
+							maxlength="8"
+							value="#{senhaAcessoDeAlterarBBean.senhaAcesso.senhaConfirmacao}" />
+					</p>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"
+					action="#{senhaAcessoDeAlterarBBean.voltar}" role="button">#{msg['page.btn.voltar']}</p:commandLink>
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandLink id="btnContinuar" styleClass="btn btn-default"
+					onclick="encryptNewPasswordAccessDLInterno();"
+					action="#{senhaAcessoDeAlterarBBean.continuar}" role="button">
+             			#{msg['page.btn.continuar']}
+             	</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

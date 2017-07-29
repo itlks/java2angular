@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:jsp="http://java.sun.com/JSP/Page"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:c="http://java.sun.com/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+				template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<span id="divHtml"> <p:outputPanel styleClass="row" id="painelGeral">
+
+				<p:outputPanel styleClass="col-xs-12">
+
+						<c:forEach 	items="#{segundaViaVeicCodBarraBBean.segundaViaCodBarrasVeiculos}"
+									var="cod" 
+									varStatus="codIndex">
+
+						<div class="multiplosPdfsCss"> 
+							
+							<p:outputPanel styleClass="box-shadow ">
+
+								<p:outputPanel styleClass="row">
+								
+									<p:outputPanel styleClass="col-xs-12">
+
+										<c:forEach 	items="#{cod.segundaViaCodBarrasVeiculosList}"
+													var="dadoPagamento" 
+													varStatus="dadoPagamentoIndex">		
+																				
+											<c:set var="chave" value="#{fn:substring(dadoPagamento, 0, fn:indexOf(dadoPagamento, ':')+1)}" />
+											<c:set var="valor" value="#{fn:substring(dadoPagamento, fn:indexOf(dadoPagamento, ':')+1, fn:length(dadoPagamento))}" />
+											
+											<c:if test="#{dadoPagamentoIndex.index eq 11}">
+												<hr/>
+												<br />
+											</c:if>
+											
+											<c:if test="#{dadoPagamentoIndex.index eq 0}">
+												<h:outputText 	id="txte_#{codIndex.index}#{dadoPagamentoIndex.index}" 
+																value="#{valor}" 
+																styleClass="bold" />
+												<hr/>
+											</c:if>
+											
+												<h:outputText 	id="txt1_#{codIndex.index}#{dadoPagamentoIndex.index}" 
+																value="#{chave}" 
+																styleClass="bold" />
+											
+												<h:outputText 	id="txt2_#{codIndex.index}#{dadoPagamentoIndex.index}" 
+																value="#{valor}" rendered="#{dadoPagamentoIndex.index > 0}"/>
+															
+										 	<br />
+									
+											
+										</c:forEach>
+											<br/>
+										<p:outputPanel styleClass="row">
+											
+											<p:outputPanel styleClass="col-xs-12">
+												<p:separator/>
+											</p:outputPanel>
+										
+										</p:outputPanel>
+										
+																
+									</p:outputPanel>
+									
+								</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							</p:outputPanel> 
+
+
+
+						</div>
+					</c:forEach>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12" style="margin-top:-16px">
+
+
+							<ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml">
+								<ui:param name="divHtml" value="true" />
+								<ui:param name="imprimir" value="true" />
+							</ui:include>
+
+						</p:outputPanel>
+
+				</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</span>
+			
+		<p:outputPanel styleClass="row space-b"
+			rendered="#{segundaViaVeicCodBarraBBean.segViaBBean.pagamentoSelecionado == 4}">
+
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{segundaViaVeicCodBarraBBean.voltar}" role="button">#{msg['page.btn.voltar']}
+		       </p:commandLink>
+			</p:outputPanel>
+			
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>
+

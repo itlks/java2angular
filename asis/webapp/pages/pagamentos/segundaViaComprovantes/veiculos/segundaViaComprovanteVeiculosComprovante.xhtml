@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:jsp="http://java.sun.com/JSP/Page"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:c="http://java.sun.com/jstl/core"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+       template="/templates/templateConsultaNovo.xhtml">
+       <ui:define name="content">
+       
+             <p:outputPanel styleClass="row">
+                    <p:outputPanel styleClass="col-lg-12">
+                           <p:outputPanel styleClass="titulo-painel">
+                                  <h4>#{msg['pages.segundaViaComprovantes.veiculos.segundaViaComp.vejaComprovante']}</h4>
+                           </p:outputPanel>
+                    </p:outputPanel>
+             </p:outputPanel>
+        
+            <!--  <h:outputText value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.dsDtCon}"/>-->
+                     
+             <p:outputPanel styleClass="row" id="painelGeral">
+                    <p:outputPanel styleClass="col-lg-12">
+                        <p:outputPanel styleClass="box-shadow no-margin-bottom">
+                        
+                        <!-- Include Renderização dos comprovantes Transferencia -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 1}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteTransferencia.xhtml"/>
+                        </p:outputPanel>
+  
+                        <!-- Include Renderização dos comprovantes Licenciamento -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 2}" >
+                        <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteLicenciamento.xhtml"/> 
+                        </p:outputPanel>
+             
+                        <!-- Include Renderização dos comprovantes Licenciamento 2 via -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 4}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteLicenciamento2Via.xhtml"/>
+                        </p:outputPanel>
+                        
+                        
+                        
+                        
+                        <p:outputPanel rendered="#{segundaViaVeicCodBarraBBean.segViaBBean.pagamentoSelecionado == 4}">
+             <!-- Include Renderização dos comprovantes Veiculos CodDeBarras 2 via -->       
+                <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteVeiculoCodDeBarra.xhtml"/>
+		    </p:outputPanel>
+                         
+                        <!-- Include Renderização dos comprovantes Transferencia 2 via -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 5}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteTransferencia2Via.xhtml"/>
+                        </p:outputPanel>
+
+                        <!-- Include Renderização dos comprovantes Primeiro Registro -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 6}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteRegistro.xhtml"/>
+                        </p:outputPanel>
+                        
+                        <!-- Include Renderização dos comprovantes Debitos Pendentes -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 7}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteDebitosPendentes.xhtml"/>
+                        </p:outputPanel>
+                
+                        <!-- Include Renderização dos comprovantes IPVA -->
+                        <p:outputPanel  rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 8}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteIPVA.xhtml"/>
+                        </p:outputPanel>
+
+                        <!-- Include Renderização dos comprovantes DPVAT -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 9}" >
+                                 <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteDPVAT.xhtml"/>
+                        </p:outputPanel>
+
+                        <!-- Include Renderização dos comprovantes Multas de transito -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 10}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteMultasDeTransito.xhtml"/>
+                        </p:outputPanel>
+
+                        <!-- Include Renderização dos comprovantes Multas ReNAINF -->
+                        <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 11}" >
+                            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteMultasRenainf.xhtml"/>
+                        </p:outputPanel>
+
+                        <!-- Include Renderização dos comprovantes Taxa Detran -->
+                     <!--    <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 12}" > -->
+                 <!--            <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteTaxaDetran.xhtml"/> -->
+                <!--        </p:outputPanel> -->
+          
+                         <!-- Include Renderização dos comprovantes Taxa de Licenciamento -->
+<!--                     <p:outputPanel   rendered="#{segundaViaComprovanteVeiculosBBean.codigoDeparaSeFaz == 13}" > -->
+<!--                                 <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteTaxaDeLicenciamento.xhtml"/> -->
+<!--                       </p:outputPanel> -->
+                
+                
+                           <p:separator styleClass="custom-separator" />
+                               <p:outputPanel styleClass="row space-b">
+                               		<p:outputPanel styleClass="col-xs-12">
+                                   		<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+                                   	</p:outputPanel>
+                                </p:outputPanel>
+                             </p:outputPanel>
+                           <ui:include src="/commons/pdf/pdfButtons.xhtml" />
+                           
+                    </p:outputPanel>
+             </p:outputPanel>
+             
+                     <p:outputPanel styleClass="row space-b">
+             <!-- Include Renderização dos comprovantes Veiculos CodDeBarras 2 via   includeComprovanteVeiculoCodDeBarra.xhtml -->       
+               <!--   <ui:include src="/pages/pagamentos/segundaViaComprovantes/veiculos/includeComprovanteVeiculoCodDeBarra.xhtml"/>   -->  
+		        <p:outputPanel styleClass="col-xs-12 text-right no-visible text-right ">            
+		           <p:commandLink styleClass="btn btn-default btn-cinza" 
+		           				  action="#{segundaViaComprovanteVeiculosBBean.voltarEmLista}"
+		           				  role="button">#{msg['page.btn.voltar']}
+		           </p:commandLink>
+		        </p:outputPanel>
+		    </p:outputPanel>
+       </ui:define>
+
+</ui:composition>
+

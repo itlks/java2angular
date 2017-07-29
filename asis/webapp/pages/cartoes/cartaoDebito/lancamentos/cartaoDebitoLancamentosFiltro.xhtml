@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+          
+    	<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['pages.cartoes.cartoesDebito.lancamentos.filtro.titulo']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<h:outputLabel value="#{msg['pages.cartoes.cartoesDebito.lancamentos.filtro.tipoPesquisa']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="form-group">
+
+								<h:selectOneMenu name="tipoOrigemApreensao" value="#{cartaoDebitoLancamentosBBean.filtroCartao}" tabindex="1">
+									<f:selectItem itemValue="0" 
+										itemLabel="#{msg['pages.cartoes.cartoesDebito.lancamentos.filtro.item0']}" />
+									<f:selectItem itemValue="1" 
+										itemLabel="#{msg['pages.cartoes.cartoesDebito.lancamentos.filtro.item1']}" />
+									<p:ajax update="digitecartao" ></p:ajax>
+								</h:selectOneMenu>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel id="digitecartao">
+							<p:outputPanel styleClass="col-md-4" rendered="#{cartaoDebitoLancamentosBBean.filtroCartao eq '1'}" >
+	
+								<p:outputPanel styleClass="form-group">
+									<p:inputMask id="numeroCartaoDigitado"
+										maxlength="19" tabindex="2" value="#{cartaoDebitoLancamentosBBean.dto.cartaoSelecionado.numeroCartao}"
+										styleClass="form-control numberOnly" placeholder="9999.9999.9999.9999" mask="?9999.9999.9999.9999" converter="cpfSemMascaraConverter"/>
+								</p:outputPanel>
+	
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+		    <p:outputPanel styleClass="col-md-12 text-right">
+		       
+		       <p:blockUI block="btnVoltar" trigger="btnVoltar" />	
+		       <p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza"  role="button"
+		       		action="#{cartaoDebitoLancamentosBBean.voltarDaTelaFiltro}">#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.filtro.voltar']}
+		       		<f:setPropertyActionListener target="#{cartaoDebitoLancamentosBBean.filtroCartao}" value="0" />
+		       </p:commandLink>
+		       
+		       <p:blockUI block="btnContinuar" trigger="btnContinuar" />	
+		       <p:commandLink  id="btnContinuar" styleClass="btn btn-default"  role="button" tabindex="3" 
+		       		action="#{cartaoDebitoLancamentosBBean.confirmarTelaFiltro}">#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.filtro.continuar']}</p:commandLink>
+		    </p:outputPanel>
+		</p:outputPanel>     
+        
+	</ui:define>
+</ui:composition>         

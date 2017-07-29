@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel id="painelSelecaoUsuario">
+			<p:remoteCommand autoRun="true"
+				actionListener="#{usuarioSecundarioSenhaBBean.validaMensagem}"
+				onstart="panel_block('painelSelecaoUsuario');"
+				oncomplete="panel_unblock('painelSelecaoUsuario');" />
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4><h:outputText value="#{msg['pages.administrativo.usuario.secundario.senhas.alterar']}" /></h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{!listaUsuario.isEmpty()}"
+				id="painelSelecao">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="table table-striped" >
+
+									<p:blockUI block="dataUsuarioSecundario"
+										trigger="dataUsuarioSecundario" />
+									<p:dataTable id="dataUsuarioSecundario" var="usuario"
+										value="#{usuarioSecundarioSenhaBBean.listaUsuario}"
+										selectionMode="single" rendered="#{!listaUsuario.isEmpty()}"
+										selection="#{usuarioSecundarioSenhaBBean.usuarioSelecionado}"
+										rowKey="#{usuario}">
+
+										<p:ajax event="rowSelect"
+											listener="#{usuarioSecundarioSenhaBBean.selecionarUsuario}" />
+
+										<p:column id="nomeLogon"
+											headerText="#{msg['pages.administrativo.usuario.secundario.senhas.acesso']}">
+											<h:outputText value="[#{usuario.nomeLogon}]" />
+										</p:column>
+										<p:column id="nomeUsuario"
+											headerText="#{msg['pages.administrativo.usuario.secundario.senhas.completo']}">
+											<h:outputText value="#{usuario.nomeUsuario}" />
+										</p:column>
+									</p:dataTable>
+
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row" rendered="#{listaUsuario.isEmpty()}">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5><h:outputText value="#{msg['pages.administrativo.usuario.secundario.senhas.listVazia']}" /></h5>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-12 text-right">
+
+					<p:commandButton id="btnVoltar"
+						styleClass="btn btn-default btn-cinza" role="button"
+						action="#{usuarioSecundarioSenhaBBean.voltarTelaSelecao}"
+						value="#{msg['page.btn.voltar']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<f:event type="preRenderView" listener="#{contaCorrenteConsultaSaldoBBean.acessoDireto()}" />
+		<ui:include src="/commons/crm/banner.xhtml" >
+			<ui:param name="idBanner"
+					  value="idBannerSaldo" />
+			<ui:param name="bannerDTO"
+					  value="#{campanhasCRMBBean.bannerSaldo}" />
+		</ui:include>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText
+							value="#{msg['page.conta.corrente.consulta.saldo.label.saldo.consulta']}" />
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-12 text-center bold">
+							<h:outputFormat
+								value="#{msg['page.conta.corrente.consulta.saldo.label.posicao.em']}">
+								<f:param
+									value=" #{contaCorrenteConsultaSaldoBBean.dataPosicaoFormated}" />
+							</h:outputFormat>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-12">
+							<ui:include
+								src="/pages/contaCorrente/consulta/saldo/detalheSaldo.xhtml">
+								<ui:param name="contaCorrenteSaldoDTO"
+									value="#{contaCorrenteConsultaSaldoBBean.contaCorrenteSaldoDTO}" />
+							</ui:include>
+
+							<br />
+							<br />
+							<br />
+							<br />
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6 vertical-align-bottom">
+											<c:forEach
+												items="#{contaCorrenteConsultaSaldoBBean.contaCorrenteSaldoDTO.componentesJuros}"
+												var="linha">
+												<h:outputText styleClass="font-normal"
+													value="#{linha.descricao}" />
+												<h:outputText styleClass="font-normal pull-right text-right"
+													value="#{linha.valor }" style="margin-right:30px;" />
+												<br />
+												<p:separator styleClass="hr-Dashed " />
+											</c:forEach>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 pull-right padding-right-35 vertical-align-bottom">
+											<c:forEach
+												items="#{contaCorrenteConsultaSaldoBBean.contaCorrenteSaldoDTO.componentesDatas}"
+												var="linha">
+												<h:outputText styleClass="font-normal"
+													value="#{linha.descricao}" />
+												<h:outputText styleClass="font-normal pull-right text-right "
+													value="#{linha.valor }" style="margin-right:30px;" />
+												<br />
+												<p:separator styleClass="hr-Dashed " />
+											</c:forEach>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:separator></p:separator>
+						</p:outputPanel>
+
+						<br />
+						<p:separator />
+
+					</p:outputPanel>
+					<p:outputPanel styleClass="space-t">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml"></ui:include>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink id="btnVoltar"
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{contaCorrenteConsultaSaldoBBean.voltarMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

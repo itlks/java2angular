@@ -1,0 +1,61 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b" id="idDadosExtPagtoGpsCodBarra_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosIntPagtoGpsCodBarra_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+			id="idOpRelDadosLblPagtoGpsCodBarra_#{posicaoLista}"/>
+		</p:outputPanel>	
+	
+	
+		<p:outputPanel styleClass="row" id="idOpRelCodBarraExtPagtoGpsCodBarra_#{posicaoLista}">				 		
+	 	            <p:outputPanel styleClass="col-xs-12" id="idOpRelCodBarraIntPagtoGpsCodBarra_#{posicaoLista}">					                
+	              <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoBarras']}" styleClass="space" 
+	              id="idOpRelCodBarraLblPagtoGpsCodBarra_#{posicaoLista}"/>
+	              <h:outputText value="${compHisParts[0]}"  id="idOpRelCodBarraTxtPagtoGpsCodBarra_#{posicaoLista}"/>
+	               </p:outputPanel>		                    
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row" id="idOpRelCodigoExtPagtoGpsCodBarra_#{posicaoLista}">				 		
+	 	            <p:outputPanel styleClass="col-xs-12" id="idOpRelCodigoIntPagtoGpsCodBarra_#{posicaoLista}">					                
+	              <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigo']}" styleClass="space" 
+	              id="idOpRelCodigoLblPagtoGpsCodBarra_#{posicaoLista}"/>
+	              <h:outputText value="${compHisParts[1]}"  id="idOpRelCodigoTxtPagtoGpsCodBarra_#{posicaoLista}"/>
+	               </p:outputPanel>		                    
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row" rendered="${compHisParts[2]} ne ''" id="idOpRelVencExtPagtoGpsCodBarra_#{posicaoLista}">				 		
+	          	<p:outputPanel styleClass="col-xs-12" id="idOpRelVencIntPagtoGpsCodBarra_#{posicaoLista}">					                
+	              <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.vencimento']}" styleClass="space" 
+	              id="idOpRelVencLblPagtoGpsCodBarra_#{posicaoLista}"/>
+	              <h:outputText value="${compHisParts[2]}"  id="idOpRelVencTxtPagtoGpsCodBarra_#{posicaoLista}"/>
+	            </p:outputPanel>		                    
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row" id="idOpRelValorExtPagtoGpsCodBarra_#{posicaoLista}">				 		
+	 	            <p:outputPanel styleClass="col-xs-12" id="idOpRelValorIntPagtoGpsCodBarra_#{posicaoLista}">					                
+	              <h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" 
+	              id="idOpRelValorLblPagtoGpsCodBarra_#{posicaoLista}"/>
+	              <h:outputText value="#{detalheParam.valor}"  id="idOpRelValorTxtPagtoGpsCodBarra_#{posicaoLista}"/>
+	               </p:outputPanel>		                    
+		</p:outputPanel>
+		
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPagtoGpsCodBarra_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPagtoGpsCodBarra_#{posicaoLista}">
+			<p:separator id="idSepaLinePagtoGpsCodBarra_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+
+</ui:fragment>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+	<ui:define name="content">
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		
+		<h:inputHidden value="#{pagamentosTributosMunicipaisIptuSPBBean.clientHash}" id="clientHash" partialSubmit="true"/>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							<strong><h:outputText value="Transação exclusiva para pagamento on-line do IPTU da Prefeitura do Município de São Paulo." /></strong>
+						</p>
+						
+						<p>
+							<h:outputText value="Serviço disponível somente em dias úteis, das 7h às 21h. No vencimento, o pagamento deverá ser efetuado até as 21h." />
+						</p>
+						
+						<p>
+							<h:outputText value="Os campos assinalados com * são de preenchimento obrigatório. Preencha cuidadosamente, pois os dados informados são de sua responsabilidade. " />
+						</p>
+						
+						<p>
+							<h:outputText value="Para mais informações, acesse o site da " />
+							<p:commandLink 	style="margin-left: 5px;"
+											oncomplete="window.open('http://portal.prefeitura.sp.gov.br/secretarias/financas/tributos/iptu/', '_blank')">
+								Prefeitura de São Paulo
+							</p:commandLink>
+						</p>
+						
+						<p>
+							<p:commandLink
+								actionListener="#{pagamentosTributosMunicipaisIptuSPBBean.initLimites}"
+								value="#{msg['pages.apelidos.gpsAviso.confira.limites']}">
+							</p:commandLink>
+						</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>  
+		<ui:include src="/pages/limites/limites.xhtml" />
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.label.informativo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>  
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">    
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel  value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.numero.contribuinte']}" />
+							   <p:inputText styleClass="form-control" value="#{pagamentosTributosMunicipaisIptuSPBBean.numContribuinte}"
+							   				onchange="if(!isNumberKey(event)){return false;}" onkeypress="if(!isNumberKey(event)){return false;}" maxlength="11"
+							   				id="umContribuinte_hash_1"/>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.ano.exercicio']}" />
+							   <p:inputText styleClass="form-control" value="#{pagamentosTributosMunicipaisIptuSPBBean.anoExercicio}"
+							   				onkeypress="if(!isNumberKey(event)){return false;}" maxlength="4" id="anoExercicio_hash_2"/>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+							   <h:outputLabel value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.numero.notificacao']}" />
+							   <p:inputText styleClass="form-control" value="#{pagamentosTributosMunicipaisIptuSPBBean.numNotificacao}" onkeypress="if(!isNumberKey(event)){return false;}" maxlength="2"/>
+							</p:outputPanel>                        
+																
+						</p:outputPanel>               
+					</p:outputPanel>   
+
+					<p:outputPanel styleClass="row" rendered="#{!pagamentosTributosMunicipaisIptuSPBBean.pagamentoApelidoExistente}">
+						<p:outputPanel styleClass="col-xs-12" />                    
+						  <p:separator />
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row" rendered="#{!pagamentosTributosMunicipaisIptuSPBBean.pagamentoApelidoExistente}">
+						<p:outputPanel styleClass="col-xs-12">
+						  
+							<p:outputPanel styleClass="checkbox col-xs-6 space-b">
+								
+							   <p:selectBooleanCheckbox value="#{pagamentosTributosMunicipaisIptuSPBBean.novoApelido}" onchange="atualizarPanelCadApelido();" id="checkBoxCadApelido"> </p:selectBooleanCheckbox>
+							   <h:outputLabel styleClass="checkbox-inline space-t space-b">
+									#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.label.informativo.cadastrar.contribuinte']}
+							   </h:outputLabel>	 
+							   						   
+							</p:outputPanel>
+							 
+							<p:outputPanel styleClass="col-xs-6 flex-align-v form-group" id="cadApelido" rendered="#{pagamentosTributosMunicipaisIptuSPBBean.novoApelido}">								
+								<p:outputPanel styleClass="col-xs-2">
+									<h:outputLabel >#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.label.apelido']}</h:outputLabel>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-xs-10 text-right">
+									<p:inputText styleClass="form-control" value="#{pagamentosTributosMunicipaisIptuSPBBean.apelido}" maxlength="20" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>                                                        
+					
+					<p:remoteCommand name="atualizarPanelCadApelido" update="@form"/>
+					
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>   
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+			   <p:commandLink styleClass="btn btn-default btn-cinza" action="#{pagamentosTributosMunicipaisIptuSPBBean.voltarParaMenu}" role="button">#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.btn.voltar']}</p:commandLink>
+			   <p:commandLink styleClass="btn btn-default" action="#{pagamentosTributosMunicipaisIptuSPBBean.goPaginaEscolha}" role="button"
+			   					value="#{msg['page.pagamentos.tributos.municipais.iptu.sp.preenchimento.btn.continuar']}" onclick="enviarHash()"/>
+			</p:outputPanel>
+		</p:outputPanel> 
+	       
+	</ui:define>
+</ui:composition>         

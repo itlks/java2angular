@@ -1,0 +1,57 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	<c:set var="compPeriodoDia" value="${fn:substring(compHisParts[2],7,9)}" />
+	<c:set var="compPeriodoMes" value="${fn:substring(compHisParts[2],5,7)}" /> 
+	<c:set var="compPeriodoAno" value="${fn:substring(compHisParts[2],1,5)}" />
+	
+	<p:outputPanel styleClass="row space-b" id="idExternoPgoGareDarf_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosPgoGareDarf_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosPgoGareDarfLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCpfCnpjPgoGareDarf_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.cpfCnpj']}" styleClass="space" 
+			id="idCpfCnpjLblPgoGareDarf_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0]}" converter="converterCpfCnpj" id="idCpfCnpjTxtPgoGareDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCodPgoGareDarf_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigo']}" styleClass="space" 
+			id="idCodLblPgoGareDarf_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" id="idCodTxtPgoGareDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idVencPgoGareDarf_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.vencimento']}" rendered="${compHisParts[1] ne '6106'}" styleClass="space" 
+			id="idVencLblPgoGareDarf_#{posicaoLista}"/>
+			<h:outputText value="${compPeriodoDia.concat('/').concat(compPeriodoMes).concat('/').concat(compPeriodoAno)}" id="idVencTxtPgoGareDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" rendered="${compHisParts[1] eq '6106'}" id="idPerPgoGareDarf_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.percentual']}" styleClass="space" id="idPerLblPgoGareDarf_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2] / 100}" id="idPerTxtPgoGareDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idValorPgoGareDarf_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" id="idValorLblPgoGareDarf_#{posicaoLista}"/>
+			<h:outputText value="#{detalheParam.valor}" id="idValorTxtPgoGareDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPgoGareDarf_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPgoGareDarf_#{posicaoLista}">
+			<p:separator id="idSepaLinePgoGareDarf_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+
+</ui:fragment>	

@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+	
+	<p:dialog id="popupBanco" closable="true" width="900px" height="520px" position="center" header="#{msg['pages.transferencia.popup.listarbancos']}" visible="#{transferenciaBBean.popupVisivel}" styleClass="modal-box box-shadow" modal="true" widgetVar="painelPopupListarBancosVar" >
+			
+			<div class="popover-content">
+				<p:outputPanel styleClass="titulo-painel">
+		
+						<p:dataTable id="listarBa" widgetVar="listarBa"
+						var="bancos"  focus="globalFilter"
+						value="#{transferenciaBBean.listarBancos}" emptyMessage="#{msg['page.transferencias.transferir.naoExistemBancos']}"
+						selection="#{transferenciaBBean.linhaSelecionada}"
+						rowKey="#{bancos}" selectionMode="single" scrollable="true" scrollHeight="300" >
+						
+								 <f:facet name="header">
+						            <p:outputPanel styleClass="text-left" >
+						                <h:outputText value="Busca: " />
+						                <p:inputText id="globalFilter" onkeyup="PF('listarBa').filter()" style="width:150px" />
+						            </p:outputPanel>
+						        </f:facet>
+
+								<p:ajax event="rowSelect" listener="#{transferenciaBBean.onChangeBancoSelecionado}" update="@form" />
+						
+								<p:column sortBy="OERIDESCRICAOO" filterBy="OERIDESCRICAOO" filterStyle="display:none" filterMatchMode="contains" headerText="#{msg['pages.transferencia.popup.nomeBanco']}" style="width:2%;" >
+									<h:outputText value="#{bancos.OERIDESCRICAOO}" />
+								</p:column>
+								
+								<p:column sortBy="OERIBANCOPESQ" filterBy="OERIBANCOPESQ" filterStyle="display:none" filterMatchMode="contains" headerText="#{msg['pages.transferencia.popup.numero']}" style="width:3%;" >
+									<h:outputText value="#{bancos.OERIBANCOPESQ}" />
+								</p:column>
+								
+								<p:column sortBy="OERIISPBPESQ" filterBy="OERIISPBPESQ" filterStyle="display:none" filterMatchMode="contains" headerText="#{msg['pages.transferencia.popup.codigoIspb']}" style="width:3%;" >
+									<h:outputText value="#{bancos.OERIISPBPESQ}" />
+								</p:column>
+											
+						</p:dataTable>
+				
+				</p:outputPanel>
+			</div>
+			
+	</p:dialog>
+    
+</ui:composition>

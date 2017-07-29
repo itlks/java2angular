@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	   
+	   <!-- Gerar nova referencia de operação inicio -->
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+	   <!--  Gerar nova referencia de operação  fim -->
+		
+					<p:outputPanel styleClass="row space-b">
+		             	<p:outputPanel styleClass="col-xs-12 space-b">
+							<h5 class="bold">Manutenção de Favorecidos </h5>
+						</p:outputPanel>
+					 </p:outputPanel>
+					 
+					 <ui:include src="/pages/transferencias/transferencias/infoContaDestinoManut.xhtml" />
+			
+			       	
+			       	<p:outputPanel styleClass="col-md-12 text-right">
+						<p:commandButton id="btnVoltar2"
+							action="#{transferenciaFavorecidosBBean.voltarEmPreenchimento}"
+							styleClass="btn btn-default btn-cinza" role="button"
+							value="#{msg['page.btn.voltar']}" />
+							
+						<p:commandButton id="btnAlterar" 
+							action="#{transferenciaFavorecidosBBean.alterarFavorecido_confirma}"
+							role="button" value="#{msg['page.btn.alterar']}"
+							styleClass="btn btn-default" />
+						<p:defaultCommand target="btnAlterar" />
+		
+						<p:commandButton id="btnExcluir2" 
+							action="#{transferenciaFavorecidosBBean.excluirFavorecido_confirma}"
+							role="button" value="#{msg['page.btn.excluir']}"
+							styleClass="btn btn-default" />
+						<p:defaultCommand target="btnExcluir2" />
+					</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

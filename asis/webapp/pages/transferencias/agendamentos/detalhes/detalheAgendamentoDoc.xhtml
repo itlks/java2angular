@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:outputLabel styleClass="space-b" value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+  
+	<p:outputPanel styleClass="row">
+			 
+		<p:outputPanel styleClass="col-xs-12"
+			rendered="#{not empty agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento
+			 			and agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento.tipo eq 'S'}">
+			<h:outputLabel for="tipoRecorrenteDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipo']}" />
+			<h:outputText id="tipoRecorrenteDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento.descricao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12" rendered="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoPessoa eq 'F'}">
+			<h:outputLabel for="tipoDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipoDOC']}" />
+			<h:outputText id="tipoDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoDOC}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="numeroBancoDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.numeroBanco']}" />
+			<h:outputText id="numeroBancoDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.bancoDestino}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="agenciaDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.agencia']}" />
+			<h:outputText id="agenciaDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.agenciaDestino}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.conta']}" />
+			<h:outputText id="contaDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaDestino}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="favorecidoDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.favorecido']}" />
+			<h:outputText id="favorecidoDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.favorecido}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="finalidadeDoc" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.finalidade']}" />
+			<h:outputText id="finalidadeDoc"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.finalidadeDOC.descricao}" />
+		</p:outputPanel>
+			 
+	</p:outputPanel>
+			
+</ui:composition>

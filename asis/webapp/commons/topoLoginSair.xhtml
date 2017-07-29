@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:outputPanel styleClass="topo topo-login">
+		<p:outputPanel styleClass="logo">
+			<p:graphicImage value="/images/santander-topo.png" alt="logo login" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="titulo-login">
+
+			<p:outputLabel value="#{ msg['page.home.label.titulo.sistema'] }"/>
+	
+			<p:commandLink value="#{ msg['page.home.label.sair'] }" title="Sair" partialSubmit="true" action="#{mensagemBBean.sairInternetBanking}"/>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="quebra"/>
+		
+	</p:outputPanel>
+
+
+</ui:composition>

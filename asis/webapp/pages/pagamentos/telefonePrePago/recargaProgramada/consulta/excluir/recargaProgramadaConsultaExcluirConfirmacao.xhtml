@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+        <!-- Titulo Confirmação inicio -->
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.confirmacao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- Titulo Confirmação fim  -->
+
+		<p:outputPanel styleClass="row ">
+			 <p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+			        <p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+                      <!-- Label inicio -->
+	                 <p:outputPanel styleClass="col-xs-3">
+	                        <p> <h:outputLabel value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.empresa']}"></h:outputLabel></p>
+	                 	    <p> <h:outputLabel value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.periodicidade']}"></h:outputLabel></p>
+	                 	    <p> <h:outputLabel value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.ntelefone']}"></h:outputLabel></p>
+	                        <p> <h:outputLabel value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.dtinicio']}"></h:outputLabel></p>
+	                        <p> <h:outputLabel value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.dtfim']}"></h:outputLabel></p>
+	                        <p> <h:outputLabel value="#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.incluir.valor']}"></h:outputLabel></p>
+	                 </p:outputPanel>
+	                  <!-- Label fim -->
+	                 
+	                 <!-- Values inicio -->
+	                 <p:outputPanel styleClass="col-xs-3">
+	                 		<p><h:outputLabel value="CLARO SP DDD 11"></h:outputLabel></p>
+						    <p><h:outputLabel value="Mensal"></h:outputLabel></p>
+						    <p><h:outputLabel value="91891-9198"></h:outputLabel></p>
+					        <p><h:outputLabel value="01/09/2016"></h:outputLabel></p>
+						    <p><h:outputLabel value="01/09/2017"></h:outputLabel></p>
+						    <p><h:outputLabel value="R$17,00"></h:outputLabel></p>
+	                 </p:outputPanel>
+	                 <!-- Values fim-->
+	                 
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+                    <!-- Dispositivos de segurança inicio -->
+		         <p:outputPanel>
+			          <ui:include src="/commons/inicializaDL.xhtml" />
+			          <ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		        </p:outputPanel>
+		            <!-- Dispositivos de segurança fim -->
+		            
+		     </p:outputPanel>
+		 </p:outputPanel>
+		
+		<!-- Ações da pagina inicio-->
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink
+					action="#{recargaProgramadaIncluirBBean.voltarEmPreenchimento}"
+					styleClass="btn btn-default btn-cinza" role="button">
+			      	#{msg['page.btn.voltar']}
+				</p:commandLink>
+
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandLink id="btnConfirmar" onclick="encryptSecureDL();"
+					action="#{recargaProgramadaIncluirBBean.continuarEmConfirmacao}"
+					role="button" value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" />
+			</p:outputPanel>
+		</p:outputPanel>
+	   <!-- Ações da pagina fim-->
+
+	</ui:define>
+</ui:composition>

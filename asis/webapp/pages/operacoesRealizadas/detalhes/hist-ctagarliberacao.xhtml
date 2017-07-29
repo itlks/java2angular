@@ -1,0 +1,49 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"/>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valorliberado']}" styleClass="space"/>
+				<h:outputText value="${compHisParts[4]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recargaHistorico.dataSolicitacao']}" styleClass="space"/>
+				<h:outputText value="${compHisParts[0]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.bancovinculado']}" styleClass="space"/>
+				<h:outputText value="${compHisParts[1]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.agenciavinculada']}" styleClass="space"/>
+				<h:outputText value="${compHisParts[2]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.contratovinculado']}" styleClass="space"/>
+				<h:outputText value="${compHisParts[3]}" />
+			</p:outputPanel>
+	</p:outputPanel>
+			
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

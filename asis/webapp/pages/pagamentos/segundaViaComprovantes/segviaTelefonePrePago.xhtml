@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+        <p:outputPanel styleClass="row">
+          <p:outputPanel styleClass="col-md-12 no-print no-visible">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">                               
+                <i class="fa fa-exclamation-circle"></i>
+                <span><p>#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.paragrafo1']}</p>
+                <p>#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.paragrafo2']}</p></span>
+            </p:outputPanel>  
+          </p:outputPanel>                        
+        </p:outputPanel>            
+
+       <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.subtitulo1']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+       </p:outputPanel>   
+
+       <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow no-margin-bottom">
+               		<p:outputPanel styleClass="row space-b">
+                        <p:outputPanel styleClass="col-xs-6"> 
+                        <h:outputLabel styleClass="space">
+                           <strong>
+                           		#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.tipoconsulta']}
+                           </strong> 
+                        </h:outputLabel>
+                        <h:outputText value="#{msg['page.segunda.via.comprovantes.telefoneprepago.titulo']}"/>
+                        </p:outputPanel>
+                         <p:outputPanel styleClass="col-xs-6 text-right"> 
+                         <h:outputLabel styleClass="space">
+                            <strong>#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.periodo']} </strong></h:outputLabel>
+                            #{msg['page.segunda.via.comprovantes.cartaocredito.consulta.periodo.de']}
+                            <h:outputLabel styleClass="space" value="#{segundaViaComprovanteConsultarBBean.periodoInicialFormat}"/> 
+                            <h:outputText styleClass="space" value="#{msg['page.segunda.via.comprovantes.cartaocredito.consulta.periodo.ate']}"/>
+                            <h:outputLabel value="#{segundaViaComprovanteConsultarBBean.periodoFinalFormat}"/>
+                        </p:outputPanel>
+                   	</p:outputPanel>
+                        
+					<p:outputPanel styleClass="row ">
+                        
+                        <p:outputPanel
+								rendered="#{not empty segundaViaComprovanteTelefonePrePagoBBean.listaSegViaCommpTelefonePrePago}">
+                        <p:outputPanel styleClass="col-md-12 space-t text-right no-print no-visible"> 
+                            <p:outputPanel styleClass="row text-right">
+                            <ui:include src="/commons/pdf/pdfButtonsSegVia.xhtml">
+								<ui:param name="excel" value="segViaComprTelefonePrePagoTable" />
+								<ui:param name="imprimir" value="false" />
+								<ui:param name="enviarEmail" value="false" />
+								<ui:param name="exibirShadow" value="false"/>
+							</ui:include>
+                            </p:outputPanel>
+                        
+                        </p:outputPanel>                       
+                        </p:outputPanel>                        
+                    </p:outputPanel> 
+                    <br/>
+				
+                    <p:outputPanel styleClass="row ">
+                        <p:outputPanel styleClass="col-md-12 table-cursor-default"> 
+								<p:dataTable id="segViaComprTelefonePrePagoTable"									
+											 value="#{segundaViaComprovanteTelefonePrePagoBBean.listaSegViaCommpTelefonePrePago}"
+											 selection="#{segundaViaComprovanteTelefonePrePagoBBean.listaSegViaCommpTelefonePrePagoSelecionados}"
+											 var="linha" 
+											 rowKey="#{linha}"
+											 emptyMessage="#{msg['page.segunda.via.comprovantes.cartaocredito.tabela.vazia.msg']}">
+
+																		
+									<p:column selectionMode="multiple" styleClass="no-visible" exportable="false" />
+																
+									<p:column styleClass="col-md-2">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.header.data']}" />
+										</f:facet>
+										<h:outputText value="#{linha.dataPagamento}" />
+									</p:column>
+									<p:column styleClass="col-md-3">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.header.descricao']}" />
+										</f:facet>
+										<h:outputText value="#{linha.operadora}" />
+									</p:column>
+									<p:column styleClass="text-right">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.header.valor']}" />
+										</f:facet>
+											<h:outputText value="#{linha.valorPago}">
+												<f:convertNumber type="currency" currencySymbol="" />
+											</h:outputText>											
+									</p:column>
+									<p:column styleClass="col-md-3">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.segunda.via.comprovantes.telefoneprepago.consulta.header.canal']}" />
+										</f:facet>
+										<h:outputText value="#{linha.canalPagamentoCaseSensitive}" />
+
+									</p:column>
+								</p:dataTable>
+
+                            
+                           
+                        </p:outputPanel>
+                    </p:outputPanel>                                                           
+                </p:outputPanel>
+                
+                
+
+            </p:outputPanel>
+        </p:outputPanel>
+			               
+	    
+        <p:outputPanel styleClass="row space-t">
+            <p:outputPanel styleClass="col-md-12 text-right no-print no-visible">
+               <p:commandLink styleClass="btn btn-default btn-cinza" 
+               				  action="#{segundaViaComprovanteTelefonePrePagoBBean.voltarSegViaComprovantePesquisa}" 
+               				  role="button">#{msg['page.btn.voltar']}
+               </p:commandLink>
+
+	        	<p:commandLink styleClass="btn btn-default"
+	        				action="#{segundaViaComprovanteTelefonePrePagoBBean.carregarDetalheSegundaViaTelefonePrePago}"
+	       				 	role="button" value="#{msg['page.btn.visualizar.comprovantes']}">
+	        	</p:commandLink>
+	        	
+            </p:outputPanel>
+        </p:outputPanel>
+                
+  
+                
+	</ui:define>
+</ui:composition>

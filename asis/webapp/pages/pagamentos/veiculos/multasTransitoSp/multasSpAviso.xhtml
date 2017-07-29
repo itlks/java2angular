@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="panelMultaVeiculos"
+		styleClass="aviso-interno-blocos alert-information box-shadow">
+		<i class="fa fa-exclamation-circle"></i>
+		<span>
+			
+			<strong>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.transacaoExclusiva']}</strong>
+			<br />
+			<br />
+			#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.pagamentosEfetuados1']}
+			<br />
+			#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.pagamentosEfetuados2']}
+			<br />
+			#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.pagamentosEfetuados3']}
+			<br />
+			#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.pagamentosEfetuados4']}
+			
+			<br />
+			<br />
+               	<p>
+               		<ui:include src="/pages/generico/limites2.xhtml">#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.9']} </ui:include>															
+				</p>
+				<p><strong>						
+					<p:commandLink 
+						actionListener="#{multasVeiculosBBean.initLimites}"
+						value="#{msg['page.pagamentos.veiculossp.ipva.listarenavam.mensagem.9']}">
+					</p:commandLink>
+					</strong>
+				</p>
+			
+			<span class="space-b" />
+			<p:separator />
+			<p>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.aquiVocePode']}</p>
+			<p><strong>#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.aposCadastramento']}</strong></p>
+			<br />
+			<p><strong>
+				<p:commandLink action="#{multasVeiculosBBean.initRenavam}">
+					<h:outputText
+						value="#{msg['pages.pagamentos.veiculos.multas.TransitoSp.multasVeiculosRenavamOnline.incluirNovoRenavam']}" />
+				</p:commandLink>
+			   </strong>
+			</p>
+		</span>
+	</p:outputPanel>
+</ui:composition>

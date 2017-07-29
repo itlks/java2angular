@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<h:outputText
+						value="
+					#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.aviso']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText class="h4"
+						value="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.escolhaOPeriodo']}" />
+					<br />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="PanelPreenchimento" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel
+								styleClass="col-xs-4 no-padding no-visible">
+								<p:outputPanel styleClass="form-group">
+									<h:outputText
+										value="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.de']}" />
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar id="dataInicial"
+											value="#{consultaSaldoPeriodoBBean.dto.dataInicial}"
+											onkeyup="mascaraData(this, event)" tabindex="1"
+											converter="dateStringConverter" pattern="dd/MM/yyyy"
+											maxlength="10">
+											<p:ajax event="dateSelect" update="PanelPreenchimento"
+												listener="#{consultaSaldoPeriodoBBean.esconderSaldo}"
+												process="@all" />
+										</p:calendar>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4 no-visible">
+								<p:outputPanel styleClass="form-group">
+									<h:outputText
+										value="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.ate']}" />
+									<p:outputPanel styleClass="icon-data-input">
+										<i class="fa fa-calendar"></i>
+										<p:calendar id="dataFinal"
+											value="#{consultaSaldoPeriodoBBean.dto.dataFinal}"
+											onkeyup="mascaraData(this, event)" tabindex="2"
+											converter="dateStringConverter" pattern="dd/MM/yyyy"
+											maxlength="10">
+											<p:ajax event="dateSelect" update="PanelPreenchimento"
+												listener="#{consultaSaldoPeriodoBBean.esconderSaldo}"
+												process="@all" />
+										</p:calendar>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-4 no-padding no-visible">
+								<br />
+								<p:commandButton id="btnExibir" styleClass="btn btn-default"
+									tabindex="3" role="button"
+									value="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.exibir']}">
+									<p:ajax update="@form"
+										listener="#{consultaSaldoPeriodoBBean.buscarSaldoPeriodo}"
+										process="@all" />
+								</p:commandButton>
+								<p:blockUI block="btnExibir" trigger="btnExibir" />
+								<p:defaultCommand target="btnExibir" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<p:outputPanel id="saldo" styleClass="row">
+						<p:outputPanel styleClass="col-xs-12" rendered="#{consultaSaldoPeriodoBBean.exibeDetalhes}">
+							<h:outputLabel value="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.periodo']} " />
+
+							<h:outputText class="bold" value=" #{consultaSaldoPeriodoBBean.dto.dataInicialPesquisada} a " />
+							<h:outputLabel value=" #{consultaSaldoPeriodoBBean.dto.dataFinalPesquisada}" />
+
+							<h:outputText styleClass="pull-right bold" value="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.dataHora']}" />
+							<h:outputText value=" #{consultaSaldoPeriodoBBean.dto.dataHoraPesquisa}" />
+
+							<p:outputPanel styleClass="table-responsive table table-striped printFont">
+								<p:dataTable id="tabela1" var="tabela"
+									value="#{consultaSaldoPeriodoBBean.listarSaldoRS}"
+									styleClass="cancelarModal">
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.dia']}">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.formatarDataDDMMYYYY(tabela.strTSOEFECHA)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.saldoCC']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSALDOCONTA)} #{consultaSaldoPeriodoBBean.valorMonetario(strtabela.TSOESALDOCONTA)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.saldoBloqueioDia']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSLDBLOQDIA)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOESLDBLOQDIA)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.saldoBloqueado']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSLDBLOQ)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOESLDBLOQ)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.saldoBloqueioJudicial']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSLDBLOQJUD)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOESLDBLOQJUD)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.provisaoDeEncargos']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLPROVENC)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOEPROVENC)}" />
+									</p:column>
+									<p:column
+										headerText="Investimento com Resgate Automático"
+										styleClass="text-right" width="10%">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSLDFNDRESGAUT)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOESLDFNDRESGAUT)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.saldoDisponvel']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSLDDISPO)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOESLDDISPO)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.limiteChequeEspecial']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLLIMCHQESP)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOELIMCHQESPEC)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.limiteChequeInv']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLLIMCHQINVEST)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOELIMCHQINVEST)}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['pages.contaCorrente.consulta.saldo.contaCorrenteConsultaSaldoPeriodo.saldoDispTotal']}"
+										styleClass="text-right">
+										<h:outputText
+											value="#{consultaSaldoPeriodoBBean.sinal(tabela.strTSOESNLSLDDISPTOT)} #{consultaSaldoPeriodoBBean.valorMonetario(tabela.strTSOESLDDISPTOT)}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel rendered="#{consultaSaldoPeriodoBBean.exibeDetalhes}">
+						<p:outputPanel >
+							<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel rendered="#{consultaSaldoPeriodoBBean.exibeDetalhes}">
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="space-t" rendered="#{!consultaSaldoPeriodoBBean.exibeDetalhes}" />
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink 
+					styleClass="btn btn-default btn-cinza no-visible"
+					action="#{consultaSaldoPeriodoBBean.voltarMenu}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

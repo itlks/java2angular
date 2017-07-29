@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.titulo.consulta.perfil']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<span> 
+										<p:outputLabel for="nomePerfil"
+											value="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.nome.perfil']}" />
+										<h:outputText id="nomePerfil"> #{perfilAutorizacaoConsultaBBean.perfilSelecionado.nomePerfilAutorizacao}</h:outputText>
+									</span>
+									<br />
+									<span> 
+										<p:outputLabel for="descricaoPerfil"
+											value="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.descricao']}" />
+										<h:outputText id="descricaoPerfil"> #{perfilAutorizacaoConsultaBBean.perfilSelecionado.descricaoPerfilAutorizacao}</h:outputText>
+									</span>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12 text-right">
+									<p:outputLabel
+										value="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.usuarios.perfil']}" />
+									<br/>
+									<h:outputText value="> " style="color: red;" />
+									<p:commandLink id="linkConsultarPerfis" value="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.consultar.usuarios']}"
+										action="#{perfilAutorizacaoConsultaBBean.selecionouListaPerfilConfirmacao}" />
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row space-t">
+								<p:outputPanel styleClass="col-xs-12">
+									<ui:repeat var="servico"
+										value="#{perfilAutorizacaoConsultaBBean.listaServicos}">
+										<h5>
+											<p:outputLabel value="#{servico.nomeServico} " />
+										</h5>
+										<p:outputPanel styleClass="row">
+											<p:outputPanel	styleClass="col-xs-12">
+												<p:outputPanel	styleClass="table table-striped page-break-all-in page-break-all-head-in">
+											<p:dataTable var="trans" value="#{servico.transacoes}">
+	
+												<p:column width="50%"
+													headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.transacao']}">
+													<h:outputText value="#{trans.nomeTransacao}" />
+												</p:column>
+	
+												<p:column width="10%"
+													headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.qtd.ass']}">
+													<h:outputText value="#{trans.qtdAssinaturas}" />
+												</p:column>
+
+												<p:column width="20%"
+													headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.valor']}">
+													<h:outputText value="#{trans.idGrupoServico == 1 ? '--' : trans.idGrupoServico == 100 ? '--' : trans.idGrupoServico == 650 ? '--' : trans.idGrupoServico == 750 ? '--' : trans.valorAlcada}">
+														<f:convertNumber minFractionDigits="2"
+															maxFractionDigits="2" />
+													</h:outputText>
+												</p:column>
+	
+												<p:column width="20%"
+													headerText="#{msg['page.administrativo.perfilAutorizacao.consultarConfirmacao.coluna.limite.diario']}">
+													<h:outputText value="#{trans.idGrupoServico == 300 ? trans.valorDiario : trans.idGrupoServico == 49 ? trans.valorDiario : trans.idGrupoServico == 83 ? trans.valorDiario : '--'}">
+														<f:convertNumber minFractionDigits="2"
+															maxFractionDigits="2" />
+													</h:outputText>
+												</p:column>
+	
+											</p:dataTable>
+											</p:outputPanel>
+										</p:outputPanel>
+										</p:outputPanel>
+										
+										
+										
+									</ui:repeat>
+								</p:outputPanel>
+							</p:outputPanel>	
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-t">
+		                <p:outputPanel styleClass="col-xs-12">
+		                    <p:separator />
+		                </p:outputPanel>
+		            </p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include  src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza" id="btnVoltar"
+					role="button" value="#{msg['page.btn.voltar']}"
+					action="#{perfilAutorizacaoConsultaBBean.voltarParaSelecao}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

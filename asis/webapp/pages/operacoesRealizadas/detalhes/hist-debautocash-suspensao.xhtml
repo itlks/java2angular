@@ -1,0 +1,58 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"/>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Empresa Conveniada:" styleClass="space"/>
+				
+					<h:outputText value="${compHisParts[5]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Identificador:" styleClass="space"/>
+				
+					<h:outputText value="${compHisParts[7]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Início da Suspensão:" styleClass="space"/>
+				
+					<h:outputText value="${compHisParts[11]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Término da Suspensão:" styleClass="space"/>
+				
+					<h:outputText value="${compHisParts[12]}" />
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel value="Forma de Pagamento:" styleClass="space"/>
+				
+					<h:outputText value="Conta Corrente" rendered="${compHisParts[14] eq 'CB'}" />
+					<h:outputText value="Cartão de crédito - " rendered="${compHisParts[14] ne 'CB'}" />
+					<h:outputText value="${compHisParts[42]}" rendered="${compHisParts[14] ne 'CB'}" />
+					<h:outputText value=" XXXX.XXXX.XXXX." rendered="${compHisParts[14] ne 'CB'}" />
+					<h:outputText value="Conta Corrente" rendered="${compHisParts[14] eq ''}" />
+			</p:outputPanel>				
+	</p:outputPanel>
+			
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

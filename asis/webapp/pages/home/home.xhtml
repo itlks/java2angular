@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
+                
+                
+   <ui:define name="content">
+   		<ui:include src="/commons/crmHome.xhtml"/>
+   		<p:remoteCommand autoRun="true" name="habilitarCampanha" action="#{campanhasCRMBBean.habilitarCampanha}" />
+		<!-- alerta -->
+		<p:outputPanel styleClass="alerta">
+			<i class="fa fa-exclamation-circle"></i>
+			<span>Lorem ipsum dolor sit amet, consectetuer adipiscing
+				elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+				magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+				nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
+				ex ea commodo consequat. </span>
+			<p:outputPanel styleClass="fechar-alerta">
+				<p:commandLink href="#">
+					<p:graphicImage value="/images/fechar.png" alt=""/>
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+          <!-- alerta fim -->
+        <p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-4">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow homeBlock">
+					<p:outputPanel styleClass="titulo-painel titulo-bloco-home">
+						<h4>Saldo</h4>
+					</p:outputPanel>
+					<p:outputPanel styleClass="conteudo-painel">
+						<table class="table">
+							<thead>
+								<tr>
+									<td>#{msg['pages.painelSecundario.saldo.conta']}</td>
+									<td>R$ #{homeBBean.saldos.saldoContaCorrente}</td>
+								</tr>
+								<tr>
+									<td>#{msg['pages.painelSecundario.saldo.b']} #{msg['pages.painelSecundario.saldo.bloqueado']}</td>
+									<td>R$ #{homeBBean.saldos.saldoBloqueado}</td>
+								</tr>
+								<tr>
+									<td>#{msg['pages.painelSecundario.saldo.c']} #{msg['pages.painelSecundario.saldo.provisoes']}</td>
+									<td>R$ #{homeBBean.saldos.previsaoEncargos}</td>
+								</tr>
+								<tr>
+									<td>#{msg['pages.painelSecundario.saldo.disponivel']}</td>
+									<td>R$ #{homeBBean.saldos.saldoDisponivel}</td>
+								</tr>
+							</thead>
+						</table>
+					</p:outputPanel>
+					<p:outputPanel styleClass="rodape-painel text-right">
+						<p:commandLink styleClass="btn btn-default" href="#" role="button"
+							value="Ver extrato" />
+					</p:outputPanel>					
+				</p:outputPanel>
+				<!-- titulo blocos fim -->
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow homeBlock">
+					<p:outputPanel styleClass="titulo-painel titulo-bloco-home">
+						<h4>Atendimento</h4>
+					</p:outputPanel>
+					<p:outputPanel styleClass="conteudo-painel">
+						<ul>
+							<li><strong>Central de atendimento Santander Empresarial</strong></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</p:outputPanel>
+				</p:outputPanel>
+				<!-- titulo blocos fim -->
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow homeBlock">
+					<p:outputPanel styleClass="titulo-painel titulo-bloco-home">
+						<h4>Autorizações</h4>
+					</p:outputPanel>
+					<p:outputPanel styleClass="conteudo-painel">
+						<ul class="autorizacao">
+							<li><strong>Pagamento a fornecedores</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+							<li style="margin-right: 0;"><strong>Transferência</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+							<li><strong>Folha de pagamento</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+							<li style="margin-right: 0;"><strong>Administrativo</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+						</ul>
+						<p:outputPanel styleClass="quebra"></p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="rodape-painel text-right">
+						<p:commandLink styleClass="btn btn-default" href="#" role="button" value="Ver pendências" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<!-- titulo blocos fim -->
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow homeBlock">
+					<p:outputPanel styleClass="titulo-painel titulo-bloco-home">
+						<h4>Autorizações</h4>
+					</p:outputPanel>
+					<p:outputPanel styleClass="conteudo-painel">
+						<ul class="autorizacao">
+							<li><strong>Pagamento a fornecedores</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+							<li style="margin-right: 0;"><strong>Transferência</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+							<li><strong>Folha de pagamento</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+							<li style="margin-right: 0;"><strong>Administrativo</strong>
+								<p>pendências: 5</p>
+								<p>Valor: R$ 12.453,99</p></li>
+						</ul>
+						<p:outputPanel styleClass="quebra" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="rodape-painel text-right">
+						<p:commandLink styleClass="btn btn-default" href="#" role="button" value="Ver pendências" />
+					</p:outputPanel>
+				</p:outputPanel>
+				<!-- titulo blocos fim -->
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow homeBlock">
+					<p:outputPanel styleClass="titulo-painel titulo-bloco-home">
+						<h4>Favoritos</h4>
+					</p:outputPanel>
+					<p:outputPanel styleClass="conteudo-painel conteudo-painel-altura-total">
+						<ul class="lista-favoritos">
+							<li class="titulo-favoritos">Conta corrente</li>
+							<li><p:commandLink href="#" value="Saldo" /></li>
+							<li><p:commandLink href="#" value="Extrato" /></li>
+						</ul>
+						<ul class="lista-favoritos">
+							<li class="titulo-favoritos">Pagamentos</li>
+							<li><p:commandLink href="#" value="Água" /></li>
+							<li><p:commandLink href="#" value="Gás" /></li>
+							<li><p:commandLink href="#" value="ISS/TFA/TFE/TLIF SP" /></li>
+						</ul>
+						<ul class="lista-favoritos">
+							<li class="titulo-favoritos">Transferência</li>
+							<li><p:commandLink href="#" value="Transferir" /></li>
+							<li><p:commandLink href="#" value="Entre contas Santander" /></li>
+						</ul>
+						<ul class="lista-favoritos">
+							<li class="titulo-favoritos">Conta corrente</li>
+							<li><p:commandLink href="#" value="Saldo" /></li>
+							<li><p:commandLink href="#" value="Extrato" /></li>
+						</ul>
+						<ul class="lista-favoritos">
+							<li class="titulo-favoritos">Conta corrente</li>
+							<li><p:commandLink href="#" value="Saldo" /></li>
+							<li><p:commandLink href="#" value="Extrato" /></li>
+						</ul>
+						<ul class="lista-favoritos">
+							<li class="titulo-favoritos">Conta corrente</li>
+							<li><p:commandLink href="#" value="Saldo" /></li>
+							<li><p:commandLink href="#" value="Extrato" /></li>
+						</ul>
+					</p:outputPanel>
+					<p:outputPanel styleClass="rodape-painel text-right">
+						<h:commandButton id="btnAlterar" styleClass="btn btn-default"  action="#{acessoRapidoBBean.goAcessoRapidoConfiguracao}" role="button" value="Alterar" />
+					</p:outputPanel>
+					
+
+				</p:outputPanel>
+				<!-- titulo blocos fim -->
+			</p:outputPanel>
+		</p:outputPanel>
+
+								
+
+	</ui:define>
+						
+
+</ui:composition> 

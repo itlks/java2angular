@@ -1,0 +1,31 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<p:outputPanel styleClass="row space-b" id="idExternoCancelaLance_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosCancelaLance_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosCancelaLanceLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNumeroOperacaoCancelaLance_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroOperacao']}"
+							styleClass="space" id="idNumeroOperacaoLblCancelaLance_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" id="idNumeroOperacaoTxtCancelaLance_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+			
+	<p:outputPanel styleClass="row space-b" id="idSeparatorApiCad_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepApiCad_#{posicaoLista}">
+			<p:separator id="separatorApiCad_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

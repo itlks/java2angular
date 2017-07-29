@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/perguntaRespostaClassico.xhtml" />
+		
+		<script type="text/javascript" language="javascript">
+			jQuery(window).load(function() {
+				preencherPerguntaAlterar();
+			});
+		</script>
+		
+		<p:remoteCommand name="preencherPerguntaAlterar" action="#{assinaturaEletronicaAlterarBBean.preencherPergunta}" />
+
+		<h:inputHidden id="usuario" partialSubmit="true"
+			value="#{assinaturaEletronicaAlterarBBean.session.nomeUsuarioLogado}" />
+
+		<h:inputHidden id="hashAcesso" partialSubmit="true"
+			value="#{assinaturaEletronicaAlterarBBean.session.hashSenhaEletronica}" />
+
+		<h:inputHidden id="hashAcessoNovo" partialSubmit="true"
+			value="#{assinaturaEletronicaAlterarBBean.session.hashSenhaEletronicaNova}" />
+
+		<h:inputHidden id="hashResposta" partialSubmit="true"
+			value="#{assinaturaEletronicaAlterarBBean.hashResposta}" />
+
+		<h:inputHidden id="msgErroJavaStript" partialSubmit="true"
+			value="#{assinaturaEletronicaAlterarBBean.loginDTO.msgErroJavaStript}" />
+			
+		<h:inputHidden value="#{assinaturaEletronicaAlterarBBean.clientHash}" id="clientHash" partialSubmit="true"/> 
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					rendered="#{assinaturaEletronicaAlterarBBean.session.possuiAssinatura eq 'S'}"
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow min-lines">
+					<i class="fa fa-exclamation-circle" />
+					<span>
+						<p>
+						#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.texto.alerta']}
+						</p>
+					</span>
+				</p:outputPanel>
+				<p:outputPanel
+					rendered="#{assinaturaEletronicaAlterarBBean.session.possuiAssinatura eq 'N'}"
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow min-lines">
+					<i class="fa fa-exclamation-circle" />
+					<span>#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.texto.alerta.solicitar']}</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{assinaturaEletronicaAlterarBBean.session.possuiAssinatura eq 'S'}">
+					<h4>#{msg['pages.administrativo.assinaturaEletronica.assinaturaAlterarPreenchimento2.dados.alteracao']}</h4>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="titulo-painel"
+					rendered="#{assinaturaEletronicaAlterarBBean.session.possuiAssinatura eq 'N'}">
+					<h4>#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.dados.para.alteracao.cadastramento']}</h4>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="box-shadow">
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-6">
+					<p:outputPanel
+						rendered="#{assinaturaEletronicaAlterarBBean.session.nivelUsuario eq 'P'}">
+						<h5 class="space-b">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.preencher.todos']}</h5>
+					</p:outputPanel>
+					<p:outputPanel
+						rendered="#{assinaturaEletronicaAlterarBBean.session.nivelUsuario eq 'S'}">
+						<h5 class="space-b">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.preencher.todossec']}</h5>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel
+				rendered="#{assinaturaEletronicaAlterarBBean.session.nivelUsuario eq 'P'}">
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-3">
+						<h5 class="space-b"
+							style="font-weight: bold; margin-bottom: 14px;">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.identificacao']}</h5>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-3">
+						<p:outputLabel for="cnpj_hash_1"
+							value="#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.cnpj']}" />
+							<p:inputMask id="cnpj_hash_1" styleClass="form-control space-b"
+								size="25" value="#{assinaturaEletronicaAlterarBBean.cnpj}" 
+								mask="99.999.999/9999-99"/>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row">
+				<p:separator styleClass="space-b"
+					rendered="#{assinaturaEletronicaAlterarBBean.exibePergunta}" />
+			</p:outputPanel>
+
+
+			<p:outputPanel styleClass="row"
+				rendered="#{assinaturaEletronicaAlterarBBean.exibePergunta}">
+				<p:outputPanel styleClass="col-xs-4 space-b">
+					<p>
+						<h5 style="font-weight: bold;">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.validacao']}
+						</h5>
+
+						<p:outputPanel styleClass="quebra" />
+						<h:outputText
+							value="#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.responda.a.pergunta']}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="row"
+				rendered="#{assinaturaEletronicaAlterarBBean.exibePergunta}">
+				<p:outputPanel styleClass="col-xs-4 space-b">
+					<p:outputPanel autoUpdate="true">
+						<p:outputLabel style="margin-right:14px;" id="txtPergunta"
+						value="#{assinaturaEletronicaAlterarBBean.perguntaDto.pergunta}" />
+					</p:outputPanel>
+					<br />
+					<p:inputText style="margin-right:18px;width:300px; float: left;"
+						id="txtResposta" label="digite" styleClass="form-control"
+						maxlength="60"
+						value="#{assinaturaEletronicaAlterarBBean.txtResposta}" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+
+
+			<p:separator />
+
+			<h5 style="font-weight: bold; margin-bottom: 14px;">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.dados.assinatura.eletronica']}</h5>
+
+			<p:outputPanel styleClass="form-group"
+				rendered="#{assinaturaEletronicaAlterarBBean.session.possuiAssinatura eq 'S'}">
+				<p:outputLabel style="display: block;">#{msg['pages.administrativo.assinaturaEletronica.assinaturaAlterarPreenchimento2.assinatura.eletronica.atual']}</p:outputLabel>
+				<p:password styleClass="form-control" id="senhaAcesso" maxlength="8"
+					style="width:300px;"
+					value="#{assinaturaEletronicaAlterarBBean.loginDTO.senha}"
+					placeholder="" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="form-group">
+				<p:outputLabel style="display: block;">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.escolha.assinatura']}</p:outputLabel>
+				<p:password styleClass="form-control" id="senhaAcessoNova"
+					maxlength="8"
+					value="#{assinaturaEletronicaAlterarBBean.loginDTO.senhaNova}"
+					style="width:300px; float:left; margin-right: 18px;" placeholder="" />
+				<h:outputText style="padding-top: 8px; display: inline-block;"
+					value="#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.assinatura.formato']}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="form-group">
+				<p:outputLabel style="display: block;">#{msg['pages.assinaturaEletronica.assinaturaEletronicaAlterar.redigite.assinatura']}</p:outputLabel>
+				<p:password styleClass="form-control" id="senhaAcessoConfirmacao"
+					maxlength="8"
+					value="#{assinaturaEletronicaAlterarBBean.loginDTO.senhaConfirmacao}"
+					style="width:300px;" placeholder="" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-secundario"
+					action="#{assinaturaEletronicaAlterarBBean.voltar}" role="button"
+					value="#{msg['page.btn.voltar']}" style="margin-right:10px;" />
+
+				<p:commandButton styleClass="btn btn-default" rendered="#{assinaturaEletronicaAlterarBBean.exibePergunta}"
+					action="#{assinaturaEletronicaAlterarBBean.cadastrarNovaAssinatura}"
+					onclick="resposta();encryptNewAssinaturaEletronicaAndRespostaEletronica();enviarHash();capturarPerguntaResposta();"
+					role="button" value="#{msg['page.btn.continuar']}"
+					update=":formGeral"/>
+				
+				<p:commandButton styleClass="btn btn-default" id="btnEntrar" rendered="#{!assinaturaEletronicaAlterarBBean.exibePergunta}"
+					action="#{assinaturaEletronicaAlterarBBean.cadastrarNovaAssinatura}"
+					onclick="encryptNewAssinaturaEletronicaAndRespostaEletronica();enviarHash();capturarPerguntaResposta();"
+					role="button" value="#{msg['page.btn.continuar']}"
+					update=":formGeral"/>
+					
+				<p:defaultCommand target="btnEntrar" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- ############################################################### MULTAS INICIO ####################################################################### -->
+		
+	<p:outputPanel styleClass="row">
+            	
+        <ui:repeat 
+                var="multa" 
+                varStatus="status" 
+                value="#{segundaViaComprovanteVeiculosBBean.detalheDetran.listaMulta}" 
+                size="#{segundaViaComprovanteVeiculosBBean.detalheDetran.nroOcorrMulta}">
+            
+            	<p:outputPanel styleClass="col-xs-4">
+                	<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.guia']}" />
+                	<h:outputText value="#{segundaViaComprovanteVeiculosBBean.formataNumGuia(multa.numGu)}" />
+                </p:outputPanel>
+                
+            	<p:outputPanel styleClass="col-xs-4">
+                	<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.autodeinfracao']}" />
+                	<h:outputText value="#{multa.atInf}" />
+                </p:outputPanel>
+                
+            	<p:outputPanel styleClass="col-xs-4">
+                	<h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.orgaoautuador']}" />
+                	<h:outputText value="#{segundaViaComprovanteVeiculosBBean.formataOrgaoAtuador(multa.cdOAt)}" />
+                </p:outputPanel>
+            
+            	<p:outputPanel styleClass="col-xs-4">
+	                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.datadainfracao']}" />
+	                <h:outputText value="#{multa.dtInf}" />
+                </p:outputPanel>
+                
+            	<p:outputPanel styleClass="col-xs-4">
+	                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.datadevencimento']}" />
+	                <h:outputText value="#{multa.dtVen}" />
+                </p:outputPanel>
+                
+            	<p:outputPanel styleClass="col-xs-4">
+	                <h:outputLabel styleClass="bold space" value="#{msg['pages.pagamentos.segundaviacomprovante.veiculos.valor']}" />
+	                <h:outputText value="#{multa.vlMul}">
+	                   <f:convertNumber type="currency" locale="pt_br" currencySymbol="(R$)" />
+	                </h:outputText>
+                </p:outputPanel>
+
+            	<p:outputPanel rendered="#{status.index + 1 != segundaViaComprovanteVeiculosBBean.detalheDetran.nroOcorrMulta}">
+            		 <p:outputPanel styleClass="col-xs-12 space-b"></p:outputPanel>
+            	</p:outputPanel>
+             
+        </ui:repeat>
+        
+    </p:outputPanel>
+	
+	<!-- ####################################################################### MULTAS FIM ######################################################################### -->
+</ui:composition>

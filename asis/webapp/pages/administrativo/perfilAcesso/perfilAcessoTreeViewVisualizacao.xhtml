@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:santander="http://santander.com/ui">
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:separator />
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<ui:repeat var="itemCol" value="#{DTOlistaPerfilAcesso}">
+		<p:outputPanel styleClass="row space-t">
+			<p:outputPanel styleClass="col-xs-12">
+				<h5>
+					<h:outputText styleClass="text-uppercase bold"
+						value="#{itemCol.nomeItemMenuPai}" />
+				</h5>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-4">
+				<p:outputPanel styleClass="col-xs-12">
+					<ul class="links-submenu">
+						<ui:repeat var="item" value="#{itemCol.listaMenuItemCol1}">
+							<h:outputText
+								rendered="#{item.idItemMenuPrin ne '0' and item.idItemMenuPrin eq itemCol.idItemMenuPrin}">
+								<li class="menu-title bold">#{item.noItemMenu}</li>
+							</h:outputText>
+							<h:outputText
+								rendered="#{item.idItemMenuPrin ne itemCol.idItemMenuPrin}">
+								<li><h:outputLabel class="texto-vermelho space" value="&gt;" /> 
+								 <h:outputText
+										async="true" immediate="true"
+										rendered="#{item.idItemMenuPrin ne itemCol.idItemMenuPrin}"
+										value="#{item.noItemMenu}" /></li>
+							</h:outputText>
+						</ui:repeat>
+					</ul>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<p:outputPanel styleClass="col-xs-12">
+					<ul class="links-submenu">
+						<ui:repeat var="item" value="#{itemCol.listaMenuItemCol2}">
+							<h:outputText
+								rendered="#{item.idItemMenuPrin ne '0' and item.idItemMenuPrin eq itemCol.idItemMenuPrin}">
+								<li class="menu-title">#{item.noItemMenu}</li>
+							</h:outputText>
+							<h:outputText
+								rendered="#{item.idItemMenuPrin ne itemCol.idItemMenuPrin}">
+								<li>
+								<h:outputLabel class="texto-vermelho space" value="&gt;" /> 
+								<h:outputText async="true" immediate="true"
+										rendered="#{item.idItemMenuPrin ne itemCol.idItemMenuPrin}"
+										value="#{item.noItemMenu}" /></li>
+							</h:outputText>
+						</ui:repeat>
+					</ul>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-4">
+				<p:outputPanel styleClass="col-xs-12">
+					<ul class="links-submenu">
+						<ui:repeat var="item" value="#{itemCol.listaMenuItemCol3}">
+							<h:outputText
+								rendered="#{item.idItemMenuPrin ne '0' and item.idItemMenuPrin eq itemCol.idItemMenuPrin}">
+								<li class="menu-title">#{item.noItemMenu}</li>
+							</h:outputText>
+							<h:outputText
+								rendered="#{item.idItemMenuPrin ne itemCol.idItemMenuPrin}">
+								<li><h:outputLabel class="texto-vermelho space" value="&gt;" /> 
+									<h:outputText
+										async="true" immediate="true"
+										rendered="#{item.idItemMenuPrin ne itemCol.idItemMenuPrin}"
+										value="#{item.noItemMenu}" /></li>
+							</h:outputText>
+						</ui:repeat>
+					</ul>
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:separator />
+
+		</p:outputPanel>
+
+	</ui:repeat>
+</ui:composition>

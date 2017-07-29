@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.titleConsulta']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p:outputPanel styleClass="table-responsive label200 radio no-visible">
+								<h:selectOneRadio id="_1" value="#{chequesConsultarTaloesBBean.radioEnum}"  valueChangeListener="#{chequesConsultarTaloesBBean.radioListUpdate}" >
+									<p:ajax process="@this" update="@form"  />
+									<f:selectItems value="#{chequesConsultarTaloesBBean.enumValues}" var="valorEnum" itemValue="#{valorEnum}" itemLabel="#{valorEnum.label}"  />
+								</h:selectOneRadio>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="consTaloes"
+									value="#{chequesConsultarTaloesBBean.listaChequesResponseDinamica}" var="talao"
+									emptyMessage="#{msg['pages.contacorrente.cheques.consultarTaloes.nenhum.encontrado']}"> 
+						
+									<p:column exportable="true">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.numInicial']}" />
+										</f:facet>
+										<h:outputText value="#{talao.descPricheq}" />
+									</p:column>
+									<p:column exportable="true">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.numFinal']}" />
+										</f:facet>
+										<h:outputText value="#{talao.descUltcheq}" />
+									</p:column>
+									<p:column exportable="true">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.emissao']}" />
+										</f:facet>
+										<h:outputText value="#{talao.dataFormatadaDDMMYYYYY}" />
+									</p:column>
+									<p:column exportable="true">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.situacao']}" />
+										</f:facet>
+										<h:outputText value="#{talao.descricaoSituacao}" />
+									</p:column>
+									<p:column exportable="true">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.folhasPagas']}" />
+										</f:facet>
+										<h:outputText value="#{talao.qtddisp}" />
+									</p:column>
+									<p:column exportable="true">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.obs']}" />
+										</f:facet>
+										<h:outputText value="#{talao.descricaoObservacao}" />
+									</p:column>
+									<p:column exportable="false" styleClass="no-visible">
+										<f:facet name="header">
+											<p:graphicImage id="tooltipCheques"
+												value="/images/icon-i.png"
+												styleClass="tooptip-usuario" />
+											<p:tooltip id="toolTipInfo" for="tooltipCheques" value="#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.info']}" />
+										</f:facet>
+										<p:commandLink id="linkU162" immediate="true" 
+											action="#{chequesConsultarTaloesBBean.detalhe(talao)}"	styleClass="link-acesso-rapido">
+											<p:graphicImage id="tooltipCheques2"
+												value="/images/u162.png"
+												styleClass="tooptip-usuario" />
+												#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.linkDetalhar']}
+										</p:commandLink>
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml">
+					<ui:param name="excel" value="consTaloes" />
+					<ui:param name="nomeExcel" value="ConsultarTaloes"/>	
+				</ui:include>
+			
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b no-visible">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza" role="button" immediate="true"
+					action="#{chequesConsultarTaloesBBean.voltar}">#{msg['pages.contacorrente.cheques.consultarTaloes.consulta.btnVoltar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+	
+</ui:composition>

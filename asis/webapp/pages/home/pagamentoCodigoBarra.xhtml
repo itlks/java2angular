@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:inputText type="hidden" styleClass="textCoachMark"
+		value="Pagamento de contas com Código de Barras diretamente na página inicial."></p:inputText>
+	<p:inputText type="hidden" styleClass="posicaoPainel"
+		value="width: 400px; left: 15px; top:-70px; display: block; position: absolute;"></p:inputText>
+
+	<p:outputPanel styleClass="box-shadow maquinaGetNet radiusB"
+		id="codBarrasPainel2">
+		<p:outputPanel styleClass="row">
+
+			<p:outputPanel styleClass="col-xs-12">
+				<i class="fa fa-barcode icon-barcode space" />
+				<h:outputText styleClass="bold"
+					value="#{msg['page.home.widget.codigoDeBarras.titulosContasTributos']}" />
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12 space-t">
+				<p:outputPanel styleClass="form-group">
+					<h:outputLabel for=""
+						value="#{msg['page.home.widget.codigoDeBarras.informeOCodigoDeBarras']}" />
+					<p:inputText id="txtCodigodeBarras"
+						styleClass="form-control barcode"
+						value="#{homeBBean.codigoDigitado}" />
+				</p:outputPanel>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12 leitor-otico">
+				<p:graphicImage value="/images/u2034.png" alt="icone-leitor-otico"
+					styleClass="space" />
+				<span>#{msg['page.home.widget.codigoDeBarras.utilizarLeitorOtico']}</span>
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-8 pull-left text-left space-t">
+				<p:commandLink
+					value="#{msg['page.home.widget.codigoDeBarras.oQuePossoPagar']}"
+					onclick="PF('empresas').show();"></p:commandLink>
+				<ui:include
+					src="/pages/pagamentos/contas/pagamentoComCodigoBarras/relacaoEmpresas/relacaoEmpresas.xhtml" />
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-4 pull-right text-right">
+				<p:commandButton styleClass="btn btn-default"
+					id="btnContinuarCodigoBarra" action="#{homeBBean.irCodigoDeBarras}"
+					role="button" onstart="openLoad();" oncomplete="closeLoad();"
+					value='Continuar' />
+				<p:defaultCommand target="btnContinuarCodigoBarra" />
+			</p:outputPanel>
+
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<script language="JavaScript" type="text/javascript"
+		src="#{facesContext.externalContext.requestContextPath}/js/barcode.js" />
+	<script language="JavaScript" type="text/javascript"
+		src="#{facesContext.externalContext.requestContextPath}/js/validaCodeBar.js" />
+
+</ui:composition>

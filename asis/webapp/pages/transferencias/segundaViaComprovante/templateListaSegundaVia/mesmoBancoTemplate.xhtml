@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="row">
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel styleClass="titulo-painel">
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.comprovanteSegundaViaTed']}" />
+					</p:outputPanel>					
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h4>#{transferenciaSegundaViaComprovanteBBean.tipoContaDestino}</h4>
+						<br />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.agencia']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.agenciaDestino}"/>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.contaCorrente']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.contaDestino}"/>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.favorecido']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.favorecido}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.selecao.valor']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.valor}" />
+					</p:outputPanel>
+					<br />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:separator />
+						<h4>#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.informacoesAdicionais']}</h4>
+						<br />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.consulta.tipoDeTransferencia']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.tipoTransferencia}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.contaOrigemInformada']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.contaOrigem}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.contaDestinoInformada']}" 
+						styleClass="space"/>
+						<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.contaDestino}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.segundaVia']}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 space-b">						
+						<p:separator/>
+							<span>#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.transacaoEntreContas']}</span>						
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.dataTransacao']}" 
+							styleClass="space"/>
+							<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.dataTransacao}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+					</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.autenticacaoBancaria']}" 
+							styleClass="space"/>
+							<h:outputText value="#{transferenciaSegundaViaComprovanteBBean.detalheMesmoBanco.autenticacao}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputLabel value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.canal']}" 
+							styleClass="space"/>
+							<h:outputText value="#{msg['pages.transferencias.segundaViaComprovantes.consultar.resultado.internetBanking']}"/>
+						</p:outputPanel>
+					
+				</p:outputPanel>
+				<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+			</p:outputPanel>
+			<ui:include src="/commons/pdf/pdfButtons.xhtml"></ui:include>
+		</p:outputPanel>
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}" immediate="true"
+					action="#{transferenciaSegundaViaComprovanteBBean.voltarLista()}" />
+					</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+       <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.dadosDaEmpresa']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow">    
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-12">
+
+                            <h:outputLabel styleClass="bold" for="" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.nomeDaEmpresa']}" />
+                            <span>#{cartaoDebitoLancamentosBBean.dto.cnpjSelecionado.nomeEmpresa}</span><br/>
+                            <h:outputLabel styleClass="bold" for="" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.cnpj']}" />
+                            <span>#{cartaoDebitoLancamentosBBean.dto.cnpjSelecionado.cnpjComMascara}</span><br/>
+                            <h:outputLabel styleClass="bold" for="" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.area']}" />
+                            <span>#{cartaoDebitoLancamentosBBean.dto.cnpjSelecionado.area}</span>
+                                                                          
+                        </p:outputPanel>                               
+                    </p:outputPanel>  
+                                                            
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>   
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.dadosCartao']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow">    
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-12">
+
+                            <h:outputLabel styleClass="bold" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.titular']}" />
+                            <span>#{cartaoDebitoLancamentosBBean.dto.cartaoSelecionado.titular}</span><br/>
+                            <h:outputLabel styleClass="bold" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.numeroCartao']}" />
+                            <span>#{cartaoDebitoLancamentosBBean.dto.cartaoSelecionado.numeroCartaoComMascara}</span><br/>
+                            <h:outputLabel styleClass="bold" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.tipoCartao']}" />
+                            <span>#{cartaoDebitoLancamentosBBean.dto.cartaoSelecionado.bandeira}</span>
+                                                                     
+                        </p:outputPanel>                               
+                    </p:outputPanel>  
+                                                            
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>         
+
+        <p:outputPanel styleClass="row no-visible">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.selecaoData']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row no-visible">
+            <p:outputPanel styleClass="col-xs-12">
+                <p:outputPanel styleClass="box-shadow">    
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-4">
+
+                            <p:outputPanel styleClass="form-group">
+                               <h:outputLabel for="" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.dataInicial']}" />
+                               <p:outputPanel styleClass="icon-data-input">
+                                  <i class="fa fa-calendar"></i>
+                                  <p:calendar id="dataInicial" 
+                                  			  value="#{cartaoDebitoLancamentosBBean.dto.dataInicial}"
+                                  			  onkeyup="mascaraData(this, event)"
+											  tabindex="1" 
+											  converter="dateStringConverter"
+											  pattern="dd/MM/yyyy"
+											  maxlength="10" >
+								  		<p:ajax event="dateSelect" update="lancamentos" 
+								  				listener="#{cartaoDebitoLancamentosBBean.resetExibeLancamentos}" process="@all" />
+                                  </p:calendar>
+                               </p:outputPanel>
+                            </p:outputPanel>
+                        </p:outputPanel>               
+                    </p:outputPanel>                          
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-xs-4">                        
+
+                            <p:outputPanel styleClass="form-group">
+                               <h:outputLabel for="" value="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.dataFinal']}" />
+                               <p:outputPanel styleClass="icon-data-input">
+                                  <i class="fa fa-calendar"></i>
+                                  <p:calendar id="dataFinal" 
+                                  			  value="#{cartaoDebitoLancamentosBBean.dto.dataFinal}"
+                                  			  onkeyup="mascaraData(this, event)"
+											  tabindex="2" 
+											  converter="dateStringConverter"
+											  pattern="dd/MM/yyyy"
+											  maxlength="10" >
+								  		<p:ajax event="dateSelect" update="lancamentos" 
+								  				listener="#{cartaoDebitoLancamentosBBean.resetExibeLancamentos}" process="@all" />
+                                  </p:calendar>
+                               </p:outputPanel>
+                            </p:outputPanel>
+                                                                                    
+                        </p:outputPanel>      
+                        
+                        <p:outputPanel styleClass="col-xs-4">   <br/>                     
+
+                            <p:commandLink styleClass="btn btn-default" style="margin-top:8px;" role="button" tabindex="3" >
+                            	#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.exibir']}
+                            	<p:ajax update="lancamentos" listener="#{cartaoDebitoLancamentosBBean.exibirLancamentos}" process="@all" />
+                           	</p:commandLink>
+                                                                                    
+                        </p:outputPanel>                                   
+                    </p:outputPanel>  
+                                                            
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>                    
+
+		<p:outputPanel id="lancamentos">
+			<p:outputPanel rendered="#{cartaoDebitoLancamentosBBean.exibeLancamentos}">
+				<p:outputPanel styleClass="row" >
+		            <p:outputPanel styleClass="col-xs-12">
+		                <p:outputPanel styleClass="titulo-painel">
+		                    <h4>#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.periodoExtrato']} 
+		                    #{cartaoDebitoLancamentosBBean.dto.dataInicial} a 
+		                    #{cartaoDebitoLancamentosBBean.dto.dataFinal}</h4>
+		                </p:outputPanel>
+		            </p:outputPanel>
+		        </p:outputPanel>
+
+		        <p:outputPanel styleClass="row">
+		            <p:outputPanel styleClass="col-xs-12">
+		                <p:outputPanel styleClass="box-shadow">    
+		
+		                    <p:outputPanel styleClass="row">
+		                        <p:outputPanel styleClass="col-xs-12">
+		                          <p:outputPanel styleClass="table-responsive table table-striped">
+		                             <p:dataTable var="item" 
+		                             	id="tabela1" 
+		                             	value="#{cartaoDebitoLancamentosBBean.dto.lancamentos}"
+		                             	emptyMessage="Transação concluída com sucesso. Não existe movimento para este cartão." >
+		                                <p:column headerText="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.dataDebito']}">
+		                                   <h:outputText value="#{item.dataDeDebito}" />
+		                                </p:column>
+		                                <p:column headerText="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.estabelecimentoTransacao']}">
+		                                   <h:outputText value="#{item.estabelecimento}" />
+		                                   <h:outputText value="&#160;&#160;&#160;&#160;" />
+		                                   <h:outputText value="#{item.historico}" />
+		                                </p:column>
+		                                <p:column headerText="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.valor']}">
+		                                   <h:outputText style="float:right;padding-right:20px;" value="#{item.valor eq '0' ? ' ' : item.valor}" converter="valorMonetarioConverter"/>
+		                                </p:column>
+		                                <p:column style="padding-left:30px!important;width:250px;" headerText="#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.dataTransacao']}">
+		                                   <h:outputText value="#{item.dataDaTransacao}"/>
+		                                </p:column>
+		                             </p:dataTable>
+		                          </p:outputPanel>
+		                        </p:outputPanel>                               
+		                    </p:outputPanel>                                              
+		          			  <br />
+								<p:separator />
+								<p:outputPanel width="100%">
+							<br />
+								<ui:include src="/commons/rodapeCentralAtendimento.xhtml"/>
+								</p:outputPanel>
+		                </p:outputPanel>
+		            </p:outputPanel>
+		        </p:outputPanel>  
+				
+								
+	            <ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+			           
+        </p:outputPanel>
+        
+		<p:outputPanel styleClass="row space-b">
+		    <p:outputPanel styleClass="col-xs-12 text-right">
+        	   
+        	   <p:blockUI block="btnVoltar" trigger="btnVoltar" />	
+		       <p:commandLink id="btnVoltar" styleClass="btn btn-default btn-cinza no-visible" role="button"
+		       		action="#{cartaoDebitoLancamentosBBean.voltarDaTelaExtrato}">#{msg['pages.cartoes.cartoesDebito.lancamentos.cartoes.voltar']}</p:commandLink>
+		       
+		    </p:outputPanel>
+		</p:outputPanel>
+        
+	</ui:define>
+</ui:composition>         

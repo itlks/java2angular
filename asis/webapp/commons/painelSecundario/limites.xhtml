@@ -1,0 +1,176 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Limites" id="painelSecundarioLimites" modal="false" resizable="false" width="1024" height="400" 
+		visible="#{painelSecundarioBBean.limitesVisivel}" styleClass="popover-submenu box-shadow" appendTo="@(body)"
+		onShow="adjustPositionning($('#formPainelSecundario\\:painelSecundarioBotaoLimites'), $('#formPainelSecundario\\:painelSecundarioLimites'), 35)"
+		widgetVar="painelSecundarioLimitesVar">
+		
+		<div class="arrow-submenu">
+			<p:graphicImage value="/images/arrow-popover.png"/>
+		</div>
+       <p:scrollPanel mode="native" style="width:1024px;height:400px">
+			<div class="popover-title">
+				<div class="row">
+					<div class="col-md-11">
+						<h4 class="margin-top-10">#{msg['pages.painelSecundario.limites.limites']}</h4>                      
+					</div>
+					<div class="col-md-1">
+						<p:commandLink action="#{painelSecundarioBBean.exibirLimites}" update="formPainelSecundario">
+							<p:graphicImage width="25px" height="25px" value="/images/close-modal.png"/>
+						</p:commandLink>
+					</div>                     
+				</div>
+			</div>
+						
+			<div class="popover-content">
+				<div class="row">
+					<div class="col-md-12">
+	
+						<h5 class="space-b">#{msg['pages.painelSecundario.limites.transferencia']}</h5>
+									
+						<p:panelGrid styleClass="table-responsive table table-fixed-values">
+							<f:facet name="header">            
+						    	<p:row>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header1']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header2']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header3']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header4']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header5']}</p:column>
+				           		</p:row>
+						 	</f:facet>
+						    <p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco1.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico1.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico1.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico1.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico1.horario']}</p:column>
+				           	</p:row> 
+				           	 <p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco2.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico2.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico2.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico2.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico2.horario']}</p:column>
+				           	</p:row>
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco3.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico3.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico3.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico3.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico3.horario']}</p:column>
+				           	</p:row>  
+						</p:panelGrid>
+				
+						<h5 class="space-b">#{msg['pages.painelSecundario.limites.pagamentos']}</h5>
+						
+						<p:panelGrid styleClass="table-responsive table table-fixed-values" >
+							<f:facet name="header">            
+						    	<p:row>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header1']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header2']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header3']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header4']}</p:column>
+				           			<p:column>#{msg['pages.painelSecundario.limites.header5']}</p:column>
+				           		</p:row>
+						 	</f:facet>
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco4.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico4.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico4.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico4.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico4.horario']}</p:column>
+				           	</p:row>  
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco5.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico5.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico5.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico5.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico5.horario']}</p:column>
+				           	</p:row>  
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco6.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico6.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico6.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico6.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico6.horario']}</p:column>
+				           	</p:row>  
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco7.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico7.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico7.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico7.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico7.horario']}</p:column>
+				           	</p:row>
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco8.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico8.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico8.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico8.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico8.horario']}</p:column>
+				           	</p:row> 
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco9.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico9.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico9.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico9.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico9.horario']}</p:column>>
+				           	</p:row> 
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco10.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico10.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico10.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico10.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico10.horario']}</p:column>
+				           	</p:row> 
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco11.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico11.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico11.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico11.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico11.horario']}</p:column>           	</p:row>
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco12.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico12.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico12.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico12.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico12.horario']}</p:column>
+				           	</p:row> 
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco13.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico13.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico13.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico13.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico13.horario']}</p:column>
+				           	</p:row>   
+				           	<p:row>
+				           		<p:column styleClass="text-left">#{msg['pages.painelSecundario.limites.serivco14.nome']}</p:column>
+				           		<p:column styleClass="text-center">#{msg['pages.painelSecundario.limites.servico14.qtd']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico14.limiteSemCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico14.limiteComCartao']}</p:column>
+				           		<p:column styleClass="text-right">#{msg['pages.painelSecundario.limites.servico14.horario']}</p:column>
+				           	</p:row>         	            	           	            	
+						</p:panelGrid>
+						
+						<h5 class="space-b">#{msg['pages.painelSecundario.limites.agendamentos']}</h5>
+	
+						<p>#{msg['pages.painelSecundario.limites.agendamentos.linha1']}</p>
+						<p>#{msg['pages.painelSecundario.limites.agendamentos.linha2']}</p>
+						<br/>
+						<p>#{msg['pages.painelSecundario.limites.agendamentos.linha3']}</p>
+						<br/>
+						<p>#{msg['pages.painelSecundario.limites.agendamentos.linha4']}</p>
+						<br/>
+						<p>#{msg['pages.painelSecundario.limites.agendamentos.linha5']}</p>
+						<br/>
+						<p>#{msg['pages.painelSecundario.limites.agendamentos.linha6']}</p>
+					</div>	
+				</div>
+			</div>	
+		</p:scrollPanel>
+	</p:dialog>		
+</ui:composition>

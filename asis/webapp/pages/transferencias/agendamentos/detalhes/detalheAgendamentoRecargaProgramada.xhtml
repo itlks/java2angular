@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:outputLabel styleClass="space-b"
+		value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+
+	<p:outputPanel styleClass="row">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="tipoRecorrenteCelular" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.tipo']}" />
+			<h:outputText id="tipoRecorrenteCelular"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.tipoOperacaoAgendamento.descricao}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="nomeOperadora" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.operadora']}" />
+			<h:outputText id="nomeOperadora"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.nomeOperadora}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="telefoneComDdd" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.telefoneComDDD']}" />
+			<h:outputText id="telefoneComDdd"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.numeroTelefone}" />
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+</ui:composition>

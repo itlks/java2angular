@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateComprovanteSemWizard.xhtml">
+
+
+	<ui:repeat var="detalhe" value="#{listaDetalhe}">
+
+		<!-- Tela de ICMS -->
+		<h:panelGroup rendered="#{detalhe.tipoCom  eq 1}">
+			<ui:define name="contentHeader">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<h4>
+								<strong><h:outputText styleClass="bold"
+										value="#{msg['page.pagamentos.tributos.estaduais.comprovante.titulo']}" /></strong>
+							</h4>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</ui:define>
+
+			<ui:define name="contentComprovante">
+
+				<p:outputPanel styleClass="row">
+
+					<p:outputPanel styleClass="col-xs-6">
+						<p:outputPanel styleClass="titulo-destaque">
+							<h5 class="bold">
+								<h:outputText styleClass="bold"
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.documentoArrecadacao']}" />
+								<br />
+								<h:outputText styleClass="bold"
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.gareIcms']}" />
+							</h5>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<strong> <h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.contribuinte']}" />
+										</strong>
+									</p>
+									<p>
+										<h:outputText
+											value="#{detalhe.nomeCon}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12 space-b">
+								<p:outputPanel styleClass="form-group ">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.endereco']}" /></strong>
+									</p>
+									<p>
+										<h:outputText
+											value="#{detalhe.endeCon}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.municipio']}" /></strong>
+									</p>
+									<p>
+										<h:outputText value="" /> 
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.uf']}" /></strong>
+									</p>
+									<p>
+										<h:outputText value="" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.telefone']}" /></strong>
+									</p>
+									<p>
+										<h:outputText
+											value="#{detalhe.teleCon}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12 space-b">
+								<p:outputPanel styleClass="form-group ">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.confirmacao.cnae']}" /></strong>
+									</p>
+									<p>
+										<h:outputText
+											value="#{detalhe.cnae}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.observacao']}" /></strong>
+									</p>
+									<p>
+										<h:outputText
+											value="#{detalhe.obs}" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:outputPanel styleClass="form-group">
+									<p>
+										<strong><h:outputText
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.numeroControle']}" /></strong>
+									</p>
+									<p>
+										<h:outputText
+											value="----------" />
+									</p>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+
+
+					<p:outputPanel styleClass="col-xs-6 border-left-col">
+
+						<p:outputPanel styleClass="row space-b space-t">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.uf.favorecida']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText value="São Paulo" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.dataVencimento']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.dataVct}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.codigoReceita']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.codRece}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.inscricaoEstadual']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.insEsta}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.cpfCnpj']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.identif}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.inscricaoDividaAtivaOuNumeroEtiqueta']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.etiquet}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.referencia']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.refMa}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.aiimOuNumeroParcelamentoOuNumeroNotificacao']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.aiim}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.receitaNominalOuCorrigida']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText converter="valorMonetarioConverter"
+										value="#{detalhe.valPrin}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.juros']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText converter="valorMonetarioConverter"
+										value="#{detalhe.valJuro}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.multa']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText converter="valorMonetarioConverter"
+										value="#{detalhe.valMult}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.acrescimo']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText converter="valorMonetarioConverter"
+										value="#{detalhe.valAcre}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.honorarios']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText converter="valorMonetarioConverter"
+										value="#{detalhe.valHono}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row total-label"
+							style="padding: 10px 0px;">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.valor.total']}" /></strong>
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<strong><h:outputText
+											converter="valorMonetarioConverter"
+											value="#{detalhe.valTota}" /></strong>
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.dataPagamento']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.dataMov}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row space-b gray-row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p>
+									<strong><h:outputText
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.banco']}" /></strong>
+								</p>
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-6 text-right">
+								<p>
+									<h:outputText
+										value="#{detalhe.entArre}" />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 text-center destaque-text">
+
+						<p>
+							<strong><h:outputText
+									value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.aviso.lei']}" /></strong>
+						</p>
+
+					</p:outputPanel>
+				</p:outputPanel>
+			</ui:define>
+		</h:panelGroup>
+
+		<!-- Tela de ITCMD -->
+
+		<h:panelGroup rendered="#{detalhe.tipoCom  eq 2}">
+			<ui:define name="contentComprovante">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<p:outputPanel styleClass="titulo-painel">
+							<h4>
+								<p:outputLabel styleClass="bold"
+									value="#{msg['page.pagamentos.tributos.estaduais.comprovante.titulo']}" />
+							</h4>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="no-margin-bottom">
+						<p:outputPanel styleClass="row">
+
+							<!-- Coluna 1 -->
+							<p:outputPanel styleClass="col-xs-6 label-14">
+								<p:outputPanel
+									styleClass="text-center flex-align-vh lg-height margin-tb-120 bold">
+									<p>
+										<p:outputLabel styleClass="bold"
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.pagamento']}" />
+									</p>
+									<p>
+										<p:outputLabel styleClass="bold"
+											value="#{msg['page.pagamentos.gareItCmdSp.mensagem.linha3']}" />
+									</p>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="contribuinte">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.contribuinte.15']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="contribuinte"
+												value="#{detalhe.nomeCon}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="endereco">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.endereco']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="endereco"
+												value="#{detalhe.endeCon}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="municipio">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.municipio']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="municipio" value="" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-1">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="uf">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.uf']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="uf" value="" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-4">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="telefone">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.telefone']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="telefone"
+												value="#{detalhe.teleCon}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-3">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="cep">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.cep']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="cep"
+												value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.cep}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="observacao">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.observacao']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="observacao"
+												value="#{detalhe.obs}" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+										<p:outputPanel styleClass="form-group">
+											<p:outputLabel for="nrControle">
+												<strong>#{msg['page.pagamentos.gareItCmdSp.label.nr.controle']}</strong>
+											</p:outputLabel>
+											<p:outputPanel styleClass="quebra" />
+											<h:outputText id="nrControle"
+												value="------------------" />
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<!-- Coluna 2 -->
+
+
+							<p:outputPanel styleClass="col-xs-6 border-left">
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel
+										styleClass="col-xs-6 text-right pull-right space-b">
+										<h:outputText id="ufFavorecidaPrimeiraVia"
+											value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.primeiraVia']}"
+											class="bold" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="ufFavorecida">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.uf.favorecida']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+
+
+
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="ufFavorecida" value="São Paulo" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="dataVencimento">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.data.vencimento']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="dataVencimento"
+											value="#{detalhe.dataVct}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="codigoReceita">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.codigo.receita']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="codigoReceita"
+											converter="codigoReceitaConverter"
+											value="#{detalhe.codRece}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="numeroDeclaracao">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.numero.declaracao']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="numeroDeclaracao"
+											value="#{detalhe.numDec}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="cnpjCpf">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.cnpj.cpf']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="cnpjCpf"
+											value="#{detalhe.identif}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="inscricao">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.inscricao.divida']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="inscricao"
+											value="#{segundaViaComprovanteTributosEstaduaisBBean.comprovanteResponseDisplay.etiquet}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="_7">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.07']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="_7" value="" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-8">
+										<p:outputLabel for="aiim">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.AIIM']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-4 text-right">
+										<h:outputText id="aiim"
+											value="#{detalhe.aiim}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="valorReceita">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.valor.receita']}</strong>
+										</p:outputLabel>
+										<p:outputPanel styleClass="quebra" />
+										<p:outputLabel>
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.nominal.corrigida']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="valorReceita"
+											converter="valorMonetarioConverter"
+											value="#{detalhe.valPrin}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="jurosMora">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.juros.mora']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="jurosMora"
+											converter="valorMonetarioConverter"
+											value="#{detalhe.valJuro}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-7">
+										<p:outputLabel for="multaMora">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.multa.mora']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-5 text-right">
+
+										<h:outputText id="multaMora"
+											converter="valorMonetarioConverter"
+											value="#{detalhe.valMult}" />
+
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-8">
+										<p:outputLabel for="acrescimoFinanceiro">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.acrescimo.financeiro']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-4 text-right">
+
+										<h:outputText id="acrescimoFinanceiro"
+											converter="valorMonetarioConverter"
+											value="#{detalhe.valAcre}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-8">
+										<p:outputLabel for="honorarios">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.honorarios']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-4 text-right">
+
+										<h:outputText id="honorarios"
+											converter="valorMonetarioConverter"
+											value="#{detalhe.valHono}" />
+
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel id="painelValorTotal"
+									styleClass="row space-b gray-row total-label"
+									style="padding: 10px 0px;">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="valorTotal">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.valor.total']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<strong> <h:outputText id="valorTotal"
+												value="#{detalhe.valTota}">
+												<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+											</h:outputText>
+
+										</strong>
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="dataPagamento">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.data.pagamento']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="dataPagamento"
+											value="#{detalhe.dataMov}" />
+									</p:outputPanel>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="row flex-align-v form-group">
+									<p:outputPanel styleClass="col-xs-6">
+										<p:outputLabel for="codBanco">
+											<strong>#{msg['page.pagamentos.gareItCmdSp.label.banco']}</strong>
+										</p:outputLabel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="col-xs-6 text-right">
+										<h:outputText id="codBanco">#{detalhe.entArre}</h:outputText>
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12 text-center margin-top-20">
+									<br />
+									<p:outputPanel styleClass="col-xs-1"></p:outputPanel>
+									<p:outputPanel styleClass="col-xs-10 font-size-12 flex-align-v">
+										<h:outputText styleClass="">
+
+											<strong>#{msg['page.pagamentos.gareItCmdSp.portaria']}</strong>
+										</h:outputText>
+									</p:outputPanel>
+
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</ui:define>
+	
+		</h:panelGroup>
+
+		<!-- Tela de Gare DR -->
+		<h:panelGroup rendered="#{detalhe.tipoCom  eq 4}">
+			<ui:define name="contentComprovante">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12">
+						<!-- titulo blocos -->
+						<p:outputPanel styleClass="no-margin-bottom">
+
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">
+									<p:outputPanel styleClass="titulo-painel">
+										<h4>
+											<p:outputLabel styleClass="bold"
+												value="#{msg['page.pagamentos.tributos.estaduais.comprovante.titulo']}" />
+										</h4>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-6">
+									<p:outputPanel styleClass="titulo-destaque">
+										<p>
+											<p:outputLabel styleClass="bold"
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.guiaArrecadacao']}" />
+										</p>
+										<p>
+											<p:outputLabel styleClass="bold"
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.demaisReceitas']}" />
+											-
+											<p:outputLabel styleClass="bold"
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.gareDr']}" />
+										</p>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.conteudo.nome.razao']}</h:outputLabel>
+										<p>
+											<h:outputText
+												value="#{detalhe.nomeCon}" />
+										</p>
+									</p:outputPanel>
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.conteudo.endereco']}</h:outputLabel>
+										<p>
+											<h:outputText
+												value="#{detalhe.endeCon}" />
+										</p>
+									</p:outputPanel>
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-6">
+											<p:outputPanel styleClass="form-group">
+												<h:outputLabel for="">#{msg['page.gare.conteudo.municipio']}</h:outputLabel>
+												<p>
+													<h:outputText value="" />
+												</p>
+											</p:outputPanel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-2">
+											<p:outputPanel styleClass="form-group">
+												<h:outputLabel for="">#{msg['page.gare.conteudo.uf']}</h:outputLabel>
+												<p>
+													<h:outputText value="" />
+												</p>
+											</p:outputPanel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-4">
+											<p:outputPanel styleClass="form-group">
+												<h:outputLabel for="">#{msg['page.gare.conteudo.telefone']}</h:outputLabel>
+												<p>
+													<h:outputText
+														value="#{detalhe.teleCon}" />
+												</p>
+											</p:outputPanel>
+										</p:outputPanel>
+
+									</p:outputPanel>
+									<p:outputPanel styleClass="row">
+										<p:outputPanel styleClass="col-xs-8">
+											<p:outputPanel styleClass="form-group">
+												<h:outputLabel for="">#{msg['page.gare.conteudo.tributo.receita']}</h:outputLabel>
+												<p>
+													<p:outputLabel value="">
+
+													</p:outputLabel>
+												</p>
+											</p:outputPanel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-4">
+											<p:outputPanel styleClass="form-group">
+												<h:outputLabel for="">#{msg['page.gare.conteudo.cnae']}</h:outputLabel>
+												<p>
+													<h:outputText
+														value="#{detalhe.cnae}" />
+												</p>
+												<p>&nbsp;</p>
+												<h:outputLabel for="">#{msg['page.gare.conteudo.placa']}</h:outputLabel>
+												<p>
+													<h:outputText
+														value="#{detalhe.placa}" />
+												</p>
+											</p:outputPanel>
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.gare.conteudo.obs']}</h:outputLabel>
+										<p>
+											<h:outputText
+												value="#{detalhe.obs}" />
+										</p>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="">#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.numeroControle']}</h:outputLabel>
+										<p>
+											<h:outputText
+												value="-------------------------" />
+										</p>
+									</p:outputPanel>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-xs-6 border-left">
+
+									<p:outputPanel styleClass="row">
+										<p:outputPanel
+											styleClass="col-xs-6 text-right pull-right space-b">
+											<h:outputText id="ufFavorecida"
+												value="#{msg['page.pagamentos.tributos.estaduais.gareIcmsSp.comprovante.viaContribuinte']}"
+												class="bold" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.uf.favorecida']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText value="São Paulo" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.data.vencimento']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.dataVct}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.code.receita']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.codRece}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.inscricao.estadual']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.insEsta}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.cpf.cnpj']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.identif}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.inscricao.divida']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.etiquet}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.referencia']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.refMa}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.num.aiim']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.aiim}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.valor.receita']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText converter="valorMonetarioConverter"
+												value="#{detalhe.valPrin}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.juros.mora']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText converter="valorMonetarioConverter"
+												value="#{detalhe.valJuro}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.multa.mora']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText converter="valorMonetarioConverter"
+												value="#{detalhe.valMult}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.vago.12']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText value="" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.honorarios']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText converter="valorMonetarioConverter"
+												value="#{detalhe.valHono}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.conteudo.valor.total']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText converter="valorMonetarioConverter"
+												value="#{detalhe.valTota}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.preenchimento.dataPagamento23']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.dataMov}" />
+										</p:outputPanel>
+									</p:outputPanel>
+
+									<p:outputPanel
+										styleClass="row flex-align-v form-group form-group">
+										<p:outputPanel styleClass="col-xs-6">
+											<h:outputLabel for="">#{msg['page.gare.preenchimento.banco']}</h:outputLabel>
+										</p:outputPanel>
+										<p:outputPanel styleClass="col-xs-6 text-right">
+											<h:outputText
+												value="#{detalhe.entArre}" />
+										</p:outputPanel>
+									</p:outputPanel>
+									<p>&nbsp;</p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row">
+
+								<p:outputPanel styleClass="col-xs-12 text-center space-t">
+									<p>
+										<h:outputText value="#{msg['page.gare.comprovante.portaria']}" />
+									</p>
+									<p>
+										<h:outputText
+											value="#{msg['page.gare.comprovante.comprovante']}" />
+										<h:outputText
+											value="#{msg['page.gare.comprovante.recolhimento']}" />
+									</p>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-12" rendered="false">
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				</ui:define>
+		</h:panelGroup>
+
+
+
+		
+
+	</ui:repeat>
+
+</ui:composition>

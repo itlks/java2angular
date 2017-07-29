@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row" rendered="#{pagamentosContasCodigoBarrasBBean.gerouPendencia and pagamentosContasCodigoBarrasBBean.flagVR}">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<p:outputPanel styleClass="margin-top-10">
+						<p>#{msg['pages.pagamentos.codBarra.vr.alertaLiberacaoPendencia']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row"
+			rendered="#{pagamentosContasCodigoBarrasBBean.gerouPendencia}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.com.pendencia']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row"
+			rendered="#{!pagamentosContasCodigoBarrasBBean.gerouPendencia}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<p:outputPanel
+						rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento ne null}">
+						<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.com.agendamento']}</h4>
+					</p:outputPanel>
+					<p:outputPanel
+						rendered="#{pagamentosContasCodigoBarrasBBean.dataPagamento eq null}">
+						<h4>#{msg['page.segunda.via.comprovantes.titulos.subtitulo.sem.pendencia']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+
+						<ui:include
+								src="/pages/pagamentos/contas/pagamentoComCodigoBarras/titulos/codigoBarrasInformacoes.xhtml" />
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:separator styleClass="custom-separator" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12" rendered="#{pagamentosContasCodigoBarrasBBean.pgAgoraAgendar eq 'PA'}">
+							<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.pagamento1']}" />
+							<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.pagamento2']}" />
+							<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.pagamento3']}" />
+						</p:outputPanel>  
+						<p:outputPanel styleClass="col-xs-12" rendered="#{pagamentosContasCodigoBarrasBBean.pgAgoraAgendar eq 'AP'}">
+							<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.agendamento1']}" />
+							<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.agendamento2']}" />
+							<h:outputText styleClass="space" value="#{msg['pages.pagamento.codBarras.titulo.pagamento.informacoes.label.agendamento3']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:separator styleClass="custom-separator" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row"
+						rendered="#{pagamentosContasCodigoBarrasBBean.gerouPendencia}">
+						<p:outputPanel styleClass="col-xs-12">
+							<h4 align="center">#{msg['pages.pagamento.codBarras.titulo.pagamento.comprovante.demonstrativo']}</h4>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel
+						rendered="#{!pagamentosContasCodigoBarrasBBean.gerouPendencia}">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-4">
+										<p>
+											<strong>#{msg['page.commons.comprovante.autenticacao']}</strong>
+										</p>
+										<p>
+											<h:outputText
+												value="#{pagamentosContasCodigoBarrasBBean.autenticacaoBancaria}" />
+										</p>
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="col-xs-4">
+										<p>
+											<strong>#{msg['page.commons.comprovante.data.hora']}</strong>
+										</p>
+										<p>
+											<h:outputText
+												value="#{pagamentosContasCodigoBarrasBBean.dataHoraTransacao}">
+												<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+											</h:outputText>
+										</p>
+									</p:outputPanel>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:separator styleClass="custom-separator" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink styleClass="btn btn-default"
+					action="#{pagamentosContasCodigoBarrasBBean.goHome}" role="button">#{msg['menu.item.home']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

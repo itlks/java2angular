@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<ui:define name="content">
+
+		<f:event type="preRenderView"
+			listener="#{antecipacaoDemaisCredenciadorasBBean.acessoDiretoSelecionadosValor()}" />
+
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<h:inputHidden
+			value="#{antecipacaoDemaisCredenciadorasBBean.clientHash}"
+			id="clientHash" partialSubmit="true" />
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle" />
+					<p>
+						<h:outputText
+							value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.linha1']}" />
+					</p>
+					<p>
+						<h:outputText
+							value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.linha2']}" />
+					</p>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h:outputText styleClass="h4"
+						value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.antecipDemaisCreden']}" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- ======================================================================================================================================== -->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<h:outputText styleClass="h5 bold"
+								value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec']}" />
+							<br />
+							<br />
+							<p:outputPanel styleClass=" table table-striped">
+								<p:dataTable id="dataCnpjSel" var="e"
+									value="#{antecipacaoDemaisCredenciadorasBBean.listaCnpjSelecionados}"
+									emptyMessage="#{msg['page.emprestimosERecebiveis.termo.de.adesao.contrato.preencher.tableSemRegistro']}"
+									tableStyleClass="table table-striped">
+
+
+									<p:column width="40" styleClass="col-xs-4"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.razaoSocial']}">
+										<h:outputText value="#{e.razaoSocial}" />
+									</p:column>
+									<p:column width="40" styleClass="col-xs-5"
+										headerText="#{msg['page.empereb.antecipcielorede.solicantecip.cpfCnpj']}">
+										<h:outputText value="#{e.cpfCnpjWeb}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+							<p:outputPanel styleClass="space">
+
+								<p:outputPanel styleClass="row">
+									<p:outputPanel styleClass="col-xs-12">
+
+
+										<br />
+										<p:outputLabel value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.formaDeAntecipPvalor']}" />
+										<br />
+										<p:outputPanel styleClass="row">
+											<p:outputPanel styleClass="col-xs-4">
+
+												<p>
+													<p:outputLabel styleClass="space" value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.valorTotal']}" />
+													<h:outputText
+														value="#{antecipacaoDemaisCredenciadorasBBean.valorTotalWeb}" />
+												</p>
+												<p>
+													<p:outputLabel styleClass="space"
+														value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.valorTotal']}" />
+												</p>
+												<p:inputText id="valor_hash_1" styleClass="form-control"
+													maxlength="12" onkeyup="maskMoney(this, null, event)"
+													onblur="maskMoneyOnBlur(this)"
+													value="#{antecipacaoDemaisCredenciadorasBBean.dto.strValorSolicitacao}" />
+											</p:outputPanel>
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</p:outputPanel>
+								<br />
+
+								<p:outputPanel styleClass="col-xs-12"
+									rendered="#{antecipacaoDemaisCredenciadorasBBean.exibeCliqueAqui}">
+									<p:outputPanel styleClass="space-b">
+										<p>
+											<h:outputText value="#{msg['page.empereb.antecipcielorede.solicantecip.selecionados.cnpjSelec.mensagem']}"/>
+											<p:commandLink value="#{msg['page.empereb.antecipcielorede.solicantecip.cnpjSelec.clicarAqui']}"
+												action="#{antecipacaoDemaisCredenciadorasBBean.continuarEmAdesao}" />
+										</p>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- ======================================================================================================================================== -->
+
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<!-- BOTOES INICIO -->
+		<p:outputPanel id="panelBotoes" styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					action="#{antecipacaoDemaisCredenciadorasBBean.voltarEmSelecionados}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+
+				<p:commandButton id="btnContinuar"
+					action="#{antecipacaoDemaisCredenciadorasBBean.continuarEmConfirmacaoValor}"
+					onclick="enviarHash()" role="button"
+					value="#{msg['page.btn.continuar']}" styleClass="btn btn-default" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:blockUI block="panelBotoes" trigger="btnContinuar" />
+
+	</ui:define>
+</ui:composition>

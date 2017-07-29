@@ -1,0 +1,57 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+
+	<p:outputPanel styleClass="row style-b" id="idExternoSisComex_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosSisComex_#{posicaoLista}">
+			<h:outputText 	styleClass="bold" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosSComexLbl_#{posicaoLista}"/>		
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idBancoSComex_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.banco']}"
+							id="idBancoLblSComex_#{posicaoLista}" styleClass="space"/>
+			<h:outputText value="${compHisParts[0]}" id="idBancoTxtSComex_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idAgenciaContaSComex_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.agenciaConta']}"
+							styleClass="space" id="idAgenciaContaLblSComex_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" id="idAgenciaContaTxtSComex_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idAgenciaContaSComex_#{posicaoLista}">
+			<h:outputLabel 	styleClass="space" value="#{msg['page.operacoes.realizadas.detalhe.dados.label.opcaoDebito']}"
+							rendered="${compHisParts[2] eq '1' or compHisParts[2] eq '2' or compHisParts[2] eq '3' or compHisParts[2] eq '4'}"
+							id="idOpcaoDebitoLblSComex_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.saldoDisponivel']}"
+							rendered="${compHisParts[2] eq '1'}" id="idSaldoDisponivelTxtSComex_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.limiteMaximoDiario']}"
+							rendered="${compHisParts[2] eq '2'}" id="idLimiteMaximoDiarioTxtSComex_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.comLimiteMaximoDiario']}"
+							rendered="${compHisParts[2] eq '3'}" id="idComLimiteMaximoDiarioTxtSComex_#{posicaoLista}"/>
+			<h:outputText 	value="#{msg[page.operacoes.realizadas.detalhe.dados.label.semLimiteMaximoDiario'']}"
+							rendered="${compHisParts[2] eq '4'}" id="idSemLimiteMaximoDiarioTxtSComex_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12 space-b" id="idValorSComex_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" id="idValorLblSComex_#{posicaoLista}"
+							rendered="${compHisParts[2] eq '2' or compHisParts[2] eq '3'}" styleClass="space" />
+			<h:outputText 	value="#{detalheParam.valor}" id="idValorTxtSComex_#{posicaoLista}"
+							rendered="${compHisParts[2] eq '2' or compHisParts[2] eq '3'}"/>
+		</p:outputPanel>
+				
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSComex_#{posicaoLista}">
+			<p:separator id="idSeparatorSepSComex_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+
+</ui:fragment>

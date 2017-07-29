@@ -1,0 +1,57 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set id="v_#{id}" var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set id="#{id}" var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<p:outputPanel styleClass="row space-b" id="idExternoCobrancaKEnvio_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosCobrancaKEnvio_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}"
+							id="idDadosCobrancaKEnvioLbl_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCodigoBeneficiarioCobrancaKEnvio_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoBeneficiario']}"
+							styleClass="space" id="idCodigoBeneficiarioLblCobrancaKEnvio_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" id="idCodigoBeneficiarioTxtCobrancaKEnvio_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNossoNumeroCobrancaKEnvio_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.nossoNumero']}"
+							styleClass="space" id="idNossoNumeroLblCobrancaKEnvio_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" id="idNossoNumeroTxtCobrancaKEnvio_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCodigoOperacaoCobrancaKEnvio_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoOperacao']}"
+							styleClass="space" id="idCodigoOperacaoLblCobrancaKEnvio_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[3]}" id="idCodigoOperacaoTxtCobrancaKEnvio_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel 	styleClass="col-xs-12" rendered="${compHisParts[4] ne ''}"
+						id="idInformacaoAdicionalValorCobrancaKEnvio_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.informacoesAdicionaisValor']}"
+							styleClass="space" id="idInformacoesAdicionaisValorLblCobrancaKEnvio_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[4]}" id="idInformacoesAdicionaisValorTxtCobrancaKEnvio_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel 	styleClass="col-xs-12" rendered="${compHisParts[5] ne '' || compHisParts[5] ne '00000000'}"
+						id="idInformacoesAdicionalDataCobrancaKEnvio_#{posicaoLista}">
+			<h:outputLabel 	value="#{msg['page.operacoes.realizadas.detalhe.dados.label.informacoesAdicionaisData']}"
+							styleClass="space" id="idInformacoesAdicionaisDataLblCobrancaKEnvio_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[5]}" id="idInformacoesAdicionaisDataTxtCobrancaKEnvio_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+			
+	<p:outputPanel styleClass="row space-b" id="idSeparatorCobrancaKEnvio_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSeparatorSepCobrancaKEnvio_#{posicaoLista}">
+			<p:separator id="separatorCobrancaKEnvio_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:fragment>

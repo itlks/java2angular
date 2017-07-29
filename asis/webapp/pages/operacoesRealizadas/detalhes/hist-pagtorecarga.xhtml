@@ -1,0 +1,49 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<c:set var="compHis" value="#{detalheParam.compHis}"/>
+	<c:set var="compHisParts" value="${fn:split(compHis, '|')}" />
+	
+	<p:outputPanel styleClass="row space-b" id="idDadosExtPagtoRecarga_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idDadosIntPagtoRecarga_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.dados']}" id="idDadosLblPagtoRecarga_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idCodAreaPagtoRecarga_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.codigoArea']}" styleClass="space" 
+			id="idCodAreaLblPagtoRecarga_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[0] * 1}" id="idCodAreaTxtPagtoRecarga_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idNumTelPagtoRecarga_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.numeroTelefone']}" styleClass="space" 
+			id="idNumTelLblPagtoRecarga_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[1]}" id="idNumTelTxtPagtoRecarga_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idEmpresaPagtoRecarga_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.empresa']}" styleClass="space" 
+			id="idEmpresaLblPagtoRecarga_#{posicaoLista}"/>
+			<h:outputText value="${compHisParts[2]}" id="idEmpresaTxtPagtoRecarga_#{posicaoLista}"/>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12" id="idValorPagtoRecarga_#{posicaoLista}">
+			<h:outputLabel value="#{msg['page.operacoes.realizadas.detalhe.dados.label.valor']}" styleClass="space" 
+			id="idValorLblPagtoRecarga_#{posicaoLista}"/>
+			<h:outputText value="#{detalheParam.valor}" id="idValorTxtPagtoRecarga_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>	
+	
+	<p:outputPanel styleClass="row space-b" id="idSepaExtPagtoRecarga_#{posicaoLista}">
+		<p:outputPanel styleClass="col-xs-12" id="idSepaIntPagtoRecarga_#{posicaoLista}">
+			<p:separator id="idSepaLinePagtoRecarga_#{posicaoLista}"/>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+</ui:fragment>

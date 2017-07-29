@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+		
+		<ui:include src="/commons/inicializaDL.xhtml"/>
+		<h:inputHidden value="#{debitoAutomaticoAlterarBBean.clientHash}" id="clientHash" partialSubmit="true"/> 
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.subtitulo']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.empresa']}: " />
+								<h:outputText> #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.nomeEmpresaConveniada}</h:outputText>
+							</p>
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.identConsumidor']}: " />
+								<h:outputText> #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.identificacaoConsumidor}</h:outputText>
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 radioGrid tpoLanca">
+
+							<p:commandLink id="lnkLimiteMax" onclick="PF('popupDetalheLimiteMaximo').show();" styleClass="space-r bold"  value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}:" />
+
+
+							<p:selectOneRadio id="selLimiteMax"
+								value="#{debitoAutomaticoAlterarBBean.dto.empresaConveniada.possuiLimiteDebito}"
+								layout="custom">
+								<f:selectItem itemLabel="#{msg['page.txt.sim']}"
+									itemValue="true">
+								</f:selectItem>
+								<f:selectItem itemLabel="#{msg['page.txt.nao']}"
+									itemValue="false" />
+								<p:ajax event="click" process="@this"
+									update="formGeral:panelValorMaximo"
+									listener="#{debitoAutomaticoAlterarBBean.renderizarInputValorMaximo}" />
+							</p:selectOneRadio>
+
+
+							<p:radioButton id="optLimite1" for="selLimiteMax" itemIndex="0" />
+							<h:outputLabel for="optLimite1" value="#{msg['page.txt.sim']}"
+								style="font-weight:normal !important" />
+
+							<p:radioButton id="optLimite2" for="selLimiteMax" itemIndex="1" />
+							<h:outputLabel for="optLimite2" value="#{msg['page.txt.nao']}"
+								style="font-weight:normal !important" />
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row" id="panelValorMaximo">
+						<p:outputPanel styleClass="col-xs-4"
+							rendered="#{debitoAutomaticoAlterarBBean.exibeInputValorMaximo}">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.autorizoDebito']}: " />
+								<p:inputText onkeypress="return onlyNumbers(event)"
+									onblur="maskMoney(this)" id="txtValorMax_hash_1"
+									value="#{debitoAutomaticoAlterarBBean.dto.empresaConveniada.valorMaximoDebito}"
+									maxlength="15" converter="valorDecimalConverter"
+									placeholder="0,00" styleClass="form-control">
+
+									<p:ajax event="blur" immediate="false"
+										listener="#{debitoAutomaticoAlterarBBean.exibirMsgLimiteMaxDebito2}" />
+
+								</p:inputText>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 radioGrid tpoLanca">
+							<h:outputLabel
+								value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.emitirAvisoCorreio']}: "
+								styleClass="space-r bold" />
+
+							<p:selectOneRadio id="selEmitirAvisoCorreio"
+								value="#{debitoAutomaticoAlterarBBean.dto.empresaConveniada.emitirAvisoCorreios}"
+								layout="custom">
+
+								<f:selectItem itemLabel="#{msg['page.txt.sim']}"
+									itemValue="true" />
+								<f:selectItem itemLabel="#{msg['page.txt.nao']}"
+									itemValue="false" />
+
+							</p:selectOneRadio>
+
+
+							<p:radioButton id="opt3" for="selEmitirAvisoCorreio"
+								itemIndex="0" />
+							<h:outputLabel for="opt3" value="#{msg['page.txt.sim']}"
+								style="font-weight:normal !important" />
+
+							<p:radioButton id="opt4" for="selEmitirAvisoCorreio"
+								itemIndex="1" />
+							<h:outputLabel for="opt4" value="#{msg['page.txt.nao']}"
+								style="font-weight:normal !important" />
+
+							<span>#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.servicoSujeitoCobranca']}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b" rendered="#{debitoAutomaticoAlterarBBean.formaPagamentoRender}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12" rendered="#{debitoAutomaticoAlterarBBean.formaPagamentoRender}">
+							<p>
+								<h:outputLabel
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.formaPagamento']}: " />
+								<h:outputText
+									value=" #{debitoAutomaticoAlterarBBean.dto.empresaConveniada.formaPagamentoFormatada}" />
+							</p>
+							<h:outputLabel
+								value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.alteracaoPagamento']}: "
+								styleClass="pull-left space" style="margin-top: 5px;" />
+							<p:outputPanel styleClass="radioGrid tpoLanca"
+								rendered="#{debitoAutomaticoAlterarBBean.renderizaLabel eq 'S'}">
+								<h:outputText value=" Conta Corrente" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="radioGrid tpoLanca"
+								rendered="#{debitoAutomaticoAlterarBBean.renderizaLabel eq 'N'}">
+								<p:selectOneRadio id="selFormaPagamento"
+									value="#{debitoAutomaticoAlterarBBean.formaDePagamento}"
+									layout="custom">
+									<f:selectItem itemValue="CB"
+										itemLabel="#{msg['page.contaCorrente.pacoteservico.contratar.contaCorrente']}">
+									</f:selectItem>
+
+									<f:selectItem itemValue="C1"
+										itemLabel="#{msg['page.segunda.via.comprovantes.cartaocredito.consulta.cartaoCredito']}">
+									</f:selectItem>
+
+									<p:ajax event="click" process="@this"
+										update="formGeral:divCartoes"
+										listener="#{debitoAutomaticoAlterarBBean.renderizarCartoes()}" />
+
+								</p:selectOneRadio>
+
+								<p:radioButton id="opt1" for="selFormaPagamento" itemIndex="0" />
+								<h:outputLabel for="opt1"
+									value="#{msg['page.contaCorrente.pacoteservico.contratar.contaCorrente']}"
+									style="font-weight:normal !important" />
+
+								<p:radioButton id="opt2" for="selFormaPagamento" itemIndex="1" />
+								<h:outputLabel for="opt2"
+									value="#{msg['page.segunda.via.comprovantes.cartaocredito.consulta.cartaoCredito']}"
+									style="font-weight:normal !important" />
+
+
+								<p:outputLabel id="tooltipDebito">
+									<i class="fa fa-info-circle" aria-hidden="true" />
+								</p:outputLabel>
+
+								<p:tooltip for="tooltipDebito" myPosition="left center"
+									atPosition="right center"
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.alteracao.tooltip']}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-t" id="divCartoes" rendered="#{debitoAutomaticoAlterarBBean.exibeCartoes}">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputLabel styleClass=" bold">#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.selecionarPagamento']}</p:outputLabel>
+							<p:dataTable id="cartoes" var="cartao"
+								value="#{debitoAutomaticoAlterarBBean.dto.listaCartaoParcelado}"
+								selection="#{debitoAutomaticoAlterarBBean.dto.cartaoSelecionado}"
+								rowKey="#{cartao.numeroCartao}"
+								emptyMessage="#{msg['pages.pagamentos.incluir.debito.automatico.nenhum.registro']}">
+
+								<p:column selectionMode="single"
+									style="width:16px;text-align:center" />
+								<p:column headerText="Tipo Cartão">
+									<h:graphicImage url="/images/img_#{cartao.imagemBandeira}.gif" />
+									<h:outputLabel>
+									#{cartao.descrBandeira}&nbsp;
+									#{cartao.tipoCartao}
+									</h:outputLabel>
+								</p:column>
+
+								<p:column
+									headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.nrCartao']}">
+									<h:outputText value="#{cartao.numeroCartaoFormatado}" />
+								</p:column>
+
+								<p:column
+									headerText="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.nomeCartao']}">
+									<h:outputText value="#{cartao.nomeGravadoCartao}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel style="font-weight: bold"
+									value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.historico']} " />
+								<p:inputText id="txtHistorico" maxlength="12"
+									styleClass="form-control"
+									value="#{debitoAutomaticoAlterarBBean.dto.empresaConveniada.historicoComplementar}"
+									onkeyup="stringToUpperCase(this);"
+									onblur="replaceSpecialChars(this);" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4 input-help">
+							<h:outputLabel
+								value="#{msg['pages.pagamento.debitoAutomatico.cadastro.incluir.inclusao.opcional']} " />
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink id="cmdLnkVoltar"
+					styleClass="btn btn-default btn-cinza"
+					action="#{debitoAutomaticoAlterarBBean.debitoAutoGenericoBBean.initTelaConsultaConta(false)}"
+					role="button" value="#{msg['page.btn.voltar']}" />
+
+				<p:commandLink id="cmdLnkContinuar" styleClass="btn btn-default"
+					action="#{debitoAutomaticoAlterarBBean.avisoConfirmacao}"
+					role="button" value="#{msg['page.btn.continuar']}" onclick="enviarHash()"/>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:dialog widgetVar="popupDetalheLimiteMaximo" id="popupDetalheLimiteMaximo"
+			header="#{msg['pages.pagamento.debitoAutomatico.cadastro.alterar.comprovante.limiteMaxDebito']}"
+			position="center" width="800" height="190" modal="true" dynamic="true" 
+			resizable="false" styleClass="modal-box modalGray no-print no-visible">
+			<ui:include
+				src="../consultar/debitoAutomaticoPopUpDetalheLimiteMaximo.xhtml" />
+		</p:dialog>		
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"	
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+
+	<p:outputPanel styleClass="row space-b">
+       <p:outputPanel styleClass="col-lg-12">
+             <p:outputPanel styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span>
+                    	<p style="font-weight: bold;">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p1']}</p>
+                        <p>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p2']}</p>
+                        <p>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p3']}</p>
+                        <p>#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p4']} <a href="http://portal.prefeitura.sp.gov.br/secretarias/financas/tributos/iptu/">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.linkPrefeitura']}</a></p>
+                        <br/>
+                        <p><a href="#">#{msg['page.pagamentos.iptu-sp.pgtoIptuBanespa.p5']}</a></p>
+                   	</span>
+             </p:outputPanel>
+       </p:outputPanel>
+	</p:outputPanel>
+
+</ui:composition> 

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+
+	<ui:define name="content">
+
+		<ui:include
+			src="/pages/administrativo/qrToken/cadastrar/qrAvisoHabilitacaoAparelho.xhtml"></ui:include>
+		<ui:include src="//commons/inicializaDL.xhtml"></ui:include>
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.administrativo.qrToken.cadastrar.Habil']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow ">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 bold">
+							<p>PASSO 3 -
+								#{msg['pages.administrativo.qrToken.cadastrar.EscolOMetodDeHabil']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2">
+							<p:outputLabel styleClass="bold"
+								value="#{msg['pages.administrativo.qrToken.cadastrar.CPF']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7">
+							<h:outputText value="#{qrTokenCadastroBBean.session.cpfUsuario}"
+								converter="converterCpfCnpj" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-2">
+							<p:outputLabel styleClass="bold"
+								value="#{msg['pages.administrativo.qrToken.cadastrar.NomeDoApare']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7">
+							<h:outputText value="#{qrTokenCadastroBBean.dto.nomeAparelho}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputLabel>#{MetodoHabilitacaoEnum.SMS.name}</p:outputLabel>
+					<p:separator/>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputPanel styleClass="table-responsive radio label520">
+								<h:selectOneRadio id="radioOpcaoHabilitar"
+									value="#{qrTokenCadastroBBean.dto.metodoDeHabilitacao}">
+									<f:selectItem
+										itemLabel="#{msg['pages.administrativo.qrToken.cadastrar.QueroHabilPor']}&lt;strong&gt; #{msg['pages.administrativo.qrToken.cadastrar.SMS']}&lt;/strong&gt; "
+										itemValue="SMS" itemEscaped="false" />
+									<c:if
+										test="#{qrTokenCadastroBBean.session.tipoDispositivoMobileToken.codigo eq '9' and qrTokenCadastroBBean.session.statusMobileToken eq '7'}">
+										<f:selectItem
+											itemLabel="#{msg['pages.administrativo.qrToken.cadastrar.QueroHabilPor']}&lt;b&gt; #{msg['pages.administrativo.qrToken.cadastrar.MobilToken']}&lt;/b&gt; "
+											itemValue="MT" selected="true" itemEscaped="false" />
+									</c:if>
+									<f:selectItem
+										itemLabel="#{msg['pages.administrativo.qrToken.cadastrar.QueroHabilPor']}&lt;b&gt; #{msg['pages.administrativo.qrToken.cadastrar.Agenc']}&lt;/b&gt; "
+										itemValue="AG" itemEscaped="false" />
+									<c:if
+										test="#{qrTokenCadastroBBean.session.tipoDispositivo.codigo eq '12' and qrTokenCadastroBBean.session.statusQrCode eq '7'}">
+										<f:selectItem
+											itemLabel="#{msg['pages.administrativo.qrToken.cadastrar.QueroHabilPor']}&lt;b&gt; #{msg['pages.administrativo.qrToken.cadastrar.QR']}&lt;/b&gt; "
+											itemValue="QR" itemEscaped="false" />
+									</c:if>
+									<p:ajax event="change" process="@all"
+										update="formGeral:panelPI"
+										listener="#{qrTokenCadastroBBean.renderizarInputValorMaximo}" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+
+
+
+				<p:outputPanel id="panelPI" styleClass="row">
+
+					<p:outputPanel styleClass="col-md-4"
+						rendered="#{qrTokenCadastroBBean.exibirNumeros and qrTokenCadastroBBean.dto.listaCelular.size() > 0}">
+						<p:outputLabel
+							value="#{msg['pages.administrativo.qrToken.cadastrar.NumeroDoCelular']}" />
+						<p:outputPanel styleClass="table-responsive radio label520">
+							<h:selectOneRadio id="radioCelular"
+								value="#{qrTokenCadastroBBean.dto.celularEscolhido}">
+								<f:selectItems value="#{qrTokenCadastroBBean.dto.listaCelular}"
+									var="celular" itemValue="#{celular.ddd}#{celular.celular}"
+									itemLabel="#{celular.celularFormatado}"
+									itemLabelEscaped="false" />
+							</h:selectOneRadio>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel>
+					<p:outputLabel rendered="#{false}"
+						value="Não existem números válidos para está opção, por favor procure seu gerente para regularização do seu cadastro ou selecione outro metódo.">
+					</p:outputLabel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{qrTokenCadastroBBean.voltarHabilitacao}" role="button">#{msg['page.btn.voltar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default"
+					action="#{qrTokenCadastroBBean.continuarHabilitacao}" role="button">#{msg['page.btn.continuar']}
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

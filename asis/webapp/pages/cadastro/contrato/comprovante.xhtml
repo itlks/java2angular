@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.cadastro.contrato.comprovante.CadasFinal']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5>#{msg['pages.cadastro.contrato.comprovante.AgoraQueOCadasFoi']}</h5>
+							<br />
+
+							<p:outputPanel styleClass="col-md-12">
+
+								<h5>
+									<strong>#{msg['pages.cadastro.contrato.comprovante.PropoDeAdesaECadas']}</strong>
+								</h5>
+								<br />
+
+
+								<textarea id="txtMsg" class="termos-block" rows="5" >#{msg['pages.cadastro.contrato.comprovante.LoremIpsumDolorSitAmet']}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio                                                                                                                                                                     
+                                                </textarea>
+								<br />
+
+							</p:outputPanel>
+
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<p:separator />
+
+							<p>#{msg['pages.cadastro.contrato.comprovante.EmCasoDeDuvidEntre']}</p>
+							<p>#{msg['pages.cadastro.contrato.comprovante.CapitERegioMetro']}</p>
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+				<p:outputPanel styleClass="rodape-comprovante">
+					<p:commandLink actionListener="#">
+						<i class="ic icon-PDF"></i>
+                                       #{msg['pages.cadastro.contrato.comprovante.SalvaEmPDF']} 
+                                    </p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-email"></i>
+                                       #{msg['pages.cadastro.contrato.comprovante.EnviaPorEMail']} 
+                                    </p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-imprimir"></i>
+                                       #{msg['pages.cadastro.contrato.comprovante.Impri']}
+                                    </p:commandLink>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

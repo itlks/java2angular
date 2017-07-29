@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>
+						<h:outputText value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.titulo']}"/>
+					</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="painelProdutos" styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<h:outputText value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.mensagem']}" />
+
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="tipoTransacao"
+									value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.tipo.transacao']}" />
+								<h:selectOneMenu id="tipoTransacao" name="tipoTransacao"
+									value="#{consultaPosicaoConsolidadaBBean.dto.transacaoSelecionada}">
+
+									<f:selectItem itemValue=""
+										itemLabel="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.no.option']}"
+										noSelectionOption="true" />
+									<f:selectItems value="#{consultaPosicaoConsolidadaBBean.tiposTransacao}" 
+									 var="transacao" itemValue="#{transacao}"
+									 itemLabel="#{transacao.descricao}" />
+									<p:ajax listener="#{consultaPosicaoConsolidadaBBean.tipoTransacaoSelecionado}" 
+									 process="@this" update="produto pnConvenioConta" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						
+						<p:outputPanel styleClass="col-xs-12 no-padding">
+							<p:outputPanel styleClass="col-xs-4">
+								<p:outputPanel styleClass="form-group">
+									<h:outputLabel for="produto"
+										value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.produto']}" />
+									<h:selectOneMenu name="produto" id="produto" 
+									 value="#{consultaPosicaoConsolidadaBBean.dto.codProdutoSelecionado}">
+										<f:selectItem itemValue="0"
+											itemLabel="#{consultaPosicaoConsolidadaBBean.selecionar}"
+											noSelectionOption="true" />
+										<f:selectItems value="#{consultaPosicaoConsolidadaBBean.produtoComboList}" var="itemProduto"
+										 itemValue="#{itemProduto.nrSequGrupServ}"
+										 itemLabel="#{itemProduto.nomeGrupoServico}" />
+									  	<p:ajax listener="#{consultaPosicaoConsolidadaBBean.produtoSelecionado}" event="change" process="@this" update="pnConvenioConta convenio contaDebito" />	 
+									</h:selectOneMenu>
+								</p:outputPanel>
+							</p:outputPanel>
+							
+							<p:outputPanel id="pnConvenioConta">
+								<p:outputPanel styleClass="col-xs-4" id="pnConvenio" rendered="#{consultaPosicaoConsolidadaBBean.renderConvenioConta}" >
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="convenio"
+											value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.convenio']}" />
+	
+										<h:selectOneMenu  name="convenio" id="convenio" value="#{consultaPosicaoConsolidadaBBean.dto.convenioSelecionado}" >
+	
+											<f:selectItem itemValue=""
+												itemLabel="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.no.option.convenio']}"
+												noSelectionOption="true" />
+	
+											<f:selectItems value="#{consultaPosicaoConsolidadaBBean.convenioList}" 
+											 var="convenio" 
+											 itemLabel="#{convenio.bancoEntidadBr} - #{convenio.bancoSucursalBr} - #{convenio.bancoNroCuentaBr}"
+											 itemValue="#{convenio.valueCombo}" />
+											<p:ajax listener="#{consultaPosicaoConsolidadaBBean.convenioSelecionado}" 
+										     event="change" process="@this" update="contaDebito" />	 
+										</h:selectOneMenu>
+									</p:outputPanel>
+								</p:outputPanel>
+							
+								<p:outputPanel styleClass="col-xs-4" id="pnContaDebito" rendered="#{consultaPosicaoConsolidadaBBean.renderConvenioConta}" >
+									<p:outputPanel styleClass="form-group">
+										<h:outputLabel for="contaDebito"
+											value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.conta']}" />
+											
+										<h:selectOneMenu name="contaDebito" id="contaDebito"
+										 value="#{consultaPosicaoConsolidadaBBean.dto.contaDebSelecionada}">
+											<f:selectItem itemValue="0"
+												itemLabel="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.no.option.conta']}"
+												noSelectionOption="true" />
+										
+											<f:selectItems value="#{consultaPosicaoConsolidadaBBean.contaDebitoList}"
+											 var="contaDebito"
+											 itemLabel="#{contaDebito.entDebSucursalBr} - #{contaDebito.entDebNroCuentaBr}" 
+											 itemValue="#{contaDebito.valueCombo}"/>
+										</h:selectOneMenu>
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="dataIni"
+									value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.data.inicial']}" />
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="dataIni" pattern="dd/MM/yyyy"
+										value="#{consultaPosicaoConsolidadaBBean.dto.dataInicial}"  />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for="ate"
+									value="#{msg['pages.autorizacoes.consultas.posicaoConsolidada.posicaoConsolidada.data.final']}" />
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="dataFim" pattern="dd/MM/yyyy"
+										value="#{consultaPosicaoConsolidadaBBean.dto.dataFinal}" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">				
+				<p:commandLink id="cmdLnkVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					value="#{msg['page.btn.voltar']}"
+					action="#{consultaPosicaoConsolidadaBBean.voltarPaginaInicial}" />
+
+				<p:blockUI block="cmdLnkContinuar" trigger="cmdLnkContinuar" />	
+				<p:commandLink id="cmdLnkContinuar" styleClass="btn btn-default"
+					role="button" value="#{msg['page.btn.continuar']}"
+					action="#{consultaPosicaoConsolidadaBBean.continuarTelaConsulta}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

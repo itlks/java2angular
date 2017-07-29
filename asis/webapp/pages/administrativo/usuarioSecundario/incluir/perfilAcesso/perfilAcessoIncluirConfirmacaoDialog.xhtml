@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:santander="http://santander.com/ui"
+	template="/templates/templateDialog.xhtml">
+
+	<ui:define name="contentDialog">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 space-t">
+
+				<p:outputPanel id="perfilAcessoInclusaoDialog">
+					<ui:include
+						src="/pages/administrativo/perfilAcesso/incluir/perfilAcessoInclusaoConfirmacao_conteudo.xhtml" />
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-12 text-right">
+
+						<p:commandLink id="btnVoltarDialog" styleClass="btn btn-default btn-cinza"
+							role="button"
+							onstart="openLoad();"
+							oncomplete="closeLoad();"
+							action="#{perfilAcessoInclusaoBBean.voltarPreenchimento2Dialog}"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.botaoVoltar']}" />
+
+						<p:blockUI block="btnContinuarDialog" trigger="btnContinuarDialog" />
+						<p:commandLink id="btnContinuarDialog" styleClass="btn btn-default"
+							role="button" ajax="true"
+							update="formGeral:perfilAcessoInclusaoDialog"
+							process="formGeral:perfilAcessoInclusaoDialog" 
+							onstart="dialog_block(); openLoad();"
+							oncomplete="scrollToFirstMessage(); dialog_unblock(); closeLoad();"
+							value="#{msg['page.administrativo.perfilAcesso.incluir.botaoContinuar']}"
+							action="#{perfilAcessoInclusaoBBean.continuarComprovanteDialog}"
+							onclick="encryptSecureDL();" >
+						</p:commandLink>
+						<p:defaultCommand target="btnContinuarDialog" />
+
+					</p:outputPanel>
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

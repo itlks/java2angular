@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include src="#{apelidoBBean.configuracaoApelido.urlPageAviso}"></ui:include>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.apelidos.listaApelidos.informe.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">#{msg['pages.apelidos.listaApelidos.novo.pagamento']}</h5>
+							<span style="color: red; margin-right: 8px;"><strong>&gt;</strong>&nbsp;</span>
+							<p:commandLink action="#{apelidoBBean.preencherDados()}"
+								id="btnPreencherDados"
+								value="#{msg['pages.apelidos.listaApelidos.preencher.dados']}">
+							</p:commandLink>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:separator styleClass="space-b"/>
+					<p:outputPanel styleClass="form-group">
+						<p:outputPanel>
+							<strong><h5 class="space-b">#{msg['pages.apelidos.listaApelidos.pagamentos.cadastrados']}</h5></strong>
+						</p:outputPanel>
+						<p:outputPanel styleClass="table-responsive table table-striped">
+							<p:dataTable id="dtApelidos"
+								selection="#{apelidoBBean.configuracaoApelido.apelidoEscolhido}"
+								rowKey="#{obj.coluna1}"
+								value="#{apelidoBBean.configuracaoApelido.listaApelido}"
+								tableStyleClass="table-hover" var="obj" selectionMode="single">
+
+								<p:ajax event="rowSelect" listener="#{apelidoBBean.onRowSelect}" />
+
+								<p:column
+									headerText="#{apelidoBBean.configuracaoApelido.nomeColuna1}"
+									style="text-align: left;">
+									<h:outputText value="#{obj.coluna1}" />
+								</p:column>
+								<p:column
+									headerText="#{apelidoBBean.configuracaoApelido.nomeColuna2}">
+									<h:outputText value="#{obj.coluna2}" />
+								</p:column>
+
+								<p:column styleClass="text-right">
+									<p:blockUI block="alterar" trigger="alterar" />
+									<p:commandLink id="alterar" role="button"
+										action="#{apelidoBBean.alterar(obj)}">
+										<h:graphicImage id="imgAlterar" styleClass="custom-icons"
+											value="/images/u1239.png" /> #{msg['pages.apelidos.listaApelidos.alterar']}</p:commandLink>
+								</p:column>
+								<p:column styleClass="text-center">
+									<p:blockUI block="excluir" trigger="excluir" />
+									<p:commandLink id="excluir" role="button"
+										action="#{apelidoBBean.excluir(obj)}">
+										<h:graphicImage id="imgExcluir" styleClass="custom-icons"
+											value="/images/u1241.png" /> #{msg['pages.apelidos.listaApelidos.excluir']}</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

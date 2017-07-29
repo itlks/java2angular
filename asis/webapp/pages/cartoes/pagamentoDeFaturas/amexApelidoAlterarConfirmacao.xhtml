@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.amex.apelidos.conferirAlteracao']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<p:outputLabel><strong>#{msg['page.amex.apelidos.header.identificacao']}</strong></p:outputLabel>
+									<strong>&#160;</strong>
+									<p:outputLabel value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.identificacao}" id="identificacao"/>
+									<p:separator />
+									<br/>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="col-md-2">
+									<p:outputLabel for="numeroCartao" value="#{msg['page.amex.apelidos.header.numeroCartao']}"/>
+									<strong>&#160;</strong>
+									<p:inputText value="#{apelidoBBean.configuracaoApelido.apelidoEscolhido.numeroCartao}" maxlength="15" id="numeroCartao" styleClass="form-control numberOnly" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<br/>
+
+		<p:outputPanel styleClass="row space-b">
+		    <p:outputPanel styleClass="col-md-12 text-right">
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandLink id="btnVoltar" value="#{msg['page.amex.apelidos.botoes.voltar']}" styleClass="btn btn-default btn-cinza"
+					action="#{apelidoBBean.goApelido()}"/>
+						
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandLink id="btnContinuar" value="#{msg['page.amex.apelidos.botoes.continuar']}" styleClass="btn btn-default"
+					action="#{cartaoAmexBBean.continuarAmexApelidosAlterarConfirmacao}" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

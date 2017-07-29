@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.cadastro.contrato.preenchimento.cadastramento']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>#{msg['page.cadastro.contrato.preenchimento.dados.cadastramento']}</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-6">
+							<p>
+								<strong>#{cadastroContratoBBean.nomeSessao}</strong>
+							</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-2">
+							<p class="text-right">
+								<strong>#{msg['page.cadastro.contrato.preenchimento.agencia']}</strong>
+								#{cadastroContratoBBean.agenciaSessao}
+							</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-3">
+							<p class="text-right">
+								<strong>#{msg['page.cadastro.contrato.preenchimento.conta.corrente']}</strong>
+								#{cadastroContratoBBean.contaSessao}
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<p>
+								<strong>#{msg['page.cadastro.contrato.preenchimento.cnpj']}</strong>
+								#{cadastroContratoBBean.cnpjSessao}
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<h5 class="space-b">#{msg['page.cadastro.contrato.preenchimento.preencha.todos.campos']}</h5>
+							<h5 class="space-b">
+								<strong>#{msg['page.cadastro.contrato.preenchimento.identificacao']}</strong>
+							</h5>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.agencia']}"></h:outputLabel>
+								<p:inputText id="txtAgencia" type="text" maxlength="4"
+									value="#{cadastroContratoBBean.dto.agenciaAcesso}"
+									onkeypress="return onlyNumbers(event)"
+									styleClass="form-control pull-left largura-88" />
+
+								<p:outputPanel id="outPt">
+									<i id="imgTp"
+										class="fa fa-info-circle icone-informacao pull-left"></i>
+								</p:outputPanel>
+								<pe:tooltip id="toolTipInfo" for="outPt"
+									styleClass="associar-tooltip"
+									value="#{msg['page.cadastro.contrato.preenchimento.tooltip.agencia']}"
+									myPosition="Right center" atPosition="left center" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5 class="space-b">
+								<strong>#{msg['page.cadastro.contrato.preenchimento.dados.acesso']}</strong>
+							</h5>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.responsavel.nome']}"></h:outputLabel>
+								<p:inputText id="txtNomeAcesso" maxlength="14"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.nomeCompleto}"
+									type="text" styleClass="form-control pull-left largura-88" />
+								<p:outputPanel id="outPt2">
+									<i class="fa fa-info-circle icone-informacao pull left"
+										id="toolTipNome"></i>
+								</p:outputPanel>
+								<pe:tooltip id="toolTipInfo2" for="outPt2"
+									styleClass="associar-tooltip"
+									value="#{msg['page.cadastro.contrato.preenchimento.tooltip.nome']}"
+									myPosition="left center" atPosition="center" />
+								<p:outputPanel styleClass="stop-float"></p:outputPanel>
+
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.responsavel.email']}" />
+								<p:inputText id="txtEmail" maxlength="64"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.email}"
+									styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.responsavel.cpf']}" />
+								<p:inputText id="txtCpf" maxlength="15"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.cpf}"
+									onkeyup="maskCpfCnpj(this, event)" styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-1">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.responsavel.ddd']}" />
+								<p:inputText id="txtDdd" maxlength="2"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.telefoneDdd}"
+									styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-2">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.responsavel.telefone']}" />
+								<p:inputText id="txtFone" maxlength="9"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.telefoneNumero}"
+									styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-1">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.responsavel.ramal']}" />
+								<p:inputText id="txtRamal" maxlength="5"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.telefoneRamal}"
+									styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-8">
+
+							<p>
+								<strong>#{msg['page.cadastro.contrato.preenchimento.digite.pregunta']}</strong>
+							</p>
+							<br />
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.pergunta']}" />
+								<p:inputText id="txtPergunta" maxlength="20"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.perguntaAcesso}"
+									styleClass="form-control" />
+							</p:outputPanel>
+
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.resposta']}" />
+								<p:inputText id="txtResposta" maxlength="60"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.respostaAcesso}"
+									styleClass="form-control" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5 class="space-b">
+								<strong>#{msg['page.cadastro.contrato.preenchimento.outros.usuarios.master']}</strong>
+							</h5>
+							<p>#{msg['page.cadastro.contrato.preenchimento.permitida.solicitacao']}</p>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12 inputs-grey-header">
+
+							<p:outputPanel styleClass="col-md-5">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.outros.usuarios.nome']}"></h:outputLabel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-3">
+
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.outros.usuarios.cpf']}"></h:outputLabel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-1">
+
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.outros.usuarios.ddd']}"></h:outputLabel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-2">
+
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.outros.usuarios.telefone']}"></h:outputLabel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-1">
+
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.outros.usuarios.ramal']}"></h:outputLabel>
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12 inputs-grey-block">
+
+							<p:outputPanel styleClass="col-md-5">
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtNome2" maxlength="64"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalA.nomeCompleto}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtCpf2" maxlength="12"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalA.cpf}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtDdd2" maxlength="2"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalA.telefoneDdd}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-3">
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtFone2" maxlength="9"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalA.telefoneNumero}"
+										styleClass="form-control"></p:inputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtRamal2" maxlength="2"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalA.telefoneRamal}"
+										styleClass="form-control"></p:inputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtNome3" maxlength="64"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalB.nomeCompleto}"
+										styleClass="form-control"></p:inputText>
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-1">
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtCpf3" maxlength="12"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalB.cpf}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtDdd3" maxlength="2"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalB.telefoneDdd}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtFone3" maxlength="9"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalB.telefoneNumero}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-2">
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtRamal3" maxlength="64"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalB.telefoneRamal}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtNome4" maxlength="64"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalC.nomeCompleto}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtCpf4" maxlength="12"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalC.cpf}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-1">
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtDdd4" maxlength="2"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalC.telefoneDdd}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtFone4" maxlength="9"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalC.telefoneNumero}"
+										styleClass="form-control" />
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="form-group">
+									<p:inputText id="txtRamal4" maxlength="5"
+										value="#{cadastroContratoBBean.dto.usuarioMasterAdicionalC.telefoneRamal}"
+										styleClass="form-control"></p:inputText>
+								</p:outputPanel>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h:outputLabel for=""
+								value="#{msg['page.cadastro.contrato.preenchimento.quantidade.usuarios.master']}"></h:outputLabel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-2">
+
+							<p:outputPanel styleClass="form-group">
+								<p:inputText id="txtQtd" maxlength="2"
+									value="#{cadastroContratoBBean.dto.usuarioMaster.qtdAssinatura}"
+									onkeypress="return onlyNumbers(event)" type="text"
+									styleClass="form-control pull-left largura-80"></p:inputText>
+								<p:outputPanel id="outPtIco">
+									<i class="fa fa-info-circle icone-informacao pull left"></i>
+								</p:outputPanel>
+								<pe:tooltip id="toolTipInfo3" for="outPtIco"
+									styleClass="associar-tooltip"
+									value="#{msg['page.cadastro.contrato.preenchimento.AoSolicitar']}"
+									myPosition="left center" atPosition="right center" />
+								<p:outputPanel styleClass="stop-float"></p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+
+							<h5>
+								<strong>#{msg['page.cadastro.contrato.preenchimento.contas.acesso']}</strong>
+							</h5>
+							<br />
+							<p>#{msg['page.cadastro.contrato.preenchimento.digite.contas']}</p>
+							<br />
+
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-1">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.contas.agencia']}" />
+								<p:inputText id="txtAgCa" maxlength="4"
+									onkeypress="return onlyNumbers(event)"
+									value="#{cadastroContratoBBean.agenciaContaAcesso}"
+									styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-2 col-md-offset-1">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.contas.conta.corrente']}" />
+								<p:inputText id="txtContaCorCa" maxlength="9"
+									onkeypress="return onlyNumbers(event)"
+									value="#{cadastroContratoBBean.contaCorrenteContaAcesso}"
+									styleClass="form-control"></p:inputText>
+							</p:outputPanel>
+
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-2 text-right">
+							<p:commandLink id="cmdLnkDir"
+								styleClass="btn btn-period add-in-out" actionListener="#"
+								role="button"> >> </p:commandLink>
+							<br />
+							<p:commandLink id="cmdLnkEsq"
+								styleClass="btn btn-period add-in-out" actionListener="#"
+								role="button">  &#60;&#60; </p:commandLink>
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-5">
+
+							<p:outputPanel styleClass="form-group">
+								<p:inputTextarea id="txtAreaContas" rows="5"
+									styleClass="form-control" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p>
+								<strong>#{msg['page.cadastro.contrato.preenchimento.selecione.abaixo.tipo.servico']}</strong>
+							</p>
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-sm-6">
+							<p:outputPanel styleClass="form-group">
+								<p:outputPanel styleClass="table-responsive radio space-b">
+									<h:selectOneRadio id="_1" value="_1">
+										<f:selectItem
+											itemLabel="#{msg['page.cadastro.contrato.preenchimento.somente.consultas']}"
+											itemValue="_1" />
+										<f:selectItem
+											itemLabel="#{msg['page.cadastro.contrato.preenchimento.consultas.servicos.especiais']}"
+											itemValue="_2">											
+										</f:selectItem>
+									</h:selectOneRadio>
+
+								</p:outputPanel>
+								<p:outputPanel>
+									<p:outputPanel id="outPutPnl" styleClass="form-group">
+										<i class="fa fa-info-circle icone-informacao pull left"></i>
+									</p:outputPanel>
+									<pe:tooltip id="toolTipInfo4" for="outPutPnl"
+									styleClass="associar-tooltip"
+									value="#{msg['pages.cadastro.contrato.preenchimento.Aoselecionar2']}"
+									myPosition="left center" atPosition="right center" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:separator />
+							<p>#{msg['page.cadastro.contrato.preenchimento.para.realizacao.movimentacoes']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p>#{msg['page.cadastro.contrato.preenchimento.cadastre.assinatura.eletronica']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-4">
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.assinatura.eletronica']}" />
+								<p:password id="txtAssEle" maxlength="8"
+									styleClass="form-control" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.cadastro.contrato.preenchimento.confirme.assinatura.eletronica']}" />
+								<p:password id="txtAssEleConfirm" maxlength="8"
+									styleClass="form-control" />
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+
+							<p>#{msg['page.cadastro.contrato.preenchimento.para.realizar.movimentacoes']}</p>
+							<br />
+							<p>#{msg['page.cadastro.contrato.preenchimento.apos.finalizacao.cadastramento']}</p>
+							<br />
+							<p>#{msg['page.cadastro.contrato.preenchimento.aderir.servico.mobile.token']}</p>
+							<br />
+
+							<p>
+								<strong>#{msg['page.cadastro.contrato.preenchimento.deseja.efetuar.adesao.mobile.token']}</strong>
+							</p>
+							<br />
+							<p:outputPanel styleClass="table-responsive radio">
+								<h:selectOneRadio id="_2" value="_2">
+									<f:selectItem
+										itemLabel="#{msg['page.cadastro.contrato.preenchimento.sim']}"
+										itemValue="_1" />
+									<f:selectItem
+										itemLabel="#{msg['page.cadastro.contrato.preenchimento.nao']}"
+										itemValue="_2" />
+								</h:selectOneRadio>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza pull-left"
+					action="#{cadastroContratoBBean.cancelar}" role="button">#{msg['page.cadastro.contrato.preenchimento.cancelar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					action="#{cadastroContratoBBean.voltarCadastramento}" role="button">#{msg['page.cadastro.contrato.preenchimento.voltar']}</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" action="#{cadastroContratoBBean.continuarConfirmacao}"
+					role="button">#{msg['page.cadastro.contrato.preenchimento.continuar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+	</ui:define>
+</ui:composition>

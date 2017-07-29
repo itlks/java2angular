@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<!-- INICIO html/pimefaces -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.pagamentoFinalizado']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<!-- alerta -->
+
+		<!-- flex-align-vh lg-height -->
+
+		<!-- alerta fim -->
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<!-- titulo blocos -->
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-6">
+							<p:outputPanel
+								styleClass="col-lg-12 text-center flex-align-vh lg-height form-group margin-bottom-120 margin-top-40">
+								<p:outputPanel styleClass="col-lg-3">
+									<h:graphicImage value="/images/u132.png"
+										style="width: 84px;height: 96px;" />
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-9">
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.misterioFazenda']}</p>
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.secretariaReceitaFederal']}</p>
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.documentoArrecadacao']}</p>
+									<p>#{msg['page.pagamentos.tributos.federais.darfCadastro.darf']}</p>
+
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="form-group">
+								<h:outputText for="nomeTelefone" style="padding-top: 5px;">#{msg['page.pagamentos.tributos.federais.darfCadastro.nomeEmpresaTelefone']}</h:outputText>
+								<p:outputPanel styleClass="quebra" />
+								<p:outputLabel id="nomeTelefone"
+									value="#{tributosFederaisBBean.darf.nome}">
+								</p:outputLabel>
+								
+								<p:separator />
+								
+								<h5><strong>#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.atencao']}</strong></h5>
+								
+								<p>#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.msg.atencao']}</p>
+								
+							</p:outputPanel>
+						</p:outputPanel>
+						<!-- 				FIM PAINEL ESQUERDO				 -->
+
+						<!-- 				PAINEL DIREITO 					 -->
+						<p:outputPanel styleClass="col-lg-6 border-left">
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="periodoApuracao">#{msg['page.pagamentos.tributos.federais.darfCadastro.periodoApuracao']}
+								</h:outputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="periodoApuracao"
+										value="#{tributosFederaisBBean.darf.dataPeriodo}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="cpfCnpj">#{msg['page.pagamentos.tributos.federais.darfCadastro.cpfCnpj']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6 form-group text-right">
+									<p:outputLabel id="cpfCnpj"
+										value="#{tributosFederaisBBean.darf.cpfCnpj}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="codigoReceita">#{msg['page.pagamentos.tributos.federais.darfCadastro.codigoReceita']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="codigoReceita"
+										value="#{tributosFederaisBBean.darf.codigoReceita}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="receitaBruta">#{msg['page.pagamentos.tributos.federais.darfCadastro.numeroReferencia']}
+								</h:outputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="receitaBruta"
+										value="#{tributosFederaisBBean.darf.numeroReferencia}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="dataVencimento">#{msg['page.pagamentos.tributos.federais.darfCadastro.dataVencimento']}
+								</h:outputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="dataVencimento"
+										value="#{tributosFederaisBBean.darf.dataVencimento}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="valorPrincipal">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorPrincipal']}
+								</h:outputText>
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorPrincipal"
+										value="#{tributosFederaisBBean.darf.valorPrincipal}" />
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="valorMulta">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorMulta']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorMulta"
+										value="#{tributosFederaisBBean.darf.valorMulta}">
+									</p:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="row flex-align-v padding-5">
+								<p:outputPanel styleClass="col-lg-6 form-group sem-margin">
+									<h:outputText for="valorJuros">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorJuros']}
+								<br />
+								#{msg['page.pagamentos.tributos.federais.darfCadastro.encargos']}
+								</h:outputText>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorJuros">#{tributosFederaisBBean.darf.valorJurosEncargos}</p:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel
+								styleClass="row flex-align-v row-gray-background padding-5 no-padding-bottom"
+								id="painelValorTotal">
+								<p:outputPanel styleClass="col-lg-6 form-group">
+									<h:outputText for="valorTotal">#{msg['page.pagamentos.tributos.federais.darfCadastro.valorTotal']}</h:outputText>
+
+								</p:outputPanel>
+								<p:outputPanel styleClass="col-lg-6  form-group text-right">
+									<p:outputLabel id="valorTotal">#{tributosFederaisBBean.darf.valorTotal}</p:outputLabel>
+								</p:outputPanel>
+							</p:outputPanel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="row col-lg-12  form-group text-center margin-top-20">
+							<p>#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.darfRecolhido']}</p>
+							<p>#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.portandoDevera']}</p>
+							<p>#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.darf']}</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator styleClass="margin-bottom-25" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputLabel for="autenticacaoBancaria">#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.autenticacaoBancaria']}</p:outputLabel>
+							<p:outputPanel styleClass="quebra" />
+							<h:outputText id="autenticacaoBancaria"></h:outputText>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+							<p:outputLabel for="dataTransacao">#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.dataHora']}</p:outputLabel>
+							<p:outputPanel styleClass="quebra" />
+							<h:outputText id="dataTransacao"></h:outputText>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator styleClass="custom-separator" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p>
+								<h:outputText
+									value="#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.casoDuvida']}" />
+							</p>
+							<p>
+								<h:outputText
+									value="#{msg['page.pagamentos.tributos.federais.tributosDarfPgto.capitaisRegioes']}" />
+							</p>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow" id="painelGeral">
+					
+					<p>
+						<strong>
+							<h:outputText value="Escolha uma das cotas" style="font-size: 16px" />
+						</strong>
+						<br />
+						<br />
+					</p>
+					
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-6 form-group">
+							<p:outputLabel value="Cliente: " />
+							<p:outputLabel value="#{consorcioListaCotasAtivasBBean.dto.cliente}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-6 form-group">
+							<p:outputLabel value="Cnpj: " />
+							<p:outputLabel value="#{consorcioListaCotasAtivasBBean.dto.cnpj}" 
+								converter="converterCpfCnpj"/>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="table-responsive table table-striped table-link">
+								<p:dataTable id="tabelaCotasAtivas" var="item" 
+									value="#{consorcioListaCotasAtivasBBean.dto.listaDTO}"  
+								 	selectionMode="single"
+								 	selection="#{consorcioListaCotasAtivasBBean.dto.itemSelecionado}"
+								  	rowKey="#{item.cota}">
+									
+									<p:ajax event="rowSelect" listener="#{consorcioListaCotasAtivasBBean.continuarProximaTela}" />
+						
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="Grupo" />
+										</f:facet>
+										<h:outputText value="#{item.grupo}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="Cota" />
+										</f:facet>
+										<h:outputText value="#{item.cota}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="Bem" />
+										</f:facet>
+										<h:outputText value="#{item.bem}" />
+									</p:column>
+
+								</p:dataTable>
+							</p:outputPanel>
+						<p:blockUI id="blockUITable" block="tabelaCotasAtivas" trigger="tabelaCotasAtivas" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+					
+	</ui:define>
+</ui:composition>

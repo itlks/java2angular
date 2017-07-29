@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.periodoDesejado']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.dataInicial']}"
+									styleClass="font-normal" />
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="popup"
+										value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.dataInicial}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false">
+										<p:ajax event="change"/>
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.dataFinal']}"
+									styleClass="font-normal" />
+								<p:outputPanel styleClass="icon-data-input">
+									<i class="fa fa-calendar"></i>
+									<p:calendar id="popup1"
+										value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.dataFinal}"
+										pattern="dd/MM/yyyy" converter="dateConverterFormat"
+										maxlength="10"
+										onkeyup="mascaraData(this, event); bloqueioCTRLV(this, event);"
+										readonlyInput="false">
+										<p:ajax event="change"/>
+									</p:calendar>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel for=""
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoOcorrencia']}"
+									styleClass="font-normal" />
+								<h:selectOneMenu name="tipoOrigemApreensao" value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.tipoOcorrencia}">
+									<f:selectItem itemValue="T" itemLabel="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoTransferencia.todos']}" />
+									<f:selectItem itemValue="C" itemLabel="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoTransferencia.credito']}" />
+									<f:selectItem itemValue="D" itemLabel="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoTransferencia.debito']}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="form-group">
+								<h:outputLabel
+									value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.TipoTransferencia']}"
+									styleClass="font-normal" />
+								<h:selectOneMenu name="tipoOrigemApreensao" value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.tipoTransferencia}">
+									<f:selectItem itemValue="T" itemLabel="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoTransferencia.todos']}"/>
+									<f:selectItem itemValue="E" itemLabel="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoTransferencia.doce']}" />
+									<f:selectItem itemValue="D" itemLabel="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.tipoTransferencia.docd']}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink 	styleClass="btn btn-default"
+							 	actionListener="#{contaCorrenteExtratosAdesaoDocOnlineBBean.consultarMovDocOnLine}"
+								role="button" 
+								update="@form"
+								process="@all">
+          				#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.enviar']}
+        		</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" rendered="#{contaCorrenteExtratosAdesaoDocOnlineBBean.exibirMsgSemRegistro}">
+			<p:outputPanel styleClass="col-xs-12 text-center">
+				<h:outputText value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.nenhumDocEncontrado']}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="panelMsgDetalhe" styleClass="row" rendered="#{contaCorrenteExtratosAdesaoDocOnlineBBean.exibirGrids}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.cliqueOpcaoDesejadaVisualizarDetalhe']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel id="painelGrid" styleClass="row" rendered="#{contaCorrenteExtratosAdesaoDocOnlineBBean.exibirGrids}">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+				
+					<p:outputPanel styleClass="row"
+						rendered="#{contaCorrenteExtratosAdesaoDocOnlineBBean.isCredito}">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								<h:outputFormat value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.creditoPeriodo']}">
+									<f:param  value=" #{contaCorrenteExtratosAdesaoDocOnlineBBean.dataIncialFormatada}" />
+									<f:param  value=" #{contaCorrenteExtratosAdesaoDocOnlineBBean.dataFinalFormatada}" />
+								</h:outputFormat>
+							</h5>
+
+							<p:outputPanel styleClass="table table-striped">
+								<p:dataTable id="tabelaCredito"
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.consultaMovDocOnLineDTO.movDocOnLineCreditoList}"
+									var="movimento" >
+
+									<p:column headerText="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.dataMovimento']}" >
+										<h:outputText value="#{movimento.fecha}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+										<f:facet name="footer">
+											<p:outputPanel styleClass="text-left">
+												#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.total']}
+											</p:outputPanel>
+										</f:facet>
+									</p:column>
+								
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:outputPanel styleClass="row" rendered="#{contaCorrenteExtratosAdesaoDocOnlineBBean.isDebito}">
+						<p:outputPanel styleClass="col-xs-12">
+							<h5 class="space-b">
+								<h:outputFormat value="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.debitoPeriodo']}">
+									<f:param  value=" #{contaCorrenteExtratosAdesaoDocOnlineBBean.dataIncialFormatada}" />
+									<f:param  value=" #{contaCorrenteExtratosAdesaoDocOnlineBBean.dataFinalFormatada}" />
+								</h:outputFormat>
+							</h5>
+
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:dataTable id="tabelaDebito"
+									value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.consultaMovDocOnLineDTO.movDocOnLineDebitoList}"
+									var="movimento" rowKey="#{movimento}"
+									emptyMessage="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.naoExisteLancamentoDebitoPeriodo']}"
+									selectionMode="single"
+									selection="#{contaCorrenteExtratosAdesaoDocOnlineBBean.movimentoDocOnLine}">
+
+									<p:ajax event="rowSelect" process="@this" update="@all"
+										listener="#{contaCorrenteExtratosAdesaoDocOnlineBBean.detalharMovimento}" />
+
+									<p:column
+										headerText="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.dataMovimento']}">
+										<h:outputText value="#{movimento.fecha}" >
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+										<f:facet name="footer">
+											<p:outputPanel styleClass="text-left">
+												#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.total']}
+											</p:outputPanel>
+										</f:facet>
+									</p:column>
+									
+									<p:column
+										headerText="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.nomeBeneficio']}">
+										<h:outputText value="#{movimento.nomeFavorecido}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.valorDebito']}">
+										<h:outputText value="#{movimento.importe}" converter="valorMonetarioConverter"/>
+										<f:facet name="footer">
+											<p:outputPanel styleClass="text-left">
+												<h:outputText value="#{contaCorrenteExtratosAdesaoDocOnlineBBean.consultaMovDocOnLineDTO.movDocOnLineDebitoTotal}" converter="valorMonetarioConverter"/>
+											</p:outputPanel>
+										</f:facet>
+									</p:column>
+									
+									<p:column
+										headerText="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.identificacao']}">
+										<h:outputText value="#{movimento.tipoTransferencia}" />
+									</p:column>
+									<p:column
+										headerText="#{msg['page.contaCorrente.extrato.consultaAdesaoDocOnline.status']}">
+										<h:outputText value="#{movimento.situacion}" />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					
+					<p:separator />
+					<p:outputPanel>
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml"/>
+					</p:outputPanel>
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

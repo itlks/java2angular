@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/templates/template.xhtml">
+
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="placeholders">
+			<p:outputPanel styleClass="header-page">
+				<span>Administrativo</span>
+				<span> > </span>
+				<span>Transfêrencia de Arquivos</span>
+
+				<h2>Associar Regras (novo)</h2>
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="alerta mini-alerta">
+				<p>
+					<i class="fa fa-exclamation-circle" /> <span> No serviço de
+						Associação de Regras, você determina quais produtos/layouts
+						poderão ser transmitidos/recebidos pelos usuários secundários. </span>
+				</p>
+			</p:outputPanel>
+
+			<h4>Associar Regras</h4>
+
+			<p:outputPanel styleClass="conteudo-painel">
+				<h5>Usuário</h5>
+
+				<h:selectOneMenu value="#{transferenciaArquivosAssociarRegrasBBean.usuarioSelecionado}">
+					<p:ajax
+						listener="#{transferenciaArquivosAssociarRegrasBBean.onChangeUsuario}"
+						update="@(.placeholders)" />
+
+					<f:selectItem itemLabel="Selecione" itemValue=""
+						noSelectionOption="true" />
+
+					<f:selectItems
+						value="#{transferenciaArquivosAssociarRegrasBBean.usuariosSecundarios}"
+						var="user" itemLabel="[#{user.loginUser}] #{user.nomeUser}"
+						itemValue="[#{user.loginUser}] #{user.nomeUser}" />
+				</h:selectOneMenu>
+
+
+				<p:panel id="painelProdutos"
+					visible="#{transferenciaArquivosAssociarRegrasBBean.exibirOpcoes}"
+					style="margin: auto -15px;">
+					<p:separator style="margin-bottom: 25px;" />
+
+					<p:dataTable emptyMessage="Não há produtos para este usuários."
+						disabledSelection="true" id="produtosTable"
+						tableStyleClass="tacle-custom tacle-custom-header-left table-zebrada table-associar dotted-table table-hover"
+						value="#{transferenciaArquivosAssociarRegrasBBean.produtosDisponiveis}"
+						var="produto" rowKey="#{produto.nome}">
+
+						<p:ajax event="rowSelect"
+							listener="#{transferenciaArquivosAssociarRegrasBBean.setObjSelecionado}" />
+
+						<p:column headerText="Produto">
+							#{produto.nome}
+						</p:column>
+
+						<p:column headerText="Layout">
+							#{produto.layout}
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Remessa <p:outputLabel
+									styleClass="remessa-replacement">i</p:outputLabel>
+							</f:facet>
+
+							<pe:tooltip for="@(.remessa-replacement)"
+								value="Permite enviar arquivos remessa para os layouts selecionados"
+								myPosition="left center" atPosition="right center" />
+
+							<p:selectBooleanCheckbox value="#{produto.remessa}">
+								<p:ajax
+									listener="#{transferenciaArquivosAssociarRegrasBBean.onCheckedRemessa(produto)}" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">Retorno <p:outputLabel
+									styleClass="retorno-replacement">i</p:outputLabel>
+							</f:facet>
+
+							<pe:tooltip for="@(.retorno-replacement)"
+								styleClass="associar-tooltip"
+								value="Permite receber arquivos retorno dos layouts selecionados"
+								myPosition="left center" atPosition="right center" />
+
+							<p:selectBooleanCheckbox value="#{produto.retorno}">
+								<p:ajax
+									listener="#{transferenciaArquivosAssociarRegrasBBean.onCheckedRetorno(produto)}" />
+							</p:selectBooleanCheckbox>
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
+
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="text-right rodape-button">
+				<h:panelGroup>
+
+					<p:commandLink value="Cancelar"
+						styleClass="btn btn-default btn-secundario"
+						action="#{blankBBean.cancelar}" />
+
+					<p:commandLink value="Voltar"
+						styleClass="btn btn-default btn-secundario"
+						action="goHome" />
+
+					<p:commandLink value="Continuar" styleClass="btn btn-default"
+						style="margin-left:10px;"
+						action="#{transferenciaArquivosAssociarRegrasBBean.passarPassoComprovante}"
+						rendered="#{transferenciaArquivosAssociarRegrasBBean.exibirOpcoes}" />
+
+				</h:panelGroup>
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

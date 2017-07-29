@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- ############################################################### INFORMACOES TRANSFERENCIA INICIO ####################################################################### -->
+
+	<p:outputPanel styleClass="row space-b">
+		<p:outputPanel styleClass="col-xs-12 space-b">
+			<h:outputText
+				value="#{transferenciaBBean.tituloTipoTransferencia}" />
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<p:outputPanel styleClass="row space-b">
+		
+			<p:outputPanel styleClass="col-xs-12 space-b">
+				<h5 class="bold">#{msg['page.transferencias.transferir.confirmacao.contasOrigem']}</h5>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.confirmacao.nome']}" />
+				<h:outputText for="" value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].nomeOrigem}" />
+			</p:outputPanel>
+				
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.agencia']}" />
+				<h:outputText for="" value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].agenciaOrigemFormatada}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.conta']}" />
+				<h:outputText for="" value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].contaOrigemFormatada}" />
+			</p:outputPanel>
+				
+	</p:outputPanel>
+
+
+	<p:outputPanel styleClass="row space-b">
+		
+			<p:outputPanel styleClass="col-xs-12 space-b">
+				<h5 class="bold">#{msg['page.transferencias.transferir.confirmacao.contaDestino']}</h5>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.confirmacao.nome']}" />
+				<h:outputText for=""
+					value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].nomeDestino}" />
+			</p:outputPanel>
+
+			<p:outputPanel rendered="#{not empty transferenciaBBean.tipoTransferencia}">
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel for="" styleClass="space"
+						value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].tipoDocumento}:" />
+					<h:outputText for=""
+						value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].documentoFormatado}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			
+			<p:outputPanel rendered="#{not empty transferenciaBBean.tipoTransferencia}">
+				
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel for="" styleClass="space"
+						value="#{msg['page.transferencias.transferir.banco']}" />
+					<h:outputText for=""
+						value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].bancoDestinoFormatado}" />
+				</p:outputPanel>
+				
+				<p:outputPanel styleClass="col-xs-12">
+					<h:outputLabel for="" styleClass="space"
+						value="#{msg['page.transferencias.transferir.ispb']}" />
+					<h:outputText for=""
+						value="#{transferenciaBBean.dtoParaValidacaoHash2.ispb}" />
+				</p:outputPanel>
+					
+			</p:outputPanel>
+		
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.agencia']}" />
+				<h:outputText for=""
+					value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].agenciaDestinoFormatada}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.conta']}" />
+				<h:outputText for=""
+					value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].contaDestinoFormatada}" />
+			</p:outputPanel>
+
+			<p:outputPanel styleClass="col-xs-12">
+				<h:outputLabel for="" styleClass="space" value="#{msg['page.transferencias.transferir.valor']}" />
+				<h:outputText for="" value="#{transferenciaBBean.valor}">
+               		<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+            		</h:outputText>
+           	 </p:outputPanel>
+
+	</p:outputPanel>
+
+
+	<p:outputPanel styleClass="row space-b">
+		
+		<p:outputPanel styleClass="col-xs-12 space-b">
+			<h5 class="bold">#{msg['page.transferencias.transferir.confirmacao.outrasInformacoes']}</h5>
+		</p:outputPanel>
+		
+			
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['page.transferencias.transferir.confirmacao.finalidade']}" />
+			<h:outputText for=""
+				value="#{transferenciaBBean.tipoFinalidade.descricao}" />
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['page.transferencias.transferir.confirmacao.tarifaServico']}" />
+				<h:outputText for="" value="#{transferenciaBBean.dadosConsultiva.rsRetorno[0].valorTarifa}">
+            			<f:convertNumber type="currency" locale="pt_BR" currencySymbol="R$" />
+            		</h:outputText>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="" styleClass="space"
+				value="#{msg['page.transferencias.transferir.historico']}" />
+			<h:outputText for="" value="#{transferenciaBBean.historico}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'AGENDAMENTO'}">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.confirmacao.dataAgendada']}" />
+				<h:outputText for="" 
+					value="#{transferenciaBBean.dataTransferencia}">
+                              <f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:outputPanel>
+
+			<p:outputPanel rendered="#{transferenciaBBean.tipoData eq 'TRANSFERIR_AGORA'}">
+				<h:outputLabel for="" styleClass="space"
+					value="#{msg['page.transferencias.transferir.confirmacao.dataTransferencia']}" />
+				<h:outputText for="" 
+					value="#{transferenciaBBean.dataTransferencia}">
+                              <f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:outputPanel>
+		</p:outputPanel>
+	
+ 	</p:outputPanel>
+	  
+	<!-- ####################################################################### TRANSFERENCIA CLIENTE FIM ######################################################################### -->
+</ui:composition>

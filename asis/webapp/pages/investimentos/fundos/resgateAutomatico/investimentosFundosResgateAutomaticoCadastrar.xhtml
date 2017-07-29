@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos flex-align-v alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<label class="font-normal">
+						Para sua tranquilidade, o Santander oferece a opção de cadastrar Fundos de Investimento para resgate automático, 
+						caso o saldo de sua conta corrente fique abaixo do limite. Porém se você já possui Fundos cadastrados para esse fim, 
+						poderá cancelá-los a qualquer momento. Caso necessário efetue um novo cadastro. 
+					</label>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+
+					<h4>Informe o fundo para cadastrar o resgate automático</h4>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:tabView id="panelTokens2" styleClass="abas">
+					<p:tab title="Meus Fundos de Investimento">
+						<p>
+							<strong>
+								<h4>Selecione o fundo desejado para cadastrar o resgate automático:</h4>
+							</strong>
+						</p>
+						<br />
+						
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-lg-12">
+								<p:outputPanel styleClass="table-responsive table table-striped">
+								
+									<p:dataTable 	id="tableMeusFundosInvestimento"
+													tableStyleClass="table-responsive table table-striped table-click" 
+													rowKey="#{fundo.codigoFundoContaFundo}"													
+													value="#{investimentosFundosResgateAutomaticoBBean.listaCadastrar}" 
+													var="fundo"
+													selectionMode="single"
+													selection="#{investimentosFundosResgateAutomaticoBBean.fundoSelecionado}" >
+													
+										<p:ajax event="rowSelect" />			
+													 
+										
+										<p:column headerText="Fundo">
+											<i class="fa fa-circle space-r" style="color: #{investimentosFundosResgateAutomaticoBBean.obterCorTipoFamilia(fundo.tipoFamilia)}" aria-hidden="true"></i>
+											<h:outputText value="#{fundo.descFundo}" />
+										</p:column>
+										
+										<p:column headerText="Saldo Bruto" styleClass="text-right">
+											<h:outputText value="#{fundo.saldoBruto}" />
+										</p:column>
+										
+										<p:column headerText="Saldo Líquido" styleClass="text-right">
+											<h:outputText value="#{fundo.saldoLiquido}" />
+										</p:column>
+									</p:dataTable>
+									
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						
+						
+						
+						<p:outputPanel styleClass="familia-fundos no-print no-visible">
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-md-12">
+									<h5>
+										<strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.titleFamiliaFundos']}</strong>
+									</h5>
+								</p:outputPanel>
+							</p:outputPanel>
+							
+		
+							<ui:include src="/pages/investimentos/fundos/rentabilidadePeriodo/legendaFamiliaFundos.xhtml" >
+								<ui:param name="listaLegenda" value="#{investimentosFundosResgateAutomaticoBBean.legendas.datos.familia}" /> 
+							</ui:include>
+							
+							
+						</p:outputPanel>
+					</p:tab>
+				</p:tabView>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink 
+						styleClass="btn btn-default btn-cinza"
+          				action="#{investimentosFundosResgateAutomaticoBBean.voltarParaResgateAutomaticoCancelar}" 
+          				role="button">Voltar 
+           		</p:commandLink>
+        		<p:commandLink 
+        				styleClass="btn btn-default margin5" disabled="true"
+        				action="#{investimentosFundosResgateAutomaticoBBean.consultaCaracteristicas}"
+          				role="button">Ver características 
+              	</p:commandLink>
+        		<p:commandLink 
+        				styleClass="btn btn-default " disabled="true"
+        				action="#{investimentosFundosResgateAutomaticoBBean.cadastrar}"
+          				role="button">Cadastrar 
+              	</p:commandLink>
+					
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<script>
+			$(".table-click tbody tr").click(function() {
+				$(".table-click tbody tr").removeClass("yellow");
+				$(this).toggleClass("yellow"); 
+			});			
+		</script>	
+	</ui:define>
+</ui:composition>

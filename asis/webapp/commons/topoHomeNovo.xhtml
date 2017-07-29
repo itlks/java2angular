@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel id="topo" styleClass="topo">
+		
+		<p:outputPanel styleClass="container-fluid">
+			<p:outputPanel styleClass="row">
+
+				<p:outputPanel styleClass="col-xs-4">
+					<p:outputPanel id="logo" styleClass="logo">
+						<p:commandLink action="#{menuBBean.redirectHome}">
+							<p:graphicImage value="/images/logo-login.png" alt="logo" />
+						</p:commandLink>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<h:form id="formPainelNotificacoes">
+					<p:outputPanel styleClass="col-xs-8 text-right" id="painelNotificacoes">
+						<p:outputPanel styleClass="iconsHeader ">
+
+							<p:commandLink action="#{homeBBean.exibirOcultarAutorizacoes}" styleClass="homeCoachMark5"
+								update=":formPainelNotificacoes" id="iconeAutorizacoes"
+								rendered="#{atributosDaSessao.acessoAutorizacao eq 'S'}">
+								
+								<p:inputText type="hidden" styleClass="textCoachMark" value="Clique no ícone e confira suas Pendências de Autorização."></p:inputText>
+								<p:inputText type="hidden" styleClass="posicaoPainel" value="text-align: left; width: 255px; left: -310px; top:70px; display: block; position: absolute;"></p:inputText>
+								<p:outputPanel styleClass="imagemPainel" style="left: -106px; top: -18px; position: absolute; z-index: 1; transform: rotate(180deg); -webkit-transform: rotate(180deg); -moz-transform:rotate(180deg);">
+									<img style="display: none;" src="#{facesContext.externalContext.requestContextPath}/images/arrowCoachMark.png" />		
+								</p:outputPanel>
+								
+								<span class="notification first">#{homeBBean.autorizacoes.numeroPendencias}</span>
+								<i class="ic icon-autorizacao" title="Autorizações" aria-hidden="true"></i>
+							</p:commandLink>
+							
+							<p:commandLink id="iconeNotificacoes" styleClass="homeCoachMark6">
+								
+								<p:inputText type="hidden" styleClass="textCoachMark" value="Clique no ícone e confira seus Alertas."></p:inputText>
+								<p:inputText type="hidden" styleClass="posicaoPainel" value="text-align: left; width: 250px; left: -310px; top:70px; display: block; position: absolute; z-index: 1;"></p:inputText>
+								<p:outputPanel styleClass="imagemPainel" style="left: -106px; top:-18px; position: absolute; z-index: 1; transform: rotate(180deg); -webkit-transform: rotate(180deg); -moz-transform:rotate(180deg);">
+									<img style="display: none;" src="#{facesContext.externalContext.requestContextPath}/images/arrowCoachMark.png" />		
+								</p:outputPanel>
+								
+								<span class="notification">#{homeBBean.qteAvisos}</span>
+								<i class="ic icon-alerta" title="Notificações" aria-hidden="true"></i>
+							</p:commandLink>
+
+							<p:commandLink onclick="btnInfoCoachMark();" id="btnAtivar" styleClass="homeCoachMark7">
+								
+								<p:inputText type="hidden" styleClass="textCoachMark" value="Acesse este Tutorial sempre que quiser."></p:inputText>
+								<p:inputText type="hidden" styleClass="posicaoPainel" value="text-align: left; width: 255px; left: -335px; top:70px; display: block; position: absolute; z-index: 1;"></p:inputText>
+								<p:outputPanel styleClass="imagemPainel" style="left: -106px; top: -18px; position: absolute; z-index: 1; transform: rotate(180deg); -webkit-transform: rotate(180deg); -moz-transform:rotate(180deg);">
+									<img style="display: none;" src="#{facesContext.externalContext.requestContextPath}/images/arrowCoachMark.png" />		
+								</p:outputPanel>
+								
+								<i class="ic icon-ajuda" title="Ajuda" aria-hidden="true"></i>
+							</p:commandLink>
+							
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="userInfo">
+							<p class="userName">#{msg['page.home.label.ola']},
+								#{loginBBean.session.nomeUsuarioMaster}</p>
+							<p class="lastAcess">#{ msg['page.home.label.ultimoAcesso']}
+								#{loginBBean.session.dataUltimoAcesso}</p>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="btnSair">
+							<p:commandLink title="Sair" styleClass="sair" partialSubmit="true"
+								action="#{mensagemBBean.sairInternetBanking}"
+								value="#{ msg['page.home.label.sair']}" />
+						</p:outputPanel>
+						
+					</p:outputPanel>
+
+					<ui:include src="/pages/home/painelAutorizacoes.xhtml" />
+					<ui:include src="/pages/home/painelNotificacoes.xhtml" />
+				</h:form>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+
+	<!-- Data/Hora/Agencia/Conta/Trocar Conta -->
+	<p:outputPanel styleClass="row homeNova">
+		<div class="sub-menu-header home">
+
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-6 dataHora">
+					<form jsfc="h:form" id="formData">
+						<p>
+							<h:outputText escape="false" id="idDataHora"
+								value="#{menuBBean.dataHora}" />
+							<p:poll interval="10"
+								listener="#{counterBBean.atualizarDataHora}"
+								update="formData:idDataHora" />
+						</p>
+					</form>
+				</p:outputPanel>
+
+				<p:outputPanel styleClass="col-xs-6 text-right">
+					<p:outputPanel styleClass="agenciaConta">
+						<p>
+							<span class="space-r"><strong>#{
+									msg['page.home.label.agencia'] }:</strong> #{loginBBean.session.agencia}</span>
+							<span><strong>#{ msg['page.home.label.conta'] }:</strong>
+								#{loginBBean.session.conta}</span>
+						</p>
+					</p:outputPanel>
+					<ui:include src="/commons/trocaConta/btnTrocaConta.xhtml" />
+				</p:outputPanel>
+			</p:outputPanel>
+		</div>
+	</p:outputPanel>
+
+</ui:composition>

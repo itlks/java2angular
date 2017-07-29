@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovoSemMenuSair.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/invalidTeclado.xhtml" />
+		<script language="JavaScript" type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/js/default.js"/>
+			<p:outputPanel styleClass="row space-b">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel>
+						<h1>#{msg['pages.cadastroPj.ativacao']}</h1>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="titulo-painel">
+						<h4>#{msg['pages.cadastroPj.ativacao.comprovante.titulo']}</h4>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="box-shadow no-margin-bottom">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-6">
+								<p class="text-left">
+									<strong>#{msg['pages.cadastroPj.ativacao.label.nomeTitular']}</strong>
+									#{ativacaoMasterBBean.dto.cliente}
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.ativacao.label.agencia']}</strong>
+									#{ativacaoMasterBBean.dto.agencia}
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-3">
+								<p class="text-right">
+									<strong>#{msg['pages.cadastroPj.ativacao.label.conta']}</strong>
+									#{ativacaoMasterBBean.dto.contaCorrente}
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5>
+									<strong>#{msg['pages.cadastroPj.ativacao.seu.cadastramento']}</strong>
+								</h5>
+								<br />
+								<p>#{msg['pages.cadastroPj.ativacao.sua.senha.a']}
+								<span class="no-visible">#{msg['pages.cadastroPj.ativacao.sua.senha.b']}</span></p>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row space-t">
+							<p:outputPanel styleClass="col-xs-12">
+								<p:separator />
+							</p:outputPanel>
+						</p:outputPanel>
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+				
+			<p:outputPanel styleClass="row space-b ">
+				<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+					<p:blockUI block="returnButton" trigger="returnButton" />
+					<p:commandLink id="returnButton" styleClass="btn btn-default no-visible"
+						action="#{ativacaoMasterBBean.redirectLogin}" role="button">#{msg['page.btn.internet.banking']}</p:commandLink>
+				</p:outputPanel>
+				
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

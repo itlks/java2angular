@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+	<style> .th{ width: 22%; } </style>
+
+		<ui:include	src="/pages/investimentos/fundos/extratoMovimentacao/extratoMovimentacaoAviso.xhtml" />
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+							<span>
+								<p>#{msg['pages.investimentos.fundos.extratoMovimentacao.selecionarPeriodo']}</p>
+								<p>#{msg['pages.investimentos.fundos.extratoMovimentacao.disponiveis']}</p>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-3 ">
+							<p:outputPanel styleClass="form-group tamInput spacer-b">
+								<h:outputLabel styleClass="underlineLine" for="" value="Período:" />
+								<h:selectOneMenu name="tipoOrigemApreensao" value="#{investimentosFundosExtratoMovimentacaoBBean.quantidadeDeDias}">
+									<p:ajax event="change" process="@this" update="@form, content2" listener="#{investimentosFundosExtratoMovimentacaoBBean.mostrarMovimentacoes}" />
+									<f:selectItem itemValue="15" itemLabel="#{msg['pages.investimentos.fundos.extratoMovimentacao.15dias']}" noSelectionOption="true" />
+									<f:selectItem itemValue="30" itemLabel="#{msg['pages.investimentos.fundos.extratoMovimentacao.30dias']}" />
+									<f:selectItem itemValue="45" itemLabel="#{msg['pages.investimentos.fundos.extratoMovimentacao.45dias']}" />
+								</h:selectOneMenu>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:remoteCommand name="scrollDownSelect" onstart="scrollDownSelected();" />
+					
+					<p:outputPanel styleClass="row " id="content2">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table-responsive table ">
+							<h:outputLabel value="#{msg['pages.investimentos.fundos.extratoMovimentacao.label.MovimentosConvertidos']}" for="dataTableFundosInvestimentoConvertidos" />  
+								<p:dataTable id="dataTableFundosInvestimentoConvertidos"
+									tableStyleClass="table-responsive table table-striped table-click "
+									rowKey="#{investimento.hashCode()}"
+									value="#{investimentosFundosExtratoMovimentacaoBBean.listaMovimentacaoConvertida}"
+									var="investimentos"
+									selection="#{investimentosFundosExtratoMovimentacaoBBean.movimentacaoSelecionada}"
+									selectionMode="single"
+									emptyMessage="#{msg['pages.investimentos.fundos.extratoMovimentacao.semMovimentacaoNoPeriodoSelecionado']}">
+									<p:ajax event="rowSelect" update="@form:tabelaMovimentacaoDetalhes" listener="#{investimentosFundosExtratoMovimentacaoBBean.consultarDetalheMovimentacao}" />
+									<p:column  headerText="" width="7%" >
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.data']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.dataMovimento}" converter="dateConverterFormat" />
+									</p:column >
+									<p:column exportable="false" headerText="" width="5%" >
+										<i class="fa fa-circle  width10 " style="color: ##{investimentos.corFamilia}" aria-hidden="true"></i>
+									</p:column>
+									<p:column headerText="" width="27%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.fundo']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.nomereduzidoIB}" />
+									</p:column>
+									<p:column headerText="" width="18%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.contaFundo']}" />
+										</f:facet>
+										<h:outputText value="#{investimentosFundosExtratoMovimentacaoBBean.leftPadZero(investimentos.contaFundo)}" />
+									</p:column>
+									<p:column headerText="" width="6%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.tipoOperacao']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.descricaoOperacao}" />
+									</p:column>
+									<p:column  headerText="" width="15%" styleClass="text-right ">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.valorTransacao']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.valorBruto}" converter="valorMonetarioConverter"  />
+									</p:column>
+									
+									<p:column  headerText="" width="5%" styleClass="text-center">
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="*" rendered="#{investimentos.creditoMvtoemCC eq 'P'}" />
+									</p:column>
+									
+								</p:dataTable>
+							</p:outputPanel>
+								
+							<p:outputPanel styleClass="table-responsive table ">
+							<h:outputLabel value="#{msg['pages.investimentos.fundos.extratoMovimentacao.label.MovimentosPendentesDeConversao']}" for="dataTableFundosInvestimentoPendentes" />
+								<p:dataTable id="dataTableFundosInvestimentoPendentes"
+									tableStyleClass="table-responsive table table-striped table-click"
+									rowKey="#{investimentos.hashCode()}"
+									value="#{investimentosFundosExtratoMovimentacaoBBean.listaMovimentacaoPendentes}"
+									var="investimentos"
+									selection="#{investimentosFundosExtratoMovimentacaoBBean.movimentacaoSelecionada}"
+									selectionMode="single"
+									emptyMessage="#{msg['pages.investimentos.fundos.extratoMovimentacao.semMovimentacaoNoPeriodoSelecionado']}" >
+									<p:ajax event="rowSelect" update="@form:tabelaMovimentacaoDetalhes" listener="#{investimentosFundosExtratoMovimentacaoBBean.consultarDetalheMovimentacao}" />
+									<p:column headerText="" width="7%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.data']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.dataMovimento}" converter="dateConverterFormat" />
+									</p:column>
+									<p:column exportable="false" headerText="" width="5%">
+										<i class="fa fa-circle  width10 " style="color: ##{investimentos.corFamilia}" aria-hidden="true"></i>
+									</p:column>
+									<p:column headerText="" width="27%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.fundo']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.nomereduzidoIB}" />
+									</p:column>
+									<p:column headerText="" width="18%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.contaFundo']}" />
+										</f:facet>
+										<h:outputText value="#{investimentosFundosExtratoMovimentacaoBBean.leftPadZero(investimentos.contaFundo)}" />
+									</p:column>
+									<p:column headerText="" width="6%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.tipoOperacao']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.descricaoOperacao}" />
+									</p:column>
+									<p:column headerText="" width="15%" styleClass="text-right" >
+										<f:facet name="header">
+											<h:outputText value="#{msg['pages.investimentos.fundos.extratoMovimentacao.valorTransacao']}" />
+										</f:facet>
+										<h:outputText value="#{investimentos.valorBruto}" converter="valorMonetarioConverter" />
+									</p:column>
+									<p:column  headerText="" width="5%" styleClass="text-center">
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="*" rendered="#{investimentos.creditoMvtoemCC eq 'P'}" />
+									</p:column>
+								</p:dataTable>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="row" rendered="#{investimentosFundosExtratoMovimentacaoBBean.semMovimentacoesNoperiodo eq false}" >
+									<p:outputPanel styleClass="col-xs-6" >
+										<p:outputPanel rendered="#{investimentosFundosExtratoMovimentacaoBBean.movimentoPendenteDeCreditoEmConta eq false}" >
+											<p class="space-t bold">#{msg['pages.investimentos.fundos.extratoMovimentacao.mensageRodapeTabela']}</p>
+										</p:outputPanel>
+									</p:outputPanel>
+									
+									<p:outputPanel styleClass="col-xs-6 text-right" >
+										<p:outputPanel styleClass="text-right" rendered="#{investimentosFundosExtratoMovimentacaoBBean.movimentoPendenteDeCreditoEmConta eq true}" >
+											<p class="space-t bold">#{msg['pages.investimentos.fundos.extratoMovimentacao.mensagemMovimentosPendentesDeCreditoEmConta']}</p>
+										</p:outputPanel>
+									</p:outputPanel>
+								</p:outputPanel>
+								
+								<p:outputPanel styleClass="table-responsive table ">
+								<p:dataTable 
+									id="dataTableFundosInvestimento" 
+									value="#{investimentosFundosExtratoMovimentacaoBBean.exportarExcel}" 
+									var="investimentoExportarExcel" 
+									style="visibility: hidden; display: none;" >
+									<p:column>
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="#{investimentoExportarExcel[0]}"  />
+									</p:column >
+									<p:column>
+										<f:facet name="header">
+											<h:outputText  />
+										</f:facet>
+										<h:outputText value="#{investimentoExportarExcel[1]}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="#{investimentoExportarExcel[2]}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="#{investimentoExportarExcel[3]}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="#{investimentoExportarExcel[4]}"  />
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText />
+										</f:facet>
+										<h:outputText value="#{investimentoExportarExcel[5]}"  />
+									</p:column>
+								</p:dataTable>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b ">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="familia-fundos ">
+						<p:outputPanel styleClass="row">
+							<p:outputPanel styleClass="col-xs-12">
+								<h5>
+									<strong>#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.titleFamiliaFundos']}</strong>
+								</h5>
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="row ">
+							<p:outputPanel styleClass="col-xs-12">
+								<ui:repeat var="legenda" value="#{investimentosFundosExtratoMovimentacaoBBean.legendas.datos.familia}" varStatus="status">
+									<h:panelGroup rendered="#{status.index % 2 eq 0}" styleClass="col-xs-6 space-b">
+										<i class="fa fa-circle" style="color: #{investimentosFundosExtratoMovimentacaoBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+										<h:outputText value="#{legenda.nomeRedFundo}" />
+									</h:panelGroup>
+
+									<h:panelGroup rendered="#{status.index % 2 eq 1}" styleClass="col-xs-6 space-b">
+										<i class="fa fa-circle" style="color: #{investimentosFundosExtratoMovimentacaoBBean.obterCorTipoFamilia(legenda.tipodaFamilia)}" aria-hidden="true"></i>
+										<h:outputText value="#{legenda.nomeRedFundo}" />
+										<br />
+									</h:panelGroup>
+								</ui:repeat>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b ">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b" id="tabelaMovimentacaoDetalhes">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:dataTable
+								rendered="#{investimentosFundosExtratoMovimentacaoBBean.renderizaDetalhe}"
+								value="#{investimentosFundosExtratoMovimentacaoBBean.movimentacoesSelecionadas}"
+								var="movimentacao" styleClass="table-responsive ">
+								<p:column  width="25" styleClass="text-center" style="text-align:center!important;" headerText="#{msg['pages.investimentos.fundos.extratoMovimentacao.dataDaDaSolicitacao']}">
+									<h:outputText value="#{movimentacao.dataMovimento}" />
+								</p:column>
+								<p:column  width="25" styleClass="text-right" style="text-align:center!important;" headerText="#{msg['pages.investimentos.fundos.extratoMovimentacao.dataDaConversaoEmCotas']}">
+									<h:outputText value="#{movimentacao.datavalor}" />
+								</p:column>
+								<p:column  width="25" styleClass="text-right" style="text-align:center!important;" headerText="#{msg['pages.investimentos.fundos.extratoMovimentacao.dataDoLancamentoEmConta']}">
+									<h:outputText value="#{movimentacao.datadeCredito}" />
+								</p:column>
+							</p:dataTable>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+				<ui:include src="/commons/pdf/pdfButtons.xhtml">
+					<ui:param name="excel" value="@form:dataTableFundosInvestimento" />
+					<ui:param name="nomeExcel" value="extrato-movimentacao" />
+				</ui:include>
+			</p:outputPanel>
+			<p:outputPanel styleClass="col-md-12 text-right">
+
+				<p:commandLink
+					styleClass="btn btn-default btn-cinza no-print no-visible"
+					action="#{investimentosFundosExtratoMovimentacaoBBean.voltarMenu}"
+					role="button">#{msg['pages.investimentos.fundos.rentabilidadePeriodo.consulta.btnVoltar']}</p:commandLink>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		<script>
+			$(".table-click tbody tr").click(function() {
+				$(".table-click tbody tr").removeClass("yellow");
+				$(this).toggleClass("yellow"); 
+			}); 
+			
+			function scrollDownSelected() {
+				$('html, body').animate({scrollTop:$(".btn-cinza").offset().top}, 1000);
+			}
+			
+			$(window).load(function() {
+				   atualizarDetalhes();
+				});
+		</script>
+		</ui:define>
+</ui:composition>

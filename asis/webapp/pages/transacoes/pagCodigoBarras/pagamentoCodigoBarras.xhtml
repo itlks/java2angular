@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<ui:include
+			src="#{codigoBarraBBean.configuracaoCodBarra.urlPageAviso}"></ui:include>
+
+		<p:outputPanel styleClass="row" id="panelGeral">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.codigoBarra.pagamentoCodigoBarras.informe.dados']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<h5>#{msg['pages.codigoBarra.pagamentoCodigoBarras.digite.sequencia']}</h5>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-lg-3">
+							<p:outputPanel styleClass="form-group">
+								#{msg['pages.codigoBarra.pagamentoCodigoBarras.bloco1']}
+							<p:inputMask value="#{codigoBarraBBean.dto.bloco1}"
+									styleClass="form-control" mask="999999999999"
+									onkeypress="return onlyNumbers(event)" id="bloco1" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-lg-3">
+							<p:outputPanel styleClass="form-group">
+								#{msg['pages.codigoBarra.pagamentoCodigoBarras.bloco2']}
+								<p:inputMask value="#{codigoBarraBBean.dto.bloco2}"
+									styleClass="form-control" mask="999999999999"
+									onkeypress="return onlyNumbers(event)" id="bloco2" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-lg-3">
+							<p:outputPanel styleClass="form-group">
+								#{msg['pages.codigoBarra.pagamentoCodigoBarras.bloco3']}
+								<p:inputMask value="#{codigoBarraBBean.dto.bloco3}" 
+									styleClass="form-control" mask="999999999999"
+									onkeypress="return onlyNumbers(event)" id="bloco3" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-lg-3">
+							<p:outputPanel styleClass="form-group">
+								#{msg['pages.codigoBarra.pagamentoCodigoBarras.bloco4']}
+								<p:inputMask value="#{codigoBarraBBean.dto.bloco4}"
+									styleClass="form-control" mask="999999999999"
+									onkeypress="return onlyNumbers(event)" id="bloco4" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b"
+						rendered="codigoBarraBBean.configuracaoCodBarra.usarCliente">
+						<p:outputPanel styleClass="col-md-6">
+							<p:outputPanel styleClass="form-group">
+						#{msg['pages.codigoBarra.pagamentoCodigoBarras.informe.cliente']}
+								<p:inputText value="#{codigoBarraBBean.dto.cliente}"
+									styleClass="form-control" id="cliente" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b" id="data">
+								<p:outputPanel columns="2" 
+									cellpadding="5" styleClass="col-lg-3 col-lg-offset-0 no-padding radiobutton">
+									<p:selectOneRadio id="forma" styleClass="radio-custom-weight"
+										value="#{codigoBarraBBean.dto.agendarPagamento}">
+										<f:selectItem
+											itemLabel="#{msg['pages.pagamento.gps.pagar.agora']} "
+											itemValue="false" />
+											
+										<f:selectItem
+											itemLabel="#{msg['pages.pagamento.gps.agendar.para.data']}"
+											itemValue="true" />
+										<p:ajax updade="formGeral" />
+									</p:selectOneRadio>
+								</p:outputPanel>
+							
+							<p:outputPanel styleClass="col-lg-1 col-lg-offset-0 no-padding">
+								<p:graphicImage id="tooltip" value="/images/icon-i.png"
+									style="width: 15px;"/>
+								<p:tooltip for="tooltip" style="top: 110.583px">
+									<h:outputText><p>#{msg['pages.pagamento.gps.info.agendar1']} </p>
+									
+									<p>#{msg['pages.pagamento.gps.info.agendar2']}</p></h:outputText>
+
+								</p:tooltip>
+							</p:outputPanel>
+							<p:outputPanel id="dataPag" styleClass="col-lg-3" rendered="#{codigoBarraBBean.dto.agendarPagamento}">
+									<p:inputMask value="#{codigoBarraBBean.dto.dataPagamento}"
+										styleClass="form-control" id="dataPagamento"
+										mask="99/99/9999"  >
+
+										<p:ajax event="blur"
+											listener="#{codigoBarraBBean.validarData()}" />
+
+									</p:inputMask>
+							</p:outputPanel>
+							</p:outputPanel>
+
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button"
+					action="#{codigoBarraBBean.voltarCodigoBarraPreenchimento}"
+					id="voltar"
+					value="#{msg['pages.codigoBarra.pagamentoCodigoBarras.voltar']}" />
+					
+				<p:commandLink styleClass="btn btn-default" role="button"
+					action="#{codigoBarraBBean.continuarCodigoBarraPreenchimento}"
+					id="continuar"
+					value="#{msg['pages.codigoBarra.pagamentoCodigoBarras.continuar']}"></p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

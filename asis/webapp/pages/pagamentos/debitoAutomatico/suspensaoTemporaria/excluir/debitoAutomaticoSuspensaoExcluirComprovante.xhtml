@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.comprovante.tituloComprovante']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+
+					<ui:include src="/pages/pagamentos/debitoAutomatico/suspensaoTemporaria/excluir/debitoAutomaticoSuspensaoExcluirInformacoes.xhtml" />
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+					
+					<p:outputPanel styleClass="col-xs-3">
+								<p><h:outputLabel value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.comprovante.autenticacao']}" /></p>	
+								<p><h:outputText value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.autenticacaoBancaria}" /></p>
+							</p:outputPanel>
+							
+							<p:outputPanel styleClass="col-xs-3">
+								<p><h:outputLabel value="#{msg['pages.pagamentos.debito.automatico.excluir.suspensao.comprovante.dataTransacao']}" /></p>
+								<p><h:outputText value="#{debitoAutomaticoSuspensaoExcluirBBean.dto.dataHoraTransacao}">
+									<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+								   </h:outputText>
+								</p>
+							</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-md-12">
+							<p:separator />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+					<p:outputPanel styleClass="col-xs-7">
+						<p>#{msg['page.commons.comprovante.central.linha1']}</p>
+						<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-2">
+						<p>#{msg['page.commons.comprovante.sac.linha1']}</p>
+						<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-2">
+						<p>#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+						<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

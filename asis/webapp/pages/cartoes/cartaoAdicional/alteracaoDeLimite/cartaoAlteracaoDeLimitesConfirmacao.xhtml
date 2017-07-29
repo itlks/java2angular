@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{gareIcmsSpBBean.verificaExibicaoMensagemErroTelaConfirmacao}" />
+	</f:metadata>
+
+	<ui:define name="content">
+	    <p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Confira os dados para finalizar sua solicitação</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-md-3">
+
+							<h:outputLabel for="" value="CNPJ:"></h:outputLabel>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-2">
+
+							<h:outputLabel for="" value="05.454.471/0001-93"></h:outputLabel>
+
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-3">
+							<h:outputLabel for="" value="Empresa:"> TESTES PARCELADO PJ</h:outputLabel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-4">
+
+							<h:outputLabel for="" value="Área:"></h:outputLabel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:separator styleClass="space-b" />
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-md-3">
+
+							<h:outputLabel for="" value="Tipo de Cartão:"></h:outputLabel>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-5">
+
+							<h:outputLabel for="" value="VISA"></h:outputLabel>
+
+
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-md-4">
+
+							<h:outputLabel for="" value="Número do cartão: ">XXXX XXXX XXXX 7658</h:outputLabel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+					<p:separator styleClass="space-b" />
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-md-4">
+
+							<h:outputLabel for="" value="Nome gravado no cartão:"> MUDEG UK AX VU ESOF</h:outputLabel>
+
+						</p:outputPanel>
+
+
+						<p:outputPanel styleClass="col-md-4 col-md-offset-4">
+
+							<h:outputLabel for="" value="Validade do cartão:"> 06/2022</h:outputLabel>
+
+						</p:outputPanel>
+
+					</p:outputPanel>
+
+
+					<p:separator styleClass="space-b" />
+
+					<p:outputPanel styleClass="row">
+
+						<p:outputPanel styleClass="col-md-3">
+
+							<h:outputLabel for="" value="Vencimento das faturas:"></h:outputLabel>
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-2">
+
+							<h:outputLabel for="" value="30 de cada mês"></h:outputLabel>
+
+
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-md-3 col-md-offset-3">
+
+							<h:outputLabel for="" value="Novo limite de crédito:"> R$ 14.000,00</h:outputLabel>
+
+						</p:outputPanel>
+						
+
+					</p:outputPanel>
+
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<!-- Assinatura -->
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Assinatura Eletrônica</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-lg-12">
+							<p:outputPanel styleClass="col-md-3 ">
+								<p>
+									<p:outputLabel styleClass="" value="Conta Corrente:" />
+								</p>
+								<p>
+									<span>0391 13 004611-9</span>
+								</p>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-3 ">
+								<p>
+									<h:outputLabel for="" value="Assinatura Eletrônica:" />
+									<p:password id="assinaturaEletronica" placeholder=""
+										styleClass="form-control col-md-4 " />
+								</p>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" actionListener="#" role="button">
+					Voltar 
+				</p:commandLink>
+				<p:commandLink styleClass="btn btn-default" actionListener="#" role="button">
+					Continuar 
+				</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>         

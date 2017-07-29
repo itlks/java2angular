@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<f:event type="preRenderView" listener="#{formularioRenavamBbean.acessoDireto()}" />
+
+		<h:outputLabel
+			value="#{msg['pages.autorizacao.renavam.leia.imprima']}" styleClass="row space-b no-visible col-xs-2"></h:outputLabel>
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row  space-b">
+						<p:outputPanel styleClass="col-xs-6">
+
+							<h:outputLabel styleClass="bold" for=""
+								value="#{formularioRenavamBbean.autoriazacaoRenavanDTO.nomeEmpresa}" />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-2 width150">
+							<h:outputLabel styleClass="bold, space"
+								value="#{msg['pages.preenchimento.autorizacao.renavam.agencia']}  " />
+							
+							<h:outputLabel styleClass="space" for=""
+								value="#{formularioRenavamBbean.autoriazacaoRenavanDTO.agencia}"  />
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-4">
+							<h:outputLabel styleClass="bold, space" for=""
+								value="#{msg['pages.autorizacao.renavam.conta.corrente']}" />
+							<h:outputLabel styleClass="" for=""
+								value="#{formularioRenavamBbean.autoriazacaoRenavanDTO.contaCorrente}" />
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>#{msg['pages.preenchimento.autorizacao.renavam.solicitacao.cadastro']}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<span>#{msg['pages.autorizacao.renavam.conta.ao']}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<span> <strong>#{msg['pages.preenchimento.autorizacao.renavam.banco.santander']}</strong>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<span>#{msg['pages.preenchimento.autorizacao.renavam.senhor.gerente']}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<span><strong>#{msg['pages.preenchimento.autorizacao.renavam.cadastro.de.renavan']}</strong></span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<span><p>#{msg['pages.preenchimento.autorizacao.renavam.cadastro.de.acordo']}
+									#{msg['pages.preenchimento.autorizacao.renavam.cadastro.de.acordo2']}
+								</p></span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel
+						styleClass="table-responsive table table-striped no-margin-bottom">
+						<p:dataTable id="tabelaComprovantePagamentos"
+							value="#{formularioRenavamBbean.dadosSelecionados}"
+							var="dadosSelecionados">
+							<p:column
+								headerText="#{msg['pages.preenchimento.autorizacao.renavam.renavan']}">
+								<h:outputText value="#{dadosSelecionados.identif}"
+									converter="converterNumeroRenavam" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.preenchimento.autorizacao.renavam.estado']}">
+								<h:outputText value="#{dadosSelecionados.sbtppag}" />
+							</p:column>
+							<p:column
+								headerText="#{msg['pages.preenchimento.autorizacao.renavam.apelido']}">
+								<h:outputText value="#{dadosSelecionados.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 ">
+							<span>#{msg['pages.preenchimento.autorizacao.renavam.solicitacao.analise']}</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel styleClass="bold, space " for=""
+									value="#{msg['pages.preenchimento.autorizacao.renavam.titular']}" />
+								<h:outputLabel styleClass="" for=""
+									value="#{formularioRenavamBbean.autoriazacaoRenavanDTO.nomeEmpresa}" />
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputText styleClass="bold, space" for=""
+									value="#{msg['pages.preenchimento.autorizacao.renavam.agencia.conta.corrente']}" />
+								<p:outputLabel
+									value="#{formularioRenavamBbean.autoriazacaoRenavanDTO.agencia}"
+									styleClass="space" />
+								<p:outputLabel
+									value=" #{formularioRenavamBbean.autoriazacaoRenavanDTO.contaCorrente}" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+					<br />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:separator
+								styleClass="sign-line col-xs-3 no-margin-bottom space-t" /><h:outputText value="," styleClass="space"/>
+							<span >#{formularioRenavamBbean.autoriazacaoRenavanDTO.data}.</span>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row cod-barras-input ">
+						<p:outputPanel styleClass="col-xs-12  label-cod ">
+							<p:separator styleClass="sign-line col-xs-5 no-margin-bottom " />
+							<p:separator
+								styleClass="sign-line col-xs-offset-1 col-xs-5 no-margin-bottom " />
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-5 col-xs-offset-1">
+							<h:outputLabel styleClass="space-l" for=""
+								value="#{msg['pages.preenchimento.autorizacao.renavam.assinatura.correntista.representante']}" />
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-5 col-xs-offset-1">
+							<h:outputLabel styleClass="col-xs-offset-1" for=""
+								value="#{msg['pages.preenchimento.autorizacao.renavam.assinatura.correntista.representante']}" />
+						</p:outputPanel>
+					</p:outputPanel>
+					<br />
+					<br />
+					<p:separator />
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b no-visible">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza" role="button" id="botaoVoltar"
+					action="#{formularioRenavamBbean.voltarTelaPreenchimento}">#{msg['page.conta.corrente.consulta.copiaDeCheques.label.voltar']}</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

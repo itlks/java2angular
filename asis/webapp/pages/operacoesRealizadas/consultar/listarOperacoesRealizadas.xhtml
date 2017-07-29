@@ -1,0 +1,176 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateConsultaNovo.xhtml">
+	
+	<ui:define name="content">
+	
+	<style>
+	.rodape-comprovante-noBG {
+    background: transparent;
+    box-shadow: none;
+    margin-bottom: 16px;
+    text-align: right;
+	}
+	</style>
+	
+		<p:outputPanel styleClass="row space-b no-print no-visible" >
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+<!-- 					#{msg['page.operacoes.realizadas.consulta.mensagem.resultado.pdf']} -->
+						<p>Selecione a(s) transação(ões) que deseja visualizar e clique em visualizar operações.</p>
+<!-- 						#{msg['page.operacoes.realizadas.consulta.mensagem.resultado.excel']} -->
+						<p>Você também pode salvar a lista de comprovantes em Excel ou PDF clicando nos links correspondentes.</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.operacoes.realizadas.consulta.mensagem.resultado.pesquisa']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>		
+							
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-8 form-group">
+
+							<p:outputPanel
+								rendered="#{operacoesRealizadasBBean.dto.datainicio !=null}">
+								<span><strong>Data:</strong>
+									#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.de']}
+									<h:outputLabel
+										value="#{operacoesRealizadasBBean.dto.datainicio}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+									#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.ate']}
+									<h:outputLabel value="#{operacoesRealizadasBBean.dto.datafim}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel> </span>
+							</p:outputPanel>
+
+							<p:outputPanel
+								rendered="#{operacoesRealizadasBBean.periodoSelecionado !=null and operacoesRealizadasBBean.periodoSelecionado.descricao ne 'Selecione'}">
+								<strong>#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.periodo']} </strong>
+                                                    <h:outputLabel
+									value="#{operacoesRealizadasBBean.periodoSelecionado.descricao}" />
+
+							</p:outputPanel>							
+						</p:outputPanel>
+						 <p:outputPanel styleClass="col-xs-4 text-right no-print">
+                        	<ui:include src="/commons/pdf/pdfButtonsSegVia.xhtml">
+								<ui:param name="excel" value="listarOperacoesRealizadaTable" />
+								<ui:param name="imprimir" value="false" />
+								<ui:param name="enviarEmail" value="false" />
+								<ui:param name="exibirShadow" value="false" />
+							</ui:include>
+                        </p:outputPanel>                         
+                     
+                    </p:outputPanel>
+                    
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+							<p:outputPanel styleClass="table-responsive table table-striped table-cursor-default table-operacoes">
+								<p:dataTable  widgetVar="WidProduto" id="listarOperacoesRealizadaTable"
+									first="#{operacoesRealizadasBBean.paginaCorrente * operacoesRealizadasBBean.registroPorPagina}"
+									value="#{operacoesRealizadasBBean.listaOperacoesRealizadas.listaConsultarTipoOperacoes}"
+									selection="#{operacoesRealizadasBBean.listaOperacoesRealizadas.listaConsultarTipoOperacoesSelecionado}"
+									var="item"
+									rowKey="#{item.numeroAutenticacao}#{item.nomeTransacao}"
+									emptyMessage="Não existem resultado para o período solicitado." paginator="true" 
+									rows="#{operacoesRealizadasBBean.registroPorPagina}"
+									paginatorPosition="bottom"
+									paginatorTemplate="">
+ 							
+ 									<p:ajax event="rowSelectCheckbox" process="checkbox" />
+									<p:ajax event="rowUnselectCheckbox" process="checkbox" />
+									
+ 							
+ 									
+ 									<p:column id="checkbox" selectionMode="multiple" styleClass="no-print no-visible" exportable="false" />
+											
+									<p:column width="40%">
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.operacoes.realizadas.consulta.label.transacao']}" />
+										</f:facet>
+										<h:outputText value="#{item.nomeTransacao.toUpperCase()}" />
+									</p:column>
+									
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.operacoes.realizadas.consulta.label.data']}" />
+										</f:facet>
+										<h:outputText value="#{item.dataTransacao}" />
+									</p:column>
+		
+									<p:column >
+										<f:facet name="header">
+											<h:outputText value="#{msg['page.operacoes.realizadas.consulta.label.horario']}" />
+										</f:facet>
+										<h:outputText value="#{item.horaTransacao}" />
+									</p:column>
+									
+									<p:column styleClass="text-right">
+										<f:facet name="header">
+											<h:outputText value="Valor (R$)" />
+										</f:facet>
+										<h:outputText value="#{item.valor}" />
+									</p:column> 
+								</p:dataTable>	
+								            
+							<p:commandLink id="proximo" styleClass="pull-right fimPag no-print no-visible" role="button" oncomplete="PF('WidProduto').paginator.setPage(#{operacoesRealizadasBBean.paginaCorrente}+1);" value="Próximo&gt;&gt;" 
+							rendered="#{operacoesRealizadasBBean.isExibeProximo()}">
+								<p:ajax update="@(.table-operacoes)" listener="#{operacoesRealizadasBBean.avancarPagina()}" event="click" oncomplete="window.location='#'" />
+							</p:commandLink>
+							<h:outputText styleClass="pull-right fimPag space-r space-l no-print no-visible" value="#{msg['page.contaCorrente.extrato.contaCorrenteConsultaExtrato.barra']}" 
+							rendered="#{operacoesRealizadasBBean.isExibeProximo() and operacoesRealizadasBBean.isExibeVoltar()}"/>
+							<p:commandLink id="anterior" styleClass="pull-right fimPag no-print no-visible" role="button" oncomplete="PF('WidProduto').paginator.setPage(#{operacoesRealizadasBBean.paginaCorrente}-1);" value="&lt;&lt;Anterior" 
+							rendered="#{operacoesRealizadasBBean.isExibeVoltar()}">
+								<p:ajax update="@(.table-operacoes)" listener="#{operacoesRealizadasBBean.voltarPagina()}" event="click" process="@(.table-operacoes)" oncomplete="window.location='#'" />
+							</p:commandLink>
+
+							</p:outputPanel>
+							<p:separator styleClass="col-xs-12 no-padding"></p:separator>
+						</p:outputPanel>
+					</p:outputPanel>
+					<ui:include src="listarOperacoesRealizadasGerarExcel.xhtml" />
+					
+					<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+				</p:outputPanel>
+
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		<br />
+		
+		<p:outputPanel styleClass="row space-b ">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza no-visible"
+					action="#{operacoesRealizadasBBean.voltarParaTelaPesquisa}"
+					role="button"
+					value="#{msg['page.btn.voltar']}" />
+
+				<p:commandLink styleClass="btn btn-default  no-visible"
+					action="#{operacoesRealizadasBBean.continuarDetalhe}"
+					rendered="#{operacoesRealizadasBBean.tamanhoLista != 0}"
+					role="button"
+					value="Visualizar Operações"
+					/>
+			</p:outputPanel>
+	</p:outputPanel>
+	
+	</ui:define>
+	 
+</ui:composition>

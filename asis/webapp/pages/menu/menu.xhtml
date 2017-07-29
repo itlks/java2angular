@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core" 
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="content">
+		
+		<p:outputPanel id="idSubMenu" styleClass="row placeholders">
+			<h:outputText styleClass="titulo-submenu" value="#{menuBBean.nomeItemMenuPai}" />
+
+			<p:outputPanel styleClass="col-xs-4">
+				<ul class="links-submenu">
+					<ui:repeat var="item" value="#{menuBBean.listaMenuItemCol1}">
+						<h:outputText rendered="#{item.idItemMenuPrin ne '0' and item.idItemMenuPrin eq menuBBean.idItemMenu}"><li class="menu-title">#{item.noItemMenu}</li></h:outputText>	
+												
+						<h:outputText rendered="#{item.idItemMenuPrin ne menuBBean.idItemMenu}"><li><span>&gt;</span>
+							<p:commandLink async="true" immediate="true"
+								onclick="panel_block('idSubMenu');" oncomplete="panel_unblock('idSubMenu');"
+								action="#{menuBBean.redirect}"
+								rendered="#{item.idItemMenuPrin ne menuBBean.idItemMenu}"
+								value="#{item.noItemMenu}">
+								<f:param name="redirectPage" value="#{item.coCamiBanner}" />
+								<f:param name="descricaoMenuPai" value="#{menuBBean.nomeItemMenuPai}"/>
+								<f:param name="descricaoMenu" value="#{item.noItemMenu}"/>
+								<f:param name="idItemMenu" value="#{item.idItemMenu}"/>
+								<f:param name="idItemMenuPai" value="#{item.idItemMenuPrin}"/>
+								<f:param name="redirectPageIBPJClassico" value="#{item.coCamiPagina}" />
+							</p:commandLink></li>
+						</h:outputText>
+						
+					</ui:repeat>
+				</ul>
+			</p:outputPanel>
+								
+			<p:outputPanel styleClass="col-xs-4">
+				<ul class="links-submenu">
+					<ui:repeat var="item" value="#{menuBBean.listaMenuItemCol2}">
+						<h:outputText rendered="#{item.idItemMenuPrin ne '0' and item.idItemMenuPrin eq menuBBean.idItemMenu}"><li class="menu-title"><strong>#{item.noItemMenu}</strong></li></h:outputText>	
+												
+						<h:outputText rendered="#{item.idItemMenuPrin ne menuBBean.idItemMenu}"><li><span>&gt;</span>
+						<p:commandLink async="true" immediate="true"
+								action="#{menuBBean.redirect}"
+								rendered="#{item.idItemMenuPrin ne menuBBean.idItemMenu}"
+								onclick="panel_block('idSubMenu');" oncomplete="panel_unblock('idSubMenu');"
+								value="#{item.noItemMenu}">
+								<f:param name="redirectPage" value="#{item.coCamiBanner}" />
+								<f:param name="descricaoMenuPai" value="#{menuBBean.nomeItemMenuPai}"/>
+								<f:param name="descricaoMenu" value="#{item.noItemMenu}"/>
+								<f:param name="idItemMenu" value="#{item.idItemMenu}"/>
+								<f:param name="idItemMenuPai" value="#{item.idItemMenuPrin}"/>
+								<f:param name="redirectPageIBPJClassico" value="#{item.coCamiPagina}" />
+							</p:commandLink></li>
+						</h:outputText>
+					
+					</ui:repeat>
+				</ul>
+			</p:outputPanel>
+			
+			<p:outputPanel styleClass="col-xs-4">
+				<ul class="links-submenu">
+					<ui:repeat var="item" value="#{menuBBean.listaMenuItemCol3}">
+						<h:outputText rendered="#{item.idItemMenuPrin ne '0' and item.idItemMenuPrin eq menuBBean.idItemMenu}"><li class="menu-title"><strong>#{item.noItemMenu}</strong></li></h:outputText>	
+												
+							<h:outputText rendered="#{item.idItemMenuPrin ne menuBBean.idItemMenu}"><li><span>&gt;</span>
+							<p:commandLink async="true" immediate="true"
+								action="#{menuBBean.redirect}"
+								rendered="#{item.idItemMenuPrin ne menuBBean.idItemMenu}"
+								onclick="panel_block('idSubMenu');" oncomplete="panel_unblock('idSubMenu');"
+								value="#{item.noItemMenu}">
+								<f:param name="redirectPage" value="#{item.coCamiBanner}" />
+								<f:param name="descricaoMenuPai" value="#{menuBBean.nomeItemMenuPai}"/>
+								<f:param name="descricaoMenu" value="#{item.noItemMenu}"/>
+								<f:param name="idItemMenu" value="#{item.idItemMenu}"/>
+								<f:param name="idItemMenuPai" value="#{item.idItemMenuPrin}"/>
+								<f:param name="redirectPageIBPJClassico" value="#{item.coCamiPagina}" />
+							</p:commandLink></li>
+						</h:outputText>
+
+					</ui:repeat>
+				</ul>	
+			</p:outputPanel>
+			<p:panel  visible="false"> 
+				<p:outputPanel autoUpdate="true">
+					<h:outputLink id="redirectURL" styleClass="no-visible no-print" value="#{menuBBean.url}" target="#{menuBBean.target}" />
+				</p:outputPanel>
+			</p:panel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

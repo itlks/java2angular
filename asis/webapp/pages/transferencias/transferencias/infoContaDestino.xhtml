@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+     <p:outputPanel styleClass="row">
+
+         <p:outputPanel styleClass="col-xs-8">
+
+             <p:outputPanel styleClass="row space-t">
+                 <p:outputPanel styleClass="form-group col-xs-4 no-margin-bottom" >
+                     <h:outputLabel for="" value="Banco:" />
+                     <p:outputPanel styleClass="form-group">
+                         <p:inputText id="bancoSelecionado2_hash_1" disabled="true"
+                          styleClass="form-control numberOnly" maxlength="3" value="#{transferenciaBBean.dtoParaValidacaoHash2.banco}" />
+                     </p:outputPanel>
+                 </p:outputPanel>
+
+                 <p:outputPanel id="panelIspb2" styleClass="col-xs-2">
+                     <p:outputPanel styleClass="form-group">
+                         <h:outputLabel for="" value="#{msg['page.transferencias.transferir.ispb']}" />
+                         <p:inputText id="ispb2_hash_2"  disabled="true"
+                         styleClass="form-control numberOnly" maxlength="8" value="#{transferenciaBBean.dtoParaValidacaoHash2.ispb}" />
+                     </p:outputPanel>
+                 </p:outputPanel>
+
+             </p:outputPanel>
+
+         </p:outputPanel>
+     </p:outputPanel>
+     <p:outputPanel styleClass="row ">
+         <p:outputPanel styleClass="col-xs-8">
+
+             <p:outputPanel styleClass="row">
+                 <p:outputPanel styleClass="col-xs-2 ">
+
+                     <p:outputPanel styleClass="form-group">
+                         <h:outputLabel for=""
+                             value="#{msg['page.transferencias.transferir.agencia']}" />
+                         <p:inputText id="agencia2_hash_3"  disabled="true"
+                         styleClass="form-control numberOnly" maxlength="4" value="#{transferenciaBBean.dtoParaValidacaoHash2.agencia}" />
+                     </p:outputPanel>
+                 </p:outputPanel>
+
+                 <p:outputPanel styleClass="col-xs-4">
+                     <p:outputPanel styleClass="form-group">
+                         <h:outputLabel for=""
+                             value="#{msg['page.transferencias.transferir.conta']}" />
+                         <p:inputText id="conta2_hash_4"  disabled="true"
+                         styleClass="form-control numberOnly" maxlength="13" value="#{transferenciaBBean.dtoParaValidacaoHash2.conta}" />
+                     </p:outputPanel>
+                 </p:outputPanel>
+             </p:outputPanel>
+
+         </p:outputPanel>
+     </p:outputPanel>
+
+     <p:outputPanel id="panelOutraTitularidadeFav"
+     				rendered="#{transferenciaBBean.exibePanelOutraTitularidade}">
+         <p:outputPanel styleClass="table-responsive radio label200">
+             <h:selectOneRadio id="tipoTitularidadeFavorito"
+                 value="#{transferenciaBBean.tipoTitularidade}"
+                 disabled="true">
+                 <f:selectItems
+                     value="#{transferenciaBBean.tiposTitularidades}" var="i"
+                     itemLabel="#{i.label}" itemValue="#{i.value}" />
+             </h:selectOneRadio>
+         </p:outputPanel>
+
+
+         <p:outputPanel
+             rendered="#{transferenciaBBean.exibePanelOutraTitularidade}"
+             styleClass="row">
+             <p:outputPanel styleClass="col-xs-10">
+
+                 <p:outputPanel styleClass="row">
+                     <p:outputPanel styleClass="col-xs-5">
+
+                         <p:outputPanel styleClass="form-group">
+                             <h:outputLabel for=""
+                                 value="#{msg['page.transferencias.transferir.confirmacao.nome']}" />
+                             <p:inputText styleClass="form-control" maxlength="80" disabled="true"
+                                 value="#{transferenciaBBean.nome}" />
+                         </p:outputPanel>
+                     </p:outputPanel>
+
+                     <p:outputPanel styleClass="col-xs-3">
+
+                         <p:outputPanel id="panelTiposDocumentosFav"
+                             styleClass="table-responsive radio label100 no-padding"
+                             style="margin-top: -17px; width: 300px;">
+                          <h:selectOneRadio id="tiposDocumentoFav"
+                              value="#{transferenciaBBean.tipoDocumento}" disabled="true">
+                              <f:selectItems
+                                  value="#{transferenciaBBean.tiposDocumentos}" var="i"
+                                  itemLabel="#{i.label}" itemValue="#{i.value}" />
+                          </h:selectOneRadio>
+                      </p:outputPanel>
+
+                      <p:outputPanel id="panelDocumentoFav"
+                          styleClass="form-group">
+                          <p:inputText id="docto2_hash_6" disabled="true"
+                              value="#{transferenciaBBean.dtoParaValidacaoHash2.documento}" styleClass="form-control" maxlength="18"/>
+                      </p:outputPanel>
+                  </p:outputPanel>
+              </p:outputPanel>
+          </p:outputPanel>
+      </p:outputPanel>
+      
+  </p:outputPanel>
+</ui:composition>

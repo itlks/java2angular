@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/template.xhtml">
+	
+	<ui:define name="content">
+ 		 <p:outputPanel styleClass="row">
+                                <p:outputPanel styleClass="col-lg-12">
+                                    <p:outputPanel styleClass="titulo-painel">
+                                        <h4>#{msg['pages.cadastro.contrato.confirmacao.ConfiAPropoDeAdesa']}</h4>
+                                    </p:outputPanel>
+                                </p:outputPanel>
+                            </p:outputPanel>
+
+
+                            <p:outputPanel styleClass="row">
+                              <p:outputPanel styleClass="col-lg-12">
+                                <p:outputPanel styleClass="box-shadow">
+                                    <p:outputPanel styleClass="row">
+                                        <p:outputPanel styleClass="col-md-12">  
+
+                                            <h5>#{msg['pages.cadastro.contrato.confirmacao.LeiaAtentAPropoDe']}</h5><br/>
+
+                                            <p:outputPanel styleClass="col-md-12">  
+
+                                                <h5><strong>#{msg['pages.cadastro.contrato.confirmacao.PropoDeAdesaECadas']}</strong></h5><br/>
+
+                                                
+                                                <textarea class="termos-block" rows="5" id="">#{msg['pages.cadastro.contrato.confirmacao.LoremIpsumDolorSitAmet']}
+
+#{msg['pages.cadastro.contrato.confirmacao.LoremIpsumDolorSitAmet']}
+
+#{msg['pages.cadastro.contrato.confirmacao.LoremIpsumDolorSitAmet']}
+
+#{msg['pages.cadastro.contrato.confirmacao.LoremIpsumDolorSitAmet']}                                                                                                                                                                     
+                                                
+                                                
+                                                </textarea><br/>
+
+                                                <p:commandLink styleClass="link-termos" action="#" role="button"><strong>#{msg['pages.cadastro.contrato.confirmacao.CliquAquiParaVizuaAs']} </strong> </p:commandLink>
+
+                                                <div class="li-termos">
+                                                    <p:outputPanel styleClass="table-responsive radio">
+                                                       <h:selectOneRadio id="_1" value="_1" layout="custom">
+                                                          <f:selectItem itemLabel="#{msg['pages.cadastro.contrato.confirmacao.TodosOsDadosInforNa']}" itemValue="_1" />
+                                                          <f:selectItem itemLabel="#{msg['pages.cadastro.contrato.confirmacao.NaoEstaoCorreOsDados']}" itemValue="_2" />
+                                                       </h:selectOneRadio>
+                                                    </p:outputPanel>     
+                                                </div>                                           
+
+                                            </p:outputPanel>
+
+                                        </p:outputPanel>
+                                    </p:outputPanel>                                                                              
+                                </p:outputPanel>                    
+                              </p:outputPanel>
+                            </p:outputPanel>
+
+                            <p:outputPanel styleClass="row space-b">
+                                <p:outputPanel styleClass="col-md-12 text-right">
+                                    <p:commandLink styleClass="btn btn-default btn-cinza pull-left" action="#{cadastroContratoBBean.cancelar}" role="button">#{msg['pages.cadastro.contrato.confirmacao.Cance']}</p:commandLink>
+                                    <p:commandLink styleClass="btn btn-default btn-cinza" action="#{cadastroContratoBBean.voltarPreenchimento}" role="button">#{msg['pages.cadastro.contrato.confirmacao.Volta']}</p:commandLink>
+                                   <p:commandLink styleClass="btn btn-default" action="#{cadastroContratoBBean.continuarComprovante}" role="button">#{msg['pages.cadastro.contrato.confirmacao.Conti']}</p:commandLink>
+                                </p:outputPanel>
+                            </p:outputPanel>     
+	</ui:define>
+</ui:composition>                              

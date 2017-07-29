@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:dialog header="Saldo" id="painelSecundarioSaldo" modal="false" closable="true" visible="#{painelSecundarioBBean.saldoVisivel}" styleClass="popover-submenu box-shadow"
+		onShow="adjustPositionning($('#formPainelSecundario\\:painelSecundarioBotaoSaldo'), $('#formPainelSecundario\\:painelSecundarioSaldo'), 35)"
+		widgetVar="painelSecundarioSaldoVar">
+		
+		<div class="arrow-submenu">
+			<p:graphicImage value="/images/arrow-popover.png"/>
+		</div>
+		
+		<h4 class="popover-title">#{msg['pages.painelSecundario.saldo.saldo']}</h4>
+		
+		<div class="popover-content">
+			<div class="row">
+				<div class="col-md-12 padding-right-35">
+					<div class="row striped-row">
+						<div class="col-md-8 space-b">
+							<p>#{msg['pages.painelSecundario.saldo.conta']}</p>
+						</div>
+						<div class="col-md-4">	
+							<p>R$ #{painelSecundarioBBean.saldos.saldoContaCorrente}</p>
+						</div>					
+					</div>	
+					<div class="row striped-row">	
+						<div class="col-md-8 space-b">	
+							<p>#{msg['pages.painelSecundario.saldo.b']} <span class="link-termos">#{msg['pages.painelSecundario.saldo.bloqueado']}</span></p>
+						</div>
+						<div class="col-md-4">	
+							<p>R$ #{painelSecundarioBBean.saldos.saldoBloqueado}</p>
+						</div>						
+					</div>	
+					<div class="row striped-row">	
+						<div class="col-md-8 space-b">	
+							<p>#{msg['pages.painelSecundario.saldo.c']} <span class="link-termos">#{msg['pages.painelSecundario.saldo.provisoes']}</span></p>
+						</div>
+						<div class="col-md-4">	
+							<p>R$ #{painelSecundarioBBean.saldos.previsaoEncargos}</p>
+						</div>						
+					</div>	
+					<div class="row striped-row">	
+						<div class="col-md-8 space-b">	
+							<p>#{msg['pages.painelSecundario.saldo.disponivel']}</p>
+						</div>
+						<div class="col-md-4">	
+							<p>R$ #{painelSecundarioBBean.saldos.saldoDisponivel}</p>
+						</div>					
+					</div>		
+				</div>
+			</div>
+        </div>
+        
+        <div class="popover-footer">
+ 			<p:commandLink styleClass="btn btn-default" href="#" role="button" value="#{msg['pages.painelSecundario.saldo.botao']}" />
+ 		</div>    
+ 	</p:dialog>
+</ui:composition>	

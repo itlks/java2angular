@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+			
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow min-lines">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>#{msg['pages.transferenciaArquivos.selecaoOpcao.text2_A']}</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>			
+			
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.transferenciaArquivos.selecaoOpcao.text3']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>				
+			
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12">
+
+							<p:selectOneRadio id="customRadio"
+								value="#{transArqPersonalizarBBean.opcao}" layout="custom">
+								<f:selectItem itemValue="1"
+									itemLabel="#{msg['pages.transferenciaArquivos.selecaoOpcao.transsimples']}" />
+								<f:selectItem itemValue="2"
+									itemLabel="#{msg['pages.transferenciaArquivos.selecaoOpcao.transavancada']}" />
+							</p:selectOneRadio>
+						<p:outputPanel styleClass="total-label space-b">	
+							<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+							<h:outputLabel for="opt1"
+								value="#{msg['pages.transferenciaArquivos.selecaoOpcao.transsimples']}"
+								style="margin-left: 10px;" />
+						</p:outputPanel>
+
+							<p class="space-b">
+								<b>#{msg['pages.transferenciaArquivos.selecaoOpcao.caracteristicas']}</b>
+							</p>
+							<p class="space-b">#{msg['pages.transferenciaArquivos.selecaoOpcao.text4']}</p>
+							<p class="space-b">
+								<b>#{msg['pages.transferenciaArquivos.selecaoOpcao.text5']}</b>
+							</p>
+							<p class="space-b">#{msg['pages.transferenciaArquivos.selecaoOpcao.text6']}</p>
+
+					<p:outputPanel styleClass="total-label space-b">
+						<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+						<h:outputLabel for="opt2"
+							value="#{msg['pages.transferenciaArquivos.selecaoOpcao.transavancada']}"
+							style="margin-left: 10px;" />
+					</p:outputPanel>
+
+						<p class="space-b">
+							<b>#{msg['pages.transferenciaArquivos.selecaoOpcao.caracteristicas']}</b>
+						</p>
+						<p class="space-b">#{msg['pages.transferenciaArquivos.selecaoOpcao.text7']}</p>
+						<p class="space-b">
+							<b>#{msg['pages.transferenciaArquivos.selecaoOpcao.text5']}</b>
+						</p>
+						<p class="space-b">#{msg['pages.transferenciaArquivos.selecaoOpcao.text8']}</p>
+
+					<p:separator />
+
+					<p:selectBooleanCheckbox id="naoExibir"
+						value="#{transArqPersonalizarBBean.naoExibirOpcoesTranferencias}"
+						binding="#{transArqPersonalizarBBean.checkVisualizar}" />
+					<span> <h:outputText
+							styleClass="text space" for="naoExibir"
+							value="#{msg['pages.transferenciaArquivos.selecaoOpcao.text9']}" />
+					</span>
+
+			</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	</p:outputPanel>
+</p:outputPanel>			
+
+			
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+					<p:commandLink id="voltar"
+						value="#{msg['pages.transferenciaArquivos.selecaoOpcao.voltar']}"
+						action="#{transArqPersonalizarBBean.voltarHome()}"
+						styleClass="btn btn-default btn-secundario"
+						style="margin-right: 10px;" />
+
+					<p:commandLink id="confirmacao"
+						value="#{msg['pages.transferenciaArquivos.selecaoOpcao.continuar']}"
+						action="#{transArqPersonalizarBBean.avancarParaPassoConfirmacao()}"
+						styleClass="btn btn-default" />
+						
+					<p:blockUI block="confirmacao" trigger="confirmacao" />
+			</p:outputPanel>
+		</p:outputPanel>			
+
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<ui:include src="/commons/inicializaDL.xhtml" />
+		<ui:include src="/commons/gerarNovoReferOper.xhtml" />
+	
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-md-12">
+				<p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">
+					 <i class="fa fa-exclamation-circle"></i>
+	               		<span class="site-map">                 	
+	                	<p><strong>#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.1']}</strong></p>
+	                	<br />
+	                    <p>#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.2']}</p>  
+	                	<p>#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.3']}</p>
+	                    <p>#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.2.1']} #{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.2.2']}</p>
+	                    <p>#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.2.3']}</p>      
+	                	<p>#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.4']}</p>
+	                	<br />
+	                    <p><strong>
+							<p:commandLink 
+								actionListener="#{dpvatMinasGeraisBBean.initLimites}"
+								value="#{msg['page.pagamentos.veiculosMG.dpvat.listarenavam.mensagem.9']}">
+							</p:commandLink>
+							</strong>
+						</p>
+						<br />
+						<p>#{msg['pages.pagamento.veiculosMG.dpvat.preencher.AOpcaoDeAgendEsta']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+  		<p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                   <h4>#{msg['pages.pagamento.veiculosMG.dpvat.preencher.InforOsDadosParaSeu']}</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  	
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="box-shadow">
+
+					<ui:include	src="/pages/pagamentos/veiculosMinasGerais/dpvat/dpvatDadosComunsMG.xhtml" />
+							
+					<p:separator />
+							
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">												
+							<h5 class="space-b">
+								<strong>#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Exerc']}</strong>
+							</h5>
+							<p>#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.EscolUmaFormaDePagam']}</p>
+							<p>#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.OsValorDosExercEm']}</p>
+							<p>#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.AOpcaoDeAgendEsta']}</p>
+							<br />
+							
+							<p:outputPanel>										
+								<p:selectOneRadio
+									id="customRadio"
+									value="#{dpvatMinasGeraisBBean.cotaSelecionada}"
+									converter="cotaIpvaMGRadioConverter" layout="custom">
+									
+									<p:ajax listener="#{dpvatMinasGeraisBBean.selecionarCota}"
+														update="panelPeriodocheck" />
+														
+									<c:forEach items="#{dpvatMinasGeraisBBean.listaCotasDTO}" var="cotaSelection" varStatus="iteratorCotaSelection">	
+										<f:selectItem id="cota_#{cotaSelection.id}" itemValue="#{cotaSelection}"  />
+									</c:forEach>
+								</p:selectOneRadio>
+							</p:outputPanel>							
+							
+							<p:outputPanel styleClass="table-responsive table table-striped">
+								<p:panelGrid id="exerciciosGrid" styleClass="table-responsive table table-striped">
+									<f:facet name="header">
+										<p:row>
+											<p:column styleClass="col-md-3">
+												<h:outputText value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Exercicio']}"/>
+											</p:column>
+											
+											<p:column styleClass="col-md-3">
+												<h:outputText value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.CotaParcela']}"/>
+											</p:column>
+											
+											<p:column styleClass="col-md-3">
+												<h:outputText value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Vencimento']}"/>
+											</p:column>
+											
+											<p:column styleClass="col-md-3 text-right">
+												<h:outputText value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Total']}"/>
+											</p:column>
+										</p:row>
+									</f:facet>
+									
+									<c:forEach items="#{dpvatMinasGeraisBBean.listaCotasDTO}" var="cotaTemp" varStatus="iteratorCotaTemp">
+										<p:row>
+											<p:column headerText="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Exercicio']}" styleClass="col-md-3">
+												<h:outputText value="#{cotaTemp.anoExercio}" rendered="#{cotaTemp.index==0}"/>
+											</p:column>
+											
+											<p:column headerText="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.CotaParcela']}" styleClass="col-md-3">
+												<p:radioButton for="customRadio" itemIndex="#{iteratorCotaTemp.index}" />										
+												<h:outputText value="#{cotaTemp.descricao}" />										
+											</p:column>
+											
+											<p:column headerText="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Vencimento']}" styleClass="col-md-3">
+												<h:outputText value="#{cotaTemp.dataVencimento}"/>
+											</p:column>										
+											
+											<p:column headerText="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.Total']}" styleClass="col-md-3 text-right">
+												<h:outputText value="#{cotaTemp.valor}" >
+													<f:convertNumber type="currency" currencySymbol="" />
+												</h:outputText>
+											</p:column>	
+										</p:row>
+									</c:forEach>
+								</p:panelGrid>	
+							</p:outputPanel>
+									
+							<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-12">												
+									<h:outputLabel value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.DataPagamento']}"  styleClass="bold" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+							
+						<!-- INICIO - AGENDAMETO OU PAGAMENTO ONLINE -->
+
+						<p:outputPanel styleClass="row space-b">
+							<p:outputPanel styleClass="col-md-12">
+							</p:outputPanel>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-lg-12">
+
+							<p:outputPanel id="panelPeriodocheck"
+								styleClass="row radioGrid tpoLanca">
+
+								<p:selectOneRadio id="setAgendarPagamento" layout="custom"
+									value="#{dpvatMinasGeraisBBean.agendarPagamento}">
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.PagarAgora']} "
+										itemValue="false" />
+									<f:selectItem
+										itemLabel="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.AgendarPara']}:"
+										itemValue="true" />
+
+									<p:ajax listener="#{dpvatMinasGeraisBBean.onChangeAgendamento}"
+										process="exerciciosGrid" update="panelPeriodocheck dataAgendamento"
+										event="change"></p:ajax>
+								</p:selectOneRadio>
+
+								<p:outputPanel styleClass="col-xs-8">
+                                	<p:outputPanel styleClass="pull-left">
+										<p:radioButton id="opt1" for="setAgendarPagamento"
+											itemIndex="0" />
+										<h:outputLabel
+											value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.PagarAgora']} "
+											for="opt1" />
+	
+										<p:radioButton id="opt2" for="setAgendarPagamento"
+											itemIndex="1" />
+										<h:outputLabel
+											value="#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.AgendarPara']}:"
+											for="opt2" />
+	
+										<p:graphicImage id="tooltip" value="/images/icon-i.png"
+											style="width: 15px;" />
+										<p:tooltip for="tooltip" style="top: 110.583px">
+											<h:outputText>
+												<p>#{msg['pages.pagamento.veiculosMG.dpvat.pagamento.agendar1']}</p>
+											</h:outputText>
+										</p:tooltip>									
+									</p:outputPanel>
+
+									<p:outputPanel styleClass="icon-data-input col-xs-3">
+										<i class="fa fa-calendar"></i>		
+										<p:calendar id="dataAgendamento"
+                                            showOtherMonths="true" 
+                                            pattern="dd/MM/yyyy"
+                                            value="#{dpvatMinasGeraisBBean.dataPagamento}"
+                                            maxlength="10"
+                                            converter="dateConverterFormat" 
+                                            onkeyup="bloqueioCTRLV(this, event); mascaraData(this, event)" 
+                                            onkeypress="mascaraData(this, event)">			
+											
+											<p:ajax event="change" 
+													process="@this" 
+													update="dataAgendamento"/>		
+																								
+											<p:ajax event="dateSelect" 																	
+													listener="#{dpvatMinasGeraisBBean.dateSelectedDataAgendamento}" 
+													update="panelPeriodocheck dataAgendamento"/>																						
+										</p:calendar>										
+									</p:outputPanel>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+						<!-- FIM - AGENDAMETO OU PAGAMENTO ONLINE -->
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+												
+				<p:commandLink id="cmdLnkVoltar"
+					value="#{msg['page.btn.voltar']}"
+					styleClass="btn btn-default btn-cinza"
+					role="button"
+					action="#{dpvatMinasGeraisBBean.voltarListaRenavam}" />
+															
+				<p:commandLink id="btnContinuar"					
+					value="#{msg['page.btn.continuar']}"
+					styleClass="btn btn-default" 
+					role="button"
+					action="#{dpvatMinasGeraisBBean.continuarPagamento}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<ui:include src="/pages/limites/limites.xhtml" />
+		
+		<script type="text/javascript" language="javascript">
+			$(document).ready(function(){
+			    $(window).scrollTop(0);
+			});
+		</script>
+
+	</ui:define>
+</ui:composition>

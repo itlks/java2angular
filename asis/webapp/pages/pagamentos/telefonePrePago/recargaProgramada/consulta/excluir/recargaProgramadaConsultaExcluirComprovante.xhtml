@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+	    <!-- Titulo de Comprovante inicio -->
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.excluir.comprovante.finalizado']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+	    <!-- Titulo de Comprovante fim  -->
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow">
+				        <p:outputPanel styleClass="row">
+						    <p:outputPanel styleClass="col-md-12">
+
+							<p:outputPanel styleClass="col-md-1">
+								<p:outputPanel styleClass="form-group" >
+									<p><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recarga.identificacao']}" /></p>
+									<p><h:outputLabel value="#{recargaProgramadaExcluirBBean.telefoneSelecionado.identificacao}"/></p>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="col-md-4">
+								<p:outputPanel styleClass="form-group">
+									<p><h:outputLabel value="#{msg['page.pagamentos.telefoneprepago.recarga.telefone']}" /></p>
+									<p><h:outputLabel value="#{recargaProgramadaExcluirBBean.telefoneSelecionado.celularFormatado}" /></p>
+								</p:outputPanel>
+							</p:outputPanel>
+		                   
+	               </p:outputPanel>
+	                 <!-- Values fim-->
+
+					<!-- Aviso inicio -->
+						<p:outputPanel styleClass="col-xs-12">
+						  <br/>
+						     <br/>
+						        <p:outputPanel>
+							      <span>#{msg['pages.pagamentos.telefonePrePago.recargaProgramada.excluir.comprovante.texto']}</span>
+							    </p:outputPanel>		
+							 <br/>
+						  <br/>
+						</p:outputPanel>
+					 <!--Aviso fim  -->
+					 
+                      <!-- Autenticação, data e hora inicio-->
+					   <p:separator styleClass="space-b" />
+								<p:outputPanel styleClass="row">
+								<p:outputPanel styleClass="col-xs-3">
+									<p><strong>#{msg['page.commons.comprovante.autenticacao']}</strong></p>
+									   <p>
+										<h:outputLabel value="#{recargaProgramadaExcluirBBean.dto.autenticacaoBancaria}" />
+									   </p>
+								</p:outputPanel>
+
+								<p:outputPanel styleClass="col-xs-3">
+									<p><strong>#{msg['page.commons.comprovante.data.hora']}</strong></p>
+									   <p>
+										<h:outputLabel value="#{recargaProgramadaExcluirBBean.dto.dataHoraTransacao}">
+											<f:convertDateTime pattern="dd/MM/yyyy - HH:mm:ss" />
+										</h:outputLabel>
+									   </p>
+								</p:outputPanel>
+							</p:outputPanel>
+					   <p:separator />
+					  <!-- Autenticação, data e hora fim-->
+			
+			           <!-- Ações padrão da pagina inicio-->
+						<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-7">
+							<p>#{msg['page.commons.comprovante.central.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.central.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p>#{msg['page.commons.comprovante.sac.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.sac.linha2']}</p>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-2">
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha1']}</p>
+							<p>#{msg['page.commons.comprovante.ouvidoria.linha2']}</p>
+						</p:outputPanel>						
+					</p:outputPanel>
+					 <!-- Ações padrão da pagina fim-->	
+					
+				</p:outputPanel>
+
+			</p:outputPanel>
+					<!-- Estrutural de Comprovante inicio -->
+					<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+	                <!-- Estrutural de Comprovante fim -->
+		</p:outputPanel>
+	
+		
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

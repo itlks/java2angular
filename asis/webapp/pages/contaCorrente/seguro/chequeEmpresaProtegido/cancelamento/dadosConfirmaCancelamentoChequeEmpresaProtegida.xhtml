@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Cancelamento de seguros</h4>
+
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row ">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow ">
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for=""
+									value="Nome do Segurado:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="KERQWA YOZX VO ASD GAJK RQER YPZI" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-10 no-padding">
+								<h:outputLabel styleClass="bold" for=""
+									value="Agência/Conta de débito do contrato:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2 no-padding">
+								<h:outputLabel for="" value="0009/13.005657.6" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for="" value="Produto:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="CHEQUE EMPRESA PROTEGIDO - CONTRIB" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-10 no-padding">
+								<h:outputLabel styleClass="bold" for=""
+									value="Data da Contratação:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2 no-padding">
+								<h:outputLabel for="" value="06/06/2016" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for=""
+									value="Número do Certificado:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="330009000130056576" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-10 no-padding">
+								<h:outputLabel styleClass="bold" for="" value="Prêmio Pago:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2 no-padding">
+								<h:outputLabel for="" value="0,00" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row ">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel styleClass="bold" for=""
+									value="Denominação Social da Seguradora:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for=""
+									value="ZURICH SANTANDER BRASIL SEGS E PREV S.A." />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-10 no-padding">
+								<h:outputLabel styleClass="bold" for=""
+									value="Data de Vencimento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-2 no-padding">
+								<h:outputLabel for="" value="06/06/2016" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					actionListener="#{cancelarSeguroChequeBBean.voltarTelaListagem()}"
+					role="button"
+					value="#{msg['pages.contaCorrente.seguro.chequeEmpresaProtegido.cancelamento.voltar']}" />
+					
+				<p:commandLink styleClass="btn btn-default" actionListener="#"
+					role="button"
+					value="Continuar"/>
+					
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

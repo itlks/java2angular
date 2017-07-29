@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>
+							<strong>#{msg['pages.administrativo.usuario.secundario.senhas.seguranca']}</strong>
+						</p>
+						<p>#{msg['page.mobileToken.excluirValidacao.assinaturaEletronicaSegurancaComposta']}</p>
+						<p>#{msg['pages.administrativo.usuario.secundario.senhas.solicitada']}</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+
+				<p:blockUI block="btnVoltar" trigger="btnVoltar" />
+				<p:commandButton id="btnVoltar"
+					styleClass="btn btn-default btn-cinza" role="button"
+					action="#{usuarioSecundarioSenhaBBean.voltarTelaValidacao}"
+					value="#{msg['page.btn.voltar']}" />
+
+				<p:blockUI block="btnContinuar" trigger="btnContinuar" />
+				<p:commandButton id="btnContinuar" styleClass="btn btn-default"
+					role="button" onclick="encryptSecureDL();"
+					action="#{usuarioSecundarioSenhaBBean.continuarEmValidacao}"
+					value="#{msg['page.btn.continuar']}" />
+				<p:defaultCommand target="btnContinuar" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+</ui:composition>

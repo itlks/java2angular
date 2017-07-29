@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalha.xhtml">
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span>
+						<p>As informações apresentadas foram fornecidas pela
+							instutuição financeira destinatária e stão atualizadas até este
+							momento, considerando descontos, abatimentos, juros e encargos,
+							que possam incidir sobre o valor do título. Documento não
+							compensável.</p>
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>Dados do título eletrônico DDA</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-5">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Pagador  eletrônico:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="XVIDS LTDA" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-3 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="CPF/CNPJ:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="02.386.450/0001-90" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>Identificação do título</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Código da instituição financeida destinatária:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding ">
+								<h:outputLabel for="" value="033" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Nome da instituição financeida destinatária:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="BANCO SANTANDER (BRASIL) S.A." />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Nome do beneficiário:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="AMBIENTE VIVO - TESTE G4" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="CPF/ CNPJ do beneficiário:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="31.710.165/0001-80" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Endereço do beneficiário:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="Rua Florenca 148" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Cidade:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="Embu" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Estado:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="SP" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="CEP:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="06826-360" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Nome do pagador:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="Lecyane Moreira Vieira" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="CPF/ CNPJ do pagador:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="706.404.591-53" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Endereço do pagador:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="Estrada do Campo Limpo 291 AP 93D" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Cidade:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="São Paulo" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Estado:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="SP" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="CEP:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="05777-001" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-11">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Sacados avalista:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-8 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>Dados de Registro do Título</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Data do vencimento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="15/03/2017" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Data limite:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="14/05/2017" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Data do documento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="15/07/2016" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Data do processamento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="15/07/2016" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Valor do documento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="R$ 60,00" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Desconto:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Juros:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Multa:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="0,00" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Tipo de moeda:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="09 - Real" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Abatimento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Espécie:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="DM DUPLICATA MERCANTIL" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Qtd. de moeda:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Situação do título:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="Pago" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Nosso número:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="00000000004588" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Origem:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="Agregado" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Seu número:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="14" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Beneficiário autoriza pagamento de valor divergente:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5">
+								<h:outputLabel for="" value="Não" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-6 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Reconhecido:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>Dados de pagamento do título</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-12 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Desconto calculado:" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Abatimento calculado:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-12 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Juros calculado:" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Multa calculada:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Valor calculado:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" value="R$ 60,00" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Data - hora do último cálculo:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="20/07/2016 - 17:43:48 hs" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<p:outputPanel styleClass="col-xs-5 no-padding">
+								<h:outputLabel for="" styleClass="bold" value="Valor pago:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" value="R$ 60,00" />
+							</p:outputPanel>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-7 ">
+							<p:outputPanel styleClass="col-xs-4 no-padding">
+								<h:outputLabel for="" styleClass="bold"
+									value="Data - hora do pagamento:" />
+							</p:outputPanel>
+							<p:outputPanel styleClass="col-xs-7 no-padding">
+								<h:outputLabel for="" value="20/07/2016 - 17:43:48 hs" />
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:separator />
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-12 bold">
+							<span>Instruções</span>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:outputPanel>
+				<p:outputPanel styleClass="rodape-comprovante">
+					<p:commandLink actionListener="#">
+						<i class="ic icon-PDF"></i> Salvar em PDF 
+					   </p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-email"></i> Enviar por e-mail 
+					   </p:commandLink>
+					<p:commandLink actionListener="#">
+						<i class="ic icon-imprimir"></i> Imprimir 
+					   </p:commandLink>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza"
+					actionListener="#" role="button">
+		         Voltar 
+		      </p:commandLink>
+				<p:commandLink styleClass="btn btn-default" actionListener="#"
+					role="button">
+		         Outros Dados
+		      </p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

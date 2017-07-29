@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false"
+			styleClass="loading">
+			<p:graphicImage value="/images/aguarde.gif" />
+		</p:dialog>
+
+		<p:outputPanel styleClass="row space-b no-print no-visible">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow flex-align-v">
+					<i class="fa fa-exclamation-circle"></i>
+					<span><p>
+							<h:outputText
+								value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.header.textoInformativo.confirmacao.dataEfetivacao']}" />
+						</p></span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel id="panelPendenciasPorProduto"
+			styleClass="box-shadow col-xs-12 noPaddingR">
+			<ui:repeat var="item"
+				value="#{autorizacoesPendenciaConfirmacaoBBean.pendenciasConfirmacao}">
+
+				<p:outputPanel id="panelUiRepeatData"
+					rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'E'}"
+					styleClass="row col-xs-12">
+					<h:outputLabel styleClass="h5 space-b"
+						value="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.dataEfetivacao']} #{item.descricaoAgrupamento}"
+						for="convenios" />
+				</p:outputPanel>
+
+				<p:outputPanel id="panelUiRepeatDataIncl"
+					rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'I'}"
+					styleClass="row col-xs-12">
+					<h:outputLabel styleClass="h5 space-b"
+						value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.tab.titulo.dataInclusao']} #{item.descricaoAgrupamento}"
+						for="convenios" />
+				</p:outputPanel>
+
+				<p:outputPanel id="panelUiRepeatDataEfet"
+					rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'P'}"
+					styleClass="row col-xs-12">
+					<h:outputLabel styleClass="h5 space-b"
+						value="#{item.descricaoAgrupamento}" for="convenios" />
+				</p:outputPanel>
+
+				<p:outputPanel id="panelUiRepeatConv"
+					rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'C' }"
+					styleClass="row col-xs-12 space-t">
+					<h:outputLabel styleClass="h5 bold no-margin"
+						value="#{item.descricaoAgrupamento}" for="convenios" />
+
+					<h:outputText styleClass="h5 row no-margin"
+						value="#{item.detalheAgrupamentoConvenio}" for="convenios" />
+				</p:outputPanel>
+
+				<p:outputPanel id="panelUiRepeatProd"
+					rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'R' }"
+					styleClass="row col-xs-12 ">
+					<h:outputLabel styleClass="h5 space-b"
+						value="#{item.detalheAgrupamentoConvenio}" for="convenios" />
+				</p:outputPanel>
+
+				<p:outputPanel id="panelUiRepeat" styleClass="row col-xs-12">
+
+					<p:dataTable id="tabelaSintetica" value="#{item.pendencias}"
+						styleClass="noPadding noHover" var="sintetica" expandedRow="true"
+						emptyMessage="Nenhum Registro Encontrado">
+
+						<p:column
+							headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.produto']}"
+							styleClass="col-xs-6 padding"
+							rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'E' || autorizacoesPendenciaBBean.dto.tipoAba eq 'I'}">
+							<h:outputText value="#{sintetica.descricaoProduto}" />
+						</p:column>
+
+						<p:column
+							headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.dataDeEfetivacao']}"
+							styleClass="col-xs-6 padding"
+							rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'P' || autorizacoesPendenciaBBean.dto.tipoAba eq 'C'}">
+							<h:outputText value="#{sintetica.data}" />
+						</p:column>
+
+						<p:column headerText="Remessa" styleClass="col-xs-6 padding"
+							rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'R'}">
+							<h:outputText value="#{sintetica.codigoRemessa}" />
+						</p:column>
+
+						<p:column styleClass="col-xs-3 padding"
+							headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.quantidade']}">
+							<h:outputText value="#{sintetica.qtdPendenciasSelecionadasPorGrupo}" />
+						</p:column>
+						<p:column styleClass="col-xs-3 padding text-right"
+							headerText="#{msg['pages.autorizacoes.pendencias.dataEefeticavao.incluir.label.valorTotal']}">
+							<h:outputText value="#{sintetica.vlrTotalPendenciasPorGrupo}"
+								converter="valorMonetarioConverter" />
+						</p:column>
+
+						<p:rowExpansion>
+							<p:outputPanel rendered="#{sintetica.tipoPendencia ne 'C'}">
+								<ui:include
+									src="/pages/autorizacoes/pendencias/confirmacaoAnaliticasPendencias.xhtml" />
+							</p:outputPanel>
+							<p:outputPanel
+								rendered="#{sintetica.tipoPendencia eq 'C' and autorizacoesPendenciaBBean.dto.tipoAba ne 'R'}">
+								<ui:include
+									src="/pages/autorizacoes/pendencias/confirmacaoModalidadesPendencias.xhtml" />
+							</p:outputPanel>
+							<p:outputPanel
+								rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'R'}">
+								<ui:include
+									src="/pages/autorizacoes/pendencias/remessa/confirmacaoModalidadesPendenciasRemessa.xhtml" />
+							</p:outputPanel>
+						</p:rowExpansion>
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column
+									styleClass="ui-datatable-footer no-border col-xs-6 text-right padding"
+									footerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.label.totalPara']} #{item.descricaoAgrupamento}"
+									rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'E' || autorizacoesPendenciaBBean.dto.tipoAba eq 'I' || autorizacoesPendenciaBBean.dto.tipoAba eq 'P' }" />
+								<p:column
+									styleClass="ui-datatable-footer no-border col-xs-6 text-right padding"
+									footerText="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.label.totalParaAgenciaConta']} #{item.contaConvenioAnalitico}"
+									rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'C'}" />
+								<p:column
+									styleClass="ui-datatable-footer no-border col-xs-6 text-right padding"
+									footerText="Total para #{item.detalheAgrupamento}"
+									rendered="#{autorizacoesPendenciaBBean.dto.tipoAba eq 'R'}" />
+								<p:column
+									styleClass="ui-datatable-footer no-border col-xs-3 text-left padding"
+									footerText="#{item.qtdPendenciasSelecionadasPorGrupo}" />
+								<p:column
+									styleClass="ui-datatable-footer no-border col-xs-3 text-right padding"
+									footerText="">
+									<f:facet name="footer">
+										<h:outputText value="#{item.vlrTotalPendenciasPorGrupo}"
+											converter="valorMonetarioConverter" />
+									</f:facet>
+								</p:column>
+							</p:row>
+						</p:columnGroup>
+					</p:dataTable>
+				</p:outputPanel>
+			</ui:repeat>
+		</p:outputPanel>
+
+		<p:outputPanel>
+			<ui:include src="/commons/inicializaDL.xhtml" />
+			<ui:include src="/commons/dispositivoSegurancaNovo.xhtml" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right">
+				<p:commandButton styleClass="btn btn-default btn-cinza"
+					role="button"
+					value="#{msg['pages.autorizacoes.pendencias.autorizacoesPendencia.button.voltar']}"
+					immediate="true"
+					action="#{autorizacoesPendenciaBBean.voltarParaAutorizacoesPendencia}" />
+				<p:defaultCommand target="btnConfirmar" />
+				<p:blockUI block="btnConfirmar" trigger="btnConfirmar" />
+				<p:commandButton id="btnConfirmar" role="button"
+					value="#{msg['page.btn.continuar']}" styleClass="btn btn-default"
+					onstart="encryptSecureDL();PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()"
+					action="#{autorizacoesPendenciaConfirmacaoBBean.continuarTelaComprovante}" />
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

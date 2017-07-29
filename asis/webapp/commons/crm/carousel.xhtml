@@ -1,0 +1,333 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<script type="text/javascript" language="javascript">
+		function proxImg(proxElem, elemAnt) {
+			$(".carouselHome .linkImage.img1").hide();
+			$(".carouselHome .linkImage.img2").hide();
+			$(".carouselHome .linkImage.img3").hide();
+			$(".carouselPagination a").removeClass("active");
+			$(".carouselHome .linkImage").removeClass("active");
+			$("."+proxElem).addClass("active");
+			$(".carouselHome .linkImage.img" + proxElem).addClass("active");
+			$(".carouselHome .linkImage.img" + proxElem).show("slide", {
+				direction : "right"
+			}, 150);
+			
+			var original1 = Number($('.inputt1').val());
+			if (original1 > 0) {
+				ajusteCarousel(original1, "t1")
+			}
+			var original2 = Number($('.inputt2').val());
+			if (original2 > 0) {
+				ajusteCarousel(original2, "t2")
+			}			
+			var original3 = Number($('.inputt3').val());
+			if (original3 > 0) {
+				ajusteCarousel((original3), "t3")
+			}
+
+			return 0;
+		}
+	
+		$(".carouselPagination a").click(function() {
+	
+			if ($(this).hasClass("active")) {
+				return 0;
+			} else {
+				var atual = $(this).attr("class").substring(0);
+				$(".carouselHome .linkImage.img1").hide();
+				$(".carouselPagination a").removeClass("active");
+				$(".carouselHome .linkImage").removeClass("active");
+				$(this).addClass("active");
+				$(".carouselHome .linkImage.img" + atual).addClass("active");
+				$(".carouselHome .linkImage.img" + atual).show("slide", {
+					direction : "right"
+				}, 150);
+				
+				var original1 = Number($('.inputt1').val());
+				if (original1 > 0) {
+					ajusteCarousel(original1, "t1")
+				}
+				var original2 = Number($('.inputt2').val());
+				if (original2 > 0) {
+					ajusteCarousel(original2, "t2")
+				}			
+				var original3 = Number($('.inputt3').val());
+				if (original3 > 0) {
+					ajusteCarousel((original3), "t3")
+				}
+	
+				return 0;
+			}
+		})
+		
+		function ajusteCarousel(original, frase) {
+			
+			var carouselImagem = 550;
+
+			var atual = $('.ajustarCarousel').width();
+
+			var resto = (atual*100) / carouselImagem;
+
+			var posicao = ((original*resto) / 100);
+
+			$('.'+frase).css("left", posicao);
+		}
+		
+		$( document ).ready(function() {
+		    
+			var original1 = Number($('.inputt1').val());
+			if (original1 > 0) {
+				ajusteCarousel(original1, "t1")
+			}
+			var original2 = Number($('.inputt2').val());
+			if (original2 > 0) {
+				ajusteCarousel(original2, "t2")
+			}			
+			var original3 = Number($('.inputt3').val());
+			if (original3 > 0) {
+				ajusteCarousel(original3, "t3")
+			}						
+		});
+		
+		$( window ).resize(function() {
+			
+			var original1 = Number($('.inputt1').val());
+			if (original1 > 0) {
+				ajusteCarousel(original1, "t1")
+			}
+			var original2 = Number($('.inputt2').val());
+			if (original2 > 0) {
+				ajusteCarousel(original2, "t2")
+			}			
+			var original3 = Number($('.inputt3').val());
+			if (original3 > 0) {
+				ajusteCarousel(original3, "t3")
+			}
+					
+		});
+	</script>
+	
+	<p:outputPanel styleClass="col-xs-6 paddingL7 homeCoachMark3" rendered="#{campanhasCRMBBean.carouselPrimDTO.habilitarCarousel}">
+		
+		<p:inputText type="hidden" styleClass="textCoachMark" value="Confira as ofertas personalizadas para sua empresa."></p:inputText>
+		<p:inputText type="hidden" styleClass="posicaoPainel text-right" value="width: 400px; left: -425px; display: block; position: absolute;"></p:inputText>
+				
+		<p:outputPanel styleClass="box-shadow esfera carouselHome">
+
+			<span class="linkImage img1 active">			
+			
+				<span class="textCarousell t1" style="top: 0#{campanhasCRMBBean.carouselPrimDTO.strTopDiv1}px; left: #{campanhasCRMBBean.carouselPrimDTO.strLeftDiv1}px;">
+					<input type="hidden" class="inputt1" value="#{campanhasCRMBBean.carouselPrimDTO.strLeftDiv1}"/>
+					<h:outputText escape="false" value="#{campanhasCRMBBean.carouselPrimDTO.textoDiv1}"/>
+				</span>
+						
+				<span class="textCarousell t2" style="top: 0#{campanhasCRMBBean.carouselPrimDTO.strTopDiv2}px; left: #{campanhasCRMBBean.carouselPrimDTO.strLeftDiv2}px;">
+					<input type="hidden" class="inputt2" value="#{campanhasCRMBBean.carouselPrimDTO.strLeftDiv2}"/>
+					<h:outputText escape="false" value="#{campanhasCRMBBean.carouselPrimDTO.strTextoDiv2}"/>
+				</span>
+				
+				<span class="textCarousell t3" style="top: 0#{campanhasCRMBBean.carouselPrimDTO.strTopDiv3}px; left: #{campanhasCRMBBean.carouselPrimDTO.strLeftDiv3}px;">
+					<input type="hidden" class="inputt3" value="#{campanhasCRMBBean.carouselPrimDTO.strLeftDiv3}"/>
+					<h:outputText escape="false" value="#{campanhasCRMBBean.carouselPrimDTO.strTextoDiv3}"/>
+				</span>
+				
+				<span class="textCarousell" style="top: 0#{campanhasCRMBBean.carouselPrimDTO.strTopLinkUrl}px; left: #{campanhasCRMBBean.carouselPrimDTO.strLeftLinkUrl}px;">
+					<h:commandLink autoUpdate="true" 
+					rendered="#{campanhasCRMBBean.carouselPrimDTO.tpCampanha eq 'C' and campanhasCRMBBean.carouselPrimDTO.isMidia4}" 
+					actionListener="#{campanhasCRMBBean.aceite}" action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselPrimDTO)}" 
+					  target="#{campanhasCRMBBean.carouselPrimDTO.blank}">
+						<f:param name="aceiteBoId" value="#{campanhasCRMBBean.carouselPrimDTO.boId}" />
+						<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.carouselPrimDTO.raAttribSeg}" />
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselPrimDTO.strTextoLinkUrl}"/>
+					</h:commandLink>
+					
+					<h:commandLink 	rendered="#{not (campanhasCRMBBean.carouselPrimDTO.tpCampanha eq 'C') and campanhasCRMBBean.carouselPrimDTO.isMidia4}" 
+										autoUpdate="true" 
+										action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselPrimDTO)}" 
+										target="#{campanhasCRMBBean.carouselPrimDTO.blank}">
+							<h:outputText escape="false" value="#{campanhasCRMBBean.carouselPrimDTO.strTextoLinkUrl}"/>
+						</h:commandLink>
+				</span>
+				
+				<p:graphicImage rendered="#{campanhasCRMBBean.carouselPrimDTO.isMidia4}" value="#{campanhasCRMBBean.carouselPrimDTO.imagem}" styleClass="ajustarCarousel"/>
+				
+			
+				<h:commandLink autoUpdate="true" rendered="#{campanhasCRMBBean.carouselPrimDTO.tpCampanha eq 'C' and campanhasCRMBBean.carouselPrimDTO.isMidia4 != true}" 
+				actionListener="#{campanhasCRMBBean.aceite}" 
+				action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselPrimDTO)}" 
+				 target="#{campanhasCRMBBean.carouselPrimDTO.blank}">
+					<f:param name="aceiteBoId" value="#{campanhasCRMBBean.carouselPrimDTO.boId}" />
+					<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.carouselPrimDTO.raAttribSeg}" />
+					<p:graphicImage value="#{campanhasCRMBBean.carouselPrimDTO.imagem}"/>
+				</h:commandLink>
+				<h:commandLink rendered="#{not (campanhasCRMBBean.carouselPrimDTO.tpCampanha eq 'C') and campanhasCRMBBean.carouselPrimDTO.isMidia4 != true}" 
+				action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselPrimDTO)}" target="#{campanhasCRMBBean.carouselPrimDTO.blank}">
+					<p:graphicImage value="#{campanhasCRMBBean.carouselPrimDTO.imagem}" />
+				</h:commandLink>
+				<p:outputPanel autoUpdate="false" rendered="#{campanhasCRMBBean.carouselPrimDTO.tpCampanha eq 'C'}" styleClass="disableCarouselImage">
+					
+					<span>
+							Para ver uma nova campanha no próximo acesso. 
+						<h:commandLink action="#{campanhasCRMBBean.rejeite}"  
+						 value="Clique aqui." >
+							<f:param name="rejeiteBoId" value="#{campanhasCRMBBean.carouselPrimDTO.boId}"/>
+							<f:param name="rejeiteRaAttribSeg" value="#{campanhasCRMBBean.carouselPrimDTO.raAttribSeg}"/>
+						</h:commandLink>	
+					</span>
+				</p:outputPanel>			
+			</span>
+			
+			<c:if test="#{campanhasCRMBBean.carouselSegunDTO.habilitarCarousel}">
+				<span class="linkImage img2"> 
+
+				
+					<span class="textCarousell t1" style="top: 0#{campanhasCRMBBean.carouselSegunDTO.strTopDiv1}px; left: #{campanhasCRMBBean.carouselSegunDTO.strLeftDiv1}px;">
+						<input type="hidden" class="inputt1" value="#{campanhasCRMBBean.carouselSegunDTO.strLeftDiv1}"/>
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselSegunDTO.textoDiv1}"/>
+					</span>
+							
+					<span class="textCarousell t2" style="top: 0#{campanhasCRMBBean.carouselSegunDTO.strTopDiv2}px; left: #{campanhasCRMBBean.carouselSegunDTO.strLeftDiv2}px;">
+						<input type="hidden" class="inputt2" value="#{campanhasCRMBBean.carouselSegunDTO.strLeftDiv2}"/>
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselSegunDTO.strTextoDiv2}"/>
+					</span>
+					
+					<span class="textCarousell t3" style="top: 0#{campanhasCRMBBean.carouselSegunDTO.strTopDiv3}px; left: #{campanhasCRMBBean.carouselSegunDTO.strLeftDiv3}px;">
+						<input type="hidden" class="inputt3" value="#{campanhasCRMBBean.carouselSegunDTO.strLeftDiv3}"/>
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselSegunDTO.strTextoDiv3}"/>
+					</span>
+					
+					<span class="textCarousell" style="top: 0#{campanhasCRMBBean.carouselSegunDTO.strTopLinkUrl}px; left: #{campanhasCRMBBean.carouselSegunDTO.strLeftLinkUrl}px;">
+						<h:commandLink autoUpdate="true" 
+						rendered="#{campanhasCRMBBean.carouselSegunDTO.tpCampanha eq 'C' and campanhasCRMBBean.carouselSegunDTO.isMidia4}" 
+						action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselSegunDTO)}" 
+						actionListener="#{campanhasCRMBBean.aceite}" 
+						 target="#{campanhasCRMBBean.carouselSegunDTO.blank}">
+							<f:param name="aceiteBoId" value="#{campanhasCRMBBean.carouselSegunDTO.boId}" />
+							<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.carouselSegunDTO.raAttribSeg}" />
+							<h:outputText escape="false" value="#{campanhasCRMBBean.carouselSegunDTO.strTextoLinkUrl}"/>
+						</h:commandLink>
+						
+						<h:commandLink 	rendered="#{not (campanhasCRMBBean.carouselSegunDTO.tpCampanha eq 'C') and campanhasCRMBBean.carouselSegunDTO.isMidia4}" 
+										autoUpdate="true" 
+										action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselSegunDTO)}" 
+										target="#{campanhasCRMBBean.carouselSegunDTO.blank}">
+							<h:outputText escape="false" value="#{campanhasCRMBBean.carouselSegunDTO.strTextoLinkUrl}"/>
+						</h:commandLink>
+					</span>
+					
+					<p:graphicImage rendered="#{campanhasCRMBBean.carouselSegunDTO.isMidia4}" value="#{campanhasCRMBBean.carouselSegunDTO.imagem}" styleClass="ajustarCarousel"/>
+					
+					<h:commandLink autoUpdate="true" 
+								 	rendered="#{campanhasCRMBBean.carouselSegunDTO.tpCampanha eq 'C' and campanhasCRMBBean.carouselSegunDTO.isMidia4 != true}" 
+								 	action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselSegunDTO)}" 
+								 	actionListener="#{campanhasCRMBBean.aceite}" 
+								 	target="#{campanhasCRMBBean.carouselSegunDTO.blank}">
+						<f:param name="aceiteBoId" value="#{campanhasCRMBBean.carouselSegunDTO.boId}" />
+						<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.carouselSegunDTO.raAttribSeg}" />
+						<p:graphicImage value="#{campanhasCRMBBean.carouselSegunDTO.imagem}"/>
+					</h:commandLink>
+					<h:commandLink rendered="#{not (campanhasCRMBBean.carouselSegunDTO.tpCampanha eq 'C')  and campanhasCRMBBean.carouselSegunDTO.isMidia4 != true}" 
+					action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselSegunDTO)}" 
+					target="#{campanhasCRMBBean.carouselSegunDTO.blank}">
+						<p:graphicImage value="#{campanhasCRMBBean.carouselSegunDTO.imagem}"/>
+					</h:commandLink>
+					<p:outputPanel autoUpdate="true" rendered="#{campanhasCRMBBean.carouselSegunDTO.tpCampanha eq 'C'}" styleClass="disableCarouselImage">
+						Para ver uma nova campanha no próximo acesso. 
+						<h:commandLink action="#{campanhasCRMBBean.rejeite}" value="Clique aqui.">
+							<f:param name="rejeiteBoId" value="#{campanhasCRMBBean.carouselSegunDTO.boId}"/>
+							<f:param name="rejeiteRaAttribSeg" value="#{campanhasCRMBBean.carouselSegunDTO.raAttribSeg}"/>
+						</h:commandLink>			
+					</p:outputPanel>
+				</span>
+			</c:if>
+			
+			<c:if test="#{campanhasCRMBBean.carouselTercDTO.habilitarCarousel}">
+				<span class="linkImage img3"> 
+				
+				
+					<span class="textCarousell t1" style="top: 0#{campanhasCRMBBean.carouselTercDTO.strTopDiv1}px; left: #{campanhasCRMBBean.carouselTercDTO.strLeftDiv1}px;">
+						<input type="hidden" class="inputt1" value="#{campanhasCRMBBean.carouselTercDTO.strLeftDiv1}"/>
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselTercDTO.textoDiv1}"/>
+					</span>
+							
+					<span class="textCarousell t2" style="top: 0#{campanhasCRMBBean.carouselTercDTO.strTopDiv2}px; left: #{campanhasCRMBBean.carouselTercDTO.strLeftDiv2}px;">
+						<input type="hidden" class="inputt2" value="#{campanhasCRMBBean.carouselTercDTO.strLeftDiv2}"/>
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselTercDTO.strTextoDiv2}"/>
+					</span>
+					
+					<span class="textCarousell t3" style="top: 0#{campanhasCRMBBean.carouselTercDTO.strTopDiv3}px; left: #{campanhasCRMBBean.carouselTercDTO.strLeftDiv3}px;">
+						<input type="hidden" class="inputt3" value="#{campanhasCRMBBean.carouselTercDTO.strLeftDiv3}"/>
+						<h:outputText escape="false" value="#{campanhasCRMBBean.carouselTercDTO.strTextoDiv3}"/>
+					</span>
+					
+					<p:graphicImage rendered="#{campanhasCRMBBean.carouselTercDTO.isMidia4}" value="#{campanhasCRMBBean.carouselTercDTO.imagem}" styleClass="ajustarCarousel"/>
+					
+					<span class="textCarousell" style="top: 0#{campanhasCRMBBean.carouselTercDTO.strTopLinkUrl}px; left: #{campanhasCRMBBean.carouselTercDTO.strLeftLinkUrl}px;">
+						<h:commandLink 	rendered="#{campanhasCRMBBean.carouselTercDTO.tpCampanha eq 'C' and campanhasCRMBBean.carouselTercDTO.isMidia4}" 
+										autoUpdate="true" 
+										action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselTercDTO)}" 
+										actionListener="#{campanhasCRMBBean.aceite}" 
+										target="#{campanhasCRMBBean.carouselTercDTO.blank}">
+							<f:param name="aceiteBoId" value="#{campanhasCRMBBean.carouselTercDTO.boId}" />
+							<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.carouselTercDTO.raAttribSeg}" />
+							<h:outputText escape="false" value="#{campanhasCRMBBean.carouselTercDTO.strTextoLinkUrl}"/>
+						</h:commandLink>
+						
+						<h:commandLink 	rendered="#{not (campanhasCRMBBean.carouselTercDTO.tpCampanha eq 'C') and campanhasCRMBBean.carouselTercDTO.isMidia4}" 
+										autoUpdate="true" 
+										action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselTercDTO)}" 
+										target="#{campanhasCRMBBean.carouselTercDTO.blank}">
+							<h:outputText escape="false" value="#{campanhasCRMBBean.carouselTercDTO.strTextoLinkUrl}"/>
+						</h:commandLink>
+					</span>
+					
+					<h:commandLink rendered="#{campanhasCRMBBean.carouselTercDTO.tpCampanha eq 'C'  and campanhasCRMBBean.carouselTercDTO.isMidia4 != true}" autoUpdate="true" action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselTercDTO)}" actionListener="#{campanhasCRMBBean.aceite}"  target="#{campanhasCRMBBean.carouselTercDTO.blank}">
+						<f:param name="aceiteBoId" value="#{campanhasCRMBBean.carouselTercDTO.boId}" />
+						<f:param name="aceiteRaAttribSeg" value="#{campanhasCRMBBean.carouselTercDTO.raAttribSeg}" />
+						<p:graphicImage value="#{campanhasCRMBBean.carouselTercDTO.imagem}"/>
+					</h:commandLink>
+					<h:commandLink rendered="#{not (campanhasCRMBBean.carouselTercDTO.tpCampanha eq 'C') and campanhasCRMBBean.carouselTercDTO.isMidia4 != true}" action="#{campanhasCRMBBean.redrectCarousel(campanhasCRMBBean.carouselTercDTO)}" target="#{campanhasCRMBBean.carouselTercDTO.blank}">
+						<p:graphicImage value="#{campanhasCRMBBean.carouselTercDTO.imagem}" />
+					</h:commandLink>
+					<p:outputPanel autoUpdate="true" rendered="#{campanhasCRMBBean.carouselTercDTO.tpCampanha eq 'C'}" styleClass="disableCarouselImage">
+
+						Para ver uma nova campanha no próximo acesso. 
+						<h:commandLink action="#{campanhasCRMBBean.rejeite}" value="Clique aqui." >
+							<f:param name="rejeiteBoId" value="#{campanhasCRMBBean.carouselTercDTO.boId}"/>
+							<f:param name="rejeiteRaAttribSeg" value="#{campanhasCRMBBean.carouselTercDTO.raAttribSeg}"/>
+						</h:commandLink>
+
+					</p:outputPanel>
+				</span>
+			</c:if>
+			
+			
+
+			<c:if test="#{campanhasCRMBBean.carouselSegunDTO.habilitarCarousel}">
+				<span class="carouselPagination" style="position: absolute; width:72px; bottom: 20px; top: auto; right: 15px;">
+				
+				<p:commandLink id="divImg1" styleClass="1 active"> 
+					<p:ajax event="click" immediate="true" listener="#{campanhasCRMBBean.segunCarouselVisualizado}" oncomplete="proxImg(1)"/>
+				</p:commandLink>
+				<p:commandLink id="divImg2" styleClass="2"> 
+					<p:ajax event="click" immediate="true" listener="#{campanhasCRMBBean.segunCarouselVisualizado}" oncomplete="proxImg(2)"/>
+				</p:commandLink>
+				<c:if test="#{campanhasCRMBBean.carouselTercDTO.habilitarCarousel}">
+					<p:commandLink id="divImg3" styleClass="3"> 
+						<p:ajax event="click" immediate="true" listener="#{campanhasCRMBBean.tercCarouselVisualizado}" oncomplete="proxImg(3)"/>
+					</p:commandLink>
+				</c:if>
+				</span>
+			</c:if>
+		</p:outputPanel>
+	</p:outputPanel>
+
+
+</ui:composition>

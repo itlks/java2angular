@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog id="dialogDetalhe" styleClass="modal-box autorizacoesModal"
+		widgetVar="dialogDetalhe" closable="true" resizable="false"
+		draggable="false" showHeader="true" width="60%" height="600"
+		modal="true" header="Detalhes da Autorização" onShow="closeLoad();">
+	
+		
+		<p:outputPanel style="height:595px" styleClass="scrollModal">
+			<p:outputPanel rendered="#{autorizacoesPendenciaDetalheBBean.conteudoCash}">
+				<ui:include src="/pages/autorizacoes/pendencias/detalheModal/detalheCash/detalheGenerico.xhtml" />
+			</p:outputPanel>
+			<p:outputPanel rendered="#{autorizacoesPendenciaDetalheBBean.conteudoAdministrativo or autorizacoesPendenciaDetalheBBean.conteudoOnline}">
+				<ui:include src="/pages/autorizacoes/pendencias/detalheModal/detalheCabecalho.xhtml" />
+			</p:outputPanel>
+			<p:outputPanel styleClass="row col-xs-12" rendered="#{!autorizacoesPendenciaDetalheBBean.naoExibeTransacao}">
+				<p:outputPanel styleClass="col-xs-12 no-padding space-l">
+					<p:separator />
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="row space-t space-b space-r space-l titulo-bloco" rendered="#{!autorizacoesPendenciaDetalheBBean.naoExibeTransacao}">
+				<h5 class="bold">Transação</h5>
+			</p:outputPanel>
+
+			<p:outputPanel rendered="#{autorizacoesPendenciaDetalheBBean.conteudoAdministrativo}">
+				<ui:include src="/pages/autorizacoes/pendencias/detalheModal/detalheConteudoAdministrativo.xhtml" />
+			</p:outputPanel>
+
+			<p:outputPanel rendered="#{autorizacoesPendenciaDetalheBBean.conteudoOnline}">
+				<ui:include src="/pages/autorizacoes/pendencias/detalheModal/detalheConteudoOnline.xhtml" />
+			</p:outputPanel>
+
+			<p:outputPanel rendered="#{autorizacoesPendenciaDetalheBBean.conteudoCash and autorizacoesPendenciaDetalheBBean.dadosDetalheCash != null}">
+				<ui:include src="#{autorizacoesPendenciaDetalheBBean.conteudoDialog}" />
+			</p:outputPanel>
+
+			<ui:include src="/pages/autorizacoes/pendencias/detalheModal/detalheHistorico.xhtml" />
+
+			<p:outputPanel styleClass="row space-t space-b no-margin-bottom">
+				<p:outputPanel styleClass="col-xs-12">
+					<p:outputPanel styleClass="col-xs-12 space-t">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+				</p:outputPanel>
+			</p:outputPanel>
+			<p:outputPanel styleClass="space-r">
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+			</p:outputPanel>
+		</p:outputPanel>
+		<p:remoteCommand name="clearEmail" action="#{PDFBBean.clearFields}" update="@this"></p:remoteCommand>
+		<script>
+			var lnkEmail = $('[id*="enviarEmailPopup"]')[0];
+			lnkEmail.onclick = '';
+			if (lnkEmail.addEventListener) {
+				lnkEmail.addEventListener("click", atualizaPopupEmail, false);
+			}else if (lnkEmail.attachEvent){
+				lnkEmail.attachEvent("onclick", atualizaPopupEmail);
+			}
+			
+			function atualizaPopupEmail(){
+				generateHtmlToPdf();
+				clearEmail();
+				PF('enviarPorEmailDialog').show();
+			}
+		</script>
+	</p:dialog>
+</ui:composition>

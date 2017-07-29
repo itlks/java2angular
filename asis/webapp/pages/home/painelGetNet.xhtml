@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:outputPanel id="painelGetNet" styleClass="box-shadow maquinaGetNet radiusB" rendered="#{homeBBean.widgetFavorito eq 'maquininhaGetNet'}">
+		
+		<p:inputText type="hidden" styleClass="textCoachMark" value="Painel de gestão das suas vendas com cartões na maquininha Getnet."></p:inputText>
+		<p:inputText type="hidden" styleClass="posicaoPainel" value="width: 400px; left: 15px; top:-70px; display: block; position: absolute; z-index: 1;"></p:inputText>
+		
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-6 legenda-cobranca">
+
+				<p class="cartaoMaster">
+					<span class="tituloBoleto">#{msg['page.home.painelGetNet.Master']}</span><br />
+					<span class="valor">R$ <h:outputText
+							converter="valorMonetarioConverter"
+							value="#{homeBBean.valorGetNetMaster}" /></span>
+
+				</p>
+
+				<p class="cartaoVisa">
+					<span class="tituloBoleto">#{msg['page.home.painelGetNet.Visa']}</span><br />
+					<span class="valor">R$ <h:outputText
+							converter="valorMonetarioConverter"
+							value="#{homeBBean.valorGetNetVisa}" /></span>
+
+				</p>
+
+				<p class="totalReceber">
+					<span class="tituloBoleto">#{msg['page.home.painelGetNet.totalAReceber']}</span><br />
+					<span class="valor">R$ <h:outputText
+							converter="valorMonetarioConverter"
+							value="#{homeBBean.valorGetNetTotal}" />*
+					</span>
+
+				</p>
+
+				<p class="obs">
+					<p:commandLink action="#{homeBBean.redirectAntecipacao}">Quero antecipar</p:commandLink>
+					<br />* consulte seus recebíveis disponíveis para antecipação.
+				</p>
+			</p:outputPanel>
+
+
+			<p:outputPanel styleClass="col-xs-6">
+
+				<p:outputPanel styleClass="row">
+					<p:outputPanel styleClass="col-xs-12 text-center">
+					<p:graphicImage cache="false" rendered="true"
+						value="#{homeBBean.montaGraficoGetNet()}" height="130px" />
+					</p:outputPanel>
+					<p:outputPanel styleClass="col-xs-12 text-center">
+						<p:commandLink
+							value="#{msg['page.home.painelGetNet.LancamentoFuturo']}"
+							action="#{homeBBean.redirectLancamentoFuturo}" />
+					</p:outputPanel>
+				</p:outputPanel>
+
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</p:outputPanel>
+</ui:composition>

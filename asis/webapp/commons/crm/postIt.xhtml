@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsp="http://java.sun.com/JSP/Page"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+                
+			   <p:panel id="divPostIt" rendered="#{campanhasCRMBBean.postItDTO.habilitarPostIt}">
+				<table style="border-collapse: inherit;" border="0" cellspacing="0" cellpadding="0" width="188">
+					<tr>
+						<td background="#{facesContext.externalContext.requestContextPath}/images/crm/bkgtopopostit_amarelo.png" height="24" align="right">
+						<p:commandLink styleClass="sair" partialSubmit="true" actionListener="#{campanhasCRMBBean.desabilitarPostIt}"
+								action="#{campanhasCRMBBean.hideDialog('dialogTelaInterna')}">
+								<img src="#{facesContext.externalContext.requestContextPath}/images/crm/btnmaistarde_amarelo.png"
+								border="0" vspace="7" hspace="16" />
+						</p:commandLink>
+	
+						</td>
+					</tr>
+					<tr>
+						<td background="#{facesContext.externalContext.requestContextPath}/images/crm/bkgpostit_amarelo.png"
+							valign="top">
+							<table border="0" cellspacing="0" cellpadding="0" width="100%">
+								<tr style="border: none!important">
+									<td><img src="#{facesContext.externalContext.requestContextPath}/images/crm/dot.png" width="15"
+										height="1" />
+									</td>
+									<td valign="top" bgcolor="FAE89A" width="100%">
+										<div style="font-family: Times New Roman; font-size: 15px; color: 000;">
+											<a href="#"><font color="rgb(153,0,0)"><p:outputLabel escape="false" value="#{campanhasCRMBBean.postItDTO.textoDiv1}"/></font> </a><a href="#{campanhasCRMBBean.postItDTO.linkURL}" target="_blank"><p:outputLabel style="cursor: pointer" escape="false" value="#{campanhasCRMBBean.postItDTO.textoDiv2}"/></a><p:outputPanel styleClass="quebra" /><c:if test="#{campanhasCRMBBean.postItDTO.habilitarLinkRedirect}"><h:commandLink action="#{campanhasCRMBBean.redrectPostIt}"><p:outputLabel style="cursor: pointer" escape="false" value="#{campanhasCRMBBean.postItDTO.textoDiv3}"/></h:commandLink></c:if><c:if test="#{not (campanhasCRMBBean.postItDTO.habilitarLinkRedirect)}"><a href="#"><p:outputLabel style="cursor: pointer" escape="false" value="#{campanhasCRMBBean.postItDTO.textoDiv3}"/></a></c:if>
+										</div>
+									</td>
+									<td valign="bottom"><img src="#{facesContext.externalContext.requestContextPath}/images/crm/lytcantopostit_amarelo.png" alt=""
+										width="12" height="149" border="0" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td width="188" height="34"
+							background="#{facesContext.externalContext.requestContextPath}/images/crm/imgrodapepostit_amarelo.png"
+							valign="top"
+							style="font-family: verdana; font-size: 9px; padding-top: 6px; padding-left: 8px; padding-right: 14px">
+						</td>
+					</tr>
+				</table>
+			</p:panel>
+			
+</ui:composition>

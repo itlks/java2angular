@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+	
+
+	<ui:define name="content">
+		<p:outputPanel styleClass="row space-b">
+          <p:outputPanel styleClass="col-lg-12">
+            <p:outputPanel styleClass="aviso-interno-blocos alert-information box-shadow">                               
+                <i class="fa fa-exclamation-circle"></i>
+                <span><p><strong>Transação exclusiva para pagamento on-line do IPTU da Prefeitura do Município de São Paulo.</strong></p>
+                <p>Serviços disponíveis somente em dias Úteis, das 7h às 21h. No vencimento, o pagamento deverá ser efetuado até as 21h.</p>
+                <p>Os campos assinalados com * são de preenchimento obrigatório. Preencha cuidadosamente, pois os dados informados são de sua responsabilidade.</p>
+                <p>Para mais informações, acesse o site da <p:commandLink>Secretaria da Fazenda do Estado de São Paulo.</p:commandLink></p><br/>
+                <p><p:commandLink>Confira os limites para esse pagamento.</p:commandLink></p></span>
+            </p:outputPanel>  
+          </p:outputPanel>                        
+        </p:outputPanel>        
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="titulo-painel">
+                    <h4>Informe os dados para pagamento</h4>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>  
+
+        <p:outputPanel styleClass="row">
+            <p:outputPanel styleClass="col-lg-12">
+                <p:outputPanel styleClass="box-shadow">    
+
+                    <p:outputPanel styleClass="row">
+                        <p:outputPanel styleClass="col-md-12">
+
+                            <p><strong>Nome do Contribuinte: </strong>EMPRESA ABC</p>
+                            <p><strong>Nº do Contribuinte/Cadastro do Imóvel: </strong>00184530018</p>
+                            <p><strong>Ano do exercício: </strong>2015</p>
+                            <p><strong>Número da notificação:</strong></p>                                    
+
+                          <p:separator /><br/>
+
+                          <h5 class="space-b">Formas de Pagamento</h5> 
+
+                          <p:outputPanel styleClass="table-responsive table table-striped">
+                             <p:dataTable id="tabela1">
+                                <p:column headerText="Perfil">
+                                   <h:outputText value="teste" />
+                                </p:column>
+                                <p:column headerText="Descrição">
+                                   <h:outputText value="teste2" />
+                                </p:column>
+                             </p:dataTable>
+                          </p:outputPanel>
+
+
+                          <h5><strong>Existem dívidas em aberto nos seguintes exercícios</strong></h5>
+                          <p>01/04/2015</p>
+
+                          <p:separator />
+
+                          <p>Existem dívidas em exercício(s) no Depto. Fiscal - Procure a P.M.S.P.</p>
+                          <p>Existem dívidas em exercício(s) mais antigos - Procure a P.M.S.P.</p>
+                          <p>Existem dívidas em exercício(s) mais antigos e no Depto. Fiscal - Procure a P.M.S.P.</p>
+                    </p:outputPanel>
+                    
+                   </p:outputPanel>
+
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>      
+
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-md-12 text-right">
+			   <p:commandLink styleClass="btn btn-default btn-cinza"  role="button">Voltar</p:commandLink>
+			   <p:commandLink styleClass="btn btn-default" role="button">Continuar</p:commandLink>
+			</p:outputPanel>
+		</p:outputPanel> 
+ 
+	</ui:define>
+</ui:composition>         

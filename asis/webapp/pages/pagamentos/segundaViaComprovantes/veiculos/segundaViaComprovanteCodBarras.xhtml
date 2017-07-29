@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+	<ui:define name="content">
+
+
+		<p:outputPanel styleClass="row space-b no-visible">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel
+					styleClass="aviso-interno-blocos alert-information box-shadow">
+					<i class="fa fa-exclamation-circle"></i>
+					<span> <!--  
+                                         <p>#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.paragrafo1']}</p>
+                                              <br />
+                                         <p>#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.paragrafo2']}</p>-->
+
+						<p>Selecione os itens do resultado da pesquisa que deseja
+							"Salvar em PDF" ou "Enviar por e-mail" em seguida, clique na
+							opção desejada. Você pode repetir essa operação quantas vezes
+							quiser. Para visualizar o comprovante clique sobre a transação
+							desejada.</p> <br />
+						<p>Você pode gerar uma lista de todos os títulos em formato
+							Excel. Não é necessário selecionar os lançamentos, basta clicar
+							no botão "Exportar Excel" que será gerada uma lista com todos os
+							títulos, com as mesmas informações que estão exibidas no
+							resultado da pesquisa.</p>
+
+					</span>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-lg-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.subtitle']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row" id="painelGeral">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row space-b">
+						<p:outputPanel styleClass="col-xs-6">
+						    <p:outputLabel styleClass="space">
+								<strong>
+									#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.consulta']}
+								</strong>
+							</p:outputLabel>
+							<h:outputText value="#{segundaViaVeicCodBarraBBean.strTitulo}"/> 
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="col-xs-6 text-right">
+							<p:outputPanel>
+								    <h:outputLabel styleClass="space">
+								    	<strong>#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.periodo']}</strong>
+								    </h:outputLabel>
+									<h:outputText styleClass="space" value="#{msg['page.segunda.via.comprovantes.cartaocredito.consulta.periodo.de']}"/>
+									<h:outputLabel value="#{segundaViaVeicCodBarraBBean.dataInicial}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+									#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.ate']}
+									<h:outputLabel value="#{segundaViaVeicCodBarraBBean.dataFinal}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputLabel>
+							</p:outputPanel>
+
+							<p:outputPanel
+								rendered="#{not empty segundaViaVeicCodBarraBBean.periodoEspecificoSelecionado}">
+								<strong>#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.periodo']}</strong>
+                                                                          #{msg['pages.segundaViaComprovantes.veiculos.segviaLista.de']}
+                                                    <h:outputLabel
+									value="#{segundaViaVeicCodBarraBBean.periodoEspecificoSelecionado} dias." />
+
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:outputPanel>
+
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-md-12">
+							<p:outputPanel styleClass="row text-right">
+							<p:outputPanel
+								rendered="#{not empty segundaViaVeicCodBarraBBean.consultaVeiculosCodBarras}">
+							
+							<ui:include src="/commons/pdf/pdfButtonsSegVia.xhtml">
+								<ui:param name="excel" value="dtGrid" />
+								<ui:param name="imprimir" value="false" />
+								<ui:param name="enviarEmail" value="false" />
+								<ui:param name="exibirShadow" value="false"/>
+							</ui:include>
+							</p:outputPanel>
+							<br/>
+
+							</p:outputPanel>
+
+							<p:outputPanel styleClass="table-responsive table table-striped table-cursor-default">
+
+								<p:dataTable id="dtGrid" var="per"
+									emptyMessage="Não há pagamentos no período consultado."
+									value="#{segundaViaVeicCodBarraBBean.consultaVeiculosCodBarras}"
+									selection="#{segundaViaVeicCodBarraBBean.consultaVeiculos}"
+									rowKey="#{per}">
+
+									<p:column selectionMode="multiple" styleClass="no-visible"
+										exportable="false" />
+
+									<!--                                                         	<p:ajax event="rowSelect" -->
+									<!-- 		                                                        listener="#{segundaViaVeicCodBarraBBean.obterComprovante}" global="false" />    -->
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.coluna.data']}" />
+										</f:facet>
+
+										<h:outputText value="#{per.fechaPago}">
+											<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.coluna.descricao']}" />
+										</f:facet>
+
+										<h:outputText value="#{per.nombreConvenio}" />
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.coluna.valor']}" />
+										</f:facet>
+
+										<h:outputText value="#{per.importePago}">
+											<f:convertNumber type="currency" currencySymbol="" />
+										</h:outputText>
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText
+												value="#{msg['pages.segundaViaComprovantes.veiculos.segviaLista.coluna.canal']}" />
+										</f:facet>
+
+
+										<h:outputText value="#{per.descripcionCanal}" />
+									</p:column>
+								</p:dataTable>
+
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<br />
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="row space-b ">
+			<p:outputPanel styleClass="col-md-12 text-right">
+				<p:commandLink styleClass="btn btn-default btn-cinza no-visible"
+					action="#{segundaViaVeicCodBarraBBean.voltarEmPreencher}"
+					role="button"
+					value="#{msg['page.segunda.via.comprovantes.confirmacao.botao.voltar']}" />
+
+				<p:commandLink styleClass="btn btn-default  no-visible"
+					action="#{segundaViaVeicCodBarraBBean.gerarMultiplosPDFs}"
+					role="button"
+					value="#{msg['page.btn.visualizar.comprovantes']}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>

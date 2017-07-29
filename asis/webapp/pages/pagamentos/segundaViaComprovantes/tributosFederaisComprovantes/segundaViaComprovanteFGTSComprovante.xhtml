@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateConsultaNovo.xhtml">
+
+	<ui:define name="content">
+		<span id="divHtml"> 
+		
+			<c:forEach	items="#{segundaViaComprovanteTributosFederaisBBean.listaSegViaCommpContasSelecionados}"
+						var="dto" 
+						varStatus="item">
+						
+				<span class="multiplosPdfsCss">
+					<p:outputPanel styleClass="box-shadow ">
+						
+						<p:outputPanel styleClass="row" id ="panel05_#{item.index}">
+							<p:outputPanel styleClass="col-xs-12" id ="panel04_#{item.index}">
+								<p:outputPanel id ="panel03_#{item.index}">
+									<p:outputPanel styleClass="row space-b" id ="panel02_#{item.index}">
+										<p:outputPanel styleClass="col-xs-12" id ="panel01_#{item.index}">
+											<c:forEach	items="#{dto.segundaViaComprContasDTOs}"
+														var="dado" 
+														varStatus="iteratorDados">
+	
+												<p:outputPanel id ="panel2_#{item.index}#{iteratorDados.index}" styleClass="row" rendered="#{dado.tipoLinha=='C'}">
+													<p:outputPanel id ="panel1_#{item.index}#{iteratorDados.index}" styleClass="col-xs-12 text-center" style="text-align:left !important">
+														<h:outputText id ="text1_#{item.index}#{iteratorDados.index}" value="#{dado.label} " styleClass="bold" />
+														<h:outputText id ="text2_#{item.index}#{iteratorDados.index}" value="#{dado.value}" styleClass="bold " />
+														<hr/>
+													</p:outputPanel>
+													<p:outputPanel styleClass="col-xs-12" id ="panel211_#{item.index}#{iteratorDados.index}">
+														<c:forEach begin="1" end="#{dado.espacoLinha}">
+															<br />
+														</c:forEach>
+													</p:outputPanel>
+												</p:outputPanel>
+												
+												<p:outputPanel id ="panel3_#{item.index}#{iteratorDados.index}" styleClass="row" rendered="#{dado.tipoLinha=='L'}">
+													<p:outputPanel id ="panel31_#{item.index}#{iteratorDados.index}" styleClass="col-xs-12" >
+														<h:outputText id ="text3_#{item.index}#{iteratorDados.index}" value="#{dado.label} " styleClass="bold" />
+														<h:outputText id ="text4_#{item.index}#{iteratorDados.index}" value="#{dado.value}" />
+													</p:outputPanel>
+													<p:outputPanel id ="panel4_#{item.index}#{iteratorDados.index}" styleClass="col-xs-12" rendered="#{dado.ultimo eq 'true'}">
+													<c:forEach begin="1" end="#{dado.espacoLinha}">
+														<br />
+														</c:forEach>
+													</p:outputPanel>
+												</p:outputPanel>
+											</c:forEach>
+										</p:outputPanel>
+									</p:outputPanel>
+				
+									<p:outputPanel styleClass="row space-b" id ="panel06_#{item.index}">
+										<p:outputPanel styleClass="col-xs-12" id ="panel07_#{item.index}">
+											<p:separator />
+										</p:outputPanel>
+									</p:outputPanel>
+									
+									
+									<p:outputPanel styleClass="row space-b" id ="panel08_#{item.index}">
+										<p:outputPanel styleClass="col-xs-12" id ="panel09_#{item.index}">
+											<c:forEach
+												items="#{segundaViaComprovanteTributosFederaisBBean.listaSegViaDetalhe}"
+												var="dado" varStatus="iteratorDados">
+												<p:outputPanel styleClass="row" id ="panel10_#{item.index}#{iteratorDados.index}"
+													rendered="#{dado.tipoLinha=='I'}">
+													<p:outputPanel styleClass="col-xs-12" id ="panel11_#{item.index}#{iteratorDados.index}">
+				
+													<h:outputText value="#{dado.value}" id ="txt10_#{item.index}#{iteratorDados.index}"/>
+													</p:outputPanel>
+													
+												</p:outputPanel>
+				
+											</c:forEach>
+										</p:outputPanel>
+									</p:outputPanel>
+				
+									<p:outputPanel styleClass="row space-b" id ="panel12_#{item.index}">
+										<p:outputPanel styleClass="col-xs-12" id ="panel121_#{item.index}">
+											<p:separator />
+										</p:outputPanel>
+									</p:outputPanel>
+				
+									<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+				</span>
+			</c:forEach>
+			<p:outputPanel styleClass="row" style="margin-top: -16px">
+				<p:outputPanel styleClass="col-xs-12">
+					<ui:include src="/commons/pdf/pdfMultiplosButtons.xhtml">
+						<ui:param name="divHtml" value="true" />
+						<ui:param name="imprimir" value="true" />
+					</ui:include>
+				</p:outputPanel>
+			</p:outputPanel>
+		</span>
+		
+		<p:outputPanel styleClass="row space-b">
+			<p:outputPanel styleClass="col-xs-12 text-right no-print no-visible">
+				<p:commandLink  id="btnVoltar"
+										styleClass="btn btn-default btn-secundario"
+										action="#{segundaViaComprovanteTributosFederaisBBean.voltarLista}"
+										role="button" value="#{msg['page.btn.voltar']}"/>
+			</p:outputPanel>
+		</p:outputPanel>
+		
+		
+	</ui:define>
+
+</ui:composition>

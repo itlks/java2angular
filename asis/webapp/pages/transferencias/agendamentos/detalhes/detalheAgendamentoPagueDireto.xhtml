@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:outputLabel styleClass="space-b"
+		value="#{agendamentoBBean.dto.detalheAgendamentosDTO.titulo}" />
+
+	<p:outputPanel styleClass="row">
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="contaPagueDiretoDebito" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.contaCorrenteDebito']}" />
+			<h:outputText id="contaPagueDiretoDebito"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.contaCorrenteDebito}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="fornecedorPagueDireto" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.fornecedor']}" />
+			<h:outputText id="fornecedorPagueDireto"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.fornecedor}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="notaFiscalPagueDireto" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.notaFiscal']}" />
+			<h:outputText id="notaFiscalPagueDireto"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.numeroNotaFiscal}" />
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="col-xs-12">
+			<h:outputLabel for="posPagueDireto" styleClass="space"
+				value="#{msg['pages.agendamento.detalhe.pos']}" />
+			<h:outputText id="posPagueDireto"
+				value="#{agendamentoBBean.dto.detalheAgendamentosDTO.pos}" />
+		</p:outputPanel>
+
+	</p:outputPanel>
+
+</ui:composition>

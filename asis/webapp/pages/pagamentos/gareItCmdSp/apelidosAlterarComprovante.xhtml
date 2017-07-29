@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template_com_migalhaNovo.xhtml">
+
+	<ui:define name="content">
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="titulo-painel">
+					<h4>#{msg['page.pagamentos.gareItCmdSp.apelidos.alterar.titulo.comprovante']}</h4>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+
+		<p:outputPanel styleClass="row">
+			<p:outputPanel styleClass="col-xs-12">
+				<p:outputPanel styleClass="box-shadow no-margin-bottom">
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="identificacao"
+									styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.identificacao']}</p:outputLabel>
+								<h:outputText id="identificacao"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.identificacao}</h:outputText>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="codigoReceita"
+									styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.codigo.receita']}</p:outputLabel>
+								<h:outputText id="codigoReceita"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.codigoReceita}</h:outputText>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="nrDeclaracao" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.nr.declaracao']} </p:outputLabel>
+								<h:outputText id="nrDeclaracao"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.numeroDeclaracao}</h:outputText>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="cnpjCpf" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.cnpj.cpf']}</p:outputLabel>
+								<h:outputText id="cnpjCpf"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.cnpjCpf}</h:outputText>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="inscricao" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.inscricao']}</p:outputLabel>
+								<h:outputText id="inscricao"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.inscricaoDivida}</h:outputText>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="nrAiim" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.nr.aiim']}</p:outputLabel>
+								<h:outputText id="nrAiim"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.nrAiim}</h:outputText>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="contribuinte" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.contribuinte']}</p:outputLabel>
+								<h:outputText id="contribuinte"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.contribuinte}</h:outputText>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="endereco" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.endereco']}</p:outputLabel>
+								<h:outputText id="endereco"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.endereco}</h:outputText>
+							</span>
+						</p:outputPanel>
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="telefone" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.telefone']}</p:outputLabel>
+								<h:outputText id="telefone"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.telefone}</h:outputText>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="cep" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.cep']}</p:outputLabel>
+								<h:outputText id="cep"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.cep}</h:outputText>
+							</span>
+						</p:outputPanel>
+					</p:outputPanel>
+					<p:outputPanel styleClass="row">
+						<p:outputPanel styleClass="col-xs-4">
+							<span> <p:outputLabel for="obeservacoes" styleClass="bold">#{msg['page.pagamentos.gareItCmdSp.apelidos.label.observacoes']}</p:outputLabel>
+								<h:outputText id="obeservacoes"> #{apelidoBBean.configuracaoApelido.apelidoEscolhido.observacoes}</h:outputText>
+							</span>
+						</p:outputPanel>
+
+					</p:outputPanel>
+					
+					<br/>
+
+					<p:outputPanel width="100%">
+						<ui:include src="/commons/rodapeCentralAtendimento.xhtml" />
+					</p:outputPanel>
+
+				</p:outputPanel>
+
+				<ui:include src="/commons/pdf/pdfButtons.xhtml" />
+
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>
